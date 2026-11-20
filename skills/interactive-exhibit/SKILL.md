@@ -1,14 +1,22 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and chrome (nav cluster, frame zoom, i panel, HUD, text box, consent, back link); the served words and numbers a room prints and where they come from (store_writer, exhibit_store_editor, objects_config.json); what a room opens on; testing a room (the gallery run's checks, tools/headless); carding an exhibit in Studio
+fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and chrome (nav cluster, frame zoom, i panel, HUD, text box, consent, back link); the served words and numbers a room prints and where they come from (store_writer, exhibit_store_editor, objects_config.json); what a room opens on; testing a room (the gallery run's checks, tools/headless); carding an exhibit in Studio; a Lagrange point's marker and box, a name's side (label_side_for)
 ---
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-257, 258-482, 483-734.
+Read this file in 3 parts: lines 1-261, 262-486, 487-738.
 
-Skill version: 1.42 | 2026-11-12, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.43 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.43 (L-297, the
+Lagrange points) adds A point is a marker, and a name has a side: a
+point drawn as its marker alone at the minute shown, its box, and a
+name's side set per body on Tony's look. Install and verify names the
+skills page where it now is (L-537). To stay at the cap, the 1.40 entry
+moved out. Read from L-297's notes and the gallery at 56bc3fab before
+it was written.
+Earlier: 1.42 | 2026-11-12, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ af8e1bdf and gallery @ 001d5046 (the session's bases;
 Tony's checkpoint pushes since, to gallery ae0d7ac0). v1.42 (L-527, a
 first visit's guide) adds two rules. A GUIDE ASKS FOR ONE ACTION AND
@@ -43,31 +51,6 @@ tap 5 px off or more as plotly_hover, so a finger's hover after its tap
 is that tap and opens what a click opens (gallery/tap_hover.js, the
 gallery run's Tap hover row); and the widened pick is any finger's, in
 either orientation (Tony: "Yes, any finger").
-Earlier: 1.40 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ b3ce81f8 and gallery @ cea21af1. v1.40 (L-515, one nested
-tree, step 2b; Tony's rulings 13 to 20 of 2026-11-09, with L-514 rulings 1
-and 4) makes the Solar System room ONE PICTURE AND ONE DRAWER. Each body
-something is fetched around folds open, behind an arrow at the start of
-its name, to what circles it and, for a centre serving features of its own
-(Earth, Jupiter, Saturn), its own shells and guides, together by distance;
-a moon is drawn at its planet's place by ADDING the planet's position to
-the moon's own JPL elements around it (gallery/assembler/compose_children.py);
-ticking a moon ticks its planet; a moon's box is the Moon's pattern, its
-distance from its planet, and past its checked span one sentence saying
-so. Centre on, on every centre in the tree (the Sun too), moves the view
-in the page so the body sits in the middle, on its own served opening,
-the whole drawing shifted so the middle is the scene's origin in 64-bit
-numbers (gallery/view_centre.js; the 32-bit error measured: Pluto's system
-121 km at 35.6 AU); the axis lines cross there and the frame note says so;
-Go To on a moon puts its planet at the middle; Home and Reset return to
-the Sun's view; the trail is the path down the tree. The Earth room folds
-into the root: ?exhibit=earth opens it centred on Earth, its row and driver
-OBSOLETE and kept; a fold is drawn, and its stored drawings fetched, the
-first time it is needed. The Pluto row reads "Pluto system", the
-barycentre the open white square. Jupiter's and Saturn's openings (the
-symbol alone) are served arrival blocks, which the store writer can now add
-(add_arrival). And L-518's received note on Reset's frame. Read from the
-gallery's code with this session's edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
@@ -76,7 +59,8 @@ twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
 2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
 (L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515)
-and 2026-11-11 (L-522) and 2026-11-12 (L-527).
+and 2026-11-11 (L-522) and 2026-11-12 (L-527) and
+2026-11-19 (L-297).
 
 ## Contents
 
@@ -92,6 +76,7 @@ if this list and the headings disagree (L-418).
   - One drawer for every centre [QUALITY]
   - One picture: the folds and the view's middle [QUALITY]
   - The Solar System room's drawer: bodies, not shells [QUALITY]
+  - A point is a marker, and a name has a side [QUALITY]
   - A room's drawer lists its shells where each begins [QUALITY]
   - A shell trace carries its key [CRITICAL]
   - Only two tools write the served config [QUALITY]
@@ -242,6 +227,25 @@ each body is now, with a buffer of 20 percent, and Go To fits the body's whole
 orbit.
 What the page does, and where: the gallery's `INTERACTIVE_AS_BUILT.md`,
 The Solar System room's drawer: bodies, not shells.
+
+### A point is a marker, and a name has a side [QUALITY]
+
+v1.43, L-297. A Lagrange point is drawn as its marker alone, the
+orrery's open square, its name beside it, placed by `position_at` at
+the minute shown (`render_spacecraft.build_point_traces`): no line, no
+orbit. A point served around another body is drawn at that body's place
+by ADDING, as a moon is (`compose_children.build_point_child_traces`).
+The fetched centre rules the drawer (Tony, 2026-11-07, 11:26): the
+Earth-Moon points are Earth's children, in its fold by distance; the
+Earth-Sun points are a root group after Earth's row. The box
+(`SolarSystemFigures.pointBox`): the name, the approved words, the
+distance from its own centre, and "JPL states no accuracy for this
+position." (JPL's 2xr answer is "n.a."); no orbit, no period.
+A NAME'S SIDE is set per body (`presentation.label_side_for`, its
+`_LABEL_SIDES` map), "top center" for every body not set; a side is
+Mode 5, set on Tony's look (ESCAPADE-Gold below, Earth-Moon L1 left).
+Bodies that share a few pixels at a room's scale keep their pile-up:
+Centre on with the frame zoom is the answer (Tony, 2026-11-19).
 
 ### A room's drawer lists its shells where each begins [QUALITY]
 Each shell takes its place in the drawer at the distance where its
@@ -724,11 +728,11 @@ needs no ruling; whether a feature is drawn at all is Tony's.
 ## Install and verify
 
 Author here: `skills/interactive-exhibit/SKILL.md` in the orrery repo.
-Install to the account (Settings > Skills). Run `skills_index.py` so the
-manifest in PROJECT_INSTRUCTIONS.md carries the version. Per Stale Skill
-= Stop, the session that installs a version cannot verify the install.
-Earlier installs and their confirmations, 1.0 to 1.41:
-documentation/SKILL_HISTORIES.md, under interactive-exhibit.
-1.42 was cut on 2026-11-12 in the Claude Code session for L-527, through
-the python_work door, from the repo's copy of 1.41; a session that loads
-the account's copy confirms it reads 1.42 before exhibit work.
+Install to the account (Plugins, in the claude.ai sidebar). Run
+`skills_index.py` so the manifest in PROJECT_INSTRUCTIONS.md carries the
+version. Per Stale Skill = Stop, the session that installs a version
+cannot verify the install. Earlier installs and their confirmations,
+1.0 to 1.42: documentation/SKILL_HISTORIES.md, under interactive-exhibit.
+1.43 was written on 2026-11-19 by the coordinating session for L-297,
+from the repo's copy of 1.42; a session that loads the account's copy
+confirms it reads 1.43 before exhibit work.

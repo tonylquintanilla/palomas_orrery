@@ -95,6 +95,9 @@ the Moon's standards: the Moon keyed for the website's Earth room, 'moon',
 with JPL's exact name read live; its quotation, which NASA's pages do not
 carry, replaced by NASA's own words from its Moon facts page, whole, in
 the NASA: "..." form, with that page as its link, by Tony's choices.)
+Module updated: November 19, 2026 with Anthropic's Claude Opus 5.5 (L-432: COLOR_KEY_BY_NAME,
+the name map L-297 added, removed; the colour table, now
+orrery_colors.py, holds the Lagrange points under the names shown.)
 """
 
 from datetime import datetime
@@ -450,9 +453,8 @@ OBJECT_DEFINITIONS = [
     # bounds the fetch and the animation (path_drawing.entry_span). The
     # words are Tony's "Approved" of 2026-11-18, with his three changes
     # (documentation/WORDS_L297_lagrange_points_20261118.md). Colours:
-    # the colour table (constants_new.py, color_map) keeps its lines
-    # under JPL's names; COLOR_KEY_BY_NAME, after this list, turns each
-    # name shown into its key, so no colour line changed (L-432).
+    # the colour table (orrery_colors.py, color_map) holds a line for
+    # each point under the name shown (L-432, 2026-11-19).
     # Earth-Moon Lagrange Points
     # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
     # 2026-11-18); span: JPL's data sheet for 3011, revised Jul 11, 2019, read
@@ -1699,23 +1701,6 @@ OBJECT_DEFINITIONS = [
 
 ]
 
-# A name shown -> the key of its line in the colour table
-# (constants_new.color_map, which reads this map first). The Lagrange
-# points (L-297) show Tony's names of 2026-11-18; their colour lines
-# keep JPL's names, unchanged, so the Constants change check reads no
-# changed colour line. A name not here is its own key.
-COLOR_KEY_BY_NAME = {
-    'Earth-Moon L1': 'EM-L1',
-    'Earth-Moon L2': 'EM-L2',
-    'Earth-Moon L4': 'EM-L4',
-    'Earth-Moon L5': 'EM-L5',
-    'Earth-Sun L1': 'L1',
-    'Earth-Sun L2': 'L2',
-    'Earth-Sun L4': 'L4',
-    'Earth-Sun L5': 'L5',
-}
-
-
 def build_objects_list(definitions, vars_dict, color_map_func):
     """
     Build the runtime objects list from definitions.
@@ -1723,7 +1708,7 @@ def build_objects_list(definitions, vars_dict, color_map_func):
     Args:
         definitions: OBJECT_DEFINITIONS list
         vars_dict: Dictionary mapping var_name strings to tk.IntVar instances
-        color_map_func: The color_map function from constants_new
+        color_map_func: The color_map function (orrery_colors.py, re-exported by constants_new)
     
     Returns:
         List of object dictionaries with 'var' and 'color' resolved

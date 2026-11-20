@@ -11,15 +11,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 178  
-**Total Lines of Code (non-blank):** 144,715  
-**Total Public Functions/Classes:** 1,891
+**Total Python Files:** 181  
+**Total Lines of Code (non-blank):** 145,764  
+**Total Public Functions/Classes:** 1,904
 
 ## Classification Coverage
 
-**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (12).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
+- `orrery_colors.py`
+- `patch_L297_2_skills_and_protocol.py`
+- `patch_L432_1_colors_to_drawing_code.py`
 - `path_drawing.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
@@ -29,8 +32,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (4).** No valid `Domain:` tag.
 
+- `patch_L297_2_skills_and_protocol.py`
+- `patch_L432_1_colors_to_drawing_code.py`
 - `path_drawing.py`
 - `test_path_drawing.py`
 
@@ -140,9 +145,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,682 lines) |
+| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,669 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (513 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (6,002 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (5,834 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (393 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (277 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
@@ -216,7 +221,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `add_docstrings.py` | Two related tools for module-level docstrings. (1,210 lines) |
 | `check_horizons_confirmations.py` | - every object the website takes from the orrery's list has been confirmed against JPL Horizons, recently, and has not changed since; each fetched period too; and every spacecraft data sheet a row quotes still gives the row's figure (L-395, L-431). (225 lines) |
-| `constants_change_report.py` | - what moved in constants_new.py, and why. (637 lines) |
+| `constants_change_report.py` | - what moved in constants_new.py, and why. (727 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (246 lines) |
@@ -281,6 +286,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (136 lines) |
+| `orrery_colors.py` | The orrery's colour for each body it draws, by the name it shows. (195 lines) |
+| `patch_L297_2_skills_and_protocol.py` | The three skill updates L-297's round learned, the protocol's v3.143, and L-537 (the skills page moved). (473 lines) |
+| `patch_L432_1_colors_to_drawing_code.py` | Moves the orrery's colour table out of constants_new.py into its own drawing module, orrery_colors.py. (472 lines) |
 | `path_drawing.py` | The orrery draws a planned path by its path plan (L-476): a spacecraft's flown and planned trajectory, or a comet on an open path, around the Sun. (370 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (524 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |

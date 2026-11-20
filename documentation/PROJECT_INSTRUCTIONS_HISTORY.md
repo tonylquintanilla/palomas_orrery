@@ -4926,6 +4926,52 @@ resident.
 (Moved down from the resident protocol on 2026-11-18, when
 v3.142 made a fourth entry.)
 
+v3.140 (November 12, 2026, night): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.41 -> 1.42 (L-527, a first
+visit's guide), by the records skill's binding rule, Tony's go-ahead of
+Nov 12 ("Yes": the skill, the skills index and one protocol version
+entry) and the coordinator's word at the close, after his phone look of
+20:34 ("the whole sequence works and is very effective"). A GUIDE THAT
+WAITS, AND A ROOM HELD UPRIGHT.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 12 (Claude Opus 5.5),
+through the python_work door, built on orrery af8e1bdf and gallery
+001d5046, from Tony's prompt and
+documentation/COORD_L527_guide_brief_20261112.md, in three parts with a
+report and his go-ahead after each, and his phone looks of 15:55, the
+evening and 20:34 between them.
+
+WHAT CHANGED. interactive-exhibit: two rules. A GUIDE ASKS FOR ONE
+ACTION AND WAITS FOR IT: its cards give instructions only, so it adds
+no claim to source; a card ends only on its own action, told by the
+page's own functions and handled by a timer, never inside a Plotly
+event; a camera move it makes is worked out from what is drawn; its
+steps, words, setting and sums are gallery/first_guide.js, held by the
+gallery run's First guide row and walked by
+tools/headless/walk_first_guide.js. And, under Phone first, UPRIGHT
+ONLY (Tony's ruling of Nov 12, 13:18 and 13:44): a room is built and
+tested upright; held sideways it shows one line asking for the phone
+upright, and a guide pauses. Seven field notes of September, each held
+by a rule the skill keeps or by the store writer's suite, and the
+oldest of four version entries (1.39) moved to
+documentation/SKILL_HISTORIES.md, so the skill stays under its cap of
+738 lines (734).
+
+THE OBLIGATION TRAVELS. This session read interactive-exhibit 1.41 from
+the repo's copy, as a Code session does, as the manifest expected. Tony
+reinstalls it (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it
+from the account confirms its copy reads 1.42 before exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.137 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-19, when
+v3.143 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

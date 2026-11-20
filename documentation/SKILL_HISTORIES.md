@@ -557,6 +557,32 @@ And to The Access Standard: an agency summary that names no source is
 a lead, not a source; read one layer down (Tony's ruling of
 2026-10-21, that it is method).
 
+The 2.34 entry, moved here on 2026-11-19 (L-297), when 2.37 made a
+fourth resident entry:
+
+Earlier: 2.34 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b995472a. v2.34 (L-434 with L-454) adds How a range
+is drawn, under When the source gives a range: an edge nobody can
+place is drawn as a cloud across its range; an edge that moves keeps
+its surface sharp and gets the range's two ends as whiskers; the hover
+says which. Tony, 2026-10-22: "Edges are better drawn with a cloud
+across the range. While a fluctuation is more like graph whiskers so
+there the concentric circles would be a graphical device. In both
+cases the hover should explain."
+The census of `# Verified:` stamps, from Retired: `# Verified:
+April 2026 via Gemini fact-check`, moved here word for word on
+2026-11-19 (L-297, the skill at its cap):
+
+Census re-measured at `7f4a2f9f` (2026-08-27): 42 remaining --
+shell_configs.py 14, earth 13, jupiter 9, comet 6. Unchanged since
+`1e60c783`. Disposal is not a separate deletion patch: the status
+pass REPLACES each stamp with a real `# Status:` line as it passes
+through, which records what the stamp was actually worth instead of
+leaving a blank. Zero in the five Batch 1 modules and zero in Mars,
+which were cleared as those batches landed. (Two came out of
+shell_configs.py with the Mercury and Moon body headers in the geometry
+follow-up, from 16.) The rest clear in Batch 2.
+
 ## interactive-exhibit
 
 Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
@@ -1171,6 +1197,39 @@ config) or by the store writer's own suite:
   back walked into the exhibit from the lobby. history.back() when the
   gallery is behind.
 
+The 1.40 entry, moved here on 2026-11-19 (L-297), when 1.43 made a
+fourth resident entry:
+
+Earlier: 1.40 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b3ce81f8 and gallery @ cea21af1. v1.40 (L-515, one nested
+tree, step 2b; Tony's rulings 13 to 20 of 2026-11-09, with L-514 rulings 1
+and 4) makes the Solar System room ONE PICTURE AND ONE DRAWER. Each body
+something is fetched around folds open, behind an arrow at the start of
+its name, to what circles it and, for a centre serving features of its own
+(Earth, Jupiter, Saturn), its own shells and guides, together by distance;
+a moon is drawn at its planet's place by ADDING the planet's position to
+the moon's own JPL elements around it (gallery/assembler/compose_children.py);
+ticking a moon ticks its planet; a moon's box is the Moon's pattern, its
+distance from its planet, and past its checked span one sentence saying
+so. Centre on, on every centre in the tree (the Sun too), moves the view
+in the page so the body sits in the middle, on its own served opening,
+the whole drawing shifted so the middle is the scene's origin in 64-bit
+numbers (gallery/view_centre.js; the 32-bit error measured: Pluto's system
+121 km at 35.6 AU); the axis lines cross there and the frame note says so;
+Go To on a moon puts its planet at the middle; Home and Reset return to
+the Sun's view; the trail is the path down the tree. The Earth room folds
+into the root: ?exhibit=earth opens it centred on Earth, its row and driver
+OBSOLETE and kept; a fold is drawn, and its stored drawings fetched, the
+first time it is needed. The Pluto row reads "Pluto system", the
+barycentre the open white square. Jupiter's and Saturn's openings (the
+symbol alone) are served arrival blocks, which the store writer can now add
+(add_arrival). And L-518's received note on Reset's frame. Read from the
+gallery's code with this session's edits before it was written.
+The 1.42 install, from Install and verify, 2026-11-19 (L-297):
+1.42 was cut on 2026-11-12 in the Claude Code session for L-527, through
+the python_work door, from the repo's copy of 1.41; a session that loads
+the account's copy confirms it reads 1.42 before exhibit work.
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -1566,6 +1625,38 @@ existing -- which is what used to deadlock: config-inside-the-swap-dir meant a
 crash mid-swap left load_config unable to read the config before recovery could
 restore the directory. Moving the config out (L-114) closed that; a crash
 mid-swap now self-heals on the next run.
+
+The 1.17 entry, moved here on 2026-11-19 (L-297), when 1.20 made a
+fourth resident entry:
+
+Earlier: 1.17 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 15dc8e34 and gallery @ c77f87f6. v1.17 (L-507) adds, to
+A Spacecraft Is Fetched by Its Plan, an ended mission's last day asked
+for itself (fetch_path_last_day): the room puts an ended mission's
+marker on the path's last served point, and the 7-day backbone can stop
+up to six days short of the day the mission ended. And the plan's span
+now ends on an ended mission's mission_end. Read from the gallery's
+builder, with this session's edit, before it was written.
+The size note from A Spacecraft Is Fetched by Its Plan and the
+section Fetch facts proven live, moved here word for word on
+2026-11-19 (L-297, the skill at its cap):
+
+- SIZE: the first simulated build of 2026-10-25, on fake straight paths,
+  served 68 KB of positions for the twelve; before the windows were
+  thinned at their own scale it was about 1.7 MB. The real paths curve,
+  so the first real build measures it.
+
+## Fetch facts proven live (2026-07-11 gate)
+
+- Periodic comets pin to a specific 900000XX record (Encke 90000091; Halley
+  90000030 pattern). The short-designation trap and full rule live in
+  horizons-orbital-mechanics.
+- Spacecraft arcs: a coarse glide (fetch_step, ~7d) + daily densify inside
+  curated event_windows (flybys) + douglas_peucker thinning of the GLIDE ONLY
+  (windows are pinned, exempt). Voyager 1 verified: both windows fully daily,
+  zero gaps; 49-year glide 2549 -> 29 points with a genuine 12-year straight
+  segment. Refresh is overwrite-by-date on the forward window; the past is
+  frozen.
 
 ## horizons-orbital-mechanics
 

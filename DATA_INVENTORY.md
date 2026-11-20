@@ -35,16 +35,16 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 503.5 MB (4114 files)
+**Total size:** 510.6 MB (4512 files)
 
-**GitHub Pages headroom:** 520 MB remaining of 1024 MB ceiling (49.2% used)
+**GitHub Pages headroom:** 513 MB remaining of 1024 MB ceiling (49.9% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 2969 | 450.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-18 |
-| .jsonl | 711 | 18.4 MB | encke.jsonl (66.0 KB) | 2026-11-18 |
+| .json | 3296 | 455.5 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-19 |
+| .jsonl | 782 | 20.3 MB | encke.jsonl (66.6 KB) | 2026-11-19 |
 | .kmz | 38 | 14.3 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-29 |
 | .py | 291 | 10.0 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-11-19 |
 | .png | 15 | 7.7 MB | palomas_orrery_logo.png (5.1 MB) | 2026-11-17 |
@@ -61,7 +61,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .bat | 1 | 3.7 KB | _run_local_server.bat (3.7 KB) | 2026-08-24 |
 | (none) | 2 | 1.1 KB | LICENSE (1.1 KB) | 2026-10-04 |
 | .url | 1 | 176.0 B | Paloma's Orrery - Interactive Astronomical Visualizations.url (176.0 B) | 2026-02-27 |
-| .sha | 3 | 123.0 B | constants_export.sha (41.0 B) | 2026-11-18 |
+| .sha | 3 | 123.0 B | constants_export.sha (41.0 B) | 2026-11-19 |
 
 ### Largest files (top 10)
 
@@ -91,7 +91,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 503.5 MB | 1024 MB | 520 MB | 49.2% |
+| gallery | 510.6 MB | 1024 MB | 513 MB | 49.9% |
 | orrery (gitignored data) | 578.6 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

@@ -2,14 +2,20 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day), a held body (HELD)
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day), a held body (HELD), a Lagrange point served as a point (serving_shape 'point')
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 4 parts: lines 1-260, 261-529, 530-778, 779-944.
+Read this file in 4 parts: lines 1-258, 259-523, 524-788, 789-942.
 
-Skill version: 1.19 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.20 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.20 (L-297, the
+Lagrange points) adds A Lagrange Point Is Served as a Point, the fourth
+serving shape. To stay at the cap, the 1.17 entry, Fetch facts proven
+live and a size note of 2026-10-25 moved out. Read from L-297's notes
+and the gallery's builder at 56bc3fab before it was written.
+Earlier: 1.19 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 02183e4d and gallery @ 173d397a; built in gallery
 db28733e. v1.19 (L-525, hold the bad data) adds A Body That Fails Its
 Test Is Held. Riding it: the night's title, a new abort, Layer 1's
@@ -27,19 +33,11 @@ an ended mission's `mission_end`, `end_note` and `cutoff_note`, and An
 Ended Mission's Last Day gains the case where the path stops before the
 mission ended (Akatsuki, cut on the last day fitted to tracking). Read from the gallery's mirror, its suites and builder at
 3660993e and this session's edits before it was written.
-Earlier: 1.17 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 15dc8e34 and gallery @ c77f87f6. v1.17 (L-507) adds, to
-A Spacecraft Is Fetched by Its Plan, an ended mission's last day asked
-for itself (fetch_path_last_day): the room puts an ended mission's
-marker on the path's last served point, and the 7-day backbone can stop
-up to six days short of the day the mission ended. And the plan's span
-now ends on an ended mission's mission_end. Read from the gallery's
-builder, with this session's edit, before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
 2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507),
-2026-11-05 (L-507) and 2026-11-11 (L-525).
+2026-11-05 (L-507), 2026-11-11 (L-525) and 2026-11-19 (L-297).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -64,6 +62,7 @@ if this list and the headings disagree (L-418).
 - A config change is not deployed until the cache is rebuilt [CRITICAL]
 - The Builder Reads the Period's Centre [QUALITY]
 - A Spacecraft Is Fetched by Its Plan [QUALITY]
+- A Lagrange Point Is Served as a Point [QUALITY]
 - A Small Body's Own Uncertainty Is Served [QUALITY]
 - Every Question Is Asked of JPL, Fresh [QUALITY]
 - A Body That Fails Its Test Is Held [QUALITY]
@@ -73,7 +72,6 @@ if this list and the headings disagree (L-418).
 - Commit with round-trip verify
 - The three-layer gate (documentation/TESTING_PROTOCOL.md, orrery repo)
 - Adding a new object -- the full sequence, and where it silently breaks
-- Fetch facts proven live (2026-07-11 gate)
 - Field notes
 
 ## Operating mode -- unattended every night, since October 31 2026
@@ -492,10 +490,6 @@ the orrery's."
 - THE OFFLINE SUITE gives a spacecraft with no plan a stand-in plan, as
   it gives stand-in drawings, so it does not depend on a pull: in the
   config as committed, a plan arrives only when the mirror copies it.
-- SIZE: the first simulated build of 2026-10-25, on fake straight paths,
-  served 68 KB of positions for the twelve; before the windows were
-  thinned at their own scale it was about 1.7 MB. The real paths curve,
-  so the first real build measures it.
 - A COMET ON AN OPEN PATH IS A PATH BODY (v1.13, L-443, slice 2, build
   B part 2). `is_path_body` is one test, a spacecraft or an entry with
   `open_path`, and every place above that asked "is this a spacecraft?"
@@ -526,6 +520,22 @@ the orrery's."
   stand-in orbit, named when used. Piece C of C/2025 K1 went to an
   orbit this way on 2026-11-05 (by hand that day, gallery e5352a86; the
   mirror does it since).
+
+## A Lagrange Point Is Served as a Point [QUALITY]
+
+v1.20, L-297: the fourth shape, `serving_shape` 'point' (category
+'lagrange_point'). A point has no mass and no orbit, so no elements
+are fetched: only JPL's positions around the centre it is served
+around (Earth for the Earth-Moon points, the Sun for the Earth-Sun
+ones), a day apart across the served window and a day past each edge,
+and an hour apart from yesterday to the day after tomorrow (`POINT_*`;
+Tony, 2026-11-19). Fetched last, once the window is known
+(`point_window`); a point never takes part in the window
+(`served_window_from`), so it cannot narrow it. JPL's answer is held to
+the point's own name: asked for 3013, JPL answers an asteroid. A failed
+fetch serves the saved days (`serve_last_good_point`), today's point
+nulled; the validator's #L (`point_problems`) refuses elements, a short
+span, a missing day or hour, each planted.
 
 ## A Small Body's Own Uncertainty Is Served [QUALITY]
 
@@ -898,18 +908,6 @@ ELEMS mock entry (+ fake_solution_tp branch if Tp-anchored) AND bump the
 count assertion; (3) Layer 1 from a clean checkout; (4) Layer 2:
 --dry-run --object <slug> against real Horizons; (5) --first-build (not
 --nightly, per above).
-
-## Fetch facts proven live (2026-07-11 gate)
-
-- Periodic comets pin to a specific 900000XX record (Encke 90000091; Halley
-  90000030 pattern). The short-designation trap and full rule live in
-  horizons-orbital-mechanics.
-- Spacecraft arcs: a coarse glide (fetch_step, ~7d) + daily densify inside
-  curated event_windows (flybys) + douglas_peucker thinning of the GLIDE ONLY
-  (windows are pinned, exempt). Voyager 1 verified: both windows fully daily,
-  zero gaps; 49-year glide 2549 -> 29 points with a genuine 12-year straight
-  segment. Refresh is overwrite-by-date on the forward window; the past is
-  frozen.
 
 ## Field notes
 

@@ -124,6 +124,12 @@ Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
     (L-465: asin and acos join math's pure functions, so the Sun's
     equator tilt, an angle worked out with acos, is understood).
+Module updated: November 19, 2026 with Anthropic's Claude Opus 5.5
+    (L-432: a colour line, 'Name': 'colour', is read as a rendering
+    setting. Removed, it is named and passes, as the colour table left
+    for orrery_colors.py; added, it fails, since a colour belongs in
+    the drawing code. A self-test of the shape runs first, every run,
+    with a planted loose pattern it must catch.)
 """
 
 import os
@@ -145,6 +151,96 @@ DICT_RE = re.compile(
     r'(-?\d+\.?\d*(?:[eE][-+]?\d+)?)\s*,?\s*(?:#.*)?$')
 
 COMMENT_RE = re.compile(r'^\s*#')
+
+# A colour line, 'Name': '<colour>', with either kind of quote, where the
+# colour is a CSS name, a hex code, or rgb() / rgba() of plain numbers.
+# It holds no value this check judges: a colour is a rendering setting
+# (provenance-discipline, Three Kinds of Drawing Number; Tony,
+# 2026-09-22). Since L-432 (2026-11-19) the table is orrery_colors.py, so
+# a REMOVED colour line is named and passes, and an ADDED one fails: a
+# colour belongs in the drawing code. Only a line holding a digit is
+# taken (a colour line without one was never read as a value).
+_COLOUR_NUM = r'\d+(?:\.\d+)?%?'
+COLOUR_RE = re.compile(
+    r"""^\s*(?:'(?P<k1>[^']+)'|"(?P<k2>[^"]+)")\s*:\s*"""
+    r"""(?P<q>['"])(?:[A-Za-z]+|#[0-9A-Fa-f]{3,8}"""
+    r'|rgba?\(\s*' + _COLOUR_NUM + r'(?:\s*,\s*' + _COLOUR_NUM
+    + r'){2,3}\s*\))'
+    r"""(?P=q)\s*,?\s*(?:#.*)?$""")
+
+
+def take_colour_lines(diff_text, pattern=None):
+    """Take the colour lines out of a diff, before its values are read.
+
+    Returns (removed, added, rest): the names of the colour lines the diff
+    removes and adds, in diff order, and the diff without those lines, for
+    read_changes(). A colour line is a changed line holding a digit that
+    matches COLOUR_RE (or `pattern`, which the self-test plants).
+    """
+    pattern = pattern or COLOUR_RE
+    removed, added, kept = [], [], []
+    for line in diff_text.split('\n'):
+        body = line[1:]
+        if (line[:1] in '+-' and not line.startswith(('+++', '---'))
+                and any(ch.isdigit() for ch in body)):
+            m = pattern.match(body)
+            if m:
+                name = m.groupdict().get('k1') or m.groupdict().get('k2')
+                (removed if line[0] == '-' else added).append(
+                    name or body.strip())
+                continue
+        kept.append(line)
+    return removed, added, '\n'.join(kept)
+
+
+# Each case: a diff line, and what it must be read as.
+_COLOUR_CASES = [
+    ("-        'Mars': 'rgb(188, 39, 50)',", 'removed'),
+    ("-        'EM-L1': 'cyan',        ", 'removed'),
+    ('-        "Hi\'iaka": \'rgb(200, 180, 220)\',    # Light purple',
+     'removed'),
+    ("+        'Ceres': 'rgb(1, 2, 3)',", 'added'),
+    ("-        'Mass': '5.97e24 kg',", 'value'),
+    ("-        'Odd': 'rgb(1, 2)',", 'value'),
+    ("-    KM_PER_AU = 149597870.7", 'value'),
+]
+_LOOSE = re.compile(
+    r"""^\s*(?:'(?P<k1>[^']+)'|"(?P<k2>[^"]+)")\s*:\s*['"].*""")
+
+
+def _judge(pattern):
+    """How many of the cases `pattern` reads as each case says."""
+    right = 0
+    for line, want in _COLOUR_CASES:
+        removed, added, _rest = take_colour_lines(line, pattern)
+        got = 'removed' if removed else 'added' if added else 'value'
+        right += (got == want)
+    return right
+
+
+def colour_self_test():
+    """True when the rule reads every case right and a loose one does not."""
+    n = len(_COLOUR_CASES)
+    right = _judge(COLOUR_RE)
+    loose_right = _judge(_LOOSE)
+    print('  colour lines: self-test %d of %d cases read right; a planted'
+          ' loose pattern misread %d' % (right, n, n - loose_right))
+    return right == n and loose_right < n
+
+
+def report_colours(removed, added):
+    """Print the colour lines; True when one was ADDED (a failure)."""
+    if removed:
+        print('  %d colour line(s) removed -- a rendering setting leaving'
+              ' this file (L-432):' % len(removed))
+        print('      ' + ', '.join(removed))
+    if added:
+        print('  %d colour line(s) ADDED -- a colour belongs in'
+              ' orrery_colors.py, not here (L-432):' % len(added))
+        print('      ' + ', '.join(added))
+    if removed or added:
+        print()
+    return bool(added)
 
 # NAME = <anything that is not a comment>. Deliberately loose: the test
 # that matters happens in parse_derived(), which parses the right-hand
@@ -550,6 +646,10 @@ def main():
         print('  Nothing was checked. This is not a pass.')
         return 2
     print('  comparing against %s' % resolved.strip())
+    if not colour_self_test():
+        print('  The colour-line rule failed its own self-test.')
+        print('  Nothing was checked. This is not a pass.')
+        return 2
     print()
 
     ok, out = git(['diff', '--unified=6', base, '--', TARGET], here)
@@ -563,6 +663,8 @@ def main():
         print('  No changes to %s since %s.' % (TARGET, base))
         return 0
 
+    colour_removed, colour_added, out = take_colour_lines(out)
+    colour_failed = report_colours(colour_removed, colour_added)
     docstrings, doc_note = docstring_lines(here, base)
     tracked, tracked_note = module_level_names(here, base)
     changed, added, removed, unparsed, doc_lines, derived = read_changes(
@@ -607,7 +709,7 @@ def main():
         if doc_lines:
             print('  %d of the changed line(s) are module docstring text'
                   ' (%s).' % (len(doc_lines), doc_note))
-        return 0
+        return 1 if colour_failed else 0
 
     bare, unclear = [], []
     for name, before, after, state in changed:
@@ -729,7 +831,7 @@ def main():
     print('-' * 70)
 
     return 1 if (bare or unclear or unparsed or derived_bare
-                 or unreadable) else 0
+                 or unreadable or colour_failed) else 0
 
 
 if __name__ == '__main__':

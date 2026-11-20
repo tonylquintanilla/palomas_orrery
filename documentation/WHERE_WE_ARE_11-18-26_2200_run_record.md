@@ -653,3 +653,402 @@ Center on Earth,
 6. Tick ESCAPADE-Blue and Gold. Their names are on opposite sides of their symbols, and Blue’s box says “around the point called Earth-Sun L2”.
 
 When the orrery's push is done, send me its SHA and I'll finish the colour patch against it.
+
+================
+
+Recorded. All three rulings from this afternoon will go on the ledger at the close: the check covering every entry asked of JPL, the orbiters' real fix with no stopgap, and the Moon's period with its swing in the sentence.
+
+That leaves two cleanup items that need nothing from you now:
+- **The skill updates Session 2 ran out of time for,** with the skills page's new location (L-537). I'll write them now as a patch for you to run when you're back.
+- **The 24 goldenrod bodies (L-432)** wait for your eye at the desktop, after the colour patch runs.
+
+I'm starting on the skill updates, beginning with the records skill's rules for how a skill is bumped.
+
+The records skill reads 1.23, matching the manifest. Now I'll read Session 2's own record of what it built, so the skill text rests on its words, not my memory.
+
+I have Session 2's record. Now the size limits: each skill has a line cap, so I'll check how much room each has, and find every place the old skills-page wording sits.
+
+I have the layout. Before writing any skill text I'll confirm the names Session 2's record uses actually exist in the pushed website code, so the skills point at real things.
+
+I have every anchor. Writing the patch now, then I'll run it on a throwaway copy and hold it to each cap and the skills' own index check.
+
+Everything passes on a throwaway copy: both index tools ran, the skills' own check is clean, and every document is within its cap. I'll look over the diffs once before handing it over.
+
+L-537 asked that the help page be read again before the wording was corrected, since it was moving that week. I'll do that rather than leave the note saying it wasn't.
+
+The patch is tested. One last check: the two patches run together, in either order, since you'll run both.
+
+Both orders work. Copying the patch to your orrery folder.
+
+The skill updates are written as a second patch, `patch_L297_2_skills_and_protocol.py`, and it's in your orrery folder. I read it back from your disk, and it matches the tested copy byte for byte.
+
+**What it does:**
+- **Three skills get the rules this round learned:**
+  - **Cache builder (1.20):** a Lagrange point is served as its own kind of body, with hourly positions near today.
+  - **Exhibit skill (1.43):** a point is drawn as a marker alone, and each body's name can sit on its own side.
+  - **Provenance skill (2.37):** the box's error is worked out for the curve the page draws, not the straight line, and orbiters wait for L-538.
+- **The protocol goes to v3.143.** Its check on stale skills now sends you to Plugins in the claude.ai sidebar, not Settings > Skills. I read the help page again today, and that's where it is now. L-537 closes.
+- **Each skill stays within its line cap.** Each one moves its oldest version entry into the histories file, as sessions always do.
+
+It ran clean on a throwaway copy of the pushed orrery, with every document within its cap and the skills' own check passing. It also runs cleanly alongside the colour patch, in either order.
+
+**When you're back at your desk:**
+1. Run `patch_L432_1_colors_to_drawing_code.py`, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L432_1_colors_to_drawing_code.py'
+patch_L432_1: the colour table to the drawing code
+ok base: constants_new.py
+ok base: celestial_objects.py
+ok base: constants_change_report.py
+ok moved: the name map lookup out
+ok moved: 'EM-L1': 'cyan', -> 'Earth-Moon L1': 'cyan',
+ok moved: 'EM-L2': 'white', -> 'Earth-Moon L2': 'white',
+ok moved: 'EM-L3': 'green', -> gone
+ok moved: 'EM-L4': 'magenta', -> 'Earth-Moon L4': 'magenta',
+ok moved: 'EM-L5': 'red', -> 'Earth-Moon L5': 'red',
+ok moved: 'L1': 'cyan', -> 'Earth-Sun L1': 'cyan',
+ok moved: 'L2': 'white', -> 'Earth-Sun L2': 'white',
+ok moved: 'L3': 'green', -> gone
+ok moved: 'L4': 'magenta', -> 'Earth-Sun L4': 'magenta',
+ok moved: 'L5': 'red', -> 'Earth-Sun L5': 'red',
+ok same colour for all 162 names but the ten Lagrange keys (EM-L1, EM-L2, EM-L3, EM-L4, EM-L5, L1, L2, L3, L4, L5); the eight names shown keep theirs
+ok constants_new.py: color_map() replaced by its import
+ok constants_new.py: stamp
+ok celestial_objects.py: COLOR_KEY_BY_NAME removed
+ok celestial_objects.py: the colours comment
+ok celestial_objects.py: build_objects_list docstring
+ok celestial_objects.py: stamp
+ok no other .py file uses COLOR_KEY_BY_NAME
+ok report: the colour failure in the final verdict
+ok report: the colour failure in the no-value verdict
+ok report: colour lines taken out before values are read
+ok report: the self-test at every run
+ok report: the colour-line rule
+ok report: stamp
+  colour lines: self-test 7 of 7 cases read right; a planted loose pattern misread 2
+ok written: orrery_colors.py
+ok written: constants_new.py
+ok written: celestial_objects.py
+ok written: constants_change_report.py
+ok import from a fresh interpreter: Mars, Earth-Moon L1, Earth-Sun L2, an unknown name -> rgb(188, 39, 50) cyan white goldenrod
+patch applied
+
+Still quoting the old place (not edited here): L-432 on the ledger,
+and provenance-discipline's note on rendering settings still in
+constants_new.py. The close records both.
+
+Do next:
+  1. (do) Move this file into documentation\.
+  2. (do) The orrery's maintenance run: Constants change names
+     the colour lines removed and passes; Tier-1 0.
+  3. (look) Open the orrery: a few Lagrange points and two
+     planets, in their colours.
+  4. (do) Commit and push, not while a night is running.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. then `patch_L297_2_skills_and_protocol.py`, each from VS Code's Run button. Each should end with "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L297_2_skills_and_protocol.py'
+patch_L297_2: three skill bumps, the protocol v3.143, L-537
+ok base: skills/gallery-cache-builder/SKILL.md reads Skill version: 1.19
+ok base: skills/interactive-exhibit/SKILL.md reads Skill version: 1.42
+ok base: skills/provenance-discipline/SKILL.md reads Skill version: 2.36
+ok base: PROJECT_INSTRUCTIONS.md reads v3.142
+ok cut: cache builder: the 1.17 entry
+ok cache builder: the 1.20 entry
+ok cache builder: the older-entries line
+ok cache builder: fires_when
+ok cache builder: contents, the new section
+ok cache builder: contents, Fetch facts out
+ok cache builder: the size note out
+ok cut: cache builder: Fetch facts proven live
+ok cache builder: A Lagrange Point Is Served as a Point
+ok cut: exhibit: the 1.40 entry
+ok exhibit: the 1.43 entry
+ok exhibit: the older-entries line
+ok exhibit: fires_when
+ok exhibit: contents, the new section
+ok exhibit: A point is a marker, and a name has a side
+ok exhibit: Install and verify (L-537)
+ok cut: provenance: the 2.34 entry
+ok provenance: the 2.37 entry
+ok provenance: the older-entries line
+ok provenance: "these bound it"
+ok provenance: the working-out between served points
+ok provenance: "the LARGEST of them"
+ok provenance: the census of 2026-08-27 out, a pointer left
+ok histories: the cache builder's three passages
+ok histories: the exhibit's 1.40 entry and 1.42 install
+ok histories: provenance's 2.34 entry and census
+ok protocol: header v3.143
+ok protocol: Stale Skill gate, the stores
+ok protocol: Stale Skill gate, reinstall
+ok protocol: the v3.143 entry
+ok protocol: v3.140 out
+ok protocol history: v3.140 in
+ok ledger: L-537 DONE
+ok ledger: L-537 note
+ok ledger: L-297 Gap
+ok written: skills/gallery-cache-builder/SKILL.md
+ok written: skills/interactive-exhibit/SKILL.md
+ok written: skills/provenance-discipline/SKILL.md
+ok written: documentation/SKILL_HISTORIES.md
+ok written: PROJECT_INSTRUCTIONS.md
+ok written: documentation/PROJECT_INSTRUCTIONS_HISTORY.md
+ok written: LEDGER_CONSOLIDATED.md
+ok skills_index.py: Skill Manifest regenerated (12 skills) in PROJECT_INSTRUCTIONS.md.
+ok ledger_index.py: Index regenerated (269 live items) in c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+ok skills_index.py --check:   WARNING: safe-file-editing: SKILL.md body is 760 lines; Anthropic's guideline is under 500
+ok doc_index.py --caps: DOCUMENT CAPS: PASS -- 18 document(s) within their caps, 12 skill(s) all listed; no cap yet: LEDGER_CONSOLIDATED.md (41697 lines)
+patch applied
+
+Do next:
+  1. (do) Move this file into documentation\.
+  2. (do) Commit and push the orrery, not while a night is running.
+  3. (do) Reinstall gallery-cache-builder, interactive-exhibit and
+     provenance-discipline (Plugins, in the claude.ai sidebar), and
+     paste PROJECT_INSTRUCTIONS.md into the Project's instructions.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. Run the orrery's maintenance run, and check that Constants change passes and Tier-1 is 0.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261119T145358Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 3.8s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.9s  rewrote data/constants_export.json
+  Period fetch                 0.3s  unchanged (2 checked, not written) --
+                                     NOTHING MISSING -- 110 served objects
+                                     examined, no query asked
+  Horizons check               0.4s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 110 entries and 28 sheets
+                                     current, no query asked
+  Path plan                    0.3s  unchanged (1 checked, not written) -- 34
+                                     paths, events akatsuki 15, atlas_2024_g3 1,
+                                     atlas_3i 1, bepicolombo 35, borisov_2025_v1
+                                     1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1,
+                                     c2025_k1_d 1, cassini 7, dart 1,
+                                     escapade_blue 3, escapade_gold 3,
+                                     europa_clipper 5, galileo 7, juice 10, juno
+                                     4, lucy 7, mcnaught 1, new_horizons 2,
+                                     osiris_apex 13, oumuamua 1,
+                                     panstarrs_2025_r3 1, parker_solar_probe 49,
+                                     pioneer_10 1, pioneer_11 2,
+                                     psyche_spacecraft 2, rosetta 12,
+                                     solar_orbiter 31, tsuchinshan_atlas 1,
+                                     voyager_1 2, voyager_2 5, west 1, wierzchos
+                                     1. Asked JPL for: nothing.
+  El Nino check                1.3s  unchanged (1 checked, not written) --
+                                     CURRENT -- the page shows NOAA's latest:
+                                     discussion of 12 November 2026, RONI to ASO
+                                     2026, chances issued November 2026; nothing
+                                     written.
+  Objects export               0.3s  rewrote data/objects_export.json
+  Drawings export              2.0s  unchanged (8 checked, not written)
+  Module atlas                 7.3s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               3.9s  rewrote DATA_INVENTORY.md
+  Exact rows report            4.9s  rewrote EXACT_ROWS_PRINTED.md -- 11 of 47
+                                     exact rows printed at 40 lines (25 orrery,
+                                     15 gallery); 14 drawn only, 3 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.4s  4 of the changed line(s) are module
+                                     docstring text (base 232 line(s); working
+                                     236 line(s)).
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              2.4s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       4.0s  Export matches the store: sha256
+                                     9358fd112b64 on both sides; 234 rows
+                                     re-read, 57 not exported, 46 tokens; 835
+                                     conversions re-computed, 12 of 12 worked
+                                     cases hold; 234 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Constants rounding           0.1s  PASS -- 7 of 7 pins held; 2 of 2 planted
+                                     faults caught by name.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.3s  pass -- 110 of 110 entries and 67 periods
+                                     confirmed, 28 sheets read, within 30 days
+  Horizons check suite         1.0s  pass -- 81 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.5s  pass -- 39 checks, every planted fault
+                                     caught (22 planted, 8 of them for Earth's
+                                     period, L-445, 2 for Pluto's, L-443)
+  El Nino check suite          0.5s  PASS -- 22 checks: a planted fault caught; a
+                                     newer discussion, RONI season and chances
+                                     each flag EL NINO DUE and save the copies
+                                     once; NOAA's files as the page shows them
+                                     write nothing; an outage and a changed
+                                     sentence are reported; the page is never
+                                     touched; the folder output, the gate and the
+                                     commit title hold.
+  Path plan suite              5.4s  40 of 40 checks passed
+  Path drawing suite           0.3s  13 of 13 checks passed
+  Path or orbit suite          0.3s  17 of 17 checks passed, every planted fault
+                                     caught
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      3.5s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   2.0s  No unit contradicts its arithmetic: 62
+                                     derived row(s) read -- 53 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 229 status lines in constants_new.py are
+                                     well formed; 59 rows carry none.
+  Row shape                    0.1s  All 291 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          20.9s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                 12.6s  All 24 orbit cache tests passed: cache
+                                     loads, old formats convert, corrupted
+                                     entries are dropped; the clock reads UTC and
+                                     both forms of the fetched stamp read back;
+                                     the repository-wide fresh check examined 150
+                                     .py files and 20 JPL calls, every one asked
+                                     fresh (2 not JPL, excepted); JPL's answers
+                                     told apart (no such body, more than one,
+                                     unreachable, other) on 10 faked answers to
+                                     fetch_trajectory, 10 to fetch_position by
+                                     astroquery and 11 by both its routes, and 4
+                                     fallback branches ask before drawing (3
+                                     bodies JPL has no solution for drawn from
+                                     their papers whatever it answers); nothing
+                                     left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    1.0s  PASS -- 6 of 6 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.0
+                                     deg
+  Drawings export check       56.2s  PASS -- 22 of 22 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5; main_belt 6000 dots, no
+                                     plane recorded, sha256 712caffec391
+  Position digits (L-401)      2.3s  PASS -- 18 of 18 planted faults caught by
+                                     name; 28 hovers examined, 221 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 499 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 22 period sentences
+  Orbit markers (L-431, L-401)    9.0s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.4s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.5s  PASS -- 15 of 15 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named; 13
+                                     night-gate cases
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 113
+                                     steps matched to their buttons by name and
+                                     script; 146 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Document caps                0.1s  PASS -- 18 document(s) within their caps, 12
+                                     skill(s) all listed; no cap yet:
+                                     LEDGER_CONSOLIDATED.md (41697 lines)
+  Worksheet checker            7.7s  72 of 99 routed, 8 clean
+  Worksheet checker tests     18.5s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         23.4s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 25 string sites carry the pinned 73
+                                     claims and 0 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          58.8s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 272: orrery 110, Earth System 144,
+                                     stars 13, utilities 2, unclassified 3.
+
+======================================================================
+  37 of 37 gating checkers passed -- 265.3s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 99 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 272: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 3.
+      Tier-1 rose since the previous run in 1 file(s):
+      - patch_L432_1_colors_to_drawing_code.py: 0 -> 1
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2716 file(s) examined, 10 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/objects_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    19 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+4. Open the orrery and check a few colours.
+5. Move both patches into `documentation\`, -- done 
+6. then commit and push. Make sure the new `orrery_colors.py` is in the change list. -- gallery nightly at 0c832de1caf357efd34c6b5c36770ee394d0bbec; orrery at 
+7. Reinstall three skills (gallery-cache-builder, interactive-exhibit, provenance-discipline) from Plugins in the sidebar, 
+8. and paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions.
+
+**Still waiting:** your phone look at the Lagrange points. 
+
+Solar System room. 
+1. In the drawer, “Earth-Sun Lagrange Points” sits right after Earth; tick it. 
+2. L4 sits on Earth’s orbit ahead of Earth, and L5 behind it. 
+3. L1 and L2 share Earth’s pixels at this scale, as you ruled. 
+4. Tap Earth-Sun L4: its box gives NASA’s words, its distance from the Sun, and “JPL states no accuracy for this position.”
+Center on Earth, 
+1. open Earth’s fold. The order is Earth-Moon L1, Moon, L5, L4, L2. Tick the four and zoom to the Moon’s orbit:
+2. L1 sits between Earth and the Moon (about 330,000 km from Earth), its name on the left;
+3. L2 sits beyond the Moon (about 450,000 km);
+4. L4 and L5 sit on the Moon’s orbit, ahead of and behind it.
+5. Still centred on Earth, zoom out. With Earth-Sun L1 and L2 ticked, each is about 1.5 million km from Earth, L1 toward the Sun.
+6. Tick ESCAPADE-Blue and Gold. Their names are on opposite sides of their symbols, and Blue’s box says “around the point called Earth-Sun L2”.
+
+When you tell me what you saw, I'll write the session's close: this afternoon's three rulings, the round's outcome and the next coordinator's prompt. The 24 goldenrod bodies are a desk job after the colour patch.

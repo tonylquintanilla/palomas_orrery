@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.142 | November 18, 2026
+Tony Quintanilla, PE | Claude | v3.143 | November 19, 2026
 
-Cut from 00c89ef0 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 4c44ea87 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -416,7 +416,8 @@ If a listed skill is relevant and has not fired, load it by name.
 
 Stale Skill = Stop [CRITICAL]
 A skill lives in THREE stores: the repo (skills/<n>/SKILL.md), Tony's
-account install (Settings > Skills -- the copy Claude actually loads), and
+account install (Plugins, in the claude.ai sidebar -- the copy Claude
+actually loads), and
 the manifest table below (a generated mirror, rebuilt by skills_index.py).
 When Claude loads a skill it needs, it compares that skill's own version
 line against the manifest row. The comparison is free: both are already in
@@ -427,7 +428,7 @@ the skill and mention the mismatch afterwards. Do NOT reason about which
 copy looks newer and carry on. State plainly which version loaded, which
 version the manifest expects, and ask Tony to:
   - (do) push the current SKILL.md to skills/ in the repo, and
-  - (do) reinstall it to the account profile (Settings > Skills),
+  - (do) reinstall it to the account (Plugins, in the claude.ai sidebar),
 then reload the skill and continue the task.
 
 The STOP is the whole point. A mismatch noticed mid-task and mentioned in
@@ -520,7 +521,7 @@ horizons-orbital-mechanics   1.19 Horizons queries, centers, frames, osculating
                                   small body drawn as a path or an orbit by its
                                   database e (path_or_orbit.py,
                                   data/small_body_solutions.json)
-provenance-discipline        2.36 Scanner runs, audits, citations, constants,
+provenance-discipline        2.37 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
@@ -543,7 +544,7 @@ gallery-assembler            1.4  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.19 Nightly builder, atomic swap and its
+gallery-cache-builder        1.20 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
@@ -557,8 +558,10 @@ gallery-cache-builder        1.19 Nightly builder, atomic swap and its
                                   rule), every JPL question asked fresh
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
-                                  (fetch_path_last_day), a held body (HELD)
-interactive-exhibit          1.42 a room or exhibit in interactive.html
+                                  (fetch_path_last_day), a held body (HELD), a
+                                  Lagrange point served as a point
+                                  (serving_shape 'point')
+interactive-exhibit          1.43 a room or exhibit in interactive.html
                                   (?exhibit=); its drawer and chrome (nav
                                   cluster, frame zoom, i panel, HUD, text box,
                                   consent, back link); the served words and
@@ -566,7 +569,9 @@ interactive-exhibit          1.42 a room or exhibit in interactive.html
                                   from (store_writer, exhibit_store_editor,
                                   objects_config.json); what a room opens on;
                                   testing a room (the gallery run's checks,
-                                  tools/headless); carding an exhibit in Studio
+                                  tools/headless); carding an exhibit in
+                                  Studio; a Lagrange point's marker and box, a
+                                  name's side (label_side_for)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1260,6 +1265,46 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.143 (November 19, 2026): One instruction's wording changed in this
+document, and THREE skills bumped, from L-297 (the Lagrange points) and
+L-537 (the skills page moved).
+
+WHAT PROMPTED IT. The Claude Code sessions of Nov 18 and 19 (Claude
+Opus 5.5), through the python_work door, keyed eight Lagrange points in
+the orrery and served and drew them on the website, pushed at orrery
+a70d98c5 and gallery 56bc3fab. JPL has no L3: the orrery's two L3
+entries had drawn two asteroids, and are gone. Session 2 reached Tony's
+push window before the skills; the coordinating session wrote them from
+L-297's notes and the code at those SHAs.
+
+WHAT CHANGED. gallery-cache-builder 1.19 -> 1.20: A Lagrange Point Is
+Served as a Point, the fourth serving shape. interactive-exhibit 1.42
+-> 1.43: a point drawn as its marker alone at the minute shown, its
+box, and a name's side set per body on Tony's look.
+provenance-discipline 2.36 -> 2.37: the working-out between served
+points is a third error, worked out for the curve the page draws, not
+the straight chord (Tony, Nov 18: "the straight path is not what is
+happening"), on for the Lagrange points and open-path comets only; a
+craft orbiting a planet keeps the chord until L-538. Each skill moved
+its oldest version entry, and two of them a passage of history, to
+documentation/SKILL_HISTORIES.md to stay at its cap. In this document,
+Stale Skill = Stop names the skills page where it now is, Plugins in
+the claude.ai sidebar, in place of Settings > Skills (L-537, closed);
+the older version entries keep the words they were written with.
+
+THE OBLIGATION TRAVELS. This session wrote the three from the repo's
+copies, 1.19, 1.42 and 2.36, as the manifest expected. Tony reinstalls
+all three (Plugins, in the claude.ai sidebar) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads each from the account confirms its copy reads 1.20, 1.43 or 2.37
+before that work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.140 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.142 (November 18, 2026): No rule changed in this document. ONE
 skill bump: horizons-orbital-mechanics 1.18 -> 1.19 (L-533, ESCAPADE's
 path), by the records skill's binding rule, on the brief's section 8
@@ -1340,49 +1385,6 @@ from the account confirms its copy reads 1.3 before Earth System work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.138 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.140 (November 12, 2026, night): No rule changed in this document.
-ONE skill bump: interactive-exhibit 1.41 -> 1.42 (L-527, a first
-visit's guide), by the records skill's binding rule, Tony's go-ahead of
-Nov 12 ("Yes": the skill, the skills index and one protocol version
-entry) and the coordinator's word at the close, after his phone look of
-20:34 ("the whole sequence works and is very effective"). A GUIDE THAT
-WAITS, AND A ROOM HELD UPRIGHT.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 12 (Claude Opus 5.5),
-through the python_work door, built on orrery af8e1bdf and gallery
-001d5046, from Tony's prompt and
-documentation/COORD_L527_guide_brief_20261112.md, in three parts with a
-report and his go-ahead after each, and his phone looks of 15:55, the
-evening and 20:34 between them.
-
-WHAT CHANGED. interactive-exhibit: two rules. A GUIDE ASKS FOR ONE
-ACTION AND WAITS FOR IT: its cards give instructions only, so it adds
-no claim to source; a card ends only on its own action, told by the
-page's own functions and handled by a timer, never inside a Plotly
-event; a camera move it makes is worked out from what is drawn; its
-steps, words, setting and sums are gallery/first_guide.js, held by the
-gallery run's First guide row and walked by
-tools/headless/walk_first_guide.js. And, under Phone first, UPRIGHT
-ONLY (Tony's ruling of Nov 12, 13:18 and 13:44): a room is built and
-tested upright; held sideways it shows one line asking for the phone
-upright, and a guide pauses. Seven field notes of September, each held
-by a rule the skill keeps or by the store writer's suite, and the
-oldest of four version entries (1.39) moved to
-documentation/SKILL_HISTORIES.md, so the skill stays under its cap of
-738 lines (734).
-
-THE OBLIGATION TRAVELS. This session read interactive-exhibit 1.41 from
-the repo's copy, as a Code session does, as the manifest expected. Tony
-reinstalls it (Settings > Skills) and pastes this version into the
-Project's instructions on claude.ai; the next session that loads it
-from the account confirms its copy reads 1.42 before exhibit work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.137 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

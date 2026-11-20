@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*270 live items; 254 need attention (`!`); 165 RICE-scored; 261 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*269 live items; 253 need attention (`!`); 165 RICE-scored; 262 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1187,7 +1187,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-18 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-18 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-15 |
-| ! | L-537 | The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump) | OPEN | -- | 2026-11-18 |
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 
 ### B. Pending Action (Tony-side)
@@ -1598,6 +1597,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-524 | The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built) | DONE | -- | 2026-11-12 |
 |  | L-527 | A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; built, closed) | DONE | -- | 2026-11-12 |
 |  | L-535 | The period's reason: the website's period line says what set its digits (orrery + gallery; built, closed) | DONE | -- | 2026-11-16 |
+|  | L-537 | The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump) | DONE | -- | 2026-11-19 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -2040,30 +2040,6 @@ across a year), choose how the digits are set from it, and the period
 fetch's and the digits test's checks; Tony's word on the rule.
 **Ref:** L-535 (the period's reason); L-431 (orbital periods); L-484
 (Pluto's period at its barycentre); L-514 (the Mars room).
-
-#### [L-537] The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump)
-<!-- L:537 status:OPEN upd:2026-11-18 section:A flag: rice: -->
-- **Found 2026-11-18, evening**, reinstalling horizons-orbital-mechanics
-  1.19, in the coordinating session (Claude Opus 5.5). Tony: "where
-  has skills management gone?" Anthropic's help pages, read that
-  evening: skills had moved from Settings to Customize > Skills, and
-  Customize is renamed Plugins in the sidebar, one Plugins page in
-  place of the separate Skills, Connectors and Plugins tabs
-  (support.claude.com, article 17740565, "Manage plugins, skills and
-  connectors from one Plugins page"). Tony found it and reinstalled;
-  17:30: "i had to down vote this new buried method."
-- **Where the old words stand**, at orrery 342d2bc4:
-  PROJECT_INSTRUCTIONS.md five times (the Stale Skill gate among them)
-  and skills/interactive-exhibit/SKILL.md once. Each would send Tony
-  to a place that no longer exists. By the records skill's rule a
-  wrong instruction is corrected in the session that finds it; it is
-  carried instead, so as not to ask a second reinstall and protocol
-  paste of Tony the same night, and he knows the new place. Read the
-  help page again when correcting: the page was moving that week.
-**Gap:** the correction, at the next protocol version and at
-interactive-exhibit's next version (L-297's round, if it bumps it).
-**Ref:** ledger-and-session-records (a wrong sentence in a skill: bump
-now, or carry it); the protocol's Stale Skill = Stop.
 
 #### [L-538] The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297)
 <!-- L:538 status:OPEN upd:2026-11-19 section:A flag: rice: -->
@@ -16429,8 +16405,9 @@ Tony's disk) the website serves and draws the eight.
   interactive-exhibit, provenance-discipline 2.37) and L-537 with them.
   They change no served file, so they ride a later commit.
 **Gap:** the push and the Daily Run (Tony's run order of Nov 19); Tony's
-phone look; the skill bumps above, one protocol entry (v3.143), with
-L-537.
+phone look; the skill bumps above are written, with L-537
+(patch_L297_2_skills_and_protocol.py, Nov 19): Tony reinstalls the
+three and pastes v3.143.
 **Ref:** L-291, L-294, L-538 (the orbiters' printed error), gallery
 `INTERACTIVE_AS_BUILT.md` (The Lagrange points), gallery
 `tools/gallery_cache_builder.py` (lines
@@ -38414,6 +38391,39 @@ card model, one viewer per orientation); gallery `index.html`,
 **Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
 `documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
 tree); L-165 (site continuity); L-503 (the belt on the website).
+
+#### [L-537] The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump)
+<!-- L:537 status:DONE upd:2026-11-19 section:C flag: rice: -->
+- **Found 2026-11-18, evening**, reinstalling horizons-orbital-mechanics
+  1.19, in the coordinating session (Claude Opus 5.5). Tony: "where
+  has skills management gone?" Anthropic's help pages, read that
+  evening: skills had moved from Settings to Customize > Skills, and
+  Customize is renamed Plugins in the sidebar, one Plugins page in
+  place of the separate Skills, Connectors and Plugins tabs
+  (support.claude.com, article 17740565, "Manage plugins, skills and
+  connectors from one Plugins page"). Tony found it and reinstalled;
+  17:30: "i had to down vote this new buried method."
+- **Where the old words stand**, at orrery 342d2bc4:
+  PROJECT_INSTRUCTIONS.md five times (the Stale Skill gate among them)
+  and skills/interactive-exhibit/SKILL.md once. Each would send Tony
+  to a place that no longer exists. By the records skill's rule a
+  wrong instruction is corrected in the session that finds it; it is
+  carried instead, so as not to ask a second reinstall and protocol
+  paste of Tony the same night, and he knows the new place. Read the
+  help page again when correcting: the page was moving that week.
+**Note:** (2026-11-19, the coordinating session, Claude Opus 5.5) corrected
+by patch_L297_2_skills_and_protocol.py: the protocol's Stale Skill gate
+(its two lines) and interactive-exhibit 1.43's Install and verify now
+say "Plugins, in the claude.ai sidebar". The protocol's older version
+entries (v3.141, v3.142, and v3.140, moved down) keep "Settings >
+Skills": they record what was true when written. The help page, read
+again Nov 19 (support.claude.com, article 17740565): in the sidebar,
+what was Customize becomes Plugins, one Plugins page in place of the
+Skills, Connectors and Plugins tabs. Some of claude.com's docs still
+say Customize, so the change is still rolling out.
+**Gap:** none.
+**Ref:** ledger-and-session-records (a wrong sentence in a skill: bump
+now, or carry it); the protocol's Stale Skill = Stop.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
