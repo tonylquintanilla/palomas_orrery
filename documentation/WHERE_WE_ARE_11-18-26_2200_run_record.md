@@ -1145,6 +1145,8 @@ ok   orrery_colors.py: 'ESCAPADE-Blue': 'blue',   # ESCAPADE: placeholder, Tony'
 patch applied (2 edits, 1 files)
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
+head is at 04ebd9fb1c2c216c6c0e4e94f7e0fb4bb1277a11
+
 - **Website:** save patch_L533_2_brighter_craft_website.py in tonyquintanilla.github.io and click Run.
   - It changes ESCAPADE-Blue to turquoise on the website too.
   - It gives every spacecraft's open diamond a 2-pixel outline in its own colour, so the symbol reads as a thick line instead of a hairline.
@@ -1159,9 +1161,13 @@ ok   gallery/assembler/presentation.py: # for Tony's phone look (Mode 5).
 patch applied (5 edits, 2 files)
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
+head is at eed30d4bcadd702a9b7b4dd5b6261f5445abf0f7
+
 Each patch prints one "ok" line per edit, then "patch applied". If anything doesn't match, it prints an error and writes nothing. In the test, ESCAPADE-Blue's marker came out turquoise with its 2-pixel outline. The tests on how moons and Lagrange points are placed and on the path error estimate still passed.
 
 **When to push.** The page reads this code live, so you'll see the change on your phone as soon as GitHub serves it, with no nightly run needed. The nights have been running late in the morning: the orrery's around 10:30 a.m. and the website's around 11:20 a.m., with second runs in the early afternoon. So commit and push both repositories before about 10:15 this morning, or after about 3 p.m.
+
+-- all green in both repos.
 
 If the diamonds look right but still small, the outline width is one number at the top of render_spacecraft.py, and the next patch can raise it.
 
@@ -1169,3 +1175,5 @@ Where this leaves us:
 - The reel's draft 2 already has the cuts you asked for (no drawer, nothing zoomed out past the 0.5 AU tick).
 - The brighter craft are ready to run. After your phone look, a new recording of the same moves gives draft 3.
 - The session-close patch from yesterday, patch_L297_3_close_session_20261119.py, still needs to run. It doesn't touch these files, so the order between them doesn't matter.
+
+-- when i have earth centered, then go to Escapade, the scene shifts to sun centered instead of staying earth centered. 
