@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-19T19:32:46.378208+00:00",
+  "clean_run_utc": "2026-11-20T16:10:16.405999+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/44599100355",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/44770386005",
   "reported_not_red": [],
   "rows": [
     {
@@ -21,7 +21,7 @@
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 110 entries and 28 sheets current, no query asked"
+      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 2 checked today, 2 queries"
     },
     {
       "row": "Path plan",
@@ -36,7 +36,7 @@
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written)"
+      "verdict": "rewrote data/objects_export.json"
     },
     {
       "row": "Drawings export",
@@ -46,7 +46,7 @@
     {
       "row": "Constants export check",
       "kind": "checker",
-      "verdict": "Export matches the store: sha256 97ca403f198e on both sides; 234 rows re-read, 57 not exported, 46 tokens; 835 conversions re-computed, 12 of 12 worked cases hold; 234 citations worked out again, 8 of 8 worked cases hold."
+      "verdict": "Export matches the store: sha256 9358fd112b64 on both sides; 234 rows re-read, 57 not exported, 46 tokens; 835 conversions re-computed, 12 of 12 worked cases hold; 234 citations worked out again, 8 of 8 worked cases hold."
     },
     {
       "row": "Objects export check",
@@ -86,7 +86,7 @@
     {
       "row": "Orbit cache",
       "kind": "checker",
-      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 147 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
+      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 148 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
     },
     {
       "row": "Drawings export check",
