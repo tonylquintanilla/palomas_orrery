@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-20T16:10:16.405999+00:00",
+  "clean_run_utc": "2026-11-20T19:10:09.591810+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/44770386005",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/44799367120",
   "reported_not_red": [],
   "rows": [
     {
@@ -21,7 +21,7 @@
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 2 checked today, 2 queries"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 110 entries and 28 sheets current, no query asked"
     },
     {
       "row": "Path plan",
@@ -36,7 +36,7 @@
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "rewrote data/objects_export.json"
+      "verdict": "unchanged (1 checked, not written)"
     },
     {
       "row": "Drawings export",
