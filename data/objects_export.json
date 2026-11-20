@@ -1,8 +1,8 @@
 {
   "schema": 4,
   "source_sha256": "8d26be3d2b6b349eb50757afac422ea8713e3ebec95bf2c1c4751a903c6bdea4",
-  "period_inputs_sha256": "8ed60d5ab42b98e682c9e6d10191f642b0d123aa5db5072334391f3fa968abbd",
-  "confirmations_sha256": "b4b3b37bcdc72ef3055e31c6f66b765c998265a81d33213a7838e91ea29cba73",
+  "period_inputs_sha256": "0c4b2510602003f3bd8e949a57416dfdaed7e4ccb8d4356d164e9b057e0ad73b",
+  "confirmations_sha256": "046c5e8ea6e6ae30c8ba1dfc914958a521fabd432df80295c258d05e93f85e37",
   "paths_sha256": "f08ab85a7997186dc2d4125a06338e0feb6b7faffb540adb40bec019e241362f",
   "cadence_days": 30,
   "objects": {
@@ -170,7 +170,7 @@
         "target": "3",
         "target_label": "the Earth-Moon center of mass",
         "open_orbit": false,
-        "fetched": "2026-11-19",
+        "fetched": "2026-11-20",
         "words": null,
         "reason": "JPL gives no uncertainty for this period, so only the digits that stay the same over a year are shown.",
         "days_only": false,
@@ -185,22 +185,22 @@
           "text": "365.253"
         },
         "record": {
-          "days": 365.252723903852,
-          "error_days": 0.000741985275794832,
+          "days": 365.2529080665288,
+          "error_days": 0.0009806031707739749,
           "error_from": "year_change",
           "sbdb_status": "not a small body; SBDB not asked",
-          "epoch": "2026-11-19 03:47",
+          "epoch": "2026-11-20 02:51",
           "elements": {
-            "a": 0.9999933942992886,
-            "e": 0.01667932635334228,
-            "i": 0.003599533680311726,
-            "omega": 287.7588996708001,
-            "Omega": 175.3483986352872,
-            "TP": 2461409.601127399,
-            "MA": 314.7172278777336,
-            "TA": 313.3389992263275,
-            "q": 0.9833141781245843,
-            "epoch": "2026-11-19 03:47 osc."
+            "a": 0.9999937304344862,
+            "e": 0.01667987454761105,
+            "i": 0.003599669650582347,
+            "omega": 287.7551798678303,
+            "Omega": 175.3523948876518,
+            "TP": 2461409.601379129,
+            "MA": 315.6642914297543,
+            "TA": 314.3084242984744,
+            "q": 0.9833139604624413,
+            "epoch": "2026-11-20 02:51 osc."
           }
         }
       },
@@ -212,12 +212,12 @@
           "horizons_name": "Earth"
         },
         "period": {
-          "confirmed": "2026-11-19",
+          "confirmed": "2026-11-20",
           "center": "@sun",
-          "epoch": "2026-11-19 03:47",
-          "days": 365.252723903852,
-          "jpl_days": 365.252723903852,
-          "error_days": 0.000741985275794832
+          "epoch": "2026-11-20 02:51",
+          "days": 365.2529080665288,
+          "jpl_days": 365.2529080665288,
+          "error_days": 0.0009806031707739749
         },
         "hold": null
       }
@@ -238,33 +238,33 @@
         "target": "301",
         "target_label": null,
         "open_orbit": false,
-        "fetched": "2026-11-19",
+        "fetched": "2026-11-20",
         "words": null,
         "reason": "JPL gives no uncertainty for this period, so only the digits that stay the same over a year are shown.",
         "days_only": true,
         "years": null,
         "days": {
-          "value": 26.9,
+          "value": 27.0,
           "figures": 3,
-          "text": "26.9"
+          "text": "27.0"
         },
         "record": {
-          "days": 26.87753929629526,
-          "error_days": 0.047053593126598514,
+          "days": 26.99559056944342,
+          "error_days": 0.14715387327429852,
           "error_from": "year_change",
           "sbdb_status": "not a small body; SBDB not asked",
-          "epoch": "2026-11-19 03:47",
+          "epoch": "2026-11-20 02:51",
           "elements": {
-            "a": 0.00254393404964661,
-            "e": 0.06997113339645994,
-            "i": 5.034586734002451,
-            "omega": 133.0322396513631,
-            "Omega": 324.7308864984577,
-            "TP": 2461371.469083545,
-            "MA": 255.3728596518282,
-            "TA": 247.8044256254258,
-            "q": 0.002365932100906991,
-            "epoch": "2026-11-19 03:47 osc."
+            "a": 0.002551377569388634,
+            "e": 0.06992166222309255,
+            "i": 5.027347017838253,
+            "omega": 130.6440374621731,
+            "Omega": 324.6879414703767,
+            "TP": 2461371.314134036,
+            "MA": 270.7136312926087,
+            "TA": 262.7191098875556,
+            "q": 0.002372981008778267,
+            "epoch": "2026-11-20 02:51 osc."
           },
           "paired": false,
           "not_paired": "the cache holds no Sun-centred elements for this body"
@@ -278,12 +278,12 @@
           "horizons_name": "Moon"
         },
         "period": {
-          "confirmed": "2026-11-19",
+          "confirmed": "2026-11-20",
           "center": "@399",
-          "epoch": "2026-11-19 03:47",
-          "days": 26.87753929629526,
-          "jpl_days": 26.87753929629526,
-          "error_days": 0.047053593126598514
+          "epoch": "2026-11-20 02:51",
+          "days": 26.99559056944342,
+          "jpl_days": 26.99559056944342,
+          "error_days": 0.14715387327429852
         },
         "hold": null
       }
