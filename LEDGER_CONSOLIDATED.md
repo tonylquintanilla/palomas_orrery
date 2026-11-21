@@ -1174,7 +1174,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
-| ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-15 |
+| ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk to be brought up to date) | OPEN | -- | 2026-11-21 |
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-16 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
@@ -1188,7 +1188,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
-| ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
+| ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed) | OPEN | -- | 2026-11-21 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 
@@ -2174,7 +2174,7 @@ provenance-discipline, A Computed Position Prints What Its Errors Earn.
 **Ref:** L-297 (the Lagrange points); L-395 (the Horizons check);
 horizons-orbital-mechanics, Checking an Entry Against JPL.
 
-#### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea)
+#### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Tony, 2026-11-20, 12:47**, after ESCAPADE's reel was posted on
   Instagram: "I would like to use the reel you made because it has a
@@ -2261,12 +2261,42 @@ horizons-orbital-mechanics, Checking an Entry Against JPL.
   documentation/COORD_L540_links_fold_brief_20261121.md; start prompt:
   documentation/PROMPT_code_L540_links_fold_20261121.md, for one Claude
   Code session in the website.
-**Gap:** the Code session (the Links fold in the drawer and the editor,
-New Link Card asking the row), Tony's Add place... Earth on the reel,
-his phone look, and ESCAPADE's scene remade (L-542). The
-gallery-pipeline and interactive-exhibit skills gain link cards, the
-Links fold and the editor's layout at their next bumps (method, not a
-ruling). A card that plays the reel on the
+- **Built Nov 21, the Links fold** (Claude Code, Claude Opus 5.5, on
+  gallery 5a7df273, in two parts with Tony's go-ahead between). A link
+  card (live address on another website, the lobby's test) with a place
+  sits in a fourth fold, Links, under that row, after its Encounters
+  and before its Saved pictures; its mark an arrow leaving a box, its
+  line "Each link opens another website in a new tab."; a tap opens it
+  in a new tab and keeps nothing for Back; Find counts it as a link.
+  With no place it is in no fold, the lobby only (gallery/picture_folds.js,
+  interactive.html, gallery/solar_system_drawer.js). The editor draws
+  the same fold (tools/drawer_places.py is_link, fold_kind; DRAWER_FOLDS),
+  and New Link Card... asks which row, as Add place... lists them, or
+  No row: with a row the card is saved in solar_system beside it, with
+  none in Storage (tools/link_card.py new_entry's place). LINKS_ROOM and
+  its words are gone. Checked by the Picture folds row (section 9,
+  nineteen breaks), the walk's section 41, the Drawer places row (two
+  more breaks), the Link cards row (a link card's places are rows the
+  drawer lists, in the Solar System room), the window driven on a
+  throwaway copy, and the whole gallery run, 52 of 52, run with no file
+  being edited. FOUND: the pushed website's Picture folds row was red,
+  exit 1, "Solar System card escapade_reel has no place in the drawer"
+  (rechecked on a clean copy of 5a7df273); a link card may now have no
+  place. The session's first "base" run was started while it was
+  already editing, so it was no base (Tony's catch). The walk's eleven
+  old reds are judged on L-521.
+- **The brief's slips** (COORD_L540_links_fold_brief_20261121.md): Find's
+  count lives in gallery/solar_system_drawer.js, which it did not name;
+  it did not know the Picture folds row was red at the base; the walk
+  and the as-built page needed sections too; and its "no row: Lobby
+  only" choice saves the card in Storage, which no visitor sees, so the
+  window says "No row (saved in Storage)".
+**Gap:** Tony's push; Add place... Earth on the reel in the editor, Save
+All, push; his phone look; ESCAPADE's scene remade (L-542). Skill text
+owed at the next bumps (method, not a ruling): interactive-exhibit, the
+Links fold (a link card, its place and order, LINK_MARK, the new tab,
+Find's link count); gallery-pipeline, link cards (New Link Card asking
+the row, Storage with none) and the editor's Links fold. A card that plays the reel on the
 lobby itself stays an idea, for a design talk if the link card falls
 short.
 **Ref:** L-533 (ESCAPADE); L-518 (the shared scene link); L-519 (Scenes
@@ -3113,8 +3143,8 @@ contents lists); L-499 (the kinds of session); L-506 (Token Economy);
 L-012 (the false "fetched fresh" print, still at `palomas_orrery.py`
 line 4872).
 
-#### [L-521] Three red checks in the drawer walk (gallery, the headless walk; recorded)
-<!-- L:521 status:OPEN upd:2026-11-15 section:A flag: rice: -->
+#### [L-521] Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk to be brought up to date)
+<!-- L:521 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Recorded, not chased.** Found 2026-11-09 by the L-519 (Featured's
   rethink) Code session (Claude Opus 5.5), on gallery 6a153716 with a
   payload built that day by the room's real driver (2026-11-09T12:00Z):
@@ -3145,9 +3175,52 @@ line 4872).
   moved the view", Sedna's lines not bulleted, and a text-box line of 67
   to 70 characters from the main belt's drawing. The five received from
   L-523 did not fail. Not chased.
-**Gap:** find, for each of the three, whether the page or the walk is
-wrong; fix the one that is. A gallery session that next opens the drawer
-or the text box.
+- **Eleven, each judged, 2026-11-21, by L-540 (the Links fold)'s Code
+  session** (Claude Opus 5.5), on Tony's word ("name all 11 red checks
+  of the drawer walk ... say whether the walk's expectation is stale or
+  the page is wrong. Record them on L-521"). On gallery 5a7df273 with a
+  payload of 2026-11-21T12:00Z the walk fails 11 of 357; the same 11,
+  word for word, on a copy of the pushed page, and 11 of 367 with that
+  session's section 41. ALL ELEVEN ARE STALE: the page follows the rule
+  in force, and each expectation is older than a deliberate change.
+  Judged by a helper agent booting the page headlessly, read only;
+  items 6, 8 and the belt's wrap width rechecked against the files.
+  Walk lines at the session's working copy:
+  1. "scene tap moved the view" (line 752, Oct 2): it wants no Plotly
+     call after a tap; the tap makes one, to open the text box (L-497
+     6a, Oct 27), and the range does not move. Compare the view, not
+     the calls.
+  2. "Sedna's hover lines are not bulleted" (lines 946-951, Oct 26): it
+     wants five bulleted lines; there are four, all bulleted, as the
+     note "JPL's own uncertainty ... not yet included" is gone since
+     Sedna's uncertainty is served (L-484, Oct 29).
+  3. "the Spacecraft group is not ... right after Earth's row" (line
+     973, Nov 7): the Earth-Sun Lagrange Points group comes first
+     (L-297, Nov 19; as-built, The Lagrange points, Where).
+  4. "the groups are not in their places" (lines 1183-1186): the same;
+     lagrange_earth_sun now sits after aten.
+  5. "a body's text box has a line wider than 62 characters" (line
+     1332, Oct 26): every long line is the belt's cloud's drawing words
+     (data/objects_config.json), wrapped at the drawings' 70
+     (feature_renderers.js HOVER_WIDTH; interactive-exhibit's 70 for
+     the desktop box); 62 is a body box's width, and the cloud's row
+     came Oct 29 (L-503).
+  6. "earth's moons are not right under its row, nearest first" (line
+     1785, Nov 10): the walk sorts by a(1-e), which the Earth-Moon
+     points do not have; the page lists them and the Moon by distance
+     now (L-297; as-built: "by their distance from it now").
+  7. "Earth's pictures are not in a fold right after Earth's row" (line
+     243, Nov 8): the Encounters fold sits between them (L-529, Nov
+     20).
+  8-11. Earth's desktop fold, its tap, 'Artemis', and the phone's
+     twins (lines 252, 260, 273, 316): the walk counts the encounter
+     card (drawer_row earth, no file) among Earth's pictures; the page
+     puts it in Encounters, never among them (L-529).
+  Shared causes: the Lagrange points (3, 4, 6), the Encounters fold (7
+  to 11), and one each from L-497 (1), L-484 (2) and L-503 (5).
+**Gap:** bring the walk's eleven expectations up to date, one clause
+each above (the page is not changed); then the walk is green again. A
+gallery session that next opens the drawer or the text box.
 **Ref:** L-519 (Featured's rethink); L-497 (one text box); gallery
 `tools/headless/walk_solar_system_drawer.js`.
 

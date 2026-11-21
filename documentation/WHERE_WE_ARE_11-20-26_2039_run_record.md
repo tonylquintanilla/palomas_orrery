@@ -712,7 +712,7 @@ ok   ledger_index.py
 ok   doc_index.py --caps
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-2. Commit and push the orrery. -- 
+2. Commit and push the orrery. -- d3b62abcad941f8a67742b93abe5c65b35fe3415
 3. Move the patch to the `documentation` folder.
 
 Run it before the Links fold session writes its own closing records, because both edit Where We Are. If it prints ANCHOR FAIL, nothing is written; tell me and I'll rebuild it on the new page.

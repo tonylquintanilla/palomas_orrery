@@ -1,23 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 21, 2026, midday: the first encounter's close, your phone look recorded and the Nov 20 rulings on the ledger (Fable, coordinating session).
-- Written at orrery 39070a95 and gallery 5a7df273, with this patch's edits on your disk.
+Last updated: November 21, 2026, afternoon: the Links fold built (Claude Code, Claude Opus 5.5, in the website).
+- Written at orrery d3b62abc and gallery 5a7df273, with this session's edits on your disk, not pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The first encounter is live and looked at: ESCAPADE's Earth flybys play hour by hour from the Encounters fold under Earth's row, each pass dated; your look of Nov 20, "Works great!", and Pause takes on the first tap since the player's patch (L-529 (guided encounters)).
-> - Two items recorded, not fixed: three places read or print a plan's time, which is on JPL's clock, as UTC (L-541 (a plan's clock)); the gallery editor let your scene into the Earth room, which the Scene cards check refuses (L-542 (a scene's room)).
-> - The gallery editor has New Link Card, every web address in the i panels is a link, and its Solar System section is laid out as the website's: Lobby only first, then each row's Scenes, Encounters and Saved pictures (L-540 (a reel on a Featured card)).
+> - A link card can now sit beside a body in the room's drawer, in a Links fold after that body's Encounters and before its Saved pictures; a tap opens it in a new tab. The gallery editor shows the same fold, and New Link Card asks which row; with no row the card goes to Storage. The Outside Links room is gone from the code (L-540 (a reel on a Featured card)).
+> - The pushed website's Picture folds check was red: it refused the reel's card for having no place in the drawer. A link card may now have none, and the whole gallery run is green, 52 of 52, run with nothing being edited.
+> - The drawer walk's eleven red checks are each judged: all eleven expect the page as it was before a deliberate change (the Lagrange points, the Encounters fold, and three older ones), so the walk is what needs updating, not the page (L-521 (the walk's red checks)).
 >
-> **Do next:** *The Links fold's build, in progress (L-540 (a reel on a Featured card)); then the encounter's slice 2, its talk first (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b), whose briefs are not written yet.*
+> **Do next:** *Your push and the reel's place (below); then the encounter's slice 2, its talk first (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b), whose briefs are not written yet.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) Start a Claude Code session in the website with documentation/PROMPT_code_L540_links_fold_20261121.md: the Links fold, so the reel sits under Earth. The Outside Links room is dropped (L-540 (a reel on a Featured card)).*
+> - *(do) Push the website and then the orrery; then in the gallery editor select the reel (Solar System, Lobby only), Add place... Earth, Save All, push; then look on your phone: Earth's Links fold, its words, and the reel opening in a new tab (L-540 (a reel on a Featured card)).*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -75,7 +75,7 @@ Waiting behind other work; a line leaves when picked up.
 - The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
-- Three checks red in the drawer walk before Scenes was built, the page or the walk aged, the same three again Nov 15: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
+- The drawer walk's eleven red checks, each judged stale on Nov 21: bring the walk up to date in a gallery session that next opens the drawer (Nov 9; L-521 (the walk's red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - Charon's period is asked around Pluto's centre, not the barycentre; fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when JPL cannot answer) slices b and c; L-484 (the two agree), its brief and build; L-504 (the orrery's clock), the Earth System, stamps and tools; L-510 part 2, the path plan asked from before any launch.
@@ -88,7 +88,7 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261120T202853Z, ok, no retry on the swap (the website's swap log at ae56a944, read Nov 20).
