@@ -1316,7 +1316,31 @@ I've built both. The patch is in your website folder as patch_L540_5_link_cards_
 **To run it:** 
 1. close the editor, 
 2. then click Run. You should see one "ok" line per edit, two "new" lines, and "=== LINK CARDS: PASS". 
-3. Then commit and push. The website's night ran this afternoon, so nothing is in the way tonight.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L540_5_link_cards_and_links.py'
+ok   tools/gallery_editor.py: keep the hand-curated tree.
+ok   tools/gallery_editor.py: self._refresh_tree(keep='card:' + entry['id'])
+ok   tools/gallery_editor.py: import scene_card  # noqa: E402
+ok   tools/gallery_editor.py: c.add_command(label="New Scene...", command=self._new_scene)
+ok   tools/gallery_editor.py: self.root.wait_window(dlg)
+ok   gallery/encounter.js: return "<h3>" + esc(title || "") + "</h3>" + lines.map(funct
+ok   gallery/encounter.js: //   infoHtml     the i panel's words: what the drawing is, 
+ok   index.html: <!-- A first visit's guide (L-527): the setting the start ca
+ok   index.html: // Card sources (schema v2): one line, URLs clickable, each 
+ok   index.html: where it was. Tony's ruling of 2026-11-20: the reel's link a
+ok   gallery_maintenance_run.py: ("Scene cards", "python",
+ok   gallery_maintenance_run.py: and the Tutorial row, wired to the same file.)
+new  tools/link_card.py
+new  tools/test_link_card.py
+patch applied (2 new files, 12 edits in 4 files)
+self-test, sharing marks kept: caught
+self-test, the website's own address let through: caught
+worked cases: all pass
+real file: 1 link card(s) checked: escapade_reel
+=== LINK CARDS: PASS
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+3. Then commit and push. The website's night ran this afternoon, so nothing is in the way tonight. -- 96c4ca9740581057aacbfae5e345cfc9dcb4500a
 
 Where this leaves us:
 - New link cards can be made in the editor from now on.
