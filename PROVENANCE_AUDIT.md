@@ -20,18 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261121T024651Z | `df03469` | 179 | 1184 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 6 | 0 |
 | 20261121T021727Z | `74b63fc` | 179 | 1184 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 6 | 0 |
 | 20261119T233321Z | `4c44ea8` | 181 | 1186 | 272 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 3 | 712 | 196 | 6 | 0 |
 | 20261119T145358Z | `53bf246` | 178 | 1185 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 7 | 0 |
 | 20261119T144344Z | `53bf246` | 178 | 1185 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 7 | 0 |
 | 20261119T035232Z | `53bf246` | 178 | 1185 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 7 | 0 |
-| 20261119T022958Z | `53bf246` | 178 | 1184 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 6 | 0 |
 
-Change since the previous run: total -2, Tier-1 -1.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
-
-Tier-1 moved by domain: unclassified 3 -> 2.
 
 ---
 
@@ -2042,9 +2040,9 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 438 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 439 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2817 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2988 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 3120 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 2837 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3008 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3140 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 
