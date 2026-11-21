@@ -661,8 +661,8 @@ CHECKERS -- the verdict informs the push call
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
 
-3. Commit and push the website. --
-4. On your phone, press Play and Pause several times.
+3. Commit and push the website. -- 7dbcc903616ca88c8735e2b026b7d7e459d71764
+4. On your phone, press Play and Pause several times. -- correct
 5. Move the patch file to the `documentation` folder.
 
-Tell me whether Pause takes on the first try. Then I'll write the close, with your look recorded on L-529.
+Tell me whether Pause takes on the first try. Then I'll write the close, with your look recorded on L-529. -- close

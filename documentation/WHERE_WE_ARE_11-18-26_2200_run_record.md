@@ -1264,7 +1264,61 @@ So I wrote a patch that adds the card: patch_L540_4_reel_link_card.py, now in yo
 - **Run the patch.** It finds your "ESCAPADE Earth Flyby" scene and puts the reel card just before it, in the same gallery room, so the story comes first and the scene sits beside it.
   - The new card is Featured, has no file, and has no place in the room's drawer.
   - It writes the file exactly the way the editor does.
-- **Commit and push.** Your scene card goes in the same push, since it's saved on your disk but not yet pushed.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L540_4_reel_link_card.py'
+note: 0 ESCAPADE scene cards found (1 expected); the reel card goes last, in room solar_system. Move it in the editor if you like.
+ok   added the card 'escapade_reel', Featured, linking to https://www.instagram.com/reel/Df-TOOvjork/
+patch applied (139 cards)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+- **Commit and push.** Your scene card goes in the same push, since it's saved on your disk but not yet pushed. -- 527ac762b7600d60a73999d7204153b35bfd0ad5
+
 - **Then tap the reel card on your phone.** I read the address "Df-TOOvjork" off your screenshot. If Instagram says the page isn't there, open the card in the editor and fix its "Live scene URL". It will accept the change there.
 
 The ledger now says these cards are made in the editor, which isn't quite right. The next record patch will say so.
+
+================
+
+I'll start with the links. First I'll find where the info panel's text is drawn and which served words contain web addresses.
+
+Now the test, in the same shape as the scene card's.
+
+Now the patch builder for all six files.
+
+Now the patch script itself, then the pre-test on a throwaway copy.
+
+I've built both. The patch is in your website folder as patch_L540_5_link_cards_and_links.py. Close the gallery editor before you run it.
+
+**The links check.** I read every place on the website where a web address can reach a visitor.
+- **Already links:** the room's own info panel makes every address a link: sources, notes and the "Read more" line.
+- **Two places were plain text, both from the ESCAPADE encounter:**
+  - the encounter's info panel line, "Positions and velocities: JPL Horizons, https://ssd.jpl.nasa.gov/horizons/, ...";
+  - the lobby's source line under the encounter's card. It made a link only when the whole source was an address, and this one has words around it.
+  
+  Both now use the same rule as the room's panel, so every address becomes a link that opens in a new tab.
+- **No other page** shows an address outside a link.
+- **The hover and the text box can't hold links.** Plotly draws them, so any address there is linked from the info panel instead.
+
+**The New Link Card command.** It's in the Card menu, under New Scene, and works the same way:
+- Paste the address, give the card a name, and save.
+- Featured is on by default.
+- The card goes in the room of whichever card you have selected.
+- It strips the sharing marks Instagram adds after the "?", and names each one it removes.
+- It refuses the website's own addresses and points you to New Scene for those.
+- It refuses an address that's already on another card.
+
+**A bug I fixed on the way.** New Scene's Save made the scene, then hit an error, so the status line never said the scene was saved. The new window had the same fault, and both are fixed.
+
+**Your ESCAPADE scene card isn't on the website.** It isn't in the pushed card file, though the reel card is. After running the patch, you may need to make the scene again with New Scene.
+
+**How I tested it.** I ran the patch on a copy of the website. On a virtual screen I typed into both windows and saved: a reel already on a card was refused by name, the site's own address was refused, and a new reel was saved and selected. The new "Link cards" check passes, and it is now a row in the gallery run. Its self-test breaks the logic two ways first, to show it can fail. The existing checks for typed facts, source lists and scene cards still pass.
+
+**To run it:** 
+1. close the editor, 
+2. then click Run. You should see one "ok" line per edit, two "new" lines, and "=== LINK CARDS: PASS". 
+3. Then commit and push. The website's night ran this afternoon, so nothing is in the way tonight.
+
+Where this leaves us:
+- New link cards can be made in the editor from now on.
+- Every address in the info panels is a link.
+- The ledger still describes making these cards in the editor as if it already worked. The next record patch will cover tonight's changes.
