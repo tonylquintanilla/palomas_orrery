@@ -1,12 +1,16 @@
 ---
 name: gallery-pipeline
 description: Web gallery pipeline for the Paloma's Orrery project (palomasorrery.com). Use for any task touching gallery_studio.py, json_converter.py, gallery_editor.py, gallery_json_fixer.py, the index.html gallery viewer, gallery_metadata.json, gallery_config.json, the tonyquintanilla.github.io repo, or GitHub Pages deployment. Use when curating or exporting plots through Gallery Studio, converting HTML to gallery JSON, editing gallery cards or categories, working with _studio_config / _studio / _encyclopedia / _kmz_handoff / _original_text keys, studio presets, mobile or portrait rendering, or the WYSIWYG preview. Do not use for projects other than Paloma's Orrery.
-fires_when: Gallery Studio, json_converter, index.html viewer, gallery cards
+fires_when: Gallery Studio, json_converter, index.html viewer, gallery cards, the gallery editor's scene, encounter and link cards
 ---
 
 # Gallery Pipeline
 
-Skill version: 1.2 | Cut from tonyquintanilla.github.io @ 89c8bf30 (code)
+Skill version: 1.3 | 2026-11-21, with Anthropic's Claude Fable 5.2, at
+tonyquintanilla.github.io @ 828362fd and palomas_orrery @ bd70f584.
+v1.3 (L-540; L-529) adds The Editor's Cards. To stay at the cap, Shared
+Conventions and seven field notes moved out (SKILL_HISTORIES.md).
+Earlier: 1.2 | Cut from tonyquintanilla.github.io @ 89c8bf30 (code)
 and palomas_orrery @ b29ad3f8 (context) | July 12, 2026
 Sources: gallery_studio.py, json_converter.py, index.html at HEAD;
 web_gallery_handoff.md (30+ sessions).
@@ -94,6 +98,22 @@ Consequences:
 - Minimal-override principle for the viewer: transparent backgrounds +
   light font for dark theme only; everything else is Studio's job.
 
+## The Editor's Cards: scenes, encounters, links
+
+A card that is not a saved picture is a scene, an encounter or a link;
+tools/gallery_editor.py lists them as the website's drawer does.
+- A SCENE (New Scene, from a room's shared link) sits in the room
+  solar_system, its places in drawer_row (Scene cards row; L-542).
+- AN ENCOUNTER's card names its package, its centre and its craft; its
+  dates are read from the plan, never typed (Encounters row).
+- A LINK CARD (New Link Card) is one whose address is another
+  website's. The command asks which row: with a row the card is saved
+  in the Solar System room beside it; with none it is saved in
+  Storage, unseen until placed (Tony, 2026-11-21: "In Storage for
+  consistency."). Link cards, Drawer places and Picture folds rows.
+The editor holds the card file in memory: after anything else writes
+it, File > Reload from disk before Save All.
+
 ## Deployment
 
 GitHub Pages via GitHub Desktop pushes. If a deploy fails with a
@@ -133,28 +153,8 @@ state the basis -- do not hand the lay reader a connection we will not
 draw ourselves. Load earth-system-pipeline before writing or editing any
 such text.
 
-## Shared Conventions (duplicated deliberately; masters elsewhere)
-
-- Credit line on substantive edits (master: orrery-coding-conventions).
-- ASCII/LF for Python deliverables (master: safe-file-editing).
-- Distance hover text includes AU alongside km (master:
-  orrery-coding-conventions); Studio's km-suffix title gate keeps
-  exact-km / M-km tiers inside the gate with a range-auto fallback.
-
 ## Field Notes
 
-- JS: JSON.stringify(undefined).substring() crashes; guard with || ''.
-- position: fixed escapes CSS containment; position: absolute stays
-  inside the parent.
-- Plotly.js native touch works on mobile without custom code.
-- D-pad pan arrows: 2D uses Plotly.relayout on axis ranges; 3D shifts
-  camera eye/center.
 - DEFAULT_CONFIG changes have wide blast radius: every path seeded from
   it (startup, Reset Defaults, presets, raw load) -- Studio exports are
   unaffected because saved _studio_config states override defaults.
-- Presets must preserve scenario-specific settings (KMZ link, custom
-  title) -- presets set general layout only.
-- Animated plots: strip_hidden_traces requires frame trace-index
-  remapping, or stripped portrait exports animate the wrong traces.
-- social_media_export.py is mostly superseded by Studio; its
-  _parse_hover_html() survives as a shared utility.

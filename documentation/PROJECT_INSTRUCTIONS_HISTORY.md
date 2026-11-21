@@ -4972,6 +4972,54 @@ resident.
 (Moved down from the resident protocol on 2026-11-19, when
 v3.143 made a fourth entry.)
 
+v3.141 (November 14, 2026, night): No rule changed in this document.
+ONE skill bump: earth-system-pipeline 1.2 -> 1.3 (L-001, food
+insecurity), by the records skill's binding rule, Tony's word of Nov
+14, 20:04 ("Yes I approve") to
+documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md, applied
+as written but one mark: the description's earth/<id>.html reads
+earth/[id].html, as skills_index.py refuses a tag there, and so would
+the reinstall. A LAYER ON THE WEB, AND ITS WALK ON ITS PAGE.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 14 (Claude Opus 5.5),
+through the python_work door, built Sudan's guided walk on orrery
+594e562c and gallery 09b4b498, from Tony's prompt and
+documentation/COORD_L001_sudan_walk_brief_20261114.md, in three parts
+with a report and his reading after each; the skill was applied after
+his pushes, at orrery 5779e1f0 and gallery 8e24f9d0.
+
+WHAT CHANGED. earth-system-pipeline: two new sections. GOOGLE EARTH ON
+THE WEB: styles at the file's top, no screen overlays, one <div> per
+line in pop-ups; the phone app cannot switch folders and the web can,
+so the words promise only where the map opens; the owner's switching is
+the public view; the page links out. A LAYER'S PAGE AND ITS WALK: the
+page is the layer's one home, written by its generator; where a visitor
+needs a route the walk lives there, Google Earth its last step's
+button; pictures drawn at every build; every figure sourced and checked
+against the data; the phone-width check and Tony's reading. Under Data
+Sources, IPC's two exports, joined by name. Respectful awareness (Tony,
+Nov 14) joins the restraint section, and Source Voice Only gains: no
+meaning given to the source in words it never uses. The 3+5 card is
+folded into Architecture as Google Earth Pro's only. To stay at the cap
+of 199 lines, the 1.2 and 1.1 entries and the Shared Conventions
+section (each line held by its master) moved to
+documentation/SKILL_HISTORIES.md.
+
+THE OBLIGATION TRAVELS. This session read earth-system-pipeline 1.2
+from the repo's copy, as a Code session does, as the manifest expected.
+Tony reinstalls it (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it
+from the account confirms its copy reads 1.3 before Earth System work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.138 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-21, when
+v3.144 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

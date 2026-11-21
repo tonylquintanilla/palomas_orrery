@@ -1230,6 +1230,67 @@ The 1.42 install, from Install and verify, 2026-11-19 (L-297):
 the python_work door, from the repo's copy of 1.41; a session that loads
 the account's copy confirms it reads 1.42 before exhibit work.
 
+The 1.41 entry, moved here on 2026-11-21 (L-529), when 1.44 made a
+fourth resident entry:
+
+Earlier: 1.41 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 87fb472e and gallery @ e21b6746 (the session's bases;
+Tony's checkpoint pushes since). v1.41 (L-522, document caps, step 2)
+SPLITS THE SKILL: the rules stay here; what interactive.html does now
+moved whole, in its own words, into the gallery's
+INTERACTIVE_AS_BUILT.md, changed in the commit that changes the page and
+held to the code by the gallery run's As-built names row
+(tools/check_as_built_names.py). Each of the six long sections leaves
+one rule and a pointer, the Provenance rule keeping its rules for new
+work; the anatomy table, the text box, the readability asks and the
+headless recipe moved with them; the install confirmations went to
+documentation/SKILL_HISTORIES.md; fires_when is cut to the phrases that
+make the skill fire. Every old line was accounted for by script: found
+once in the skill, the reference or the history, or listed with its
+reason. SEPARATELY, A CORRECTION (L-523, Tony's word of 2026-11-11):
+"Touch has no hover" was wrong for a 3D scene. Plotly sends a finger's
+tap 5 px off or more as plotly_hover, so a finger's hover after its tap
+is that tap and opens what a click opens (gallery/tap_hover.js, the
+gallery run's Tap hover row); and the widened pick is any finger's, in
+either orientation (Tony: "Yes, any finger").
+Four field notes, moved here on 2026-11-21 (L-529) to keep the skill
+at its cap; gallery-pipeline's The Editor's Cards now carries the
+editor's Reload from disk:
+
+- 2026-09-10, L-291 step 7: the first Earth card was a COPY -- Copy
+  Card to Room on the static Earth-and-Moon portrait, then a live URL
+  -- made because the Studio button was not found. It kept the
+  portrait's `sibling` stamp, file and size, and index.html's Featured
+  rule (a 9:16 card yields to a featured sibling) dropped it from the
+  DESKTOP lobby while the phone showed it. The handoff written the
+  night before said step 7 had not started: its session never read the
+  metadata. A replay of the viewer's rule against the served metadata
+  predicted both screens before Tony looked, and was right. Fixed by
+  delete, then Studio, then the editor, in that order. The editor's
+  Reload from disk existed and was not found either (L-288, L-312).
+- 2026-09-15, L-318 round 3: a drawer row had two targets, an 18 px box
+  and a name that did what GO did, and Tony's finger kept landing on
+  the name of an unticked shell -- the camera moved and nothing drew, a
+  tap that read as doing nothing. Measured in the page before any
+  design: every pixel around the box belonged to the name. A one-target
+  row with no box was proposed and withdrawn once Tony described his
+  use (tick several, then go to one). Measure before you describe.
+- 2026-09-15, L-318 round 4: Tony read the orphan words as unnecessary
+  line breaks. Right about the words; measuring showed they cost one or
+  two lines per box, and the box's WIDTH was the real height. Line
+  counts written into the patch's notes before the run disagreed with
+  the run on every row and were corrected before delivery.
+- 2026-09-15/16, L-318 rounds 5 and 6: Plotly sometimes drew no arrow
+  to a mid-screen box, and why was not pinned down; the arrow was
+  removed on the phone instead. The tap fix went the other way -- the
+  cause was read from Plotly's source first and worked on the first
+  phone test. Three of five rounds changed something after Tony's eyes;
+  the sandbox has no WebGL and no phone, and cannot see any of it.
+The 1.43 install, from Install and verify, 2026-11-21 (L-529):
+1.43 was written on 2026-11-19 by the coordinating session for L-297,
+from the repo's copy of 1.42; a session that loads the account's copy
+confirms it reads 1.43 before exhibit work.
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -1874,3 +1935,32 @@ by the master it names.
   (master: orrery-coding-conventions).
 - Provenance: Tier-1 = 0 before push; composed text sourced at the
   construction site (master: provenance-discipline).
+
+## gallery-pipeline
+
+Moved here on 2026-11-21 (L-540, L-529), when 1.3 added The Editor's
+Cards and the skill stood at its cap. Shared Conventions, each line
+held by its master:
+
+## Shared Conventions (duplicated deliberately; masters elsewhere)
+
+- Credit line on substantive edits (master: orrery-coding-conventions).
+- ASCII/LF for Python deliverables (master: safe-file-editing).
+- Distance hover text includes AU alongside km (master:
+  orrery-coding-conventions); Studio's km-suffix title gate keeps
+  exact-km / M-km tiers inside the gate with a range-auto fallback.
+
+Seven field notes:
+
+- JS: JSON.stringify(undefined).substring() crashes; guard with || ''.
+- position: fixed escapes CSS containment; position: absolute stays
+  inside the parent.
+- Plotly.js native touch works on mobile without custom code.
+- D-pad pan arrows: 2D uses Plotly.relayout on axis ranges; 3D shifts
+  camera eye/center.
+- Presets must preserve scenario-specific settings (KMZ link, custom
+  title) -- presets set general layout only.
+- Animated plots: strip_hidden_traces requires frame trace-index
+  remapping, or stripped portrait exports animate the wrong traces.
+- social_media_export.py is mostly superseded by Studio; its
+  _parse_hover_html() survives as a shared utility.

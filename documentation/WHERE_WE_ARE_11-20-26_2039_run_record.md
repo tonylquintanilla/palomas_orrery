@@ -723,3 +723,76 @@ Run it before the Links fold session writes its own closing records, because bot
 - The first encounter is live, looked at and recorded.
 - Next for encounters is slice 2, its talk first: the two close passes, the words on each card, and the loiter's view.
 - The cleanup briefs for Opus are still not written.
+
+=====================
+
+I'll read your run record and what this morning's L-540 close already changed, then write the close for the encounter work.
+
+I read your run record, including "-- correct" beside the Play and Pause step. The close for the encounter is in your orrery folder: `patch_L529_2_close_record.py`.
+
+**What it records**
+- **On the encounter (L-529):** your phone look in your words, the player's patch, your "Yes it does", what I checked on your disk, and what I got wrong (the clock, the window, and one brief that ran to 670,000 tokens).
+- **On missions by destination (L-534):** your Nov 20 rulings, and that the Nov 15 row under Mars waits. It says "waits", not "withdrawn", because your words were "for now".
+- **On ESCAPADE (L-533):** the flyby dates are answered, the path ending at Mars is enough, and the L2 loiter is an encounter.
+- **On the clock item (L-541):** my wider question about the live rooms, marked as not verified.
+- **The design record:** the plan's times corrected to JPL's clock.
+- **Where We Are:** nine lines changed and none added, since the page is at its cap of 130. Nothing below your marker is touched.
+
+**To run it**
+1. Open it in VS Code and click Run. You should see 20 "ok" lines, "patch applied", then two more "ok" lines for the ledger's index and the caps check.
+2. Commit and push the orrery.
+3. Move the patch to the `documentation` folder.
+
+Run it before the Links fold session writes its own closing records, because both edit Where We Are. If it prints ANCHOR FAIL, nothing is written; tell me and I'll rebuild it on the new page.
+
+**One thing I left out on purpose: the skill updates.** The Links fold's brief says its own skill text is owed at the same skill's next update. So I'll write one update for both builds after that session closes, and you reinstall once.
+
+**Where this leaves us**
+- The first encounter is live, looked at and recorded.
+- Next for encounters is slice 2, its talk first: the two close passes, the words on each card, and the loiter's view.
+- The cleanup briefs for Opus are still not written.
+
+==============================
+
+**Coordinator:**
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L529_3_skills_and_protocol.py'
+ok   skills/interactive-exhibit/SKILL.md: a Lagrange point's marker and box, a name's side (label_
+ok   skills/interactive-exhibit/SKILL.md: Skill version: 1.43 | 2026-11-19, with Anthropic's Claud
+ok   skills/interactive-exhibit/SKILL.md: Earlier: 1.41 | 2026-11-11, with Anthropic's Claude Opus
+ok   skills/interactive-exhibit/SKILL.md: and 2026-11-11 (L-522) and 2026-11-12 (L-527) and
+ok   skills/interactive-exhibit/SKILL.md: - One picture: the folds and the view's middle [QUALITY]
+ok   skills/interactive-exhibit/SKILL.md: - A guide asks for one action and waits for it [QUALITY]
+ok   skills/interactive-exhibit/SKILL.md: ### The Solar System room's drawer: bodies, not shells [
+ok   skills/interactive-exhibit/SKILL.md: ### The touch path is not the mouse path [QUALITY]
+ok   skills/interactive-exhibit/SKILL.md: - 2026-09-10, L-291 step 7: the first Earth card was a C
+ok   skills/interactive-exhibit/SKILL.md: 1.0 to 1.42: documentation/SKILL_HISTORIES.md, under int
+ok   skills/gallery-pipeline/SKILL.md: fires_when: Gallery Studio, json_converter, index.html v
+ok   skills/gallery-pipeline/SKILL.md: Skill version: 1.2 | Cut from tonyquintanilla.github.io 
+ok   skills/gallery-pipeline/SKILL.md: ## Deployment
+ok   skills/gallery-pipeline/SKILL.md: ## Shared Conventions (duplicated deliberately; masters 
+ok   skills/gallery-pipeline/SKILL.md: - JS: JSON.stringify(undefined).substring() crashes; gua
+ok   skills/gallery-pipeline/SKILL.md: - Presets must preserve scenario-specific settings (KMZ 
+ok   documentation/SKILL_HISTORIES.md: confirms it reads 1.42 before exhibit work.
+ok   documentation/SKILL_HISTORIES.md: (master: orrery-coding-conventions).
+ok   PROJECT_INSTRUCTIONS.md: Tony Quintanilla, PE | Claude | v3.143 | November 19, 20
+ok   PROJECT_INSTRUCTIONS.md: Cut from 4c44ea87 at https://github.com/tonylquintanilla
+ok   PROJECT_INSTRUCTIONS.md: v3.143 (November 19, 2026): One instruction's wording ch
+ok   PROJECT_INSTRUCTIONS.md: v3.141 (November 14, 2026, night): No rule changed in th
+ok   documentation/PROJECT_INSTRUCTIONS_HISTORY.md: (Moved down from the resident protocol on 2026-11-19, wh
+ok   LEDGER_CONSOLIDATED.md: **Gap:** Tony's push; Add place... Earth on the reel in 
+ok   LEDGER_CONSOLIDATED.md: skill text owed: the build's eleven rules above, at
+ok   documentation/WHERE_WE_ARE.md: Last updated: November 21, 2026, afternoon: the Links fo
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2
+patch applied (27 edits, 7 files)
+ok   skills_index.py
+ok   ledger_index.py
+ok   skills_index.py --check
+ok   doc_index.py --caps
+
+Do next: 
+1. move this file into documentation, 
+2. commit and push -- 
+3. the orrery, reinstall interactive-exhibit and gallery-pipeline,
+and paste PROJECT_INSTRUCTIONS.md into the Project.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

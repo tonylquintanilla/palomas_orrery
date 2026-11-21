@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.143 | November 19, 2026
+Tony Quintanilla, PE | Claude | v3.144 | November 21, 2026
 
-Cut from 4c44ea87 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from bd70f584 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -530,8 +530,9 @@ provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
 earth-system-pipeline        1.3  KMZ layers, Google Earth web, a layer's page
                                   and its walk, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
-gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
-                                  viewer, gallery cards
+gallery-pipeline             1.3  Gallery Studio, json_converter, index.html
+                                  viewer, gallery cards, the gallery editor's
+                                  scene, encounter and link cards
 ledger-and-session-records   1.23 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
@@ -561,7 +562,7 @@ gallery-cache-builder        1.20 Nightly builder, atomic swap and its
                                   (fetch_path_last_day), a held body (HELD), a
                                   Lagrange point served as a point
                                   (serving_shape 'point')
-interactive-exhibit          1.43 a room or exhibit in interactive.html
+interactive-exhibit          1.44 a room or exhibit in interactive.html
                                   (?exhibit=); its drawer and chrome (nav
                                   cluster, frame zoom, i panel, HUD, text box,
                                   consent, back link); the served words and
@@ -571,7 +572,10 @@ interactive-exhibit          1.43 a room or exhibit in interactive.html
                                   testing a room (the gallery run's checks,
                                   tools/headless); carding an exhibit in
                                   Studio; a Lagrange point's marker and box, a
-                                  name's side (label_side_for)
+                                  name's side (label_side_for); an encounter
+                                  (data/encounters/, tools/encounter_fetch.py,
+                                  its player); a card's fold beside a row
+                                  (Scenes, Encounters, Links)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1265,6 +1269,48 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.144 (November 21, 2026): No rule changed in this document. TWO
+skill bumps, from L-529 (guided encounters) and L-540 (a reel on a
+Featured card), by the records skill's binding rule.
+
+WHAT PROMPTED IT. Two Claude Code sessions (Claude Opus 5.5), through
+the python_work door, built in the website: on Nov 20 the first
+encounter, ESCAPADE's Earth flybys, from Tony's rulings of that day
+(documentation/DESIGN_encounters_20261120.md), live and looked at on
+his phone; on Nov 21 the Links fold, pushed at gallery 828362fd.
+Neither brief had its session write a skill; each session listed the
+rules it learned on the ledger, and the coordinating session (Claude
+Fable 5.2) wrote both skills from those notes and the code at that
+SHA, in one bump, so Tony reinstalls once.
+
+WHAT CHANGED. interactive-exhibit 1.43 -> 1.44: An encounter is a
+package played in a room of its own (a completed pass; its package
+under data/encounters/, fetched by hand; its dates read from the plan
+and converted from JPL's clock; its player), and A card beside a body
+sits in a fold of its kind (Scenes, Encounters, Links, Saved
+pictures). gallery-pipeline 1.2 -> 1.3, its first bump since July:
+The Editor's Cards, with Tony's ruling of Nov 21 that a link card made
+with no row is saved in Storage ("In Storage for consistency."). Each
+skill stayed at its cap by moving text, word for word, to
+documentation/SKILL_HISTORIES.md. Three of the encounter build's
+rules also belong in other skills and wait for those skills' next
+versions, named on L-529: the plan's clock (horizons-orbital-mechanics,
+with L-541), the escape rule (safe-file-editing, with L-471) and the
+package's place (gallery-cache-builder).
+
+THE OBLIGATION TRAVELS. This session wrote the two from the repo's
+copies, 1.43 and 1.2, as the manifest expected. Tony reinstalls both
+(Plugins, in the claude.ai sidebar) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads
+either from the account confirms its copy reads 1.44 or 1.3 before
+that work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.141 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.143 (November 19, 2026): One instruction's wording changed in this
 document, and THREE skills bumped, from L-297 (the Lagrange points) and
 L-537 (the skills page moved).
@@ -1340,51 +1386,6 @@ Horizons work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.139 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.141 (November 14, 2026, night): No rule changed in this document.
-ONE skill bump: earth-system-pipeline 1.2 -> 1.3 (L-001, food
-insecurity), by the records skill's binding rule, Tony's word of Nov
-14, 20:04 ("Yes I approve") to
-documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md, applied
-as written but one mark: the description's earth/<id>.html reads
-earth/[id].html, as skills_index.py refuses a tag there, and so would
-the reinstall. A LAYER ON THE WEB, AND ITS WALK ON ITS PAGE.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 14 (Claude Opus 5.5),
-through the python_work door, built Sudan's guided walk on orrery
-594e562c and gallery 09b4b498, from Tony's prompt and
-documentation/COORD_L001_sudan_walk_brief_20261114.md, in three parts
-with a report and his reading after each; the skill was applied after
-his pushes, at orrery 5779e1f0 and gallery 8e24f9d0.
-
-WHAT CHANGED. earth-system-pipeline: two new sections. GOOGLE EARTH ON
-THE WEB: styles at the file's top, no screen overlays, one <div> per
-line in pop-ups; the phone app cannot switch folders and the web can,
-so the words promise only where the map opens; the owner's switching is
-the public view; the page links out. A LAYER'S PAGE AND ITS WALK: the
-page is the layer's one home, written by its generator; where a visitor
-needs a route the walk lives there, Google Earth its last step's
-button; pictures drawn at every build; every figure sourced and checked
-against the data; the phone-width check and Tony's reading. Under Data
-Sources, IPC's two exports, joined by name. Respectful awareness (Tony,
-Nov 14) joins the restraint section, and Source Voice Only gains: no
-meaning given to the source in words it never uses. The 3+5 card is
-folded into Architecture as Google Earth Pro's only. To stay at the cap
-of 199 lines, the 1.2 and 1.1 entries and the Shared Conventions
-section (each line held by its master) moved to
-documentation/SKILL_HISTORIES.md.
-
-THE OBLIGATION TRAVELS. This session read earth-system-pipeline 1.2
-from the repo's copy, as a Code session does, as the manifest expected.
-Tony reinstalls it (Settings > Skills) and pastes this version into the
-Project's instructions on claude.ai; the next session that loads it
-from the account confirms its copy reads 1.3 before Earth System work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.138 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -2291,12 +2291,17 @@ horizons-orbital-mechanics, Checking an Entry Against JPL.
   and the as-built page needed sections too; and its "no row: Lobby
   only" choice saves the card in Storage, which no visitor sees, so the
   window says "No row (saved in Storage)".
+- **Tony, 2026-11-21, 14:17,** asked by the coordinating session (Claude
+  Fable 5.2) whether a link card made with no row should stay hidden in
+  Storage until it is placed or show in the lobby, since the brief had
+  asked for "Lobby only": "In Storage for consistency." New Link
+  Card's "No row (saved in Storage)" stands as built.
+- **The skill text is written** (patch_L529_3_skills_and_protocol.py,
+  protocol v3.144): interactive-exhibit 1.44, A card beside a body sits
+  in a fold of its kind; gallery-pipeline 1.3, The Editor's Cards.
 **Gap:** Tony's push; Add place... Earth on the reel in the editor, Save
-All, push; his phone look; ESCAPADE's scene remade (L-542). Skill text
-owed at the next bumps (method, not a ruling): interactive-exhibit, the
-Links fold (a link card, its place and order, LINK_MARK, the new tab,
-Find's link count); gallery-pipeline, link cards (New Link Card asking
-the row, Storage with none) and the editor's Links fold. A card that plays the reel on the
+All, push; his phone look; ESCAPADE's scene remade (L-542). He
+reinstalls the two skills and pastes v3.144. A card that plays the reel on the
 lobby itself stays an idea, for a design talk if the link card falls
 short.
 **Ref:** L-533 (ESCAPADE); L-518 (the shared scene link); L-519 (Scenes
@@ -2576,9 +2581,13 @@ in the close views; NASA's "powered Earth flybys" through the
 orrery's words; the words on each card. The L2 loiter as an encounter
 (Tony, Nov 20), its view its own question. How a completed encounter
 is asked again if JPL replaces a prediction with a measurement. The
-skill text owed: the build's eleven rules above, at
-interactive-exhibit's next bump, written together with the Links
-fold's (L-540 (a reel on a Featured card)) so Tony reinstalls once.
+skill text is written: all eleven rules above are in
+interactive-exhibit 1.44 (patch_L529_3_skills_and_protocol.py,
+protocol v3.144), which Tony reinstalls. Three of them also belong
+elsewhere and wait for those skills' next versions: the plan's clock,
+horizons-orbital-mechanics, with L-541 (a plan's clock); the escape
+rule, safe-file-editing, with L-471 (a delivered patch is final); the
+package's place and the night, gallery-cache-builder.
 **Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
 swing, `gallery/first_guide.js`); L-507 (historical missions, whose
 encounters were to become saved scenes); L-489 (compositions: Artemis II

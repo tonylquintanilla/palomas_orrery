@@ -1,14 +1,24 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and chrome (nav cluster, frame zoom, i panel, HUD, text box, consent, back link); the served words and numbers a room prints and where they come from (store_writer, exhibit_store_editor, objects_config.json); what a room opens on; testing a room (the gallery run's checks, tools/headless); carding an exhibit in Studio; a Lagrange point's marker and box, a name's side (label_side_for)
+fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and chrome (nav cluster, frame zoom, i panel, HUD, text box, consent, back link); the served words and numbers a room prints and where they come from (store_writer, exhibit_store_editor, objects_config.json); what a room opens on; testing a room (the gallery run's checks, tools/headless); carding an exhibit in Studio; a Lagrange point's marker and box, a name's side (label_side_for); an encounter (data/encounters/, tools/encounter_fetch.py, its player); a card's fold beside a row (Scenes, Encounters, Links)
 ---
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-261, 262-486, 487-738.
+Read this file in 3 parts: lines 1-254, 255-515, 516-738.
 
-Skill version: 1.43 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.44 | 2026-11-21, with Anthropic's Claude Fable 5.2, at
+palomas_orrery @ bd70f584 and gallery @ 828362fd. v1.44 (L-529, guided
+encounters; L-540, a reel on a Featured card) adds two rules. AN
+ENCOUNTER IS A PACKAGE PLAYED IN A ROOM OF ITS OWN: a completed pass,
+its package fetched by hand, its player, its dates read and never
+typed. And A CARD BESIDE A BODY SITS IN A FOLD OF ITS KIND: Scenes,
+Encounters, Links, Saved pictures. Written by the coordinating session
+from the two builds' ledger notes and the gallery at 828362fd, not by
+their Code sessions. To stay at the cap, the 1.41 entry and four field
+notes of September (L-291, L-318) moved out.
+Earlier: 1.43 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.43 (L-297, the
 Lagrange points) adds A point is a marker, and a name has a side: a
 point drawn as its marker alone at the minute shown, its box, and a
@@ -31,26 +41,6 @@ sideways a room shows one line asking for the phone upright, and the
 phone look and the walks are upright. Seven field notes of September
 (L-278, L-282, L-289, L-334), each held by a rule above them or by the
 writer's own suite, moved to documentation/SKILL_HISTORIES.md.
-Earlier: 1.41 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 87fb472e and gallery @ e21b6746 (the session's bases;
-Tony's checkpoint pushes since). v1.41 (L-522, document caps, step 2)
-SPLITS THE SKILL: the rules stay here; what interactive.html does now
-moved whole, in its own words, into the gallery's
-INTERACTIVE_AS_BUILT.md, changed in the commit that changes the page and
-held to the code by the gallery run's As-built names row
-(tools/check_as_built_names.py). Each of the six long sections leaves
-one rule and a pointer, the Provenance rule keeping its rules for new
-work; the anatomy table, the text box, the readability asks and the
-headless recipe moved with them; the install confirmations went to
-documentation/SKILL_HISTORIES.md; fires_when is cut to the phrases that
-make the skill fire. Every old line was accounted for by script: found
-once in the skill, the reference or the history, or listed with its
-reason. SEPARATELY, A CORRECTION (L-523, Tony's word of 2026-11-11):
-"Touch has no hover" was wrong for a 3D scene. Plotly sends a finger's
-tap 5 px off or more as plotly_hover, so a finger's hover after its tap
-is that tap and opens what a click opens (gallery/tap_hover.js, the
-gallery run's Tap hover row); and the widened pick is any finger's, in
-either orientation (Tony: "Yes, any finger").
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
@@ -60,7 +50,7 @@ twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
 (L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515)
 and 2026-11-11 (L-522) and 2026-11-12 (L-527) and
-2026-11-19 (L-297).
+2026-11-19 (L-297) and 2026-11-21 (L-529).
 
 ## Contents
 
@@ -75,6 +65,7 @@ if this list and the headings disagree (L-418).
   - What a room opens on is SERVED, not coded [QUALITY]
   - One drawer for every centre [QUALITY]
   - One picture: the folds and the view's middle [QUALITY]
+  - A card beside a body sits in a fold of its kind [QUALITY]
   - The Solar System room's drawer: bodies, not shells [QUALITY]
   - A point is a marker, and a name has a side [QUALITY]
   - A room's drawer lists its shells where each begins [QUALITY]
@@ -89,6 +80,7 @@ if this list and the headings disagree (L-418).
   - Hover text gives km AND AU [QUALITY]
   - Phone first, and the conditions are stated [QUALITY]
   - A guide asks for one action and waits for it [QUALITY]
+  - An encounter is a package played in a room of its own [QUALITY]
   - The touch path is not the mouse path [QUALITY]
   - Hover text is written for the visitor [QUALITY]
   - A feature's info link: NASA if specific, else Wikipedia [QUALITY]
@@ -213,6 +205,19 @@ because a phone's WebGL holds 32-bit floats. A fold is drawn, and its
 stored drawings fetched, the first time it is needed.
 What the page does, and where: the gallery's `INTERACTIVE_AS_BUILT.md`,
 One picture: the folds and the view's middle.
+
+### A card beside a body sits in a fold of its kind [QUALITY]
+A card placed beside a row (`drawer_row`) is listed under that row in a
+fold of its kind, in this order: Scenes, Encounters, Links, Saved
+pictures. A fold is drawn only when it has a card. An encounter's card
+is marked as one. A link's is known by its address being another
+website's, by the lobby's own test, and it alone may have no place: it
+is then in no fold. A tap on a scene or an encounter keeps the room's
+place for Back; a link opens in a new tab and keeps nothing. Find
+counts each kind by its own name. The logic is
+`gallery/picture_folds.js`, held by the run's Picture folds row; the
+drawer walk is no gate and is kept green all the same (L-521).
+As built: the gallery's `INTERACTIVE_AS_BUILT.md`.
 
 ### The Solar System room's drawer: bodies, not shells [QUALITY]
 It is the same drawer as every room's. The decisions rows of bodies
@@ -484,6 +489,30 @@ to -- is walked with `tools/headless/walk_first_guide.js` before it
 ships. Where each piece is: the gallery's `INTERACTIVE_AS_BUILT.md`, A
 first visit's guide.
 
+### An encounter is a package played in a room of its own [QUALITY]
+An encounter is a COMPLETED pass, opened from the fold of the body it
+is centred on; craft that pass together share one. The body's Hill
+sphere sets its window and opening view, a craft that loitered at its
+edge entering at its last crossing inward; each view runs on an even
+clock (L-529; `documentation/DESIGN_encounters_20261120.md`).
+- THE PACKAGE lives under `data/encounters/`, written by hand by
+  `tools/encounter_fetch.py`: JPL's positions and velocities around the
+  centre, every body at the same moments, so each frame is a moment JPL
+  was asked for. It refuses a body JPL names otherwise, and a second
+  run with the same answer writes nothing. The night never runs, swaps
+  or commits it; the run's Encounters row holds each pass to the plan's
+  event on the craft's entry.
+- NOTHING IS TYPED: a pass's date is read from the plan, whose moments
+  are on JPL's clock (TDB) and are converted before they print as UTC
+  (L-541); the card names the package, the centre and the craft.
+- THE PLAYER applies each frame with `Plotly.update`; `Plotly.animate`
+  redraws a 3D scene whole and resets its camera. A room with no
+  Pyodide waits for the page's load before it draws. Whatever opens a
+  text box pauses it. Its button answers the press, not the click.
+- A NON-ASCII MARK in the page is written as its `\u` escape, and the
+  file's bytes are checked: an edit tool wrote raw characters instead.
+As built: the gallery's `INTERACTIVE_AS_BUILT.md`, Encounters.
+
 ### The touch path is not the mouse path [QUALITY]
 Plotly fires no camera events during a touch rotation; chrome that
 follows the camera reads it directly (`scene._scene.getCamera()`) once
@@ -695,35 +724,6 @@ needs no ruling; whether a feature is drawn at all is Tony's.
 - 2026-09-06, L-288: Studio authors the exhibit's card; the card is a
   placard with an Interactive tag and needs no picture (the lobby
   settled that on the phone).
-- 2026-09-10, L-291 step 7: the first Earth card was a COPY -- Copy
-  Card to Room on the static Earth-and-Moon portrait, then a live URL
-  -- made because the Studio button was not found. It kept the
-  portrait's `sibling` stamp, file and size, and index.html's Featured
-  rule (a 9:16 card yields to a featured sibling) dropped it from the
-  DESKTOP lobby while the phone showed it. The handoff written the
-  night before said step 7 had not started: its session never read the
-  metadata. A replay of the viewer's rule against the served metadata
-  predicted both screens before Tony looked, and was right. Fixed by
-  delete, then Studio, then the editor, in that order. The editor's
-  Reload from disk existed and was not found either (L-288, L-312).
-- 2026-09-15, L-318 round 3: a drawer row had two targets, an 18 px box
-  and a name that did what GO did, and Tony's finger kept landing on
-  the name of an unticked shell -- the camera moved and nothing drew, a
-  tap that read as doing nothing. Measured in the page before any
-  design: every pixel around the box belonged to the name. A one-target
-  row with no box was proposed and withdrawn once Tony described his
-  use (tick several, then go to one). Measure before you describe.
-- 2026-09-15, L-318 round 4: Tony read the orphan words as unnecessary
-  line breaks. Right about the words; measuring showed they cost one or
-  two lines per box, and the box's WIDTH was the real height. Line
-  counts written into the patch's notes before the run disagreed with
-  the run on every row and were corrected before delivery.
-- 2026-09-15/16, L-318 rounds 5 and 6: Plotly sometimes drew no arrow
-  to a mid-screen box, and why was not pinned down; the arrow was
-  removed on the phone instead. The tap fix went the other way -- the
-  cause was read from Plotly's source first and worked on the first
-  phone test. Three of five rounds changed something after Tony's eyes;
-  the sandbox has no WebGL and no phone, and cannot see any of it.
 
 ## Install and verify
 
@@ -732,7 +732,7 @@ Install to the account (Plugins, in the claude.ai sidebar). Run
 `skills_index.py` so the manifest in PROJECT_INSTRUCTIONS.md carries the
 version. Per Stale Skill = Stop, the session that installs a version
 cannot verify the install. Earlier installs and their confirmations,
-1.0 to 1.42: documentation/SKILL_HISTORIES.md, under interactive-exhibit.
-1.43 was written on 2026-11-19 by the coordinating session for L-297,
-from the repo's copy of 1.42; a session that loads the account's copy
-confirms it reads 1.43 before exhibit work.
+1.0 to 1.43: documentation/SKILL_HISTORIES.md, under interactive-exhibit.
+1.44 was written on 2026-11-21 by the coordinating session for L-529
+and L-540, from the repo's copy of 1.43; a session that loads the
+account's copy confirms it reads 1.44 before exhibit work.

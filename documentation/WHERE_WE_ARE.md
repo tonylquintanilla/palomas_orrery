@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 21, 2026, afternoon: the Links fold built, then the drawer walk brought up to date (Claude Code, Claude Opus 5.5, in the website).
+Last updated: November 21, 2026, afternoon: the Links fold built, the drawer walk brought up to date (Claude Code, Claude Opus 5.5), and the skills written for both builds (the coordinating session, Claude Fable 5.2).
 - Written at orrery bd70f584 and gallery 828362fd, with this session's edits on your disk, not pushed.
 
 > **READ THIS FIRST**
@@ -17,6 +17,7 @@ Last updated: November 21, 2026, afternoon: the Links fold built, then the drawe
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
+> - *(do) Reinstall two skills, interactive-exhibit and gallery-pipeline (Plugins, in the claude.ai sidebar), and paste PROJECT_INSTRUCTIONS.md, now v3.144, into the Project's instructions (L-529 (guided encounters), L-540 (a reel on a Featured card)).*
 > - *(do) Push the website and then the orrery; then in the gallery editor select the reel (Solar System, Lobby only), Add place... Earth, Save All, push; then look on your phone: Earth's Links fold, its words, and the reel opening in a new tab (L-540 (a reel on a Featured card)).*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
