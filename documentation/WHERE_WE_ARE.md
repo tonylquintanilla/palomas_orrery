@@ -1,14 +1,15 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 20, 2026, evening: the first encounter, ESCAPADE's Earth flybys, built in the website (Opus, Claude Code).
-- Written at orrery 74b63fcc and gallery 886610eb, with this session's edits on your disk.
+Last updated: November 21, 2026, morning: link cards, every address in the i panels a link, the editor laid out as the website, and an Outside Links room (Opus, coordinating session).
+- Written at orrery 08656fdc and gallery 5a7df273, with this patch's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - The first encounter is built: ESCAPADE's Earth flybys play hour by hour, from 18 October to 14 November, with both twins, the Moon and Earth-Sun L2 moving and each pass dated; it opens from an Encounters fold under Earth's row (L-529 (guided encounters)).
 > - Two items recorded, not fixed: three places read or print a plan's time, which is on JPL's clock, as UTC (L-541 (a plan's clock)); the gallery editor let your scene into the Earth room, which the Scene cards check refuses (L-542 (a scene's room)).
+> - The gallery editor has New Link Card, every web address in the i panels is a link, and its Solar System section is laid out as the website's: Lobby only first, then each row's Scenes, Encounters and Saved pictures (L-540 (a reel on a Featured card)).
 >
 > **Do next:** *Your phone look at ESCAPADE's Earth flybys after the push (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b).*
 >
@@ -16,7 +17,7 @@ Last updated: November 20, 2026, evening: the first encounter, ESCAPADE's Earth 
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) In the gallery editor: a New Scene from the room's shared link with ESCAPADE-Blue, ESCAPADE-Gold and Earth-Sun L2 ticked, and a card whose Live scene URL is the reel's Instagram address; both Featured, then Save All, push, and look on your phone (L-540 (a reel on a Featured card)).*
+> - *(do) Start a Claude Code session in the website with documentation/PROMPT_code_L540_links_fold_20261121.md: the Links fold, so the reel sits under Earth. The Outside Links room is dropped (L-540 (a reel on a Featured card)).*
 > - *(do) Push both and look at the encounter on your phone (L-529 (guided encounters)); then remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.

@@ -1188,7 +1188,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
-| ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea) | OPEN | -- | 2026-11-20 |
+| ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 
@@ -2150,7 +2150,7 @@ provenance-discipline, A Computed Position Prints What Its Errors Earn.
 horizons-orbital-mechanics, Checking an Entry Against JPL.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea)
-<!-- L:540 status:OPEN upd:2026-11-20 section:A flag: rice: -->
+<!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Tony, 2026-11-20, 12:47**, after ESCAPADE's reel was posted on
   Instagram: "I would like to use the reel you made because it has a
   story. That's where a featured card shines and the visitor can then
@@ -2173,19 +2173,81 @@ horizons-orbital-mechanics, Checking an Entry Against JPL.
   ticked, opening at today's date).
 - **Built:** patch_L540_2_outside_link_card (gallery, index.html). A
   card whose "live" address is another website's is read as a page
-  card: no "Interactive" label, and a tap opens it in a new tab. The
-  editor's "Live scene URL" field already takes any address.
-  **Tony-action (do):** in the gallery editor, a New Scene from the
-  room's shared link with the three rows ticked, Featured on; and a
-  card whose Live scene URL is the reel's Instagram address, Featured
-  on, with no drawer place, so it stays out of the room's drawer; then
-  Save All, push, and look on the phone.
-**Gap:** the two cards and Tony's look. A card that plays the reel on
-the lobby itself stays an idea, for a design talk if the link card
-falls short.
+  card: no "Interactive" label, and a tap opens it in a new tab.
+- **Corrected, 19:30:** the editor could not make that card. Tony: "the
+  instagram link does not save in the editor." New Scene takes only
+  room links, as built, and the editor had no command for a card that
+  is only a link; its "Live scene URL" field takes any address, but
+  only on a card that exists. The session had said otherwise without
+  reading the editor. The reel's card was made by
+  patch_L540_4_reel_link_card (id escapade_reel, Featured, room
+  solar_system, no drawer place; its address read from Tony's
+  screenshot, Df-TOOvjork).
+- **Tony, 22:27:** "I would prefer a new link card command in the
+  editor. also ... could you check that all url's in the info panels
+  have live links not just typed url's? for example, the new Escapade
+  encounters." Built by patch_L540_5_link_cards_and_links, pushed at
+  gallery 96c4ca97. Card > New Link Card... in the gallery editor (its
+  logic tools/link_card.py: the address cleaned of the sharing marks a
+  site adds, each named; the website's own address refused, with New
+  Scene named; an address already on a card refused), checked by
+  tools/test_link_card.py, the gallery run's new "Link cards" row, whose
+  self-test breaks it two ways first. THE LINKS CHECK: the room's i
+  panel already linked every address (sunAppendLinked, L-456); two
+  places did not, both ESCAPADE's encounter: its i panel's source line
+  (gallery/encounter.js, infoHtml) and a lobby card's source line with
+  words around its address (index.html, sourcesHtml). Both now cut
+  addresses by gallery/source_list.js. No page shows an address outside
+  a link; the hover and the text box are Plotly's and cannot hold one.
+  Fixed in passing: New Scene's Save raised an error after making the
+  scene, so its status line never said so.
+- **Tony, 23:28 to 23:32:** the editor follows the website's structure,
+  "not in a drawer" at the top as "Lobby only"; "a new group for
+  'Outside Links' like Instagram reels, or maybe other outside links
+  that are of special interest"; and, asked whether that is a room
+  visitors see in the website's menu or a group only in the editor:
+  "Both." Built by patch_L540_6_editor_follows_website, pushed at
+  gallery 5a7df273: the Solar System door's first group is Lobby only,
+  open; each drawer row's cards sit in the website's folds (Scenes,
+  Encounters, Saved pictures), a fold drawn only when it has cards; New
+  Link Card puts a card in the room outside_links when it exists, else
+  in Storage like any new card (Tony, 23:23: "the old place to put new
+  card that had not been assigned was 'storage'"). Storage is never
+  served (L-287), so a card that should show waits there until moved.
+  Each patch was tested with the editor driven on a virtual screen.
+  **Tony-action (do):** in the gallery editor, with nothing selected,
+  Room > New Room..., "Outside Links" for both names (the key is then
+  outside_links); move the reel's card (Solar System, Lobby only) to it
+  with Move to Room...; remake ESCAPADE's scene with New Scene, kept in
+  the Solar System room (L-542); Save All, push, and look on the phone.
+- **Tony, by voice, Nov 21, morning: a link sits beside its body, and
+  the Outside Links room is dropped.** "outside links should fit like
+  saved scenes. Or saved pictures. ... they're like special links but
+  they are connected to specific bodies. So, for example, the Instagram
+  reel about ... the escapade missions sit under Earth"; on Earth or
+  Mars: "I think it depends on the encounter ... the Earth encounter
+  belongs under Earth, and eventually, when we get to ... the entry,
+  that would be Mars." 09:16: "I'm inclined to do the links fold first
+  so I can clean up the tree"; 09:18, "Yes" to a brief. So a link card
+  sits in a fourth fold, Links, beside the row of the body of the
+  encounter it shows, in the room's drawer and in the editor. The
+  do-step above for the Outside Links room is WITHDRAWN (the room was
+  never made). Brief:
+  documentation/COORD_L540_links_fold_brief_20261121.md; start prompt:
+  documentation/PROMPT_code_L540_links_fold_20261121.md, for one Claude
+  Code session in the website.
+**Gap:** the Code session (the Links fold in the drawer and the editor,
+New Link Card asking the row), Tony's Add place... Earth on the reel,
+his phone look, and ESCAPADE's scene remade (L-542). The
+gallery-pipeline and interactive-exhibit skills gain link cards, the
+Links fold and the editor's layout at their next bumps (method, not a
+ruling). A card that plays the reel on the
+lobby itself stays an idea, for a design talk if the link card falls
+short.
 **Ref:** L-533 (ESCAPADE); L-518 (the shared scene link); L-519 (Scenes
-in Featured); L-363 and L-428 (the lobby's wide card and start card);
-the reel rule of Nov 17 (L-060).
+in Featured); L-542 (a scene's room); L-456 (the i panel's links);
+L-287 (Storage is never served); L-363 and L-428 (the lobby's wide card
+and start card); the reel rule of Nov 17 (L-060).
 
 #### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed)
 <!-- L:541 status:OPEN upd:2026-11-20 section:A flag: rice: -->

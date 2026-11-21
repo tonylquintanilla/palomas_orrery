@@ -1346,3 +1346,146 @@ Where this leaves us:
 - New link cards can be made in the editor from now on.
 - Every address in the info panels is a link.
 - The ledger still describes making these cards in the editor as if it already worked. The next record patch will cover tonight's changes.
+
+=================
+
+**Coordinator:**
+
+Both, then. I'll check how rooms are stored, so the new room and the tree changes go in one patch.
+
+Now driving the editor on a virtual screen: the tree's shape, selecting a fold, making the Outside Links room, and a link card landing in it.
+
+The patch is in your website folder: patch_L540_6_editor_follows_website.py. It changes only the editor. 
+1. Close the editor, 
+2. then click Run. You should see nine "ok" lines and "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L540_6_editor_follows_website.py'
+ok   tools/gallery_editor.py: sharing marks a site adds, a name, Featured on by default, i
+ok   tools/gallery_editor.py: STORAGE_KEY = 'other'
+ok   tools/gallery_editor.py: # Scenes first, then encounters (L-529), then saved
+ok   tools/gallery_editor.py: for n in self.drawer_nodes:
+ok   tools/gallery_editor.py: for c in lost:
+ok   tools/gallery_editor.py: if kind == 'drow':
+ok   tools/gallery_editor.py: "#loose": "Solar System cards with no place in the drawer: t
+ok   tools/gallery_editor.py: window; this only shows it. The card goes in the selected ca
+ok   tools/gallery_editor.py: ttk.Label(dlg, text=f"Gallery room: {room} (Move to Room... 
+patch applied (9 edits, 1 files)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+**What the Solar System section of the editor will look like:**
+- **"Lobby only" comes first and starts open.** Today it holds the reel card and the three room cards, Today's solar system, Solar Structures, and Earth and Moon. These are cards the lobby shows and the room's drawer doesn't.
+- **Each drawer row's cards sit in folds named as on the website:** Scenes, then Encounters, then Saved pictures. A fold appears only when it has cards. For example, ESCAPADE's Earth flybys appears under Earth, in Encounters. Selecting a fold shows its row.
+- **New Link Card** puts a new card in the Outside Links room. Until that room exists, it puts it in Storage, the same as any new card.
+
+**Then, in the editor:**
+1. Click the empty space at the top of the tree so nothing is selected. Choose Room > New Room..., and name it exactly "Outside Links" for both names it asks for. Use Set Door Color... if you want a colour.
+2. Select the reel card under Lobby only, then Move to Room... > Outside Links.
+3. Save All, then commit and push. The website's menu will then list Outside Links as a room, with the reel inside it, and the reel stays in Featured.
+
+On a copy, with the editor running on a virtual screen, I checked:
+- the tree's new shape;
+- selecting a fold and selecting a card inside one;
+- that a link card goes to Storage before the room exists;
+- making the Outside Links room with New Room..., which gave the key outside_links, and a second test reel landing there.
+
+The checks for link cards, scene cards and drawer places all still pass.
+
+Where this leaves us:
+- The editor and the website now share one layout for the Solar System room.
+- Outside Links becomes a room once you make it.
+- The ledger still needs tonight's record: link cards, the address fixes, this layout, and the Outside Links room. That's the next session's record patch.
+
+========================
+
+**Coordinator:**
+
+Let me check what reached both repositories overnight before I answer.
+
+Thank you, it was a good one. Three things are left: one record patch to run, and two steps in the editor.
+
+**1. Run the closing record.** It's in your orrery folder: patch_L540_7_close_record.py.
+- **The ledger.** It brings L-540 (a reel on a Featured card) up to date:
+  - my 7:30 p.m. mistake about the editor, corrected;
+  - your rulings from 10:27 to 11:32 p.m.;
+  - the three website patches and what each one did.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L540_7_close_record.py'
+ok   LEDGER_CONSOLIDATED.md: <!-- L:540 status:OPEN upd:2026-11-20 section:A flag: rice: 
+ok   LEDGER_CONSOLIDATED.md: - **Built:** patch_L540_2_outside_link_card (gallery, index.
+ok   documentation/WHERE_WE_ARE.md: Last updated: November 20, 2026, evening: the first encounte
+ok   documentation/WHERE_WE_ARE.md: > - Two items recorded, not fixed: three places read or prin
+ok   documentation/WHERE_WE_ARE.md: > - *(do) In the gallery editor: a New Scene from the room's
+patch applied (5 edits, 2 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+- **Where We Are.** It updates the date line, adds one line to "Changed since you last read this", and replaces the old editor step under "Needs you now" with the Outside Links step.
+- L-540 stays open until the steps below are done.
+
+I tested it on a copy. It should print "patch applied", then "ok" for the ledger index and for the length check. Move it to documentation, then commit and push.
+
+**2. In the editor, two steps.** Both website patches are pushed. The Outside Links room and the ESCAPADE scene aren't there yet.
+- With nothing selected, choose Room > New Room... and name it "Outside Links" for both names. Then move the reel card from Lobby only into it with Move to Room...
+- Make ESCAPADE's scene again with New Scene, and keep it in the Solar System room. This is the step you planned after deleting the earlier one (L-542, a scene's room).
+- Save All, push, and look at both on your phone.
+
+**Owed later, not urgent.** The gallery-pipeline skill should describe link cards, the Outside Links room and the editor's new layout at its next version bump. That's written in the ledger.
+
+Where this leaves us:
+- The reel is posted, the craft are brighter, and the editor can make link cards.
+- Every web address in the info panels is a link.
+- Next is still the design talk on destinations and encounters.
+
+=======================
+
+I'll read the drawer's drawing and opening code first, so the brief names the exact places to change.
+
+Now the brief and the start prompt.
+
+The brief is written, and it's in your orrery folder together with the start prompt, inside one patch: patch_L540_8_links_fold_brief.py.
+
+**Steps, in order:**
+1. **Run patch_L540_7_close_record.py.** It's this morning's record of last night's work.
+2. **Run patch_L540_8_links_fold_brief.py.**
+   - It places the brief and the start prompt in documentation.
+   - It records your ruling on L-540: a link sits in a Links fold beside its body, and the Outside Links room is dropped.
+   - On Where We Are, it replaces the Outside Links step with "start the Code session".
+   - If you run it before patch 7, it stops and says so, and writes nothing.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L540_8_links_fold_brief.py'
+ok   LEDGER_CONSOLIDATED.md: **Gap:** Tony's do-steps and phone look. The gallery-pipelin
+ok   documentation/WHERE_WE_ARE.md: > - *(do) In the gallery editor: New Room... "Outside Links"
+new  documentation/COORD_L540_links_fold_brief_20261121.md
+new  documentation/PROMPT_code_L540_links_fold_20261121.md
+patch applied (2 new files, 2 edits in 2 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. **Move both patches to documentation, -- done 
+4. then commit and push the orrery.** -- 
+5. **Start Claude Code** in the python_work folder, on Opus at high effort. Paste everything below the line in documentation/PROMPT_code_L540_links_fold_20261121.md.
+
+**What the Code session builds, in two parts, with your go-ahead in between:**
+- **Part 1, the room's drawer:**
+  - a Links fold under a body's row, drawn after Encounters, with a mark of its own;
+  - a tap opens the link in a new tab, and the room stays open behind it.
+- **Part 2, the editor:**
+  - the same fold in the tree;
+  - New Link Card asks which body's row the link goes under, and a link with no row goes to Storage;
+  - then the whole gallery run.
+
+**Left for you after its push:**
+- select the reel card under Lobby only, use Add place... to put it under Earth, then Save All and push;
+- your phone look;
+- remaking ESCAPADE's scene.
+
+I set the fold's words as "Links" and "Each link opens another website in a new tab." You can change them at your phone look.
+
+I tested patch 8 on a copy, both after patch 7 and before it.
+
+Where this leaves us:
+- Next is the Code session for the Links fold.
+- After it, the reel sits under Earth, beside the flyby it shows.
+- The cleanup comes after that, starting with each path's real last day.
