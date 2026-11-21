@@ -1180,6 +1180,47 @@ Where this leaves us:
 
 ==============================
 
+**Coordinator:**
+
+Both patches are in your folders, tested on copies of the two repositories.
+
+**1. Website: patch_L540_2_outside_link_card.py.** Run it, commit and push.
+- It changes how the lobby treats a card whose address is another website, such as the reel on Instagram.
+- That card opens in a new tab, so your site stays open behind it.
+- It no longer carries the "Interactive" label.
+- Room cards and page cards behave as before.
+- The website's second night usually runs around 2:45 p.m., so push before about 2:30 or after about 3:15.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L540_2_outside_link_card.py'
+ok   index.html: download and no iPhone download tips; a .kmz still downloads
+ok   index.html: for (var i = 0; i < vizs.length; i++) {
+ok   index.html: if (viz.live) {                 // a live card opens its sce
+patch applied (3 edits, 1 files)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+**2. The two cards, in the gallery editor.** Save All, then push.
+- **ESCAPADE's scene:**
+  - On your phone, open the room with ESCAPADE-Blue, ESCAPADE-Gold and Earth-Sun L2 ticked, and Share to copy the link.
+  - In the editor, choose New Scene, paste the link, and turn Featured on.
+- **The reel:**
+  - Make a card titled however you like, with the reel's Instagram address in "Live scene URL".
+  - Turn Featured on.
+  - Leave its drawer place empty, so it stays out of the room's drawer.
+
+Both are narrow cards, so they sit side by side in Featured's two columns.
+
+**3. Orrery: run patch_L540_1, then patch_L540_3_record_correction.py.**
+- Patch 3 corrects my mistake in the ledger. It records that scenes already exist, your two rulings, and the website change.
+- It moves L-540 off the Deferred list and puts the two cards under "Needs you now" on Where We Are.
+- If you run it before patch 1, it stops and tells you to run patch 1 first.
+- Move both patches to documentation, then commit and push. The orrery's second night is due around 1:30, so push after about 2 p.m.
+
+Where this leaves us:
+- The reel is posted, and the craft are drawn brighter.
+- Once your two cards are pushed, Featured carries the reel's story and the way into the room on the twins.
+- A card that plays the video on the lobby itself stays an idea, in case the link card falls short.
+
+
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L540_1_reel_card_record.py'
 ok   LEDGER_CONSOLIDATED.md: horizons-orbital-mechanics, Checking an Entry Against JPL.
 ok   LEDGER_CONSOLIDATED.md: <!-- L:533 status:OPEN upd:2026-11-19 section:A flag: rice: 
