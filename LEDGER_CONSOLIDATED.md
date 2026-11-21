@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*269 live items; 253 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*270 live items; 254 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1183,11 +1183,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-19 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-20 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-18 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
+| ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea) | OPEN | -- | 2026-11-20 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1741,7 +1742,7 @@ go-ahead.
 final).
 
 #### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534)
-<!-- L:533 status:OPEN upd:2026-11-19 section:A flag: rice: -->
+<!-- L:533 status:OPEN upd:2026-11-20 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
   gallery d3e97b15): NASA's article of 2026-11-09,
@@ -1944,6 +1945,17 @@ THE BOX'S LAST DAY, RULED. Tony: "Yes" -- the website asks JPL for each
 span's last moment too, as `fetch_path_last_day` does for an ended
 mission, so the 27 paths that stop short run to their span's end and
 each box names that day. A gallery build of its own.
+**Note:** (2026-11-20, the coordinating session, Claude Opus 5.5)
+THE CRAFT DRAWN BRIGHTER, for ESCAPADE's reel. Tony, 08:15: "Why don't
+we try basic changes first like brighter colors, teal instead of blue,
+maybe thicker lines for space craft symbols"; then "Yes" to
+ESCAPADE-Blue turquoise in both repositories (the CSS colour teal is
+darker than blue), ESCAPADE-Gold kept, and every spacecraft's open
+diamond outlined 2 pixels in its own colour on the website
+(`render_spacecraft.MARKER_OUTLINE_PX`; comets unchanged). Built by
+patch_L533_1 and _2_brighter_craft, pushed at orrery 9591db8 and
+gallery eed30d4. Tony's phone look, 10:53: "Looks good." The reel was
+posted on Instagram the same day; a reel on a lobby card is L-540.
 **Gap:** the row under Mars, by L-534's rule once it is designed. The
 box's last day: its build, as ruled Nov 19. The loops near L2, with
 an Earth-centred path view in Earth's fold. One later item: a Mars
@@ -2130,6 +2142,44 @@ provenance-discipline, A Computed Position Prints What Its Errors Earn.
 **Gap:** a Code session in the orrery (horizons_check.py and its suite).
 **Ref:** L-297 (the Lagrange points); L-395 (the Horizons check);
 horizons-orbital-mechanics, Checking an Entry Against JPL.
+
+#### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea)
+<!-- L:540 status:OPEN upd:2026-11-20 section:A flag: rice: -->
+- **Tony, 2026-11-20, 12:47**, after ESCAPADE's reel was posted on
+  Instagram: "I would like to use the reel you made because it has a
+  story. That's where a featured card shines and the visitor can then
+  go to the interactive. Maybe at the end we can embed a link to a
+  scene? If this is for a future build we can just put it in the
+  ledger."
+- **Corrected the same day (13:00, the coordinating session):** the
+  first record said the room could not open on chosen bodies. It can,
+  and has since Nov 8: the room writes the ticked rows into its own
+  address (?show=, with ?at= for the minute), and since Nov 9 the
+  gallery editor's New Scene window keeps such a link as a SCENE card,
+  which Featured can carry (L-518, L-519; gallery/scene_address.js,
+  tools/gallery_editor.py). The session's search had read only
+  interactive.html. A card that plays a video does not exist: the lobby
+  draws a picture and a link, with no <video>.
+- **Tony, 12:50:** "Alternatively I could post the Instagram reel in
+  Featured as a link." **13:01:** "That would be ideal", to two cards
+  side by side in Featured: the reel's link on Instagram, and
+  ESCAPADE's scene (ESCAPADE-Blue, ESCAPADE-Gold and Earth-Sun L2
+  ticked, opening at today's date).
+- **Built:** patch_L540_2_outside_link_card (gallery, index.html). A
+  card whose "live" address is another website's is read as a page
+  card: no "Interactive" label, and a tap opens it in a new tab. The
+  editor's "Live scene URL" field already takes any address.
+  **Tony-action (do):** in the gallery editor, a New Scene from the
+  room's shared link with the three rows ticked, Featured on; and a
+  card whose Live scene URL is the reel's Instagram address, Featured
+  on, with no drawer place, so it stays out of the room's drawer; then
+  Save All, push, and look on the phone.
+**Gap:** the two cards and Tony's look. A card that plays the reel on
+the lobby itself stays an idea, for a design talk if the link card
+falls short.
+**Ref:** L-533 (ESCAPADE); L-518 (the shared scene link); L-519 (Scenes
+in Featured); L-363 and L-428 (the lobby's wide card and start card);
+the reel rule of Nov 17 (L-060).
 
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
 <!-- L:529 status:OPEN upd:2026-11-18 section:A flag: rice: -->

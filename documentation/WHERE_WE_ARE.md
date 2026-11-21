@@ -1,14 +1,14 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 19, 2026, night: the Lagrange points live and looked at; this round's cleanup ruled (Opus, coordinating session).
-- Written at orrery 1c0688ca and gallery 0c832de1, with this patch's edits on your disk.
+Last updated: November 20, 2026, noon: ESCAPADE's reel posted; its craft drawn brighter; a reel on a lobby card recorded (Opus, coordinating session).
+- Written at orrery 5aa6a013 and gallery aba9df72, with this patch's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The eight Lagrange points are live on the website and in the orrery, and your phone look passed every line. L4 and L5 sit just off the Moon's drawn orbit by geometry: JPL puts them at the Moon's distance now, 60 degrees either side, and the orbit is an ellipse (L-297 (the Lagrange points), closed).
-> - The orrery's colours live in their own drawing file now, `orrery_colors.py`; three skills updated, the protocol at v3.143, the skills page at Plugins (L-432 (the default goldenrod), L-537 (the skills page), closed).
+> - ESCAPADE's reel is posted. For it the craft are drawn brighter on both sites: ESCAPADE-Blue is turquoise, and every spacecraft's diamond has a thicker outline (L-533 (ESCAPADE)).
+> - The reel's link and ESCAPADE's scene go side by side in Featured; the website now opens an outside link in a new tab, with no "Interactive" label (L-540 (a reel on a Featured card)).
 >
 > **Do next:** *The design talk on destinations and encounters (L-534 (missions by destination), L-529 (guided encounters)); beside it, this round's cleanup (the road, line b).*
 >
@@ -16,6 +16,7 @@ Last updated: November 19, 2026, night: the Lagrange points live and looked at; 
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
+> - *(do) In the gallery editor: a New Scene from the room's shared link with ESCAPADE-Blue, ESCAPADE-Gold and Earth-Sun L2 ticked, and a card whose Live scene URL is the reel's Instagram address; both Featured, then Save All, push, and look on your phone (L-540 (a reel on a Featured card)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -32,7 +33,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                page (L-060 (El Nino)) live Nov 17; ESCAPADE's path (L-533)
                live Nov 18; the Lagrange points (L-297) live
                Nov 19, on your phone look; next, the
-               destinations and encounters talk (L-534, L-529), then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.* << moved this session
+               destinations and encounters talk (L-534, L-529), then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.*
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
@@ -45,12 +46,12 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11; steps 3 to 6 between builds, the
                protocol's reduction first, for a new Fable session.
-  b.   [beside] This round's cleanup, each ruled Nov 19 (the order is yours): every path to its last day, L-533 (ESCAPADE); the orbiters' hourly points, L-538 (the orbiters' printed error); every entry checked against JPL, L-539 (every entry checked); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. << new this session
+  b.   [beside] This round's cleanup, each ruled Nov 19 (the order is yours): every path to its last day, L-533 (ESCAPADE); the orbiters' hourly points, L-538 (the orbiters' printed error); every entry checked against JPL, L-539 (every entry checked); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Every path runs to its span's last day: the website asks JPL for it too (Nov 19; L-533 (ESCAPADE)).
@@ -77,23 +78,22 @@ Waiting behind other work; a line leaves when picked up.
 - Charon's period is asked around Pluto's centre, not the barycentre; fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when JPL cannot answer) slices b and c; L-484 (the two agree), its brief and build; L-504 (the orrery's clock), the Earth System, stamps and tools; L-510 part 2, the path plan asked from before any launch.
 - The other Earth System layers on the web, and South Sudan when IPC publishes (Nov 13; L-530 (the other layers on the web), L-070 (other countries)).
-- L-511 (the export carries the words): behind the check (Nov 3).
 - L-508 (a held body's alarm), L-485 (a nightly run): the website honours no orrery hold yet; the alarm's quiet half waits, its loud half built (L-525, Nov 11).
-- L-462 (a shorter run); L-128 (the ice lines); L-500 (eyeballed numbers).
+- L-462 (a shorter run); L-128 (the ice lines); L-500 (eyeballed numbers); L-511 (the export carries the words), behind the check (Nov 3).
 - L-483 (a comet room), after historical missions' slice 2.
 - L-489 (compositions), with L-486 and L-488 under it: Artemis II in the Earth room first, with slice 2 (L-507 (historical missions)); Apollo 11's S-IVB with them (Nov 5).
 - A body crossing e = 1: its drawer row waits for JPL's class (L-510 (the typed fields), Nov 5).
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261119T204434Z, ok, no retry on the swap (the website's swap log at 0c832de1, read Nov 19).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 1c0688ca, generated Nov 19, read Nov 19).
 - This page's date and the ledger's newest stamp: both Nov 19. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
 - None open. The last day was ruled Nov 19: yes, each path asks for its span's last day (L-533 (ESCAPADE)).
@@ -117,7 +117,7 @@ Not urgent, in your order:
 3. Earth's list (L-413 (Earth's list)): open as enhancements, or closed
    with its seven pieces moved to their own items.
 
-## Where the details are  **>> UPDATED THIS SESSION**
+## Where the details are
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.

@@ -1177,3 +1177,36 @@ Where this leaves us:
 - The session-close patch from yesterday, patch_L297_3_close_session_20261119.py, still needs to run. It doesn't touch these files, so the order between them doesn't matter.
 
 -- when i have earth centered, then go to Escapade, the scene shifts to sun centered instead of staying earth centered. 
+
+==============================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L540_1_reel_card_record.py'
+ok   LEDGER_CONSOLIDATED.md: horizons-orbital-mechanics, Checking an Entry Against JPL.
+ok   LEDGER_CONSOLIDATED.md: <!-- L:533 status:OPEN upd:2026-11-19 section:A flag: rice: 
+ok   LEDGER_CONSOLIDATED.md: **Gap:** the row under Mars, by L-534's rule once it is desi
+ok   documentation/WHERE_WE_ARE.md: Last updated: November 19, 2026, night: the Lagrange points 
+ok   documentation/WHERE_WE_ARE.md: - Written at orrery 1c0688ca and gallery 0c832de1, with this
+ok   documentation/WHERE_WE_ARE.md: > - The eight Lagrange points are live on the website and in
+ok   documentation/WHERE_WE_ARE.md: destinations and encounters talk (L-534, L-529), then Uranus
+ok   documentation/WHERE_WE_ARE.md: b.   [beside] This round's cleanup, each ruled Nov 19 (the o
+ok   documentation/WHERE_WE_ARE.md: ## Settled  **>> UPDATED THIS SESSION**
+ok   documentation/WHERE_WE_ARE.md: ## Signals  **>> UPDATED THIS SESSION**
+ok   documentation/WHERE_WE_ARE.md: ## Waiting on you  **>> UPDATED THIS SESSION**
+ok   documentation/WHERE_WE_ARE.md: ## Where the details are  **>> UPDATED THIS SESSION**
+ok   documentation/WHERE_WE_ARE.md: - L-511 (the export carries the words): behind the check (No
+ok   documentation/WHERE_WE_ARE.md: - L-462 (a shorter run); L-128 (the ice lines); L-500 (eyeba
+patch applied (14 edits, 2 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L540_3_record_correction.py'
+ok   LEDGER_CONSOLIDATED.md: #### [L-540] A reel on a Featured card, ending with a link i
+ok   LEDGER_CONSOLIDATED.md: - **What the website does today, read 2026-11-20 at gallery 
+ok   documentation/WHERE_WE_ARE.md: > - Your idea of the reel on a Featured card, ending with a 
+ok   documentation/WHERE_WE_ARE.md: - A reel on a Featured card, ending with a link that opens t
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 
+patch applied (5 edits, 2 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
