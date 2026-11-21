@@ -1179,17 +1179,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
-| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-20 |
+| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-21 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-20 |
-| ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-18 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-21 |
+| ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-21 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
-| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
+| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed) | OPEN | -- | 2026-11-21 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 
 ### B. Pending Action (Tony-side)
@@ -1744,7 +1744,7 @@ go-ahead.
 final).
 
 #### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534)
-<!-- L:533 status:OPEN upd:2026-11-20 section:A flag: rice: -->
+<!-- L:533 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
   gallery d3e97b15): NASA's article of 2026-11-09,
@@ -1962,8 +1962,18 @@ posted on Instagram the same day; a reel on a lobby card is L-540.
 Each twin's Earth flyby is now an encounter, played from its own
 package and opened under Earth's row: L-529's note of the same evening
 (ESCAPADE's Earth flybys, slice 1).
-**Gap:** the row under Mars, by L-534's rule once it is designed. The
-box's last day: its build, as ruled Nov 19. The loops near L2, with
+- **2026-11-20 and 21, THE FLYBY DATES, THE DESTINATION, THE LOITER.**
+  Tony's miss of Nov 18, "The only thing I miss are the dates of
+  flybys", is answered by the first encounter, ESCAPADE's Earth
+  flybys, live Nov 20 and looked at on his phone ("Works great!"):
+  each pass carries its date, and the Encounters fold under Earth
+  prints both (L-529 (guided encounters)). His other miss, the
+  destination, Nov 20, 14:46: "The path ends at Mars. That is enough
+  for now." Ruled in the same message: "there is also the L2 loiter
+  as an encounter"; it is built after the flybys' slice 2, and its
+  view is its own question.
+**Gap:** the row under Mars waits (L-534 (missions by destination),
+Nov 20). The box's last day: its build, as ruled Nov 19. The loops near L2, with
 an Earth-centred path view in Earth's fold. One later item: a Mars
 arrival counts as one only because JPL's data runs three days past
 orbit insertion; the plan's 30-day remake shows it if JPL trims that.
@@ -1972,7 +1982,7 @@ by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
 orbiter rule for an arrival).
 
 #### [L-534] Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529)
-<!-- L:534 status:OPEN upd:2026-11-18 section:A flag: rice: -->
+<!-- L:534 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Tony's rulings, 2026-11-15**, in the coordinating session (Claude
   Opus 5.5, through the python_work door, on orrery b30d6d05 and gallery
   d3e97b15), starting from ESCAPADE (L-533): 16:07, "add it as a row
@@ -2032,8 +2042,23 @@ orbiter rule for an arrival).
     rule (L-533) would read each mission as one long loiter.
   - THE ORDER. Tony, 13:31: "Keep as planned after escapade": the
     Lagrange points' round first, then this one.
-**Gap:** the design round, with L-529 (guided encounters), after the
-Lagrange points (L-297); ESCAPADE (L-533) the worked example.
+- **Tony's rulings, 2026-11-20**, by voice and then in chat with the
+  coordinating session (Claude Fable 5.2); the whole talk is
+  `documentation/DESIGN_encounters_20261120.md`. From the voice
+  transcript, fillers removed: "maybe this is just a type of
+  encounter, not a different kind of visualization"; "perhaps we
+  should just build completed encounters at this time." Typed, 14:46,
+  on what the page says of ESCAPADE's destination: "The path ends at
+  Mars. That is enough for now."
+  - WHAT THIS CHANGES. The Nov 15 rulings above, a row under Mars and
+    the second of the "three paths", wait. Nothing new sits under
+    Mars for ESCAPADE until it arrives, September 2027 by the plan.
+    They are not withdrawn: his words were "for now".
+  - The first encounter, ESCAPADE's Earth flybys, was built under
+    L-529 (guided encounters) and is live.
+**Gap:** waits behind L-529's encounters. To ask Tony when an arrival
+is next to be shown: whether a destination appears only as that
+arrival's encounter, or the Nov 15 row comes back.
 **Ref:** L-533 (ESCAPADE); L-529 (guided encounters); L-515 (one nested
 tree); L-476 (paths by the plan); L-443 (the spacecraft group); L-507
 (historical missions).
@@ -2250,7 +2275,7 @@ L-287 (Storage is never served); L-363 and L-428 (the lobby's wide card
 and start card); the reel rule of Nov 17 (L-060).
 
 #### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed)
-<!-- L:541 status:OPEN upd:2026-11-20 section:A flag: rice: -->
+<!-- L:541 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Opened 2026-11-20, evening**, by Tony's word at L-529's Part B
   report ("any place in the orrery or the website that prints a plan
   time as UTC without converting it from TDB, saying where you
@@ -2286,6 +2311,17 @@ and start card); the reel rule of Nov 17 (L-060).
   UTC.
 - NOT FOUND: the orrery prints no plan event moment in a hover. L-529's
   encounter converts by astropy and prints UTC.
+- **A WIDER QUESTION, NOT VERIFIED** (the coordinating session, Claude
+  Fable 5.2, 2026-11-20; from a search of the code, not a trace).
+  Every served position carries JPL's date, on JPL's clock, and the
+  live rooms appear to place a body by the visitor's UTC minute
+  against those dates with no conversion: the search found no TDB
+  handling in `gallery/assembler/` or in the page's clock, and
+  `resolver.py` turns an ISO UTC time into a Julian date as it stands.
+  If that is so, every body in a live room is drawn 69 seconds from
+  the minute its title shows. To trace end to end before anything
+  changes: what the builder stamps, what the page asks for, and
+  whether any box prints finer than 69 seconds of its body's motion.
 **Gap:** a ruling on each: convert, or name JPL's clock where it is
 printed (L-504's rule prints an elements' date "on JPL's ephemeris
 clock").
@@ -2312,7 +2348,7 @@ of `solar_system`, or the check allows the Earth room's address.
 **Ref:** L-519 (Scenes); L-540 (a reel on a Featured card); L-529.
 
 #### [L-529] Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20)
-<!-- L:529 status:OPEN upd:2026-11-20 section:A flag: rice: -->
+<!-- L:529 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Tony, 2026-11-12, 20:34,** after his phone look at the finished
   guide (L-527 (a first visit's guide)): "it works great. i'm thinking
   this might be a good way to create encounters, with labels and focus
@@ -2470,11 +2506,49 @@ coordinating session's close moves them here.
   add the button". Added to `palomas_orrery_dashboard.py` under
   "Gallery -- checks and data", with its short line; the row passes
   (114 steps matched). The one change to orrery code this session.
-**Gap:** Tony's phone look at slice 1, after the push. Slice 2: the two
-close passes, escape speed beside the speed, NASA's "powered Earth
-flybys" through the orrery's words. The L2 loiter as an encounter. How
-a completed encounter is asked again if JPL replaces a prediction with
-a measurement.
+- **TONY'S PHONE LOOK, 2026-11-20, 21:40**, with a picture of the
+  encounter playing (website f918d74b, orrery df034699; his run record
+  `documentation/WHERE_WE_ARE_11-20-26_2039_run_record.md`): "Two
+  issues: 1) the Pause button is difficult to activate while Play is not
+  an issue. 2) make the play bar oval around the bar opacity 0. Works
+  great! Thanks."
+- **THE PLAYER'S PATCH, the same night:** `patch_L529_1_player_press.py`
+  (gallery, pushed at 7dbcc903; the coordinating session, Claude Fable
+  5.2). The button answers the press (pointerdown), not the click that
+  follows it; a second press inside 350 ms is the same press; the
+  button is 44 px tall; the oval around the player is clear. The
+  reading it was built on was not measured on a phone: while it plays
+  the page is busy drawing, a phone's click comes late, and a second
+  tap then started it again. Tested on a copy of the pushed page, 12
+  checks, 5 of them failing on the page as pushed. Tony's run record,
+  beside "press Play and Pause several times": "-- correct"; and
+  2026-11-21, 12:02, asked whether Pause takes on the first tap: "Yes
+  it does." Slice 1 is LIVE AND LOOKED AT.
+- **VERIFIED AGAINST CLAIMED, by the coordinating session on Tony's
+  disk before the push (Nov 20, 20:35):** no non-ASCII byte in the
+  three new code files or the three changed page files it read; each
+  twin's box carries its served description, which names Mars; the
+  card file held the encounter's card and one scene; the one change to
+  orrery code was the dashboard's button. Taken from the build's
+  report and not checked again: the seven planted faults and the
+  walk.
+- **WHAT THE COORDINATING SESSION GOT WRONG, kept for the next brief.**
+  The brief and the design record said the plan's times are UTC; they
+  are on JPL's clock (the build caught it; L-541 (a plan's clock)).
+  The voice call said the plan holds an encounter's window; it does
+  not (the design record's 3.2). The slice ran to about 670,000
+  tokens by the build's own estimate: one brief held the package, the
+  scene, the row, Find and the editor. Slice 2's brief keeps each
+  session inside one part of the site.
+**Gap:** slice 2, its talk first: the two close passes and how the
+visitor moves between the three views; escape speed beside the speed
+in the close views; NASA's "powered Earth flybys" through the
+orrery's words; the words on each card. The L2 loiter as an encounter
+(Tony, Nov 20), its view its own question. How a completed encounter
+is asked again if JPL replaces a prediction with a measurement. The
+skill text owed: the build's eleven rules above, at
+interactive-exhibit's next bump, written together with the Links
+fold's (L-540 (a reel on a Featured card)) so Tony reinstalls once.
 **Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
 swing, `gallery/first_guide.js`); L-507 (historical missions, whose
 encounters were to become saved scenes); L-489 (compositions: Artemis II

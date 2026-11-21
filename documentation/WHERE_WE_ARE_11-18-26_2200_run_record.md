@@ -1464,8 +1464,8 @@ ok   doc_index.py --caps
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 3. **Move both patches to documentation, -- done 
-4. then commit and push the orrery.** -- 
-5. **Start Claude Code** in the python_work folder, on Opus at high effort. Paste everything below the line in documentation/PROMPT_code_L540_links_fold_20261121.md.
+4. then commit and push the orrery.** -- and nightly pull at 39070a959e1d6822ee9a026e276287a6a6a50837
+5. **Start Claude Code** in the python_work folder, on Opus at high effort. Paste everything below the line in documentation/PROMPT_code_L540_links_fold_20261121.md. -- started at OPEN: 11-21-26 1026: Opus: Code: Website documentation coordination
 
 **What the Code session builds, in two parts, with your go-ahead in between:**
 - **Part 1, the room's drawer:**

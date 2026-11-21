@@ -1,28 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 21, 2026, morning: link cards, every address in the i panels a link, the editor laid out as the website, and an Outside Links room (Opus, coordinating session).
-- Written at orrery 08656fdc and gallery 5a7df273, with this patch's edits on your disk.
+Last updated: November 21, 2026, midday: the first encounter's close, your phone look recorded and the Nov 20 rulings on the ledger (Fable, coordinating session).
+- Written at orrery 39070a95 and gallery 5a7df273, with this patch's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The first encounter is built: ESCAPADE's Earth flybys play hour by hour, from 18 October to 14 November, with both twins, the Moon and Earth-Sun L2 moving and each pass dated; it opens from an Encounters fold under Earth's row (L-529 (guided encounters)).
+> - The first encounter is live and looked at: ESCAPADE's Earth flybys play hour by hour from the Encounters fold under Earth's row, each pass dated; your look of Nov 20, "Works great!", and Pause takes on the first tap since the player's patch (L-529 (guided encounters)).
 > - Two items recorded, not fixed: three places read or print a plan's time, which is on JPL's clock, as UTC (L-541 (a plan's clock)); the gallery editor let your scene into the Earth room, which the Scene cards check refuses (L-542 (a scene's room)).
 > - The gallery editor has New Link Card, every web address in the i panels is a link, and its Solar System section is laid out as the website's: Lobby only first, then each row's Scenes, Encounters and Saved pictures (L-540 (a reel on a Featured card)).
 >
-> **Do next:** *Your phone look at ESCAPADE's Earth flybys after the push (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b).*
+> **Do next:** *The Links fold's build, in progress (L-540 (a reel on a Featured card)); then the encounter's slice 2, its talk first (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b), whose briefs are not written yet.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 > - *(do) Start a Claude Code session in the website with documentation/PROMPT_code_L540_links_fold_20261121.md: the Links fold, so the reel sits under Earth. The Outside Links room is dropped (L-540 (a reel on a Featured card)).*
-> - *(do) Push both and look at the encounter on your phone (L-529 (guided encounters)); then remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
+> - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -35,7 +35,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                page (L-060 (El Nino)) live Nov 17; ESCAPADE's path (L-533)
                live Nov 18; the Lagrange points (L-297) live
                Nov 19, on your phone look; the encounters talk
-               and the first encounter, ESCAPADE's Earth flybys, Nov 20 (L-529 (guided encounters)) << new this session; then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.*
+               and the first encounter, ESCAPADE's Earth flybys, Nov 20, on your phone look (L-529 (guided encounters)); then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.*
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
@@ -68,10 +68,10 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- ESCAPADE's loops near L2 show only in a view centred on Earth, and the website draws a planned path around the Sun alone: with Earth's fold, where SOHO, Gaia and JWST need it too (Nov 18; L-533 (ESCAPADE)).
+- ESCAPADE's year near L2 is an encounter of its own, after the flybys' slice 2; its view is an open question, since its loops show only around Earth and not as NASA draws them (Nov 20; L-529 (guided encounters)). A planned path drawn around Earth, which SOHO, Gaia and JWST need too, stays with Earth's fold (Nov 18; L-533 (ESCAPADE)).
 - The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
@@ -93,9 +93,9 @@ Waiting behind other work; a line leaves when picked up.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261120T202853Z, ok, no retry on the swap (the website's swap log at ae56a944, read Nov 20).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 1c0688ca, generated Nov 19, read Nov 20).
-- This page's date and the ledger's newest stamp: both Nov 20. Agree.
+- This page's date and the ledger's newest stamp: both Nov 21. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
 - None open. The last day was ruled Nov 19: yes, each path asks for its span's last day (L-533 (ESCAPADE)).

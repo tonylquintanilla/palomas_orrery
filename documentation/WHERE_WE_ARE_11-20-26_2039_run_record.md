@@ -666,3 +666,60 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
 5. Move the patch file to the `documentation` folder.
 
 Tell me whether Pause takes on the first try. Then I'll write the close, with your look recorded on L-529. -- close
+
+==========================
+
+**Coordinator:**
+
+I'll read your run record and what this morning's L-540 close already changed, then write the close for the encounter work.
+
+I read your run record, including "-- correct" beside the Play and Pause step. The close for the encounter is in your orrery folder: `patch_L529_2_close_record.py`.
+
+**What it records**
+- **On the encounter (L-529):** your phone look in your words, the player's patch, your "Yes it does", what I checked on your disk, and what I got wrong (the clock, the window, and one brief that ran to 670,000 tokens).
+- **On missions by destination (L-534):** your Nov 20 rulings, and that the Nov 15 row under Mars waits. It says "waits", not "withdrawn", because your words were "for now".
+- **On ESCAPADE (L-533):** the flyby dates are answered, the path ending at Mars is enough, and the L2 loiter is an encounter.
+- **On the clock item (L-541):** my wider question about the live rooms, marked as not verified.
+- **The design record:** the plan's times corrected to JPL's clock.
+- **Where We Are:** nine lines changed and none added, since the page is at its cap of 130. Nothing below your marker is touched.
+
+**To run it**
+1. Open it in VS Code and click Run. You should see 20 "ok" lines, "patch applied", then two more "ok" lines for the ledger's index and the caps check.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L529_2_close_record.py'
+ok   LEDGER_CONSOLIDATED.md: <!-- L:529 status:OPEN upd:2026-11-20 section:A flag: rice
+ok   LEDGER_CONSOLIDATED.md: **Gap:** Tony's phone look at slice 1, after the push. Sli
+ok   LEDGER_CONSOLIDATED.md: <!-- L:534 status:OPEN upd:2026-11-18 section:A flag: rice
+ok   LEDGER_CONSOLIDATED.md: **Gap:** the design round, with L-529 (guided encounters),
+ok   LEDGER_CONSOLIDATED.md: <!-- L:533 status:OPEN upd:2026-11-20 section:A flag: rice
+ok   LEDGER_CONSOLIDATED.md: **Gap:** the row under Mars, by L-534's rule once it is de
+ok   LEDGER_CONSOLIDATED.md: <!-- L:541 status:OPEN upd:2026-11-20 section:A flag: rice
+ok   LEDGER_CONSOLIDATED.md: **Gap:** a ruling on each: convert, or name JPL's clock wh
+ok   documentation/DESIGN_encounters_20261120.md: worked out from JPL by `path_plan.py`; times are UTC; dist
+ok   documentation/DESIGN_encounters_20261120.md: The close moves these rulings to L-534, L-529 and L-533 by
+ok   documentation/WHERE_WE_ARE.md: Last updated: November 21, 2026, morning: link cards, ever
+ok   documentation/WHERE_WE_ARE.md: > - The first encounter is built: ESCAPADE's Earth flybys 
+ok   documentation/WHERE_WE_ARE.md: > **Do next:** *Your phone look at ESCAPADE's Earth flybys
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Push both and look at the encounter on your phon
+ok   documentation/WHERE_WE_ARE.md: ## The road  **>> UPDATED THIS SESSION**
+ok   documentation/WHERE_WE_ARE.md: Nov 20 (L-529 (guided encounters)) << new this session; th
+ok   documentation/WHERE_WE_ARE.md: ## Deferred
+ok   documentation/WHERE_WE_ARE.md: - ESCAPADE's loops near L2 show only in a view centred on 
+ok   documentation/WHERE_WE_ARE.md: - This page's date and the ledger's newest stamp: both Nov
+ok   documentation/WHERE_WE_ARE.md: ## Waiting on you  **>> UPDATED THIS SESSION**
+patch applied (20 edits, 3 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Commit and push the orrery. -- 
+3. Move the patch to the `documentation` folder.
+
+Run it before the Links fold session writes its own closing records, because both edit Where We Are. If it prints ANCHOR FAIL, nothing is written; tell me and I'll rebuild it on the new page.
+
+**One thing I left out on purpose: the skill updates.** The Links fold's brief says its own skill text is owed at the same skill's next update. So I'll write one update for both builds after that session closes, and you reinstall once.
+
+**Where this leaves us**
+- The first encounter is live, looked at and recorded.
+- Next for encounters is slice 2, its talk first: the two close passes, the words on each card, and the loiter's view.
+- The cleanup briefs for Opus are still not written.

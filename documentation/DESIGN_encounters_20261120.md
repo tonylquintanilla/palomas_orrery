@@ -65,8 +65,10 @@ His words are from the voice transcript, with the fillers taken out.
 ### 3.1 The twins' events, as the orrery's plan holds them
 
 Read from `data/path_plans.json` at orrery c442793a. Every figure is
-worked out from JPL by `path_plan.py`; times are UTC; distances are
-from the body's centre.
+worked out from JPL by `path_plan.py`; times are on JPL's clock, TDB,
+69 seconds ahead of UTC; distances are from the body's centre.
+(Corrected Nov 21: this line first said UTC. The build caught it and
+the encounter converts; L-541.)
 
 | Craft | Event | Closest | Distance | Speed | The plan's window |
 |---|---|---|---|---|---|
@@ -307,3 +309,9 @@ which one bounds the window and which is drawn.
 
 The close moves these rulings to L-534, L-529 and L-533 by patch. The
 builder's brief is written when its session is next.
+
+Done, Nov 20 and 21: slice 1 was built from
+`COORD_L529_encounter_escapade_earth_brief_20261120.md`, pushed, and
+looked at on Tony's phone ("Works great!"); the rulings are on L-529,
+L-534 and L-533 by `patch_L529_2_close_record.py`. Section 8's list
+is slice 2's talk.
