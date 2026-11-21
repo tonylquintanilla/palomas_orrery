@@ -1174,7 +1174,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
-| ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk to be brought up to date) | OPEN | -- | 2026-11-21 |
+| ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | PENDING-GATE | -- | 2026-11-21 |
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-16 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
@@ -3143,8 +3143,8 @@ contents lists); L-499 (the kinds of session); L-506 (Token Economy);
 L-012 (the false "fetched fresh" print, still at `palomas_orrery.py`
 line 4872).
 
-#### [L-521] Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk to be brought up to date)
-<!-- L:521 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+#### [L-521] Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green)
+<!-- L:521 status:PENDING-GATE upd:2026-11-21 section:A flag: rice: -->
 - **Recorded, not chased.** Found 2026-11-09 by the L-519 (Featured's
   rethink) Code session (Claude Opus 5.5), on gallery 6a153716 with a
   payload built that day by the room's real driver (2026-11-09T12:00Z):
@@ -3218,9 +3218,52 @@ line 4872).
      puts it in Encounters, never among them (L-529).
   Shared causes: the Lagrange points (3, 4, 6), the Encounters fold (7
   to 11), and one each from L-497 (1), L-484 (2) and L-503 (5).
-**Gap:** bring the walk's eleven expectations up to date, one clause
-each above (the page is not changed); then the walk is green again. A
-gallery session that next opens the drawer or the text box.
+- **Brought up to date, 2026-11-21, later, the same session**, on Tony's
+  word ("bring the drawer walk's eleven expectations up to date, as L-521
+  lists them, changing only the walk"), on gallery 828362fd and orrery
+  bd70f584, his push of the Links fold. Only
+  `tools/headless/walk_solar_system_drawer.js` changed; the page did not.
+  Each expectation now works out what the page should do from the
+  payload or the card, not from the page's helpers:
+  1. the tap: the range and the camera unchanged, and the only calls a
+     relayout of the annotations (the text box);
+  2. Sedna: four bulleted lines where the payload serves a figure for
+     its uncertainty (a number in km), five with the note where none;
+  3. the Earth-Sun Lagrange Points group, folded, right after Earth's
+     row where the payload serves the points (a new check), then the
+     Spacecraft group past its hidden members;
+  4. the groups' order with lagrange_earth_sun after aten, where served;
+  5. a drawing's box (a row "drawing:<name>") up to 72 characters, its
+     70-character wrap and the bullet; a body's still 62;
+  6. a Lagrange point among the moons by its served distance now, and
+     two at the same distance in the served order. Found here, a
+     correction of the judgment above: the page lists Earth's fold
+     em_l1, moon, em_l4, em_l5, em_l2; Earth-Moon L4 and L5 are equally
+     far by their geometry, their served figures 0.0025046595109979577
+     and 0.002504659510997924 AU, and the page keeps the served order
+     (gallery/drawer_order.js measures a child where it is drawn);
+  7. Earth's folds right after its row in the website's order, Scenes,
+     Encounters and Links where it has them, its Saved pictures last;
+  8-11. a saved picture worked out from the card: not a scene, not an
+     encounter, not a link; a card's places one or a list.
+  RESULT: the walk passes in full, "PASS: 368 checks on the stand-in
+  scene" (one check more, item 3's Lagrange group), with a payload of
+  2026-11-21T12:00Z. CAN FAIL: on a throwaway copy of the website, each
+  of three planted breaks fails the walk with its own check, then the
+  copy put back walks green: (1) a tap that also moves the camera
+  (interactive.html, sunTapOpen): "scene tap moved the view:
+  [["relayout",["scene.camera"]],...]"; (6) a fold's moons and points
+  sorted farthest first (gallery/drawer_order.js, a child's au): "earth's
+  moons are not right under its row, nearest first"; (7) a row's folds
+  drawn in reverse (interactive.html, foldsAt): "Earth's pictures are not
+  in a fold right after Earth's row and its other folds, in the
+  website's order: earth,encounters:earth". Two first plants missed the
+  code that orders the open fold (the page's own sort of the fold's
+  rows, and a child's value in drawer_order.js, neither what the walk
+  reads) and the walk stayed green on both, as it should. The gallery
+  run after: 52 of 52.
+**Gap:** Tony's push of the walk; then DONE, and the walk is the check
+that goes red when the drawer leaves its rules.
 **Ref:** L-519 (Featured's rethink); L-497 (one text box); gallery
 `tools/headless/walk_solar_system_drawer.js`.
 

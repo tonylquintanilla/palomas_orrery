@@ -1,15 +1,15 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 21, 2026, afternoon: the Links fold built (Claude Code, Claude Opus 5.5, in the website).
-- Written at orrery d3b62abc and gallery 5a7df273, with this session's edits on your disk, not pushed.
+Last updated: November 21, 2026, afternoon: the Links fold built, then the drawer walk brought up to date (Claude Code, Claude Opus 5.5, in the website).
+- Written at orrery bd70f584 and gallery 828362fd, with this session's edits on your disk, not pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - A link card can now sit beside a body in the room's drawer, in a Links fold after that body's Encounters and before its Saved pictures; a tap opens it in a new tab. The gallery editor shows the same fold, and New Link Card asks which row; with no row the card goes to Storage. The Outside Links room is gone from the code (L-540 (a reel on a Featured card)).
 > - The pushed website's Picture folds check was red: it refused the reel's card for having no place in the drawer. A link card may now have none, and the whole gallery run is green, 52 of 52, run with nothing being edited.
-> - The drawer walk's eleven red checks are each judged: all eleven expect the page as it was before a deliberate change (the Lagrange points, the Encounters fold, and three older ones), so the walk is what needs updating, not the page (L-521 (the walk's red checks)).
+> - The drawer walk is green again, 368 checks: its eleven red checks each expected the page as it was before a deliberate change (the Lagrange points, the Encounters fold, and three older ones), so only the walk changed; three planted breaks each turn it red (L-521 (the walk's red checks)).
 >
 > **Do next:** *Your push and the reel's place (below); then the encounter's slice 2, its talk first (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b), whose briefs are not written yet.*
 >
@@ -75,7 +75,6 @@ Waiting behind other work; a line leaves when picked up.
 - The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
-- The drawer walk's eleven red checks, each judged stale on Nov 21: bring the walk up to date in a gallery session that next opens the drawer (Nov 9; L-521 (the walk's red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - Charon's period is asked around Pluto's centre, not the barycentre; fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when JPL cannot answer) slices b and c; L-484 (the two agree), its brief and build; L-504 (the orrery's clock), the Earth System, stamps and tools; L-510 part 2, the path plan asked from before any launch.
