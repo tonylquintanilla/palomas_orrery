@@ -116,7 +116,7 @@ A tool logging a value is not a display a visitor sees, so these are not counted
 
 No display prints these exact rows. Under Rule 7 they carry no print count. The number is how many other orrery lines name the row, so a use that prints it through another name can still be found by reading those lines.
 
-- `KM_PER_AU`: named on 231 other orrery line(s).
+- `KM_PER_AU`: named on 230 other orrery line(s).
 - `PARSEC_TO_AU`: named on 10 other orrery line(s).
 - `S_PER_HOUR`: named on 3 other orrery line(s).
 - `S_PER_DAY`: named on 12 other orrery line(s).
@@ -190,6 +190,6 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 
 Orrery: every tracked `.py` file outside `documentation/`, except `constants_new.py` and this tool, searched for each exact row's name inside `{...}` in a formatted string, as the argument of `_declared`, `_whole_figures` or `_with_uncertainty`, after `%`, or inside `str(...)` or `format(...)`. Comment lines are skipped.
 
-Gallery: each pointer in `data/objects_config.json` to an exact row, followed to its print lines by the PRINTS table in the tool: the page script, the function and a piece of the print line. A pointer read only to place a drawing is named instead in the DRAWN table, by the line that reads it, and that line must not be a print line. A pointer with no entry, or an entry that matches nothing, is reported above rather than dropped. Page scripts read: `gallery/arrival.js`, `gallery/direction_arrows.js`, `gallery/drawer_order.js`, `gallery/earth_geometry.js`, `gallery/far_lines.js`, `gallery/feature_renderers.js`, `gallery/first_guide.js`, `gallery/guestbook.js`, `gallery/nav_cluster.js`, `gallery/picture_folds.js`, `gallery/scene_address.js`, `gallery/scene_moment.js`, `gallery/solar_system_drawer.js`, `gallery/solar_system_figures.js`, `gallery/source_list.js`, `gallery/tap_hover.js`, `gallery/text_box.js`, `gallery/view_centre.js`, `interactive.html`.
+Gallery: each pointer in `data/objects_config.json` to an exact row, followed to its print lines by the PRINTS table in the tool: the page script, the function and a piece of the print line. A pointer read only to place a drawing is named instead in the DRAWN table, by the line that reads it, and that line must not be a print line. A pointer with no entry, or an entry that matches nothing, is reported above rather than dropped. Page scripts read: `gallery/arrival.js`, `gallery/direction_arrows.js`, `gallery/drawer_order.js`, `gallery/earth_geometry.js`, `gallery/encounter.js`, `gallery/far_lines.js`, `gallery/feature_renderers.js`, `gallery/first_guide.js`, `gallery/guestbook.js`, `gallery/nav_cluster.js`, `gallery/picture_folds.js`, `gallery/scene_address.js`, `gallery/scene_moment.js`, `gallery/solar_system_drawer.js`, `gallery/solar_system_figures.js`, `gallery/source_list.js`, `gallery/tap_hover.js`, `gallery/text_box.js`, `gallery/view_centre.js`, `interactive.html`.
 
 Not searched: an exact row's value typed into text as words or digits instead of read from the row.

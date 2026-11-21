@@ -1238,6 +1238,23 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
+        # L-529 (guided encounters), 2026-11-20, Tony's "Yes, add the
+        # button": the website run's Encounters row, so Dashboard parity
+        # finds it.
+        ("Encounters",
+        os.path.join("tools", "check_encounters.py"),
+        "Every encounter card and its package under data/encounters/ "
+        "(L-529): the card's address is its encounter's; every body holds "
+        "a position, velocity and speed for each moment; every hour of "
+        "the window and every minute of each flyby window is there; each "
+        "pass is its entry's plan event, at the plan's moment and "
+        "distance; the page's files are served, the night leaves the "
+        "folder alone. It plants seven faults first, to show it can fail. "
+        "GATES the gallery runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
         ("Drawer Places",
         os.path.join("tools", "test_drawer_places.py"),
         "The logic behind the gallery editor's drawer tree and Places list "
@@ -2526,6 +2543,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Scene Cards"):
         "Checks the New Scene window turns a shared link into a card.",
+    ("Gallery -- checks and data",
+     "Encounters"):
+        "Checks each encounter's package holds its plan's passes, hour by hour.",
     ("Gallery -- checks and data",
      "Drawer Places"):
         "Checks the editor's drawer tree matches the website's drawer and folds.",

@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** November 19, 2026 by `module_atlas.py`  
+**Generated:** November 20, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,18 +11,16 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 181  
-**Total Lines of Code (non-blank):** 145,764  
-**Total Public Functions/Classes:** 1,904
+**Total Python Files:** 179  
+**Total Lines of Code (non-blank):** 144,822  
+**Total Public Functions/Classes:** 1,894
 
 ## Classification Coverage
 
-**Undetermined role (12).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (10).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `orrery_colors.py`
-- `patch_L297_2_skills_and_protocol.py`
-- `patch_L432_1_colors_to_drawing_code.py`
 - `path_drawing.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
@@ -32,10 +30,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (4).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L297_2_skills_and_protocol.py`
-- `patch_L432_1_colors_to_drawing_code.py`
 - `path_drawing.py`
 - `test_path_drawing.py`
 
@@ -286,9 +282,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (136 lines) |
-| `orrery_colors.py` | The orrery's colour for each body it draws, by the name it shows. (195 lines) |
-| `patch_L297_2_skills_and_protocol.py` | The three skill updates L-297's round learned, the protocol's v3.143, and L-537 (the skills page moved). (473 lines) |
-| `patch_L432_1_colors_to_drawing_code.py` | Moves the orrery's colour table out of constants_new.py into its own drawing module, orrery_colors.py. (472 lines) |
+| `orrery_colors.py` | The orrery's colour for each body it draws, by the name it shows. (198 lines) |
 | `path_drawing.py` | The orrery draws a planned path by its path plan (L-476): a spacecraft's flown and planned trajectory, or a comet on an open path, around the Sun. (370 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (524 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |

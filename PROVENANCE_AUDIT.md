@@ -1,10 +1,10 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: November 19, 2026
-Files scanned: 181
-Total findings: 1186
-Constants: 320 | Dicts: 83 | Display strings: 783
+Generated: November 20, 2026
+Files scanned: 179
+Total findings: 1184
+Constants: 320 | Dicts: 81 | Display strings: 783
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,22 +20,18 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261121T021727Z | `74b63fc` | 179 | 1184 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 6 | 0 |
 | 20261119T233321Z | `4c44ea8` | 181 | 1186 | 272 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 3 | 712 | 196 | 6 | 0 |
 | 20261119T145358Z | `53bf246` | 178 | 1185 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 7 | 0 |
 | 20261119T144344Z | `53bf246` | 178 | 1185 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 7 | 0 |
 | 20261119T035232Z | `53bf246` | 178 | 1185 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 7 | 0 |
 | 20261119T022958Z | `53bf246` | 178 | 1184 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 6 | 0 |
-| 20261119T022244Z | `53bf246` | 178 | 1184 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 195 | 6 | 0 |
 
-Change since the previous run: total +1, Tier-1 +1.
+Change since the previous run: total -2, Tier-1 -1.
 
-Tier-1 rose in these files:
+No file's Tier-1 count rose.
 
-| File | Before | After |
-|------|-------:|------:|
-| patch_L432_1_colors_to_drawing_code.py | 0 | 1 |
-
-Tier-1 moved by domain: unclassified 2 -> 3.
+Tier-1 moved by domain: unclassified 3 -> 2.
 
 ---
 
@@ -66,12 +62,12 @@ Tier-1 moved by domain: unclassified 2 -> 3.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 272 |
+| 1 | 16-20 | FIX NOW | 271 |
 | 2 | 10-15 | REVIEW | 712 |
-| 3 | 5-9 | LOW PRIORITY | 196 |
+| 3 | 5-9 | LOW PRIORITY | 195 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
-**Whole tree, Tier-1: 272: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 3.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
+**Whole tree, Tier-1: 271: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -86,7 +82,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 203 of 234 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 110 served object(s). The whole tree's Tier-1 count is 272: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 3; most of them are off this path.
+Examined: 203 of 234 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 110 served object(s). The whole tree's Tier-1 count is 271: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2; most of them are off this path.
 
 Exported rows computed from other rows (31): `CHROMOSPHERE_TOP_KM`, `CORONA_BASE_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_INNER_PERIOD_MIN`, `EARTH_LEO_OUTER_KM`, `EARTH_LEO_OUTER_PERIOD_MIN`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `PARKER_CLOSEST_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`, `SUN_EQUATOR_TILT_DEG`, `SUN_SIDEREAL_ROTATION_PERIOD_D`.
 
@@ -203,7 +199,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `module_atlas.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
-| `patch_L432_1_colors_to_drawing_code.py` | unclassified | 1 | 0 | 1 | 0 | 2 |
 | `test_path_drawing.py` | unclassified | 2 | 0 | 0 | 0 | 2 |
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
@@ -261,11 +256,10 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
-| Unclassified (no Domain: tag, or one outside the six) | 3 | 3 | 5 | 1 | 0 | 9 |
+| Unclassified (no Domain: tag, or one outside the six) | 2 | 2 | 5 | 0 | 0 | 7 |
 
-**Domain coverage gap (3):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
+**Domain coverage gap (2):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
-- `patch_L432_1_colors_to_drawing_code.py` -- no Domain: tag in its docstring
 - `path_drawing.py` -- no Domain: tag in its docstring
 - `test_path_drawing.py` -- no Domain: tag in its docstring
 
@@ -671,12 +665,6 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L432_1_colors_to_drawing_code.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 76 | dict | FINGERPRINTS[...] | (3 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -2057,12 +2045,6 @@ is planned for a future session.
 | 2817 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 2988 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 3120 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
-
-### patch_L432_1_colors_to_drawing_code.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 104 | dict | NEW_NAMES[...] | (8 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
 
 ### path_plan.py
 

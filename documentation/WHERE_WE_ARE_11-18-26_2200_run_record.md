@@ -1200,8 +1200,8 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 **2. The two cards, in the gallery editor.** Save All, then push.
 - **ESCAPADE's scene:**
-  - On your phone, open the room with ESCAPADE-Blue, ESCAPADE-Gold and Earth-Sun L2 ticked, and Share to copy the link.
-  - In the editor, choose New Scene, paste the link, and turn Featured on.
+  - On your phone, open the room with ESCAPADE-Blue, ESCAPADE-Gold and Earth-Sun L2 ticked, and Share to copy the link. -- done on the desktop mobile tab. i can't transfer phone links to the editor.
+  - In the editor, choose New Scene, paste the link, and turn Featured on. -- done
 - **The reel:**
   - Make a card titled however you like, with the reel's Instagram address in "Live scene URL".
   - Turn Featured on.
@@ -1251,3 +1251,20 @@ patch applied (5 edits, 2 files)
 ok   ledger_index.py
 ok   doc_index.py --caps
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+==========================
+
+The editor did what it was built to do: the New Scene window takes only room links. My instructions were the problem. I'll check how the editor makes a plain card.
+
+The editor refused for a reason, and my instructions were wrong. Its New Scene window accepts only links into the room, so it turns away the Instagram address on purpose. The editor also has no command that makes a card that is only a link. I said to make one there without checking. The "Live scene URL" field takes any address, but only on a card that already exists.
+
+So I wrote a patch that adds the card: patch_L540_4_reel_link_card.py, now in your website folder. I tested it on a copy that includes a stand-in for your ESCAPADE scene card.
+
+- **Close the gallery editor first.** It keeps the card file in memory, and its next Save All would write over the new card. -- done
+- **Run the patch.** It finds your "ESCAPADE Earth Flyby" scene and puts the reel card just before it, in the same gallery room, so the story comes first and the scene sits beside it.
+  - The new card is Featured, has no file, and has no place in the room's drawer.
+  - It writes the file exactly the way the editor does.
+- **Commit and push.** Your scene card goes in the same push, since it's saved on your disk but not yet pushed.
+- **Then tap the reel card on your phone.** I read the address "Df-TOOvjork" off your screenshot. If Instagram says the page isn't there, open the card in the editor and fix its "Live scene URL". It will accept the change there.
+
+The ledger now says these cards are made in the editor, which isn't quite right. The next record patch will say so.

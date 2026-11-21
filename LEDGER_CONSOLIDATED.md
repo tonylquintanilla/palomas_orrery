@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*270 live items; 254 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*272 live items; 256 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1179,7 +1179,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
-| ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-18 |
+| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-20 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
@@ -1189,6 +1189,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the two cards Nov 20, a card that plays video an idea) | OPEN | -- | 2026-11-20 |
+| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
+| ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1956,6 +1958,10 @@ diamond outlined 2 pixels in its own colour on the website
 patch_L533_1 and _2_brighter_craft, pushed at orrery 9591db8 and
 gallery eed30d4. Tony's phone look, 10:53: "Looks good." The reel was
 posted on Instagram the same day; a reel on a lobby card is L-540.
+**Note:** (2026-11-20, evening, the Claude Code session, Claude Opus 5.5)
+Each twin's Earth flyby is now an encounter, played from its own
+package and opened under Earth's row: L-529's note of the same evening
+(ESCAPADE's Earth flybys, slice 1).
 **Gap:** the row under Mars, by L-534's rule once it is designed. The
 box's last day: its build, as ruled Nov 19. The loops near L2, with
 an Earth-centred path view in Earth's fold. One later item: a Mars
@@ -2181,8 +2187,70 @@ falls short.
 in Featured); L-363 and L-428 (the lobby's wide card and start card);
 the reel rule of Nov 17 (L-060).
 
-#### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
-<!-- L:529 status:OPEN upd:2026-11-18 section:A flag: rice: -->
+#### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed)
+<!-- L:541 status:OPEN upd:2026-11-20 section:A flag: rice: -->
+- **Opened 2026-11-20, evening**, by Tony's word at L-529's Part B
+  report ("any place in the orrery or the website that prints a plan
+  time as UTC without converting it from TDB, saying where you
+  looked"); reported, not fixed. Found by L-529's build: a path plan's
+  event times (`closest`, `window`, `launch`, `left`, `start`, `end` in
+  `data/path_plans.json` and on each entry's `path.events`) are on
+  JPL's clock, TDB, 69 seconds ahead of UTC in 2026 (`path_plan.py`
+  asks JPL in TDB and labels its own printout "TDB"). L-529's brief
+  called them UTC.
+- WHERE I LOOKED (Claude Opus 5.5, 2026-11-20): every reader of a plan
+  event's moments. Website: `gallery/*.js`, `gallery/assembler/*.py`,
+  the drivers in `interactive.html`, `tools/*.py`. Orrery: the
+  top-level `*.py` that read `path_plans.json` or `events`
+  (`path_drawing.py`, `export_objects.py`, `palomas_orrery.py`,
+  `palomas_orrery_dashboard.py`, `spacecraft_encounters.py`,
+  `orbit_data_manager.py`, `celestial_objects.py`).
+- PRINTED, ONE PLACE: the website's text box loiter sentence
+  (`gallery/solar_system_figures.js`, `planDay` in `loiterLine`) prints
+  a plan moment's day as it is written, on JPL's clock, in a sentence
+  whose other dates are UTC, and does not name the clock. Right today
+  for ESCAPADE (its launch 21:33 and flyby 10:01 are far from
+  midnight); a loiter with no launch falls back to its `start`,
+  "2025-11-14 00:00" TDB, which is 13 November, 23:58:51 UTC, and
+  would print a day late.
+- READ AS UTC, NOT PRINTED, TWO PLACES: the website's nightly builder
+  (`tools/gallery_cache_builder.py`, the plan's event windows read by
+  `_parse_calendar` as UTC, then asked of JPL 69 s later by
+  `fetch_vectors_range`), and the orrery's `path_drawing.py` (the same,
+  `strptime` of `ev["window"]`, then `TDB_OFFSET` added). Each flyby's
+  minute points are asked 69 s later than the plan's window; nothing a
+  visitor reads moves. The builder also keys each answer by
+  `Time(jd).datetime` with no scale, reading JPL's TDB Julian date as
+  UTC.
+- NOT FOUND: the orrery prints no plan event moment in a hover. L-529's
+  encounter converts by astropy and prints UTC.
+**Gap:** a ruling on each: convert, or name JPL's clock where it is
+printed (L-504's rule prints an elements' date "on JPL's ephemeris
+clock").
+**Ref:** L-529 (guided encounters); L-504 (the orrery's clock, UTC);
+L-533 (ESCAPADE); horizons-orbital-mechanics (The Clock Is Read as UTC).
+
+#### [L-542] The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed)
+<!-- L:542 status:OPEN upd:2026-11-20 section:A flag: rice: -->
+- **Opened 2026-11-20, evening**, by Tony's word at L-529's Part B
+  report; reported, not fixed. Tony's scene "ESCAPADE Earth Flyby"
+  (L-540), saved by the gallery editor at 19:24, carries room
+  `solar_system/earth`; the gallery run's Scene cards row
+  (`tools/test_scene_card.py`) refuses any scene not in `solar_system`
+  (`scene_card.SCENE_ROOM`), so the row is red until the card moves.
+  Tony, Nov 20, 20:30: "i deleted the card and will redo after the
+  push"; the Scene cards row passes again.
+- WHAT THE CODE SAYS: New Scene writes `room: solar_system`
+  (`tools/scene_card.py`, the card it builds). The editor's Move to room
+  (`tools/gallery_editor.py`, `_move_to_room`) moves any card to any
+  room and does not ask whether it is a scene; that is the likely way
+  the scene reached `solar_system/earth`, not confirmed.
+**Gap:** a ruling: the editor refuses or warns when a scene is moved out
+of `solar_system`, or the check allows the Earth room's address.
+**Ref:** L-519 (Scenes); L-540 (a reel on a Featured card); L-529.
+
+#### [L-529] Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20)
+<!-- L:529 status:OPEN upd:2026-11-20 section:A flag: rice: -->
 - **Tony, 2026-11-12, 20:34,** after his phone look at the finished
   guide (L-527 (a first visit's guide)): "it works great. i'm thinking
   this might be a good way to create encounters, with labels and focus
@@ -2231,8 +2299,120 @@ the reel rule of Nov 17 (L-060).
   box gives one only inside ESCAPADE's loiter sentence. ESCAPADE is
   the worked example, and its loiter the new kind of event the round
   reads (L-533).
-**Gap:** one design round with L-534, after the Lagrange points
-(L-297), by the road's order; then which encounter first.
+**Note:** (2026-11-20, evening, the Claude Code session, Claude Opus
+5.5, through the python_work door, on orrery 74b63fcc and gallery
+886610eb, from Tony's prompt and
+`documentation/COORD_L529_encounter_escapade_earth_brief_20261120.md`,
+in three parts with a report and his go-ahead after each.) SLICE 1
+BUILT: ESCAPADE's Earth flybys, the whole visit. The design talk's
+rulings are in `documentation/DESIGN_encounters_20261120.md`; the
+coordinating session's close moves them here.
+- MEASURED FROM JPL (Part A), each twin's distance from Earth's centre
+  every hour from launch to Nov 21, against the Hill sphere the page
+  draws (235 Earth radii, 1,498,862 km; printed 1.5 million). Five
+  crossings each: out 2 Dec 2025, in 7 Jun, out 23 Jul, in October,
+  out after its pass. Blue's last crossing inward 18 Oct, 20:00 to
+  21:00 UTC, first outward 12 Nov, 11:00 to 12:00; Gold's 21 Oct,
+  02:00 to 03:00, and 14 Nov, 09:00 to 10:00. Against the plan's
+  hill_km the window would be about 19 Oct 05:00 to 14 Nov 09:00.
+- THE WINDOW, Tony's ruling of Nov 20 ("Yes"): 18 October 2026, 20:00
+  UTC to 14 November 2026, 10:00 UTC, 26 days 14 hours, 639 hourly
+  frames.
+- JPL'S RECORD for -9 and -10, both "Revised: Nov 20, 2026": "Tracking
+  data through November 18, 2026. Prediction thereafter." The window
+  is all tracking. At the plan's own moments today's record gives the
+  plan's figures exactly: Blue 8,033.8 km, 10.443 km/s; Gold 7,382.6
+  km, 10.825 km/s. JPL answers Earth-Sun L2 (32) around Earth.
+- A CORRECTION TO THE BRIEF: the plan's event times are on JPL's clock
+  (TDB, `path_plan.py`), not UTC. Blue's pass is 09:59:51 UTC, Gold's
+  10:58:51 UTC; the package converts by astropy. Where else a plan
+  time is read or printed as UTC: L-541.
+- BUILT (Part B), in the website. `tools/encounter_fetch.py` (Tony's
+  Run button, no arguments) asks JPL fresh for Blue, Gold, the Moon
+  and L2 around Earth, in km and km/s, every body at the same 931
+  moments (each hour of the window, each minute of each flyby window
+  on the entries' `path.events`), and writes
+  `data/encounters/escapade_earth_2026.json` (622 KB, about 246 KB
+  compressed); a second run with nothing changed writes nothing.
+  `interactive.html?encounter=escapade-earth-2026`, no Pyodide, built
+  by `gallery/encounter.js`: Earth, its served Hill sphere, both
+  twins' whole paths, the Moon, L2, each pass marked with its date and
+  time; Play, Pause and a slider; under the title the hour and each
+  twin's distance and speed; a tap pauses and opens the box with the
+  twin's served description (it names Mars, the brief's ruling 9) and
+  the hour's figures; "Back to Earth". In the room an Encounters fold
+  under Earth's row, "ESCAPADE's Earth flybys 7 and 9 November 2026",
+  the dates read from the plan; Back returns to the fold; Find counts
+  it as an encounter. The as-built page's Encounters section has the
+  rest.
+- ONE CHANGE FROM THE DESIGN, MEASURED: the player applies each frame
+  with Plotly.update, not Plotly's own frame animation, which redrew
+  the whole 3D scene every frame (0.5 to 1.8 s on a desktop, over ten
+  minutes for the visit) and undid a turn made while it played. With
+  update a frame takes 17 to 39 ms and the visit plays in about 90 s.
+- THE DIGITS: a distance in whole kilometres (the room's floor; JPL
+  states no accuracy for a craft or a Lagrange point, its 2xr answer
+  "n.a."); a speed to the metre per second, as the plan prints one,
+  which the provenance rule does not reach. Tony, Nov 20: "The digits
+  stay as they are for my phone look."
+- TONY'S POINTS AT PART B (Nov 20, evening): each twin's box opens with
+  its served description, now held by the walk; L2's name set "top
+  left" in this encounter only (the tool's `label_sides`), which fits
+  a phone upright; Earth's box reads "every speed is relative to
+  Earth" (his wording); three marks the edit tool had written as raw
+  characters (the Play and Pause marks, an ellipsis, a walk's arrow)
+  are now `\u` escapes, as the page writes its others.
+- CHECKS, each shown failing once on a planted fault: the gallery run's
+  new Encounters row (`tools/check_encounters.py`, seven faults); the
+  Typed facts and Hover budget rows, which now build the encounter;
+  Picture folds (four more breaks); Scene cards, Drawer places and the
+  Solar System drawer taught the card; the sibling check knows
+  `data/encounters/`; the night's allow-list is shown not to hold it;
+  `tools/headless/walk_encounter.js`, 29 checks.
+- VERIFIED: in a real browser on Tony's computer at desktop size and
+  at a phone's 375 px upright, and headless. NOT VERIFIED: Tony's
+  phone, the live site, the website's Daily Run after the push.
+- FOR THE COORDINATOR, rules this build learned that hold for the next
+  encounter, for the skill bumps after the push (not written into any
+  skill here).
+  interactive-exhibit:
+  1. A room that plays through time applies each frame with
+     Plotly.update; Plotly.animate redraws a 3D scene whole and resets
+     its camera.
+  2. A room with no Pyodide waits for the page's load before it draws,
+     or the 3D picture keeps the size it had (a third of the screen).
+  3. Whatever opens a text box pauses the player, so the box's figures
+     stay the frame's.
+  4. A player bar sits above the frame HUD, measured from the page.
+  5. An encounter is a third kind of card in a fold: scenes, then
+     encounters, then saved pictures; it keeps its own address for
+     Back as a scene does; its dates come from the plan on the craft's
+     entries, never the card.
+  6. A plan's moment is on JPL's clock (TDB); a page prints it as UTC
+     only after converting it.
+  7. A non-ASCII mark is written as its `\u` escape, and the file's
+     bytes are checked after an edit: the edit tool wrote raw
+     characters where escapes were typed.
+  gallery-cache-builder:
+  1. An encounter's package lives under `data/encounters/`, written by
+     hand with its own tool; the night never runs, swaps or commits it,
+     and the sibling check knows the folder by name.
+  2. A package asks JPL in km and km/s, every body at the same moments
+     on JPL's clock, and refuses a body named otherwise or answered at
+     other moments; its one worked figure, a speed, says so.
+  3. A second run with the same answer writes nothing at all.
+  4. The Encounters row holds each pass to the plan's event on the
+     entry, the alarm if the plan ever moves a completed pass.
+- THE DASHBOARD'S BUTTON: the orrery run's Dashboard parity row found
+  the website's new Encounters row had no button. Tony, Nov 20: "Yes,
+  add the button". Added to `palomas_orrery_dashboard.py` under
+  "Gallery -- checks and data", with its short line; the row passes
+  (114 steps matched). The one change to orrery code this session.
+**Gap:** Tony's phone look at slice 1, after the push. Slice 2: the two
+close passes, escape speed beside the speed, NASA's "powered Earth
+flybys" through the orrery's words. The L2 loiter as an encounter. How
+a completed encounter is asked again if JPL replaces a prediction with
+a measurement.
 **Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
 swing, `gallery/first_guide.js`); L-507 (historical missions, whose
 encounters were to become saved scenes); L-489 (compositions: Artemis II

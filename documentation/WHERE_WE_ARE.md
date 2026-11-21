@@ -1,26 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 20, 2026, noon: ESCAPADE's reel posted; its craft drawn brighter; a reel on a lobby card recorded (Opus, coordinating session).
-- Written at orrery 5aa6a013 and gallery aba9df72, with this patch's edits on your disk.
+Last updated: November 20, 2026, evening: the first encounter, ESCAPADE's Earth flybys, built in the website (Opus, Claude Code).
+- Written at orrery 74b63fcc and gallery 886610eb, with this session's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - ESCAPADE's reel is posted. For it the craft are drawn brighter on both sites: ESCAPADE-Blue is turquoise, and every spacecraft's diamond has a thicker outline (L-533 (ESCAPADE)).
-> - The reel's link and ESCAPADE's scene go side by side in Featured; the website now opens an outside link in a new tab, with no "Interactive" label (L-540 (a reel on a Featured card)).
+> - The first encounter is built: ESCAPADE's Earth flybys play hour by hour, from 18 October to 14 November, with both twins, the Moon and Earth-Sun L2 moving and each pass dated; it opens from an Encounters fold under Earth's row (L-529 (guided encounters)).
+> - Two items recorded, not fixed: three places read or print a plan's time, which is on JPL's clock, as UTC (L-541 (a plan's clock)); the gallery editor let your scene into the Earth room, which the Scene cards check refuses (L-542 (a scene's room)).
 >
-> **Do next:** *The design talk on destinations and encounters (L-534 (missions by destination), L-529 (guided encounters)); beside it, this round's cleanup (the road, line b).*
+> **Do next:** *Your phone look at ESCAPADE's Earth flybys after the push (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b).*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 > - *(do) In the gallery editor: a New Scene from the room's shared link with ESCAPADE-Blue, ESCAPADE-Gold and Earth-Sun L2 ticked, and a card whose Live scene URL is the reel's Instagram address; both Featured, then Save All, push, and look on your phone (L-540 (a reel on a Featured card)).*
+> - *(do) Push both and look at the encounter on your phone (L-529 (guided encounters)); then remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road
+## The road  **>> UPDATED THIS SESSION**
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -32,8 +33,8 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  15.   [NOW]   *Mars (L-514 (the Mars room)) closed Nov 15. El Nino's
                page (L-060 (El Nino)) live Nov 17; ESCAPADE's path (L-533)
                live Nov 18; the Lagrange points (L-297) live
-               Nov 19, on your phone look; next, the
-               destinations and encounters talk (L-534, L-529), then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.*
+               Nov 19, on your phone look; the encounters talk
+               and the first encounter, ESCAPADE's Earth flybys, Nov 20 (L-529 (guided encounters)) << new this session; then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.*
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
@@ -66,7 +67,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - ESCAPADE's loops near L2 show only in a view centred on Earth, and the website draws a planned path around the Sun alone: with Earth's fold, where SOHO, Gaia and JWST need it too (Nov 18; L-533 (ESCAPADE)).
@@ -86,14 +87,14 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261119T204434Z, ok, no retry on the swap (the website's swap log at 0c832de1, read Nov 19).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 1c0688ca, generated Nov 19, read Nov 19).
-- This page's date and the ledger's newest stamp: both Nov 19. Agree.
+- Last cache build: 20261120T202853Z, ok, no retry on the swap (the website's swap log at ae56a944, read Nov 20).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 1c0688ca, generated Nov 19, read Nov 20).
+- This page's date and the ledger's newest stamp: both Nov 20. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
 - None open. The last day was ruled Nov 19: yes, each path asks for its span's last day (L-533 (ESCAPADE)).
@@ -106,7 +107,6 @@ At the next design talk:
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
 - A tidier Solar System view: where several names share a few pixels, only the largest body's name until you zoom in (Nov 19; L-297 (the Lagrange points)).
-- Missions by destination and encounters at every flyby and destination, one round, after the Lagrange points, ESCAPADE the worked example. Your words of Nov 18: "The only thing I miss are the dates of flybys"; "We also don't say what the destination or basic mission objective is" (L-534 (missions by destination), L-529 (guided encounters)).
 - Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 
 Not urgent, in your order:
@@ -121,7 +121,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- This round: L-297 (the Lagrange points), its brief `COORD_L297_lagrange_points_brief_20261118.md`, the words `WORDS_L297_lagrange_points_20261118.md`; the website's `INTERACTIVE_AS_BUILT.md`, The Lagrange points; the close `patch_L297_3_close_session_20261119.py`; your run record `WHERE_WE_ARE_11-18-26_2200_run_record.md`.
+- This round: L-529 (guided encounters), its brief `COORD_L529_encounter_escapade_earth_brief_20261120.md`, the design record `DESIGN_encounters_20261120.md`; the website's `INTERACTIVE_AS_BUILT.md`, Encounters; the tool `tools/encounter_fetch.py` and its package under `data/encounters/`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's
   handoff, `HANDOFF_document_upkeep_20261116.md` (Nov 16).
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.
