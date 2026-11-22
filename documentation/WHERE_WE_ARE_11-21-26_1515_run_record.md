@@ -545,12 +545,26 @@ I'll write the clock's brief now. First I'm reading the last brief as the model,
 - A second run refuses and writes nothing.
 
 **Your run order**
-1. In GitHub Desktop, orrery: Fetch origin, and Pull origin if it offers. -- 
+1. In GitHub Desktop, orrery: Fetch origin, and Pull origin if it offers. -- da6b729d83df426a29ae1ec7a7ab0459cfdc57cb
 2. Save `patch_L541_1_room_clock_brief.py` in the orrery folder (`palomas_orrery_for_github`). Open it in VS Code and click Run.
    - Success: three "ok" lines, three "new" lines, "patch applied", then "ok" for `ledger_index.py` and for `doc_index.py --caps`.
    - Failure: an "ERROR:" or "ANCHOR FAIL" line, and nothing is written. Tell me the line.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L541_1_room_clock_brief.py'
+ok   LEDGER_CONSOLIDATED.md: #### [L-541] A plan's moment is on JPL's clock (TDB), and so
+ok   LEDGER_CONSOLIDATED.md: changes: what the builder stamps, what the page asks for, an
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Reinstall two skills, interactive-exhibit and gall
+new  documentation/COORD_L541_room_clock_brief_20261121.md
+new  documentation/PROMPT_code_L541_room_clock_20261121.md
+new  documentation/SURVEY_L541_clock_69s_20261121.md
+patch applied (3 new files, 3 edits in 2 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+Next: commit and push the orrery; then start the Code session with documentation/PROMPT_code_L541_room_clock_20261121.md.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
 3. Move the patch into the orrery's `documentation` folder.
-4. Commit and push the orrery. Suggested summary: "L541 rooms' clock brief".
+4. Commit and push the orrery. Suggested summary: "L541 rooms' clock brief". -- 
 5. When you choose to start the session: open Claude Code in `python_work`, Opus, high effort. Paste the prompt from below its line.
 6. Bring me the Part A report.
 

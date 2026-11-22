@@ -1189,7 +1189,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
-| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed) | OPEN | -- | 2026-11-21 |
+| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock ruled Nov 21, its brief written) | OPEN | -- | 2026-11-21 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 
 ### B. Pending Action (Tony-side)
@@ -2309,7 +2309,7 @@ in Featured); L-542 (a scene's room); L-456 (the i panel's links);
 L-287 (Storage is never served); L-363 and L-428 (the lobby's wide card
 and start card); the reel rule of Nov 17 (L-060).
 
-#### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; recorded, not fixed)
+#### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock ruled Nov 21, its brief written)
 <!-- L:541 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Opened 2026-11-20, evening**, by Tony's word at L-529's Part B
   report ("any place in the orrery or the website that prints a plan
@@ -2357,11 +2357,65 @@ and start card); the reel rule of Nov 17 (L-060).
   the minute its title shows. To trace end to end before anything
   changes: what the builder stamps, what the page asks for, and
   whether any box prints finer than 69 seconds of its body's motion.
-**Gap:** a ruling on each: convert, or name JPL's clock where it is
-printed (L-504's rule prints an elements' date "on JPL's ephemeris
-clock").
+- **TRACED, 2026-11-21: YES** (the coordinating session, Claude Fable
+  5.2, at gallery 7d1e2e16; by reading the code and the served index,
+  not by a render). The builder stores JPL's own Julian dates (each
+  point's `datetime_jd`, JPL's JDTDB; an orbit's `epoch_jd` as asked;
+  the Moon's `as_of_today.t` reads 2461365.500694444, 00:01:00 on
+  JPL's clock). The page hands the visitor's UTC minute to the
+  assembler (`EPOCH_ISO`; `resolver.py`, `_iso_to_jd`; once more in
+  `interactive.html`), and `propagate_marker` and `position_at` take
+  it against JPL's dates with no conversion. `sceneMomentStamp` prints
+  the same number with the word "UTC". So every body in a live room is
+  drawn where it was 69.184 seconds before the minute its date line
+  shows; the bodies are right relative to each other. The desktop
+  orrery was not traced.
+- THE SIZES (`documentation/SURVEY_L541_clock_69s_20261121.md`): at
+  22:00 UTC on Nov 21, for 56 of 106 served bodies the distance from
+  the centre changes in 69.184 s by more than the error its box prints
+  with: 20 comets, 18 asteroids, the 8 Lagrange points, 5 spacecraft
+  (Voyager 1 and 2, New Horizons, Lucy, Psyche), Mercury, Venus and
+  Mars, Ceres, and Titan. Mercury prints to whole kilometres and is
+  about 640 km off; Mars prints with a 17 km error and is 112 km off.
+  A re-working of the page's rule in Python at one moment, not the
+  page's own code; 8 of 114 not worked out (the Sun, and 7 ended
+  missions past their served points).
+- THE NUMBER HAS NO SOURCE. The 69 is whole seconds, typed in three
+  places: the builder's `utc_to_tdb`, the orrery's
+  `orbit_data_manager.py` (`utc_to_tdb`) and `path_drawing.py`
+  (`TDB_OFFSET`); `constants_new.py` has no row for it. The figure is
+  69.184 s: 37 s between TAI and UTC, and 32.184 s more to JPL's
+  clock. IERS Bulletin C 72 (6 July 2026): "NO leap second will be
+  introduced at the end of December 2026", so the 37 holds across the
+  served window; read 2026-11-21 in the tz list's forward of it, not
+  at IERS. The 32.184 s is in the builder's docstring and is not
+  sourced there.
+- **TONY'S RULING, 2026-11-21.** 16:18: "What will we show visitors
+  UTC converted from TDB, or TDB?" He was told: visitors see UTC; the
+  date line is the visitor's own UTC minute and does not change; the
+  room adds the difference before it looks up JPL's data; a body's
+  source line keeps naming JPL's clock for the date of its orbit; a
+  plan's moments print as UTC converted from JPL's clock where a
+  visitor reads them. 16:21: "Yes". On the cleanup's order, 16:04: "in
+  whatever order you believe works best"; the coordinating session's
+  order is this item's rooms, then L-539 (every entry checked), then
+  L-538 (the orbiters' printed error), which refines an error smaller
+  than 69 seconds of an orbiter's motion.
+**Gap:** the rooms' clock, built by one Code session in the website
+from `documentation/COORD_L541_room_clock_brief_20261121.md`.
+**Tony-action (do):** start it with
+`documentation/PROMPT_code_L541_room_clock_20261121.md`. Outside that
+brief and still open here: the builder's keys and its reading of a
+plan's windows as UTC; the orrery's `path_drawing.py`; the whole-second
+69 in the orrery's `utc_to_tdb`; a sourced row for the difference, if
+the orrery's store is its home; and the skill text
+(horizons-orbital-mechanics, gallery-assembler, interactive-exhibit,
+gallery-cache-builder).
 **Ref:** L-529 (guided encounters); L-504 (the orrery's clock, UTC);
-L-533 (ESCAPADE); horizons-orbital-mechanics (The Clock Is Read as UTC).
+L-533 (ESCAPADE); L-538 (the orbiters' printed error); L-539 (every
+entry checked); horizons-orbital-mechanics (The Clock Is Read as UTC);
+`documentation/COORD_L541_room_clock_brief_20261121.md`;
+`documentation/SURVEY_L541_clock_69s_20261121.md`.
 
 #### [L-542] The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed)
 <!-- L:542 status:OPEN upd:2026-11-20 section:A flag: rice: -->

@@ -17,7 +17,7 @@ Last updated: November 21, 2026, afternoon: the Links fold built, the drawer wal
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) Reinstall two skills, interactive-exhibit and gallery-pipeline (Plugins, in the claude.ai sidebar), and paste PROJECT_INSTRUCTIONS.md, now v3.144, into the Project's instructions (L-529 (guided encounters), L-540 (a reel on a Featured card)).*
+> - *(do) Start the Code session for the rooms' clock: open Claude Code in python_work, Opus, high effort, and paste `documentation/PROMPT_code_L541_room_clock_20261121.md` from below its line. The live rooms draw every body 69 seconds behind the UTC minute shown; your ruling of Nov 21: "Yes", convert (L-541 (a plan's clock)). The two skills are reinstalled and v3.144 is pasted, confirmed Nov 21.*
 > - *(do) Push the website and then the orrery; then in the gallery editor select the reel (Solar System, Lobby only), Add place... Earth, Save All, push; then look on your phone: Earth's Links fold, its words, and the reel opening in a new tab (L-540 (a reel on a Featured card)).*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
