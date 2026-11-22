@@ -1071,7 +1071,7 @@ Next: move this patch to documentation, then commit and push the orrery.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 3. Move the patch into the orrery's `documentation` folder.
-4. Commit and push the orrery. Suggested summary: "L543 close record". -- 
+4. Commit and push the orrery. Suggested summary: "L543 close record". -- 2c23d9d7de26936a0002351a1ddfe3ecb4aa0d76
 5. Save your run-record copy, then clear the zone below the marker, as you usually do.
 6. Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_2.md`, pasted from below its line.
 
