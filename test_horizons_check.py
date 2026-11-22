@@ -94,6 +94,10 @@ WHAT IT CHECKS
        a take not logged; a hold dropped; a held body turning the night
        red. (Section 3's answer with no elements row is now REPORTED,
        not a disagreement, and section 5's changed entry is held.)
+    8. Every entry checked (L-539): the entries the website does not
+       serve, in test_horizons_unserved.py, which says what it plants.
+       Sections 1 to 7 run the check on the served entries alone
+       (run_of, unserved=False).
 
 RUN COMMAND
 
@@ -130,6 +134,9 @@ an outage with a lapsed confirmation still red.)
 Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 the hold: section 7, a take and a hold with three planted faults; an
 answer with no elements row is reported, and a changed entry held.)
+Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-539,
+every entry checked: section 8 is test_horizons_unserved.py; sections 1
+to 7 call each run through run_of(), on the served entries alone.)
 """
 
 import datetime
@@ -320,6 +327,16 @@ def earth_case(earth):
     return obj, entry
 
 
+def run_of(module, *args, **kwargs):
+    """module.run(...) on the served entries alone (L-539). Sections 1 to
+    7 test the served entries' check on fixtures whose three spacecraft
+    have no key, which the unserved half would ask JPL about; that half
+    is section 8's, test_horizons_unserved.py, which also holds that the
+    real runs default to checking it."""
+    kwargs.setdefault("unserved", False)
+    return module.run(*args, **kwargs)
+
+
 def checker_with(old, new):
     """A copy of horizons_check.py with one fault planted in it."""
     import types
@@ -359,7 +376,7 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
     tmp = tempfile.mkdtemp(prefix="horizons_check_hold_")
     try:
         build_root(tmp, real_cache, inputs)
-        hc.run(tmp, fetch, TODAY, pause=0, echo=quiet)   # periods confirmed
+        run_of(hc, tmp, fetch, TODAY, pause=0, echo=quiet)   # periods confirmed
         cache_path = os.path.join(tmp, "data", "osculating_cache.json")
         with open(cache_path, "r") as handle:
             cache_text = handle.read()
@@ -381,7 +398,7 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
 
         took_fetch = recorded_fetch(answers, extra={url: moved})
         lines = []
-        code, out = hc.run(tmp, took_fetch, TODAY, pause=0, echo=lines.append,
+        code, out = run_of(hc, tmp, took_fetch, TODAY, pause=0, echo=lines.append,
                            check_all=True, take=fake_take)
         conf = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
         ep = conf["objects"]["encke"]["period"]
@@ -394,21 +411,21 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
                 "a period JPL gives differently is TAKEN: exit %d, %s"
                 % (code, lines[-1][lines[-1].find("TAKEN"):][:80]))
         out_lines = []
-        t.check(offline.run(tmp, TODAY, echo=out_lines.append) == 0
+        t.check(run_of(offline, tmp, TODAY, echo=out_lines.append) == 0
                 and any(s.startswith("TAKEN today: encke.period")
                         for s in out_lines),
                 "...and the offline checker passes it on its new number, "
                 "naming it")
         with open(cache_path, "w") as handle:
             handle.write(cache_text)
-        hc.run(tmp, fetch, TODAY, pause=0, echo=quiet, check_all=True)
+        run_of(hc, tmp, fetch, TODAY, pause=0, echo=quiet, check_all=True)
 
         # Planted: a take not logged.
         planted = checker_with(
             '        taken.append({"name": "%s.period" % key,\n',
             '        (lambda item: None)({"name": "%s.period" % key,\n')
         lines = []
-        code, out = planted.run(tmp, took_fetch, TODAY, pause=0,
+        code, out = run_of(planted, tmp, took_fetch, TODAY, pause=0,
                                 echo=lines.append, check_all=True,
                                 take=fake_take, write=False)
         t.check(not ("TAKEN encke.period" in lines[-1] and out["taken"]),
@@ -423,7 +440,7 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
         with open(os.path.join(tmp, "celestial_objects.py"), "w") as handle:
             handle.write(fixture_list(renamed))
         lines = []
-        code, out = hc.run(tmp, fetch, TODAY, pause=0, echo=lines.append)
+        code, out = run_of(hc, tmp, fetch, TODAY, pause=0, echo=lines.append)
         conf = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
         mars = conf["objects"]["mars"]
         hold = mars.get("hold") or {}
@@ -439,11 +456,11 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
                 "...the export carries the hold beside the last confirmed "
                 "values")
         out_lines = []
-        t.check(offline.run(tmp, TODAY, echo=out_lines.append, night=True) == 0
+        t.check(run_of(offline, tmp, TODAY, echo=out_lines.append, night=True) == 0
                 and any("mars" in s and "held" in s for s in out_lines),
                 "...the night's checker passes it AS HELD")
         out_lines = []
-        t.check(offline.run(tmp, TODAY, echo=out_lines.append) == 1
+        t.check(run_of(offline, tmp, TODAY, echo=out_lines.append) == 1
                 and any("waiting on your look" in s for s in out_lines),
                 "...and by day it is red, waiting on Tony's look")
         aged = json.loads(json.dumps(conf))
@@ -452,7 +469,7 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
         with open(os.path.join(tmp, hc.CONFIRMATIONS), "w") as handle:
             json.dump(aged, handle)
         out_lines = []
-        t.check(offline.run(tmp, TODAY, echo=out_lines.append, night=True) == 0,
+        t.check(run_of(offline, tmp, TODAY, echo=out_lines.append, night=True) == 0,
                 "...no lapse clock runs on a held body: 40 days on, the night "
                 "still passes it as held")
         with open(os.path.join(tmp, hc.CONFIRMATIONS), "w") as handle:
@@ -463,7 +480,7 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
             '            result["status"] = "held"\n'
             '            held_keys.add(key)\n',
             '            pass\n')
-        code, out = planted.run(tmp, fetch, TODAY, pause=0, echo=quiet,
+        code, out = run_of(planted, tmp, fetch, TODAY, pause=0, echo=quiet,
                                 write=False)
         t.check(not (code == 0 and out["held"]),
                 "planted: a hold dropped is caught -- exit %d, problems %s"
@@ -482,7 +499,7 @@ def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
         with open(os.path.join(tmp, "celestial_objects.py"), "w") as handle:
             handle.write(fixture_list(SERVED))
         lines = []
-        code, out = hc.run(tmp, fetch, TODAY, pause=0, echo=lines.append)
+        code, out = run_of(hc, tmp, fetch, TODAY, pause=0, echo=lines.append)
         conf = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
         t.check(code == 0 and "hold" not in conf["objects"]["mars"]
                 and any("HOLD ENDED mars" in s for s in lines),
@@ -679,7 +696,7 @@ def main():
                 json.dump(ecache, handle)
             both = dict(answers)
             both.update(earth_answers)
-            code, out = hc.run(tmp_e, recorded_fetch(both), TODAY, pause=0,
+            code, out = run_of(hc, tmp_e, recorded_fetch(both), TODAY, pause=0,
                                echo=quiet)
             conf = hc.load_confirmations(os.path.join(tmp_e, hc.CONFIRMATIONS))
             ep = conf["objects"]["earth"].get("period") or {}
@@ -726,7 +743,7 @@ def main():
 
         print("5. The run")
         asked = []
-        code, out = hc.run(tmp, lambda u: asked.append(u) or fetch(u), TODAY,
+        code, out = run_of(hc, tmp, lambda u: asked.append(u) or fetch(u), TODAY,
                            pause=0, echo=quiet)
         conf = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
         periods = [k for k, v in conf["objects"].items() if v.get("period")]
@@ -736,17 +753,17 @@ def main():
                 "first run: identity carried over, so only the 3 periods "
                 "asked (%d queries, %s)" % (len(asked), out.get("verdict")))
         asked = []
-        code, out = hc.run(tmp, lambda u: asked.append(u) or fetch(u), TODAY,
+        code, out = run_of(hc, tmp, lambda u: asked.append(u) or fetch(u), TODAY,
                            pause=0, echo=quiet)
         t.check(code == 0 and out["verdict"] == "NOTHING DUE" and not asked,
                 "second run the same day: %s, %d queries"
                 % (out["verdict"], len(asked)))
         early = datetime.date(2026, 11, 5)
-        code, out = hc.run(tmp, fetch, early, pause=0, echo=quiet,
+        code, out = run_of(hc, tmp, fetch, early, pause=0, echo=quiet,
                            write=False)
         due = sorted(set(kind for kind, _k, _r, _w in out["results"]))
         lines = []
-        ok_offline = offline.run(tmp, early, echo=lines.append) == 0
+        ok_offline = run_of(offline, tmp, early, echo=lines.append) == 0
         t.check(due == ["identity"] and len(out["results"]) == len(SERVED)
                 and ok_offline,
                 "26 days on, every identity is asked again while the "
@@ -758,7 +775,7 @@ def main():
         cache["Jupiter"]["period"]["days"] += 0.001
         with open(cache_path, "w") as handle:
             json.dump(cache, handle)
-        code, out = hc.run(tmp, fetch, TODAY, pause=0, echo=quiet,
+        code, out = run_of(hc, tmp, fetch, TODAY, pause=0, echo=quiet,
                            write=False)
         due = [(k, kind) for kind, k, _r, _w in out["results"]]
         t.check(due == [("jupiter", "period")],
@@ -770,7 +787,7 @@ def main():
         renamed["mars"] = ("Mars", "499", None, "Mars ", "orbital")
         with open(os.path.join(tmp, "celestial_objects.py"), "w") as handle:
             handle.write(fixture_list(renamed))
-        code, out = hc.run(tmp, fetch, TODAY, pause=0, echo=quiet,
+        code, out = run_of(hc, tmp, fetch, TODAY, pause=0, echo=quiet,
                            write=False)
         # L-485: an identity JPL no longer gives as the list does is a
         # project choice, so the body is held at its confirmation, named.
@@ -784,7 +801,7 @@ def main():
         later = datetime.date(2026, 11, 12)
         before = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
         lines = []
-        code, out = hc.run(tmp, recorded_fetch(answers, down=("sstr=10&",)),
+        code, out = run_of(hc, tmp, recorded_fetch(answers, down=("sstr=10&",)),
                            later, pause=0, echo=lines.append)
         after = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
         t.check(code == 1 and out["verdict"] == "UNREACHABLE"
@@ -799,7 +816,7 @@ def main():
             if "sstr=299" in url:
                 raise hc.Unreachable("planted: HTTP 503")
             return fetch(url)
-        code, out = hc.run(tmp, down_at_venus, later, pause=0, echo=quiet,
+        code, out = run_of(hc, tmp, down_at_venus, later, pause=0, echo=quiet,
                            write=False)
         not_asked = [k for kind, k, r, _w in out["results"]
                      if r["status"] == "not asked"]
@@ -808,7 +825,7 @@ def main():
                 and len(not_asked) >= 10,
                 "after JPL fails once, nothing more is asked: %d parts not "
                 "asked, %d queries in all" % (len(not_asked), len(asked)))
-        code, out = hc.run(tmp, fetch, later, pause=0, echo=quiet)
+        code, out = run_of(hc, tmp, fetch, later, pause=0, echo=quiet)
         sheets = hc.load_sheets(os.path.join(tmp, hc.SHEETS))["sheets"]
         t.check(code == 0 and sheets["-31"]["read"] == later.isoformat()
                 and sheets["-31"]["stated"]["RA_arcsec"] == 1.701,
@@ -818,7 +835,7 @@ def main():
         seed_missing["sheets"].pop("-23")
         with open(os.path.join(tmp, hc.SHEETS), "w") as handle:
             json.dump(seed_missing, handle)
-        code, out = hc.run(tmp, fetch, later, pause=0, echo=quiet)
+        code, out = run_of(hc, tmp, fetch, later, pause=0, echo=quiet)
         sheets = hc.load_sheets(os.path.join(tmp, hc.SHEETS))["sheets"]
         t.check(code == 0 and "-23" in sheets
                 and "first read" in sheets["-23"]["notes"][-1],
@@ -826,7 +843,7 @@ def main():
         moved_sheet = answers[hc.sheet_url("-32")].replace(
             "Aug 19, 2022", "Oct 30, 2026")
         lines = []
-        code, out = hc.run(tmp, recorded_fetch(
+        code, out = run_of(hc, tmp, recorded_fetch(
             answers, extra={hc.sheet_url("-32"): moved_sheet}),
             later, pause=0, echo=lines.append, check_all=True)
         sheets = hc.load_sheets(os.path.join(tmp, hc.SHEETS))["sheets"]
@@ -837,7 +854,7 @@ def main():
 
         print("6. The offline checker")
         lines = []
-        code = offline.run(tmp, later, echo=lines.append)
+        code = run_of(offline, tmp, later, echo=lines.append)
         t.check(code == 0, "a full, current record passes: %s" % lines[-1])
         path = os.path.join(tmp, hc.CONFIRMATIONS)
         good = hc.load_confirmations(path)
@@ -848,7 +865,7 @@ def main():
             with open(target, "w") as handle:
                 json.dump(data, handle)
             out = []
-            code = offline.run(tmp, later, echo=out.append)
+            code = run_of(offline, tmp, later, echo=out.append)
             t.check(code == 1 and any(needle in s for s in out),
                     "%s: exit %d, %s" % (label, code,
                                          [s for s in out if needle in s][:1]))
@@ -879,7 +896,7 @@ def main():
         with open(last_path, "w") as handle:
             json.dump(down, handle)
         out = []
-        code = offline.run(tmp, later, echo=out.append, night=True)
+        code = run_of(offline, tmp, later, echo=out.append, night=True)
         t.check(code == 0 and any(s.startswith("REPORTED, not red")
                                   for s in out),
                 "the night run: today's UNREACHABLE reported, not red: "
@@ -890,7 +907,7 @@ def main():
         with open(path, "w") as handle:
             json.dump(lapsed, handle)
         out = []
-        code = offline.run(tmp, later, echo=out.append, night=True)
+        code = run_of(offline, tmp, later, echo=out.append, night=True)
         t.check(code == 1 and any("saturn: confirmed on" in s for s in out),
                 "the night run: an outage with a confirmation lapsed fails, "
                 "naming it: exit %d" % code)
@@ -917,6 +934,11 @@ def main():
 
     print("7. The hold and the take (L-485)")
     take_and_hold(t, answers, inputs, real_cache, fetch, url, moved)
+
+    print("8. Every entry checked: the entries the website does not serve "
+          "(L-539)")
+    import test_horizons_unserved
+    test_horizons_unserved.section(t)
 
     print("")
     print("%d checks passed, %d failed." % (t.passed, len(t.failed)))

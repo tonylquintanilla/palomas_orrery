@@ -40,6 +40,11 @@ WHAT MAKES IT FAIL, NAMED BY ENTRY
       of constants_new.py quotes whose figure the sheet no longer gives
       (option A, ruled 2026-10-12)
     - a record that cannot be read
+    - (L-539) an entry the website does not serve but the orrery asks JPL
+      for: never answered, changed since, or 30 days old; an entry that
+      fits neither "asked" nor "not asked"; two entries with one name.
+      By day also one whose first answer waits on Tony's look, or one JPL
+      now differs on; at night those pass, by name.
 
     THE NIGHT RUN (L-485, R4: an outside failure is reported, never
     halting). With --night, which orrery_maintenance_run.py --night
@@ -84,6 +89,10 @@ Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 the hold: a held body passes as held at night, by name, with no lapse
 clock, and is red by day; today's takes are named; a reported period is
 reported at night and red by day.)
+Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-539,
+every entry checked: it judges the entries the website does not serve
+too, through horizons_unserved.offline; unserved=False judges the served
+entries alone, for their tests.)
 """
 
 import datetime
@@ -96,7 +105,11 @@ import export_objects
 import horizons_check as hc
 
 
-def run(root, today, echo=print, night=False):
+def run(root, today, echo=print, night=False, unserved=True):
+    """0 when every confirmation passes, else 1. With unserved (the
+    default), the entries the website does not serve are judged too, by
+    horizons_unserved.offline (L-539); a test of the served entries alone
+    passes False."""
     try:
         objects, _sha, spacecraft = hc.current_entries(root)
         confirmations = hc.load_confirmations(os.path.join(root,
@@ -164,6 +177,14 @@ def run(root, today, echo=print, night=False):
             echo("  %-18s FAIL -- %s" % ("%s (%s)" % (name, ident), text))
     echo("  %-18s %d of %d current, each figure a row quotes as the sheet "
          "gives it" % ("sheets", len(spacecraft) - sheet_bad, len(spacecraft)))
+    # L-539, every entry checked: the entries the website does not serve,
+    # each held to the name and kind JPL gave its id. A first answer not
+    # yet looked at, or one JPL now differs on, passes at night by name and
+    # is red by day, waiting on Tony's look; a lapse is red at any hour.
+    if unserved:
+        import horizons_unserved
+        failures.extend(horizons_unserved.offline(root, today, night=night,
+                                                  echo=echo))
     last_path = os.path.join(root, hc.LAST_RUN)
     if os.path.exists(last_path):
         try:

@@ -82,6 +82,12 @@ Module updated: November 19, 2026 with Anthropic's Claude Opus 5.5
 (L-297: the website's Curve Error button and line, beside Compose
 Children, for the gallery run's new "Curve error" check; added on Tony's
 word, "Yes, add the button", after Dashboard parity found it.)
+Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5
+(L-539: the website's Link Cards and Room Clock buttons and lines,
+after Encounters, for the gallery run's "Link cards" (L-540) and "Room
+clock" (L-541) checks, which came without one; added on Tony's word,
+"Yes, add the two missing dashboard buttons", after Dashboard parity
+found them.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1254,6 +1260,37 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         None,
+        True),
+        # L-539 (every entry checked), 2026-11-22, Tony's "Yes, add the
+        # two missing dashboard buttons": the website run's Link cards
+        # row (L-540) and Room clock row (L-541) came without one, and
+        # Dashboard parity found them.
+        ("Link Cards",
+        os.path.join("tools", "test_link_card.py"),
+        "The logic behind the gallery editor's link cards (L-540): a "
+        "link cleaned to the address a card keeps, each thing taken off "
+        "named; the website's own address refused, with New Scene named; "
+        "an address already on a card refused; and every link card in the "
+        "real metadata clean, on no other card, and out of the drawer. It "
+        "breaks the real file two ways first, to show it can fail. GATES "
+        "the gallery runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Room Clock",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The rooms' clock (L-541): the served points are read on JPL's "
+        "clock, and each body's place is printed against the error its "
+        "box prints by, from the real gallery/solar_system_figures.js; "
+        "the same with the clock block taken out must be red, every run; "
+        "and at the window's last minute every body keeps its place. "
+        "GATES the gallery runner. The check is Node, so this button runs "
+        "it through documentation/run_offline_check.py. Runs from the "
+        "gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Room clock"],
         True),
         ("Drawer Places",
         os.path.join("tools", "test_drawer_places.py"),
@@ -2546,6 +2583,12 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Encounters"):
         "Checks each encounter's package holds its plan's passes, hour by hour.",
+    ("Gallery -- checks and data",
+     "Link Cards"):
+        "Checks the editor's link cards keep a clean address, on one card.",
+    ("Gallery -- checks and data",
+     "Room Clock"):
+        "Checks each room reads JPL's clock and keeps every body in place.",
     ("Gallery -- checks and data",
      "Drawer Places"):
         "Checks the editor's drawer tree matches the website's drawer and folds.",

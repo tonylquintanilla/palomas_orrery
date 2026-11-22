@@ -169,6 +169,9 @@ longer skipped for its elements.)
 Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5 (L-297,
 the Lagrange points: a point is named and not asked, since the export
 serves it no period.)
+Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+with L-539: SKIP_NAMES gains the eight Lagrange points, copying both
+pre-fetches of palomas_orrery.py, which skip them now.)
 """
 
 import ast
@@ -189,7 +192,14 @@ PLOTTED_TYPES = ("orbital", "satellite", "trajectory", "lagrange_point")
 # Gonggong came off both copies on 2026-10-23 (L-470): no failure was on
 # record, and the maintenance run is the test (Tony: "just take it off the
 # skip list and see if it fails").
-SKIP_NAMES = ("MK2", "Xiangliu", "Vanth")
+# L-512 and L-539, 2026-11-22: the eight Lagrange points, as both
+# pre-fetches skip them (JPL: "Required masses not defined, osculating
+# elements not available"). A point is named and not asked here before
+# this list is read, since the export serves it no period (L-297).
+SKIP_NAMES = ("MK2", "Xiangliu", "Vanth",
+              "Earth-Moon L1", "Earth-Moon L2", "Earth-Moon L4",
+              "Earth-Moon L5", "Earth-Sun L1", "Earth-Sun L2",
+              "Earth-Sun L4", "Earth-Sun L5")
 
 # Served entries whose period is fetched here although plotting's pre-fetch
 # asks no elements for them (L-443, 2026-10-28). The Pluto-Charon

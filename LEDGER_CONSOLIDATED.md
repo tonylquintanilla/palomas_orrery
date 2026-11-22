@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*276 live items; 260 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*279 live items; 263 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1153,7 +1153,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-05 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-10 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-22 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
@@ -1170,7 +1170,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-06 |
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
-| ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-19 |
+| ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-22 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
@@ -1187,7 +1187,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-21 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
-| ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
+| ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-22 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-21 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
@@ -1195,6 +1195,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | OPEN | -- | 2026-11-21 |
 | ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-21 |
 | ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
+| ! | L-547 | Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded) | OPEN | -- | 2026-11-22 |
+| ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-22 |
+| ! | L-549 | Four moons JPL cannot place: Xiangliu, Hi'iaka, Namaka, MK2 (orrery; for a talk with Tony) | OPEN | -- | 2026-11-22 |
 
 ### B. Pending Action (Tony-side)
 
@@ -2152,7 +2155,7 @@ place finer than earned.
 provenance-discipline, A Computed Position Prints What Its Errors Earn.
 
 #### [L-539] Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check)
-<!-- L:539 status:OPEN upd:2026-11-19 section:A flag: rice: -->
+<!-- L:539 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Found 2026-11-19** in L-297 (the Lagrange points): the orrery's
   Earth-Moon L3 and L3, asked as 3013 and 33, had drawn the asteroids
   3013 Dobrovoleva and 33 Polyhymnia under those names. Nothing caught
@@ -2174,9 +2177,213 @@ provenance-discipline, A Computed Position Prints What Its Errors Earn.
   as the two L3 entries would have shown; from then on it stores JPL's
   name and holds the entry to it every 30 days, a few per run, under
   the maintenance run's 15 minutes.
-**Gap:** a Code session in the orrery (horizons_check.py and its suite).
+**Note:** (2026-11-22, the Code session of the brief
+`documentation/COORD_L539_every_entry_brief_20261122.md`, Claude Opus
+5.5 in Claude Code, built on orrery f58581d5, not pushed) BUILT AND RUN.
+- **What was built.** `horizons_unserved.py` (new): the rule that sorts
+  every entry (served, asked, never asked, asked with no JPL id,
+  unsorted), the question to JPL's two lists and, when both are empty,
+  its main service, the record
+  `data/horizons_unserved_confirmations.json` (named by the entry's
+  name; the export does not read it), the mark, the offline half, the
+  night's lists and the one-time list. `horizons_check.py` runs it after
+  the served entries; `check_horizons_confirmations.py` judges it;
+  `orrery_maintenance_run.py` declares the record to the night, raises
+  the night's title with JPL DIFFERS and NEW JPL NAME, and names both on
+  the night's record (jpl_differs, jpl_waiting). Tests:
+  `test_horizons_unserved.py`, section 8 of the Horizons check suite,
+  46 checks; the suite 127. Answers:
+  `documentation/worksheets/horizons_answers_L539.json`. And two
+  dashboard buttons Dashboard parity had found missing for the
+  website's run, Link Cards and Room Clock, on the coordinating
+  session's "Yes".
+- **The first run against JPL, Nov 22:** 56 asked, 112 questions in 258
+  seconds. 52 answered with a name and kind; four failed, JPL having no
+  object for their ids (Xiangliu, Hi'iaka, Namaka, MK2). The
+  coordinating session ruled the same day that "JPL has no object for
+  this id" is an answer, stored as a name is, never marking itself,
+  held once looked at (built; a second run, 12 questions in 26
+  seconds, stored the four so). None of the 56 draws another object the
+  way the two L3 entries did. 42 marked themselves (their own name is
+  JPL's).
+- **Tony's look:** the one-time list,
+  `documentation/CHECK_L539_every_entry_names_20261122.md`, its 14 lines
+  to mark; his words, relayed by the coordinating session: "The 14
+  words are accepted." Set on the 14 by `horizons_unserved.py --mark`,
+  his sentence in each mark.
+- **Verified against claimed:** the whole maintenance run, read from
+  its output: "37 of 37 gating checkers passed". The night's path run
+  as GitHub runs it (`--night`) on a throwaway copy of both folders, the
+  session's code laid over (told to git as committed, since a session
+  may not commit) and ten records aged: "NIGHT RUN: CLEAN", "allowed
+  files changed: data/horizons_unserved_confirmations.json", the
+  Horizons check "PASS -- 10 checked today, 20 queries" in 44.5
+  seconds, the night 2 minutes 31 in all. The objects export before and
+  after: identical, field by field and byte for byte (110 objects). Not
+  verified: GitHub's own night, after the push.
+- **Rules learned** (for the coordinating session's skill text):
+  - An entry the website does not serve is held to the name and the
+    kind JPL gives its id, both stored; a changed kind is a mismatch as
+    a changed name is.
+  - Which entries are asked is a rule read from the list and the code,
+    never a list of names; an entry that fits neither side fails the
+    run, by name, and so do two entries with one name.
+  - A skip written inline in the fetch code is copied in the check and
+    held to the code by a test that reads the code (Planet 9's id; the
+    exoplanet kinds, written four times in palomas_orrery.py).
+  - A planets-first id that JPL finds only among the asteroids FALLS
+    THROUGH and fails by name: the L3 case (3013, the asteroid 3013
+    Dobrovoleva). Read in the library's code (astroquery's docstring:
+    "search major bodies ... and if no matches, then search small
+    bodies") and seen live (JPL's main service answers COMMAND='3013'
+    with 3013 Dobrovoleva).
+  - "JPL has no object for this id" is an answer only when both lists
+    find nothing and the main service, asked as the orrery asks,
+    refuses the id ("is out of bounds"); anything else it says then is
+    a blind spot and fails.
+  - A first answer waits on Tony's look; a session sets the mark from
+    his words; a name equal to JPL's marks itself.
+  - Renewals are spread by a cap (ten a run, due from day 20, red at
+    day 30), not by moving dates; an entry never answered, or one that
+    differs, is asked at once.
+  - A record the website does not read lives in a file the export does
+    not copy, so nothing it reads moves; the file is declared on its
+    row, so the night commits it.
+- **Skill text owed** (horizons-orbital-mechanics, for the coordinating
+  session's bump with L-541's):
+  - Line 117 says the system-barycentre numbers for Orcus (20090482)
+    and Patroclus (20000617) "are found in BOTH of JPL's indexes".
+    Today's live answers, Nov 22: in the major-body list 20000617 is
+    "Patroclus (system barycenter)" and 20090482 "Orcus (system
+    barycenter)", both "asteroid barycenter"; in the small-body list
+    each finds the body, "617 Patroclus" and "90482 Orcus", whose
+    primary SPKID is that number but whose primary designation (A906
+    UL, 2004 DW) is not. The check keeps a small-body match by its
+    designation, so neither is found in both; asked as major bodies
+    they pass.
+  - The astroquery version: requirements.txt asks "astroquery>=0.4.6";
+    Tony's machine has 0.4.9.post1; the night installs whatever
+    requirements.txt gives on the day (`pip install -r
+    requirements.txt`), not read from a night's log; the skill says
+    0.4.11. The fall-through was read in 0.4.9.post1's code and seen
+    live.
+  - The sections Checking an Entry Against JPL and Where the Check
+    Lives gain the unserved entries, the no-object answer and the mark,
+    from the rules above.
+- **Re-homed:** the second ids (the served bodies' own ids asked around
+  other centres, and the centre ids) to L-547; the pre-fetch reading a
+  missing id_type as 'smallbody' to L-548; the four moons JPL cannot
+  place to L-549; the Nov 25 peak to L-485 (a nightly run); the
+  Lagrange points' skips, done, on L-512.
+**Gap:** the coordinating session's skill bump (the text above); the
+first night on GitHub after Tony's push, whose Horizons check row
+should read NOTHING DUE until Nov 25, when the 90 served identities
+renew (L-485); the unserved entries first come due on Dec 12, ten a
+night, and the night's commit carries the record only on a night it
+moved.
+- **Tony-action (do):** commit and push this session's work before
+  running the coordinating session's patch, so the two are not mixed
+  in one commit.
 **Ref:** L-297 (the Lagrange points); L-395 (the Horizons check);
-horizons-orbital-mechanics, Checking an Entry Against JPL.
+horizons-orbital-mechanics, Checking an Entry Against JPL; L-547; L-548;
+L-549.
+
+#### [L-547] Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded)
+<!-- L:547 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+- **Found 2026-11-22** in L-539 (every entry checked). The Horizons
+  check holds each entry's id, or for a served body the id the website
+  serves (its helio_id). Two kinds of id the orrery also asks are held
+  by nothing, 22 bodies in all:
+  - A served body's own id, asked around any centre but the Sun (7):
+    Haumea 920136108, Eris 920136199, Gonggong 920225088, Orcus
+    920090482, Quaoar 920050000, Patroclus 920000617, Makemake
+    20136472.
+  - A centre id that differs from the entry's id, asked when the body
+    is the plot's centre (15): Eurybates 920003548, Polymele 920015094,
+    Leucus 20011351, Orus 20021900, Ceres 2000001, 16 Psyche 20000016,
+    Apophis 2099942, Bennu 2101955, Eros 2000433, Dinkinesh 20152830,
+    Itokawa 2025143, Ryugu 2162173, Donaldjohanson 20052246, Vesta
+    2000004, Arrokoth 2486958.
+- **JPL's lookup answers them unevenly** (live, 2026-11-22): 2000001
+  finds "1 Ceres" in the small-body list, whose primary SPKID is
+  20000001 (2000001 an alias); 20011351 finds an unnamed "asteroid
+  barycenter" among the major bodies and "11351 Leucus" among the small
+  bodies; 920003548 an unnamed "asteroidal system primary"; Haumea's
+  920136108 nothing in either list (asked by name, no Haumea-system id
+  answers today). So a check of these needs a method of its own: by
+  primary SPKID in either list, and the main service where the lookup
+  is blind.
+**Gap:** the method, then a session; nothing is checked until then.
+**Ref:** L-539; horizons-orbital-mechanics, Horizons Center Body Rules
+and JPL Binary System IDs; `celestial_objects.py` (center_id).
+
+#### [L-548] The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded)
+<!-- L:548 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+- **Found 2026-11-22** in L-539 (every entry checked).
+  `palomas_orrery.py` lines 4843 (the static plot) and 6486 (the
+  animation): `id_type = obj_dict.get('id_type', 'smallbody')`. The
+  position fetch reads the same field as `obj.get('id_type', None)`
+  (lines 5335, 5798). `period_fetch.py` copies the pre-fetch's default.
+- **Why nothing is drawn wrong today.** Pluto, id 999, is kept from
+  being asked as the asteroid 999 Zachia (JPL's main service answers
+  COMMAND='999;' with "999 Zachia (A923 PE)", read 2026-11-22) only by
+  the line `'id_type': None,` in its entry, `celestial_objects.py` line
+  255: written, the key's value is None, and .get returns it. Four
+  entries write no id_type at all: Earth-Moon Barycenter (3),
+  Pluto-Charon Barycenter (9) and Orcus-Vanth Barycenter (20090482),
+  which the pre-fetch's type filter leaves out, and Orcus, asked around
+  the Sun by its helio_id; around another centre the pre-fetch would
+  ask 920090482 as a small body. An entry added without the line would
+  be asked as an asteroid of its number.
+**Gap:** a ruling: one default in every reader, or the list writing
+id_type on every entry; then a patch.
+**Ref:** L-539; L-512 (the plot's data path); `period_fetch.py`
+(FETCHED_HERE's comment says the same of the barycentre).
+
+#### [L-549] Four moons JPL cannot place: Xiangliu, Hi'iaka, Namaka, MK2 (orrery; for a talk with Tony)
+<!-- L:549 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+- **Found 2026-11-22** in L-539's first run: for 120225088, 120136108,
+  220136108 and 120136472, neither of JPL's lookup lists finds the id,
+  and its main service answers "DXREAD: requested IOBJ= ******** is out
+  of bounds, no action taken." JPL's own suggested form, DES=<id>;,
+  finds no small body either. Asked by name, the lookup finds none of
+  the four. Recorded as "JPL has no object for this id" and marked on
+  Tony's look.
+- **How each is drawn today** (traced, nothing edited):
+  - Hi'iaka and Namaka: the orbit is drawn from JPL's elements cached
+    on 2026-02-02 (`data/osculating_cache.json`, horizons_id 120136108
+    and 220136108, around @20136108), when JPL still answered those
+    ids. `idealized_orbits.py` (plot_tno_satellite_orbit) still labels
+    it "Osculating orbit from JPL Horizons satellite ephemeris
+    solution", though JPL no longer has the object. Every plot's
+    pre-fetch asks JPL again, gets nothing, and, the cache being over 30
+    days old, offers to update first, then falls back to the February
+    copy. Their position fetch gets nothing back and they are on no
+    fallback list, so by the code's reading no marker is drawn for
+    them; not looked at in the window. Their typed elements in
+    `orbital_elements.py` name no source.
+  - MK2: on the pre-fetch's skip list and both fallback lists, drawn
+    from its typed elements (Bamberger 2025, arXiv:2509.05880), by
+    Tony's ruling of 2026-11-04 on L-512 (jpl_outcome.DRAWN_FROM_PAPERS).
+  - Xiangliu: the same, from Kiss et al. 2017.
+- **Found on the way:** `idealized_orbits.py` keeps its own id for
+  Xiangliu, 92250881 (TNO_SATELLITE_IDS), not the list's 120225088;
+  unused today, since Xiangliu is drawn from its typed elements. And it
+  keeps a skip list the skill does not name, ANALYTICAL_ONLY_SATELLITES
+  (MK2, Xiangliu, Vanth).
+- **Vanth:** JPL's lookup answers 120090482, "Vanth" (asteroidal system
+  satellite), on 2026-11-22, as Tony's check of 2026-11-04 found
+  (L-512). It is still on the pre-fetch's skip list, the fallback lists
+  and ANALYTICAL_ONLY_SATELLITES. Whether it needs those places now is
+  the talk's question; taking a name off is the test the skill names.
+- **Not done, by the coordinating session's ruling of 2026-11-22:**
+  Hi'iaka and Namaka are not put on the skip list, since a skip could
+  change what is drawn.
+**Gap:** a talk with Tony: what Hi'iaka and Namaka should draw now, and
+say; whether Vanth comes off its lists.
+- **Tony-action (decide):** at the next design talk.
+**Ref:** L-539; L-512; `idealized_orbits.py`; `orbital_elements.py`;
+`jpl_outcome.py`; horizons-orbital-mechanics, A Skip Names What Failed.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -4899,7 +5106,7 @@ skill's split (L-522).
   the Assembler.
 
 #### [L-512] The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path)
-<!-- L:512 status:OPEN upd:2026-11-19 section:A flag: rice: -->
+<!-- L:512 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Opened 2026-11-04**, from
   `documentation/COORD_L512_jpl_fallbacks_brief_20261104.md`. Tony, Nov
   4, 10:22, on 6AC4721: "the analytical orbit is not plotted. this could
@@ -5157,8 +5364,33 @@ skill's split (L-522).
   approaches to ask for: it belongs on the skip lists, with a comment
   naming what failed (horizons-orbital-mechanics, A Skip Names What
   Failed). Found by L-297's Session 1, Nov 18.
-**Gap:** Tony's look at A2, wifi off and on; then slices b and c; and
-the Lagrange points kept out of the pre-fetch and the close approaches.
+**Note:** (2026-11-22, L-539's Code session, Claude Opus 5.5, built on
+orrery f58581d5, not pushed) THE LAGRANGE POINTS KEPT OUT, the two asks
+received from L-297. Mapped first: the pre-fetch's skip list stands
+twice in `palomas_orrery.py` (plot_objects and animate_objects) and is
+copied as `period_fetch.SKIP_NAMES`; the close-approach extras
+(`_add_close_approach_extras`, called from both pipelines) have no
+list.
+- Asked again on 2026-11-22: JPL answers an elements question for 3011
+  around Earth and 31 around the Sun "Required masses not defined,
+  osculating elements not available"; the close-approach service is
+  asked by the point's number, des=3011, which names the asteroid 3011,
+  and answered no approaches (for 31 too).
+- Done: the eight points (Earth-Moon L1, L2, L4, L5; Earth-Sun L1, L2,
+  L4, L5) on both SKIP_HORIZONS_PREFETCH lists and on SKIP_NAMES, each
+  with a comment naming the failure and the date; the close-approach
+  extras pass over a point by its kind, with a comment, since there is
+  no list there. The two fallback lists are not touched: a point's
+  position is asked and answers, so they never act for it.
+- Verified: a headless plot around Earth with the Moon and Earth-Moon
+  L1 and L2 ticked, on a throwaway copy of the last commit's
+  palomas_orrery.py and of the edited one: before, both points entered
+  the pre-fetch and the close approaches and failed with tracebacks;
+  after, neither is asked; 34 traces both times, the points' six
+  identical. The period fetch suite 39 checks, the orbit cache 24
+  tests. Not run: the animation (its edit is the same line), and the
+  window by eye.
+**Gap:** Tony's look at A2, wifi off and on; then slices b and c.
 - **Tony-action (do):** look at A2 with the wifi on and off, then commit.
 **Ref:** `path_or_orbit.py`; `test_path_or_orbit.py`;
 `idealized_orbits.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`;
@@ -6612,7 +6844,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-11-10 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -7436,6 +7668,12 @@ legacy question. Tony's word pending on the task.
     afternoon; nothing pinned. requirements.txt still sets no upper
     version for astroquery or astropy: recorded, not changed.
   - L-522 had recorded the two nights as seen; this is their record.
+- **The peak night, 2026-11-25** (L-539, read 2026-11-22 from
+  data/horizons_confirmations.json): 90 served identities confirmed on
+  2026-10-31 all renew that night, about 180 questions, about 7 minutes
+  at the measured 2.4 seconds a question, under the 15 a row may take;
+  the served entries have no cap of their own, as the unserved
+  entries' ten a night is.
 **Ref:** `orrery_maintenance_run.py`; gallery `daily_run.py`;
 `documentation/DESIGN_L485_nightly_run_rulings_20261025.md`;
 `documentation/COORD_L461_stop_ruling_20261025.md`; L-461; L-462;

@@ -1,0 +1,1141 @@
+{
+  "_comment": "Written by horizons_unserved.py, inside horizons_check.py (L-539): for each entry of the orrery's list that the website does not serve but the orrery asks JPL for, the name and kind JPL gives its id, when that was first answered and last confirmed, whether Tony has looked at the pairing ('looked'), and any way JPL now differs ('differs'). Named by the entry's name. The objects export does not read it. A session sets 'looked' with --mark, from Tony's run record. Do not edit by hand.",
+  "schema": 1,
+  "cadence_days": 30,
+  "renew_from_day": 20,
+  "per_run": 10,
+  "entries": {
+    "Earth-Moon Barycenter": {
+      "id": "3",
+      "id_type": null,
+      "object_type": "barycenter",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Earth-Moon Barycenter",
+      "jpl_kind": "barycenter",
+      "jpl_spkid": "3",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3&group=sb&format=text"
+      ]
+    },
+    "Patroclus-Menoetius Barycenter": {
+      "id": "20000617",
+      "id_type": "majorbody",
+      "object_type": "barycenter",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Patroclus (system barycenter)",
+      "jpl_kind": "asteroid barycenter",
+      "jpl_spkid": "20000617",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=20000617&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=20000617&group=sb&format=text"
+      ]
+    },
+    "Menoetius": {
+      "id": "120000617",
+      "id_type": "majorbody",
+      "object_type": "orbital",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Menoetius",
+      "jpl_kind": "asteroidal system satellite",
+      "jpl_spkid": "120000617",
+      "jpl_designation": "Patroclus I",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120000617&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120000617&group=sb&format=text"
+      ]
+    },
+    "Pluto": {
+      "id": "999",
+      "id_type": null,
+      "object_type": "orbital",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Pluto",
+      "jpl_kind": "planet",
+      "jpl_spkid": "999",
+      "jpl_designation": "134340",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=999&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=999&group=sb&format=text"
+      ]
+    },
+    "Orcus-Vanth Barycenter": {
+      "id": "20090482",
+      "id_type": null,
+      "object_type": "barycenter",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Orcus (system barycenter)",
+      "jpl_kind": "asteroid barycenter",
+      "jpl_spkid": "20090482",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=20090482&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=20090482&group=sb&format=text"
+      ]
+    },
+    "Apollo 11 S-IVB": {
+      "id": "-399110",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Apollo 11 S-IVB (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-399110",
+      "jpl_designation": "1969-059B",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-399110&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-399110&group=sb&format=text"
+      ]
+    },
+    "SOHO": {
+      "id": "-21",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "SOHO (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-21",
+      "jpl_designation": "1995-065A",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-21&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-21&group=sb&format=text"
+      ]
+    },
+    "Gaia": {
+      "id": "-139479",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Gaia (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-139479",
+      "jpl_designation": "2013-074A",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-139479&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-139479&group=sb&format=text"
+      ]
+    },
+    "Hayabusa2": {
+      "id": "-37",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Hayabusa 2 (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-37",
+      "jpl_designation": "2014-076K",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-37&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-37&group=sb&format=text"
+      ]
+    },
+    "OSIRISREx": {
+      "id": "-64",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "OSIRIS-REx (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-64",
+      "jpl_designation": "2016-055A",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-64&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-64&group=sb&format=text"
+      ]
+    },
+    "MarsRover": {
+      "id": "-168",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Mars2020 (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-168",
+      "jpl_designation": "2020-052A",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-168&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-168&group=sb&format=text"
+      ]
+    },
+    "JamesWebb": {
+      "id": "-170",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "James Webb Space Telescope (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-170",
+      "jpl_designation": "2021-130A",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-170&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-170&group=sb&format=text"
+      ]
+    },
+    "Artemis II": {
+      "id": "-1024",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Artemis II (spacecraft)",
+      "jpl_kind": "spacecraft",
+      "jpl_spkid": "-1024",
+      "jpl_designation": "2026-069A",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-1024&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-1024&group=sb&format=text"
+      ]
+    },
+    "Metis": {
+      "id": "516",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Metis",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "516",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=516&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=516&group=sb&format=text"
+      ]
+    },
+    "Adrastea": {
+      "id": "515",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Adrastea",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "515",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=515&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=515&group=sb&format=text"
+      ]
+    },
+    "Amalthea": {
+      "id": "505",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Amalthea",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "505",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=505&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=505&group=sb&format=text"
+      ]
+    },
+    "Thebe": {
+      "id": "514",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Thebe",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "514",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=514&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=514&group=sb&format=text"
+      ]
+    },
+    "Io": {
+      "id": "501",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Io",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "501",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=501&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=501&group=sb&format=text"
+      ]
+    },
+    "Europa": {
+      "id": "502",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Europa",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "502",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=502&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=502&group=sb&format=text"
+      ]
+    },
+    "Ganymede": {
+      "id": "503",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Ganymede",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "503",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=503&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=503&group=sb&format=text"
+      ]
+    },
+    "Callisto": {
+      "id": "504",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Callisto",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "504",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=504&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=504&group=sb&format=text"
+      ]
+    },
+    "Pan": {
+      "id": "618",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Pan",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "618",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=618&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=618&group=sb&format=text"
+      ]
+    },
+    "Daphnis": {
+      "id": "635",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Daphnis",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "635",
+      "jpl_designation": "S/S2005_S1",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=635&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=635&group=sb&format=text"
+      ]
+    },
+    "Prometheus": {
+      "id": "616",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Prometheus",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "616",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=616&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=616&group=sb&format=text"
+      ]
+    },
+    "Pandora": {
+      "id": "617",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Pandora",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "617",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=617&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=617&group=sb&format=text"
+      ]
+    },
+    "Mimas": {
+      "id": "601",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Mimas",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "601",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=601&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=601&group=sb&format=text"
+      ]
+    },
+    "Enceladus": {
+      "id": "602",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Enceladus",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "602",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=602&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=602&group=sb&format=text"
+      ]
+    },
+    "Tethys": {
+      "id": "603",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Tethys",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "603",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=603&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=603&group=sb&format=text"
+      ]
+    },
+    "Dione": {
+      "id": "604",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Dione",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "604",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=604&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=604&group=sb&format=text"
+      ]
+    },
+    "Rhea": {
+      "id": "605",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Rhea",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "605",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=605&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=605&group=sb&format=text"
+      ]
+    },
+    "Titan": {
+      "id": "606",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Titan",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "606",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=606&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=606&group=sb&format=text"
+      ]
+    },
+    "Hyperion": {
+      "id": "607",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Hyperion",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "607",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=607&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=607&group=sb&format=text"
+      ]
+    },
+    "Iapetus": {
+      "id": "608",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Iapetus",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "608",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=608&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=608&group=sb&format=text"
+      ]
+    },
+    "Phoebe": {
+      "id": "609",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Phoebe",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "609",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=609&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=609&group=sb&format=text"
+      ]
+    },
+    "Ariel": {
+      "id": "701",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Ariel",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "701",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=701&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=701&group=sb&format=text"
+      ]
+    },
+    "Umbriel": {
+      "id": "702",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Umbriel",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "702",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=702&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=702&group=sb&format=text"
+      ]
+    },
+    "Titania": {
+      "id": "703",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Titania",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "703",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=703&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=703&group=sb&format=text"
+      ]
+    },
+    "Oberon": {
+      "id": "704",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Oberon",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "704",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=704&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=704&group=sb&format=text"
+      ]
+    },
+    "Miranda": {
+      "id": "705",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Miranda",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "705",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=705&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=705&group=sb&format=text"
+      ]
+    },
+    "Portia": {
+      "id": "712",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Portia",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "712",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=712&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=712&group=sb&format=text"
+      ]
+    },
+    "Mab": {
+      "id": "726",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Mab",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "726",
+      "jpl_designation": "S/S2003_U1",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=726&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=726&group=sb&format=text"
+      ]
+    },
+    "Triton": {
+      "id": "801",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Triton",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "801",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=801&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=801&group=sb&format=text"
+      ]
+    },
+    "Despina": {
+      "id": "805",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Despina",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "805",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=805&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=805&group=sb&format=text"
+      ]
+    },
+    "Galatea": {
+      "id": "806",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Galatea",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "806",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=806&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=806&group=sb&format=text"
+      ]
+    },
+    "Charon": {
+      "id": "901",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Charon",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "901",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=901&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=901&group=sb&format=text"
+      ]
+    },
+    "Styx": {
+      "id": "905",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Styx",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "905",
+      "jpl_designation": "S/S2012_P1",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=905&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=905&group=sb&format=text"
+      ]
+    },
+    "Nix": {
+      "id": "902",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Nix",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "902",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=902&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=902&group=sb&format=text"
+      ]
+    },
+    "Kerberos": {
+      "id": "904",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Kerberos",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "904",
+      "jpl_designation": "S/S2011_P1",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=904&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=904&group=sb&format=text"
+      ]
+    },
+    "Hydra": {
+      "id": "903",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Hydra",
+      "jpl_kind": "natural satellite",
+      "jpl_spkid": "903",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=903&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=903&group=sb&format=text"
+      ]
+    },
+    "Dysnomia": {
+      "id": "120136199",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Dysnomia",
+      "jpl_kind": "asteroidal system satellite",
+      "jpl_spkid": "120136199",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136199&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136199&group=sb&format=text"
+      ]
+    },
+    "Xiangliu": {
+      "id": "120225088",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": null,
+      "jpl_kind": null,
+      "jpl_spkid": null,
+      "jpl_designation": null,
+      "absent": true,
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120225088&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120225088&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='120225088'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "jpl_answer": "DXREAD: requested IOBJ= ******** is out of bounds, no action taken."
+    },
+    "Vanth": {
+      "id": "120090482",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Vanth",
+      "jpl_kind": "asteroidal system satellite",
+      "jpl_spkid": "120090482",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120090482&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120090482&group=sb&format=text"
+      ]
+    },
+    "Weywot": {
+      "id": "120050000",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": "Weywot",
+      "jpl_kind": "asteroidal system satellite",
+      "jpl_spkid": "120050000",
+      "jpl_designation": "",
+      "looked": {
+        "date": "2026-11-22",
+        "by": "itself: the entry's own name equals JPL's name"
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120050000&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120050000&group=sb&format=text"
+      ]
+    },
+    "Hi'iaka": {
+      "id": "120136108",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": null,
+      "jpl_kind": null,
+      "jpl_spkid": null,
+      "jpl_designation": null,
+      "absent": true,
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136108&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136108&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='120136108'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "jpl_answer": "DXREAD: requested IOBJ= ******** is out of bounds, no action taken."
+    },
+    "Namaka": {
+      "id": "220136108",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": null,
+      "jpl_kind": null,
+      "jpl_spkid": null,
+      "jpl_designation": null,
+      "absent": true,
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=220136108&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=220136108&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='220136108'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "jpl_answer": "DXREAD: requested IOBJ= ******** is out of bounds, no action taken."
+    },
+    "MK2": {
+      "id": "120136472",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "first_answered": "2026-11-22",
+      "confirmed": "2026-11-22",
+      "jpl_name": null,
+      "jpl_kind": null,
+      "jpl_spkid": null,
+      "jpl_designation": null,
+      "absent": true,
+      "looked": {
+        "date": "2026-11-22",
+        "by": "Tony's look: Tony's words, Nov 22, 2026, relayed by the coordinating session, after scanning documentation/CHECK_L539_every_entry_names_20261122.md: \"The 14 words are accepted.\""
+      },
+      "differs": null,
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136472&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136472&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='120136472'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "jpl_answer": "DXREAD: requested IOBJ= ******** is out of bounds, no action taken."
+    }
+  }
+}

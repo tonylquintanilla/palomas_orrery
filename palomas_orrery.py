@@ -202,6 +202,11 @@ the Lagrange points): the checkboxes carry the names visitors see,
 Earth-Moon L1 ... and Earth-Sun L1 ..., under "Earth-Sun Lagrange
 Points:"; EM-L3 and L3 are gone, since JPL has no L3 record and those
 two drew the asteroids 3013 Dobrovoleva and 33 Polyhymnia.
+Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-512's
+two leftover asks, with L-539): the eight Lagrange points are on both
+element pre-fetches' SKIP_HORIZONS_PREFETCH, with the failure JPL
+answers named, and the close-approach extras pass over a point; a
+point's position is still asked of JPL. What is drawn does not change.
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -1645,6 +1650,15 @@ def _add_close_approach_extras(fig, selected_objects, objects, center_object_nam
         # 'designation' since 2026-10-24: C/2025 K1 is asked as DES=1004075;
         # and keeps its hyperbolic osculating orbit (L-470).
         if obj_info.get('id_type') not in ('smallbody', 'id', 'designation'):
+            continue
+        # L-512 and L-539, 2026-11-22: a Lagrange point has no close
+        # approaches to ask for. Its id_type is 'id', so it passed the line
+        # above, and JPL's close-approach service was asked by the point's
+        # number, which names an asteroid there: des=3011 is the asteroid
+        # 3011, not Earth-Moon L1. It answered no approaches on 2026-11-22
+        # (and for 31, Earth-Sun L1). Its position is still asked, and
+        # answers. There is no skip list here, so the kind is the test.
+        if obj_info.get('object_type') == 'lagrange_point':
             continue
 
         designation = obj_info.get('id', obj_name)
@@ -4793,7 +4807,14 @@ def plot_objects():
 
     # These TNO moons have no usable JPL parent-centered ephemeris
 #    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
-    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
+    # L-512 and L-539, 2026-11-22: the eight Lagrange points. Asked for
+    # elements, JPL answers "Required masses not defined, osculating elements
+    # not available" (EM-L1, 3011, around Earth, and Earth-Sun L1, 31, around
+    # the Sun, asked 2026-11-22; first seen by L-297 on 2026-11-18): a point
+    # has no elements to ask for. Its position is still asked, and answers.
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth',  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
+                              'Earth-Moon L1', 'Earth-Moon L2', 'Earth-Moon L4', 'Earth-Moon L5',
+                              'Earth-Sun L1', 'Earth-Sun L2', 'Earth-Sun L4', 'Earth-Sun L5']
 
     # Filter objects that need osculating elements
     pre_fetch_objects = [
@@ -6433,7 +6454,14 @@ def animate_objects(step, label):
 
     # These TNO moons have no usable JPL parent-centered ephemeris
 #    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
-    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth']  # Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
+    # L-512 and L-539, 2026-11-22: the eight Lagrange points. Asked for
+    # elements, JPL answers "Required masses not defined, osculating elements
+    # not available" (EM-L1, 3011, around Earth, and Earth-Sun L1, 31, around
+    # the Sun, asked 2026-11-22; first seen by L-297 on 2026-11-18): a point
+    # has no elements to ask for. Its position is still asked, and answers.
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth',  # Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
+                              'Earth-Moon L1', 'Earth-Moon L2', 'Earth-Moon L4', 'Earth-Moon L5',
+                              'Earth-Sun L1', 'Earth-Sun L2', 'Earth-Sun L4', 'Earth-Sun L5']
 
     pre_fetch_objects = [
         obj['name'] for obj in selected_objects_for_prefetch 

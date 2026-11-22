@@ -3,7 +3,9 @@ horizons_check.py -- check each object the website serves against JPL
 Horizons: that its entry names exactly one object, that the object's id,
 index and name are what the orrery's list says, and that the orbital
 period the website prints is the one JPL gives. And re-read each
-spacecraft's Horizons data sheet on the same cycle (L-395, L-431).
+spacecraft's Horizons data sheet on the same cycle (L-395, L-431). And,
+since L-539, every other entry the orrery asks JPL for, held to the name
+and kind JPL gives its id, through horizons_unserved.py.
 
 WHERE IT RUNS AND WHY HERE
 
@@ -116,7 +118,10 @@ WHAT IT WRITES
     data/horizons_check_last_run.json: this run's date and verdict, each
     problem named. Git ignores it: it changes on every run and is read
     only by the checker that runs next, on the same machine.
-    Nothing else. check_horizons_confirmations.py reads all three offline,
+    data/horizons_unserved_confirmations.json (L-539), written by
+    horizons_unserved.py from inside this run: the entries the website
+    does not serve. The export does not read it.
+    Nothing else. check_horizons_confirmations.py reads all four offline,
     as a checker of the same maintenance run, and goes red on what this
     found; export_objects.py copies the dates into the export, and the
     website's own offline check reads them from there.
@@ -167,6 +172,12 @@ period_fetch's path, make_taker(); an identity that disagrees holds its
 body at its last confirmation, with a hold block in its record; a
 period date that cannot be read, or a question JPL refuses, is
 reported. The last-run file names what was taken, held and reported.)
+Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-539,
+every entry checked: run() also runs horizons_unserved.run for the
+entries the website does not serve, after the served ones; its queries,
+problems and unasked parts join this run's, and the verdict line names
+JPL DIFFERS and NEW JPL NAME, which raise the night's commit title.
+unserved=False tests the served entries alone.)
 """
 
 import datetime
@@ -877,8 +888,12 @@ def current_entries(root):
 
 
 def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
-        write=True, echo=print, take=None):
+        write=True, echo=print, take=None, unserved=True):
     """The whole check. Returns (exit code, summary dict).
+
+    With unserved (the default, and the maintenance run's), the entries
+    the website does not serve are checked too, by horizons_unserved.run
+    (L-539); a test of the served entries alone passes False.
 
     `take(key, obj)` re-fetches one entry's elements and period from JPL,
     saves them as plotting saves them, and returns the entry's new period
@@ -1180,6 +1195,21 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
         echo("Sheets that changed, noted for a person (not red): %s."
              % "; ".join(sheet_notes))
 
+    # L-539, every entry checked: the entries the website does not serve,
+    # asked by the rule horizons_unserved.py reads from the list, each held
+    # to the name and kind JPL gave its id. After JPL has failed once in
+    # this run, nothing more is asked.
+    uns = {"queried": 0, "due": 0, "problems": [], "unasked": [],
+           "down": None, "differs": [], "waiting": []}
+    if unserved:
+        import horizons_unserved
+        uns = horizons_unserved.run(root, fetch, today, pause=pause,
+                                    check_all=check_all, write=write,
+                                    echo=echo, down=down)
+        queried += uns["queried"]
+        if down is None and uns["down"] is not None:
+            down = uns["down"]
+
     problems = []
     reported = []
     for kind, key, result, _why in results:
@@ -1255,8 +1285,11 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
         echo("")
         echo("  HOLD ENDED %s: the list and JPL agree again" % key)
 
+    problems.extend(uns["problems"])
     unasked = [("%s's %s" % (k, kind)) for kind, k, r, _w in results
                if r["status"] in ("not asked", "could not reach JPL")]
+    unasked.extend(uns["unasked"])
+    due_count = len(tasks) + uns["due"]
     if down is not None:
         verdict = "UNREACHABLE"
         line = ("HORIZONS CHECK: UNREACHABLE -- JPL could not be reached "
@@ -1267,14 +1300,14 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
     elif problems:
         verdict = "FAIL"
         line = "HORIZONS CHECK: FAIL -- %s" % "; ".join(problems)
-    elif not tasks:
+    elif not due_count:
         verdict = "NOTHING DUE"
         line = ("HORIZONS CHECK: NOTHING DUE -- %d entries and %d sheets "
                 "current, no query asked" % (n_entries, len(spacecraft)))
     else:
         verdict = "PASS"
         line = ("HORIZONS CHECK: PASS -- %d checked today, %d queries"
-                % (len(tasks), queried))
+                % (due_count, queried))
     # L-485: what was taken, held or reported is named on the verdict
     # line, and none of it makes the run red.
     if taken:
@@ -1285,6 +1318,12 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
             "%s since %s" % (h["name"], h["since"]) for h in held)
     if reported:
         line += "; REPORTED %s" % "; ".join(reported)
+    # L-539: an unserved entry JPL now differs on, or one whose first
+    # answer waits on Tony's look, is named here and makes nothing red; the
+    # night's commit title is raised by these words (NIGHT_TITLE_FLAGS in
+    # orrery_maintenance_run.py).
+    if unserved:
+        line += horizons_unserved.verdict_words(uns)
 
     if write:
         ordered = {k: records[k] for k in objects if k in records}
@@ -1306,9 +1345,11 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
             "_comment": "Written by horizons_check.py on every run; read by "
                         "check_horizons_confirmations.py. Not tracked.",
             "date": today.isoformat(), "verdict": verdict,
-            "asked": queried, "due": len(tasks),
+            "asked": queried, "due": due_count,
             "problems": problems, "unasked": unasked,
-            "taken": taken, "held": held, "reported": reported}))
+            "taken": taken, "held": held, "reported": reported,
+            "unserved_differs": uns["differs"],
+            "unserved_waiting": [w["name"] for w in uns["waiting"]]}))
     echo("")
     if verdict in ("FAIL", "UNREACHABLE"):
         echo("Nothing in the list or in constants_new.py is edited here. A "
@@ -1317,8 +1358,9 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
     echo(line)
     return (0 if verdict in ("PASS", "NOTHING DUE") else 1), {
         "verdict": verdict, "results": results, "problems": problems,
-        "queried": queried, "due": len(tasks), "taken": taken,
-        "held": held, "reported": reported}
+        "queried": queried, "due": due_count, "taken": taken,
+        "held": held, "reported": reported, "unserved": uns,
+        "line": line}
 
 
 def payload_name(spacecraft, ident):

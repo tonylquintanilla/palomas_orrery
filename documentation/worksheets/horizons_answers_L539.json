@@ -1,0 +1,49 @@
+{
+  "_comment": "JPL's Lookup answers for the unserved entries' tests (L-539, test_horizons_unserved.py). 'answers' were fetched 2026-11-22 by Claude Opus 5.5 in Claude Code on Tony's machine, through horizons_check.live_fetch, word for word, keyed by the exact query. 'constructed' holds answers JPL did NOT give, each written in JPL's format from a real answer above and saying what it stands for; a test puts one in place of a real answer for one query. Added the same day, for the no-object answer: JPL's main-service answers for 120136472 (MK2), 99999999 and 501, and the two Lookup answers for 120136472.",
+  "fetched": "2026-11-22",
+  "answers": {
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=501&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Io\nType               = natural satellite\nPrimary SPKID      = 501\nPrimary designation= \nAliases            = JI\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=501&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = 501 Urhixidur\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000501\nPrimary designation= A903 BK\nAliases            = 1955 FB, 1951 SE, 1951 RB2, 1949 FW, 1943 FC, 2000501, J03B00K\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3013&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3013&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = 3013 Dobrovoleva\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20003013\nPrimary designation= 1979 SD7\nAliases            = 1981 GS, 2003013, J79S07D\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-170&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = James Webb Space Telescope (spacecraft)\nType               = spacecraft\nPrimary SPKID      = -170\nPrimary designation= 2021-130A\nAliases            = JWST\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-170&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=999&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Pluto\nType               = planet\nPrimary SPKID      = 999\nPrimary designation= 134340\nAliases            = \n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=999&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = 999 Zachia\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000999\nPrimary designation= A923 PE\nAliases            = 1972 CG, 1957 SH, 1940 RH, 1939 HA, A915 VC, 2000999, J23P00E\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136199&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Dysnomia\nType               = asteroidal system satellite\nPrimary SPKID      = 120136199\nPrimary designation= \nAliases            = Eris I\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136199&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=99999999&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=99999999&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nNOTICE: no matches found\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='120136472'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\nDXREAD: requested IOBJ= ******** is out of bounds, no action taken.\nRecord boundaries:                                                 \n IAU numbered asteroids:        1-  895910                         \n Unnumbered asteroids  : 50000001-50693063                         \n Comets                : 90000001-90004991                         \nIf an SPK ID, look-up with \"DES= ********;\"                        \n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='99999999'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\nDXREAD: requested IOBJ= 99999999 is out of bounds, no action taken.\nRecord boundaries:                                                 \n IAU numbered asteroids:        1-  895910                         \n Unnumbered asteroids  : 50000001-50693063                         \n Comets                : 90000001-90004991                         \nIf an SPK ID, look-up with \"DES= 99999999;\"                        \n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='501'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\n Revised: Mar 12, 2021             Io  / (Jupiter)                          501\n\n SATELLITE PHYSICAL PROPERTIES:\n  Mean radius (km)       = 1821.49           Density (g cm^-3) = 3.528 +- 0.006\n  GM (km^3/s^2)          = 5959.9155+- 0.004 Geometric Albedo  = 0.63  +- 0.02\n                                             V(1,0)            = -1.68\n\n SATELLITE ORBIT (at J2000.0 epoch, 2000-Jan-1.5):\n  Semi-major axis, a (km)~ 422,000           Orbital period    ~ 1.77 d\n  Eccentricity, e        ~ 0.00472           Rotational period = Synchronous\n  Inclination, i  (deg)  ~ 0.0375\n*******************************************************************************\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136472&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nNOTICE: no matches found\n",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=120136472&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\n"
+  },
+  "constructed": {
+    "two_objects_mb": {
+      "stands_for": "an id that matches two objects in the major-body index (no such answer was seen)",
+      "answer": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Alpha\nType               = natural satellite\nPrimary SPKID      = 777\nPrimary designation= \nAliases            = \n\nObject name        = Beta\nType               = natural satellite\nPrimary SPKID      = 777\nPrimary designation= \nAliases            = \n"
+    },
+    "nothing_sb": {
+      "stands_for": "the small-body index finding nothing",
+      "answer": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nNOTICE: no matches found\n"
+    },
+    "io_renamed_mb": {
+      "stands_for": "Io's major-body answer of 2026-11-22 with JPL's name changed to 'Io (Jupiter I)', as if JPL renamed it",
+      "answer": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Io (Jupiter I)\nType               = natural satellite\nPrimary SPKID      = 501\nPrimary designation= \nAliases            = JI\n"
+    },
+    "io_reclassed_mb": {
+      "stands_for": "Io's major-body answer of 2026-11-22 with JPL's kind changed to 'planet', as if JPL re-classed it",
+      "answer": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Io\nType               = planet\nPrimary SPKID      = 501\nPrimary designation= \nAliases            = JI\n"
+    },
+    "mk2_found_mb": {
+      "stands_for": "JPL's major-body Lookup answering 120136472 with an object, as if JPL had added Makemake's moon (it had not, 2026-11-22)",
+      "answer": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = MK2\nType               = asteroidal system satellite\nPrimary SPKID      = 120136472\nPrimary designation= \nAliases            = \n"
+    },
+    "empty_mb": {
+      "stands_for": "the major-body index finding nothing, as JPL answered 3013 on 2026-11-22",
+      "answer": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\n"
+    }
+  }
+}

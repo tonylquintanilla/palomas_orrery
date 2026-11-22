@@ -286,5 +286,29 @@
    "query_target": "399",
    "retrieved": "2026-11-20T02:53:10.064278+00:00"
   }
+ },
+ "2026-11-22": {
+  "orbit": {
+   "incl_deg": 0.003599836421884669,
+   "node_deg": 175.357583035034
+  },
+  "orbit_source": {
+   "center": "@sun",
+   "epoch_jd": 2461366.5,
+   "query_target": "3",
+   "refplane": "ecliptic",
+   "retrieved": "2026-11-22T18:23:28.051708+00:00"
+  },
+  "pole": {
+   "dec_deg": 89.8494,
+   "ra_deg": 0.59702
+  },
+  "pole_source": {
+   "epoch_jd_ut": 2461366.5,
+   "observer": "@sun",
+   "quantity": "32",
+   "query_target": "399",
+   "retrieved": "2026-11-22T18:23:28.051708+00:00"
+  }
  }
 }

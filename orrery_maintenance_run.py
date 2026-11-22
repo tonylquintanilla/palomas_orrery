@@ -323,6 +323,11 @@ NINO DUE, which night_title_flags() puts at the start of the night's
 commit title. It never changes the page. An output ending in "/" is a
 folder: snapshot() fingerprints its files and the night's allow-list
 admits any file under it.)
+Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-539,
+every entry checked: the Horizons check row declares a third output,
+data/horizons_unserved_confirmations.json, so the night commits it; the
+night's title is raised by JPL DIFFERS and NEW JPL NAME from that row;
+the night's record names them, jpl_differs and jpl_waiting.)
 """
 
 import hashlib
@@ -370,8 +375,12 @@ GENERATORS = [
     # among the checkers, is the row that goes red on what it found. The
     # fourth field quotes its verdict line, UNREACHABLE by name when JPL
     # could not be reached.
+    # L-539: and every other entry the orrery asks JPL for, through
+    # horizons_unserved.py, into a third record the export does not read;
+    # declared here, so the night commits it.
     ('Horizons check', ['horizons_check.py'],
-     ['data/horizons_confirmations.json', 'data/spacecraft_sheets.json'],
+     ['data/horizons_confirmations.json', 'data/spacecraft_sheets.json',
+      'data/horizons_unserved_confirmations.json'],
      'HORIZONS CHECK:'),
     # L-443 slice 2 (2026-10-24): each served spacecraft's path plan --
     # its span, and each flyby that needs finer steps than the backbone,
@@ -790,7 +799,13 @@ def night_allowed(path, allowed):
 # Each flag is read from its OWN row only (L-060, Nov 17): the El Nino
 # check suite's pass line names EL NINO DUE when it describes its test
 # cases, and the night of Nov 17 (c69b53b) took that for the flag.
-NIGHT_TITLE_FLAGS = (('El Nino check', 'EL NINO DUE'),)
+# L-539 (the go-ahead of 2026-11-22): the Horizons check says JPL DIFFERS
+# when JPL now gives an entry the website does not serve another name or
+# kind than its record, and NEW JPL NAME while a first answer waits on
+# Tony's look (horizons_unserved.verdict_words).
+NIGHT_TITLE_FLAGS = (('El Nino check', 'EL NINO DUE'),
+                     ('Horizons check', 'JPL DIFFERS'),
+                     ('Horizons check', 'NEW JPL NAME'))
 
 
 def night_title_flags(project_dir='.'):
@@ -912,16 +927,29 @@ def write_night_record(project_dir, results, skipped, reported):
             os.environ.get('GITHUB_REPOSITORY', ''),
             os.environ['GITHUB_RUN_ID'])
     taken, held = night_taken_held(project_dir)
+    # L-539: the entries the website does not serve that JPL now differs
+    # on, and those whose first answer waits on Tony's look, read from the
+    # Horizons check's own record, never retyped.
+    try:
+        import horizons_unserved
+        jpl_differs, jpl_waiting = horizons_unserved.night_lists(project_dir)
+    except Exception:                                # noqa: BLE001
+        jpl_differs, jpl_waiting = [], []
     body = {
         '_comment': 'Written by orrery_maintenance_run.py --night on a '
                     'clean night only (L-485), so this is the last clean '
                     'run. The dashboard reads it. A red night writes '
                     "nothing: its record is the run's log on GitHub. "
                     "'taken' is tonight's values taken from JPL, old and "
-                    "new; 'held' is every body held for its identity.",
+                    "new; 'held' is every body held for its identity; "
+                    "'jpl_differs' and 'jpl_waiting' are the entries the "
+                    "website does not serve that JPL now differs on, and "
+                    "those whose first answer waits on Tony's look (L-539).",
         'schema': 2,
         'taken': taken,
         'held': held,
+        'jpl_differs': jpl_differs,
+        'jpl_waiting': jpl_waiting,
         'clean_run_utc': utc_clock.utc_stamp(),
         'where': ('GitHub Actions' if os.environ.get('GITHUB_ACTIONS')
                   else 'a local run'),
