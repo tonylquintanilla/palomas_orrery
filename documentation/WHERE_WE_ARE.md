@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 22, 2026: every entry the orrery asks JPL for is now checked against JPL (Claude Code, Claude Opus 5.5, for the coordinating session).
-- Written on orrery f58581d5 with this session's work on your disk, not pushed; gallery 5a7c96f8, untouched.
+Last updated: November 22, 2026: the coordinating session's close. Every entry the orrery asks JPL for is checked against JPL; the skills bump is the next session's first job (Claude Fable 5.2).
+- Written on orrery 97a8b733 and gallery e6af10ea, both pushed; both nights of Nov 22 clean.
 
 > **READ THIS FIRST**
 >
@@ -11,14 +11,14 @@ Last updated: November 22, 2026: every entry the orrery asks JPL for is now chec
 > - JPL has no object at all for four moons: Xiangliu, Hi'iaka, Namaka, MK2. Hi'iaka's and Namaka's orbits are still drawn from JPL's elements of Feb 2, labelled as JPL's. That is for a talk, below (L-549 (four moons JPL cannot place)).
 > - The Lagrange points no longer ask JPL for orbits or close approaches they cannot have; the drawing is unchanged (L-512 (fallbacks when JPL cannot answer)). Nothing the website reads changed.
 >
-> **Do next:** *The coordinating session writes the skill text this check and the clock's build owe; then the orbiters' hourly points, L-538 (the orbiters' printed error); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
+> **Do next:** *The next coordinating session writes the one skills bump (v3.145) first, from `documentation/HANDOFF_coordinator_20261122_bump_notes.md`; then L-544 (L4 and L5 tie); then the protocol's reduction, step 3 of L-522 (document caps), in its own Fable session; then L-538 (the orbiters' printed error); then the encounter's slice 2, its talk first (L-529 (guided encounters)). Your "Yes" of Nov 22 to this order.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) The reel: if its place is not pushed yet, commit it in the website, then Pull origin, then Push origin. Then on your phone look for Links in Earth's fold, between Encounters and Saved pictures, and tap the reel (L-540 (a reel on a Featured card)).*
-> - *(do) Commit and push this session's orrery work first; only then run the coordinating session's patch, in a commit of its own (L-539 (every entry checked)).*
+> - *(do) Finish the look in the orrery's window, lines 8 to 14 of the checklist in your run record `WHERE_WE_ARE_11-22-26_1315_run_record.md`: one short animation with the Moon and Earth-Moon L1 ticked, with no "Required masses not defined" in the panel; then Haumea with Hi'iaka and Namaka, for our talk (L-539 (every entry checked), L-549 (four moons JPL cannot place)).*
+> - *(do) Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_3.md`, pasted from below its line. The website builds wait for its skills bump.*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -47,9 +47,9 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   s.   [done]  Sudan on Google Earth web, Nov 13, and its guided walk, Nov 14 (L-001 (food insecurity)).
  15a.  [later] The Earth Science room, after Mars and the moons (L-531 (the Earth Science room)).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
-               built Nov 10 and 11; steps 3 to 6 between builds, the
-               protocol's reduction first, for a new Fable session.
-  b.   [beside] This round's cleanup, each ruled Nov 19, in the order set Nov 21: every entry checked against JPL, L-539 (every entry checked), built Nov 22; then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.  << moved this session
+               built Nov 10 and 11; step 3, the protocol's reduction, after L-544 and before L-538, in its own Fable session (your "Yes", Nov 22); step 4, the ledger's closed items moved out,
+               at the next gap between builds; then steps 5 and 6.  << moved this session
+  b.   [beside] This round's cleanup, each ruled Nov 19, in the order set Nov 21: every entry checked against JPL, L-539 (every entry checked), built Nov 22; then the L4 and L5 tie, L-544 (L4 and L5 tie), put ahead on Nov 22; then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.  << moved this session
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
@@ -84,7 +84,7 @@ Waiting behind other work; a line leaves when picked up.
 - L-483 (a comet room), after historical missions' slice 2.
 - L-489 (compositions), with L-486 and L-488 under it: Artemis II in the Earth room first, with slice 2 (L-507 (historical missions)); Apollo 11's S-IVB with them (Nov 5).
 - A body crossing e = 1: its drawer row waits for JPL's class (L-510 (the typed fields), Nov 5).
-- L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered patch is final), for safe-file-editing's next version.
+- L-490 (the legacy list); L-499 (kinds of session).
 
 ## Signals  **>> UPDATED THIS SESSION**
 

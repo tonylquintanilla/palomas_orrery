@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*279 live items; 263 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*280 live items; 264 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1175,7 +1175,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | OPEN | -- | 2026-11-21 |
-| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-16 |
+| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-22 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
@@ -1186,18 +1186,19 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-21 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-21 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
-| ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
+| ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-22 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-22 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
-| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-21 |
+| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-22 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 | ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-21 |
-| ! | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | OPEN | -- | 2026-11-21 |
+| ! | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | OPEN | -- | 2026-11-22 |
 | ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-21 |
 | ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
 | ! | L-547 | Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded) | OPEN | -- | 2026-11-22 |
 | ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-22 |
 | ! | L-549 | Four moons JPL cannot place: Xiangliu, Hi'iaka, Namaka, MK2 (orrery; for a talk with Tony) | OPEN | -- | 2026-11-22 |
+| ! | L-550 | A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump) | OPEN | -- | 2026-11-22 |
 
 ### B. Pending Action (Tony-side)
 
@@ -2113,7 +2114,7 @@ the digits test) and the website's sentence; the Moon first.
 (Pluto's period at its barycentre); L-514 (the Mars room).
 
 #### [L-538] The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297)
-<!-- L:538 status:OPEN upd:2026-11-19 section:A flag: rice: -->
+<!-- L:538 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Found 2026-11-19** in L-297's Session 2 (Claude Opus 5.5 in Claude
   Code, website 133dbd21), holding the curve's error to every served path.
   LIVE TODAY, before and apart from that round: a spacecraft's box prints
@@ -2147,6 +2148,10 @@ see. Tony asked first, "I thought that the path already varies in
 frequency by its curve?" It does, at events; the orbiter rule keeps a
 capture's loops out of the events (Tony, 2026-10-24), so between an
 arrival and a departure the points stay a week apart.
+**Note:** ORDER, Nov 22, 2026: after the skills bump (v3.145), after
+L-544 (L4 and L5 tie) and after the protocol's reduction, L-522
+(document caps) step 3, by Tony's two words of that day, recorded on
+L-544 and L-522.
 **Gap:** the build, soon (Tony, Nov 19): finer points near today for a
 craft inside a capture; until then those boxes print up to about one
 place finer than earned.
@@ -2275,15 +2280,51 @@ provenance-discipline, A Computed Position Prints What Its Errors Earn.
   missing id_type as 'smallbody' to L-548; the four moons JPL cannot
   place to L-549; the Nov 25 peak to L-485 (a nightly run); the
   Lagrange points' skips, done, on L-512.
+**Note:** THE COORDINATING SESSION'S REVIEW AND THE CLOSE, Nov 22, 2026
+(Claude Fable 5.2). Each report of the Code session was read against
+Tony's disk: its files laid over a fresh copy of the pushed orrery,
+where the two suites read 40 and 121 after Part B and 46 and 127 at the
+close; the export in his folder was byte for byte the pushed one; the
+eight skipped names are the eight Lagrange-point entries in all three
+copies of the list. Three rulings were the coordinating session's, as
+method. A first answer waits on Tony's look, and an entry whose own name
+equals JPL's marks itself. "JPL has no object for this id" is an answer,
+stored and then held. And Hi'iaka and Namaka were first ruled onto the
+pre-fetch's skip list "if they fail exactly as MK2 does", then kept off
+it within the hour, when the trace showed their orbits are drawn from
+JPL's elements of Feb 2 (L-549 (four moons JPL cannot place)). Tony
+pushed the work at 142287c1 (merge 97a8b733) and wrote, 14:47: "i have
+pulled and pushed the repos. the nightly runs and builds are all green
+today. please proceed. i will complete the mode 5 later." Both nights of
+Nov 22 read clean on GitHub: orrery 60d0f157, and website e6af10ea with
+59 rows.
+- TONY'S LOOK IN THE WINDOW, Nov 22, partly done (his run record copy
+  documentation/WHERE_WE_ARE_11-22-26_1315_run_record.md). The two new
+  dashboard buttons ran and ended PASS. With the Moon and Earth-Moon L1
+  ticked around Earth, and with Earth and Earth-Sun L2 around the Sun,
+  the panel read "[PRE-FETCH] Checking osculating elements for 1
+  objects": two ticked, one asked, and no "Required masses not defined".
+  The checklist's line 4 was wrong: it said "L1 as its marker alone",
+  which is the website's rule; the orrery draws a point's path from
+  JPL's positions, as it did before. Tony: "L1 has an orbit too. not a
+  problem. what is the issue?"
+- **Tony-action (do):** the checklist's lines 8 to 14, in that run
+  record: one short animation with the Moon and Earth-Moon L1 ticked,
+  which no session ran; then Haumea with Hi'iaka and Namaka, a look for
+  L-549's talk.
+- THE SKILL TEXT was not written this session; it is the next
+  coordinating session's first job, from
+  documentation/HANDOFF_coordinator_20261122_bump_notes.md and the list
+  above (L-541 (a plan's clock) says why).
 **Gap:** the coordinating session's skill bump (the text above); the
 first night on GitHub after Tony's push, whose Horizons check row
 should read NOTHING DUE until Nov 25, when the 90 served identities
 renew (L-485); the unserved entries first come due on Dec 12, ten a
 night, and the night's commit carries the record only on a night it
 moved.
-- **Tony-action (do):** commit and push this session's work before
-  running the coordinating session's patch, so the two are not mixed
-  in one commit.
+- Done Nov 22: Tony committed and pushed this session's work at
+  142287c1, before the coordinating session's patch, so the two were not
+  mixed in one commit.
 **Ref:** L-297 (the Lagrange points); L-395 (the Horizons check);
 horizons-orbital-mechanics, Checking an Entry Against JPL; L-547; L-548;
 L-549.
@@ -2384,6 +2425,30 @@ say; whether Vanth comes off its lists.
 - **Tony-action (decide):** at the next design talk.
 **Ref:** L-539; L-512; `idealized_orbits.py`; `orbital_elements.py`;
 `jpl_outcome.py`; horizons-orbital-mechanics, A Skip Names What Failed.
+
+#### [L-550] A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump)
+<!-- L:550 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+- FOUND Nov 22, 2026 by L-539's Code session (Claude Opus 5.5): the
+  orrery's Dashboard parity check failed on "Link cards" and "Room
+  clock", two rows the website's builds of Nov 21 added to the gallery
+  run with no button in `palomas_orrery_dashboard.py`. The Encounters
+  row did the same on Nov 20 (Tony then: "Yes, add the button"). Three
+  times in three days.
+- WHY IT RECURS. A website session may not edit the orrery; its brief
+  says so. The orrery's night skips Dashboard parity, so nothing shows
+  the red until the next whole maintenance run by hand.
+- DONE Nov 22: the two buttons, in L-539's session, on the coordinating
+  session's go-ahead, which Tony pasted; "PASS -- 10 of 10 planted
+  faults caught; 116 steps matched to their buttons", and both ran to
+  PASS under Tony's hand.
+**Gap:** the rule, with the skills bump (v3.145): a brief for a website
+build that adds a gallery-run row says who adds the button, and the
+build's closing report names the button as owed. interactive-exhibit is
+its home.
+**Ref:** L-539 (every entry checked); L-529 (guided encounters: the
+Encounters button); L-541 (a plan's clock: the Room clock row); L-540 (a
+reel: the Link cards row); `palomas_orrery_dashboard.py`;
+documentation/HANDOFF_coordinator_20261122_bump_notes.md.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -2551,7 +2616,7 @@ into the skill that covers testing a room.
 website's checks); L-485 (a nightly run).
 
 #### [L-544] Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed)
-<!-- L:544 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+<!-- L:544 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2),
   from L-541's Code session (Claude Opus 5.5), which found it with the
   walks. Earth's fold lists its children nearest first (L-297). The two
@@ -2569,6 +2634,12 @@ website's checks); L-485 (a nightly run).
 - NOT VERIFIED in a browser: whether a visitor sees the two rows trade
   places between visits. The walks say the order differs between
   minutes.
+**Note:** ORDER, Nov 22, 2026. The coordinating session proposed that
+this item go ahead of L-538 (the orbiters' printed error): L-538's
+session must run both walks (L-545 (checks that wait to be remembered)),
+and a walk that is red for a known reason at some minutes teaches a
+session to wave a red through. Tony, 10:13: "Confirmed as recommended
+including your final thought". It follows the skills bump (v3.145).
 **Gap:** a tie-break in the drawer's order where two distances agree to
 the digits a box prints (by name is the plain choice), in the page and
 in the gallery editor's tree, which lists the same order; then both
@@ -2624,7 +2695,7 @@ website's `INTERACTIVE_AS_BUILT.md` from the sibling folder. A patch.
 **Ref:** L-522 (document caps); L-529 (guided encounters).
 
 #### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open)
-<!-- L:541 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+<!-- L:541 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Opened 2026-11-20, evening**, by Tony's word at L-529's Part B
   report ("any place in the orrery or the website that prints a plan
   time as UTC without converting it from TDB, saying where you
@@ -2823,6 +2894,16 @@ website's `INTERACTIVE_AS_BUILT.md` from the sibling folder. A patch.
   agreeing. Tony's phone look, on "the date line still reads UTC ...
   Juno's box still says 'as far as 26 August 2028'": "-- yes"
   (`documentation/WHERE_WE_ARE_11-21-26_1515_run_record.md`).
+**Note:** THE SKILL TEXT IS STILL OWED, Nov 22, 2026 (the coordinating
+session, Claude Fable 5.2). It was to be written while L-539's Code
+session ran (Tony, Nov 22, 10:13, to that order: "Confirmed as
+recommended including your final thought"). Every report of that session
+needed a turn of review, and the text was not finished. What each of the
+four skills should say, checked against the website's code at 5a7c96f8,
+is in documentation/HANDOFF_coordinator_20261122_bump_notes.md, with
+safe-file-editing as a fifth (L-529's escape rule) and the rules L-539
+(every entry checked) lists. It is the next coordinating session's first
+job: one bump, v3.145, before the next website build.
 **Gap:** the rooms' clock is live. Still open here: the builder's keys
 (`Time(jd).datetime` read as UTC) and its reading of a plan's windows
 as UTC; the orrery's `path_drawing.py`; the whole-second 69 in the
@@ -3282,7 +3363,7 @@ Kepler solver's start, the case that raised it); L-165 (site
 continuity).
 
 #### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
-<!-- L:522 status:OPEN upd:2026-11-16 section:A flag: rice: -->
+<!-- L:522 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **The review, 2026-11-10**
   (`documentation/REVIEW_fundamental_documents_20261110.md`, read at
   orrery b3ce81f8 and gallery cea21af1; the coordinating session, Claude
@@ -3629,6 +3710,29 @@ tools) was measured, not reviewed.
   Where We Are's first gauge reads the last build that succeeded, so a
   failed night still reads "ok"; and the README's cap is tripped by its
   own generated table when a root document is added.
+**Note:** THE TRACK JOINS THE ROAD'S ORDER, Nov 22, 2026 (the
+coordinating session, Claude Fable 5.2). Tony, 15:02: "One more thing.
+In a previous session we were working on documents review. Can you
+integrate that into this plan?" The coordinating session proposed: the
+skills bump (v3.145); then L-544 (L4 and L5 tie); then this item's step
+3, the protocol's reduction, in its own Fable session, before L-538 (the
+orbiters' printed error) and the encounter's slice 2; then step 4, the
+ledger's closed items moved out, at the next gap between builds, and
+steps 5 and 6 the same way. Asked "Do you confirm this order, with step
+3 before L-538?", Tony, 15:07: "Yes". The reasons given him: after step
+3 a skill bump no longer needs the protocol pasted into the Project, and
+every build ahead owes a bump; the ledger is 2.8 MB and every session
+searches it; and the track had not moved since Nov 11 because a build
+always came first. Running step 3 beside L-538 with a second coordinator
+was advised against: it needs his rulings and a carry to GPT, and on Nov
+22 his carrying was the limit when two sessions ran at once.
+- SEEN Nov 22, for step 3's close: the handoff's line that every skill
+  sits at its cap, "so every change to one begins with moving something
+  out", held. The bump of that day stalled on finding room in
+  gallery-cache-builder (942 of 944) and horizons-orbital-mechanics (904
+  of 904), whose plain history earlier bumps had already moved. Each is
+  a candidate for the split the exhibit skill had at step 2; not
+  proposed to Tony yet.
 **Gap:** steps 3 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11); step 3's talk is held, its draft is not written.
 **Tony-action (do):** reinstall interactive-exhibit 1.41 (Settings >
