@@ -792,7 +792,7 @@ ok   doc_index.py --caps
 
 Do next: 
 1. move this file into documentation, 
-2. commit and push -- 
-3. the orrery, reinstall interactive-exhibit and gallery-pipeline,
-and paste PROJECT_INSTRUCTIONS.md into the Project.
+2. commit and push -- ae9ec0f922991681df1ded138acce7d26734c8ea
+3. the orrery, reinstall interactive-exhibit and gallery-pipeline, 
+and paste PROJECT_INSTRUCTIONS.md into the Project. -- done
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
