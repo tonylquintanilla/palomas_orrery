@@ -1,24 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 21, 2026, afternoon: the Links fold built, the drawer walk brought up to date (Claude Code, Claude Opus 5.5), and the skills written for both builds (the coordinating session, Claude Fable 5.2).
-- Written at orrery bd70f584 and gallery 828362fd, with this session's edits on your disk, not pushed.
+Last updated: November 21, 2026, night: two red website nights found and fixed, and the live rooms' clock set right (the coordinating session, Claude Fable 5.2; the clock built by Claude Code, Claude Opus 5.5).
+- Written at orrery e8cc7f11 and gallery 15eec699, both pushed; the reel's place was on your disk and not yet on GitHub.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - A link card can now sit beside a body in the room's drawer, in a Links fold after that body's Encounters and before its Saved pictures; a tap opens it in a new tab. The gallery editor shows the same fold, and New Link Card asks which row; with no row the card goes to Storage. The Outside Links room is gone from the code (L-540 (a reel on a Featured card)).
-> - The pushed website's Picture folds check was red: it refused the reel's card for having no place in the drawer. A link card may now have none, and the whole gallery run is green, 52 of 52, run with nothing being edited.
-> - The drawer walk is green again, 368 checks: its eleven red checks each expected the page as it was before a deliberate change (the Lagrange points, the Encounters fold, and three older ones), so only the walk changed; three planted breaks each turn it red (L-521 (the walk's red checks)).
+> - Every live room now draws each body where JPL puts it at the UTC minute its date line shows. Until Nov 21 each was drawn where it was 69 seconds earlier: JPL's dates are on JPL's own clock, and nothing converted. No date you read changed. Each night now asks JPL where Mercury and 3I/ATLAS are and goes red if the room disagrees, the "Room clock" row (L-541 (a plan's clock)).
+> - Two website nights went red, Nov 21's runs 49 and 50, on one line of INTERACTIVE_AS_BUILT.md. It was green on your computer only because nine folders left by a build of Nov 19 hid it. Fixed and pushed the same afternoon; the nights are green again (L-529 (guided encounters), L-543 (green on your computer, red on GitHub)).
+> - A walk, which loads the page itself, caught what 53 green rows did not: three boxes printing a path's day one day early. It was fixed before the push. The walks are not in the gallery run; whether they join it is yours, under Waiting on you (L-545 (checks that wait to be remembered)).
 >
-> **Do next:** *Your push and the reel's place (below); then the encounter's slice 2, its talk first (L-529 (guided encounters)); beside it, this round's cleanup (the road, line b), whose briefs are not written yet.*
+> **Do next:** *The cleanup, in the order set Nov 21: every entry checked against JPL, L-539 (every entry checked), in the orrery, its brief not written yet; then the orbiters' hourly points, L-538 (the orbiters' printed error); then the encounter's slice 2, its talk first (L-529 (guided encounters)). The next coordinating session also writes the skill text the clock's build owes, before the next website build.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) Start the Code session for the rooms' clock: open Claude Code in python_work, Opus, high effort, and paste `documentation/PROMPT_code_L541_room_clock_20261121.md` from below its line. The live rooms draw every body 69 seconds behind the UTC minute shown; your ruling of Nov 21: "Yes", convert (L-541 (a plan's clock)). The two skills are reinstalled and v3.144 is pasted, confirmed Nov 21.*
-> - *(do) Push the website and then the orrery; then in the gallery editor select the reel (Solar System, Lobby only), Add place... Earth, Save All, push; then look on your phone: Earth's Links fold, its words, and the reel opening in a new tab (L-540 (a reel on a Featured card)).*
+> - *(do) The reel: if its place is not pushed yet, commit it in the website, then Pull origin, then Push origin. Then on your phone look for Links in Earth's fold, between Encounters and Saved pictures, and tap the reel (L-540 (a reel on a Featured card)).*
+> - *(do) Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_2.md`, pasted from below its line.*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -36,7 +36,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                page (L-060 (El Nino)) live Nov 17; ESCAPADE's path (L-533)
                live Nov 18; the Lagrange points (L-297) live
                Nov 19, on your phone look; the encounters talk
-               and the first encounter, ESCAPADE's Earth flybys, Nov 20, on your phone look (L-529 (guided encounters)); then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.*
+               and the first encounter, ESCAPADE's Earth flybys, Nov 20, on your phone look (L-529 (guided encounters)); the live rooms' clock set right Nov 21 (L-541 (a plan's clock)); then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.*
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
@@ -49,27 +49,26 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11; steps 3 to 6 between builds, the
                protocol's reduction first, for a new Fable session.
-  b.   [beside] This round's cleanup, each ruled Nov 19 (the order is yours): every path to its last day, L-533 (ESCAPADE); the orbiters' hourly points, L-538 (the orbiters' printed error); every entry checked against JPL, L-539 (every entry checked); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.
+  b.   [beside] This round's cleanup, each ruled Nov 19, in the order set Nov 21: every entry checked against JPL, L-539 (every entry checked); then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.  << moved this session
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- A visitor reads UTC everywhere. The room adds JPL's clock difference before it looks up JPL's data; only a body's source line names JPL's clock, for the date of its orbit; a plan's moments print as UTC (Nov 21, your "Yes"; L-541 (a plan's clock)).
 - Every path runs to its span's last day: the website asks JPL for it too (Nov 19; L-533 (ESCAPADE)).
 - A period prints today's figure with only the digits its swing allows, and its sentence gives the swing's measured range (Nov 19; L-536 (a moon's yearly change)).
 - A craft orbiting a planet gets the real fix, hourly points near today, and no stopgap (Nov 19; L-538 (the orbiters' printed error)).
 - Every entry the orrery asks JPL for is checked against JPL, starting from a one-time list you scan (Nov 19; L-539 (every entry checked)).
-- The points are served a day apart, an hour apart from yesterday to the day after tomorrow; colours and name sides as built, Earth-Moon L1's name on the left; the pile-up in the Solar System view stays (Nov 19; L-297 (the Lagrange points)).
-- The curve's error is on for the Lagrange points and the open-path comets only, held by the daily "Curve error" check (Nov 19; L-297 (the Lagrange points)).
 - The Lagrange points are shown as Earth-Moon L1, L2, L4, L5 and Earth-Sun L1, L2, L4, L5, "Earth-Sun" being NASA's word; JPL's names (EM-L1, SEMB-L1) are the source line (Nov 18; L-297 (the Lagrange points)).
 - Moons sit with their planet's shells by distance, as Earth's Moon does; there is no Moons group (Nov 18; L-534 (missions by destination)).
 - ESCAPADE's words leave out NASA's "kidney-bean": it is the loop seen from a view that turns with Earth, and no room turns (Nov 18; L-533 (ESCAPADE)).
 - A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - ESCAPADE's year near L2 is an encounter of its own, after the flybys' slice 2; its view is an open question, since its loops show only around Earth and not as NASA draws them (Nov 20; L-529 (guided encounters)). A planned path drawn around Earth, which SOHO, Gaia and JWST need too, stays with Earth's fold (Nov 18; L-533 (ESCAPADE)).
@@ -88,17 +87,18 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261120T202853Z, ok, no retry on the swap (the website's swap log at ae56a944, read Nov 20).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 1c0688ca, generated Nov 19, read Nov 20).
+- Last cache build: 20261122T034324Z, ok, no retry on the swap (the website's swap log at 15eec699, read Nov 21).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery e8cc7f11, generated Nov 20, read Nov 21).
 - This page's date and the ledger's newest stamp: both Nov 21. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open. The last day was ruled Nov 19: yes, each path asks for its span's last day (L-533 (ESCAPADE)).
+- Whether the gallery's checks are read from a copy holding only what a push carries, before every website push. Nov 21's red nights were green on your computer. Your "-- okay" was to raising it (L-543 (green on your computer, red on GitHub)).
+- Whether the two walks join the gallery run, which means the website keeps one more library; and when the recorded Earth scene is re-recorded. Your words, Nov 21: "should this be method?" The session's part is method now; these two are yours (L-545 (checks that wait to be remembered)).
 
 At the next design talk:
 - El Nino's step 5, its last sentence: name NOAA as the source of the open question, and say it is the swing on NOAA's index that is studied. Your words: "in today's political environment the hedge can read as ideological not just scientific" (Nov 17; L-060 (El Nino)).
@@ -122,7 +122,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- This round: L-529 (guided encounters), its brief `COORD_L529_encounter_escapade_earth_brief_20261120.md`, the design record `DESIGN_encounters_20261120.md`; the website's `INTERACTIVE_AS_BUILT.md`, Encounters; the tool `tools/encounter_fetch.py` and its package under `data/encounters/`.
+- This round: L-541 (a plan's clock), its brief `COORD_L541_room_clock_brief_20261121.md` and its survey `SURVEY_L541_clock_69s_20261121.md`; the website's `INTERACTIVE_AS_BUILT.md`, The rooms' clock; the check `documentation/smoke_room_clock.js`. The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's
   handoff, `HANDOFF_document_upkeep_20261116.md` (Nov 16).
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*272 live items; 256 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*276 live items; 260 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1174,7 +1174,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
-| ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | PENDING-GATE | -- | 2026-11-21 |
+| ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | OPEN | -- | 2026-11-21 |
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-16 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
@@ -1189,8 +1189,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
-| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock built Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-21 |
+| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-21 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
+| ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-21 |
+| ! | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | OPEN | -- | 2026-11-21 |
+| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-21 |
+| ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
 
 ### B. Pending Action (Tony-side)
 
@@ -2309,7 +2313,110 @@ in Featured); L-542 (a scene's room); L-456 (the i panel's links);
 L-287 (Storage is never served); L-363 and L-428 (the lobby's wide card
 and start card); the reel rule of Nov 17 (L-060).
 
-#### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock built Nov 21, the builder's and the orrery's readings still open)
+#### [L-543] A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked)
+<!-- L:543 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2),
+  from two red website nights (L-529's note of that day). A check that
+  walks Tony's website folder also reads what git ignores there; GitHub's
+  copy holds none of it. The founding case: `tools/check_as_built_names.py`
+  read nine `data/.staging_solar-system_*` folders left by a build of
+  Nov 19, and passed on a name that GitHub's copy does not have.
+- That one check now leaves the builder's leftovers out
+  (`patch_L529_4_as_built_names_night.py`). The class is open: any other
+  check that walks `data/` or the folder can do the same. The nine
+  folders need nothing: the builder removes siblings older than three
+  days at its next run on that machine
+  (`documentation/check_cache_siblings.py`, its header).
+- WHAT WORKED TWICE ON NOV 21. The coordinating session ran
+  `gallery_maintenance_run.py --night` on a clean clone of the pushed
+  commit. L-541's Code session ran the whole gallery run in a throwaway
+  folder holding only the files `git ls-files --cached --others
+  --exclude-standard` lists, 53 of 53; its copy script lived in a
+  scratch folder and is not in the repository.
+- Tony, Nov 21, on "a gallery run on a fresh checkout before a push ...
+  is worth a ruling at the close": "-- okay"
+  (`documentation/WHERE_WE_ARE_11-21-26_1515_run_record.md`).
+**Gap:** Tony's ruling: whether the gallery run is read from a push copy
+before every website push. If yes: the copy script becomes a tool in
+`tools/`, the run gains a way to do it in one step, and the rule goes
+into the skill that covers testing a room.
+**Ref:** L-529 (guided encounters); L-541 (a plan's clock); L-423 (the
+website's checks); L-485 (a nightly run).
+
+#### [L-544] Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed)
+<!-- L:544 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2),
+  from L-541's Code session (Claude Opus 5.5), which found it with the
+  walks. Earth's fold lists its children nearest first (L-297). The two
+  points are each as far from Earth as the Moon is, and are served at
+  the same distance except in the 17th decimal place, so the order of
+  the two rows is not fixed.
+- WHAT IT DID. `tools/headless/walk_solar_system_drawer.js`: 368 of 368
+  at 02:58 and 03:22 UTC on Nov 22, 367 at a minute between ("earth's
+  moons are not right under its row, nearest first"); the untouched
+  7d1e2e16 failed the same check at 03:22. `walk_scene_moment.js`: 12 of
+  13 on the untouched 7d1e2e16 ("frozen: the drawer differs from the
+  plain opening (232 rows against 232)"), rows 100 and 101 trading
+  places between today and the window's last day. The same pair was the
+  one wrong verdict of eleven in L-521's repair.
+- NOT VERIFIED in a browser: whether a visitor sees the two rows trade
+  places between visits. The walks say the order differs between
+  minutes.
+**Gap:** a tie-break in the drawer's order where two distances agree to
+the digits a box prints (by name is the plain choice), in the page and
+in the gallery editor's tree, which lists the same order; then both
+walks green at every minute. Method, not a ruling. Small; a session
+that changes the page runs both walks (L-545).
+**Ref:** L-297 (the Lagrange points); L-521 (the walk's red checks);
+L-541 (a plan's clock).
+
+#### [L-545] Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked)
+<!-- L:545 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
+  THE WALKS load the page itself; the gallery run's rows test its
+  scripts and a recorded scene. On Nov 21 L-541's build left three boxes
+  printing a path's day one day early (Juno, West, Galileo). It passed
+  53 gallery rows on Tony's copy and on a push copy, and the
+  coordinating session's own run of the new check.
+  `walk_solar_system_drawer.js` caught it, run only because the
+  coordinating session asked for the walks before the commit. A session
+  does not run them unasked: they need jsdom (24.1.3, from npm, into a
+  scratch folder), and neither the gallery run nor the night runs them.
+- Tony, Nov 21, on "that should not depend on someone remembering":
+  "-- correct. should this be method?"
+  (`documentation/WHERE_WE_ARE_11-21-26_1515_run_record.md`). Yes. THE METHOD: a session that changes
+  `interactive.html` or a script it loads runs both walks before its
+  closing report, and reports each count and any red check by name. A
+  brief says so until interactive-exhibit does.
+- THE RECORDED EARTH SCENE (`documentation/payload_earth_scene.json`,
+  made by `tools/record_earth_scene.py`) is re-recorded only by hand.
+  Six checks read it. Re-recorded on Nov 21 for L-541, it brought in
+  Earth's period sentence, served since L-535, which Typed facts had
+  never read (the build's closing thought).
+**Gap:** the skill text, at interactive-exhibit's next version. Two
+rulings for Tony: whether the walks join the gallery run, which means
+the website keeps jsdom and the night's runner installs it; and when the
+recorded scene is re-recorded (at every cache build, or by a check that
+goes red when it is older than the page).
+**Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
+(the website's checks); L-535.
+
+#### [L-546] Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded)
+<!-- L:546 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
+  Tony, 15:02: "I can't find INTERACTIVE_AS_BUILT.md in my folders. it
+  should be in the orrery root if it is ia critical document". It is in
+  the website's root, beside the code it describes;
+  `tools/check_as_built_names.py` reads it there, and GitHub's night has
+  no orrery folder. Tony agreed it stays ("Yes", 15:08, to the patch
+  with the page staying in the website's root).
+- FOUND BY A SEARCH, NOT A RUN: `palomas_orrery_dashboard.py` names the
+  page once, in a check's description, and has no entry that opens it.
+**Gap:** a line in the dashboard's documents list that opens the
+website's `INTERACTIVE_AS_BUILT.md` from the sibling folder. A patch.
+**Ref:** L-522 (document caps); L-529 (guided encounters).
+
+#### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open)
 <!-- L:541 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Opened 2026-11-20, evening**, by Tony's word at L-529's Part B
   report ("any place in the orrery or the website that prints a plan
@@ -2488,8 +2595,28 @@ and start card); the reel rule of Nov 17 (L-060).
   order is this item's rooms, then L-539 (every entry checked), then
   L-538 (the orbiters' printed error), which refines an error smaller
   than 69 seconds of an orbiter's motion.
-**Gap:** the rooms' clock is built and waits for Tony's push, the night
-by hand and his phone look. Still open here: the builder's keys
+- **THE COORDINATING SESSION'S REVIEW, AND TONY'S QUESTION, 2026-11-21**
+  (Claude Fable 5.2). Read on Tony's disk against 7d1e2e16 before the
+  push: `resolver.py`, `models.py`, `cache_reader.py` and the builder's
+  clock block. `documentation/smoke_room_clock.js` run on a clean
+  checkout with his files laid over it: PASS, with the build's own rows
+  (0.001 km and 0.026 km with the seam; 3,694 km and 4,088 km without).
+  Tony, 20:58: "are we asking JPL to match our numbers at a time
+  tolerance that invites a fail?" Measured by the build, by hand and not
+  in the build, at 6, 12, 18 and 24 hours after the date of Mercury's
+  served orbit: the box's error was at least 6.9 times the room's miss
+  at every hour (3I/ATLAS at 12 hours, 0.072 km against 0.5 km; Mercury
+  at 24 hours, 0.055 km against 0.5 km). The brief was wrong twice, both
+  found by the build: the served window is made on UTC, and 69.184 s is
+  TT's figure.
+- **LIVE, 2026-11-21.** Pushed at gallery b817aca5 (Tony, 21:40, "website
+  pushed. no pull."). The night run by hand, run 52, green at gallery
+  15eec699: six steps clean, all 59 rows PASS, Room clock among them;
+  the builder on GitHub's machine got 69.182891 s from JPL, astropy 8.0.3
+  agreeing. Tony's phone look, on "the date line still reads UTC ...
+  Juno's box still says 'as far as 26 August 2028'": "-- yes"
+  (`documentation/WHERE_WE_ARE_11-21-26_1515_run_record.md`).
+**Gap:** the rooms' clock is live. Still open here: the builder's keys
 (`Time(jd).datetime` read as UTC) and its reading of a plan's windows
 as UTC; the orrery's `path_drawing.py`; the whole-second 69 in the
 orrery's `utc_to_tdb` and `TDB_OFFSET`, which could read the served
@@ -2500,10 +2627,8 @@ builder asks its daily points 9 s before UTC midnight (00:01:00 on
 JPL's clock), and the page's nearest-minute rule stands in for it until
 it asks at true UTC midnight; and the served difference is today's, so
 an old date is taken back by up to 27 s too much (the old-dates finding
-above, no day wrong). The walks' two reds are L-521's.
-**Tony-action (do):** commit the website's code and its rebuilt cache
-together and push in the same sitting; run the night by hand (Actions,
-"Nightly run", "Run workflow") and read it green; then the phone look.
+above, no day wrong). The walks' two reds are L-544 (L4 and L5 tie).
+The skill text is for the next coordinating session, as one bump.
 **Ref:** L-529 (guided encounters); L-504 (the orrery's clock, UTC);
 L-533 (ESCAPADE); L-538 (the orbiters' printed error); L-539 (every
 entry checked); horizons-orbital-mechanics (The Clock Is Read as UTC);
@@ -2722,6 +2847,24 @@ coordinating session's close moves them here.
   tokens by the build's own estimate: one brief held the package, the
   scene, the row, Find and the editor. Slice 2's brief keeps each
   session inside one part of the site.
+- **TWO NIGHTS WENT RED ON THIS BUILD'S AS-BUILT LINE, 2026-11-21** (the
+  coordinating session, Claude Fable 5.2). Tony, 14:50: "nightly runs 49
+  and 50 on the website failed exit code 1." The as-built section pushed
+  at f918d74 (Nov 20, 20:43) named `feature_configs.json` with no
+  folder; `tools/check_as_built_names.py` does not look for a bare file
+  name inside `data/solar-system/`, so on GitHub's copy the name was not
+  found. On Tony's computer the same check was green: nine folders a
+  build of Nov 19 left under `data/` (`.staging_solar-system_...`) each
+  held a file of that name, and the check read them. So the Nov 21
+  session's "52 of 52" was true of his disk and not of the push. Its
+  Picture folds red was real too, and was fixed at 828362fd. Measured on
+  a clean checkout of 81c6ff5d: As-built names red, 50 of 52 gating
+  rows green, Scene cards not runnable there. Fixed by
+  `patch_L529_4_as_built_names_night.py` in the website (the name with
+  its folder; the check leaves out `data/.staging_*`; its self-test
+  plants a file in each leftover place), pushed at 627acc3f; the night
+  run by hand green at 7d1e2e16, all 58 rows PASS. The class is L-543
+  (green on Tony's computer, red on GitHub).
 **Gap:** slice 2, its talk first: the two close passes and how the
 visitor moves between the three views; escape speed beside the speed
 in the close views; NASA's "powered Earth flybys" through the
@@ -3300,7 +3443,7 @@ L-012 (the false "fetched fresh" print, still at `palomas_orrery.py`
 line 4872).
 
 #### [L-521] Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green)
-<!-- L:521 status:PENDING-GATE upd:2026-11-21 section:A flag: rice: -->
+<!-- L:521 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Recorded, not chased.** Found 2026-11-09 by the L-519 (Featured's
   rethink) Code session (Claude Opus 5.5), on gallery 6a153716 with a
   payload built that day by the room's real driver (2026-11-09T12:00Z):
@@ -3418,8 +3561,12 @@ line 4872).
   rows, and a child's value in drawer_order.js, neither what the walk
   reads) and the walk stayed green on both, as it should. The gallery
   run after: 52 of 52.
-**Gap:** Tony's push of the walk; then DONE, and the walk is the check
-that goes red when the drawer leaves its rules.
+**Gap:** the walk was pushed at gallery 81c6ff5d (Nov 21), so its gate
+is met. Not DONE: that evening one of its 368 checks, and one of
+`walk_scene_moment.js`'s 13, was red at some minutes and green at
+others, on the order of Earth-Moon L4 and L5, which is L-544 (L4 and
+L5 tie). When L-544 closes, this closes, and the walk is the check that
+goes red when the drawer leaves its rules.
 **Ref:** L-519 (Featured's rethink); L-497 (one text box); gallery
 `tools/headless/walk_solar_system_drawer.js`.
 

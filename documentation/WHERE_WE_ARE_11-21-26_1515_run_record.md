@@ -1037,13 +1037,41 @@ On your two notes: yes, running the walks before a page change is pushed should 
 - A second run refuses and writes nothing.
 
 **Your run order, in the morning**
-1. GitHub Desktop: Fetch origin and Pull origin on both, orrery 
-   1. then website.
+1. GitHub Desktop: Fetch origin and Pull origin on both, orrery -- 71e481403d3103d68785b99c85606f01d1c7853b
+   1. then website. -- no changes. 5a7c96f80237abbad59d58637fb0bcc74a92842f
 2. Save `patch_L543_1_close_record.py` in the orrery folder (`palomas_orrery_for_github`). Open it in VS Code and click Run.
    - Success: 19 "ok" lines, one "new" line, "patch applied", then "ok" for `ledger_index.py` and for `doc_index.py --caps`.
    - Failure: an "ERROR:" or "ANCHOR FAIL" line, and nothing is written. Tell the next session the line.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L543_1_close_record.py'
+ok   LEDGER_CONSOLIDATED.md: #### [L-541] A plan's moment is on JPL's clock (TDB), and so
+ok   LEDGER_CONSOLIDATED.md: **Gap:** the rooms' clock is built and waits for Tony's push
+ok   LEDGER_CONSOLIDATED.md: above, no day wrong). The walks' two reds are L-521's.
+ok   LEDGER_CONSOLIDATED.md: **Gap:** slice 2, its talk first: the two close passes and h
+ok   LEDGER_CONSOLIDATED.md: <!-- L:521 status:PENDING-GATE upd:2026-11-21 section:A flag
+ok   LEDGER_CONSOLIDATED.md: **Gap:** Tony's push of the walk; then DONE, and the walk is
+ok   LEDGER_CONSOLIDATED.md: #### [L-541] A plan's moment is on JPL's clock (TDB), and so
+ok   documentation/WHERE_WE_ARE.md: Last updated: November 21, 2026, afternoon: the Links fold b
+ok   documentation/WHERE_WE_ARE.md: > - A link card can now sit beside a body in the room's draw
+ok   documentation/WHERE_WE_ARE.md: > **Do next:** *Your push and the reel's place (below); then
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Start the Code session for the rooms' clock: open 
+ok   documentation/WHERE_WE_ARE.md: and the first encounter, ESCAPADE's Earth flybys, Nov 20, on
+ok   documentation/WHERE_WE_ARE.md: b.   [beside] This round's cleanup, each ruled Nov 19 (the o
+ok   documentation/WHERE_WE_ARE.md: ## Settled
+ok   documentation/WHERE_WE_ARE.md: - The points are served a day apart, an hour apart from yest
+ok   documentation/WHERE_WE_ARE.md: ## Deferred  **>> UPDATED THIS SESSION**
+ok   documentation/WHERE_WE_ARE.md: ## Signals
+ok   documentation/WHERE_WE_ARE.md: ## Waiting on you
+ok   documentation/WHERE_WE_ARE.md: - This round: L-529 (guided encounters), its brief `COORD_L5
+new  documentation/PROMPT_coordinator_start_20261122_2.md
+patch applied (1 new files, 19 edits in 2 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+Next: move this patch to documentation, then commit and push the orrery.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
 3. Move the patch into the orrery's `documentation` folder.
-4. Commit and push the orrery. Suggested summary: "L543 close record".
+4. Commit and push the orrery. Suggested summary: "L543 close record". -- 
 5. Save your run-record copy, then clear the zone below the marker, as you usually do.
 6. Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_2.md`, pasted from below its line.
 
