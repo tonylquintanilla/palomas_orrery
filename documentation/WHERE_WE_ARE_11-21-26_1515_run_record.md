@@ -564,8 +564,8 @@ Next: commit and push the orrery; then start the Code session with documentation
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 3. Move the patch into the orrery's `documentation` folder.
-4. Commit and push the orrery. Suggested summary: "L541 rooms' clock brief". -- 
-5. When you choose to start the session: open Claude Code in `python_work`, Opus, high effort. Paste the prompt from below its line.
+4. Commit and push the orrery. Suggested summary: "L541 rooms' clock brief". -- fb9529e37c501218eb0f5a5e80795e7bd7529a29
+5. When you choose to start the session: open Claude Code in `python_work`, Opus, high effort. Paste the prompt from below its line. -- started
 6. Bring me the Part A report.
 
 **Where this leaves us**
@@ -576,3 +576,49 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 - Still owed at this session's close: today's red nights on the ledger, the fresh-checkout ruling, the dashboard's missing link, and the rest of Where We Are.
 
 One final thought: this session will touch the builder, the assembler, the page and the checks. That is four thin slices of one concern, and slice 1 of the encounter showed what four parts in one session can cost. Part A exists so the size is known before any file changes. If its map comes back long, I would split B from C into two sessions.
+
+========================
+
+**Go. All three conditions are met, and GitHub has not moved as of 9:36 p.m.** (website 7d1e2e16, orrery fb9529e3).
+
+**Your run order, in one sitting**
+1. GitHub Desktop, website: commit everything, the code and the rebuilt cache under `data/` together. Suggested summary: "L541 rooms' clock". Push.
+   - If Desktop says the remote has moved, stop and tell me. Do not pull.
+
+**Push it now.** GitHub is still at 7d1e2e16 as of 9:39 p.m., so your commit b817aca5 will go straight on top with nothing to merge.
+
+- In GitHub Desktop, website: Push origin. -- pushed. no pull.
+- If Desktop offers "Pull origin" in place of "Push origin", stop and tell me. Do not pull.
+
+Once it is up, tell me, and I will confirm GitHub reads b817aca5 before you run the night by hand. -- done. 
+
+**The push is confirmed. GitHub reads b817aca5, "L541 rooms' clock", 252 files.**
+
+- It carries the clock block (69.18289 s) and the witness for Mercury and 3I/ATLAS.
+- The conversion point and the Room clock check match the copies I checked earlier, byte for byte.
+- `solar_system_figures.js` differs from my earlier copy, as it should: it gained the nearest-minute rule after I read it.
+
+**Next, in this order**
+1. On GitHub: the website's Actions tab, "Nightly run", "Run workflow". It takes several minutes. -- nightly run #52 started.
+2. While it runs, commit and push the orrery's ledger. It is still at fb9529e3 on GitHub. -- 
+3. Tell me green or red, and I will read the night's record from the repository.
+
+2. Orrery: commit `LEDGER_CONSOLIDATED.md`. Suggested summary: "L541 record". Push. Whether your run record file goes in this commit is yours.
+3. On GitHub: the website's Actions tab, "Nightly run", "Run workflow". It takes several minutes.
+4. Tell me green or red. I will read the result from the repository.
+5. Your phone look: the date line still reads UTC, and nothing you can see has moved. Juno's box should still say "as far as 26 August 2028".
+6. Tomorrow morning: Fetch origin and Pull origin on both, as usual.
+
+Steps 1 and 2 must be done before 2:17 a.m.
+
+**What the final report shows**
+- The gallery run reads 53 of 53 on your working copy and on the push copy.
+- The drawer walk reads 368 of 368, with Juno's, West's and Galileo's expectations unchanged.
+- The old dates all print the right day. The two figures I recalled from memory were checked against astropy and held.
+- Both leftover walk reds are the Earth-Moon L4 and L5 tie. The session proved they are older than tonight.
+
+**Where this leaves us**
+- The clock fix is built, checked and ready. It is on your disk and not yet pushed.
+- After your push and a green night, every live room draws each body where JPL puts it at the UTC minute shown.
+- Open on L-541 (a plan's clock): the builder's 9-seconds-early midnight, its keys and plan windows, the orrery's whole-second 69, and text for four skills.
+- Owed at my close: today's red nights, the L4 and L5 tie-break, whether the walks join the gallery run, how you learn of a red night, the stale Earth recording, and the fresh-checkout rule.

@@ -1189,7 +1189,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-19 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
-| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock ruled Nov 21, its brief written) | OPEN | -- | 2026-11-21 |
+| ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock built Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-21 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 
 ### B. Pending Action (Tony-side)
@@ -2309,7 +2309,7 @@ in Featured); L-542 (a scene's room); L-456 (the i panel's links);
 L-287 (Storage is never served); L-363 and L-428 (the lobby's wide card
 and start card); the reel rule of Nov 17 (L-060).
 
-#### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock ruled Nov 21, its brief written)
+#### [L-541] A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock built Nov 21, the builder's and the orrery's readings still open)
 <!-- L:541 status:OPEN upd:2026-11-21 section:A flag: rice: -->
 - **Opened 2026-11-20, evening**, by Tony's word at L-529's Part B
   report ("any place in the orrery or the website that prints a plan
@@ -2390,6 +2390,93 @@ and start card); the reel rule of Nov 17 (L-060).
   served window; read 2026-11-21 in the tz list's forward of it, not
   at IERS. The 32.184 s is in the builder's docstring and is not
   sourced there.
+  **CORRECTED 2026-11-21, by the build (Claude Opus 5.5):** 69.184 s is
+  TT minus UTC. JPL's clock is TDB, which swings about TT by up to
+  0.002 s (the Horizons manual, Specification of Time: "TT periodically
+  differs from TDB by, at most, 0.002 seconds"), so the difference the
+  rooms need is TDB minus UTC, and JPL gives it directly: 69.182751 s at
+  the served window's first minute, 69.185164 s at its last, and
+  69.18289 s at the build of 2026-11-22 02:36 UTC (Nov 21, evening, in Chicago), the figure served. The 37 leap
+  seconds read at IERS itself on 2026-11-21: Bulletin C 72 (Paris, 06
+  July 2026), "UTC-TAI = -37 s" and "NO leap second will be introduced
+  at the end of December 2026."
+- **BUILT, 2026-11-21** (Claude Code, Claude Opus 5.5, through the
+  python_work door, in the website, on gallery 7d1e2e16, in three parts
+  with a report and the coordinating session's go-ahead after each).
+  A body is now drawn where JPL puts it at the UTC minute the date line
+  shows, in every live room. ONE SEAM: `gallery/assembler/resolver.py`
+  checks the UTC minute against the served window (which the builder
+  makes on UTC, so its last minute does not move), then adds the served
+  difference once; the context carries both dates, and the drivers hand
+  the page `moment_utc_jd` (the date line's) and `moment_tdb_jd` (the
+  lookups' and the drift's), the old `epoch_jd` and `epochJd` removed.
+  A day printed from one of JPL's dates as UTC is taken back first;
+  the source line's "69 seconds" is read from the served figure; the
+  loiter sentence prints its days on UTC (ESCAPADE's still reads "13
+  November 2025"). THE DIFFERENCE IS SERVED: the builder's `build_clock`
+  asks JPL its TDB-UT (a vectors query for Mercury, astroquery's
+  delta_T; the Horizons manual: "After 1962, UT means UTC") at the
+  window's first and last minute and the build's own, works out
+  astropy's TDB minus UTC at the same minutes, and stops the build by
+  name if they differ by more than 0.001 s or JPL's moves by more than
+  0.004 s across the window (a leap second inside it). No row in the
+  orrery's store (the coordinating session's ruling of 2026-11-21).
+  With no clock block served the room draws as before and warns. THE
+  WITNESS: each build serves JPL's places of Mercury (worked out from
+  its orbit; the clock question's own answer) and 3I/ATLAS (from served
+  points) at its own minute; the website's gallery run's Room clock row
+  (`documentation/smoke_room_clock.js`, gates, the night pass too)
+  works both out with the real assembler and compares the PLACES. At
+  the build of 2026-11-22 02:36 UTC (Nov 21, evening, in Chicago): with the seam, Mercury 0.001 km and 3I/ATLAS
+  0.026 km from JPL's places, each box printing by 0.5 km; with the
+  clock block taken out, 3,693.6 km and 4,088.4 km, red, every run.
+  At the window's last minute all 42 bodies from served points keep
+  their place (a planted case is named). The builder's offline suite
+  asks JPL nothing (stand-ins) and stops the build by name on six
+  planted clock faults. Checks that moved, each for its stated reason:
+  Solar System figures (the loiter on UTC; a planted fault for a moment
+  left on JPL's clock); Earth scene geometry, Drawer order, Hover
+  budget, Source list, Typed facts and Typed numbers (the re-recorded
+  Earth scene's renamed date; Typed facts also masks Earth's period,
+  served words since L-535); Display figures (its fixture re-recorded
+  as fixture_hovers_L541_on_7d1e2e16.json, three hovers moved on
+  purpose, the old one failing on exactly those); Drawn orbit (it asks
+  the UTC second that is the elements' date on JPL's clock); and Solar
+  System drawer (a wiring point's name). The gallery run: 53 of 53
+  gating checks on Tony's working copy and on a copy holding only what
+  a push carries. INTERACTIVE_AS_BUILT.md, The rooms' clock.
+- WHAT THE BRIEF GOT WRONG: the served window is on UTC, not JPL's
+  clock, so its last minute does not move by 69 s; and the figure was
+  TT's, above.
+- A DAY FROM A SERVED POINT'S DATE IS TAKEN FROM THE NEAREST MINUTE (the
+  coordinating session's ruling of 2026-11-21, after the drawer walk went
+  red on Juno, Galileo and West): the page takes the date back to UTC,
+  rounds it to the minute, then reads the day
+  (`SolarSystemFigures.servedDay`; Solar System figures' part 7c, with a
+  planted fault that cuts the minute). The builder asks its daily points
+  at 00:01:00 on JPL's clock, 9 s before UTC midnight, so without the
+  rounding Juno's path ended "25 August 2028" where it had said 26. Not
+  for a plan's moments: the loiter's days stay as built.
+- OLD DATES (astropy, 2026-11-21): the served difference is today's.
+  TDB minus UTC was 42.185 s at Pioneer 10's first served day (4 March
+  1972), 44.186 s at Pioneer 11's (7 April 1973), 48.183 s at the
+  Voyagers' (21 August and 6 September 1977) and 56.182 s at Galileo's
+  (20 October 1989), so an old date taken back by today's 69.183 s is
+  up to 27 s early. At every one of those first days the nearest minute
+  still gives the right UTC day. The Voyagers' last served days, in
+  2099, are 9 s before UTC midnight as Juno's are, and print the day
+  asked for, by the rule.
+- THE WALKS, run 2026-11-21 with jsdom 24.1.3 in a scratch folder (the
+  coordinating session's yes): `walk_solar_system_drawer.js` 368 of 368
+  at 02:58 and 03:22 UTC; at one minute between, 1 of 368 red, Earth's
+  moons not nearest first, because Earth-Moon L4 and L5 are served at
+  one distance to the 16th place and the tie falls either way by the
+  minute; an untouched copy of 7d1e2e16 fails the same check at 03:22.
+  `walk_scene_moment.js` 12 of 13: "the drawer differs from the plain
+  opening", L4 and L5 trading places between today and the window's
+  last day; red on the untouched 7d1e2e16 as well. Neither is this
+  build's; both are L-521 (the walk's red checks) with L-297 (the
+  Lagrange points), not repaired here.
 - **TONY'S RULING, 2026-11-21.** 16:18: "What will we show visitors
   UTC converted from TDB, or TDB?" He was told: visitors see UTC; the
   date line is the visitor's own UTC minute and does not change; the
@@ -2401,16 +2488,22 @@ and start card); the reel rule of Nov 17 (L-060).
   order is this item's rooms, then L-539 (every entry checked), then
   L-538 (the orbiters' printed error), which refines an error smaller
   than 69 seconds of an orbiter's motion.
-**Gap:** the rooms' clock, built by one Code session in the website
-from `documentation/COORD_L541_room_clock_brief_20261121.md`.
-**Tony-action (do):** start it with
-`documentation/PROMPT_code_L541_room_clock_20261121.md`. Outside that
-brief and still open here: the builder's keys and its reading of a
-plan's windows as UTC; the orrery's `path_drawing.py`; the whole-second
-69 in the orrery's `utc_to_tdb`; a sourced row for the difference, if
-the orrery's store is its home; and the skill text
+**Gap:** the rooms' clock is built and waits for Tony's push, the night
+by hand and his phone look. Still open here: the builder's keys
+(`Time(jd).datetime` read as UTC) and its reading of a plan's windows
+as UTC; the orrery's `path_drawing.py`; the whole-second 69 in the
+orrery's `utc_to_tdb` and `TDB_OFFSET`, which could read the served
+figure's way (JPL's TDB-UT); and the skill text
 (horizons-orbital-mechanics, gallery-assembler, interactive-exhibit,
-gallery-cache-builder).
+gallery-cache-builder), named in the build's closing report; the
+builder asks its daily points 9 s before UTC midnight (00:01:00 on
+JPL's clock), and the page's nearest-minute rule stands in for it until
+it asks at true UTC midnight; and the served difference is today's, so
+an old date is taken back by up to 27 s too much (the old-dates finding
+above, no day wrong). The walks' two reds are L-521's.
+**Tony-action (do):** commit the website's code and its rebuilt cache
+together and push in the same sitting; run the night by hand (Actions,
+"Nightly run", "Run workflow") and read it green; then the phone look.
 **Ref:** L-529 (guided encounters); L-504 (the orrery's clock, UTC);
 L-533 (ESCAPADE); L-538 (the orbiters' printed error); L-539 (every
 entry checked); horizons-orbital-mechanics (The Clock Is Read as UTC);
