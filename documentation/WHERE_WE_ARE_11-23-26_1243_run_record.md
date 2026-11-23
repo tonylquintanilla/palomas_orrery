@@ -367,9 +367,9 @@ replies and this check are all waiting for that push.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Move all three patches, `_2`, `_3` and `_4`, into `documentation`. The first two are still in the orrery's top folder. -- done
-3. GitHub Desktop, orrery: commit. The orrery's night committed at 13:15 today, so Desktop will then offer Pull origin. Pull, then Push. Suggested summary: "L544 close and reviews". -- 
+3. GitHub Desktop, orrery: commit. The orrery's night committed at 13:15 today, so Desktop will then offer Pull origin. Pull, then Push. Suggested summary: "L544 close and reviews". -- e88771c54817979e543a8670c18ff17448a95e52
 
-**One thing to look at.** The website's night has not committed today. Yesterday's came at 13:51 your time, and it is past 14:00 now. That may only mean it is still running. But a red night writes nothing, and this is the first night on the changed page. If today's night email is red, tell the next session first.
+**One thing to look at.** The website's night has not committed today. Yesterday's came at 13:51 your time, and it is past 14:00 now. That may only mean it is still running. But a red night writes nothing, and this is the first night on the changed page. If today's night email is red, tell the next session first. -- the nightly run #50 in the orrery ran green. the website nightly has not run.  
 
 **Where this leaves us**
 
