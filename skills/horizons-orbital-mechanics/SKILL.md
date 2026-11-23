@@ -1,14 +1,22 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan, path_or_orbit). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended; the agency's own page; a craft that flew on and its end_note; an end after JPL's data), a capture's passes of the Sun (riding_passes), a loiter near a Lagrange point (ESCAPADE's), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun), a small body drawn as a path or an orbit by its database e (path_or_orbit.py, data/small_body_solutions.json)
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended; the agency's own page; a craft that flew on and its end_note; an end after JPL's data), a capture's passes of the Sun (riding_passes), a loiter near a Lagrange point (ESCAPADE's), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun), a small body drawn as a path or an orbit by its database e (path_or_orbit.py, data/small_body_solutions.json), an entry the website does not serve (horizons_unserved.py), JPL's dates on JPL's clock
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 5 parts: lines 1-221, 222-479, 480-599, 600-842, 843-904.
+Read this file in 5 parts: lines 1-204, 205-395, 396-584, 585-835, 836-904.
 
-Skill version: 1.19 | 2026-11-18, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.20 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
+palomas_orrery @ 849bf462 and gallery @ e6af10ea. v1.20 (L-539, every
+entry checked; L-541, a plan's clock). Where the Check Lives gains the
+entries the website does not serve (horizons_unserved.py); The Clock Is
+Read as UTC gains JPL's dates on JPL's clock. Three corrections: two
+barycentre numbers, a sixth skip list, astroquery's fall-through. From
+the ledger and the code at 849bf462; the 1.17 entry and five passages
+moved out.
+Earlier: 1.19 | 2026-11-18, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 00c89ef0 and gallery @ 1d3090bc. v1.19 (L-533,
 ESCAPADE's path) adds THE LOITER under How a Path's Events Are Found,
 Tony's ruling of 2026-11-18 with his tightening: months within twice
@@ -33,24 +41,12 @@ are not events. And AN OPEN ORBIT IS NOT AN ELLIPSE says piece C's
 website drawing follows the orrery's since 2026-11-05, closing what it
 called an open difference on L-484. Read from path_plan.py, the
 export and the plans made on 2026-11-05 before it was written.
-Earlier: 1.17 | 2026-11-04, evening, with Anthropic's Claude Opus
-5.5, at palomas_orrery @ 79018c0c and gallery @ 5abca2c6. v1.17 (L-512,
-part 1 and slice a's part A1). The orrery's plot decides path or orbit
-from the e of a body's typed elements when JPL's database has no record,
-and says so (A Named Failure, below). data/orbit_paths.json is retired
-(Tony's ruling 0 of 2026-11-04: "a heavy file that is wrong and nobody
-reads is a bad breadcrumb leading nowhere"), so the L-470 paragraph no
-longer sends a session to compare saved paths there, and the skip lists
-are five. Under Query Mechanics: every astroquery call in the repository
-now asks fresh, checked on Python's parser (test_orbit_cache.
-TestFreshCalls), where nine had not. Read from the code at 79018c0c and
-the session's own edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15 (L-444,
 L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25 (L-443),
 2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507), 2026-11-03
-(L-476), 2026-11-04 (L-510), 2026-11-04 (L-512), 2026-11-05 (L-507)
-and 2026-11-18 (L-533).
+(L-476), 2026-11-04 (L-510), 2026-11-04 (L-512), 2026-11-05 (L-507),
+2026-11-18 (L-533) and 2026-11-22 (L-539).
 
 ## Contents
 
@@ -114,11 +110,13 @@ record each question asks, and to ask the same one everywhere.
   Quaoar, Orcus, Patroclus) "integrated barycenter": the small-body
   solution follows the shared centre of the body and its moons. So it
   serves the system around the Sun. The system-barycentre numbers for
-  Orcus (20090482) and Patroclus (20000617) are found in BOTH of JPL's
-  indexes, which the Horizons check reads as a wrong id_type (Checking
-  an Entry Against JPL, below); the small-body records 2004 DW and
-  A906 UL are found in one. Whether the drawing says "shared centre" is
-  the barycenter rule's, in orrery-coding-conventions.
+  Orcus (20090482) and Patroclus (20000617) are major bodies, "asteroid
+  barycenter" (JPL, 2026-11-22). The small-body index finds each body
+  with that number as its SPKID, but its primary designation (2004 DW,
+  A906 UL) is not the number and the check keeps a small-body match by
+  designation, so neither is found in both (corrected v1.20, L-539).
+  Whether the drawing says "shared centre" is the barycenter rule's,
+  in orrery-coding-conventions.
 - A PINNED COMET GOES STALE. Three periodic comets were pinned to a
   record that was no longer their newest: Schaumasse, Howell and
   Churyumov-Gerasimenko, re-pinned on Tony's word of 2026-10-22
@@ -136,27 +134,18 @@ record each question asks, and to ask the same one everywhere.
   Wierzchos) or one fitted with e near 1 waits for a path drawing and is
   not served as an orbit. Which small bodies are paths is decided by the
   database's e (A Small Body Is Drawn by Its Database e, below); do not
-  judge from the name. Piece C of C/2025 K1, e 0.999994 and class COM,
-  is served as an orbit by the orrery since 2026-11-04, and drawn as one
-  by the website since 2026-11-05 (gallery e5352a86, L-510, its entry
-  made Hale-Bopp's: availability analytic, frame heliocentric); since
-  gallery 3660993 the objects mirror makes such a change by itself. The
-  open difference L-484 (the two agree) carried for it is closed by that
-  (v1.18; it had said "an open difference on L-484").
+  judge from the name.
 - A SKIP NAMES WHAT FAILED. Five lists in palomas_orrery.py keep a body
   out of a Horizons question: SKIP_HORIZONS_PREFETCH in plot_objects and
   in animate_objects, and the fallbacks ANALYTICAL_POSITION_FALLBACK
   (plot_actual_orbits and the static worker) and
   ANALYTICAL_ANIMATION_FALLBACK (animation_worker), which act only when
-  Horizons returned nothing. A sixth, SKIP_HORIZONS_TRAJECTORY, guarded
-  only the saved-path file's writer and went with it (L-512, 2026-11-04).
+  Horizons returned nothing. idealized_orbits.py has one more,
+  ANALYTICAL_ONLY_SATELLITES, written twice, with its own id for
+  Xiangliu, 92250881 (v1.20; L-549).
   period_fetch.py copies the pre-fetch list as SKIP_NAMES. A name goes on
   a list with a comment naming the record that failed, the centre it
-  failed around, and the date. Gonggong (id 920225088, its body-centre
-  record; helio_id 2007 OR10) was on all six from 2026-02-04 (commit
-  c60572d) with no such comment, and came off every list on 2026-10-23
-  (L-470): no failure on record. The lists' own comment speaks only for
-  the moons.
+  failed around, and the date.
 - TAKING A NAME OFF A SKIP LIST IS A TEST. Ask each record the orrery
   would ask, around each centre the body is plotted from: around the
   Sun, the helio_id; around any other centre, the id. If every one
@@ -176,18 +165,12 @@ record each question asks, and to ask the same one everywhere.
   K1-B and so on), which returns one record. A record number is pinned
   only for a periodic comet whose designation alone is ambiguous across
   apparitions.
-- A STORE KEYED BY NAME DOES NOT NOTICE A NEW RECORD (L-470, L-512).
-  The orrery's path cache, data/orbit_paths.json on Tony's machine, was
-  keyed by name and centre, so when an entry's id changed, a path saved
-  under the old id was still served under the name (the C/2025 K1 patch
-  compared it and found it was the comet, within 0.024 AU of piece B on
-  320 dates). That file is retired since 2026-11-04 (L-512, ruling 0):
-  nothing in the app reads or writes it, and it filed JPL's points under
-  evenly spread dates, up to a month from JPL's own. So after an id
-  change there is no saved path to compare. A store of paths keeps each
-  body's JPL record number with them and holds, by name, a path whose
-  record differs from the entry's today (L-512, ruling 3, for the
-  positions record of its slice c; not built on 2026-11-04).
+- A STORE KEYED BY NAME DOES NOT NOTICE A NEW RECORD (L-470, L-512). A
+  store of paths keeps each body's JPL record number with them and
+  holds, by name, a path whose record differs from the entry's today
+  (L-512, ruling 3, for the positions record of its slice c; not built
+  on 2026-11-04). The orrery's old path cache, keyed by name and
+  centre, is retired (L-512, ruling 0).
 
 ## Small-Body Record Pinning (periodic comets)
 
@@ -310,6 +293,13 @@ Tony's ruling of 2026-10-28: "we should standardize on utc." Built
   default date is tomorrow's, as the website's is; a "now" plot moves by
   the bodies' motion in those hours (the Moon about 19,000 km in five,
   JPL's 1.074 km/s around Earth, read 2026-10-30 02:00 UTC).
+- JPL'S DATES ARE ON JPL'S CLOCK (v1.20, L-541, L-529). `datetime_jd`
+  is JDTDB, an elements epoch is on JPL's clock, a path plan's moments
+  are TDB; a page prints one as UTC only after converting it. The
+  difference is JPL's own TDB-UT, 69.183 s in November 2026 (69.184 s is
+  TT's figure, 32.184 + 37, a brief's mistake), and an old date has an
+  old one: 42.185 s on 4 March 1972, 56.182 s on 20 October 1989. Open
+  on L-541: the orrery's whole-second 69 (`utc_to_tdb`, `TDB_OFFSET`).
 
 ## A Period Depends on Its Centre (L-431)
 
@@ -516,12 +506,6 @@ HORIZONS_ANSWERS_L395_20261007.md.
 
 ## Where the Check Lives, and What It Compares (L-395, L-431 build 3)
 
-Moved 2026-10-14 from the website's Daily Run into the orrery (Tony,
-2026-10-12: "the orrery stores and serves the data not the other way
-around"). The move's brief is
-documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md; the
-build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
-
 - `horizons_check.py` is a GENERATOR row of the orrery's maintenance
   run, just before the objects export, so the export carries the dates
   it writes. `check_horizons_confirmations.py` is a CHECKER row that
@@ -577,17 +561,26 @@ build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
   figure, not the page"); a patch to the row clears it. A sheet whose
   "Revised:" date moved and whose figure did not is noted, not red.
   Nothing here edits a row.
-- The thirteen identity confirmations of 2026-10-10 were carried over
-  with their dates, so the move asked JPL nothing. The offline tests run
-  on JPL's recorded answers,
-  `documentation/worksheets/horizons_answers_L395.json`. Its identity
-  answers are JPL's own; its elements and data-sheet answers were
-  written in JPL's format by the build, which could not reach JPL, and
-  the file says so for each, so the first live run is the real test of
-  the parsing. The same file freezes the inputs the test runs on (the
-  three cache entries, the carried confirmations, the seeded sheets):
-  a test that read the live records would fail on the day the check
-  first worked.
+- THE ENTRIES THE WEBSITE DOES NOT SERVE (v1.20, L-539;
+  `horizons_unserved.py`, run by the check after the served ones) are
+  each held to the NAME and the KIND JPL gives its id, both stored in
+  `data/horizons_unserved_confirmations.json`, which the export does not
+  read. Which entries are asked is a rule read from the list and the
+  code, never a list of names: an entry that fits no side, or two with
+  one name, fails the run, and a skip written inline in the fetch code
+  is copied in the check and held to the code by a test. A planets-first
+  id found only among the asteroids FALLS THROUGH and fails by name
+  (3013, the L3 case). "JPL has no object for this id" is an answer
+  only when both indexes find nothing and the main service refuses the
+  id; anything else is a blind spot and fails. A first answer waits on
+  Tony's look: a session sets the mark from his words (`--mark <name>
+  --by <his run record>`), a name equal to JPL's marks itself, a
+  no-object answer never does. Asked again from day 20, ten a run, red
+  at day 30; never answered or differing, at once. The night's title
+  starts JPL DIFFERS or NEW JPL NAME.
+- The offline tests run on JPL's recorded answers, frozen with their
+  inputs: `documentation/worksheets/horizons_answers_L395.json` and,
+  for the unserved entries, `horizons_answers_L539.json`.
 
 ## How a Path's Events Are Found (L-443)
 
@@ -848,6 +841,13 @@ Pluto, render wrong).
   locally -> attribute the source. Explicit lists, not automatic.
 - Cache structure: cache[name]['elements'] (nested dict) -- the elements
   live one level down.
+- ASTROQUERY ASKS THE MAJOR BODIES FIRST AND FALLS THROUGH (v1.20,
+  L-539). id_type 'majorbody', 'id' and a blank all send the bare id;
+  JPL looks among the planets, moons and spacecraft and, finding none,
+  among the asteroids: two L3 entries drew asteroids 3013 and 33. Read
+  in 0.4.9.post1 (Tony's machine; requirements.txt asks >=0.4.6; this
+  skill's other notes name 0.4.11), whose own warning calls 'majorbody'
+  and 'id' deprecated for None, "the same functionality" (L-548).
 - ASTROQUERY KEEPS EVERY ANSWER FOR A WEEK (v1.13, L-399, L-504):
   `astroquery.cache_conf.cache_timeout`, 604800 s, on disk, handed back
   when the same question is asked again. A record stamped "fetched" or

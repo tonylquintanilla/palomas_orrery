@@ -2,14 +2,21 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day), a held body (HELD), a Lagrange point served as a point (serving_shape 'point')
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day), a held body (HELD), a Lagrange point served as a point (serving_shape 'point'), the clock block and its witness, an encounter's package
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 4 parts: lines 1-258, 259-523, 524-788, 789-942.
+Read this file in 4 parts: lines 1-260, 261-523, 524-789, 790-944.
 
-Skill version: 1.20 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.21 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
+palomas_orrery @ 849bf462 and gallery @ e6af10ea. v1.21 (L-541, a
+plan's clock; L-529, guided encounters) adds The Clock Block and Its
+Witness and, under Sibling directory semantics, an encounter's package.
+Riding it: the website's second night run exists. Written by the
+coordinating session from the ledger and the builder at e6af10ea. The
+1.18 entry and five passages of history moved out to stay at the cap.
+Earlier: 1.20 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.20 (L-297, the
 Lagrange points) adds A Lagrange Point Is Served as a Point, the fourth
 serving shape. To stay at the cap, the 1.17 entry, Fetch facts proven
@@ -22,22 +29,12 @@ Test Is Held. Riding it: the night's title, a new abort, Layer 1's
 count, a wrong field note removed (interactive.html does read the served
 cache), and three passages of history moved out to stay at the cap. Read
 from the gallery's code with this session's edits before it was written.
-Earlier: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.18 (L-507, more
-voyages, with L-510's carried sentences). A Comet on an Open Path Is a
-Path Body gains the mirror's side change across e = 1 and the offline
-suite's comparison with the export by name, with a stand-in orbit for a
-body newly drawn as one (gallery 3660993); the onboarding section says
-a comet that changes side needs none. The mirror's INSERTED list gains
-an ended mission's `mission_end`, `end_note` and `cutoff_note`, and An
-Ended Mission's Last Day gains the case where the path stops before the
-mission ended (Akatsuki, cut on the last day fitted to tracking). Read from the gallery's mirror, its suites and builder at
-3660993e and this session's edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
 2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507),
-2026-11-05 (L-507), 2026-11-11 (L-525) and 2026-11-19 (L-297).
+2026-11-05 (L-507), 2026-11-11 (L-525), 2026-11-19 (L-297) and
+2026-11-22 (L-541).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -63,6 +60,7 @@ if this list and the headings disagree (L-418).
 - The Builder Reads the Period's Centre [QUALITY]
 - A Spacecraft Is Fetched by Its Plan [QUALITY]
 - A Lagrange Point Is Served as a Point [QUALITY]
+- The Clock Block and Its Witness [QUALITY]
 - A Small Body's Own Uncertainty Is Served [QUALITY]
 - Every Question Is Asked of JPL, Fresh [QUALITY]
 - A Body That Fails Its Test Is Held [QUALITY]
@@ -171,6 +169,10 @@ documentation/SKILL_HISTORIES.md).
 - A stale .prev that recovery cannot clear (e.g. a Windows file lock from a
   backup/AV process) is QUARANTINED and the run proceeds, rather than wedging
   every future run; the sweep reaps the quarantine later.
+- data/encounters/ is not the builder's (v1.21, L-529): an encounter's
+  package is written by hand by `tools/encounter_fetch.py`; the night
+  never runs, swaps or commits it, and the sibling check knows the
+  folder by name (interactive-exhibit, An encounter is a package).
 
 ## The swap retries, rolls back, and leaves a record [QUALITY]
 
@@ -517,9 +519,7 @@ the orrery's."
   were set by hand, and leaves the drawer row for a person to check. The
   offline suite compares its comets on open paths with the export BY
   NAME (no count to bump), and gives a body newly drawn as an orbit a
-  stand-in orbit, named when used. Piece C of C/2025 K1 went to an
-  orbit this way on 2026-11-05 (by hand that day, gallery e5352a86; the
-  mirror does it since).
+  stand-in orbit, named when used.
 
 ## A Lagrange Point Is Served as a Point [QUALITY]
 
@@ -536,6 +536,25 @@ the point's own name: asked for 3013, JPL answers an asteroid. A failed
 fetch serves the saved days (`serve_last_good_point`), today's point
 nulled; the validator's #L (`point_problems`) refuses elements, a short
 span, a missing day or hour, each planted.
+
+## The Clock Block and Its Witness [QUALITY]
+
+v1.21, L-541. A served `jd` is on JPL's clock (TDB) and a visitor's
+minute is UTC, so each build serves the difference in the index.
+- THE CLOCK BLOCK (`build_clock`, "clock"). JPL is asked its TDB-UT (a
+  vectors query for Mercury; the Horizons manual: "After 1962, UT means
+  UTC") at the window's first and last minute and the build's own;
+  astropy works out TDB minus UTC at the same minutes. The build stops,
+  by name, when JPL does not answer or names another body, when the two
+  differ by more than 0.001 s, or when JPL's moves by more than 0.004 s
+  across the window (a leap second inside it). Served: JPL's at the
+  build's minute, 69.1829 s on 2026-11-22.
+- THE WITNESS (`build_witness`). Each build serves JPL's places of
+  Mercury (from its orbit) and 3I/ATLAS (from served points) at its own
+  minute; the gallery run's Room clock row compares the room's places
+  with them. A witness does not share its clock with what it tests.
+- OPEN ON L-541: daily points are asked at 00:01:00 on JPL's clock, 9 s
+  before UTC midnight; keys and plan windows read as UTC.
 
 ## A Small Body's Own Uncertainty Is Served [QUALITY]
 
@@ -761,42 +780,29 @@ ending in one gate:
   "Events that trigger workflows", read 2026-11-01: "The schedule event
   can be delayed during periods of high loads of GitHub Actions
   workflow runs" and "If the load is sufficiently high enough, some
-  queued jobs may be dropped." On 2026-11-01 the website's 08:17 run
-  started at 15:15 UTC, 6 h 58 min late, and the orrery's 07:17 run at
-  14:17, 7 h 0 min late (6 h 22 min on 2026-10-31). A dropped night is
-  caught the same day by a second scheduled line: the orrery's at 11:17
-  UTC since 2026-11-01 (its `.github/workflows/nightly.yml`); the
-  website's at 12:17 comes with its next gallery session, and until
-  then its workflow carries the 08:17 line alone. A second firing is
+  queued jobs may be dropped." Both nights started about seven hours
+  late on 2026-11-01. A dropped night is caught the same day by a
+  second scheduled line: the orrery's at 11:17 UTC, the website's at
+  12:17 (each `.github/workflows/nightly.yml`). A second firing is
   harmless: the concurrency group queues it, and a clean second run
   commits only its night record. The times stay (no reschedule): the
   lag is GitHub's, not the clock's.
 
 Apart from the pulls and the records, a step that reports a problem
 does not stop the next: the guest book's problems still do not stop the
-build. Nothing in
-the Daily Run commits or pushes. The Horizons
-check was its step 2 from 2026-10-10 to 2026-10-14 and moved into the
-orrery's maintenance run beside the objects export (L-395; Tony,
-2026-10-12: "the orrery stores and serves the data not the other way
-around"). The gallery's "Horizons confirmations" row still reads the
-dates JPL confirmed each object, from the pulled export, offline, and
-goes red, naming the objects, on the day a confirmation turns 30 days
-old: the cure is the orrery's maintenance run, then the push, then the
-pull here. `python daily_run.py --check` lists the steps and fails if a
-script is missing; the maintenance run runs it.
+build. Nothing in the Daily Run commits or pushes. The gallery's
+"Horizons confirmations" row still reads the dates JPL confirmed each
+object, from the pulled export, offline, and goes red, naming the
+objects, on the day a confirmation turns 30 days old: the cure is the
+orrery's maintenance run, then the push, then the pull here. `python
+daily_run.py --check` lists the steps and fails if a script is missing;
+the maintenance run runs it.
 
 ## A Served Number That Changes on Purpose [QUALITY]
 
-Learned 2026-11-01 (v1.16, L-484, with L-485). The orrery's export
-changed one served number on purpose -- Earth's inner Van Allen belt,
-9,600 km to 10,000 km, by the export's rounding fix of 2026-10-31 --
-and the website's night refused every cache built on it until a
-gallery session moved two pins: the website's run 2 (by hand, 14:24
-UTC) and run 3 (scheduled, 15:15 UTC) were red, "1 of 36 gating
-checkers FAILED: Display figures", and committed nothing, as designed.
-The renderers were right. Two of the website's CHECKS still held the
-old number.
+Learned 2026-11-01 (v1.16, L-484, L-485): the orrery's export moved one
+served number on purpose (Earth's inner Van Allen belt, 9,600 km to
+10,000 km) and two of the website's CHECKS still held the old one.
 
 - THE WEBSITE'S CHECKS CONSUME THE EXPORT TOO. The gallery's "Display
   figures" row, `documentation/smoke_display_figures.js` in the
@@ -936,7 +942,3 @@ count assertion; (3) Layer 1 from a clean checkout; (4) Layer 2:
   builder serves last-good named with its own data's date, the hover
   prints the held date, the website's check passes held as held -- is a
   gallery session after the ruler build, recorded on L-485.
-
-Origin: created for L-098 (Phase 1b) from Fable 5's 2026-07-12 Mode 7 review;
-every code fact verified against gallery HEAD 8e060677 / orrery HEAD e83fe9ce
-with Anthropic's Claude Opus 4.8.

@@ -1291,6 +1291,49 @@ The 1.43 install, from Install and verify, 2026-11-21 (L-529):
 from the repo's copy of 1.42; a session that loads the account's copy
 confirms it reads 1.43 before exhibit work.
 
+Earlier: 1.42 | 2026-11-12, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ af8e1bdf and gallery @ 001d5046 (the session's bases;
+Tony's checkpoint pushes since, to gallery ae0d7ac0). v1.42 (L-527, a
+first visit's guide) adds two rules. A GUIDE ASKS FOR ONE ACTION AND
+WAITS FOR IT: its cards give instructions only, so it adds no claim to
+source; a card ends only on its own action, told by the page's own
+functions, never on a timer; a camera move it makes is worked out from
+what is drawn; its steps, words, setting and sums are
+gallery/first_guide.js, held by the gallery run's First guide row and
+walked by tools/headless/walk_first_guide.js. And A ROOM IS BUILT AND
+TESTED UPRIGHT (Tony's ruling of 2026-11-12, 13:18 and 13:44): held
+sideways a room shows one line asking for the phone upright, and the
+phone look and the walks are upright. Seven field notes of September
+(L-278, L-282, L-289, L-334), each held by a rule above them or by the
+writer's own suite, moved to documentation/SKILL_HISTORIES.md.
+(Moved down 2026-11-22, when 1.45 made a fourth entry.)
+
+Moved 2026-11-22 (L-541), to keep the skill at its cap, word for word.
+From A shell trace carries its key:
+Before 2026-09-18 a shell was found by the END of its legend group name,
+which was a second reading of the label formula the renderers build. Two
+readings of one formula is how they come to disagree. There is one way
+of matching now; do not add a second.
+The three field notes:
+- 2026-09-18, L-334: a check that could not fail. The writer's suite
+  asserted that refusing `value` produced a message MENTIONING "value"
+  -- and "value" is in the path, so emptying the refusal list left the
+  suite green. It now asserts the reason. Found by emptying the list on
+  purpose, which is the only way that class of hole is ever found.
+- 2026-09-18, L-334: the stamp check had a blind spot of its own. It
+  built Earth's features without the Sun direction, so the magnetopause
+  and the bow shock drew nothing and two of Earth's sixteen shells were
+  never examined. A check that examines less than it appears to is the
+  same failure as a check that cannot fail.
+- 2026-09-06, L-288: Studio authors the exhibit's card; the card is a
+  placard with an Interactive tag and needs no picture (the lobby
+  settled that on the phone).
+The 1.44 install, from Install and verify (its copy was confirmed
+loaded on 2026-11-22):
+1.44 was written on 2026-11-21 by the coordinating session for L-529
+and L-540, from the repo's copy of 1.43; a session that loads the
+account's copy confirms it reads 1.44 before exhibit work.
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -1317,6 +1360,31 @@ non-ASCII characters in a file it was already patching. And it adds
 The Correction Does Not Travel, one scope out from Stamp What You
 Change: that section governs the file the patch is editing, this one
 governs the other files quoting the value it just changed.
+
+Earlier: 1.12 | Cut from palomas_orrery @ 41c1ca7a (v1.12),
+earlier @ 1fa413d9 (v1.11), ccd1ac96 (v1.10), bfa9de2f (v1.9),
+earlier @ 6d12ecac (v1.8), d424c459 (v1.7), ef3bd13 (v1.6),
+50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
+bdaaa0c (v1.1) | October 4, 2026, with Anthropic's Claude Opus 5.5
+(v1.12); August 29, 2026, with Anthropic's Claude Opus 5 (v1.11)
+v1.12 (L-415) makes the skill agree with itself about line endings.
+Fix In Passing listed "CRLF where the repo is LF" as a violation to
+fix, while Line Endings Are Not Content and Compare Content, Not Bytes
+told a patch to write each file back in the style it found. Tony asked
+why a patch was leaving Windows line endings in place: "I thought the
+rule was to convert to lf when found and report." The preserve rule's
+reason -- that flipping the endings shows every line changed -- was
+tested on 2026-10-04 and is false wherever the repo normalizes
+(`* text=auto eol=lf`, both of this project's repos): a CRLF working
+copy shows as modified with nothing inside it, and writing it LF clears
+that mark. It holds only for a file whose COMMITTED copy is CRLF. So a
+patch now writes LF and reports, except for those files.
+v1.11 (L-315) adds A Guard Must Not Fence What a Generator Rewrites,
+earned when three chained ledger patches all refused: each was
+fingerprinted against the previous one's raw output, while every one of
+them told the operator to run `ledger_index.py` next -- which rewrites
+the zone they were hashing.
+(Moved down 2026-11-22, when 1.15 made a fourth entry.)
 
 ## orrery-coding-conventions
 
@@ -1719,6 +1787,56 @@ section Fetch facts proven live, moved here word for word on
   segment. Refresh is overwrite-by-date on the forward window; the past is
   frozen.
 
+Earlier: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.18 (L-507, more
+voyages, with L-510's carried sentences). A Comet on an Open Path Is a
+Path Body gains the mirror's side change across e = 1 and the offline
+suite's comparison with the export by name, with a stand-in orbit for a
+body newly drawn as one (gallery 3660993); the onboarding section says
+a comet that changes side needs none. The mirror's INSERTED list gains
+an ended mission's `mission_end`, `end_note` and `cutoff_note`, and An
+Ended Mission's Last Day gains the case where the path stops before the
+mission ended (Akatsuki, cut on the last day fitted to tracking). Read from the gallery's mirror, its suites and builder at
+3660993e and this session's edits before it was written.
+(Moved down 2026-11-22, when 1.21 made a fourth entry.)
+
+Moved 2026-11-22 (L-541), to keep the skill at its cap, word for word:
+- From A Spacecraft Is Fetched by Its Plan, the end of A COMET ON AN
+  OPEN PATH IS A PATH BODY:
+  Piece C of C/2025 K1 went to an
+  orbit this way on 2026-11-05 (by hand that day, gallery e5352a86; the
+  mirror does it since).
+- From THE MORNING DOES NOT WAIT FOR THE NIGHT. Its last clause had
+  gone out of date: the website's workflow carries the 12:17 line,
+  read at gallery e6af10ea.
+  On 2026-11-01 the website's 08:17 run
+  started at 15:15 UTC, 6 h 58 min late, and the orrery's 07:17 run at
+  14:17, 7 h 0 min late (6 h 22 min on 2026-10-31). A dropped night is
+  caught the same day by a second scheduled line: the orrery's at 11:17
+  UTC since 2026-11-01 (its `.github/workflows/nightly.yml`); the
+  website's at 12:17 comes with its next gallery session, and until
+  then its workflow carries the 08:17 line alone.
+- From the end of The Daily Run's Steps:
+The Horizons
+check was its step 2 from 2026-10-10 to 2026-10-14 and moved into the
+orrery's maintenance run beside the objects export (L-395; Tony,
+2026-10-12: "the orrery stores and serves the data not the other way
+around").
+- The opening of A Served Number That Changes on Purpose:
+Learned 2026-11-01 (v1.16, L-484, with L-485). The orrery's export
+changed one served number on purpose -- Earth's inner Van Allen belt,
+9,600 km to 10,000 km, by the export's rounding fix of 2026-10-31 --
+and the website's night refused every cache built on it until a
+gallery session moved two pins: the website's run 2 (by hand, 14:24
+UTC) and run 3 (scheduled, 15:15 UTC) were red, "1 of 36 gating
+checkers FAILED: Display figures", and committed nothing, as designed.
+The renderers were right. Two of the website's CHECKS still held the
+old number.
+- The skill's last lines:
+Origin: created for L-098 (Phase 1b) from Fable 5's 2026-07-12 Mode 7 review;
+every code fact verified against gallery HEAD 8e060677 / orrery HEAD e83fe9ce
+with Anthropic's Claude Opus 4.8.
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
@@ -1904,6 +2022,73 @@ the skill at its cap, word for word:
   plan made by the orbiter rule into data/path_plans.json under its
   new key, so no second half-hour run was needed."
 
+Earlier: 1.17 | 2026-11-04, evening, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 79018c0c and gallery @ 5abca2c6. v1.17 (L-512,
+part 1 and slice a's part A1). The orrery's plot decides path or orbit
+from the e of a body's typed elements when JPL's database has no record,
+and says so (A Named Failure, below). data/orbit_paths.json is retired
+(Tony's ruling 0 of 2026-11-04: "a heavy file that is wrong and nobody
+reads is a bad breadcrumb leading nowhere"), so the L-470 paragraph no
+longer sends a session to compare saved paths there, and the skip lists
+are five. Under Query Mechanics: every astroquery call in the repository
+now asks fresh, checked on Python's parser (test_orbit_cache.
+TestFreshCalls), where nine had not. Read from the code at 79018c0c and
+the session's own edits before it was written.
+(Moved down 2026-11-22, when 1.20 made a fourth entry.)
+
+Moved 2026-11-22 (L-539), to keep the skill at its cap, word for word:
+- From Which Record Serves a Body, AN OPEN ORBIT IS NOT AN ELLIPSE:
+  Piece C of C/2025 K1, e 0.999994 and class COM,
+  is served as an orbit by the orrery since 2026-11-04, and drawn as one
+  by the website since 2026-11-05 (gallery e5352a86, L-510, its entry
+  made Hale-Bopp's: availability analytic, frame heliocentric); since
+  gallery 3660993 the objects mirror makes such a change by itself. The
+  open difference L-484 (the two agree) carried for it is closed by that
+  (v1.18; it had said "an open difference on L-484").
+- From A SKIP NAMES WHAT FAILED, two passages:
+  A sixth, SKIP_HORIZONS_TRAJECTORY, guarded
+  only the saved-path file's writer and went with it (L-512, 2026-11-04).
+  Gonggong (id 920225088, its body-centre
+  record; helio_id 2007 OR10) was on all six from 2026-02-04 (commit
+  c60572d) with no such comment, and came off every list on 2026-10-23
+  (L-470): no failure on record. The lists' own comment speaks only for
+  the moons.
+- From A STORE KEYED BY NAME DOES NOT NOTICE A NEW RECORD:
+  The orrery's path cache, data/orbit_paths.json on Tony's machine, was
+  keyed by name and centre, so when an entry's id changed, a path saved
+  under the old id was still served under the name (the C/2025 K1 patch
+  compared it and found it was the comet, within 0.024 AU of piece B on
+  320 dates). That file is retired since 2026-11-04 (L-512, ruling 0):
+  nothing in the app reads or writes it, and it filed JPL's points under
+  evenly spread dates, up to a month from JPL's own. So after an id
+  change there is no saved path to compare.
+- The opening of Where the Check Lives, and What It Compares:
+Moved 2026-10-14 from the website's Daily Run into the orrery (Tony,
+2026-10-12: "the orrery stores and serves the data not the other way
+around"). The move's brief is
+documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md; the
+build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
+- Its last bullet:
+- The thirteen identity confirmations of 2026-10-10 were carried over
+  with their dates, so the move asked JPL nothing. The offline tests run
+  on JPL's recorded answers,
+  `documentation/worksheets/horizons_answers_L395.json`. Its identity
+  answers are JPL's own; its elements and data-sheet answers were
+  written in JPL's format by the build, which could not reach JPL, and
+  the file says so for each, so the first live run is the real test of
+  the parsing. The same file freezes the inputs the test runs on (the
+  three cache entries, the carried confirmations, the seeded sheets):
+  a test that read the live records would fail on the day the check
+  first worked.
+- Corrected in 1.20, as it stood, from A TNO'S SMALL-BODY RECORD IS THE
+  PAIR'S CENTRE:
+  The system-barycentre numbers for
+  Orcus (20090482) and Patroclus (20000617) are found in BOTH of JPL's
+  indexes, which the Horizons check reads as a wrong id_type (Checking
+  an Entry Against JPL, below); the small-body records 2004 DW and
+  A906 UL are found in one. Whether the drawing says "shared centre" is
+  the barycenter rule's, in orrery-coding-conventions.
+
 ## earth-system-pipeline
 
 Moved here 2026-11-14, when 1.3 (L-001) was applied on Tony's word
@@ -1964,3 +2149,42 @@ Seven field notes:
   remapping, or stripped portrait exports animate the wrong traces.
 - social_media_export.py is mostly superseded by Studio; its
   _parse_hover_html() survives as a shared utility.
+
+## gallery-assembler
+
+Moved here on 2026-11-22 (L-541), when 1.5 added One seam between the
+visitor's clock and JPL's and the skill stood at its cap. The v1.2
+entry:
+
+v1.2 (L-279) adds Mode 5 as Measurement and the Plotly event-handler
+field note, both earned by the 2026-09-02 Sun exhibit hang: eight reads
+to attribute a two-line bug, and three wrong readings on the way, every
+one of them from inferring the test conditions instead of stating them.
+(Moved down 2026-11-22, when 1.5 made a fourth entry.)
+
+Five passages, word for word. The first three had gone out of date:
+Encke is in celestial_objects.py since 2026-10-10 (L-395), the two
+docstrings were corrected, and moons are drawn in the root since
+2026-11-10 (L-515).
+- From The boundary this skill exists to protect, after the Rule:
+(Encke is the known exception -- in objects_config.json for
+M1/M2 testing ahead of the orrery; confirmed absent from
+celestial_objects.py as of July 20, 2026. Closing that gap doubles as a
+live test of the porting pipeline.)
+- From The three core modules, cache_reader.py:
+(Known stale docs: cache_reader.py AND resolver.py both still say
+served_window is "currently null at HEAD... tracked with F1" -- pre-M2,
+no longer true; fix next time you're in that file.)
+- From Layered gate, distinct from gallery-cache-builder's:
+Pluto/Charon and Moon/Io/Titan are both, as of July 20 2026, in the state of
+"data plumbing partially tested, render never attempted."
+- From Field note: never mutate a plot from inside a Plotly event
+  handler:
+Two hypotheses died before this one was found, and both are worth
+keeping because neither was unreasonable. Hover hit-testing was blamed
+first -- `Plotly.Fx.unhover` was tested directly and changed nothing.
+Trace size was blamed second, on the ~65,000 argument limit -- the
+largest trace in that scene is 4,332 points and the one that hung is 400.
+- The last line of Field note: a plotly_click bubbles as a DOM click,
+  folded into the line above it:
+Live example: gallery `700b426d`, `index.html`.

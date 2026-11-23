@@ -5020,6 +5020,47 @@ resident.
 (Moved down from the resident protocol on 2026-11-21, when
 v3.144 made a fourth entry.)
 
+v3.142 (November 18, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.18 -> 1.19 (L-533, ESCAPADE's
+path), by the records skill's binding rule, on the brief's section 8
+(documentation/COORD_L533_escapade_path_brief_20261118.md: "The rule
+then goes into horizons-orbital-mechanics ... it is method from then
+on") and Tony's ruling of Nov 18 on the loiter: "Approved, with one
+tightening", then "the loiter ends at its flyby". A CRAFT RIDING NEAR A
+LAGRANGE POINT.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 18 (Claude Opus 5.5),
+through the python_work door, built ESCAPADE's path on orrery 00c89ef0
+and gallery 1d3090bc, from Tony's prompt and the brief, in three parts
+with a report and his go-ahead after each.
+
+WHAT CHANGED. horizons-orbital-mechanics: THE LOITER, under How a
+Path's Events Are Found. A Lagrange point has no mass, so the orbiter
+rule cannot see a craft riding near one; ESCAPADE's year near L2 gave a
+false flyby of Earth and passes of the Sun. Sixty days or more within
+twice Earth's Hill sphere is one event at the point nearer on most
+days, ending at the flyby that ends it; inside it a pass of Earth is
+that flyby only when the path leaves within 15 days. To stay at the cap
+of 904 lines, the 1.16 entry and two passages of history (Galileo's and
+Cassini's first plans; the twelve's keying) moved to
+documentation/SKILL_HISTORIES.md.
+
+THE OBLIGATION TRAVELS. This session read horizons-orbital-mechanics
+1.18 from the repo's copy, as a Code session does, as the manifest
+expected. Tony reinstalls it (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.19 before
+Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.139 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-22, when
+v3.145 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -746,3 +746,44 @@ D. Hi'iaka and Namaka (a look only; nothing was changed here, and
 
 Shall I close this session after your push and hand the bump to the next one, or finish the bump here today?
 
+=================
+
+The document review is now in the plan, recorded with your "Yes", as a second small patch beside the first in your orrery folder.
+
+**What the second patch does**
+
+- **Where We Are:** "Do next" and the road's document line now carry the order. Both are changed in place, so the page stays at 130 lines.
+- **Ledger:** L-522 (document caps) gets the order, your two messages in your own words, and the reasons. L-538 (the orbiters' printed error) says it now follows step 3.
+- **The next session's starting prompt:** the order of work includes the document steps, and says step 3 is not run beside a build.
+
+**The order, as recorded**
+
+1. The skills bump, v3.145.
+2. L-544 (L4 and L5 tie).
+3. The protocol's reduction, step 3 of L-522, in its own Fable session. You start it with `documentation/HANDOFF_document_upkeep_20261116.md`.
+4. L-538, then the encounter's slice 2, its talk first.
+5. Step 4 of L-522, the ledger's closed items moved out, at the next gap between builds. Steps 5 and 6 follow the same way.
+
+**How it was tested**
+
+- Run after the first patch on a fresh copy of the pushed orrery: 6 edits, the ledger's index and the document caps both "ok".
+- Run alone, without the first patch: it refuses, says to run the first one, and writes nothing.
+- Run twice: it refuses the second time and writes nothing.
+- Both patches in your folder are byte for byte the ones tested.
+
+**Your run order, when you are back**
+
+1. In VS Code, in the orrery folder, Run `patch_L539_1_close_record.py`. Expect "patch applied", then two "ok" lines.
+2. Then Run `patch_L539_2_document_track.py`. Expect the same.
+3. Move both patches to `documentation`.
+4. GitHub Desktop, orrery: commit and push, one commit. Suggested summary: "L539 close record". If Pull origin is offered, commit first, then Pull, then Push.
+5. Finish the look in the orrery's window, lines 8 to 14 of the checklist in your run record. Line 8, the animation, is the one that matters.
+6. Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_3.md`, pasted from below its line.
+
+**Where this leaves us**
+- Every entry the orrery asks JPL for is checked against JPL, and it is live on GitHub.
+- The road ahead now has the document review in it: the bump, the L4 and L5 tie, the protocol's reduction, then the orbiters and the encounter.
+- This session is closed once the two patches are run and pushed.
+
+One final thought: the two biggest skills, gallery-cache-builder and horizons-orbital-mechanics, have no easy history left to move out, so each bump will get harder until they are split the way the exhibit skill was. I recorded that on L-522 for step 3's close and have not asked you to rule on it.
+

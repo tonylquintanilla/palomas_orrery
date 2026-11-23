@@ -1,14 +1,20 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and chrome (nav cluster, frame zoom, i panel, HUD, text box, consent, back link); the served words and numbers a room prints and where they come from (store_writer, exhibit_store_editor, objects_config.json); what a room opens on; testing a room (the gallery run's checks, tools/headless); carding an exhibit in Studio; a Lagrange point's marker and box, a name's side (label_side_for); an encounter (data/encounters/, tools/encounter_fetch.py, its player); a card's fold beside a row (Scenes, Encounters, Links)
+fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and chrome (nav cluster, frame zoom, i panel, HUD, text box, consent, back link); the served words and numbers a room prints and where they come from (store_writer, exhibit_store_editor, objects_config.json); what a room opens on; testing a room (the gallery run's checks, tools/headless); carding an exhibit in Studio; a Lagrange point's marker and box, a name's side (label_side_for); an encounter (data/encounters/, tools/encounter_fetch.py, its player); a card's fold beside a row (Scenes, Encounters, Links); a date a visitor reads (UTC); a page change's walks
 ---
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-254, 255-515, 516-738.
+Read this file in 3 parts: lines 1-258, 259-527, 528-738.
 
-Skill version: 1.44 | 2026-11-21, with Anthropic's Claude Fable 5.2, at
+Skill version: 1.45 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
+palomas_orrery @ 849bf462 and gallery @ e6af10ea. v1.45 (L-541, L-545,
+L-550) adds A VISITOR READS UTC; JPL'S DATES ARE ON JPL'S CLOCK and,
+under Phone first, A SESSION THAT CHANGES THE PAGE RUNS THE WALKS, with
+who adds a new row's dashboard button; written from the ledger and the
+gallery at e6af10ea. The 1.42 entry and two passages moved out.
+Earlier: 1.44 | 2026-11-21, with Anthropic's Claude Fable 5.2, at
 palomas_orrery @ bd70f584 and gallery @ 828362fd. v1.44 (L-529, guided
 encounters; L-540, a reel on a Featured card) adds two rules. AN
 ENCOUNTER IS A PACKAGE PLAYED IN A ROOM OF ITS OWN: a completed pass,
@@ -26,21 +32,6 @@ name's side set per body on Tony's look. Install and verify names the
 skills page where it now is (L-537). To stay at the cap, the 1.40 entry
 moved out. Read from L-297's notes and the gallery at 56bc3fab before
 it was written.
-Earlier: 1.42 | 2026-11-12, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ af8e1bdf and gallery @ 001d5046 (the session's bases;
-Tony's checkpoint pushes since, to gallery ae0d7ac0). v1.42 (L-527, a
-first visit's guide) adds two rules. A GUIDE ASKS FOR ONE ACTION AND
-WAITS FOR IT: its cards give instructions only, so it adds no claim to
-source; a card ends only on its own action, told by the page's own
-functions, never on a timer; a camera move it makes is worked out from
-what is drawn; its steps, words, setting and sums are
-gallery/first_guide.js, held by the gallery run's First guide row and
-walked by tools/headless/walk_first_guide.js. And A ROOM IS BUILT AND
-TESTED UPRIGHT (Tony's ruling of 2026-11-12, 13:18 and 13:44): held
-sideways a room shows one line asking for the phone upright, and the
-phone look and the walks are upright. Seven field notes of September
-(L-278, L-282, L-289, L-334), each held by a rule above them or by the
-writer's own suite, moved to documentation/SKILL_HISTORIES.md.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
@@ -50,7 +41,7 @@ twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
 (L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515)
 and 2026-11-11 (L-522) and 2026-11-12 (L-527) and
-2026-11-19 (L-297) and 2026-11-21 (L-529).
+2026-11-19 (L-297), 2026-11-21 (L-529) and 2026-11-22 (L-541).
 
 ## Contents
 
@@ -81,6 +72,7 @@ if this list and the headings disagree (L-418).
   - Phone first, and the conditions are stated [QUALITY]
   - A guide asks for one action and waits for it [QUALITY]
   - An encounter is a package played in a room of its own [QUALITY]
+  - A visitor reads UTC; JPL's dates are on JPL's clock [QUALITY]
   - The touch path is not the mouse path [QUALITY]
   - Hover text is written for the visitor [QUALITY]
   - A feature's info link: NASA if specific, else Wikipedia [QUALITY]
@@ -299,10 +291,7 @@ than it should, which no compiler and no page error will mention.
 feature renderers build carries a key, and names by legend group any
 that does not. Add a renderer, or a branch inside one, and stamp it.
 
-Before 2026-09-18 a shell was found by the END of its legend group name,
-which was a second reading of the label formula the renderers build. Two
-readings of one formula is how they come to disagree. There is one way
-of matching now; do not add a second.
+A shell is matched one way, by its key; do not add a second.
 
 ### Only two tools write the served config [QUALITY]
 `data/objects_config.json` is hand-formatted and a person reads its
@@ -469,6 +458,17 @@ is not a fault; the phone look and the walks are upright, and sideways
 they check only the line and the pause. A saved picture, Earth
 Science's above all, may still be landscape; a room is not.
 
+A SESSION THAT CHANGES THE PAGE RUNS THE WALKS (v1.45, L-545; Tony,
+2026-11-21: "should this be method?"). After a change to
+`interactive.html` or a script it loads, before the closing report:
+`tools/headless/walk_solar_system_drawer.js` and `walk_scene_moment.js`
+(jsdom 24.1.3 from npm, in a scratch folder), each count and any red
+check by name; and the gallery run on a copy holding only what a push
+carries (L-543). On Nov 21 a walk caught a day one day early that 53
+green rows had passed. A NEW GALLERY-RUN ROW NEEDS A DASHBOARD BUTTON
+in the orrery, which a website session may not edit: the brief says
+who adds it, and the closing report names it as owed (L-550).
+
 ### A guide asks for one action and waits for it [QUALITY]
 L-527, Tony's rulings of 2026-11-11 and 12. A first visit's guide is
 cards over a room, each asking for ONE action and moving on only when
@@ -512,6 +512,18 @@ clock (L-529; `documentation/DESIGN_encounters_20261120.md`).
 - A NON-ASCII MARK in the page is written as its `\u` escape, and the
   file's bytes are checked: an edit tool wrote raw characters instead.
 As built: the gallery's `INTERACTIVE_AS_BUILT.md`, Encounters.
+
+### A visitor reads UTC; JPL's dates are on JPL's clock [QUALITY]
+v1.45, L-541 (Tony, 2026-11-21: "Yes"). Every date a visitor reads is
+UTC, and the date line is the visitor's own minute. A served `jd`, an
+orbit's date and a plan's moment are on JPL's clock (TDB), about 69 s
+ahead. The assembler converts once (gallery-assembler, One seam) and
+hands the page `moment_utc_jd` to print and `moment_tdb_jd` for lookups
+and drift; no page subtracts one from the other. A day printed from a
+JPL date is taken back to UTC first (`planDay`); a served point's is
+then read at the nearest minute (`SolarSystemFigures.servedDay`),
+since daily points are asked 9 s before UTC midnight. Only a body's
+source line names JPL's clock.
 
 ### The touch path is not the mouse path [QUALITY]
 Plotly fires no camera events during a touch rotation; chrome that
@@ -711,19 +723,7 @@ needs no ruling; whether a feature is drawn at all is Tony's.
 
 ## Field notes
 
-- 2026-09-18, L-334: a check that could not fail. The writer's suite
-  asserted that refusing `value` produced a message MENTIONING "value"
-  -- and "value" is in the path, so emptying the refusal list left the
-  suite green. It now asserts the reason. Found by emptying the list on
-  purpose, which is the only way that class of hole is ever found.
-- 2026-09-18, L-334: the stamp check had a blind spot of its own. It
-  built Earth's features without the Sun direction, so the magnetopause
-  and the bow shock drew nothing and two of Earth's sixteen shells were
-  never examined. A check that examines less than it appears to is the
-  same failure as a check that cannot fail.
-- 2026-09-06, L-288: Studio authors the exhibit's card; the card is a
-  placard with an Interactive tag and needs no picture (the lobby
-  settled that on the phone).
+Three notes of September (L-334, L-288) are in the histories.
 
 ## Install and verify
 
@@ -732,7 +732,7 @@ Install to the account (Plugins, in the claude.ai sidebar). Run
 `skills_index.py` so the manifest in PROJECT_INSTRUCTIONS.md carries the
 version. Per Stale Skill = Stop, the session that installs a version
 cannot verify the install. Earlier installs and their confirmations,
-1.0 to 1.43: documentation/SKILL_HISTORIES.md, under interactive-exhibit.
-1.44 was written on 2026-11-21 by the coordinating session for L-529
-and L-540, from the repo's copy of 1.43; a session that loads the
-account's copy confirms it reads 1.44 before exhibit work.
+1.0 to 1.44: documentation/SKILL_HISTORIES.md, under interactive-exhibit.
+1.45 was written on 2026-11-22 by the coordinating session for L-541,
+L-545 and L-550, from the repo's copy of 1.44; a session that loads the
+account's copy confirms it reads 1.45 before exhibit work.

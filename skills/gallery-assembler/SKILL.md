@@ -1,16 +1,21 @@
 ---
 name: gallery-assembler
 description: Technical home for the interactive gallery's client-side rendering mechanism -- render_orbits.py (Kepler propagation, orbit-shape sweep), resolver.py (scene resolution, served_window gating), cache_reader.py (read-only served-cache access), the trust/served_window system (M2), and the golden-artifact build+Mode-5 acceptance process. Distinct from gallery-cache-builder (nightly data production) and gallery-pipeline (the older Studio/converter/static-viewer chain). Use for propagation math, resolver/cache_reader internals, golden artifact builds, or orrery-vs-assembler boundary questions. Do not use for projects other than Paloma's Orrery.
-fires_when: render_orbits.py, resolver.py, cache_reader.py, propagation math, golden artifact builds, Mode 5 acceptance, orrery/assembler boundary questions, AND any time a served page misbehaves and the cause is unknown -- it hangs, it freezes, it is unresponsive, it worked yesterday, a console error appears, or Claude is about to hand Tony a test to run
+fires_when: render_orbits.py, resolver.py, cache_reader.py, the seam between UTC and JPL's clock, propagation math, golden artifact builds, Mode 5 acceptance, orrery/assembler boundary questions, AND any time a served page misbehaves and the cause is unknown -- it hangs, it freezes, it is unresponsive, it worked yesterday, a console error appears, or Claude is about to hand Tony a test to run
 ---
 
 # Gallery Assembler
 
-Read this file in 2 parts: lines 1-260, 261-307.
+Read this file in 2 parts: lines 1-262, 263-307.
 
-Skill version: 1.4 | Cut from orrery @ b3ce81f8 and gallery @ cea21af1
-(v1.4), earlier @ 159c5a2c (v1.3), @ 5b3fb6b4 (v1.2),
-@ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 (v1.1) | 2026-11-10
+Skill version: 1.5 | Cut from orrery @ 849bf462 and gallery @ e6af10ea
+(v1.5), earlier @ b3ce81f8 and cea21af1 (v1.4), @ 159c5a2c (v1.3) |
+2026-11-22, with Anthropic's Claude Fable 5.2
+v1.5 (L-541, a plan's clock) adds One seam between the visitor's clock
+and JPL's: resolver.py adds the served difference once and nothing
+downstream converts again. Written by the coordinating session from
+L-541's notes and the gallery at e6af10ea. To stay at the cap, the
+v1.2 entry and five passages moved to documentation/SKILL_HISTORIES.md.
 v1.4 (L-515, one nested tree, step 2b; Tony's rulings 13 and 14 of
 2026-11-09) amends "No composition between frames" to say which
 composition is retired and which is the method: SUBTRACTING two JPL
@@ -28,10 +33,6 @@ found on the served Earth-and-Moon card. The fourth is not Plotly's
 at all. They sit beside the event-handler note because they are the
 same class: the library does something reasonable that is not what
 the calling code meant.
-v1.2 (L-279) adds Mode 5 as Measurement and the Plotly event-handler
-field note, both earned by the 2026-09-02 Sun exhibit hang: eight reads
-to attribute a two-line bug, and three wrong readings on the way, every
-one of them from inferring the test conditions instead of stating them.
 Sources: render_orbits.py, resolver.py, cache_reader.py (read live this
 session); master plan sec. 3; L-149/L-150/L-151.
 
@@ -55,10 +56,7 @@ orrery's exactly).
 
 **Rule:** new objects are authored in the orrery's celestial_objects.py
 FIRST, then ported to objects_config.json. Never invented fresh in the
-assembler. (Encke is the known exception -- in objects_config.json for
-M1/M2 testing ahead of the orrery; confirmed absent from
-celestial_objects.py as of July 20, 2026. Closing that gap doubles as a
-live test of the porting pipeline.)
+assembler.
 
 ## The three core modules
 
@@ -90,9 +88,7 @@ coverage_index.json dict; never touches network or astroquery.
 object has no `osculating` block -- the concrete enforcement point for
 L-150: an object with only a barycentric cache and no heliocentric one
 fails HERE, with a specific error, the moment a whole-system scene tries
-to include it. (Known stale docs: cache_reader.py AND resolver.py both still say
-served_window is "currently null at HEAD... tracked with F1" -- pre-M2,
-no longer true; fix next time you're in that file.)
+to include it.
 
 ## No composition between frames -- which kind is retired (v1.4)
 
@@ -157,6 +153,20 @@ barycenter-centered) wrongly gate the whole site with its ~6.4-day
 mutual-orbit window. Future barycenter/parent-relative objects are
 excluded the same way automatically.
 
+## One seam between the visitor's clock and JPL's (v1.5, L-541)
+
+A served `jd`, an orbit's date and a plan's moment are on JPL's clock
+(TDB); the minute a room is asked for is UTC. `resolver.py` is the one
+place they meet: it checks the UTC minute against the served window,
+which the builder makes on UTC, then adds the served difference
+(`coverage_index.json`, `clock.tdb_minus_utc_s`) once. The context
+carries both (`asked_utc_jd`, `resolved_epoch_jd`), and the drivers
+hand the page `moment_utc_jd` and `moment_tdb_jd`; the old `epoch_jd`
+and `epochJd` are gone. Nothing downstream converts again. With no
+clock block the room draws as before and warns. The gallery run's Room
+clock row holds it against JPL's places. Detail: the gallery's
+`INTERACTIVE_AS_BUILT.md`, The rooms' clock.
+
 ## Golden artifact process
 
 7 settled artifacts: Earth; Jupiter/Saturn; Moon/Io/Titan; Halley/Encke;
@@ -172,9 +182,7 @@ largest orbital radius, uniform dtick.
 This skill's artifacts get Mode 5 visual acceptance. The BUILDER's data
 (gallery-cache-builder's Layer 1/2) is a separate, earlier gate -- an
 artifact can only be attempted once its objects' served data passes that
-gate. Don't conflate "the cache is good" with "the render is right":
-Pluto/Charon and Moon/Io/Titan are both, as of July 20 2026, in the state of
-"data plumbing partially tested, render never attempted."
+gate. Don't conflate "the cache is good" with "the render is right".
 
 ## Mode 5 as MEASUREMENT, not just acceptance [QUALITY]
 
@@ -249,12 +257,6 @@ Fix: `setTimeout(fn, 0)` around the mutation, so the dispatch returns
 first. Applies to `plotly_click`, `plotly_hover`, `plotly_selected` and
 `plotly_relayout` alike.
 
-Two hypotheses died before this one was found, and both are worth
-keeping because neither was unreasonable. Hover hit-testing was blamed
-first -- `Plotly.Fx.unhover` was tested directly and changed nothing.
-Trace size was blamed second, on the ~65,000 argument limit -- the
-largest trace in that scene is 4,332 points and the one that hung is 400.
-
 Live example: gallery `6fd6baaf`, `interactive.html`, the `plotly_click`
 handler. L-267, L-278.
 
@@ -302,6 +304,4 @@ small upward swipe on the phone kept it too. Anything that separates
 the two event streams looks like a fix and is not one.
 
 Fix: stamp the open time and have the dismiss listener ignore a click
-within 400 ms of it. (L-302, gallery `700b426d`.)
-
-Live example: gallery `700b426d`, `index.html`.
+within 400 ms of it. (L-302, gallery `700b426d`, `index.html`.)

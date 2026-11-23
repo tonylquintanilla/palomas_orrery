@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.144 | November 21, 2026
+Tony Quintanilla, PE | Claude | v3.145 | November 22, 2026
 
-Cut from bd70f584 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 849bf462 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,11 +486,11 @@ Skill                        Ver  Fires when
 orrery-coding-conventions    1.13 Markers, hover text, axes, the opening view
                                   (Auto scale), shells, legendgroups,
                                   docstrings, new visuals
-safe-file-editing            1.14 Editing existing files, patch scripts,
+safe-file-editing            1.15 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.19 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.20 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -520,7 +520,10 @@ horizons-orbital-mechanics   1.19 Horizons queries, centers, frames, osculating
                                   (path_drawing.py, only around the Sun), a
                                   small body drawn as a path or an orbit by its
                                   database e (path_or_orbit.py,
-                                  data/small_body_solutions.json)
+                                  data/small_body_solutions.json), an entry the
+                                  website does not serve
+                                  (horizons_unserved.py), JPL's dates on JPL's
+                                  clock
 provenance-discipline        2.37 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -536,8 +539,9 @@ gallery-pipeline             1.3  Gallery Studio, json_converter, index.html
 ledger-and-session-records   1.23 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
-gallery-assembler            1.4  render_orbits.py, resolver.py,
-                                  cache_reader.py, propagation math, golden
+gallery-assembler            1.5  render_orbits.py, resolver.py,
+                                  cache_reader.py, the seam between UTC and
+                                  JPL's clock, propagation math, golden
                                   artifact builds, Mode 5 acceptance,
                                   orrery/assembler boundary questions, AND any
                                   time a served page misbehaves and the cause
@@ -545,7 +549,7 @@ gallery-assembler            1.4  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.20 Nightly builder, atomic swap and its
+gallery-cache-builder        1.21 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
@@ -561,8 +565,9 @@ gallery-cache-builder        1.20 Nightly builder, atomic swap and its
                                   row, an ended mission's last day
                                   (fetch_path_last_day), a held body (HELD), a
                                   Lagrange point served as a point
-                                  (serving_shape 'point')
-interactive-exhibit          1.44 a room or exhibit in interactive.html
+                                  (serving_shape 'point'), the clock block and
+                                  its witness, an encounter's package
+interactive-exhibit          1.45 a room or exhibit in interactive.html
                                   (?exhibit=); its drawer and chrome (nav
                                   cluster, frame zoom, i panel, HUD, text box,
                                   consent, back link); the served words and
@@ -575,7 +580,8 @@ interactive-exhibit          1.44 a room or exhibit in interactive.html
                                   name's side (label_side_for); an encounter
                                   (data/encounters/, tools/encounter_fetch.py,
                                   its player); a card's fold beside a row
-                                  (Scenes, Encounters, Links)
+                                  (Scenes, Encounters, Links); a date a visitor
+                                  reads (UTC); a page change's walks
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1269,6 +1275,39 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.145 (November 22, 2026): No rule changed in this document. FIVE
+skill bumps in one, by the records skill's binding rule, from L-539
+(every entry checked), L-541 (a plan's clock), L-529 (guided
+encounters), L-545 (the walks) and L-550 (a new check's button).
+
+WHAT PROMPTED IT. Three builds by Claude Opus 5.5 in Claude Code listed
+their rules on the ledger and wrote no skill: the encounter (Nov 20),
+the rooms' clock (Nov 21), every entry checked against JPL (Nov 22).
+The coordinating session (Claude Fable 5.2) wrote the five from those
+notes and the code at orrery 849bf462 and gallery e6af10ea.
+
+WHAT CHANGED. horizons-orbital-mechanics 1.19 -> 1.20: the entries the
+website does not serve are held to JPL's name and kind; JPL's dates
+are on JPL's clock; three corrections. gallery-cache-builder 1.20 ->
+1.21: the clock block and its witness; an encounter's package.
+gallery-assembler 1.4 -> 1.5: one seam between the visitor's clock and
+JPL's. interactive-exhibit 1.44 -> 1.45: a visitor reads UTC; a page
+change runs the walks; who adds a new row's dashboard button.
+safe-file-editing 1.14 -> 1.15: a mark outside ASCII is typed as its
+escape and the bytes read; a placed file is read back. Each stayed at
+its cap by moving text, word for word, to SKILL_HISTORIES.md.
+
+THE OBLIGATION TRAVELS. Written from the repo's copies, as the manifest
+expected. Tony reinstalls all five (Plugins, in the claude.ai sidebar)
+and pastes this version into the Project; the next session that loads
+each from the account confirms 1.20, 1.21, 1.5, 1.45 or 1.15 first.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.142 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.144 (November 21, 2026): No rule changed in this document. TWO
 skill bumps, from L-529 (guided encounters) and L-540 (a reel on a
 Featured card), by the records skill's binding rule.
@@ -1348,44 +1387,6 @@ before that work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.140 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.142 (November 18, 2026): No rule changed in this document. ONE
-skill bump: horizons-orbital-mechanics 1.18 -> 1.19 (L-533, ESCAPADE's
-path), by the records skill's binding rule, on the brief's section 8
-(documentation/COORD_L533_escapade_path_brief_20261118.md: "The rule
-then goes into horizons-orbital-mechanics ... it is method from then
-on") and Tony's ruling of Nov 18 on the loiter: "Approved, with one
-tightening", then "the loiter ends at its flyby". A CRAFT RIDING NEAR A
-LAGRANGE POINT.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 18 (Claude Opus 5.5),
-through the python_work door, built ESCAPADE's path on orrery 00c89ef0
-and gallery 1d3090bc, from Tony's prompt and the brief, in three parts
-with a report and his go-ahead after each.
-
-WHAT CHANGED. horizons-orbital-mechanics: THE LOITER, under How a
-Path's Events Are Found. A Lagrange point has no mass, so the orbiter
-rule cannot see a craft riding near one; ESCAPADE's year near L2 gave a
-false flyby of Earth and passes of the Sun. Sixty days or more within
-twice Earth's Hill sphere is one event at the point nearer on most
-days, ending at the flyby that ends it; inside it a pass of Earth is
-that flyby only when the path leaves within 15 days. To stay at the cap
-of 904 lines, the 1.16 entry and two passages of history (Galileo's and
-Cassini's first plans; the twelve's keying) moved to
-documentation/SKILL_HISTORIES.md.
-
-THE OBLIGATION TRAVELS. This session read horizons-orbital-mechanics
-1.18 from the repo's copy, as a Code session does, as the manifest
-expected. Tony reinstalls it (Settings > Skills) and pastes this
-version into the Project's instructions on claude.ai; the next session
-that loads it from the account confirms its copy reads 1.19 before
-Horizons work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.139 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

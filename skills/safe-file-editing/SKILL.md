@@ -6,9 +6,15 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Read this file in 3 parts: lines 1-306, 307-579, 580-765.
+Read this file in 3 parts: lines 1-297, 298-577, 578-763.
 
-Skill version: 1.14 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.15 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
+palomas_orrery @ 849bf462. v1.15 (L-529, guided encounters, and the
+coordinating session of 2026-11-22) adds two rules. A MARK OUTSIDE
+ASCII IS TYPED AS ITS ESCAPE, AND THE BYTES ARE READ AFTER THE EDIT,
+under Unicode-Safe Editing; and A PLACED FILE IS READ BACK, under A
+Delivered Patch Is Final. To stay at the cap, the 1.12 entry moved out.
+Earlier: 1.14 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 0c27f47a. v1.14 (L-471) adds A Delivered Patch Is
 Final, three rules learned closing L-443's slice 1 on 2026-10-22: a
 patch in Tony's folder is never replaced, and an addition goes in the
@@ -24,31 +30,8 @@ older than the two entries below moved to
 documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
-Earlier: 1.12 | Cut from palomas_orrery @ 41c1ca7a (v1.12),
-earlier @ 1fa413d9 (v1.11), ccd1ac96 (v1.10), bfa9de2f (v1.9),
-earlier @ 6d12ecac (v1.8), d424c459 (v1.7), ef3bd13 (v1.6),
-50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
-bdaaa0c (v1.1) | October 4, 2026, with Anthropic's Claude Opus 5.5
-(v1.12); August 29, 2026, with Anthropic's Claude Opus 5 (v1.11)
-v1.12 (L-415) makes the skill agree with itself about line endings.
-Fix In Passing listed "CRLF where the repo is LF" as a violation to
-fix, while Line Endings Are Not Content and Compare Content, Not Bytes
-told a patch to write each file back in the style it found. Tony asked
-why a patch was leaving Windows line endings in place: "I thought the
-rule was to convert to lf when found and report." The preserve rule's
-reason -- that flipping the endings shows every line changed -- was
-tested on 2026-10-04 and is false wherever the repo normalizes
-(`* text=auto eol=lf`, both of this project's repos): a CRLF working
-copy shows as modified with nothing inside it, and writing it LF clears
-that mark. It holds only for a file whose COMMITTED copy is CRLF. So a
-patch now writes LF and reports, except for those files.
-v1.11 (L-315) adds A Guard Must Not Fence What a Generator Rewrites,
-earned when three chained ledger patches all refused: each was
-fingerprinted against the previous one's raw output, while every one of
-them told the operator to run `ledger_index.py` next -- which rewrites
-the zone they were hashing.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418).
+on 2026-10-05 (L-418) and 2026-11-22 (L-529).
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Contents
@@ -99,6 +82,14 @@ with open(filename, 'wb') as f: f.write(content)
 | File needs CRLF preserved  | Python binary mode              |
 | Simple ASCII-only files    | sed okay                        |
 | Uncertain                  | Python binary mode (always safe)|
+
+A MARK OUTSIDE ASCII IS TYPED AS ITS ESCAPE, AND THE BYTES ARE READ
+AFTER THE EDIT (v1.15, L-529). In a file kept ASCII, such a mark is
+written as its `\u` escape, as the file writes its others. Then read
+the file's bytes for anything above 0x7F: on 2026-11-20 an edit tool
+wrote raw characters where escapes had been typed (the website
+page's Play and Pause marks, an ellipsis, a walk's arrow), and only
+the bytes showed it.
 
 ## Transactional Patching for Clustered Edits
 
@@ -392,6 +383,13 @@ handed over as a download made the patch that wrote it refuse. Tony:
 "part of the problem is that I ran these patches while you were still
 amending them" -- and the fix is the deliverer's; and "why does a patch
 refuse when it sees a document you gave to me as an artifact?")
+
+**A placed file is read back** (v1.15). A file placed in the person's
+folder from a linked session is read back, its size at least, before
+they are told it is there. On 2026-11-22 a prompt file changed and
+placed again arrived with its first content under a new date; the
+size, 1,666 bytes where 1,987 were sent, showed it, and a second
+placement seconds later landed.
 
 ### A Paste Is An Unverified Transfer [QUALITY]
 

@@ -1179,7 +1179,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
-| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-21 |
+| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-22 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
@@ -1193,7 +1193,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 | ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-21 |
 | ! | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | OPEN | -- | 2026-11-22 |
-| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-21 |
+| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-22 |
 | ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
 | ! | L-547 | Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded) | OPEN | -- | 2026-11-22 |
 | ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-22 |
@@ -2316,7 +2316,19 @@ Nov 22 read clean on GitHub: orrery 60d0f157, and website e6af10ea with
   coordinating session's first job, from
   documentation/HANDOFF_coordinator_20261122_bump_notes.md and the list
   above (L-541 (a plan's clock) says why).
-**Gap:** the coordinating session's skill bump (the text above); the
+**Note:** THE SKILL TEXT IS WRITTEN (2026-11-22, the coordinating session, Claude Fable 5.2; protocol
+v3.145, patch_L539_3_skills_bump.py):
+horizons-orbital-mechanics 1.20 carries the eight rules above (Where
+the Check Lives, THE ENTRIES THE WEBSITE DOES NOT SERVE; Query
+Mechanics, the fall-through and the astroquery version) and the two
+corrections owed, with a third: idealized_orbits.py's own skip list.
+- **Tony-action (do):** reinstall five skills (Plugins, in the
+  claude.ai sidebar): horizons-orbital-mechanics, gallery-assembler,
+  interactive-exhibit, gallery-cache-builder, safe-file-editing; and
+  paste PROJECT_INSTRUCTIONS.md, v3.145, into the Project's
+  instructions.
+**Gap:** the next session confirms its loaded copies read 1.20, 1.21,
+1.5, 1.45 and 1.15; the
 first night on GitHub after Tony's push, whose Horizons check row
 should read NOTHING DUE until Nov 25, when the 90 served identities
 renew (L-485); the unserved entries first come due on Dec 12, ten a
@@ -2376,6 +2388,12 @@ and JPL Binary System IDs; `celestial_objects.py` (center_id).
   the Sun by its helio_id; around another centre the pre-fetch would
   ask 920090482 as a small body. An entry added without the line would
   be asked as an asteroid of its number.
+**Note:** (2026-11-22, the coordinating session, Claude Fable 5.2; protocol
+v3.145, patch_L539_3_skills_bump.py) astroquery's own
+warning, in Tony's output of Nov 22, says 'majorbody' and 'id' "are
+deprecated and replaced with ``None``, which has the same
+functionality": one more reason the default matters
+(horizons-orbital-mechanics 1.20, Query Mechanics).
 **Gap:** a ruling: one default in every reader, or the list writing
 id_type on every entry; then a patch.
 **Ref:** L-539; L-512 (the plot's data path); `period_fetch.py`
@@ -2441,10 +2459,13 @@ say; whether Vanth comes off its lists.
   session's go-ahead, which Tony pasted; "PASS -- 10 of 10 planted
   faults caught; 116 steps matched to their buttons", and both ran to
   PASS under Tony's hand.
-**Gap:** the rule, with the skills bump (v3.145): a brief for a website
-build that adds a gallery-run row says who adds the button, and the
-build's closing report names the button as owed. interactive-exhibit is
-its home.
+**Note:** THE RULE IS WRITTEN (2026-11-22, the coordinating session, Claude Fable 5.2; protocol
+v3.145, patch_L539_3_skills_bump.py):
+interactive-exhibit 1.45, the last sentences of Phone first: a brief
+for a website build that adds a gallery-run row says who adds the
+button, and the build's closing report names the button as owed.
+**Gap:** none of its own; it closes at the next close after a session
+has loaded interactive-exhibit 1.45 from the account.
 **Ref:** L-539 (every entry checked); L-529 (guided encounters: the
 Encounters button); L-541 (a plan's clock: the Room clock row); L-540 (a
 reel: the Link cards row); `palomas_orrery_dashboard.py`;
@@ -2649,7 +2670,7 @@ that changes the page runs both walks (L-545).
 L-541 (a plan's clock).
 
 #### [L-545] Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked)
-<!-- L:545 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+<!-- L:545 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
   THE WALKS load the page itself; the gallery run's rows test its
   scripts and a recorded scene. On Nov 21 L-541's build left three boxes
@@ -2671,7 +2692,8 @@ L-541 (a plan's clock).
   Six checks read it. Re-recorded on Nov 21 for L-541, it brought in
   Earth's period sentence, served since L-535, which Typed facts had
   never read (the build's closing thought).
-**Gap:** the skill text, at interactive-exhibit's next version. Two
+**Gap:** the skill text is written (interactive-exhibit 1.45, Phone
+first; v3.145, 2026-11-22), the session's half only. Two
 rulings for Tony: whether the walks join the gallery run, which means
 the website keeps jsdom and the night's runner installs it; and when the
 recorded scene is re-recorded (at every cache build, or by a check that
@@ -2908,9 +2930,10 @@ job: one bump, v3.145, before the next website build.
 (`Time(jd).datetime` read as UTC) and its reading of a plan's windows
 as UTC; the orrery's `path_drawing.py`; the whole-second 69 in the
 orrery's `utc_to_tdb` and `TDB_OFFSET`, which could read the served
-figure's way (JPL's TDB-UT); and the skill text
-(horizons-orbital-mechanics, gallery-assembler, interactive-exhibit,
-gallery-cache-builder), named in the build's closing report; the
+figure's way (JPL's TDB-UT); the skill text is written (2026-11-22, the coordinating session, Claude Fable 5.2; protocol
+v3.145, patch_L539_3_skills_bump.py):
+horizons-orbital-mechanics 1.20, gallery-assembler 1.5,
+interactive-exhibit 1.45 and gallery-cache-builder 1.21; the
 builder asks its daily points 9 s before UTC midnight (00:01:00 on
 JPL's clock), and the page's nearest-minute rule stands in for it until
 it asks at true UTC midnight; and the served difference is today's, so
@@ -2943,7 +2966,7 @@ of `solar_system`, or the check allows the Earth room's address.
 **Ref:** L-519 (Scenes); L-540 (a reel on a Featured card); L-529.
 
 #### [L-529] Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20)
-<!-- L:529 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+<!-- L:529 status:OPEN upd:2026-11-22 section:A flag: rice: -->
 - **Tony, 2026-11-12, 20:34,** after his phone look at the finished
   guide (L-527 (a first visit's guide)): "it works great. i'm thinking
   this might be a good way to create encounters, with labels and focus
@@ -3161,11 +3184,11 @@ orrery's words; the words on each card. The L2 loiter as an encounter
 is asked again if JPL replaces a prediction with a measurement. The
 skill text is written: all eleven rules above are in
 interactive-exhibit 1.44 (patch_L529_3_skills_and_protocol.py,
-protocol v3.144), which Tony reinstalls. Three of them also belong
-elsewhere and wait for those skills' next versions: the plan's clock,
-horizons-orbital-mechanics, with L-541 (a plan's clock); the escape
-rule, safe-file-editing, with L-471 (a delivered patch is final); the
-package's place and the night, gallery-cache-builder.
+protocol v3.144), which Tony reinstalls. Three of them also belonged
+elsewhere and are there since v3.145 (2026-11-22,
+patch_L539_3_skills_bump.py): the plan's clock,
+horizons-orbital-mechanics 1.20; the escape rule, safe-file-editing
+1.15; the package's place and the night, gallery-cache-builder 1.21.
 **Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
 swing, `gallery/first_guide.js`); L-507 (historical missions, whose
 encounters were to become saved scenes); L-489 (compositions: Artemis II

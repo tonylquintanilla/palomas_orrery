@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 22, 2026: the coordinating session's close. Every entry the orrery asks JPL for is checked against JPL; the skills bump is the next session's first job (Claude Fable 5.2).
-- Written on orrery 97a8b733 and gallery e6af10ea, both pushed; both nights of Nov 22 clean.
+Last updated: November 22, 2026, evening: the skills bump, v3.145, is written; you reinstall five skills and paste the protocol (Claude Fable 5.2).
+- Written on orrery 849bf462 and gallery e6af10ea, both pushed; both nights of Nov 22 clean.
 
 > **READ THIS FIRST**
 >
@@ -11,14 +11,14 @@ Last updated: November 22, 2026: the coordinating session's close. Every entry t
 > - JPL has no object at all for four moons: Xiangliu, Hi'iaka, Namaka, MK2. Hi'iaka's and Namaka's orbits are still drawn from JPL's elements of Feb 2, labelled as JPL's. That is for a talk, below (L-549 (four moons JPL cannot place)).
 > - The Lagrange points no longer ask JPL for orbits or close approaches they cannot have; the drawing is unchanged (L-512 (fallbacks when JPL cannot answer)). Nothing the website reads changed.
 >
-> **Do next:** *The next coordinating session writes the one skills bump (v3.145) first, from `documentation/HANDOFF_coordinator_20261122_bump_notes.md`; then L-544 (L4 and L5 tie); then the protocol's reduction, step 3 of L-522 (document caps), in its own Fable session; then L-538 (the orbiters' printed error); then the encounter's slice 2, its talk first (L-529 (guided encounters)). Your "Yes" of Nov 22 to this order.*
+> **Do next:** *The skills bump (v3.145) is written, Nov 22. Next, once you have reinstalled: L-544 (L4 and L5 tie), in the website; then the protocol's reduction, step 3 of L-522 (document caps), in its own Fable session; then L-538 (the orbiters' printed error); then the encounter's slice 2, its talk first (L-529 (guided encounters)). Your "Yes" of Nov 22 to this order.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 > - *(do) Finish the look in the orrery's window, lines 8 to 14 of the checklist in your run record `WHERE_WE_ARE_11-22-26_1315_run_record.md`: one short animation with the Moon and Earth-Moon L1 ticked, with no "Required masses not defined" in the panel; then Haumea with Hi'iaka and Namaka, for our talk (L-539 (every entry checked), L-549 (four moons JPL cannot place)).*
-> - *(do) Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_3.md`, pasted from below its line. The website builds wait for its skills bump.*
+> - *(do) Reinstall five skills (Plugins, in the claude.ai sidebar): horizons-orbital-mechanics, gallery-assembler, interactive-exhibit, gallery-cache-builder, safe-file-editing. Then paste `PROJECT_INSTRUCTIONS.md`, now v3.145, into the Project's instructions. The website builds wait for this (L-539 (every entry checked), L-541 (a plan's clock)).*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
