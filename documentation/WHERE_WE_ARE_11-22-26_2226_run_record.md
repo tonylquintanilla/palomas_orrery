@@ -201,3 +201,85 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 4. Once the push is served, open Earth's fold on your phone and check that L4 sits above L5. -- yes
 
 Please paste what the patch printed and the commit's SHA. Then I will write the session's close for the orrery. -- we can continue to the next item in this session. 
+
+=======================
+
+The review request is written, and a third patch that places it is in your orrery folder: `patch_L544_3_review_request.py`.
+
+**What the request asks.** It is the question you gave on Nov 10: review the governing documents for gaps, effectiveness and efficiency. The words are the same for GPT and for Gemini 4 Neon.
+
+- **Kept independent:** it names five things not to open, which are the Nov 10 review, its two design records, the upkeep handoff and the ledger's L-522 (document caps). A reviewer who opens one is asked to say so.
+- **How each read the repository:** each reviewer says this first, and stops if it could not read it. That settles what I could not check about Neon.
+- **What comes back:** at most twelve findings, each with a short quotation and where it is from, who pays for the problem, the smallest change that would fix it, and how sure the reviewer is. Then up to five things the documents do well, and anything wrong with the request itself. About 1,500 words, in plain language.
+
+**What the patch does.** It places the request in the orrery's `documentation` folder, records your "Yes" on L-522, marks the handoff's "Not written" line as done, and puts the carry first on Where We Are's "Needs you now". It ran clean on a copy with the close applied. On a copy without the close, it refused and wrote nothing.
+
+**Your run order**
+
+1. Run `patch_L544_2_session_close.py` first, if you have not yet. This one refuses until it has run.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L544_2_session_close.py'
+ok   LEDGER_CONSOLIDATED.md: <!-- L:544 status:OPEN upd:2026-11-22 section:A flag
+ok   LEDGER_CONSOLIDATED.md: **Gap:** a tie-break in the drawer's order where two
+ok   LEDGER_CONSOLIDATED.md: <!-- L:533 status:OPEN upd:2026-11-21 section:A flag
+ok   LEDGER_CONSOLIDATED.md: Nov 20). The box's last day: its build, as ruled Nov
+ok   LEDGER_CONSOLIDATED.md: <!-- L:543 status:OPEN upd:2026-11-21 section:A flag
+ok   LEDGER_CONSOLIDATED.md: **Gap:** Tony's ruling: whether the gallery run is r
+ok   LEDGER_CONSOLIDATED.md: <!-- L:545 status:OPEN upd:2026-11-22 section:A flag
+ok   LEDGER_CONSOLIDATED.md: **Gap:** the skill text is written (interactive-exhi
+ok   LEDGER_CONSOLIDATED.md: <!-- L:548 status:OPEN upd:2026-11-22 section:A flag
+ok   LEDGER_CONSOLIDATED.md: **Gap:** a ruling: one default in every reader, or t
+ok   LEDGER_CONSOLIDATED.md: <!-- L:550 status:OPEN upd:2026-11-22 section:A flag
+ok   LEDGER_CONSOLIDATED.md: **Gap:** none of its own; it closes at the next clos
+ok   LEDGER_CONSOLIDATED.md: #### [L-550] A website check added by a website sess
+ok   documentation/WHERE_WE_ARE.md: Last updated: November 22, 2026, night: this coordin
+ok   documentation/WHERE_WE_ARE.md: > - Five skills now carry the rules three builds had
+ok   documentation/WHERE_WE_ARE.md: > **Do next:** *A new coordinating session first che
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Start the next coordinating session with `
+ok   documentation/WHERE_WE_ARE.md: ## The road
+ok   documentation/WHERE_WE_ARE.md: d.   [beside] Document caps (L-522 (document caps)):
+ok   documentation/WHERE_WE_ARE.md: ## Settled
+ok   documentation/WHERE_WE_ARE.md: - A visitor reads UTC everywhere. The room adds JPL'
+ok   documentation/WHERE_WE_ARE.md: - Every entry the orrery asks JPL for is held to JPL
+ok   documentation/WHERE_WE_ARE.md: - Last cache build: 20261122T194726Z, ok, no retry o
+ok   documentation/WHERE_WE_ARE.md: - Whether the gallery's checks are read from a copy 
+ok   documentation/WHERE_WE_ARE.md: - The four moons JPL cannot place: what Hi'iaka and 
+ok   documentation/WHERE_WE_ARE.md: - This round: L-539 (every entry checked), its brief
+patch applied (26 edits, 2 files)
+wrote documentation/PROMPT_coordinator_start_20261123_1.md (6123 bytes)
+stamps updated: Where We Are's header (b0eedeab, 326863a6)
+ok   ledger_index.py
+ok   doc_index.py --caps
+
+Do next: move this file into documentation; commit and push
+the orrery. The protocol's reduction is next, in its own
+session; the coordinating session after it starts with
+documentation/PROMPT_coordinator_start_20261123_1.md.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `patch_L544_3_review_request.py`. Expect four "ok" lines, "patch applied (4 edits, 3 files)", a "wrote" line, then "ok" for two tools.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L544_3_review_request.py'
+ok   LEDGER_CONSOLIDATED.md: <!-- L:522 status:OPEN upd:2026-11-22 section:A flag
+ok   LEDGER_CONSOLIDATED.md: request is written when step 3 is next. Claude recom
+ok   documentation/HANDOFF_document_upkeep_20261116.md: compared. Not written. GPT has no protocol and no sk
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Start the protocol's reduction in a new Fa
+patch applied (4 edits, 3 files)
+wrote documentation/REVIEW_REQUEST_fundamental_documents_20261123.md (5648 bytes)
+ok   ledger_index.py
+ok   doc_index.py --caps
+
+Do next: move this file into documentation; commit and push
+the orrery. Then carry the request to GPT and to Gemini 4
+Neon, as its opening says:
+documentation/REVIEW_REQUEST_fundamental_documents_20261123.md
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. Move both to `documentation`, then commit and push the orrery. -- done
+4. Open `documentation/REVIEW_REQUEST_fundamental_documents_20261123.md`. Its top says how to carry it:
+   - **GPT:** paste everything below the line into a new chat.
+   - **Gemini 4 Neon:** on your computer, import the orrery repository first, then paste the same text.
+   - **Replies:** save each one, whole, under the file name the request gives.
+5. Then start the protocol's reduction in its own session. It reads both replies before it drafts.
+
+One thing to watch: if Gemini's import of a repository is gone or works differently in the new app, stop and tell the next session before going on. The request assumes it still exists.

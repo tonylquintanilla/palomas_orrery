@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*280 live items; 264 need attention (`!`); 164 RICE-scored; 263 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*280 live items; 264 need attention (`!`); 164 RICE-scored; 265 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1175,7 +1175,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | OPEN | -- | 2026-11-21 |
-| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-22 |
+| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-23 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
@@ -1183,7 +1183,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-21 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-23 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-21 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
 | ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-22 |
@@ -1191,14 +1191,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-22 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
-| ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-21 |
-| ! | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | OPEN | -- | 2026-11-22 |
-| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-22 |
+| ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-23 |
+| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-23 |
 | ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
 | ! | L-547 | Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded) | OPEN | -- | 2026-11-22 |
-| ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-22 |
+| ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-23 |
 | ! | L-549 | Four moons JPL cannot place: Xiangliu, Hi'iaka, Namaka, MK2 (orrery; for a talk with Tony) | OPEN | -- | 2026-11-22 |
-| ! | L-550 | A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump) | OPEN | -- | 2026-11-22 |
+| ! | L-551 | No saved scenes: the gallery run makes every room's scene fresh at each run, and the saved copies go (gallery; ruled Nov 22, a list first) | OPEN | -- | 2026-11-23 |
+| ! | L-552 | The kind of body: each entry says what it is, and how JPL is asked follows from it (orrery; Tony's idea, for a design talk) | OPEN | -- | 2026-11-23 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1610,6 +1610,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-527 | A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; built, closed) | DONE | -- | 2026-11-12 |
 |  | L-535 | The period's reason: the website's period line says what set its digits (orrery + gallery; built, closed) | DONE | -- | 2026-11-16 |
 |  | L-537 | The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump) | DONE | -- | 2026-11-19 |
+|  | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | DONE | -- | 2026-11-23 |
+|  | L-550 | A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump) | DONE | -- | 2026-11-23 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1752,7 +1754,7 @@ go-ahead.
 final).
 
 #### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534)
-<!-- L:533 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+<!-- L:533 status:OPEN upd:2026-11-23 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
   gallery d3e97b15): NASA's article of 2026-11-09,
@@ -1981,7 +1983,9 @@ package and opened under Earth's row: L-529's note of the same evening
   as an encounter"; it is built after the flybys' slice 2, and its
   view is its own question.
 **Gap:** the row under Mars waits (L-534 (missions by destination),
-Nov 20). The box's last day: its build, as ruled Nov 19. The loops near L2, with
+Nov 20). The box's last day: its build, as ruled Nov 19, a build of
+its own straight after L-538 (the orbiters' printed error), not a part
+of it (Tony, 2026-11-22, 21:58, asked which: "Keep its own build"). The loops near L2, with
 an Earth-centred path view in Earth's fold. One later item: a Mars
 arrival counts as one only because JPL's data runs three days past
 orbit insertion; the plan's 30-day remake shows it if JPL trims that.
@@ -2394,7 +2398,7 @@ L-549.
 and JPL Binary System IDs; `celestial_objects.py` (center_id).
 
 #### [L-548] The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded)
-<!-- L:548 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+<!-- L:548 status:OPEN upd:2026-11-23 section:A flag: rice: -->
 - **Found 2026-11-22** in L-539 (every entry checked).
   `palomas_orrery.py` lines 4843 (the static plot) and 6486 (the
   animation): `id_type = obj_dict.get('id_type', 'smallbody')`. The
@@ -2417,8 +2421,30 @@ warning, in Tony's output of Nov 22, says 'majorbody' and 'id' "are
 deprecated and replaced with ``None``, which has the same
 functionality": one more reason the default matters
 (horizons-orbital-mechanics 1.20, Query Mechanics).
-**Gap:** a ruling: one default in every reader, or the list writing
-id_type on every entry; then a patch.
+**Note:** (2026-11-23, the coordinating session, Claude Fable 5.2)
+METHOD, on Tony's word. Neither default is safe: read as a small body,
+Pluto's 999 is the asteroid Zachia; read as a major body, an asteroid
+numbered 499 would be Mars. So nothing guesses. Every entry writes
+id_type, the four named above included; a reader that finds none
+leaves that one object out and names it; the night's check of every
+entry (L-539) fails on an entry without it. Tony, Nov 23, 08:28:
+"shouldn't we specify what kind of body it is? the objects list
+already has a field for that. that would disambiguate the id"; and at
+08:54, on this patch now and his idea to a design talk: "i'll follow
+your lead on this." His idea is L-552 (the kind of body).
+**Gap:** the patch, in the orrery: four lines in
+`celestial_objects.py`, the readers (`palomas_orrery.py`, the
+pre-fetch's two lines and the position fetch's two; `period_fetch.py`)
+and the check. All five consumers of position data are mapped first
+(the protocol's Check All Parallel Pipelines), and the website's own
+chain with them, the builder, the assembler and the page: Gemini 4
+Neon's review of 2026-11-23, finding 3, says the gate's five leave it
+out, and the text bears that out
+(`documentation/REVIEW_CHECK_fundamental_documents_20261123.md`).
+`id_type` is on 68
+lines of `palomas_orrery.py`. Its rule goes into
+horizons-orbital-mechanics, so it follows step 3 of L-522 (document
+caps).
 **Ref:** L-539; L-512 (the plot's data path); `period_fetch.py`
 (FETCHED_HERE's comment says the same of the barycentre).
 
@@ -2507,32 +2533,88 @@ say, with the look above in hand; whether Vanth comes off its lists.
 **Ref:** L-539; L-512; `idealized_orbits.py`; `orbital_elements.py`;
 `jpl_outcome.py`; horizons-orbital-mechanics, A Skip Names What Failed.
 
-#### [L-550] A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump)
-<!-- L:550 status:OPEN upd:2026-11-22 section:A flag: rice: -->
-- FOUND Nov 22, 2026 by L-539's Code session (Claude Opus 5.5): the
-  orrery's Dashboard parity check failed on "Link cards" and "Room
-  clock", two rows the website's builds of Nov 21 added to the gallery
-  run with no button in `palomas_orrery_dashboard.py`. The Encounters
-  row did the same on Nov 20 (Tony then: "Yes, add the button"). Three
-  times in three days.
-- WHY IT RECURS. A website session may not edit the orrery; its brief
-  says so. The orrery's night skips Dashboard parity, so nothing shows
-  the red until the next whole maintenance run by hand.
-- DONE Nov 22: the two buttons, in L-539's session, on the coordinating
-  session's go-ahead, which Tony pasted; "PASS -- 10 of 10 planted
-  faults caught; 116 steps matched to their buttons", and both ran to
-  PASS under Tony's hand.
-**Note:** THE RULE IS WRITTEN (2026-11-22, the coordinating session, Claude Fable 5.2; protocol
-v3.145, patch_L539_3_skills_bump.py):
-interactive-exhibit 1.45, the last sentences of Phone first: a brief
-for a website build that adds a gallery-run row says who adds the
-button, and the build's closing report names the button as owed.
-**Gap:** none of its own; it closes at the next close after a session
-has loaded interactive-exhibit 1.45 from the account.
-**Ref:** L-539 (every entry checked); L-529 (guided encounters: the
-Encounters button); L-541 (a plan's clock: the Room clock row); L-540 (a
-reel: the Link cards row); `palomas_orrery_dashboard.py`;
-documentation/HANDOFF_coordinator_20261122_bump_notes.md.
+#### [L-551] No saved scenes: the gallery run makes every room's scene fresh at each run, and the saved copies go (gallery; ruled Nov 22, a list first)
+<!-- L:551 status:OPEN upd:2026-11-23 section:A flag: rice: -->
+- **Opened 2026-11-23** by the coordinating session (Claude Fable 5.2),
+  from L-545's second question. The session had proposed a fingerprint
+  on the saved Earth scene. Tony, Nov 22, 23:25: "wait, the earth room
+  is only the first of many. every planet will have one. then every
+  moon with rows. dwarf planets, etc. we need a method that will handle
+  all of them. how is the sun's room handled?"
+- HOW THE SUN'S IS HANDLED: nothing is saved. Each check builds the
+  Sun's room at every run from `data/objects_config.json` and the
+  page's own renderers. Earth's room has three things the page's
+  Python works out for a moment (the Sun's direction, the Moon's arc,
+  the pole of date), and a check cannot run that Python in a browser,
+  so its result was saved.
+- THREE SAVED COPIES at gallery 326863a6, in `documentation/`.
+  `payload_earth_scene.json`, read by ten checks: smoke_source_list,
+  smoke_arrival, smoke_typed_numbers, smoke_display_figures,
+  smoke_label_words, smoke_earth_geometry, smoke_drawer_order,
+  smoke_typed_facts, smoke_drawn_ends, smoke_hover_budget.
+  `payload_jupiter_saturn.json`, read by smoke_features, smoke_framing
+  and smoke_hover_budget. `payload_earth.json`, an older Earth copy,
+  read by smoke_features, smoke_hover_budget and two walks,
+  walk_drawer_order and walk_shell_reset. The last two copies carry no
+  date.
+- THE METHOD. Tony, Nov 22, 23:30: "Yes and we should remove obsolete
+  saved files." No saved copies. The page's Python for a room runs in
+  plain Python outside the browser (`tools/headless/run_room_driver.py`,
+  the standard library only; the Solar System room's 430 traces in 0.3
+  s on Nov 23). The gallery run makes each room's scene at the start of
+  every run, from the page's own code and the served data, and hands it
+  to the checks. A new planet or moon needs no new file; the run is the
+  same on Tony's computer and on GitHub; at night the checks read the
+  scene made from that night's data.
+**Gap:** FIRST A LIST, no code: each check and walk, which copy it
+reads, and whether it holds numbers fixed to that copy (those work
+their numbers out from the fresh scene instead). The list sizes the
+build. Then the build, after step 3 of L-522 (document caps): the
+three copies and `tools/record_earth_scene.py`, whose header still
+says four checks, are removed in it. Not known: which moment a fresh
+scene is made at, and whether one moment is enough.
+**Ref:** L-545 (checks that wait to be remembered); L-379 (the
+recorder); L-543; L-509 (obsolete code).
+
+#### [L-552] The kind of body: each entry says what it is, and how JPL is asked follows from it (orrery; Tony's idea, for a design talk)
+<!-- L:552 status:OPEN upd:2026-11-23 section:A flag: rice: -->
+- **Opened 2026-11-23** by the coordinating session (Claude Fable 5.2),
+  from Tony's question on L-548 (a missing id_type), 08:28: "shouldn't
+  we specify what kind of body it is? the objects list already has a
+  field for that. that would disambiguate the id".
+- WHAT THE LIST HAS, read at orrery b0eedeab, 184 entries in
+  `celestial_objects.py`. `object_type` says how a thing is drawn, not
+  what it is: fixed 1, orbital 68, satellite 46, barycenter 4,
+  hypothetical 1, lagrange_point 8, trajectory 40, and the exoplanet
+  systems' four values, 16 entries. "orbital" holds Mercury to Pluto
+  (id_type None), 51 small bodies ('smallbody'), seven asked by JPL's
+  long ids ('majorbody': Patroclus, Menoetius, Haumea, Eris, Gonggong,
+  Makemake, Quaoar) and Orcus (none written). "trajectory" holds 29
+  spacecraft ('id'), 10 comets and interstellar objects ('smallbody')
+  and C/2025_K1 ('designation'). So `object_type` does not tell Mars,
+  499, from an asteroid numbered 499.
+- `id_type` DOES TWO JOBS. It tells astroquery how to read the id, and
+  the orrery's own code reads it as a kind: 'id' is taken for a
+  spacecraft (the close-approach passes), and the exoplanet entries
+  hold 'host_star', 'exoplanet', 'barycenter', 'binary_star_a' and
+  'binary_star_b', which JPL never sees. astroquery calls 'majorbody'
+  and 'id' deprecated, replaced by None (L-548's note).
+- THE IDEA: an entry says what the body is (planet, moon, dwarf planet,
+  asteroid, comet, spacecraft, barycentre, Lagrange point), and one
+  function works out how to ask JPL. The word can be JPL's own:
+  `horizons_unserved.py` records the kind JPL gives each id it checks
+  (L-539).
+- ONE LIMIT, not worked out: a small body is asked by its catalogue
+  number or by JPL's own long id (Haumea as 920136108, not 136108), so
+  the kind alone does not say how. Those entries need one more fact,
+  or a rule on the id's form.
+**Gap:** a design talk with Tony; then a list of all 184 entries, the
+kind of each and how it is asked today, before any code. `id_type` is
+on 68 lines of `palomas_orrery.py`; the session told Tony "about
+thirty places", from a list it had cut short. L-548's patch does not
+wait for this.
+**Ref:** L-548; L-539 (every entry checked); L-512 (the plot's data
+path); `celestial_objects.py`.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -2670,7 +2752,7 @@ L-287 (Storage is never served); L-363 and L-428 (the lobby's wide card
 and start card); the reel rule of Nov 17 (L-060).
 
 #### [L-543] A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked)
-<!-- L:543 status:OPEN upd:2026-11-21 section:A flag: rice: -->
+<!-- L:543 status:OPEN upd:2026-11-23 section:A flag: rice: -->
 - **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2),
   from two red website nights (L-529's note of that day). A check that
   walks Tony's website folder also reads what git ignores there; GitHub's
@@ -2692,48 +2774,22 @@ and start card); the reel rule of Nov 17 (L-060).
 - Tony, Nov 21, on "a gallery run on a fresh checkout before a push ...
   is worth a ruling at the close": "-- okay"
   (`documentation/WHERE_WE_ARE_11-21-26_1515_run_record.md`).
-**Gap:** Tony's ruling: whether the gallery run is read from a push copy
-before every website push. If yes: the copy script becomes a tool in
-`tools/`, the run gains a way to do it in one step, and the rule goes
-into the skill that covers testing a room.
+**Note:** (2026-11-22, the coordinating session, Claude Fable 5.2)
+RULED. Tony, 22:46, on "no, with the script added": "confirmed as
+recommended." He runs no push-copy check before his own website
+pushes; the night catches a fault of this kind in one of his. A
+session that changes the page already tests on a push copy
+(interactive-exhibit 1.45, Phone first). The reasons given him: most
+website pushes carry a session's work; a step to remember before every
+push is the weak kind of check; a red night writes nothing.
+**Gap:** a small build in the website: the copy script becomes a tool
+in `tools/`, so a Code session working in Tony's folder makes the push
+copy in one step. No dashboard button, no step for Tony.
 **Ref:** L-529 (guided encounters); L-541 (a plan's clock); L-423 (the
 website's checks); L-485 (a nightly run).
 
-#### [L-544] Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed)
-<!-- L:544 status:OPEN upd:2026-11-22 section:A flag: rice: -->
-- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2),
-  from L-541's Code session (Claude Opus 5.5), which found it with the
-  walks. Earth's fold lists its children nearest first (L-297). The two
-  points are each as far from Earth as the Moon is, and are served at
-  the same distance except in the 17th decimal place, so the order of
-  the two rows is not fixed.
-- WHAT IT DID. `tools/headless/walk_solar_system_drawer.js`: 368 of 368
-  at 02:58 and 03:22 UTC on Nov 22, 367 at a minute between ("earth's
-  moons are not right under its row, nearest first"); the untouched
-  7d1e2e16 failed the same check at 03:22. `walk_scene_moment.js`: 12 of
-  13 on the untouched 7d1e2e16 ("frozen: the drawer differs from the
-  plain opening (232 rows against 232)"), rows 100 and 101 trading
-  places between today and the window's last day. The same pair was the
-  one wrong verdict of eleven in L-521's repair.
-- NOT VERIFIED in a browser: whether a visitor sees the two rows trade
-  places between visits. The walks say the order differs between
-  minutes.
-**Note:** ORDER, Nov 22, 2026. The coordinating session proposed that
-this item go ahead of L-538 (the orbiters' printed error): L-538's
-session must run both walks (L-545 (checks that wait to be remembered)),
-and a walk that is red for a known reason at some minutes teaches a
-session to wave a red through. Tony, 10:13: "Confirmed as recommended
-including your final thought". It follows the skills bump (v3.145).
-**Gap:** a tie-break in the drawer's order where two distances agree to
-the digits a box prints (by name is the plain choice), in the page and
-in the gallery editor's tree, which lists the same order; then both
-walks green at every minute. Method, not a ruling. Small; a session
-that changes the page runs both walks (L-545).
-**Ref:** L-297 (the Lagrange points); L-521 (the walk's red checks);
-L-541 (a plan's clock).
-
 #### [L-545] Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked)
-<!-- L:545 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+<!-- L:545 status:OPEN upd:2026-11-23 section:A flag: rice: -->
 - **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
   THE WALKS load the page itself; the gallery run's rows test its
   scripts and a recorded scene. On Nov 21 L-541's build left three boxes
@@ -2755,12 +2811,21 @@ L-541 (a plan's clock).
   Six checks read it. Re-recorded on Nov 21 for L-541, it brought in
   Earth's period sentence, served since L-535, which Typed facts had
   never read (the build's closing thought).
-**Gap:** the skill text is written (interactive-exhibit 1.45, Phone
-first; v3.145, 2026-11-22), the session's half only. Two
-rulings for Tony: whether the walks join the gallery run, which means
-the website keeps jsdom and the night's runner installs it; and when the
-recorded scene is re-recorded (at every cache build, or by a check that
-goes red when it is older than the page).
+**Note:** (2026-11-22, the coordinating session, Claude Fable 5.2)
+RULED, both.
+- THE WALKS. Tony, 22:54, of three choices (a session's job only; at
+  night on GitHub only; everywhere, the website keeping the library):
+  "B". The night on GitHub installs jsdom at its fixed version in a
+  scratch folder and runs both walks; a failed walk makes the night
+  red; nothing is added to Tony's computer or to the website's files.
+  The night's workflow file was not read when he ruled, so the build
+  is not sized.
+- THE RECORDED SCENE is not re-recorded at all: L-551 (no saved
+  scenes), opened from Tony's answer. Ten checks read
+  `payload_earth_scene.json` on Nov 22, not six.
+**Gap:** the build of the walks at night, after step 3 of L-522
+(document caps); interactive-exhibit's rule on the walks then says the
+night runs them.
 **Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
 (the website's checks); L-535.
 
@@ -3449,7 +3514,7 @@ Kepler solver's start, the case that raised it); L-165 (site
 continuity).
 
 #### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
-<!-- L:522 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+<!-- L:522 status:OPEN upd:2026-11-23 section:A flag: rice: -->
 - **The review, 2026-11-10**
   (`documentation/REVIEW_fundamental_documents_20261110.md`, read at
   orrery b3ce81f8 and gallery cea21af1; the coordinating session, Claude
@@ -3619,6 +3684,40 @@ continuity).
      without this session's review, before the protocol's draft; the
      request is written when step 3 is next. Claude recommended;
      accepted in the same sentence.
+     WRITTEN 2026-11-23 by the coordinating session (Claude Fable
+     5.2): `documentation/REVIEW_REQUEST_fundamental_documents_20261123.md`,
+     one request in the same words for TWO reviewers. Tony, Nov 23,
+     09:25: "We had also discussed an independent review of documents
+     by GPT and now Gemini Neon may be up to it too."; asked whether
+     Gemini 4 Neon is the second reviewer, 09:30: "Yes". Google
+     released Gemini 4 Neon on 2026-11-18 (its announcement, read
+     2026-11-23 by web search). Not known: how it reads the
+     repository; the note of 2026-09-03 (L-276) predates it, so the
+     request has each reviewer say first how it read, and stop if it
+     could not. The request names five things not to open, this item
+     among them, to keep each review independent of the one of Nov 10.
+     Tony saves the replies as
+     `documentation/REVIEW_RETURN_gpt_20261123.md` and
+     `documentation/REVIEW_RETURN_gemini_neon_20261123.md`; step 3's
+     session compares them with the review of Nov 10 before the draft.
+     RETURNED 2026-11-23, both, and CHECKED by the coordinating
+     session: `documentation/REVIEW_CHECK_fundamental_documents_20261123.md`.
+     The replies are in `documentation/worksheets/`, where Tony put
+     them (13:59: "i put the responses in documentation/worksheets/"),
+     not in `documentation/` as written above; the worksheet checker
+     counts them among its uncited worksheets, 58 where it was 56, and
+     stays green. GPT fetched at the pinned commits: eight findings,
+     six of them facts, all six hold. Gemini 4 Neon could not fetch
+     GitHub ("Direct access to GitHub is blocked in this session."),
+     so L-276's note holds for it; it read a folder of 29 files the
+     session copied from the same commits, this item cut out of the
+     ledger copy: eleven findings, most hold, three of its counts
+     loose, one example not confirmed. The two agree on three things:
+     Session Start sends a session to the whole ledger and never names
+     Where We Are; the Pull sentence in Roles against the nights' own
+     commits; the READMEs and the plan still describing a hand copy.
+     The comparison with the review of Nov 10 is not done; it is step
+     3's. Tony had asked for the check file, 13:57: "yes".
   4. "One final thought": after the "Where this leaves us" bullets a
      session may add one line with a criticism nobody asked for, saying
      what it would do differently; optional, absent most days. Tony
@@ -39745,6 +39844,98 @@ the skills and v3.143 at orrery 1c0688ca, reinstalled and pasted.
 `tools/gallery_cache_builder.py` (lines
 745-800, 910-935, 1135-1150 at `92e98ca9`), `gallery/assembler/assemble.py`
 (line 54), the sizing note.
+
+#### [L-544] Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed)
+<!-- L:544 status:DONE upd:2026-11-23 section:C flag: rice: -->
+- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2),
+  from L-541's Code session (Claude Opus 5.5), which found it with the
+  walks. Earth's fold lists its children nearest first (L-297). The two
+  points are each as far from Earth as the Moon is, and are served at
+  the same distance except in the 17th decimal place, so the order of
+  the two rows is not fixed.
+- WHAT IT DID. `tools/headless/walk_solar_system_drawer.js`: 368 of 368
+  at 02:58 and 03:22 UTC on Nov 22, 367 at a minute between ("earth's
+  moons are not right under its row, nearest first"); the untouched
+  7d1e2e16 failed the same check at 03:22. `walk_scene_moment.js`: 12 of
+  13 on the untouched 7d1e2e16 ("frozen: the drawer differs from the
+  plain opening (232 rows against 232)"), rows 100 and 101 trading
+  places between today and the window's last day. The same pair was the
+  one wrong verdict of eleven in L-521's repair.
+- NOT VERIFIED in a browser: whether a visitor sees the two rows trade
+  places between visits. The walks say the order differs between
+  minutes.
+**Note:** ORDER, Nov 22, 2026. The coordinating session proposed that
+this item go ahead of L-538 (the orbiters' printed error): L-538's
+session must run both walks (L-545 (checks that wait to be remembered)),
+and a walk that is red for a known reason at some minutes teaches a
+session to wave a red through. Tony, 10:13: "Confirmed as recommended
+including your final thought". It follows the skills bump (v3.145).
+**Note:** (2026-11-22, the coordinating session, Claude Fable 5.2)
+BUILT by `patch_L544_1_tie_break.py`, pushed at gallery 326863a6. Two
+children of a body whose distances differ by less than half a
+kilometre, the finest a text box prints (`TIE_KM`, held equal to
+`FINEST_KM`), are listed by name (`settleTies`, in
+`gallery/drawer_order.js`). The page set this order in TWO places: the
+root's fold when the room opens, and the planner once Earth's fold is
+drawn with its shells; one rule serves both. The gallery editor's tree
+needed no change: it lists a body's children in the config's order, L4
+then L5, never by distance, so the Gap's "which lists the same order"
+was wrong.
+- PROOF, on clean clones of e6af10ea, untouched and patched. Drawer
+  walk at 04:10 UTC Nov 23 (L5 the nearer): 367 of 368 before, 368 of
+  368 after; at 06:01 UTC (L4 the nearer): 368 of 368 after.
+  Scene-moment walk: 12 of 13 before, 13 of 13 after. Of the root
+  drawer's 133 rows, the only two that changed places were L4 and L5.
+  The Drawer order row gained a worked case with the two real
+  distances and a fourth planted fault. The gallery run's night pass
+  gave every row the same verdict on both copies; nine rows cannot run
+  in a session's sandbox and failed alike on both (the three pulls,
+  the two mirrors, Cache builder suite, Pole of date and its ERFA
+  check, Scene cards). No new row, so no dashboard button.
+- Tony's phone look, Earth's fold, L4 above L5: "-- yes"
+  (`documentation/WHERE_WE_ARE_11-22-26_2226_run_record.md`).
+- No website night had run on the new page when this was written
+  (Nov 23, 15:00 UTC). The next session reads the night's Drawer order
+  row for "self-test red four times".
+**Gap:** none. The walks' place in the night is L-545's.
+**Ref:** L-297 (the Lagrange points); L-521 (the walk's red checks);
+L-541 (a plan's clock).
+
+#### [L-550] A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump)
+<!-- L:550 status:DONE upd:2026-11-23 section:C flag: rice: -->
+- FOUND Nov 22, 2026 by L-539's Code session (Claude Opus 5.5): the
+  orrery's Dashboard parity check failed on "Link cards" and "Room
+  clock", two rows the website's builds of Nov 21 added to the gallery
+  run with no button in `palomas_orrery_dashboard.py`. The Encounters
+  row did the same on Nov 20 (Tony then: "Yes, add the button"). Three
+  times in three days.
+- WHY IT RECURS. A website session may not edit the orrery; its brief
+  says so. The orrery's night skips Dashboard parity, so nothing shows
+  the red until the next whole maintenance run by hand.
+- DONE Nov 22: the two buttons, in L-539's session, on the coordinating
+  session's go-ahead, which Tony pasted; "PASS -- 10 of 10 planted
+  faults caught; 116 steps matched to their buttons", and both ran to
+  PASS under Tony's hand.
+**Note:** THE RULE IS WRITTEN (2026-11-22, the coordinating session, Claude Fable 5.2; protocol
+v3.145, patch_L539_3_skills_bump.py):
+interactive-exhibit 1.45, the last sentences of Phone first: a brief
+for a website build that adds a gallery-run row says who adds the
+button, and the build's closing report names the button as owed.
+**Note:** (2026-11-22, the coordinating session, Claude Fable 5.2)
+interactive-exhibit loaded from the account and read whole; its
+version line reads 1.45, the manifest's. THE FIVE SKILLS OF v3.145,
+checked the same evening: the account's copies read 1.20, 1.21, 1.5,
+1.45 and 1.15. Two were loaded and read whole (interactive-exhibit,
+safe-file-editing); three were read at their version line only
+(horizons-orbital-mechanics, gallery-cache-builder,
+gallery-assembler). Four are byte for byte the repository's at
+675b1cfe; gallery-cache-builder's differs by one line break in its
+header's description, and no word.
+**Gap:** none. Closed.
+**Ref:** L-539 (every entry checked); L-529 (guided encounters: the
+Encounters button); L-541 (a plan's clock: the Room clock row); L-540 (a
+reel: the Link cards row); `palomas_orrery_dashboard.py`;
+documentation/HANDOFF_coordinator_20261122_bump_notes.md.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

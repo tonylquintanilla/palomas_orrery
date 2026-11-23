@@ -60,6 +60,16 @@ The website track has its own coordinator and its own handoff,
      10, done without seeing this session's review, so the two can be
      compared. Not written. GPT has no protocol and no skills, so the
      request names its fetch targets and asks which it read (L-290).
+     (2026-11-23, the coordinating session, Claude Fable 5.2: WRITTEN,
+     `documentation/REVIEW_REQUEST_fundamental_documents_20261123.md`,
+     and carried to Gemini 4 Neon as well as GPT, Tony's "Yes". The
+     replies are `documentation/REVIEW_RETURN_gpt_20261123.md` and
+     `documentation/REVIEW_RETURN_gemini_neon_20261123.md`. L-522.)
+     (Later the same day: both replies are back. Tony saved them in
+     `documentation/worksheets/`, under those two names, not in
+     `documentation/`. Which findings hold, and where the two agree:
+     `documentation/REVIEW_CHECK_fundamental_documents_20261123.md`.
+     Read it before the replies.)
    - Then the draft. Tony's amendment of Nov 10, 16:37, binds it: the
      passages on the conversation stay whole and in their own words,
      and he sees the list of what moves before anything moves.

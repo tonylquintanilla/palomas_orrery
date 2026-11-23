@@ -1,28 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 22, 2026, night: this coordinating session's close. The skills bump, v3.145, is pushed and you reinstalled; your look in the orrery's window is done (Claude Fable 5.2).
-- Written on orrery 811cf44f and gallery e6af10ea, both pushed; both nights of Nov 22 clean.
+Last updated: November 23, 2026, morning: this coordinating session's close. Earth-Moon L4 is always above L5, live and looked at; your three waiting decisions are made (Claude Fable 5.2).
+- Written on orrery b0eedeab and gallery 326863a6, both pushed; both nights of Nov 22 clean; no night has run on the new page yet.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Five skills now carry the rules three builds had left on the ledger: protocol v3.145, pushed at 811cf44f. You reinstalled them and pasted the protocol; the next session checks that its copies are the new ones (L-539 (every entry checked), L-541 (a plan's clock)).
-> - Your look in the orrery's window is done. The animation with Earth-Moon L1 plays, your "-- yes". Its path is drawn from JPL's positions, as before; JPL is no longer asked for the numbers that describe an ellipse, which a point does not have (L-512 (fallbacks when JPL cannot answer)).
-> - Haumea's two moons, from your look: each orbit is drawn and says it is JPL's, of Feb 2, though JPL has since dropped both moons; the dates on its two end markers both show the day of the plot; neither moon has a marker of its own. Your "yes": that talk moves ahead of the encounter's slice 2 (L-549 (four moons JPL cannot place)).
+> - Earth-Moon L4 is always above L5 in Earth's fold: live at gallery 326863a6, your phone look "-- yes". Two rows closer than half a kilometre, the finest a box prints, are listed by name (L-544 (L4 and L5 tie), closed).
+> - The last 7 days of a path keeps its own build, straight after the orbiters' hourly points, your "Keep its own build" (L-533 (ESCAPADE), L-538 (the orbiters' printed error)).
+> - Your three decisions. No new step before your own website pushes (L-543 (green on your computer, red on GitHub)). The two walks run at night on GitHub only, your "B" (L-545 (checks that wait to be remembered)). No saved scenes: every room's scene is made fresh at each run, your "Yes and we should remove obsolete saved files." (L-551 (no saved scenes)). A missing id_type is never guessed, and your idea of a kind of body goes to a design talk (L-548 (a missing id_type), L-552 (the kind of body)).
 >
-> **Do next:** *A new coordinating session first checks that its five skills are the new versions, then takes up L-544 (L4 and L5 tie), in the website; then the protocol's reduction, step 3 of L-522 (document caps), in its own Fable session; then L-538 (the orbiters' printed error); then the talk on L-549 (four moons JPL cannot place), put ahead on Nov 22, your "yes"; then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
+> **Do next:** *The protocol's reduction, step 3 of L-522 (document caps), in its own Fable session; then L-538 (the orbiters' printed error); then every path to its last day, a build of its own (L-533 (ESCAPADE)); then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_4.md`, pasted from below its line. The website builds wait for its check of the skills.*
+> - *(do) Both outside reviews are back, in `documentation/worksheets/`, and checked: `documentation/REVIEW_CHECK_fundamental_documents_20261123.md`. Start the protocol's reduction in a new Fable session of its own, with `documentation/HANDOFF_document_upkeep_20261116.md` and L-522 (document caps). The coordinating session after it starts with `documentation/PROMPT_coordinator_start_20261123_1.md`, pasted from below its line.*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road
+## The road  **>> UPDATED THIS SESSION**
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -46,21 +46,22 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   s.   [done]  Sudan on Google Earth web, Nov 13, and its guided walk, Nov 14 (L-001 (food insecurity)).
  15a.  [later] The Earth Science room, after Mars and the moons (L-531 (the Earth Science room)).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
-               built Nov 10 and 11; step 3, the protocol's reduction, after L-544 and before L-538, in its own Fable session (your "Yes", Nov 22); step 4, the ledger's closed items moved out,
+               built Nov 10 and 11; step 3, the protocol's reduction, is next, before L-538, in its own Fable session (your "Yes", Nov 22); step 4, the ledger's closed items moved out,
                at the next gap between builds; then steps 5 and 6.
-  b.   [beside] This round's cleanup, each ruled Nov 19, in the order set Nov 21: every entry checked against JPL, L-539 (every entry checked), built Nov 22; then the L4 and L5 tie, L-544 (L4 and L5 tie), put ahead on Nov 22; then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.
+  b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, a build of its own, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).  << moved this session
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- A visitor reads UTC everywhere. The room adds JPL's clock difference before it looks up JPL's data; only a body's source line names JPL's clock, for the date of its orbit; a plan's moments print as UTC (Nov 21, your "Yes"; L-541 (a plan's clock)).
+- No saved scenes: the gallery's checks get every room's scene made fresh at each run, as the Sun's always was, and the saved copies are removed (Nov 22; L-551 (no saved scenes)).
+- The two walks run at night on GitHub only; a failed walk makes the night red; nothing is added to your computer (Nov 22; L-545 (checks that wait to be remembered)). You run no push-copy check before your own pushes; the night catches those (Nov 22; L-543 (green on your computer, red on GitHub)).
+- Nothing guesses a missing id_type: every entry writes it, and a reader that finds none leaves that object out and names it (Nov 23; L-548 (a missing id_type)).
 - Every path runs to its span's last day: the website asks JPL for it too (Nov 19; L-533 (ESCAPADE)).
 - A period prints today's figure with only the digits its swing allows, and its sentence gives the swing's measured range (Nov 19; L-536 (a moon's yearly change)).
 - A craft orbiting a planet gets the real fix, hourly points near today, and no stopgap (Nov 19; L-538 (the orbiters' printed error)).
-- Every entry the orrery asks JPL for is held to JPL's name and kind for its id; an id JPL has no object for is recorded so, and a first answer waits on your look (Nov 19 and 22; L-539 (every entry checked)).
 - The Lagrange points are shown as Earth-Moon L1, L2, L4, L5 and Earth-Sun L1, L2, L4, L5, "Earth-Sun" being NASA's word; JPL's names (EM-L1, SEMB-L1) are the source line (Nov 18; L-297 (the Lagrange points)).
 - Moons sit with their planet's shells by distance, as Earth's Moon does; there is no Moons group (Nov 18; L-534 (missions by destination)).
 - ESCAPADE's words leave out NASA's "kidney-bean": it is the loop seen from a view that turns with Earth, and no room turns (Nov 18; L-533 (ESCAPADE)).
@@ -88,16 +89,14 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261122T194726Z, ok, no retry on the swap (the website's swap log at e6af10ea, read Nov 22).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 22, read Nov 22 at 811cf44f).
-- This page's date and the ledger's newest stamp: both Nov 22. Agree.
+- Last cache build: 20261122T194726Z, ok, no retry on the swap (the website's swap log at 326863a6, read Nov 23). No night has run since the push of Nov 22, 22:31.
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 22, read Nov 23 at b0eedeab).
+- This page's date and the ledger's newest stamp: both Nov 23. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Whether the gallery's checks are read from a copy holding only what a push carries, before every website push. Nov 21's red nights were green on your computer. Your "-- okay" was to raising it (L-543 (green on your computer, red on GitHub)).
-- Whether the two walks join the gallery run, which means the website keeps one more library; and when the recorded Earth scene is re-recorded. Your words, Nov 21: "should this be method?" The session's part is method now; these two are yours (L-545 (checks that wait to be remembered)).
-- Whether every entry writes its id_type, or every reader takes one default: the orbit pre-fetch reads a missing one as an asteroid's, and only one line keeps Pluto from being asked as asteroid 999 (L-548 (a missing id_type)).
+- Where the four small builds from the decisions of Nov 22 sit in the order. Until you say: after the protocol's reduction, at the gaps between builds (the road, line b).
 
 At the next design talk:
 - El Nino's step 5, its last sentence: name NOAA as the source of the open question, and say it is the swing on NOAA's index that is studied. Your words: "in today's political environment the hedge can read as ideological not just scientific" (Nov 17; L-060 (El Nino)).
@@ -107,6 +106,7 @@ At the next design talk:
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
 - The four moons JPL cannot place: what Hi'iaka and Namaka should draw and say now that JPL has dropped them, and whether Vanth, which JPL answers again, comes off its skip lists. Ahead of the encounter's slice 2, your "yes". Your look: the orbits say JPL, of Feb 2; their end markers' dates both show the plot's day; neither moon has its own marker (Nov 22; L-549 (four moons JPL cannot place)).
+- The kind of body: each entry in the orrery's list would say what it is (planet, moon, asteroid, comet, spacecraft), and how JPL is asked would follow from it. Your words: "shouldn't we specify what kind of body it is?" The list's object_type says how a thing is drawn, not what it is (Nov 23; L-552 (the kind of body)).
 - A tidier Solar System view: where several names share a few pixels, only the largest body's name until you zoom in (Nov 19; L-297 (the Lagrange points)).
 - Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 
@@ -122,7 +122,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`.
+- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's handoff, `HANDOFF_document_upkeep_20261116.md` (Nov 16).
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
