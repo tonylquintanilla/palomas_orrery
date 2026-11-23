@@ -1,11 +1,13 @@
 {
-  "_comment": "Written by orrery_maintenance_run.py --night on a clean night only (L-485), so this is the last clean run. The dashboard reads it. A red night writes nothing: its record is the run's log on GitHub. 'taken' is tonight's values taken from JPL, old and new; 'held' is every body held for its identity.",
+  "_comment": "Written by orrery_maintenance_run.py --night on a clean night only (L-485), so this is the last clean run. The dashboard reads it. A red night writes nothing: its record is the run's log on GitHub. 'taken' is tonight's values taken from JPL, old and new; 'held' is every body held for its identity; 'jpl_differs' and 'jpl_waiting' are the entries the website does not serve that JPL now differs on, and those whose first answer waits on Tony's look (L-539).",
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-22T18:35:31.414913+00:00",
+  "jpl_differs": [],
+  "jpl_waiting": [],
+  "clean_run_utc": "2026-11-23T19:15:52.819618+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/45055790076",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/45246801490",
   "reported_not_red": [],
   "rows": [
     {
@@ -16,12 +18,12 @@
     {
       "row": "Period fetch",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 110 served objects examined, no query asked"
+      "verdict": "rewrote data/osculating_cache.json -- PASS -- no period missing; elements on the 30-day cycle for 1: Gonggong; drawing refused: McNaught"
     },
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 110 entries and 28 sheets current, no query asked"
+      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 2 checked today, 2 queries"
     },
     {
       "row": "Path plan",
@@ -36,7 +38,7 @@
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written)"
+      "verdict": "rewrote data/objects_export.json"
     },
     {
       "row": "Drawings export",
@@ -61,7 +63,7 @@
     {
       "row": "Horizons check suite",
       "kind": "checker",
-      "verdict": "pass -- 81 checks, every planted fault caught by name"
+      "verdict": "pass -- 127 checks, every planted fault caught by name"
     },
     {
       "row": "Period fetch suite",
@@ -86,7 +88,7 @@
     {
       "row": "Orbit cache",
       "kind": "checker",
-      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 148 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
+      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 151 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
     },
     {
       "row": "Drawings export check",

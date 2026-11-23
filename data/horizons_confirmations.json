@@ -86,14 +86,14 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-11-20",
+        "confirmed": "2026-11-23",
         "center": "@sun",
         "target": "3",
-        "epoch": "2026-11-20 02:51",
-        "days": 365.2529080665288,
-        "error_days": 0.0009806031707739749,
-        "jpl_days": 365.2529080665288,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='3'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461364.618750000'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-22 19:26",
+        "days": 365.2534368929997,
+        "error_days": 0.0016449686062856017,
+        "jpl_days": 365.2534368929993,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='3'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461367.309722222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
@@ -507,14 +507,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2007%20OR10&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-31",
+        "confirmed": "2026-11-23",
         "center": "@0",
         "target": "2007 OR10",
-        "epoch": "2026-10-23 21:36",
-        "days": 200476.3596847122,
+        "epoch": "2026-11-23 19:16",
+        "days": 200476.3601167546,
         "error_days": 9.386,
-        "jpl_days": 200476.3596847122,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2007%20OR10%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461337.400000000'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "jpl_days": 200476.3601167545,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2007%20OR10%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461368.302777777'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "makemake": {
