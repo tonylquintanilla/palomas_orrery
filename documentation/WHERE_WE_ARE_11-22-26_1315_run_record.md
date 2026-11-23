@@ -1143,7 +1143,7 @@ from below its line.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 3. Move both patches to `documentation`.
-4. GitHub Desktop, orrery: commit and push, one commit, not while a night is running. Suggested summary: "session close, look done". -- 
+4. GitHub Desktop, orrery: commit and push, one commit, not while a night is running. Suggested summary: "session close, look done". -- 675b1cfe4e36a62e0deac585b8ca4cc593bf0902
 5. Start the new coordinator with `documentation/PROMPT_coordinator_start_20261122_4.md`, pasted from below its line.
 
 **Where this leaves us**
