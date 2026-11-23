@@ -701,19 +701,289 @@ B. A Lagrange point, still picture (the change: JPL is no longer
 
 C. A Lagrange point, animation (the session did NOT run this)
 8. Same as line 4: Earth centre, Moon and Earth-Moon L1. Run a short
-   animation. It starts, plays, and L1 is in the frames. --
+   animation. It starts, plays, and L1 is in the frames. -- yes
 9. In the output panel: no "Required masses not defined", no
    traceback. --
+
+Working directory set to: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Interpreter: C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe
+Working directory: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Window config file: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+Restored window geometry: 1536x793+0+5
+Window will be maximized
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[DEBUG] Apophis can be center (has center_id)
+[DEBUG] Earth can be center (numeric ID: 399)
+[DEBUG] Moon can be center (numeric ID: 301)
+[DEBUG] Earth-Moon Barycenter can be center (numeric ID: 3)
+[DEBUG] Earth-Moon L1 can be center (numeric ID: 3011)
+[DEBUG] Earth-Moon L2 can be center (numeric ID: 3012)
+[DEBUG] Earth-Moon L4 can be center (numeric ID: 3014)
+[DEBUG] Earth-Moon L5 can be center (numeric ID: 3015)
+[DEBUG] Earth-Sun L1 can be center (numeric ID: 31)
+[DEBUG] Earth-Sun L2 can be center (numeric ID: 32)
+[DEBUG] Earth-Sun L4 can be center (numeric ID: 34)
+[DEBUG] Earth-Sun L5 can be center (numeric ID: 35)
+[DEBUG] Bennu can be center (has center_id)
+[DEBUG] Itokawa can be center (has center_id)
+[DEBUG] Ryugu can be center (has center_id)
+[DEBUG] Eros can be center (has center_id)
+[DEBUG] Mars can be center (numeric ID: 499)
+[DEBUG] Phobos can be center (numeric ID: 401)
+[DEBUG] Deimos can be center (numeric ID: 402)
+[DEBUG] Dinkinesh can be center (has center_id)
+[DEBUG] Vesta can be center (has center_id)
+[DEBUG] Donaldjohanson can be center (has center_id)
+[DEBUG] Ceres can be center (has center_id)
+[DEBUG] 16 Psyche can be center (has center_id)
+[DEBUG] Orus can be center (has center_id)
+[DEBUG] Polymele can be center (has center_id)
+[DEBUG] Eurybates can be center (has center_id)
+[DEBUG] Patroclus-Menoetius Barycenter can be center (numeric ID: 20000617)
+[DEBUG] Patroclus can be center (has center_id)
+[DEBUG] Menoetius can be center (has center_id)
+[DEBUG] Leucus can be center (has center_id)
+[DEBUG] Jupiter can be center (numeric ID: 599)
+[DEBUG] Metis can be center (numeric ID: 516)
+[DEBUG] Adrastea can be center (numeric ID: 515)
+[DEBUG] Amalthea can be center (numeric ID: 505)
+[DEBUG] Thebe can be center (numeric ID: 514)
+[DEBUG] Io can be center (numeric ID: 501)
+[DEBUG] Europa can be center (numeric ID: 502)
+[DEBUG] Ganymede can be center (numeric ID: 503)
+[DEBUG] Callisto can be center (numeric ID: 504)
+[DEBUG] Saturn can be center (numeric ID: 699)
+[DEBUG] Pan can be center (numeric ID: 618)
+[DEBUG] Daphnis can be center (numeric ID: 635)
+[DEBUG] Prometheus can be center (numeric ID: 616)
+[DEBUG] Pandora can be center (numeric ID: 617)
+[DEBUG] Mimas can be center (numeric ID: 601)
+[DEBUG] Enceladus can be center (numeric ID: 602)
+[DEBUG] Tethys can be center (numeric ID: 603)
+[DEBUG] Dione can be center (numeric ID: 604)
+[DEBUG] Rhea can be center (numeric ID: 605)
+[DEBUG] Titan can be center (numeric ID: 606)
+[DEBUG] Hyperion can be center (numeric ID: 607)
+[DEBUG] Iapetus can be center (numeric ID: 608)
+[DEBUG] Phoebe can be center (numeric ID: 609)
+[DEBUG] Uranus can be center (numeric ID: 799)
+[DEBUG] Ariel can be center (numeric ID: 701)
+[DEBUG] Umbriel can be center (numeric ID: 702)
+[DEBUG] Titania can be center (numeric ID: 703)
+[DEBUG] Oberon can be center (numeric ID: 704)
+[DEBUG] Miranda can be center (numeric ID: 705)
+[DEBUG] Portia can be center (numeric ID: 712)
+[DEBUG] Mab can be center (numeric ID: 726)
+[DEBUG] Neptune can be center (numeric ID: 899)
+[DEBUG] Triton can be center (numeric ID: 801)
+[DEBUG] Despina can be center (numeric ID: 805)
+[DEBUG] Galatea can be center (numeric ID: 806)
+[DEBUG] Pluto-Charon Barycenter can be center (numeric ID: 9)
+[DEBUG] Pluto can be center (numeric ID: 999)
+[DEBUG] Charon can be center (numeric ID: 901)
+[DEBUG] Styx can be center (numeric ID: 905)
+[DEBUG] Nix can be center (numeric ID: 902)
+[DEBUG] Kerberos can be center (numeric ID: 904)
+[DEBUG] Hydra can be center (numeric ID: 903)
+[DEBUG] Orcus-Vanth Barycenter can be center (numeric ID: 20090482)
+[DEBUG] Orcus can be center (has center_id)
+[DEBUG] Vanth can be center (has center_id)
+[DEBUG] Haumea can be center (has center_id)
+[DEBUG] Hi'iaka can be center (has center_id)
+[DEBUG] Namaka can be center (has center_id)
+[DEBUG] Quaoar can be center (has center_id)
+[DEBUG] Weywot can be center (has center_id)
+[DEBUG] Arrokoth can be center (has center_id)
+[DEBUG] Makemake can be center (numeric ID: 20136472)
+[DEBUG] MK2 can be center (numeric ID: 120136472)
+[DEBUG] Gonggong can be center (has center_id)
+[DEBUG] Xiangliu can be center (has center_id)
+[DEBUG] Eris can be center (has center_id)
+[DEBUG] Dysnomia can be center (has center_id)
+[CENTER MENU] Dynamic center dropdown initialized (starts with Sun only)
+[DASHBOARD] Dashboard ready.
+[CENTER MENU] Added traces to 184 object variables
+Restored sash positions: [489, 1013]
+[DEBUG] Sun can be center (numeric ID: 10)
+[CENTER MENU] Dynamic centers: Sun + ['Sun']
+[DEBUG] Sun can be center (numeric ID: 10)
+[CENTER MENU] Dynamic centers: Sun + ['Sun']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Earth can be center (numeric ID: 399)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Earth']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Earth can be center (numeric ID: 399)
+[DEBUG] Moon can be center (numeric ID: 301)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Earth', 'Moon']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Earth can be center (numeric ID: 399)
+[DEBUG] Moon can be center (numeric ID: 301)
+[DEBUG] Earth-Moon L1 can be center (numeric ID: 3011)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Earth', 'Moon', 'Earth-Moon L1']
+
+[ANIMATION PRE-FETCH] Checking osculating elements for 1 objects...
+[ANIMATION PRE-FETCH] Using Horizons ID: 301 (type: majorbody)
+User chose to update Moon
+  Using Horizons ID: 301 (id_type: majorbody)
+[...] Fetching osculating elements for Moon from JPL Horizons...
+   Using Horizons ID: 301 (id_type: majorbody)
+  [Horizons Query] Using explicit center_body override: @399
+  [Horizons Query] ID: 301 | Type: majorbody | Location: @399 | Date: 2026-11-23 02:24
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+  [L-431 period] 301: the elements fetch gave PR 27.42069725 d, the period query 27.42069725 d -- agree
+[OK] Period for Moon: 27.42069724985448 d around @399 (change in a year 0.41671009584294083 d; not a small body; SBDB not asked)
+[OK] Fetched elements (solution date: 2026-11-23)
+  Rotated: osculating_cache_backup.json [OK] osculating_cache_backup_old.json
+  Backed up: osculating_cache.json [OK] osculating_cache_backup.json
+[OK] Saved: osculating_cache.json (2-gen protected)
+[ANIMATION PRE-FETCH] OK: Moon: Updated
+[get_interval_settings] Read days_to_plot: 28
+Days to Plot: 28.0
+Number of Frames: 29
+Animation Step: Day
+==================================================
+  Moon: 29 dates
+  Earth-Moon L1: 29 dates
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for 301:
+Requested epochs: 29
+Returned vectors: 29
+Direct position matches: 29
+Interpolated positions: 0
+Final coverage: 29/29 epochs
+
+Processing trajectory for 3011:
+Requested epochs: 29
+Returned vectors: 29
+Direct position matches: 29
+Interpolated positions: 0
+Final coverage: 29/29 epochs
+Full hover text: <b>Earth</b><br><br><br>Distance from Center: 0.00000000 AU<br>Distance: 0 kilometers<br>Distance: 0.0000000 light-minutes<br>Velocity: N/A AU/day<br>Velocity: N/A km/hr (N/A km/sec)<br>This body is the center of the plot.<br>Orbital period: 1.00001 years (365.25 days)<br>For the Earth-Moon center of mass, around the Sun, from JPL Horizons, fetched 2026-11-22 UTC.<br>JPL gives no uncertainty for this period,<br>so only the digits that stay the same over a year are shown.<br>Horizons: 399. Our home planet.
+Minimal hover text: <b>Earth</b>
+[NORMAL MODE] Using dates_lists for plot_actual_orbits
+[NORMAL MODE] Moon: 51 dates from 2026-11-23 02:23:00 to 2026-12-21 02:23:00
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for 301:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Moon orbit with 51 points
+-> Added closest plotted marker for Moon to Earth: 0.002402 AU on 2026-11-25 21:35:00 UTC
+[NORMAL MODE] Earth-Moon L1: 29 dates from 2026-11-23 02:23:00 to 2026-12-21 02:23:00
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for 3011:
+Requested epochs: 29
+Returned vectors: 29
+Direct position matches: 29
+Interpolated positions: 0
+Final coverage: 29/29 epochs
+[NORMAL MODE] Plotted Earth-Moon L1 orbit with 29 points
+-> Added closest plotted marker for Earth-Moon L1 to Earth: 0.002040 AU on 2026-11-26 02:23:00 UTC
+  Trace 0: Earth (Scatter3d, mode: markers)
+  Trace 1: Moon Actual Orbit (Scatter3d, mode: lines)
+  Trace 2:  (Scatter3d, mode: markers)
+  Trace 3: Moon Closest Plotted Point (Scatter3d, mode: markers)
+  Trace 4: Earth-Moon L1 Actual Orbit (Scatter3d, mode: lines)
+  Trace 5:  (Scatter3d, mode: markers)
+  Trace 6: Earth-Moon L1 Closest Plotted Point (Scatter3d, mode: markers)
+[INFO] Moon current position: x=0.001885, y=0.001547, z=0.000206 AU
+
+[ANALYTICAL] Moon orbital elements for 2026-11-23:
+  a = 0.002570 AU
+  e = 0.065662
+  i = 5.14 deg
+  omega = 132.47 deg
+  Omega = 324.97 deg
+
+[OSCULATING] Moon orbital elements:
+  Epoch: 2026-11-23 02:24 osc.
+  a = 0.002578 AU
+  e = 0.070803
+  i = 5.00 deg
+  omega = 122.10 deg
+  Omega = 324.30 deg
+  [OK] Added Earth-Moon barycenter marker at (0.0000240, 0.0000197, 0.0000026) AU
+
+[ACTUAL APSIDAL] Checking satellites for apsidal markers...
+
+[ACTUAL APSIDAL] Processing Moon
+  Object ID: 301
+  Center: Earth
+  Moon: Using TP for perihelion: 2026-11-26 05:47:39
+  Moon: No Tapo provided - actual aphelion marker will not be plotted
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+  Next periapsis: 2026-11-26 05:47:39.805745
+    Fetched position for 2026-11-26 05:47:39
+  Fetched 1 positions
+[HOVER DEBUG] Moon Keplerian Perigee (Epoch: 2026-11-23 02:24 osc.):
+  ideal_pos is not None: True
+  params is not None: True
+  'epoch' in params: True
+  epoch value: 2026-11-23 02:24 osc.
+  angle_deg: 0.071 deg
+  [OK] Added actual apsidal markers for Moon
+
+Keplerian Orbit Summary:
+Plotted Keplerian orbits for 1 objects:
+  - Moon
+
+Skipped Keplerian orbits for:
+  Trace 0: Earth
+  Trace 1: Moon Actual Orbit
+  Trace 2:
+  Trace 3: Moon Closest Plotted Point
+  Trace 4: Earth-Moon L1 Actual Orbit
+  Trace 5:
+  Trace 6: Earth-Moon L1 Closest Plotted Point
+  Trace 7: Moon Analytical Orbit (Epoch: 2026-11-23)
+  Trace 8:
+  Trace 9: Moon Osculating Orbit (Epoch: 2026-11-23 02:24 osc.)
+  Trace 10:
+  Trace 11: Moon Keplerian Perigee
+  Trace 12: Moon Keplerian Apogee
+  Trace 13: Earth-Moon Barycenter
+  Trace 14: Moon Keplerian Perigee (Epoch: 2026-11-23 02:24 osc.)
+
+[COMET TAILS] Adding comet tails for animation initial state (date: 2026-11-23 02:23:00)
+[SCALING] Earth is a parent body but non-child objects selected -- using general scaling
+Moon: Elliptical orbit - a=0.002570 AU, e=0.0549, aphelion=0.002711 AU
+Moon around Earth: orbit=0.002711 AU
+
+Automatic scaling calculation:
+  Maximum orbital distance: 0.002711 AU
+  Buffer factor: 1.2
+  Final axis range: +/-0.003253 AU
+[ANIMATION] Static shell traces (before fence): 1
+[ANIMATION] Frame-updated traces: 3; constant traces excluded from frames: 13
+[SCALING] Earth is a parent body but non-child objects selected -- using general scaling
+Moon: Elliptical orbit - a=0.002578 AU, e=0.0708, aphelion=0.002761 AU
+Earth-Moon L1: Using position data - distance=0.002307 AU
+Moon around Earth: orbit=0.002761 AU
+
+Automatic scaling calculation:
+  Maximum orbital distance: 0.002761 AU
+  Buffer factor: 1.2
+  Final axis range: +/-0.003313 AU
+
 
 D. Hi'iaka and Namaka (a look only; nothing was changed here, and
    nobody has looked. It is for our talk on L-549.)
 10. Centre on Haumea. Tick Hi'iaka and Namaka only. Plot today.
-    Does a box offer to update saved orbits before it plots? --
-11. Is an orbit drawn for each? --
-12. Is a marker drawn for each, or the orbit alone? --
+    Does a box offer to update saved orbits before it plots? -- yes
+11. Is an orbit drawn for each? -- yes
+12. Is a marker drawn for each, or the orbit alone? -- no, only the orbit and the apsidal markers
 13. What does an orbit's hover or legend call its source? (Copy the
-    words.) --
-14. Any error text in the output panel? (Copy one line.) --
+    words.) -- keplerian from typed values not jpl
+14. Any error text in the output panel? (Copy one line.) -- no jpl accuracy is cited
 ```
 
 **How to read your answers**
@@ -786,4 +1056,99 @@ The document review is now in the plan, recorded with your "Yes", as a second sm
 - This session is closed once the two patches are run and pushed.
 
 One final thought: the two biggest skills, gallery-cache-builder and horizons-orbital-mechanics, have no easy history left to move out, so each bump will get harder until they are split the way the exhibit skill was. I recorded that on L-522 for step 3's close and have not asked you to rule on it.
+
+===============
+
+There is no issue with the Lagrange points' orbits, you are right about the geometry, and your "yes" is recorded. Your question showed I had misread one thing in the Haumea picture.
+
+**The L orbits: nothing is undrawn**
+
+- A Lagrange point's path is drawn from JPL's positions, exactly as before. Your picture shows it.
+- What the build stopped asking JPL for is a different thing: the point's *elements*, the six numbers that describe an ellipse. A point has no ellipse, so JPL refused, and the panel printed an error. That request is gone; the drawing never depended on it.
+- My sentence said "orbit" where it meant "elements". That is the second time today that wording has made you think a path was missing, so the rule is now on the ledger and in the next session's prompt: say "elements", with its meaning, never "orbit".
+
+**The end markers: yes, geometry**
+
+- The place of each end marker is geometry: the nearest and farthest points of the same ellipse the curve draws, from JPL's elements of February. It is not a position at a time.
+- I was wrong to say the two ends came from a typed value. I checked the function that writes that line: "typed value, not fetched from JPL" describes the *period* used to work out the marker's *date*, not its place.
+- So the open matter is narrower than I said. It is only the date: all four markers print the day of the plot, where the moon reaches those two points half a period apart. That is still recorded and not diagnosed.
+
+**Your "yes"**
+
+- The talk on L-549 (four moons JPL cannot place) now sits in the order after L-538 (the orbiters' printed error) and ahead of the encounter's slice 2.
+
+**How this reaches the record**
+
+The close patch was already in your folder, and a delivered patch is never replaced. So these go in a second small patch beside it: `patch_L539_5_talk_forward.py`.
+
+- It corrects L-549 in view, with your question quoted, and records your "yes".
+- It fixes the same wording on Where We Are and in the next session's prompt. The page stays at 129 lines.
+- Tested on a fresh copy: run after the close patch, 12 edits and both tools "ok". Run without the close patch, or run twice, it refuses and writes nothing. The file in your folder is byte for byte the one tested.
+
+**Your run order**
+
+1. In VS Code, in the orrery folder, Run `patch_L539_4_session_close.py`. Expect "patch applied (14 edits, 2 files)", a "wrote" line, then two "ok" lines.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L539_4_session_close.py'
+ok   LEDGER_CONSOLIDATED.md: - **Tony-action (do):** the checklist's lines 8 to 1
+ok   LEDGER_CONSOLIDATED.md: - **Tony-action (do):** reinstall five skills (Plugi
+ok   LEDGER_CONSOLIDATED.md: tests. Not run: the animation (its edit is the same 
+ok   LEDGER_CONSOLIDATED.md: **Gap:** a talk with Tony: what Hi'iaka and Namaka s
+ok   documentation/WHERE_WE_ARE.md: Last updated: November 22, 2026, evening: the skills
+ok   documentation/WHERE_WE_ARE.md: > - The orrery's Horizons check now also covers the 
+ok   documentation/WHERE_WE_ARE.md: *The skills bump (v3.145) is written, Nov 22. Next, 
+ok   documentation/WHERE_WE_ARE.md: > - *(do) Finish the look in the orrery's window, li
+ok   documentation/WHERE_WE_ARE.md: then steps 5 and 6.  << moved this session
+ok   documentation/WHERE_WE_ARE.md: at your desk.  << moved this session
+ok   documentation/WHERE_WE_ARE.md: ## Settled  **>> UPDATED THIS SESSION**
+ok   documentation/WHERE_WE_ARE.md: - Last cache build: 20261122T034324Z, ok, no retry o
+ok   documentation/WHERE_WE_ARE.md: (PROVENANCE_AUDIT.md, generated Nov 22 by this sessi
+ok   documentation/WHERE_WE_ARE.md: comes off its skip lists (Nov 22; L-549 (four moons 
+patch applied (14 edits, 2 files)
+wrote documentation/PROMPT_coordinator_start_20261122_4.md (5955 bytes)
+stamps updated: Where We Are's header (811cf44f)
+ok   ledger_index.py
+ok   doc_index.py --caps
+
+Do next: move this file into documentation; commit and push
+the orrery; start the next coordinating session with
+documentation/PROMPT_coordinator_start_20261122_4.md, pasted
+from below its line.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Then Run `patch_L539_5_talk_forward.py`. Expect "patch applied (12 edits, 3 files)", then two "ok" lines.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L539_5_talk_forward.py'
+ok   LEDGER_CONSOLIDATED.md: from JPL." and "JPL states no accuracy for this posi
+ok   LEDGER_CONSOLIDATED.md: say, with the look above in hand; whether Vanth come
+ok   LEDGER_CONSOLIDATED.md: eye. Lines 10 to 14, Haumea's two moons, are on L-54
+ok   documentation/WHERE_WE_ARE.md: plays, your "-- yes", and the point is asked for no 
+ok   documentation/WHERE_WE_ARE.md: JPL's, of Feb 2; its two end markers say "typed valu
+ok   documentation/WHERE_WE_ARE.md: then L-538 (the orbiters' printed error); then the e
+ok   documentation/WHERE_WE_ARE.md: comes off its skip lists. Your look of Nov 22: the o
+ok   documentation/PROMPT_coordinator_start_20261122_4.md: animation with a Lagrange point plays, and the point
+ok   documentation/PROMPT_coordinator_start_20261122_4.md: since dropped; its two end markers say "typed value,
+ok   documentation/PROMPT_coordinator_start_20261122_4.md: - Then L-538 (the orbiters' printed error), then the
+ok   documentation/PROMPT_coordinator_start_20261122_4.md: push copy), L-545 (whether the walks join the galler
+ok   documentation/PROMPT_coordinator_start_20261122_4.md: markers' words, and the orbit's own words said JPL.
+patch applied (12 edits, 3 files)
+ok   ledger_index.py
+ok   doc_index.py --caps
+
+Do next: move this file and patch_L539_4_session_close.py into
+documentation; commit and push the orrery; start the next
+coordinating session with
+documentation/PROMPT_coordinator_start_20261122_4.md, pasted
+from below its line.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+3. Move both patches to `documentation`.
+4. GitHub Desktop, orrery: commit and push, one commit, not while a night is running. Suggested summary: "session close, look done". -- 
+5. Start the new coordinator with `documentation/PROMPT_coordinator_start_20261122_4.md`, pasted from below its line.
+
+**Where this leaves us**
+
+- The skills bump is live, your look is done, and the Lagrange points draw as they always did.
+- The talk on the four moons is in the order, ahead of the encounter's slice 2. Its questions are the orbit's "JPL" label for two moons JPL has dropped, and the dates on the end markers.
+- This session is closed once the two patches are run and pushed.
 

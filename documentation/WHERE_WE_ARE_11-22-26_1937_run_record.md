@@ -355,9 +355,9 @@ Project.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Move it to `documentation`, along with `patch_L539_1_close_record.py` and `patch_L539_2_document_track.py`, which are still in the orrery's root. -- done
-3. GitHub Desktop, orrery: commit and push, not while a night is running. Suggested summary: "skills bump v3.145". -- 
-4. Reinstall five skills (Plugins, in the claude.ai sidebar): horizons-orbital-mechanics, gallery-assembler, interactive-exhibit, gallery-cache-builder, safe-file-editing.
-5. Paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions.
+3. GitHub Desktop, orrery: commit and push, not while a night is running. Suggested summary: "skills bump v3.145". -- 811cf44f8c973a3c2dc847561b02b4139d4513d4
+4. Reinstall five skills (Plugins, in the claude.ai sidebar): horizons-orbital-mechanics, gallery-assembler, interactive-exhibit, gallery-cache-builder, safe-file-editing. -- done 
+5. Paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions. -- v3.145 uploaded
 
 **Where this leaves us**
 

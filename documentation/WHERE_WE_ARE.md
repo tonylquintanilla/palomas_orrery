@@ -1,24 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 22, 2026, evening: the skills bump, v3.145, is written; you reinstall five skills and paste the protocol (Claude Fable 5.2).
-- Written on orrery 849bf462 and gallery e6af10ea, both pushed; both nights of Nov 22 clean.
+Last updated: November 22, 2026, night: this coordinating session's close. The skills bump, v3.145, is pushed and you reinstalled; your look in the orrery's window is done (Claude Fable 5.2).
+- Written on orrery 811cf44f and gallery e6af10ea, both pushed; both nights of Nov 22 clean.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The orrery's Horizons check now also covers the 56 entries the website does not serve: the moons, the spacecraft, the barycentres. Each is held to the name and kind JPL gives its id, as the two L3 entries were not. You looked at the list and accepted it: "The 14 words are accepted." (L-539 (every entry checked)).
-> - JPL has no object at all for four moons: Xiangliu, Hi'iaka, Namaka, MK2. Hi'iaka's and Namaka's orbits are still drawn from JPL's elements of Feb 2, labelled as JPL's. That is for a talk, below (L-549 (four moons JPL cannot place)).
-> - The Lagrange points no longer ask JPL for orbits or close approaches they cannot have; the drawing is unchanged (L-512 (fallbacks when JPL cannot answer)). Nothing the website reads changed.
+> - Five skills now carry the rules three builds had left on the ledger: protocol v3.145, pushed at 811cf44f. You reinstalled them and pasted the protocol; the next session checks that its copies are the new ones (L-539 (every entry checked), L-541 (a plan's clock)).
+> - Your look in the orrery's window is done. The animation with Earth-Moon L1 plays, your "-- yes". Its path is drawn from JPL's positions, as before; JPL is no longer asked for the numbers that describe an ellipse, which a point does not have (L-512 (fallbacks when JPL cannot answer)).
+> - Haumea's two moons, from your look: each orbit is drawn and says it is JPL's, of Feb 2, though JPL has since dropped both moons; the dates on its two end markers both show the day of the plot; neither moon has a marker of its own. Your "yes": that talk moves ahead of the encounter's slice 2 (L-549 (four moons JPL cannot place)).
 >
-> **Do next:** *The skills bump (v3.145) is written, Nov 22. Next, once you have reinstalled: L-544 (L4 and L5 tie), in the website; then the protocol's reduction, step 3 of L-522 (document caps), in its own Fable session; then L-538 (the orbiters' printed error); then the encounter's slice 2, its talk first (L-529 (guided encounters)). Your "Yes" of Nov 22 to this order.*
+> **Do next:** *A new coordinating session first checks that its five skills are the new versions, then takes up L-544 (L4 and L5 tie), in the website; then the protocol's reduction, step 3 of L-522 (document caps), in its own Fable session; then L-538 (the orbiters' printed error); then the talk on L-549 (four moons JPL cannot place), put ahead on Nov 22, your "yes"; then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) Finish the look in the orrery's window, lines 8 to 14 of the checklist in your run record `WHERE_WE_ARE_11-22-26_1315_run_record.md`: one short animation with the Moon and Earth-Moon L1 ticked, with no "Required masses not defined" in the panel; then Haumea with Hi'iaka and Namaka, for our talk (L-539 (every entry checked), L-549 (four moons JPL cannot place)).*
-> - *(do) Reinstall five skills (Plugins, in the claude.ai sidebar): horizons-orbital-mechanics, gallery-assembler, interactive-exhibit, gallery-cache-builder, safe-file-editing. Then paste `PROJECT_INSTRUCTIONS.md`, now v3.145, into the Project's instructions. The website builds wait for this (L-539 (every entry checked), L-541 (a plan's clock)).*
+> - *(do) Start the next coordinating session with `documentation/PROMPT_coordinator_start_20261122_4.md`, pasted from below its line. The website builds wait for its check of the skills.*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -48,13 +47,13 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  15a.  [later] The Earth Science room, after Mars and the moons (L-531 (the Earth Science room)).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11; step 3, the protocol's reduction, after L-544 and before L-538, in its own Fable session (your "Yes", Nov 22); step 4, the ledger's closed items moved out,
-               at the next gap between builds; then steps 5 and 6.  << moved this session
-  b.   [beside] This round's cleanup, each ruled Nov 19, in the order set Nov 21: every entry checked against JPL, L-539 (every entry checked), built Nov 22; then the L4 and L5 tie, L-544 (L4 and L5 tie), put ahead on Nov 22; then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.  << moved this session
+               at the next gap between builds; then steps 5 and 6.
+  b.   [beside] This round's cleanup, each ruled Nov 19, in the order set Nov 21: every entry checked against JPL, L-539 (every entry checked), built Nov 22; then the L4 and L5 tie, L-544 (L4 and L5 tie), put ahead on Nov 22; then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk.
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - A visitor reads UTC everywhere. The room adds JPL's clock difference before it looks up JPL's data; only a body's source line names JPL's clock, for the date of its orbit; a plan's moments print as UTC (Nov 21, your "Yes"; L-541 (a plan's clock)).
@@ -89,8 +88,8 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261122T034324Z, ok, no retry on the swap (the website's swap log at 5a7c96f8, read Nov 22).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 22 by this session's run, read Nov 22).
+- Last cache build: 20261122T194726Z, ok, no retry on the swap (the website's swap log at e6af10ea, read Nov 22).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 22, read Nov 22 at 811cf44f).
 - This page's date and the ledger's newest stamp: both Nov 22. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -107,7 +106,7 @@ At the next design talk:
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
-- The four moons JPL cannot place: what Hi'iaka and Namaka should draw and say now that JPL has dropped them, and whether Vanth, which JPL answers again, comes off its skip lists (Nov 22; L-549 (four moons JPL cannot place)).
+- The four moons JPL cannot place: what Hi'iaka and Namaka should draw and say now that JPL has dropped them, and whether Vanth, which JPL answers again, comes off its skip lists. Ahead of the encounter's slice 2, your "yes". Your look: the orbits say JPL, of Feb 2; their end markers' dates both show the plot's day; neither moon has its own marker (Nov 22; L-549 (four moons JPL cannot place)).
 - A tidier Solar System view: where several names share a few pixels, only the largest body's name until you zoom in (Nov 19; L-297 (the Lagrange points)).
 - Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 

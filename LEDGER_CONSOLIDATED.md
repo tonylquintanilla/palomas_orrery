@@ -2308,10 +2308,27 @@ Nov 22 read clean on GitHub: orrery 60d0f157, and website e6af10ea with
   which is the website's rule; the orrery draws a point's path from
   JPL's positions, as it did before. Tony: "L1 has an orbit too. not a
   problem. what is the issue?"
-- **Tony-action (do):** the checklist's lines 8 to 14, in that run
-  record: one short animation with the Moon and Earth-Moon L1 ticked,
-  which no session ran; then Haumea with Hi'iaka and Namaka, a look for
-  L-549's talk.
+- TONY'S LOOK, LINES 8 TO 14, DONE Nov 22, evening (the same run
+  record, his copy as he updated it at 20:37, with two saved
+  pictures; read by the coordinating session (Claude Fable 5.2)).
+  Line 8, one animation with the Moon and Earth-Moon L1 ticked around
+  Earth: "-- yes". Its panel read "[ANIMATION PRE-FETCH] Checking
+  osculating elements for 1 objects", the Moon alone, and "Final
+  coverage: 29/29 epochs" for 3011. The record was searched: its only
+  two "Required masses not defined" are the checklist's own lines, and
+  it holds no traceback. His saved animation
+  (Earth_system_animation_20261123_0223_earth_moon_eml1.html) names
+  Earth-Moon L1 in 30 traces and frames. L-512's Part D is seen by
+  eye. Lines 10 to 14, Haumea's two moons, are on L-549 (four moons
+  JPL cannot place).
+- THE SAME WORDS CONFUSED TWICE. The session's report said "The panel
+  asked JPL for the Moon's orbit only, never for L1's"; Tony, 21:19:
+  "I don't follow the issue of not drawing the L orbits." Nothing is
+  undrawn: a point's path is drawn from JPL's positions, as before.
+  What is no longer asked is its osculating elements, the six numbers
+  that describe an ellipse, which a point does not have. A report to
+  Tony says "elements" and glosses it, never "orbit", for what the
+  skip removes.
 - THE SKILL TEXT was not written this session; it is the next
   coordinating session's first job, from
   documentation/HANDOFF_coordinator_20261122_bump_notes.md and the list
@@ -2322,11 +2339,17 @@ horizons-orbital-mechanics 1.20 carries the eight rules above (Where
 the Check Lives, THE ENTRIES THE WEBSITE DOES NOT SERVE; Query
 Mechanics, the fall-through and the astroquery version) and the two
 corrections owed, with a third: idealized_orbits.py's own skip list.
-- **Tony-action (do):** reinstall five skills (Plugins, in the
-  claude.ai sidebar): horizons-orbital-mechanics, gallery-assembler,
-  interactive-exhibit, gallery-cache-builder, safe-file-editing; and
-  paste PROJECT_INSTRUCTIONS.md, v3.145, into the Project's
-  instructions.
+- RUN, PUSHED, REINSTALLED AND PASTED, Nov 22 (Tony's run record
+  documentation/WHERE_WE_ARE_11-22-26_1937_run_record.md): the patch
+  printed "patch applied (68 edits, 10 files)" and four tools "ok";
+  the push, "-- 811cf44f8c973a3c2dc847561b02b4139d4513d4"; the five
+  skills' reinstall, "-- done"; the paste, "-- v3.145 uploaded".
+  The coordinating session (Claude Fable 5.2) read
+  GitHub's HEAD at 811cf44f with the five versions in it, and saw
+  v3.145 in the Project's instructions when its context was re-read.
+  The reinstall cannot be checked from the session that wrote the
+  bump; Tony asked, "should we start a new coordinator due to the new
+  skills?", and the answer was yes.
 **Gap:** the next session confirms its loaded copies read 1.20, 1.21,
 1.5, 1.45 and 1.15; the
 first night on GitHub after Tony's push, whose Horizons check row
@@ -2438,9 +2461,49 @@ id_type on every entry; then a patch.
 - **Not done, by the coordinating session's ruling of 2026-11-22:**
   Hi'iaka and Namaka are not put on the skip list, since a skip could
   change what is drawn.
+- **TONY'S LOOK, Nov 22, evening** (lines 10 to 14 of the checklist in
+  documentation/WHERE_WE_ARE_11-22-26_1315_run_record.md, his copy as
+  updated at 20:37; his saved picture
+  solar_system_20261123_0228_huamea.html, read by
+  the coordinating session (Claude Fable 5.2)). Centred on Haumea,
+  both moons ticked. A box offered to update saved orbits: "-- yes".
+  An orbit for each: "-- yes". A marker for each: "-- no, only the
+  orbit and the apsidal markers". The source: "-- keplerian from typed
+  values not jpl". Error text: "-- no jpl accuracy is cited".
+- WHAT THE SAVED PICTURE HOLDS, read from the file. Neither moon has a
+  marker of its own. Each orbit is the trace "Osculating Orbit", whose
+  info marker reads "Epoch: 2026-02-02 osc." and "Osculating orbit
+  from JPL Horizons satellite ephemeris solution". Each periapsis and
+  apoapsis marker reads "From a typed period: typed value, not fetched
+  from JPL." and "JPL states no accuracy for this position".
+- CORRECTED the same evening, on Tony's question, 21:19: "This would be
+  geometry from the Keplerian orbit not actual positions right?" Yes.
+  An end marker's PLACE is geometry: the nearest and farthest points
+  of the same ellipse the curve draws, from JPL's elements of
+  February. The typed value is the PERIOD its DATE is worked out from
+  (orbital_period.py, date_note_lines: "The hover lines a computed
+  date carries"). This entry first said "a typed value for its two
+  ends", which was wrong (patch_L539_4_session_close.py; corrected by
+  patch_L539_5_talk_forward.py). What stands: the curve says JPL,
+  from February, for an id JPL has since dropped; and all four end
+  markers print one date, 2026-11-23, the day of the plot, where a
+  moon reaches its nearest and farthest points half a period apart.
+  The date is the open matter, not the place. Recorded, not diagnosed.
+- **Tony, 2026-11-22, 21:19: "yes"**, to the coordinating session's
+  thought: "the orbit that says 'JPL' for a body JPL has dropped is
+  the kind of label this project exists to prevent. I would bring the
+  L-549 talk forward, ahead of the encounter's slice 2, and not leave
+  it behind the builds." The talk is held before the encounter's slice
+  2 (L-529); the order is the road's, on Where We Are.
+- Seen in the same file and not placed on an item: Haumea's i-panel
+  words read "Horizons: 2003 EL61. A dwarf planet known for its
+  elongated shape and fast rotation." and its hover reads "Horizons:
+  136108 Haumea. A dwarf planet with rings": two stores of words for
+  one body in one picture.
 **Gap:** a talk with Tony: what Hi'iaka and Namaka should draw now, and
-say; whether Vanth comes off its lists.
-- **Tony-action (decide):** at the next design talk.
+say, with the look above in hand; whether Vanth comes off its lists.
+- **Tony-action (decide):** at its talk, ahead of the encounter's
+  slice 2 (his "yes", 2026-11-22).
 **Ref:** L-539; L-512; `idealized_orbits.py`; `orbital_elements.py`;
 `jpl_outcome.py`; horizons-orbital-mechanics, A Skip Names What Failed.
 
@@ -5516,7 +5579,9 @@ list.
   after, neither is asked; 34 traces both times, the points' six
   identical. The period fetch suite 39 checks, the orbit cache 24
   tests. Not run: the animation (its edit is the same line), and the
-  window by eye.
+  window by eye. BOTH SEEN SINCE by Tony, Nov 22: the still picture
+  and the animation, the Lagrange point drawn and asked for no
+  elements (L-539 (every entry checked), his look).
 **Gap:** Tony's look at A2, wifi off and on; then slices b and c.
 - **Tony-action (do):** look at A2 with the wifi on and off, then commit.
 **Ref:** `path_or_orbit.py`; `test_path_or_orbit.py`;
