@@ -32,7 +32,7 @@ shortens a document lowers its cap to the new size.
 
 | Document | Cap in lines | Where old lines go |
 |---|---|---|
-| `PROJECT_INSTRUCTIONS.md` | 1394 | `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` |
+| `PROJECT_INSTRUCTIONS.md` | 800 | `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` |
 | `skills/agentic-pre-test/SKILL.md` | 126 | `documentation/SKILL_HISTORIES.md` |
 | `skills/earth-system-pipeline/SKILL.md` | 199 | `documentation/SKILL_HISTORIES.md` |
 | `skills/gallery-assembler/SKILL.md` | 307 | `documentation/SKILL_HISTORIES.md` |

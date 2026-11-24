@@ -328,6 +328,10 @@ every entry checked: the Horizons check row declares a third output,
 data/horizons_unserved_confirmations.json, so the night commits it; the
 night's title is raised by JPL DIFFERS and NEW JPL NAME from that row;
 the night's record names them, jpl_differs and jpl_waiting.)
+Module updated: November 23, 2026 with Anthropic's Claude Opus 5.5 (L-522,
+step 3, the protocol's v4.0: the Skill manifest row's outputs gain
+skills/SKILL_MANIFEST.md, where the table now goes; the Skill headers
+row quotes the names count its check compared.)
 """
 
 import hashlib
@@ -345,8 +349,10 @@ import time
 GENERATORS = [
     ('Ledger index',    ['ledger_index.py'],
      ['LEDGER_CONSOLIDATED.md']),
+    # Since the protocol's v4.0 (L-522): the table goes to its own file,
+    # skills/SKILL_MANIFEST.md, and the protocol keeps the names only.
     ('Skill manifest',  ['skills_index.py', 'PROJECT_INSTRUCTIONS.md'],
-     ['PROJECT_INSTRUCTIONS.md']),
+     ['PROJECT_INSTRUCTIONS.md', 'skills/SKILL_MANIFEST.md']),
     # L-322 ruling 7: the orrery exports its constants and this runner
     # keeps the export current, so the gallery never parses orrery
     # source. Placed before Module atlas and Data inventory, which index
@@ -521,7 +527,9 @@ CHECKERS = [
     # The same script as the Skill manifest generator, run with --check
     # so its failure fails this run; as a generator its exit code would
     # not count, which is how a header Settings refused passed 19 of 19.
-    ('Skill headers', ['skills_index.py', '--check'], 'OK:'),
+    # Since v4.0 (L-522) it also holds the protocol's names to the
+    # folders under skills/; the row quotes the count it compared.
+    ('Skill headers', ['skills_index.py', '--check'], ('OK:', 'Names:')),
     ('Exact rows by the count', ['exact_rows_report.py', '--check'],
      'EXACT ROWS BY THE COUNT:'),
     # Each derived row's unit follows from its arithmetic, by astropy
@@ -981,8 +989,10 @@ def snapshot(path):
     while the screen said 'unchanged' and neither was wrong.
 
     The distinction is operational, not cosmetic. A real change to
-    PROJECT_INSTRUCTIONS.md has to be re-uploaded to the Claude UI;
-    a rewrite with identical bytes does not.
+    PROJECT_INSTRUCTIONS.md has to be pasted into the Project's
+    instructions on claude.ai; a rewrite with identical bytes does not.
+    Since the protocol's v4.0 (L-522) a skill's version change writes
+    skills/SKILL_MANIFEST.md and leaves the protocol's bytes alone.
 
     The hash is LF-normalized because a CRLF working copy is not a
     content change -- the same reason the patch scripts fingerprint
@@ -1084,8 +1094,8 @@ def tree_diff(before, after):
 
     `written` changed content. `touched` was rewritten with identical
     bytes, which matters operationally: a real change to
-    PROJECT_INSTRUCTIONS.md has to be re-uploaded to the Claude UI and
-    an identical rewrite does not. `unhashed` counts files too large to
+    PROJECT_INSTRUCTIONS.md has to be pasted into the Project's
+    instructions on claude.ai and an identical rewrite does not. `unhashed` counts files too large to
     compare by content, so the reader knows what the answer does not
     cover.
     """

@@ -22,6 +22,16 @@ rather than from memory.
           and was exactly this record; the rename adds the history
           beside it and takes nothing away.
 
+  PART 3  The stories behind the rules, and the rules retired,
+          moved 2026-11-23 (L-522, step 3), when v4.0 reduced the
+          protocol from 1,394 lines to 795: every line of v3.145
+          not kept in v4.0, word for word, in the old order.
+          The philosophy went to PROJECT_ORIGIN.md instead, and
+          the skill table to skills/SKILL_MANIFEST.md, which
+          skills_index.py writes. So PART 2's "STILL STATED IN:
+          Part 4" pointers now lead to PROJECT_ORIGIN.md for the
+          passages that moved there.
+
 Why they sit together. Both answer the same kind of question -- what
 the protocol used to say and why it stopped saying it -- and neither
 has a trigger, which is precisely why neither belongs in the resident
@@ -5061,6 +5071,196 @@ resident.
 (Moved down from the resident protocol on 2026-11-22, when
 v3.145 made a fourth entry.)
 
+
+The resident Version History as it stood at v3.145: its opening,
+then its three entries in this file's order, oldest first.
+
+Version History
+The THREE most recent entries live here. Everything older lives in
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md, PART 1 -- which also
+carries, as PART 2, the twenty-seven lessons removed at v3.37.
+
+The rule is mechanical, and it is what stops this section growing back:
+when a fourth entry is added, the oldest of the four moves down into
+that file. An entry lives in exactly one place, never both.
+
+v3.143 (November 19, 2026): One instruction's wording changed in this
+document, and THREE skills bumped, from L-297 (the Lagrange points) and
+L-537 (the skills page moved).
+
+WHAT PROMPTED IT. The Claude Code sessions of Nov 18 and 19 (Claude
+Opus 5.5), through the python_work door, keyed eight Lagrange points in
+the orrery and served and drew them on the website, pushed at orrery
+a70d98c5 and gallery 56bc3fab. JPL has no L3: the orrery's two L3
+entries had drawn two asteroids, and are gone. Session 2 reached Tony's
+push window before the skills; the coordinating session wrote them from
+L-297's notes and the code at those SHAs.
+
+WHAT CHANGED. gallery-cache-builder 1.19 -> 1.20: A Lagrange Point Is
+Served as a Point, the fourth serving shape. interactive-exhibit 1.42
+-> 1.43: a point drawn as its marker alone at the minute shown, its
+box, and a name's side set per body on Tony's look.
+provenance-discipline 2.36 -> 2.37: the working-out between served
+points is a third error, worked out for the curve the page draws, not
+the straight chord (Tony, Nov 18: "the straight path is not what is
+happening"), on for the Lagrange points and open-path comets only; a
+craft orbiting a planet keeps the chord until L-538. Each skill moved
+its oldest version entry, and two of them a passage of history, to
+documentation/SKILL_HISTORIES.md to stay at its cap. In this document,
+Stale Skill = Stop names the skills page where it now is, Plugins in
+the claude.ai sidebar, in place of Settings > Skills (L-537, closed);
+the older version entries keep the words they were written with.
+
+THE OBLIGATION TRAVELS. This session wrote the three from the repo's
+copies, 1.19, 1.42 and 2.36, as the manifest expected. Tony reinstalls
+all three (Plugins, in the claude.ai sidebar) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads each from the account confirms its copy reads 1.20, 1.43 or 2.37
+before that work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.140 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-23, when v4.0 reduced
+the protocol and its Version History to one line.)
+
+v3.144 (November 21, 2026): No rule changed in this document. TWO
+skill bumps, from L-529 (guided encounters) and L-540 (a reel on a
+Featured card), by the records skill's binding rule.
+
+WHAT PROMPTED IT. Two Claude Code sessions (Claude Opus 5.5), through
+the python_work door, built in the website: on Nov 20 the first
+encounter, ESCAPADE's Earth flybys, from Tony's rulings of that day
+(documentation/DESIGN_encounters_20261120.md), live and looked at on
+his phone; on Nov 21 the Links fold, pushed at gallery 828362fd.
+Neither brief had its session write a skill; each session listed the
+rules it learned on the ledger, and the coordinating session (Claude
+Fable 5.2) wrote both skills from those notes and the code at that
+SHA, in one bump, so Tony reinstalls once.
+
+WHAT CHANGED. interactive-exhibit 1.43 -> 1.44: An encounter is a
+package played in a room of its own (a completed pass; its package
+under data/encounters/, fetched by hand; its dates read from the plan
+and converted from JPL's clock; its player), and A card beside a body
+sits in a fold of its kind (Scenes, Encounters, Links, Saved
+pictures). gallery-pipeline 1.2 -> 1.3, its first bump since July:
+The Editor's Cards, with Tony's ruling of Nov 21 that a link card made
+with no row is saved in Storage ("In Storage for consistency."). Each
+skill stayed at its cap by moving text, word for word, to
+documentation/SKILL_HISTORIES.md. Three of the encounter build's
+rules also belong in other skills and wait for those skills' next
+versions, named on L-529: the plan's clock (horizons-orbital-mechanics,
+with L-541), the escape rule (safe-file-editing, with L-471) and the
+package's place (gallery-cache-builder).
+
+THE OBLIGATION TRAVELS. This session wrote the two from the repo's
+copies, 1.43 and 1.2, as the manifest expected. Tony reinstalls both
+(Plugins, in the claude.ai sidebar) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads
+either from the account confirms its copy reads 1.44 or 1.3 before
+that work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.141 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-23, when v4.0 reduced
+the protocol and its Version History to one line.)
+
+v3.145 (November 22, 2026): No rule changed in this document. FIVE
+skill bumps in one, by the records skill's binding rule, from L-539
+(every entry checked), L-541 (a plan's clock), L-529 (guided
+encounters), L-545 (the walks) and L-550 (a new check's button).
+
+WHAT PROMPTED IT. Three builds by Claude Opus 5.5 in Claude Code listed
+their rules on the ledger and wrote no skill: the encounter (Nov 20),
+the rooms' clock (Nov 21), every entry checked against JPL (Nov 22).
+The coordinating session (Claude Fable 5.2) wrote the five from those
+notes and the code at orrery 849bf462 and gallery e6af10ea.
+
+WHAT CHANGED. horizons-orbital-mechanics 1.19 -> 1.20: the entries the
+website does not serve are held to JPL's name and kind; JPL's dates
+are on JPL's clock; three corrections. gallery-cache-builder 1.20 ->
+1.21: the clock block and its witness; an encounter's package.
+gallery-assembler 1.4 -> 1.5: one seam between the visitor's clock and
+JPL's. interactive-exhibit 1.44 -> 1.45: a visitor reads UTC; a page
+change runs the walks; who adds a new row's dashboard button.
+safe-file-editing 1.14 -> 1.15: a mark outside ASCII is typed as its
+escape and the bytes read; a placed file is read back. Each stayed at
+its cap by moving text, word for word, to SKILL_HISTORIES.md.
+
+THE OBLIGATION TRAVELS. Written from the repo's copies, as the manifest
+expected. Tony reinstalls all five (Plugins, in the claude.ai sidebar)
+and pastes this version into the Project; the next session that loads
+each from the account confirms 1.20, 1.21, 1.5, 1.45 or 1.15 first.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.142 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-23, when v4.0 reduced
+the protocol and its Version History to one line.)
+
+v4.0 (November 23, 2026): THE REDUCTION (L-522, step 3, document
+caps). The protocol went from 1,394 lines to 795, under the cap of 800
+Tony confirmed on 2026-11-10. The text is the coordinating session's
+fourth draft, installed as ratified, with its dates and version filled.
+
+WHAT PROMPTED IT. The protocol had grown to carry its own history,
+the skill table, the philosophy, and coaching written for older
+models. Tony's five rulings of 2026-11-10
+(documentation/DESIGN_protocol_reduction_rulings_20261110.md): the
+table leaves; the history leaves, one line stays; the philosophy moves
+to the origins document; the rules are sorted by what they guard
+against, and the ledger decides the coaching; the cap is 800. The
+coordinating session (Claude Fable 5.2) wrote four drafts on orrery
+7087b3ad and gallery a811d350, with three reviews and a cold read, and
+Tony ruled on the list of what moves and on 25 numbered passages
+(documentation/DESIGN_protocol_reduction_what_moves_20261123.md and
+documentation/DESIGN_protocol_reduction_items_for_tony_20261123.md).
+Tony, 2026-11-23, 18:16, on the fourth draft: "ratified. thanks."
+
+WHAT CHANGED. The skill table leaves: skills_index.py writes it to
+skills/SKILL_MANIFEST.md, and the protocol keeps the twelve names. The
+gate Stale Skill = Stop becomes The Installed Skill Equals the
+Repository's Copy: compared at session start where there is a shell,
+and a skill change makes no version of this document. The seven Modes
+are retired but for Mode 5 and Mode 7; agentic is the default. The
+kinds of session (L-499) are stated. Context Priority puts Tony's
+working copy first. The gates for uploads and the project-file
+snapshot become Know Which Copy You Are Reading. The SHA round trip
+names its three cases. The Register Rule is relaxed on Tony's word.
+Check All Parallel Pipelines and Mode 7 become pointers to their
+skills. Document Caps is new.
+
+WHERE EACH KIND OF LINE WENT, by the account of the session that
+installed it (Claude Opus 5.5, in Claude Code):
+- 459 lines of v3.145 stand in v4.0 as they were.
+- The philosophy (Part 4 but the conversation and the double helix,
+  the quotations, the philosophical lessons), 106 lines, to the end of
+  PROJECT_ORIGIN.md, word for word.
+- The three resident version entries and the section's opening, 125
+  lines, to this PART 1, above this entry.
+- Every other line not kept, 599 lines, to PART 3 of this file, word
+  for word in the old order, each run under the heading it stood
+  under.
+- The skill table, 103 lines, is not copied: skills_index.py writes it
+  to skills/SKILL_MANIFEST.md.
+- Two blank lines are not copied.
+The whole of v3.145 is documentation/project_instructions_v3_145.md;
+v4.0's copy is documentation/project_instructions_v4_0.md.
+
+THE OBLIGATION TRAVELS. Tony pastes v4.0 into the Project's
+instructions on claude.ai. From now on a skill change asks for no
+paste; only a change to a rule here does.
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
@@ -5174,3 +5374,679 @@ so it can be made by reading rather than from memory.
 
 27. Broad-first requires judgment to recognize convergence. That judgment is Tony's
    STILL STATED IN: Part 4 Broad-First as Valid Methodology
+
+
+================================================================
+PART 3 -- THE STORIES BEHIND THE RULES, AND THE RULES RETIRED,
+MOVED 2026-11-23
+================================================================
+
+Moved out of PROJECT_INSTRUCTIONS.md on 2026-11-23, when v4.0 reduced the
+protocol (L-522, step 3; Tony ratified the text on 2026-11-23,
+18:16: "ratified. thanks."). Every line of v3.145 that v4.0 does not
+keep, word for word, in the old order, except three kinds that went
+elsewhere: the philosophy to the end of PROJECT_ORIGIN.md, the version
+entries to PART 1 above, and the skill table, which skills_index.py
+now writes to skills/SKILL_MANIFEST.md. Each run below is headed by
+its line numbers in v3.145 and the heading it stood under there. A
+line of v3.145 not found here, in PART 1, in PROJECT_ORIGIN.md or in
+v4.0 is a fault of the move. The whole of v3.145 is
+documentation/project_instructions_v3_145.md.
+
+THIS PART IS A RECORD, NOT A STORE OF RULES. Nothing in it fires.
+
+--- v3.145 lines 1-8, under the document's head, above the PREAMBLE ---
+
+<!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
+PROJECT INSTRUCTIONS
+Tony Quintanilla, PE | Claude | v3.145 | November 22, 2026
+
+Cut from 849bf462 at https://github.com/tonylquintanilla/palomas_orrery
+(branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
+Full version history and the v3.37 lessons record:
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md
+
+--- v3.145 lines 57-212, under PART 1: OPERATIONAL, all of it below its title ---
+
+Session Start
+
+Assess - New code or existing? Learn or get done?
+Check context - Uploads? Past chats? The ledger (LEDGER_CONSOLIDATED.md):
+  open items, Tony comments, Gap notes -- read them before proposing work.
+  (Chat compression means organic continuation.)
+Pull ground truth - Clone/fetch the GitHub repo at HEAD; record the base SHA
+  as the session's base. Build on the repo (or fresh uploads); /mnt/project
+  is orientation only. (See Session-Start Repo Pull,
+  Part 3.)
+Propose approach - "This looks like targeted/agentic because..."
+Confirm - Wait for go-ahead or redirect
+Execute - If scope changes, ask before expanding
+
+Quick Decisions
+Situation              Action
+Multiple interpretations    ASK
+New code                    Agentic okay
+Existing code               Targeted preferred
+Tony wants to understand    Guided (Mode 1) or Teaching (Mode 3)
+Tony wants it done          Agentic (Mode 2)
+Tony says "I trust you"     Comprehensive review okay
+Visual/aesthetic            Mode 5 - Tony leads
+Educational content         Mode 6 - Dual output
+Claude blocked              Mode 4 - Tag-team
+Unfamiliar domain           Mode 7 - Multi-AI
+Visual looks wrong          Check reference frames
+API returns empty           Check fallback list
+Open-ended design question  Iterate in conversation; don't build first draft
+Multi-session file          Verify handoff features in base before building
+
+When in doubt: Ask. Always right to ask.
+
+Modes
+Mode    When              Claude Does
+1: Guided       Existing code       Line-specific snippets
+2: Agentic      New features        Complete files + manifest
+3: Teaching     Understanding       Explain how/why
+4: Tag-Team     Blocked             Ask Tony for help
+5: Visual       Aesthetics          Implement; Tony judges
+6: Educational  Build + teach       Code + explanation
+7: Multi-AI     Unfamiliar domain   Collaborate with other AIs
+
+Mode 7: Multi-AI Collaboration
+When to use:
+- Topic outside familiar territory
+- Complex domain requiring specialist knowledge
+- Architecture decisions benefiting from multiple perspectives
+- Physics/math/science validation needed
+- Scale exceeds one session's context but domain is familiar (collegial pattern)
+
+The Pattern:
+1. EXPLORE    - Tony uses Claude/Gemini/ChatGPT for domain explanation
+2. DRAFT      - Tony brings learnings to Claude for implementation
+3. REVIEW     - Tony passes Claude's draft to specialist AI for critique, Claude/Gemini/ChatGPT
+4. IMPLEMENT  - Claude incorporates refinements
+5. DOCUMENT   - Claude and Tony document decisions, design, and builds
+6. ITERATE    - Repeat 3-5 until complete
+
+AI Roles:
+AI          Best For
+Gemini      Scientific facts, physics validation, architecture review, structural/philosophical dialogue
+ChatGPT     Conceptual framing, alternative perspectives, sanity checks
+Claude      Primary implementation, documentation, conversational continuity
+Claude (other instance)  Same-capability relay: audit, manifest, bulk implementation
+
+How each partner reads the repo (checked 2026-09-03, L-276): Claude and
+GPT fetch GitHub live and can read a file at a pinned SHA. Gemini's web
+app IMPORTS one public repository as a snapshot of HEAD at that moment;
+it cannot read a GitHub URL given in a prompt, cannot fetch at a SHA,
+and cannot see commit history, and the import is not available in the
+mobile app. So for Gemini the anchor says which state its imported copy
+corresponds to -- the second case in the clause below.
+
+Patterns:
+Pattern         Question                        Structure
+Cooperative     What's correct / what's missing?    Serial: explain -> implement -> review
+Competitive     How does this AI reason?            Parallel: same prompt -> multiple AIs -> compare
+Collegial       Can we get this done together?      Relay: spec -> execute -> review -> implement
+
+Key Principles:
+- One primary coder: Claude maintains implementation context throughout
+- Documents as handoffs: Copy/paste AI responses to share context --
+  every outbound document (audit prompt, review request, relay
+  manifest) opens with built on <SHA> at <URL>, same as a handoff.
+  The repo moves, so an un-anchored document does not say which
+  state it describes. A partner that can fetch needs the anchor to
+  fetch the right bytes; a partner that cannot needs it to know what
+  it is reading.
+  A partner without resident access to this Project -- GPT, Gemini,
+  or a Claude instance outside it -- also has no PROJECT_INSTRUCTIONS.md
+  and no installed skills. The anchor for such a document names those
+  as fetch targets too, not just the code repo, or the partner
+  operates on the code with none of the conventions governing how the
+  work is done. Name the SKILLS THE TASK FIRES, not a blanket list,
+  and ask the partner to state back which rule files it actually read
+  -- a return document that does not name them is telling you it did
+  not read them, and that read-back is the only part of this that can
+  fail visibly. Wording differs by what the partner can do with a SHA;
+  ledger-and-session-records carries the two forms. (L-290.)
+- Tony is the integrator: Carries information between AIs, resolves conflicts, makes judgment calls
+- Work with AI as you would a colleague: "Here's the job, flag problems."
+- Claude may diverge: When external input conflicts with established conventions, Claude explains and follows the convention
+
+Example (Collegial - May 2026):
+Claude 4.6 writes audit prompt -> Tony carries to 4.7 with provenance -> 4.7 reviews twice, produces 2,342-line manifest -> Tony carries back -> 4.6 reviews, implements 141 conversions. Three Claudes, one Tony, zero orchestration framework.
+
+When NOT to use: Routine coding, well-understood domains, time pressure, simple bugs.
+
+Triggers -> Responses
+Tony says -> Claude does:
+Trigger                     Response
+"Fix this"                  Ask: surgical or rethink?
+"Complete file"             Integrate changes, don't regenerate
+"Make this better"          Ask: which aspect?
+"I trust you"               Comprehensive okay; document changes
+"Something's wrong"         Investigate -> Understand -> Document -> Fix
+"Continue from before"      Search past chats
+"Gemini says..."            Integrate external input, implement
+"Open ended thinking"       Propose options, iterate, converge over multiple rounds
+"Thoughts?" / "Suggestions?"  Present alternatives with tradeoffs, invite redirect
+
+Claude notices -> Claude does:
+Observation             Action
+Ambiguous request       Ask before proceeding
+Scope expanding         Check in first
+Approach failing        Say so, suggest switch
+Visual wrong            Check transforms, trust eyes
+Multi-file change       Map touchpoints, order changes
+Domain unfamiliar       Suggest Mode 7 if complex
+Relevant skill unfired  Load it by name (see Skill Manifest, Part 3)
+
+Context Priority
+Trust in this order (highest first):
+1. Uploaded files (current; mid-session deltas live here)
+2. GitHub repo at HEAD (session-start ground truth, SHA-pinned)
+3. This protocol and the installed skills (versions per the Skill Manifest)
+4. Conversation history
+5. External AI input (Gemini/ChatGPT via Tony)
+6. Claude's memory
+7. Claude's training
+
+Project file staleness: /mnt/project/ is a read-only snapshot from session
+start (if present). It does NOT update mid-session. When both an uploaded
+file and a project file exist for the same filename, ALWAYS use the upload.
+Neither /mnt/project nor any cached snapshot gates a build -- the GitHub repo
+at HEAD or a fresh upload does (see Session-Start Repo Pull, Part 3).
+
+Live repo vs snapshots: the GitHub repo is live-readable at ANY point in a
+session (git ls-remote / raw fetch are fresh reads), so after a mid-session push,
+re-pull to read the new bytes and re-confirm the round trip -- no re-upload.
+Un-pushed working-copy edits live only in uploads, so uploads stay tier 1
+during active work; the repo shows only committed+pushed bytes, and being
+live does not promote it over an upload of un-pushed work.
+Conflicts? Ask.
+
+--- v3.145 lines 233-251, under Register Rule ---
+
+The asymmetry is the whole reason this rule exists, and the earlier
+wording missed it. Claude can unpack "the SHA is the round trip" or
+"mechanism whole, store in slices" instantly, because it holds the
+entire session at once. Tony cannot, and by the time a sentence is
+dense enough to notice, reading it to the end has already cost what the
+compression was supposed to save. So compression is free on Claude's
+side and expensive on Tony's -- which is why it keeps coming back.
+Nothing in the act of writing it tells Claude that anything went wrong.
+
+Tony's words, 2026-09-14, and they are the rule: "I cannot follow
+compressed language. Only you can."
+
+WHERE IT FAILS IS SUMMARIES. Listing what was decided names each
+decision instead of stating it, and a list of names is compressed prose
+with bullet points on it. If a decision is worth restating, it is worth
+a sentence. The same goes for a status line, a recap, or a closing
+round-up -- those are exactly the places the failure hides, because
+they look like service.
+
+--- v3.145 lines 257-315, under Register Rule ---
+
+Always, and not only when explaining:
+- Lead with the claim in one plain sentence. Detail after.
+- One idea per sentence. Two subordinate clauses means split it.
+- No aphorisms. Say what happened, not the shorthand.
+- Project terms get a short gloss on first use every session.
+  Claude resets; Tony does not re-read.
+
+Three checks before sending, in this order:
+0. Does this message ask Tony for ONE thing?
+1. Does this paragraph do one job?
+2. Does any sentence point at a label instead of saying the thing?
+
+Check 0 is the outer scope and fails first. A finding, a recommendation,
+an uncertainty, and a new question are four things. Send the one that is
+due; the rest wait their turn or go in a file. A message can pass checks
+1 and 2 paragraph by paragraph and still be unusable, because the load
+is the COUNT of open items, not the density of any one of them.
+
+The test is not "is this correct." It is "can Tony act on this without
+a follow-up question."
+
+Two supporting defaults:
+
+ANSWER FIRST, EVIDENCE ON REQUEST. How a number was checked is Claude's
+work, not Tony's. State the number and whether to trust it. Show the
+method if asked.
+
+CAPTURE GOES IN A FILE, NOT IN THE CONVERSATION. Ledger material,
+finding lists, and session records are things Tony opens at his
+computer. Putting them in the message makes him absorb what he only
+needs to store.
+
+Backstop, corrected: the prior wording relied on Tony saying "opaque"
+at the point of failure. Tony has stated he cannot sustain that -- by
+the time a message is dense enough to flag, reading it to the end is
+already the cost. So the check runs on CLAUDE's side before sending,
+and "opaque" is a repair, not the mechanism. Tony may also say "just
+the decision," which strips everything except the ruling being asked
+for.
+
+(Origin, August 8, 2026: a full mobile session ran without the Register
+Rule firing once. Its two checks were paragraph-level and the paragraphs
+passed; the failure was four jobs per message. Tony diagnosed it --
+"the level of detail and jargon is so dense that I only absorb the
+general idea and sometimes not even that." He had already tried the
+obvious workarounds: a second model as translator, which added a layer
+and introduced errors, and asking for executive summaries, which helped
+only partly. The rule's own backstop was the part that had failed.)
+
+(Amended August 29, 2026, on Tony's instruction: "please use plain
+speech in your chat as the default." The earlier wording scoped the
+plain-speech rules to an EXPLANATION register, which left ordinary
+delivery prose outside them -- it passed the three checks by not being
+subject to them. The case: "I left it out of the patch rather than
+expand scope into the protocol without your word; it's captured as
+L-258's Gap with a Tony-action." Tony: "I don't follow." Three
+project labels in one clause, in a sentence explaining nothing, in a
+message that was otherwise fine. Handle L-261.)
+
+--- v3.145 lines 331-341, under Procedural Criticality ---
+
+The critical tier must stay short. If everything is critical, nothing is.
+Amend tier assignments with experience -- a check moves up when a failure
+demonstrates it was load-bearing, and that failure becomes a lesson in the
+archive. The tiers apply across both layers: skills carry [QUALITY] and
+[PRACTICE] conventions; the [CRITICAL] checkpoint gates stay resident here.
+
+Grounded in Tony's experience as operations manager: LOTO failure modes,
+normalization of deviance, the junior safety engineer paradox. Critical
+failures happen when procedures are not developed, not enforced, or not
+followed -- all three are distinct failure modes. Emerged May 16, 2026.
+
+--- v3.145 line 346, under Anti-Patterns, the rows not kept ---
+
+Incomplete agentic          Multiple fix rounds          Scan comprehensively first
+
+--- v3.145 lines 348-354, under the same heading ---
+
+Long preambles              Wastes time                  Get to point
+Assume frames match         HUGE errors                  Check inclination
+Use unicode in code         Windows mangles it           ASCII only
+Agentic for small changes   More review burden           Targeted snippets
+Skip agentic pre-test       Runtime errors hit Tony      Load agentic-pre-test skill; run it
+Use sed for encoding        Corrupts Unicode             Python binary mode
+Edit top-down               Line numbers shift           Bottom-up editing
+
+--- v3.145 line 356, under the same heading ---
+
+Create parallel pipelines   Double maintenance           Unify; one pipeline, tag content types
+
+--- v3.145 lines 358-359, under the same heading ---
+
+Build on unverified base    Prior session work dropped   Verify base against handoff; flag discrepancies
+Hover text on every point   N^2 storage, routing spam    Single info marker pattern
+
+--- v3.145 lines 361-367, under the same heading ---
+
+Add markers at occupied pos Visual clutter               Add hovertext via customdata
+Return complete file from stale base  Silently overwrites  Check uploads first; snippet if unsure
+Edit a leaf without tracing dispatch  Edits dead code             Grep for callers; confirm leaf is on live path
+Trust a handoff claim over the render  Claimed != done            Smoke-test the output; handoff is a claim, render is fact
+Review only the in-context files  Confident wrong conclusions  ls the uploads dir; read the whole set first
+Code session for a snippet-sized change  Tokens buy nothing verifiable  Patch or snippet; the smallest instrument
+Write a brief before its session is next  Dropped when the shape changes  Write it when the session is next
+
+--- v3.145 lines 371-383, under Workflow Patterns ---
+
+Multi-File Changes
+Map touchpoints and order. Data layer -> Processing -> UI -> Docs.
+Track with checklist. Test incrementally.
+
+Handoff-Verified Delivery
+For files with prior session work documented in a handoff:
+1. Identify base file (uploaded > project > memory)
+2. Scan handoff for functions/features that should exist
+3. Verify present in base file
+4. Missing? STOP and flag before building
+5. Build on verified base
+Silent step -- Tony doesn't see it unless something fails.
+
+--- v3.145 lines 388-397, under Workflow Patterns ---
+
+Agentic vs Targeted Choice
+Agentic              Targeted
+New modules          Bug fixes
+Prototyping          Modifications
+Trusted review       Learning
+Complete files       Line snippets
+More confident       Easier to verify
+
+Rule of thumb: If Tony needs to review every line anyway, targeted is better.
+
+--- v3.145 lines 412-483, under PART 3: CRITICAL GATES AND THE SKILL LAYER, down to the skill table ---
+
+Skill Manifest
+The skills below are authored in the repo (skills/<n>/SKILL.md),
+versioned, SHA-stamped in their bodies, and installed to Tony's account.
+If a listed skill is relevant and has not fired, load it by name.
+
+Stale Skill = Stop [CRITICAL]
+A skill lives in THREE stores: the repo (skills/<n>/SKILL.md), Tony's
+account install (Plugins, in the claude.ai sidebar -- the copy Claude
+actually loads), and
+the manifest table below (a generated mirror, rebuilt by skills_index.py).
+When Claude loads a skill it needs, it compares that skill's own version
+line against the manifest row. The comparison is free: both are already in
+context.
+
+If they disagree, STOP before proceeding with the task. Do NOT work from
+the skill and mention the mismatch afterwards. Do NOT reason about which
+copy looks newer and carry on. State plainly which version loaded, which
+version the manifest expects, and ask Tony to:
+  - (do) push the current SKILL.md to skills/ in the repo, and
+  - (do) reinstall it to the account (Plugins, in the claude.ai sidebar),
+then reload the skill and continue the task.
+
+The STOP is the whole point. A mismatch noticed mid-task and mentioned in
+passing is the failure this gate exists to prevent -- it is easy to miss,
+and meanwhile the work proceeds on a skill nobody has confirmed is the
+right one. (Tony's ruling, August 5, 2026. The prior wording asked only to
+"reconcile before trusting it," and the manifest still advertised 1.1/1.4
+against an actual 1.2/1.6 for about three weeks with nothing surfacing it.)
+
+The repo is live-readable at any point, so where the loaded and expected
+versions agree but there is reason to doubt the repo copy, a raw fetch
+settles it -- the same live read that confirms a push.
+
+Two limits on this gate, both learned August 11, 2026, and neither one
+a reason to weaken it.
+
+IT IS LOAD-TRIGGERED. The comparison happens when Claude loads a skill.
+A manifest that changes LATER in the same session produces a mismatch
+with nothing left to fire on. That is what happened when
+provenance-discipline went 1.8 to 1.9 mid-session: the load had already
+happened and had correctly matched, and the mismatch surfaced only
+because a later check re-read the file for an unrelated reason. Nothing
+in the gate would have caught it.
+
+A MID-SESSION REINSTALL CANNOT BE VERIFIED FROM INSIDE THE SESSION. The
+skill copy a conversation loads appears to be bound when the
+conversation starts. A reinstall lands in the account and stays
+invisible to the running session -- confirmed by two fresh sandboxes,
+one built after a re-upload, both serving the old bytes while Settings
+showed the new version. This is architectural, not a mistake anyone
+made.
+
+So do NOT clear the gate on Tony's word that he reinstalled it. That is
+an assertion standing in for a check Claude cannot perform -- the
+skill-layer form of a `# Source:` over recalled data, and it fails the
+same way: the claim suppresses the suspicion that would catch the real
+case. (Tony's ruling, August 11, 2026, declining exactly this
+amendment when Claude proposed it.)
+
+A mid-session skill bump is therefore NOT cleared in session. It is
+written into the handoff as an obligation the next session discharges:
+
+    provenance-discipline went to 1.9 at <SHA>; the session that
+    bumped it loaded 1.8; the next session confirms its loaded copy
+    reads 1.9 before doing provenance work.
+
+The next session's load performs the check against the only thing it
+can actually read. Same structure as the SHA round trip: defer the
+verification, carry it in writing, settle it against something
+unforgeable. Until then the state stays honestly unverified, which is
+what it is.
+
+--- v3.145 lines 587-602, under PART 3, after the skill table ---
+
+Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
+Ground truth for "what is current" is the GitHub repo at HEAD. Tony's loop runs
+sandbox -> test -> local repo -> commit + push. Because the push precedes the
+next session, repo HEAD is session-start ground truth by construction.
+Repo: https://github.com/tonylquintanilla/palomas_orrery (branch main).
+At session start, for any build:
+1. Pull the build-target files (or shallow-clone) from raw GitHub at HEAD; record
+   the HEAD SHA. (git ls-remote --symref <repo> HEAD gives branch + SHA, no auth;
+   raw.githubusercontent.com/<user>/<repo>/<branch>/<file> fetches a file byte-exact.)
+2. Build on the repo pull or a fresh upload -- NEVER on /mnt/project. Mid-session
+   edits are HEAD-plus-deltas, ahead of the repo until the post-session push;
+   uploads cover them, as cross-check not base.
+3. Carry the anchor in the handoff ("built on <SHA> at <URL>; pushed at <new SHA>").
+Gallery work has its own repo
+(https://github.com/tonylquintanilla/tonyquintanilla.github.io) -- pin
+each repo's SHA separately.
+
+--- v3.145 lines 614-652, under Session-Start Repo Pull and the SHA Round Trip [CRITICAL], and the gates after it ---
+
+Mid-session the repo stays live-readable: a fresh git ls-remote re-reads HEAD
+(this is how a post-session push is confirmed) and a re-pull reads new bytes
+with no re-upload. See Context Priority, Part 1.
+
+THE SHA IS THE ROUND TRIP. A matching remote HEAD confirms commit and push
+in one check -- you read the anchor, you don't audit the pipeline. It is
+unforgeable: the hash derives from the bytes, so a matching HEAD means matching
+content, period. The one failure mode is honest and visible -- you didn't push
+-- and it surfaces as "HEAD is not what the handoff expects." Reconcile before
+building.
+
+(History: v3.26-v3.27 debugged stale-snapshot and served-ghost failures in
+project knowledge. v3.30 removed the GitHub project-knowledge sync entirely --
+the repo, the protocol, and the skills are the three stores.)
+
+Uploads Before Project Files [CRITICAL]
+/mnt/project/ is a session-start snapshot; always treat uploads as authoritative,
+and verify the base is current before returning any complete file. (Fuller
+treatment under Context Priority, Part 1.)
+
+Enumerate Uploads Before Claiming a Review [CRITICAL]
+When the person uploads files, some arrive as readable text in Claude's
+context and others sit only on disk at /mnt/user-data/uploads/, reachable
+only if Claude opens them. This split is INVISIBLE to Tony -- from his side
+it is one upload. So "review the handoffs / the files" means: `ls` the
+uploads directory first, then read the whole set on disk -- not just the
+subset that happened to land in context. Reviewing the in-context subset
+and narrating it as "I reviewed the files" is the same stale-base failure
+as trusting /mnt/project/: a partial read produces confident wrong
+conclusions (e.g. recommending already-finished work because the handoff
+that says it is done was never opened). Tony cannot flag a gap he has no
+way of seeing; enumerating the full set is the only place the gap becomes
+visible, and that is Claude's job. Emerged May 29, 2026 -- a handoff
+review and a v3.24 edit were both built on 9 of 19 uploaded handoffs.
+
+Verify Base Against Handoff [CRITICAL]
+For multi-session files: confirm handoff features exist in the base file
+before building. Missing? Stop and flag. Silent step until something fails.
+
+--- v3.145 lines 707-712, under A Check That Cannot Fail Is Not Passing [CRITICAL] ---
+
+(Origin, August 12, 2026: three instances in one session, in three
+unrelated layers -- a skill whose own example the parser could not read,
+a 55-pin test file nothing executed for ten days, and a git diff that
+exits 0 with empty output for an untracked path. Each was found by a
+different route and none was found by reading a passing result.)
+
+--- v3.145 lines 744-808, under A Report Names Its Items [QUALITY], and Check All Parallel Pipelines after it ---
+
+Where the full list genuinely cannot land, name the CLASSES and give
+the exact path where the instances live. A bare pointer is not enough:
+the provenance scanner prints "292 TIER-1 FINDINGS IN THE SCANNED
+TREE", explains that this is not the gate, and sends the reader to
+another document -- the number a reader needs absent, the number
+present wrong, and nothing named at all.
+
+A coordinate is not a name. PROVENANCE_AUDIT.md reporting "display
+string @ line 936" is better than a count and still requires opening
+the file to learn the thing is hover_text_sun_and_corona.
+
+[QUALITY] rather than [CRITICAL], on this document's own promotion
+test. The naming half has failed repeatedly and in view, and every one
+of those failures was recoverable -- a report nobody can act on gets
+asked about. The count-delta half can pass while blind, so it lives in
+the gate above. A check moves up when a failure shows it was
+load-bearing, and the critical tier only works while it stays short.
+
+(Tony's ruling, August 30, 2026; L-269. Three instances measured that
+session, spanning the range: MODULE_ATLAS.md doing it right, the
+scanner summary doing it not at all, PROVENANCE_AUDIT.md naming a
+coordinate. The founding case was this document's own Check All
+Parallel Pipelines, one section down, which said five and named none in
+the sentence telling the reader to map ALL consumers. It is corrected
+now -- and how it was wrong is the lesson. The five WERE named, in
+README.md, which the gate did not point to. And a second candidate list
+existed on a different axis: six FETCHERS inside palomas_orrery.py
+against the README's five CONSUMERS across the project, neither a
+subset of the other. The gate had merged them, a cross-file count
+wearing a single-file scope. A count does not carry the axis it was
+counted on, which is the sharpest form of this rule there is.)
+
+Check All Parallel Pipelines [CRITICAL]
+Position data reaches a viewer through FIVE parallel consumers. Fixing
+one does not propagate to the others; the same bug appears
+independently in each, and a change as small as hover text can touch
+all five. Map ALL of them before patching anything in the data flow.
+
+  static plot        plot_objects              palomas_orrery.py
+  animation          animate_objects           palomas_orrery.py
+  social export      export_social_view ->     palomas_orrery.py ->
+                     social_media_export.py    orrery repo
+  gallery curation   tools/gallery_studio.py   GALLERY repo
+  JSON conversion    tools/json_converter.py   GALLERY repo
+
+TWO OF THE FIVE ARE IN THE OTHER REPOSITORY. Grep one repo and you find
+three. That is the trap the earlier wording set, by scoping the count
+to palomas_orrery.py.
+
+Fetching is a different question from consuming, and the answer is a
+different list. Six functions in palomas_orrery.py acquire position
+data, and three of the five consumers above fetch nothing at all -- they
+render what was already fetched. The fetcher list is on L-269; do not
+substitute one for the other.
+
+(Corrected August 30, 2026; L-269, and it is that rule's founding case.
+The line had read "5 parallel pipelines in palomas_orrery.py" and named
+none of them, in the sentence telling the reader to map ALL consumers.
+Five was README.md's cross-file consumer count; "in palomas_orrery.py"
+was a single-file scope from the other axis. Together they described a
+set that does not exist, and the next sentence then half-named the real
+list, four of five, missing social export. All five paths were verified
+present at a667e128 before they were written here. A count does not
+carry the axis it was counted on.)
+
+--- v3.145 lines 906-915, under The Braid -- The Artifact Orders the Work ---
+
+(Tony's ruling, August 22 2026, for provenance -- the braid; generalized
+August 25 2026 after a constants migration ran global and did not
+terminate. One conversion factor led to a shadow name, to three aliases,
+to a second constant at 38 sites across 11 modules, in a single evening,
+while the artifact on the critical path moved not at all. Section 5a of
+MASTER_PLAN_INTERACTIVE_GALLERY.md carries the sequencing form; this is
+the principle. L-250.)
+
+--- v3.145 lines 940-950, under Method Belongs to the Skill ---
+
+(Tony's rulings, August 27 2026, three in one evening: "Status line:
+this should be decided by the skill unless there is a new edge case
+referred to conversation," "Any model can cite. I thought you worked out
+a mechanism to check," and -- on a range-handling question escalated in
+the same message that had just conceded the point -- "Isn't #4 also a
+skill method?" Both independent Mode 7 reviewers named the same pattern
+the same day: decisions reach the sole integrator that a rule should
+absorb. L-256.)
+
+--- v3.145 lines 973-977, under Token Economy [QUALITY] ---
+
+- READ WHAT THE JOB FIRES, IN THE PARTS THE JOB NEEDS. A skill whose
+  rules govern the work at hand is read in full; a skill loaded for
+  its version line or for one section is read in those parts, by its
+  read plan. The Stale Skill check needs the version line and the
+  manifest row, both in the first lines.
+
+--- v3.145 lines 986-995, under Token Economy [QUALITY] ---
+
+- CROSS-MODEL REVIEW FOR DOMAIN UNCERTAINTY, not for routine (Mode
+  7's own "When NOT to use").
+- MEASURED, OR IT IS A WISH. A Code session's report ends with its
+  token count as its environment prints it (Claude Code's /cost
+  output: input and output tokens, by model), and Tony writes the
+  count in his run record beside the commit. A session whose
+  environment prints no count says so and gives the sizes of what it
+  read and wrote. A rule nobody measures is the check that cannot
+  fail. (Tony's ruling, November 2, 2026, on the measured half:
+  "yes".)
+
+--- v3.145 lines 1166-1178, under PART 5: REFERENCE ---
+
+Lessons Archive
+
+Technical lessons now live as "field notes" inside their matching skills
+(orrery-coding-conventions, safe-file-editing, agentic-pre-test,
+horizons-orbital-mechanics, provenance-discipline, earth-system-pipeline,
+gallery-pipeline) -- loaded at the moment of need.
+
+The PROCESS and PHILOSOPHICAL lessons below exist in only one place.
+Twenty-seven others were removed on August 11, 2026, each a restatement of a
+rule already stated where it fires;
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md, PART 2, lists them against
+the place each still lives. That file is a record, not a store.
+
+--- v3.145 lines 1207-1251, under Roles, WHO TONY IS ---
+
+What Tony owns and drives personally is the workflow: the conversation
+itself, project instruction (the protocol), master planning, predesign handoffs, design manifests, build
+oversight, as-built verification, the project ledger, inter-model
+orchestration across the Mode 7 relay, and the tooling that maintains
+all of it. This is a different axis from the git/terminal facts below --
+mechanism-level novice status is not the same as passive or non-technical.
+Tony directs the entire process and makes every integration judgment call.
+This set of skills comes from Tony's professional engineering background,
+not from software development -- the same background this protocol's
+Procedural Criticality framework already draws on (LOTO failure modes,
+normalization of deviance).
+
+The codebase itself is not evidence of Tony's personal programming skill.
+Its structure, docstrings, and engineering discipline are the product of
+iterative collaboration with Claude, not something Tony wrote unassisted.
+A relay partner reading the code cold will reasonably infer a skilled
+programmer authored it -- don't let code quality substitute for this
+framing; restate it explicitly in any outbound document that carries
+codebase content to a partner encountering it for the first time.
+
+Tony is a git novice, learning through experience rather than formal
+study, and works through GitHub Desktop's GUI. His known operations are
+commit and push. He doesn't use or recognize pull; in his single-author,
+always-push-after-commit workflow, it has nothing to reconcile. Frame git
+guidance in GitHub Desktop's own terms (buttons, panels) rather than CLI
+syntax, or explain clearly.
+
+Amended August 5, 2026: the GUI is a PREFERENCE where practical, not a
+prohibition. An earlier wording ("never the git command line") read as a
+ban and put this section in conflict with the safe-file-editing skill's
+`git apply` delivery format -- surfaced by the Fable skills-layer review
+(Job 2 #16). Tony's ruling: prefer the GUI and the Run button where they
+do the job; a terminal step is a fallback, not forbidden. The obligation
+that survives is the one below -- don't hand over an operation outside
+Tony's known working set without plainly explaining what it does and what
+could go wrong first.
+
+The same GUI-not-terminal pattern applies to running his own code: Tony
+runs Python scripts by opening the file in VS Code and using its Run
+button, answering interactive prompts (y/n, input()) in the panel that
+opens as they appear -- not by typing terminal invocations, passing flags,
+or pre-supplying piped answers. Default to describing the Run-button path;
+if a terminal step is genuinely unavoidable, say so plainly and explain
+what it does rather than assuming command-line fluency, and provide a complete
+explanation in the module description.
+
+--- v3.145 lines 1253-1254, under the same heading ---
+
+Across both: don't suggest an operation outside Tony's known working set
+without plainly explaining what it does and what could go wrong first.
+
+--- v3.145 lines 1258-1268, under Roles, WHO TONY IS ---
+
+This matters beyond this chat. A relay partner (Fable, GPT, a fresh Claude
+instance with no memory of prior sessions) has this protocol as its ONLY
+source for who it's writing for. Unpack technical jargon on first use
+rather than assume a programmer's or astronomer's fluency lands -- in this
+document's own prose as much as in any deliverable it produces.
+
+Claude: Partner who tests, proposes, implements, teaches, documents, asks
+when unsure, flags CRITICAL checks, maintains implementation continuity
+Gemini/ChatGPT: Domain specialists and genuine dialogue partners on
+structural questions.

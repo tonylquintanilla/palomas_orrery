@@ -29,6 +29,8 @@
     "REQUEST_constants_new_pilot_gemini.md",
     "REQUEST_constants_new_pilot_gpt.jsonl",
     "REQUEST_constants_new_pilot_gpt.md",
+    "REVIEW_RETURN_gemini_neon_20261123.md",
+    "REVIEW_RETURN_gpt_20261123.md",
     "Relay response from Gemini -- check the sources behind the Sun's two fades L-410 with L-131.md",
     "batch1_blind_source_lookup_gemini.md",
     "horizons_answers_L395.json",
@@ -67,5 +69,5 @@
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-11-22"
+  "uncited_changed": "2026-11-23"
 }

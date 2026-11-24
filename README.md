@@ -178,7 +178,7 @@ further down this file for the rest.
 | Document | Kind | What it is for |
 |---|---|---|
 | [LEDGER_CONSOLIDATED.md](LEDGER_CONSOLIDATED.md) | hand + generated zone | The running ledger: every open and closed item under a stable handle, with the decisions behind it. Carries a generated INDEX. |
-| [PROJECT_INSTRUCTIONS.md](PROJECT_INSTRUCTIONS.md) | hand + generated zone | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. |
+| [PROJECT_INSTRUCTIONS.md](PROJECT_INSTRUCTIONS.md) | hand + generated zone | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated list of skill names. |
 | [README.md](README.md) | hand + generated zone | The front door: what the project is, where its pieces are, and how the work is kept correct. |
 | [ADDING_OBJECTS_GUIDE.md](ADDING_OBJECTS_GUIDE.md) | hand-written | Step by step for adding a new celestial object. |
 | [CLAUDE.md](CLAUDE.md) | hand-written | The door into the protocol for a Claude Code session: it points at PROJECT_INSTRUCTIONS.md and the skills, and states what a Code session writes. |
@@ -189,7 +189,7 @@ further down this file for the rest.
 | [LICENSE.md](LICENSE.md) | hand-written | The MIT license, as the standard text alone so GitHub recognizes it. Attributions are in NOTICE.md. |
 | [METHOD_MODEL_EFFORT.md](METHOD_MODEL_EFFORT.md) | hand-written | Field manual, one page: which instrument, which model and how much thinking each kind of task in Paloma's Orrery gets. Companion to the protocol's Token Economy (v3.121, L-506). Opened from the dashboard's documents list. |
 | [NOTICE.md](NOTICE.md) | hand-written | Data attributions and third-party components, moved out of LICENSE.md so GitHub recognizes the license. |
-| [PROJECT_ORIGIN.md](PROJECT_ORIGIN.md) | hand-written | How the project started, in Tony's own words. |
+| [PROJECT_ORIGIN.md](PROJECT_ORIGIN.md) | hand-written | How the project started, in Tony's own words, and the protocol's philosophy as it stood until November 2026. |
 | [requirements.txt](requirements.txt) | hand-written | Annotated dependency spec, including the kaleido 0.2.1 pin and the Plotly 5.x constraint. |
 | [RUNNING_A_PATCH_FILE.md](RUNNING_A_PATCH_FILE.md) | hand-written | How to run a delivered patch script, and what its guards mean. |
 | [DATA_INVENTORY.md](DATA_INVENTORY.md) | generated | The data inventory: the state of the local, gitignored data stores, rebuilt by data_inventory.py. Do not hand-edit. |

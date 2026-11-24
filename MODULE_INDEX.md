@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** November 22, 2026 by `module_atlas.py`  
+**Generated:** November 23, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 181  
-**Total Lines of Code (non-blank):** 146,567  
-**Total Public Functions/Classes:** 1,931
+**Total Lines of Code (non-blank):** 146,693  
+**Total Public Functions/Classes:** 1,935
 
 ## Classification Coverage
 
@@ -46,7 +46,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,885 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,934 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,942 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -224,7 +224,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `data_inventory.py` | Inventory data stores and gallery for handoff and headroom. (236 lines) |
 | `dep_trace.py` | Targeted dependency path tracer for Paloma's Orrery Usage: python dep_trace.py <module_name> [hops] (419 lines) |
 | `diagnose_bcodmo.py` | Diagnostic script to examine BCO-DMO pH data structure (67 lines) |
-| `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (336 lines) |
+| `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (340 lines) |
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
 | `enso_page_generator.py` | El Nino's page on the website: NOAA's record since 1950 and what NOAA expects next, a walk in five steps (L-060). (1,708 lines) |
 | `exact_rows_report.py` | - which exact rows a display prints, and where. (706 lines) |
@@ -240,12 +240,12 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (1,010 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,401 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,411 lines) |
 | `path_plan.py` | - the orrery's plan for drawing each path the website serves: a spacecraft's flown and planned trajectory, and a comet on an open path around its perihelion (L-443, slice 2). (1,505 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (687 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,533 lines) |
-| `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (885 lines) |
+| `skills_index.py` | Write the skill manifest, skills/SKILL_MANIFEST.md, and the protocol's list of skill names, from the SKILL.md files in skills/. (989 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
 | `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (684 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (476 lines) |

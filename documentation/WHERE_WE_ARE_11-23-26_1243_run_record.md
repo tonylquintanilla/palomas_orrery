@@ -132,7 +132,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: 
+**Session: OPEN: 11-22-26 2141: Fable: Coordinator: Review priorities and 7-day path**
 
 The review request is written, and a third patch that places it is in your orrery folder: `patch_L544_3_review_request.py`.
 
@@ -375,3 +375,67 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 - This session's work is finished once that push lands.
 - The protocol's reduction is next, in its own session. It starts from the handoff, which now sends it to the check and the two replies.
+
+====================
+
+The first placement delivered an earlier draft, 8,112 bytes where 8,290 were meant. Sending the right bytes from a fresh path.
+
+The handoff is written: `HANDOFF_document_upkeep_20261123.md`. It is in the orrery's `documentation` folder, and the same file is attached here.
+
+**One thing went wrong on the way, and is fixed.** My first placement put an earlier draft in your folder, 8,112 bytes where 8,290 were meant. Reading the file back caught it. I sent the final version from a fresh path and read it back again, and it matches. If you see two cards for this file in the chat, use the one captioned "final", or the copy in your folder.
+
+**What it holds, in about two pages**
+
+- **Start here:** six steps, ending with one question to you: whether step 3 is still the job.
+- **What changed since Nov 16:** your order, the two outside reviews, and the sizes of the protocol, the skills and the ledger, all measured at today's commit.
+- **The first job:** set the three reviews side by side before any draft.
+- **What binds the draft:** your Nov 10 amendment, and the two gate wordings that come to you.
+- **Fixes the reviews found that are not about length:** five, with the pre-test command first.
+- **How outside models read the repository now**, including what Gemini needs.
+
+It names the Nov 16 handoff as superseded and keeps that one as its session's record.
+
+**Two things it could not do, because it is a file and not a patch**
+
+- Where We Are's "Needs you now" line and L-522 (document caps) still name the Nov 16 handoff. The new handoff says so and asks the next session's close to record it.
+- It is not on GitHub until you commit and push the orrery. Do that before starting the session, so it finds the file at the commit it records.
+
+**A correction.** Earlier I said seven skill versions had moved lines out since the caps. The precise count is ten skill bumps in three protocol versions since Nov 16. The handoff has the right figure.
+
+To start the next session, give it this file and L-522.
+
+=============================
+
+**Session: OPEN 11-23-26 1432: Fable: Coordination session protocol review**
+
+Part 1 checks out, and it is safe to pull, commit and push. I read the changed files straight from your folder and compared them myself, without relying on the Code session's report.
+
+**What I checked**
+
+- **The protocol is the text you ratified.** The installed file differs from the ratified draft on 8 lines only: the first line, the version, and six dates. No placeholder is left.
+- **Your own account in the origins document is untouched.** The philosophy sits below it under its own dated heading, every line present.
+- **Nothing was lost.** Every old line that was meant to go to the history file is in it. The entry it wrote for v4.0 is accurate, and it quotes you correctly.
+- **The cap is 800** and the protocol stands at 795.
+- **The skill table** in its new file has every row the old table had.
+- **GitHub moved, as it said.** The orrery has one new nightly commit, which touches one data file. The website has nightly commits too. Neither is a missed push.
+
+**One correction before Part 2**
+
+- The Code session says it will fix a line in the file-editing skill in Part 2. The brief left that skill out on purpose.
+- The line only names where a generated table lives. A session following it would do nothing wrong, so by the records skill's own rule it waits for that skill's next version.
+- Fixing it now would mean a fourth skill to update and reinstall.
+
+**Your run order**
+
+1. In GitHub Desktop, pull the orrery, -- 
+2. then pull the website.
+3. Look at the orrery's change list, commit, and push.
+4. Tell the Code session: "Part 1 is pushed. Start Part 2. Leave safe-file-editing alone; its line is carried on L-522, as the brief says."
+
+If GitHub Desktop refuses a pull or mentions a conflict, stop there and tell me what it says.
+
+**Where this leaves us**
+
+- The reduced protocol, v4.0, is in your folder and correct. It is not yet on GitHub, and not yet in the Project's instructions.
+- Pasting it into the Project and reinstalling the three skills wait until after Part 2.
+- v4.0 is now written into the files. Say so before you commit if you want another number.

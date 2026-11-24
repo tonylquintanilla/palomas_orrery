@@ -31,8 +31,9 @@ that no longer existed, and nobody could see it from inside the README.
 
 Tony's proposal, 2026-08-31, and it is the right shape: not a checker
 that alarms on the copy, but an INDEXER that regenerates it -- the way
-skills_index.py writes the manifest into PROJECT_INSTRUCTIONS.md and
-ledger_index.py writes the INDEX into LEDGER_CONSOLIDATED.md. Fix the
+skills_index.py writes the skills' names into PROJECT_INSTRUCTIONS.md
+(the table itself, since the protocol's v4.0, into skills/SKILL_MANIFEST.md)
+and ledger_index.py writes the INDEX into LEDGER_CONSOLIDATED.md. Fix the
 producer, not the consumer.
 
 THE DESIGN: EACH DOCUMENT DECLARES ITSELF
@@ -93,6 +94,9 @@ Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-409:
 LICENSE.md described here, since it cannot carry the tag).
 Module updated: November 10, 2026 with Anthropic's Claude Opus 5.5
 (L-522: --caps, the check of DOCUMENT_CAPS.md).
+Module updated: November 23, 2026 with Anthropic's Claude Opus 5.5
+(L-522, step 3: a comment names where skills_index.py now writes the
+table; no behaviour changed.)
 """
 
 import re

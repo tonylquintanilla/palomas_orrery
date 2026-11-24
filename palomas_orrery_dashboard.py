@@ -88,6 +88,10 @@ after Encounters, for the gallery run's "Link cards" (L-540) and "Room
 clock" (L-541) checks, which came without one; added on Tony's word,
 "Yes, add the two missing dashboard buttons", after Dashboard parity
 found them.)
+Module updated: November 23, 2026 with Anthropic's Claude Opus 5.5
+(L-522, step 3, the protocol's v4.0: the Skill Manifest and Skill
+Headers buttons say where the table now goes, skills/SKILL_MANIFEST.md,
+and that the protocol keeps the skills' names.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1787,7 +1791,8 @@ LAUNCH_GROUPS = {
          True),
         ("Skill Manifest",
          "skills_index.py",
-         "Regenerate the Skill Manifest table in the protocol from skills/*/SKILL.md. "
+         "Write the skill manifest, skills/SKILL_MANIFEST.md, and the protocol's "
+         "list of skill names, from skills/*/SKILL.md. "
          "Run after adding, renaming, or versioning a skill.",
          SCRIPT_DIR,
          True,
@@ -2226,7 +2231,10 @@ LAUNCH_GROUPS = {
          "refuses, a name or description that is not text, or a value "
          "YAML would cut short at a space before a # (L-407). The Skill "
          "Manifest button runs the same script without the check, "
-         "and writes the protocol's table.",
+         "and writes the manifest file and the protocol's names. Since "
+         "the protocol's v4.0 the check also fails when a folder under "
+         "skills/ is missing from the protocol's names, or a name there "
+         "has no folder (L-522).",
          SCRIPT_DIR,
          True,
          ["--check"],
@@ -2714,7 +2722,7 @@ CARD_LINES = {
         "Checks a small body is a path or orbit by JPL's e.",
     ("Maintenance Run",
      "Skill Manifest"):
-        "Regenerates the protocol's skill table from skills/*/SKILL.md.",
+        "Writes skills/SKILL_MANIFEST.md and the protocol's skill names.",
     ("Maintenance Run",
      "Builder Marker Join"):
         "Checks the worksheet request builder joins a continued citation line.",
