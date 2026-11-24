@@ -1183,7 +1183,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-23 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-21 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
-| ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-22 |
+| ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-23 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-22 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-22 |
@@ -2118,7 +2118,7 @@ the digits test) and the website's sentence; the Moon first.
 (Pluto's period at its barycentre); L-514 (the Mars room).
 
 #### [L-538] The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297)
-<!-- L:538 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+<!-- L:538 status:OPEN upd:2026-11-23 section:A flag: rice: -->
 - **Found 2026-11-19** in L-297's Session 2 (Claude Opus 5.5 in Claude
   Code, website 133dbd21), holding the curve's error to every served path.
   LIVE TODAY, before and apart from that round: a spacecraft's box prints
@@ -2156,12 +2156,58 @@ arrival and a departure the points stay a week apart.
 L-544 (L4 and L5 tie) and after the protocol's reduction, L-522
 (document caps) step 3, by Tony's two words of that day, recorded on
 L-544 and L-522.
-**Gap:** the build, soon (Tony, Nov 19): finer points near today for a
-craft inside a capture; until then those boxes print up to about one
-place finer than earned.
+**Note:** (2026-11-23, night, the coordinating session, Claude Fable
+5.2, on orrery 2634031c and gallery 9e7bb99f) DESIGNED, AND TONY'S
+RULING. Read from the served cache built 2026-11-24T00:01 UTC:
+- Two craft are inside a capture in the date window, by their plans'
+  arrivals: Juno, and BepiColombo, which arrived at Mercury on
+  2026-11-21 18:48 by JPL's path, after the measure of Nov 19 above.
+- Juno's points are not a week apart, as this item says. Of its 32
+  served points inside the window (JD 2461280.53 to 2461456.47), 28
+  are the nightly tail's days and the other four stand 3 to 49 days
+  from their neighbours: the backbone is thinned at 0.02 AU, and
+  Juno's loop around Jupiter is thinned away.
+- A visitor can show any day in the window (the page's date input), so
+  hourly points near today alone would leave every other day as it is.
+- The measure, each served point in the window held out, with the
+  figure the box prints: Juno 6 of 32 missed by more than the figure,
+  worst 3.9 times it (JD 2461393.5, miss 4,780,840 km, figure
+  1,234,320 km), the largest miss 8,292,035 km against 3,775,987 km
+  (JD 2461442.5), and three inside the daily tail (JD 2461357.5 to
+  2461359.5, up to 2.3 times); BepiColombo 1 of 294, 6.8 times (JD
+  2461408.5).
+Tony, 23:24, to "Shall I go ahead with L-538's design?": "Yes". Tony,
+23:38, to "Do you approve daily points across the whole date window
+plus hourly around today, rather than hourly around today alone?":
+"What is your recommendation?" The session's answer: "Daily points
+across the whole date window, plus hourly points around today", and
+with it one rule: "when the night check finds an hour too coarse for
+a craft, the builder halves the step for that craft, down to a floor,
+and comes to you only if the floor still fails. That is method, so it
+would go in the skill and not to you each time." Tony, 23:39: "Yes".
+So the shape is a recommendation he accepted, and the finer-step rule
+is method, owed to gallery-cache-builder.
+The brief applies the finer-step rule to the daily part as well as to
+the hourly band, since a day was too coarse on three days of the
+tail. That is the session's reading, told to Tony after his "Yes", and
+not his words.
+The proof is the gallery run's "Curve error" row, widened to every
+craft inside a capture: red, by name, when a figure is smaller than
+its miss. The orrery's code is not touched; the arrival is already in
+the plan it sends.
+NOT CHECKED: that BepiColombo's loop around Mercury shortens to a few
+hours in the coming months. The session said it from memory; the
+brief's Part A measures it from JPL's own points.
+**Gap:** the build, by the brief, in one Claude Code session in the
+website repository. Its Part A (the map, the measure against JPL, its
+proposal) returns to a coordinating session before any edit. Then the
+skill text for gallery-cache-builder, which stands at its cap. Until
+the build, those boxes claim less error than they have.
 **Ref:** L-297 (the curve's error, Tony's ruling of Nov 19); gallery
 `tools/test_curve_error.py` (run with every kind to measure);
-provenance-discipline, A Computed Position Prints What Its Errors Earn.
+provenance-discipline, A Computed Position Prints What Its Errors Earn;
+the brief, `documentation/COORD_L538_orbiters_brief_20261123.md`,
+placed by `patch_L538_1_design_and_brief.py`.
 
 #### [L-539] Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check)
 <!-- L:539 status:OPEN upd:2026-11-22 section:A flag: rice: -->
@@ -4075,6 +4121,28 @@ was advised against: it needs his rulings and a carry to GPT, and on Nov
   This item's design part above, from the brief word for word; L-199,
   L-230 and L-499 closed, each with its reason; L-548's count of
   consumers made six; Where We Are edited by section.
+- **Step 3 confirmed, 2026-11-23, night** (the coordinating session,
+  Claude Fable 5.2, from GitHub: orrery 2634031c, Tony's commit "L522
+  documents", above 0a024d9f; gallery 9e7bb99f). The closing handoff's
+  four checks:
+  - The twelve installed skills equal the repository's copies at
+    HEAD, the text below the header byte for byte;
+    gallery-cache-builder's header differs by a line wrap, 2 bytes.
+    ledger-and-session-records reads 1.24, orrery-coding-conventions
+    1.14, agentic-pre-test 1.4. That comparison clears the three
+    reinstalls.
+  - The Project's resident protocol reads v4.0 on its third line. It
+    was not compared with the repository's file beyond that line.
+  - Part 3 is on GitHub with the four corrections in it: the door's
+    line struck, the two old Tony-actions marked overtaken, L-012's
+    line 4907, the closing handoff named here and on Where We Are.
+  - `HANDOFF_document_upkeep_20261123_close.md` is whole on GitHub,
+    158 lines, 8,172 bytes, and equal line for line to the copy Tony
+    attached.
+  Three things on the carried list above were still not put to Tony,
+  and now stand on Where We Are under Waiting on you: the stamping
+  rule, a cap for the website's `INTERACTIVE_AS_BUILT.md`, and a split
+  for gallery-cache-builder and horizons-orbital-mechanics.
 - CARRIED by this step, each for the place named (the brief's "Not in
   this job", and what the build found):
   - Skills that still name a retired part of the protocol, each for its
@@ -4119,6 +4187,8 @@ ledger-and-session-records 1.24, orrery-coding-conventions 1.14 and
 agentic-pre-test 1.4 (Plugins, in the claude.ai sidebar). The next
 session with a shell compares the installed skills with the
 repository before it works; that comparison clears the three.
+DONE, 2026-11-23, night: the paste and the three reinstalls, by the
+comparison recorded under "Step 3 confirmed" above.
 **Tony-action (decide):** the version number, v4.0 unless he says
 otherwise.
 **Ref:** the review and the design record named above; step 3's

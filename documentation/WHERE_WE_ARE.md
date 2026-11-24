@@ -1,23 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 23, 2026, evening: the close of the protocol's reduction, step 3 of L-522 (document caps). The protocol is v4.0, 795 lines (Claude Opus 5.5, in Claude Code).
-- Written on orrery 0a024d9f and gallery 9e7bb99f, both pushed; the nights since, read green in your run record.
+Last updated: November 23, 2026, night: step 3 of L-522 (document caps) confirmed from GitHub, and the design of L-538 (the orbiters' printed error) with its brief (Claude Fable 5.2, the coordinating session).
+- Written on orrery 2634031c and gallery 9e7bb99f, both pushed; both last nights read clean from their own records (the orrery's of Nov 23, 22:44 UTC; the website's of Nov 24, 00:02 UTC, 59 rows).
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The protocol is shorter: 1,394 lines became 795, the text you ratified ("ratified. thanks."). Nothing was lost: each old line is in the protocol, in the history file, or at the end of PROJECT_ORIGIN.md, and a script found every one. Closed with it: L-199 (protocol length), L-230 (a skill change's protocol entry), L-499 (kinds of session).
-> - A skill change no longer makes a new protocol version, so it no longer asks you to paste the protocol. The table of skills is its own file now, `skills/SKILL_MANIFEST.md`.
-> - Three skills changed. The records skill: no protocol entry for a skill change, and your run-record zone is never emptied. The coding conventions: six places position data reaches a viewer, the website's own the sixth. The pre-test: it reads the program's real result, which the old line hid.
+> - Step 3 is confirmed by comparison, not by anyone's word: all twelve of your installed skills equal the repository's copies, the Project's protocol reads v4.0, and Part 3 with its four corrections is on GitHub.
+> - L-538 (the orbiters' printed error) has its design, on your "Yes" of Nov 23: a craft orbiting a planet is served a point a day across every date the date box offers and a point an hour apart around today, and finer points wherever the check finds that too coarse. Today that is Juno and BepiColombo, which reached Mercury on Nov 21 by JPL's path.
+> - The fault is larger than the ledger said. Juno's points are up to 49 days apart inside the date window, not a week. Tested point by point, its marker missed by up to 8.3 million km where the box claimed 3.8 million.
 >
-> **Do next:** *L-538 (the orbiters' printed error); then every path to its last day, a build of its own (L-533 (ESCAPADE)); then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
+> **Do next:** *L-538 (the orbiters' printed error): start a Claude Code session with its brief, `documentation/COORD_L538_orbiters_brief_20261123.md`; it stops after its Part A report, which goes to the coordinating session before any edit. Then every path to its last day, a build of its own (L-533 (ESCAPADE)); then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
-> - *(do) Paste PROJECT_INSTRUCTIONS.md, v4.0, into the Project's instructions on claude.ai (the number is yours to change first), and reinstall ledger-and-session-records, orrery-coding-conventions and agentic-pre-test (Plugins, in the claude.ai sidebar). The next session with a shell checks the three. The handoff is `documentation/HANDOFF_document_upkeep_20261123_close.md`; the coordinating session starts with `documentation/PROMPT_coordinator_start_20261123_1.md`, pasted from below its line.*
 > - *(do) If you still want it, remake the ESCAPADE scene in the gallery editor, kept in the Solar System room (L-542 (a scene's room)).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -46,9 +45,9 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   s.   [done]  Sudan on Google Earth web, Nov 13, and its guided walk, Nov 14 (L-001 (food insecurity)).
  15a.  [later] The Earth Science room, after Mars and the moons (L-531 (the Earth Science room)).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
-               built Nov 10 and 11; step 3, the protocol's reduction, built Nov 23 as v4.0 << moved this session; step 4, the ledger's closed items moved out,
+               built Nov 10 and 11; step 3, the protocol's reduction, built Nov 23 as v4.0 and confirmed that night; step 4, the ledger's closed items moved out,
                at the next gap between builds; then steps 5 and 6.
-  b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' hourly points, L-538 (the orbiters' printed error); then every path to its last day, a build of its own, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).
+  b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' fine points, L-538 (the orbiters' printed error), designed Nov 23, its brief written << moved this session; then every path to its last day, a build of its own, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
@@ -62,14 +61,14 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Nothing guesses a missing id_type: every entry writes it, and a reader that finds none leaves that object out and names it (Nov 23; L-548 (a missing id_type)).
 - Every path runs to its span's last day: the website asks JPL for it too (Nov 19; L-533 (ESCAPADE)).
 - A period prints today's figure with only the digits its swing allows, and its sentence gives the swing's measured range (Nov 19; L-536 (a moon's yearly change)).
-- A craft orbiting a planet gets the real fix, hourly points near today, and no stopgap (Nov 19; L-538 (the orbiters' printed error)).
+- A craft orbiting a planet gets the real fix and no stopgap: a point a day across the date window, a point an hour apart around today, and finer points where the check finds that too coarse (Nov 19 and 23; L-538 (the orbiters' printed error)).
 - The Lagrange points are shown as Earth-Moon L1, L2, L4, L5 and Earth-Sun L1, L2, L4, L5, "Earth-Sun" being NASA's word; JPL's names (EM-L1, SEMB-L1) are the source line (Nov 18; L-297 (the Lagrange points)).
 - Moons sit with their planet's shells by distance, as Earth's Moon does; there is no Moons group (Nov 18; L-534 (missions by destination)).
 - ESCAPADE's words leave out NASA's "kidney-bean": it is the loop seen from a view that turns with Earth, and no room turns (Nov 18; L-533 (ESCAPADE)).
 - A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - ESCAPADE's year near L2 is an encounter of its own, after the flybys' slice 2; its view is an open question, since its loops show only around Earth and not as NASA draws them (Nov 20; L-529 (guided encounters)). A planned path drawn around Earth, which SOHO, Gaia and JWST need too, stays with Earth's fold (Nov 18; L-533 (ESCAPADE)).
@@ -91,13 +90,14 @@ Waiting behind other work; a line leaves when picked up.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261123T235940Z, ok, no retry on the swap (the website's swap log at 9e7bb99f, read Nov 23).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 23 by this session's run, on 0a024d9f).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 23, read at 2634031c).
 - This page's date and the ledger's newest stamp: both Nov 23. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
 - Where the four small builds from the decisions of Nov 22 sit in the order. Until you say: after the protocol's reduction, at the gaps between builds (the road, line b).
+- Three things on the document track never put to you, before step 4 of L-522 (document caps): the stamping rule (safe-file-editing, "Stamp What You Change"), which refills the header stamps step 4 empties; a cap for the website's `INTERACTIVE_AS_BUILT.md`; and a split for gallery-cache-builder and horizons-orbital-mechanics, both at their caps, the first due more text after L-538's build.
 
 At the next design talk:
 - El Nino's step 5, its last sentence: name NOAA as the source of the open question, and say it is the swing on NOAA's index that is studied. Your words: "in today's political environment the hedge can read as ideological not just scientific" (Nov 17; L-060 (El Nino)).
@@ -123,7 +123,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation.
+- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation. The orbiters: L-538 (the orbiters' printed error), its brief `COORD_L538_orbiters_brief_20261123.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's handoff, `HANDOFF_document_upkeep_20261123_close.md` (Nov 23); step 3's brief, `COORD_L522_step3_landing_brief_20261123.md`.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
