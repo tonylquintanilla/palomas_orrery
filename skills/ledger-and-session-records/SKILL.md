@@ -6,9 +6,17 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Read this file in 4 parts: lines 1-198, 199-454, 455-630, 631-807.
+Read this file in 4 parts: lines 1-195, 196-451, 452-743, 744-787.
 
-Skill version: 1.23 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.24 | 2026-11-23, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 09f633c5. v1.24 (L-522, step 3, the protocol's v4.0):
+a skill bump makes no protocol entry, so the binding rule's four steps
+are the version line, skills_index.py, the ledger note and one
+commit; the gate it names is The Installed Skill Equals the
+Repository's Copy. The run-record zone is not emptied by a close (Tony,
+2026-10-28). The Anchor Requirement gains Gemini 4 Neon's folder of
+copies and the commit lines below a request's divider.
+Earlier: 1.23 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ ea43f2a1. v1.23 (L-522, document caps), under Where We
 Are: the page's 130-line check is built, as the run's "Document caps"
 row over `DOCUMENT_CAPS.md`, its date half left on L-396; and a turn's
@@ -23,21 +31,10 @@ and what it waits behind; a line leaves when the item is picked up.
 Tony, 2026-10-22, in the coordination session Claude Fable 5.1
 recorded: "keep the deferred list prominent so we can come back to
 it."
-Earlier: 1.21 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 9248845c. v1.21 (L-442) carries Tony's seven kinds of
-document. The Document Stack is rewritten as the seven, each with when
-it is read: strategy (the master plan), tactics (Where We Are and its
-road), communication, logistics (the ledger), the field manual,
-reference, and the work. Sequencing moves from the plan to the road on
-Where We Are; the ledger keeps status. A table maps the Doc-Kind values
-in use onto the seven. Riding this version: Where We Are's section and
-the RICE bullet name the road as the order's home. Tony, 2026-10-13:
-"master plan: strategic - where we are: tactical - handoffs: orders
-and reports - ledger: logistics."
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418),
 2026-10-10 (L-395), 2026-10-11 (L-421), 2026-10-14 (L-442),
-2026-10-22 (L-469) and 2026-11-10 (L-522).
+2026-10-22 (L-469), 2026-11-10 (L-522) and 2026-11-23 (L-522).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -241,8 +238,8 @@ written for the work, and they move only at design builds.
   copy, instead of re-pasting them into the handoff. His "-- not
   clear" and "-- let's discuss" lines are the open design items in his
   own words and go onto the page's design-talk list verbatim, with the
-  date. Once read, the close empties the live zone; the copy is the
-  record.
+  date. Nothing below the marker is touched, and Tony writes only in
+  his copy (his ruling of 2026-10-28).
 - TONY ANNOTATES THIS PAGE, THE HANDOFFS AND THE LEDGER, and a patch
   never refuses his notes (L-419; Tony, 2026-10-03, and 2026-10-05: "i
   am using our handoffs or the where we are as run records"). So a
@@ -491,8 +488,8 @@ says WHAT RULES the work runs under. Without it a partner operates on
 the code with none of the conventions governing how the work is done.
 
 NAME THE SKILLS THE TASK FIRES, not a blanket list. Same judgment the
-resident protocol already asks for under "Relevant skill unfired ->
-Load it by name": a provenance review needs provenance-discipline, a
+resident protocol already asks for, to load by name a relevant skill
+that has not fired: a provenance review needs provenance-discipline, a
 review prompt carried to another model needs provenance-cross-check
 beside it, a patch needs safe-file-editing, and sending them all
 teaches the partner to skim.
@@ -515,6 +512,16 @@ The wording depends on what the partner can actually do:
   protocol and no skills at all -- they are in the other repo. THAT is
   the paste case: state the limitation and put the relevant excerpt in
   the document itself rather than pointing at a path.
+- **Gemini 4 Neon, in the Gemini app (found 2026-11-23, L-522).** It
+  cannot fetch GitHub, and the orrery cannot be imported: at 2,549
+  files and 295 MB it is past Google's stated limit of 5,000 files and
+  100 MB, and a ZIP is limited to 10 files. So it is given a folder of
+  copies of the files the task needs, with a list of what the folder
+  holds. Make the folder before the request goes.
+
+A request with a "paste below this line" divider puts its commit lines
+BELOW the divider: the part pasted is all the partner reads, and on
+2026-11-23 a request's lines sat above it, so a pasted copy lacked them.
 
 **ASK FOR THE READ-BACK.** The outbound document asks the partner to
 state which rule files it actually read. A return document that does
@@ -631,21 +638,23 @@ line ("Session/entry written [Month Year] with Anthropic's Claude
 ## Protocol and Skills Change Log (v3.30 addition)
 
 The protocol's version history lives in
-`documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, PART 1. The protocol
-itself keeps the THREE most recent entries resident; a fourth pushes
-the oldest down into that file, so an entry lives in exactly one place
-and never both. (Until 2026-08-23 this paragraph said the history
-lived in the ledger's appendix. v3.41 replaced that appendix with a
-pointer on 2026-08-18 and this sentence did not follow -- the section
-that owns the change-log convention carrying a stale claim about where
-the log lives. The Correction Does Not Travel, safe-file-editing 1.8.)
-Skill revisions are ledger entries too: each skill's SKILL.md carries a
-version line + source SHA; a skill update gets an L-item (or a line in
-the version-history appendix) recording skill name, new version, and the
-SHA it was cut from. The resident protocol's Skill Manifest table states
-the EXPECTED installed versions -- a mismatch STOPS the session under the
-resident Stale Skill = Stop [CRITICAL] gate, which also tells Tony the two
-actions needed (push to skills/, reinstall to the account profile).
+`documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, PART 1. Since v4.0
+(2026-11-23, L-522) the protocol keeps one line for its current
+version and every entry lives there; a new version is made only when
+a rule in the protocol changes. (Until 2026-08-23 this paragraph said
+the history lived in the ledger's appendix. v3.41 replaced that
+appendix with a pointer on 2026-08-18 and this sentence did not follow
+-- the section that owns the change-log convention carrying a stale
+claim about where the log lives. The Correction Does Not Travel,
+safe-file-editing 1.8.)
+Skill revisions are ledger entries: each skill's SKILL.md carries a
+version line + source SHA; a skill update gets a ledger note recording
+skill name, new version, the SHA it was cut from, and why. The table of
+versions is `skills/SKILL_MANIFEST.md`, which skills_index.py writes.
+The resident gate The Installed Skill Equals the Repository's Copy
+[CRITICAL] compares each installed skill with the repository's copy at
+session start, and a difference STOPS the session and names Tony's two
+actions (push the SKILL.md, reinstall the skill to the account).
 
 **A skill keeps three version entries [QUALITY]** (L-418, Tony,
 2026-10-05). The protocol's own rule, applied to the skills: a SKILL.md
@@ -673,18 +682,16 @@ alone in another -- so what opens a skill is the one part every
 session is sure to see.
 
 **Binding rule [QUALITY].** A skill version bump is not done until the
-manifest agrees AND the protocol's history says what changed. FOUR
-steps travel in ONE commit:
+manifest agrees AND the ledger says what changed. FOUR steps travel in
+ONE commit:
 
 1. Bump the version line in `SKILL.md`.
-2. Run `skills_index.py`.
-3. Add a **protocol version-history entry** to
-   `PROJECT_INSTRUCTIONS.md` naming the skill, the new version, and
-   WHY -- and push the oldest resident entry down into
-   `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` if that makes a
-   fourth.
-4. Commit `SKILL.md`, `PROJECT_INSTRUCTIONS.md` and the archive
-   together.
+2. Run `skills_index.py`, which rewrites `skills/SKILL_MANIFEST.md`.
+3. Write the ledger note: the skill, the new version, and WHY.
+4. Commit `SKILL.md`, the manifest and the ledger together.
+
+A skill bump makes no protocol version-history entry and asks for no
+paste of the protocol (v4.0, L-522). Tony still reinstalls the skill.
 
 Do not leave any of it to a later checkpoint someone has to remember.
 
@@ -694,11 +701,11 @@ rides a SINGLE version number, in a single commit, under the four steps
 above. Two amendments arriving the same evening do not become 1.10 and
 1.11; they become one 1.10 carrying both. (Tony's ruling, 2026-09-06,
 when L-290's relay-anchor amendment and L-296's plan-version rule both
-wanted 1.10. Each bump costs a protocol history entry, a manifest
-regeneration and a reinstall, so splitting them multiplies the
-ceremony and the chances of step 3 not firing -- and it makes the
-version history harder to read, since two entries then describe one
-evening.)
+wanted 1.10. Each bump costs a manifest regeneration and a reinstall,
+and until v4.0 cost a protocol history entry too, so splitting them
+multiplies the ceremony and the chances of a step not firing -- and it
+makes the version history harder to read, since two entries then
+describe one evening.)
 
 **A WRONG SENTENCE IN A SKILL: BUMP NOW, OR CARRY IT [QUALITY].**
 (v1.14, L-405.) A skill loads every session and is followed without
@@ -714,8 +721,8 @@ wrong sentence as written.
   that has gone out of date, a count or a list that has grown, a claim
   no step depends on. Carry it on a ledger item for the skill's next
   version, name it in the patch output (The Correction Does Not
-  Travel), and correct it then. The ceremony of a bump -- a protocol
-  entry, a manifest run, a reinstall -- is not spent on a sentence no
+  Travel), and correct it then. The ceremony of a bump -- a ledger
+  note, a manifest run, a reinstall -- is not spent on a sentence no
   one acts on.
 - **If the session is already bumping that skill**, any wrong sentence
   in it rides that bump, whichever kind it is. One Session, One Bump.
@@ -726,42 +733,13 @@ the first. The worked case: interactive-exhibit 1.8 said every reader of
 following it would at worst have looked in fewer places for a reader,
 so on 2026-10-01 it was carried (L-404 to L-405), and corrected at 1.9.
 
-**Step 3 is the one that stops firing** (Tony's observation,
-2026-08-23). Steps 1, 2 and 4 are visible -- you are editing the file,
-running the tool, making the commit. Step 3 is the only one with no
-artifact prompting it, so it is the one that gets skipped, and the
-manifest going current on its own DISGUISES the omission: the protocol
-looks updated because half of it was. It is not a new rule --
-`v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).`
-is a skill bump earning an entry on its own. It stopped firing, which
-is harder to notice than a rule that never existed.
-
-Detection for step 3 is designed and unbuilt (L-230): a
-maintenance-suite checker that reports when a skill version changed
-since the last run and the protocol version did not. It has to watch
-the TRANSITION -- the naive form, asking whether each manifested
-version appears somewhere in the written history, was measured on
-2026-08-23 and reports 10 of 10 skills, which is a check nobody reads
-twice.
-
-This is the PREVENTION side. Detection is the resident protocol's
-Stale Skill = Stop [CRITICAL] gate, which halts a session outright when a
-loaded skill's version disagrees with the manifest row. Two layers because
-prevention depends on remembering and detection does not: if the binding
-rule is followed there is no window, and if it is missed the gate catches
-it before any work is done on the wrong copy.
-
-The reason is not tidiness. The protocol tells a session that finds a
-skill-version mismatch to stop and reconcile, the same rule as a SHA
-mismatch. A stale manifest therefore fires that alarm on every session
-that loads the affected skill -- and an alarm that is always wrong is one
-the reader learns to wave off, which is the state in which a REAL mismatch
-stops registering. Bound to the commit, drift cannot exist at any pushed
-SHA. (Earned: the manifest advertised 1.1/1.4 against an actual 1.2/1.6
-for about three weeks, provenance-discipline having already gone stale a
-version earlier -- Fable skills-layer review, Job 3 #8. `skills_index.py`
-now prints what the manifest was advertising before it overwrites it, so
-running the tool reports the drift instead of silently absorbing it.)
+Detection is the resident gate The Installed Skill Equals the
+Repository's Copy [CRITICAL], which compares each installed skill with
+the repository's copy at session start. (The paragraphs on step 3
+that stopped firing, its unbuilt detector L-230 and a stale manifest
+moved to documentation/SKILL_HISTORIES.md on 2026-11-23, L-522: since
+v4.0 a skill bump makes no protocol entry, and the protocol holds no
+versions to go stale.)
 
 ## Codebase Tooling
 
@@ -778,22 +756,24 @@ running the tool reports the drift instead of silently absorbing it.)
   multi-file changes to map touchpoints.
 - ledger_index.py: regenerates the index zone in place; also supports
   migrating closed items to section C.
-- skills_index.py: regenerates the Skill Manifest table from the
-  skills/*/SKILL.md files and consistency-checks them. Same marker-zone
-  pattern as the two above. It targets the LIVE protocol only
-  (PROJECT_INSTRUCTIONS.md in the repo root); the versioned copies under
-  documentation/ are archival snapshots the tool deliberately never
-  rewrites, so do not expect a run to update them and do not hand-sync
-  them either -- an archive that keeps changing is not an archive. Since
-  August 2026 the run also PRINTS what the manifest was advertising before
-  it overwrites it, so drift is reported rather than silently absorbed.
-  See the binding rule under Protocol and Skills Change Log.
+- skills_index.py: writes `skills/SKILL_MANIFEST.md`, the table of
+  skills, versions and triggers, from the skills/*/SKILL.md files, and
+  the skills' names into the protocol's SKILL-NAMES zone (v4.0, L-522),
+  and consistency-checks them; --check also fails when a folder under
+  skills/ is missing from the names or a name has no folder. It targets
+  the LIVE protocol only (PROJECT_INSTRUCTIONS.md in the repo root); the
+  versioned copies under documentation/ are archival snapshots the tool
+  deliberately never rewrites, so do not hand-sync them either -- an
+  archive that keeps changing is not an archive. The run PRINTS what
+  the manifest file was advertising before it overwrites it, so drift
+  is reported rather than silently absorbed. See the binding rule
+  under Protocol and Skills Change Log.
 
 ## Field Notes
 
 - Enumerate the full /documentation set before reviewing a handoff chain
-  (the enumerate-before-claiming-a-review gate applies to repo docs as
-  much as uploads).
+  (the protocol reads an upload as a whole set before reporting on it,
+  Know Which Copy You Are Reading, and repo docs the same way).
 - Verify load-bearing chain claims against live code at HEAD, not
   handoff prose -- the v28 consolidation found "open" items already done
   and done-claims still open.

@@ -6,15 +6,19 @@ fires_when: BEFORE delivering complete files/agentic code; after data-content sw
 
 # Agentic Pre-Test Protocol [CRITICAL]
 
-Skill version: 1.3 | 2026-10-06, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.4 | 2026-11-23, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 09f633c5. v1.4 (L-522, step 3): the run line, piped
+into head, reported head's exit, 0, after the program failed; now the
+program's own exit is read, and the old Modes are reworded.
+Earlier: 1.3 | 2026-10-06, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 51436054. v1.3 (L-027) drops the colour swap from the
 Standard Test. palomas_orrery.py now names its panel colour once,
 PANEL_BG = 'gray90', which Tk knows on every system, so the headless
 run needs no edit to the copy, and it now fails if a Windows-only
 colour name comes back. The throwaway rule stays, with its true
 founding case.
-Earlier: 1.2 | Cut from palomas_orrery @ 3398970 | 2026-08-05
-Source: project_instructions_v3_29.md Part 3 (Agentic Pre-Test Protocol).
+Older entries and the founding case's full story are in
+documentation/SKILL_HISTORIES.md, moved there on 2026-11-23 (L-522).
 Run before delivery. Catches runtime errors Tony would otherwise hit.
 Division of labor: Claude covers Syntax + Runtime; Tony covers Visual +
 Windows-specific.
@@ -26,9 +30,20 @@ Setup (once per sandbox): `apt-get install -y python3-tk xvfb`
 ```bash
 python3 -m py_compile palomas_orrery.py
 cp palomas_orrery.py _pretest_throwaway.py
-timeout 30 xvfb-run -a python3 _pretest_throwaway.py 2>&1 | head -50
-rm _pretest_throwaway.py
+timeout 30 xvfb-run -a python3 -u _pretest_throwaway.py > _pretest.log 2>&1
+echo "exit $?"
+head -50 _pretest.log; tail -20 _pretest.log
+rm _pretest_throwaway.py _pretest.log
 ```
+
+READ THE PROGRAM'S EXIT, NOT THE PIPE'S (v1.4). A pipe reports its
+last command: `| head -50` said 0 for a planted RuntimeError on
+2026-11-23. So `$?` is read on the line after the run. A healthy
+window never closes and `timeout` ends it: exit 124, no traceback. A
+crash ends sooner with Python's own exit, 1 for an uncaught
+exception, its traceback at the log's end (hence the tail). Exit 0
+means the window closed early: find out why. `-u` writes each print
+at once; without it a program `timeout` ends leaves an empty log.
 
 The copy is run as it is, with no edit. The orrery is cross-platform
 (Tony, 2026-10-06: "We should not have any windows only
@@ -46,31 +61,15 @@ copy, and the copy is discarded. Never undo a test change in place on
 the deliverable: an undo cannot tell the values the test put there
 from the ones that were there already.
 
-The founding case, as the file history shows it (corrected
-2026-10-06, L-027). Tony's commit dff2d03 of 2026-01-09,
-"cross-platform refactor", replaced every SystemButtonFace in
-palomas_orrery.py with gray90, and he tested the orrery on Linux and
-macOS while it held. The pre-test swapped SystemButtonFace to gray90
-on a copy so the file would run headless, and swapping back
-afterwards, in place, was the known risk: on 2026-06-09 L-003
-recorded the rule against it. On 2026-06-12 commit ec333df, "animation
-refactor phase 4", changed all 26 gray90 in the file to
-SystemButtonFace: exactly that restore, on the real file. From then on
-the damaged file was read as the original. L-027 opened on 2026-06-18
-calling SystemButtonFace the starting state, and this skill at 1.1
-(L-115, 2026-07-12) rewrote this paragraph to fit the damaged file.
-The orrery could not open its window on Linux for four
-months.
+The founding case (L-027): a colour swap for a headless run, undone
+in place on the real file on 2026-06-12, kept the orrery's window shut
+on Linux for four months. The colour is now one name, PANEL_BG.
 
 The swap also hid the bug. Every headless run passed, because the
 test removed from the copy the one thing that stopped Linux. A test
 workaround that edits the thing under test can leave the test unable
 to fail on exactly what it edited -- the resident gate A Check That
 Cannot Fail Is Not Passing, from the other side.
-
-Since L-027 the colour is one name, PANEL_BG = 'gray90', defined just
-after the root window, so no swap is needed and a future one would
-have a single line to change.
 
 ## Data-Content Sweeps Need a Live-Dispatch Smoke Test
 
@@ -95,14 +94,14 @@ map, and the resident Verify Execution gate for the principle.
 
 ## When This Protocol Is Required
 
-- Any Mode 2 (agentic) deliverable: complete files, new modules.
+- Any agentic deliverable (the default): complete files, new modules.
 - Any data-content sweep, even delivered as snippets, when the changed
   data can be smoke-tested.
 - After bulk/scripted edits (transactional patches), before handoff.
 
-Not required for: single Mode 1 line snippets Tony will apply and render
-himself (the render is the gate there), pure documentation, design
-sessions.
+Not required for: a line snippet Tony asked for and will apply and
+render himself (the render is the gate there), pure documentation,
+design sessions.
 Gallery-repo builder deliverables have their own layered gate (offline
 suite + live dry-run + schedule) -- see the gallery-cache-builder skill and
 documentation/TESTING_PROTOCOL.md, not this protocol.

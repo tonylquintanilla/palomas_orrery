@@ -10,12 +10,12 @@ looking up versions and triggers in one place.
 
 ```
 Skill                        Ver  Fires when
-orrery-coding-conventions    1.13 Markers, hover text, axes, the opening view
+orrery-coding-conventions    1.14 Markers, hover text, axes, the opening view
                                   (Auto scale), shells, legendgroups,
                                   docstrings, new visuals
 safe-file-editing            1.15 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
-agentic-pre-test             1.3  BEFORE delivering complete files/agentic
+agentic-pre-test             1.4  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.20 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
@@ -63,7 +63,7 @@ earth-system-pipeline        1.3  KMZ layers, Google Earth web, a layer's page
 gallery-pipeline             1.3  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards, the gallery editor's
                                   scene, encounter and link cards
-ledger-and-session-records   1.23 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.24 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.5  render_orbits.py, resolver.py,

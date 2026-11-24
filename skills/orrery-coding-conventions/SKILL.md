@@ -6,9 +6,14 @@ fires_when: Markers, hover text, axes, the opening view (Auto scale), shells, le
 
 # Orrery Coding Conventions
 
-Read this file in 3 parts: lines 1-290, 291-590, 591-726.
+Read this file in 3 parts: lines 1-286, 287-586, 587-724.
 
-Skill version: 1.13 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.14 | 2026-11-23, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 09f633c5. v1.14 (L-522, step 3): the list of position
+consumers, under Field Notes, names six, the sixth the website's own
+chain, since the protocol's Check All Parallel Pipelines now points
+here for it. A session following 1.13 would have mapped five.
+Earlier: 1.13 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 15dc8e34. v1.13 (L-505, L-507) corrects the Marker
 Symbol Convention: the cross is for info markers alone, and a new x row
 holds the coordinate ticks, the axes' scale marks and the ruler that
@@ -24,18 +29,9 @@ end with a pointer to the i panel. Tony chose option C that evening,
 "remove the sentence everywhere and just add the banner"; a session
 following the old sentence would have put the pointer back. The
 orrery's own hovers keep theirs.
-Earlier: 1.11 | 2026-10-19, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 6e0cfacd. v1.11 (L-385) adds The Opening View: every
-view, still or animated, opens on the farthest thing drawn, shell or
-orbit, plus 20 percent; the line toward the Sun counts only when
-nothing else is drawn; the center body's rotation axis and dipole cone
-end just past its farthest shell. Tony, 2026-10-18: "this should be
-the rule for all rooms or system views." The ledger had said the rule
-goes into this skill at its build. The file also gets its read plan,
-and leaves skills_index.py's PLAN_NOT_YET list.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
-2026-10-05 (L-418), 2026-10-19 (L-385), 2026-10-26 (L-494) and
-2026-11-02 (L-507).
+2026-10-05 (L-418), 2026-10-19 (L-385), 2026-10-26 (L-494),
+2026-11-02 (L-507) and 2026-11-23 (L-522).
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
@@ -675,7 +671,7 @@ The render is the ground truth; Tony's eyes are the gate.
 - A swallowed exception in try/except hides render bugs; an undefined
   variable can drop a marker silently for weeks. Check the console for the
   caught-error print.
-- Position data reaches a viewer through FIVE parallel CONSUMERS, and a
+- Position data reaches a viewer through SIX parallel CONSUMERS, and a
   fix in one does not propagate. Map ALL of them first. Named here rather
   than counted, because a count does not say what it counted (L-269):
     static plot        plot_objects              palomas_orrery.py
@@ -683,16 +679,18 @@ The render is the ground truth; Tony's eyes are the gate.
     social export      export_social_view        palomas_orrery.py
     gallery curation   tools/gallery_studio.py   GALLERY repo
     JSON conversion    tools/json_converter.py   GALLERY repo
-  TWO OF THE FIVE ARE IN THE OTHER REPOSITORY. Grep one repo and you find
-  three. The old wording said "5 parallel pipelines in palomas_orrery.py",
-  which put a cross-file count inside a single-file scope and hid them.
+    website rooms      tools/gallery_cache_builder.py -> gallery/assembler/
+                       -> interactive.html       GALLERY repo
+  THREE OF THE SIX ARE IN THE OTHER REPOSITORY. Grep one repo and you find
+  three. The sixth asks JPL itself each night and draws from its own
+  served cache, so a fix to the orrery does not reach it, nor the reverse.
 - FETCHING is a different question with a different answer. Six functions
   in palomas_orrery.py acquire position data -- resolve_shell_sun_position,
   update_orbit_paths, plot_actual_orbits, plot_objects, animate_objects,
   open_orbital_param_visualization -- across fetch_position,
   fetch_trajectory, fetch_orbit_path and orbit_data_manager, with
   plot_objects alone holding three near-identical branches. Three of the
-  five consumers above fetch nothing; they render what was already
+  six consumers above fetch nothing; they render what was already
   fetched. Do not substitute one list for the other.
 - Structural fixes scale; data-side fixes don't. A violation in N consumers
   of one producer -> fix the producer (83 sphere-shell pairs brought into

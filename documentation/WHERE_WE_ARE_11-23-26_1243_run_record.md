@@ -132,7 +132,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-22-26 2141: Fable: Coordinator: Review priorities and 7-day path**
+**Session: DONE: 11-23-26 1422: Fable: Coordinator: Review priorities and 7-day path**
 
 The review request is written, and a third patch that places it is in your orrery folder: `patch_L544_3_review_request.py`.
 
@@ -406,7 +406,7 @@ To start the next session, give it this file and L-522.
 
 =============================
 
-**Session: OPEN 11-23-26 1432: Fable: Coordination session protocol review**
+**Session: OPEN 11-23-26 1432: Fable: L522 Coordination session protocol review**
 
 Part 1 checks out, and it is safe to pull, commit and push. I read the changed files straight from your folder and compared them myself, without relying on the Code session's report.
 
@@ -427,8 +427,8 @@ Part 1 checks out, and it is safe to pull, commit and push. I read the changed f
 
 **Your run order**
 
-1. In GitHub Desktop, pull the orrery, -- 
-2. then pull the website.
+1. In GitHub Desktop, pull the orrery, -- 09f633c5bcd08e83e05c633ab97577d987e152ec; nightly run green
+2. then pull the website. -- 142ac11365e1db0a8c0c2127215e842c3b0433f4; nightly run green
 3. Look at the orrery's change list, commit, and push.
 4. Tell the Code session: "Part 1 is pushed. Start Part 2. Leave safe-file-editing alone; its line is carried on L-522, as the brief says."
 
@@ -439,3 +439,35 @@ If GitHub Desktop refuses a pull or mentions a conflict, stop there and tell me 
 - The reduced protocol, v4.0, is in your folder and correct. It is not yet on GitHub, and not yet in the Project's instructions.
 - Pasting it into the Project and reinstalling the three skills wait until after Part 2.
 - v4.0 is now written into the files. Say so before you commit if you want another number.
+
+=====================================================
+
+Part 2 checks out too, and it is safe to commit and push both folders. I read the changed files from your folders and compared each with its earlier text.
+
+**What I checked**
+
+- **Part 1 is on GitHub.** Your commit "code: reduced protocol L522" is there, and the protocol in your folder is the same as the pushed one. Part 2 did not touch it.
+- **The records skill, now 1.24.**
+  - The sentence about emptying your run-record zone is gone. It now says nothing below the marker is touched and you write only in your copy.
+  - A skill change no longer asks for a protocol entry or a paste.
+  - The Gemini facts from today are in.
+- **The coding-conventions skill, now 1.14.** Its list names six consumers of position data, the sixth being the website's own chain, and says three of the six are in the website's repository.
+- **The pre-test skill, now 1.4.** The new test line reads the program's own result, where the old one read the result of the command after it. I read the command and it does what the skill says: a healthy window ends at the time limit, a crash shows its own error.
+- **Nothing was lost from the three skills.** Every line that left one is either in the skill histories file word for word, or is one of the sentences the brief asked to be reworded.
+- **The two door files** changed only in the paragraph about skills. The orrery's is exactly at its cap of 111 lines.
+- **The page's marker line** now ends "your timestamped copy."
+
+**One thing it did beyond the brief, and I agree with it.** The pre-test skill had no room, so the Code session moved that skill's founding story to the histories file and left a short summary. It said so in its report, and the rule the story explains is still in the skill.
+
+**Your run order**
+
+1. Look at the change list in both folders.
+2. Commit and push the orrery. -- 
+3. Commit and push the website's one file, `CLAUDE.md`.
+4. Tell the Code session: "Part 2 is pushed. Start Part 3."
+
+**Where this leaves us**
+
+- The protocol and the three skills are correct in your folders. The three skills are not yet reinstalled in your account, and the Project still holds the old protocol; both wait for Part 3 to finish.
+- Part 3 is the records: the ledger, Where We Are, and the close.
+- Bring me its report when it is done. I check it, then write this track's handoff for the next coordinator.

@@ -3918,6 +3918,51 @@ was advised against: it needs his rulings and a carry to GPT, and on Nov
   of 904), whose plain history earlier bumps had already moved. Each is
   a candidate for the split the exhibit skill had at step 2; not
   proposed to Tony yet.
+- **Step 3 built, the skills, 2026-11-23** (a Claude Code session,
+  Claude Opus 5.5, through the python_work door, on orrery 09f633c5 and
+  gallery 142ac113; the landing brief's Part 2,
+  `documentation/COORD_L522_step3_landing_brief_20261123.md`). Three
+  skill bumps, one version each, by the binding rule as v4.0 left it: no
+  protocol entry; the manifest file, `skills/SKILL_MANIFEST.md`, named
+  all three as stale before it rewrote them.
+  - ledger-and-session-records 1.23 -> 1.24. Why: v4.0 ended the
+    protocol entry for a skill bump, so the binding rule's four steps
+    are the version line, `skills_index.py`, this ledger note and one
+    commit, and the gate it names is The Installed Skill Equals the
+    Repository's Copy; the run-record zone's "the close empties the live
+    zone" contradicted both doors and Tony's ruling of Oct 28 that he
+    writes only in his copy; and Nov 23 found that Gemini 4 Neon reads
+    a folder of copies, not GitHub, and that a request's commit lines
+    belong below its paste divider. Where We Are's marker no longer says
+    the close "clears this"; no code reads that line.
+  - orrery-coding-conventions 1.13 -> 1.14. Why: the protocol's Check
+    All Parallel Pipelines now points at this skill's list, and the list
+    named five; it names six, the website's own chain (the nightly
+    builder, the assembler, interactive.html) the sixth, read in the
+    gallery folder before it was written.
+  - agentic-pre-test 1.3 -> 1.4. Why: its run line, piped into `head`,
+    reported `head`'s exit, 0, after the program failed. Shown on a
+    throwaway program: the old form said 0 for a planted RuntimeError,
+    the new form 1; a program `timeout` ends gave 124, and with no `-u`
+    its print never reached the log. Its two mentions of the old Modes
+    say agentic work is the default.
+  - To stay at their caps, each moved text word for word to
+    `documentation/SKILL_HISTORIES.md`: its oldest version entry
+    (1.21, 1.11, 1.2); the records skill its four paragraphs on step 3
+    and a stale manifest; the conventions skill one line of the list's
+    history; the pre-test skill its founding case's story and the
+    PANEL_BG paragraph after it, keeping three lines in their place (it
+    had two version entries, so the oldest freed two lines of the
+    fourteen needed).
+  - The doors: the orrery's and the website's CLAUDE.md drop the
+    comparison with the manifest's row and the Stale Skill sentence, and
+    point at each skill's header and the manifest file; the orrery door
+    stays at 111 lines. The python_work door's copy says neither, and is
+    not changed. safe-file-editing is not touched (Tony, Nov 23: "Leave
+    safe-file-editing alone; its line is carried on L-522").
+  - Tony-action (do): reinstall the three (Plugins, in the claude.ai
+    sidebar). The next session with a shell compares them with the
+    repository; that comparison clears them.
 **Gap:** steps 3 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11); step 3's talk is held, its draft is not written.
 **Tony-action (do):** reinstall interactive-exhibit 1.41 (Settings >

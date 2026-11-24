@@ -6,7 +6,8 @@ in Claude Code. It points; it does not repeat. The rules themselves are
 in PROJECT_INSTRUCTIONS.md (the protocol) and in skills/ (the skills).
 Added October 26, 2026, by Tony's ruling of that night, on the first
 Code session; amended November 2, 2026 for the protocol's Token
-Economy (v3.121, L-506). One store for every rule: if a sentence here disagrees
+Economy (v3.121, L-506), and November 23, 2026 for its v4.0 (L-522).
+One store for every rule: if a sentence here disagrees
 with the protocol or a skill, the protocol or the skill wins, and this
 file gets corrected.
 
@@ -21,17 +22,16 @@ in plain words before asking him to do it.
 
 ## The skills
 
-They live in this folder at skills/<name>/SKILL.md. The Skill Manifest
-in PROJECT_INSTRUCTIONS.md says which skill fires on which work. Read
-each one the job fires before the work: in full when its rules govern
-the work; in the parts its read plan names when it is loaded for its
-version line or one section (the protocol's Token Economy). Open your
-first report by naming the skills you read and the version line each
-one carries. Compare that version with the manifest's row. If they
-disagree, stop and say so (the protocol's Stale Skill = Stop gate).
-The repository's copy is the one read. Claude Code also offers the
-copy installed in Tony's account; an installed skill of the same name
-is not invoked (L-522).
+They live in this folder at skills/<name>/SKILL.md. Each skill's own
+header says which work fires it; the table of versions and triggers is
+skills/SKILL_MANIFEST.md. Read each one the job fires before the work:
+in full when its rules govern the work; in the parts its read plan
+names when it is loaded for one section (the protocol's Token
+Economy). Open your first report by naming the skills you read and the
+version line each one carries. The repository's copy is the one read,
+so a Code session has nothing to compare it with. Claude Code also
+offers the copy installed in Tony's account; an installed skill of the
+same name is not invoked (L-522).
 
 ## At the start of a session
 

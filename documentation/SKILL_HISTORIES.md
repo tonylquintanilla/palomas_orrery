@@ -1440,6 +1440,22 @@ documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
 
+Earlier: 1.11 | 2026-10-19, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6e0cfacd. v1.11 (L-385) adds The Opening View: every
+view, still or animated, opens on the farthest thing drawn, shell or
+orbit, plus 20 percent; the line toward the Sun counts only when
+nothing else is drawn; the center body's rotation axis and dipole cone
+end just past its farthest shell. Tony, 2026-10-18: "this should be
+the rule for all rooms or system views." The ledger had said the rule
+goes into this skill at its build. The file also gets its read plan,
+and leaves skills_index.py's PLAN_NOT_YET list.
+(Moved down 2026-11-23, when 1.14 made a fourth entry.)
+
+From the Field Notes list of position consumers, its history line, moved
+2026-11-23 at 1.14 to stay at the cap, word for word:
+The old wording said "5 parallel pipelines in palomas_orrery.py",
+  which put a cross-file count inside a single-file scope and hid them.
+
 ## ledger-and-session-records
 
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
@@ -1574,6 +1590,59 @@ computer saves its patch where he runs it (Anchor Requirement, Handoff
 Structure, Tony's Local Folders). Tony, 2026-10-10: "since we are using
 cowork, the location of the local files should be included in the
 handoff header along with the github info."
+
+Earlier: 1.21 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 9248845c. v1.21 (L-442) carries Tony's seven kinds of
+document. The Document Stack is rewritten as the seven, each with when
+it is read: strategy (the master plan), tactics (Where We Are and its
+road), communication, logistics (the ledger), the field manual,
+reference, and the work. Sequencing moves from the plan to the road on
+Where We Are; the ledger keeps status. A table maps the Doc-Kind values
+in use onto the seven. Riding this version: Where We Are's section and
+the RICE bullet name the road as the order's home. Tony, 2026-10-13:
+"master plan: strategic - where we are: tactical - handoffs: orders
+and reports - ledger: logistics."
+(Moved down 2026-11-23, when 1.24 made a fourth entry.)
+
+From Protocol and Skills Change Log, moved 2026-11-23 at 1.24 (L-522),
+when v4.0 ended the protocol entry for a skill bump, word for word:
+
+**Step 3 is the one that stops firing** (Tony's observation,
+2026-08-23). Steps 1, 2 and 4 are visible -- you are editing the file,
+running the tool, making the commit. Step 3 is the only one with no
+artifact prompting it, so it is the one that gets skipped, and the
+manifest going current on its own DISGUISES the omission: the protocol
+looks updated because half of it was. It is not a new rule --
+`v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).`
+is a skill bump earning an entry on its own. It stopped firing, which
+is harder to notice than a rule that never existed.
+
+Detection for step 3 is designed and unbuilt (L-230): a
+maintenance-suite checker that reports when a skill version changed
+since the last run and the protocol version did not. It has to watch
+the TRANSITION -- the naive form, asking whether each manifested
+version appears somewhere in the written history, was measured on
+2026-08-23 and reports 10 of 10 skills, which is a check nobody reads
+twice.
+
+This is the PREVENTION side. Detection is the resident protocol's
+Stale Skill = Stop [CRITICAL] gate, which halts a session outright when a
+loaded skill's version disagrees with the manifest row. Two layers because
+prevention depends on remembering and detection does not: if the binding
+rule is followed there is no window, and if it is missed the gate catches
+it before any work is done on the wrong copy.
+
+The reason is not tidiness. The protocol tells a session that finds a
+skill-version mismatch to stop and reconcile, the same rule as a SHA
+mismatch. A stale manifest therefore fires that alarm on every session
+that loads the affected skill -- and an alarm that is always wrong is one
+the reader learns to wave off, which is the state in which a REAL mismatch
+stops registering. Bound to the commit, drift cannot exist at any pushed
+SHA. (Earned: the manifest advertised 1.1/1.4 against an actual 1.2/1.6
+for about three weeks, provenance-discipline having already gone stale a
+version earlier -- Fable skills-layer review, Job 3 #8. `skills_index.py`
+now prints what the manifest was advertising before it overwrites it, so
+running the tool reports the drift instead of silently absorbing it.)
 
 ## gallery-cache-builder
 
@@ -2188,3 +2257,35 @@ largest trace in that scene is 4,332 points and the one that hung is 400.
 - The last line of Field note: a plotly_click bubbles as a DOM click,
   folded into the line above it:
 Live example: gallery `700b426d`, `index.html`.
+
+## agentic-pre-test
+
+Moved here from the skill on 2026-11-23 (L-522, step 3), when its 1.4
+needed room under its cap of 126 lines: its oldest version entry, the
+founding case of The pre-test never edits the deliverable, and the
+paragraph after it, each word for word as it stood in the skill.
+
+Earlier: 1.2 | Cut from palomas_orrery @ 3398970 | 2026-08-05
+Source: project_instructions_v3_29.md Part 3 (Agentic Pre-Test Protocol).
+(Moved down 2026-11-23, when 1.4 needed the room.)
+
+The founding case, as the file history shows it (corrected
+2026-10-06, L-027). Tony's commit dff2d03 of 2026-01-09,
+"cross-platform refactor", replaced every SystemButtonFace in
+palomas_orrery.py with gray90, and he tested the orrery on Linux and
+macOS while it held. The pre-test swapped SystemButtonFace to gray90
+on a copy so the file would run headless, and swapping back
+afterwards, in place, was the known risk: on 2026-06-09 L-003
+recorded the rule against it. On 2026-06-12 commit ec333df, "animation
+refactor phase 4", changed all 26 gray90 in the file to
+SystemButtonFace: exactly that restore, on the real file. From then on
+the damaged file was read as the original. L-027 opened on 2026-06-18
+calling SystemButtonFace the starting state, and this skill at 1.1
+(L-115, 2026-07-12) rewrote this paragraph to fit the damaged file.
+The orrery could not open its window on Linux for four
+months.
+
+Since L-027 the colour is one name, PANEL_BG = 'gray90', defined just
+after the root window, so no swap is needed and a future one would
+have a single line to change.
+(Both moved 2026-11-23, at 1.4; the skill keeps a four-line summary.)

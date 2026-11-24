@@ -128,7 +128,7 @@ Not urgent, in your order:
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 
 --- Your run record below this line. No patch edits it; the length cap
---- stops here; the close reads your timestamped copy and clears this.
+--- stops here; the close reads your timestamped copy.
 
 **Tony**: Run record:
 
