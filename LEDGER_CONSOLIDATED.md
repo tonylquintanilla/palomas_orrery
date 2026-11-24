@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*277 live items; 262 need attention (`!`); 162 RICE-scored; 268 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*280 live items; 265 need attention (`!`); 162 RICE-scored; 268 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1196,6 +1196,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-549 | Four moons JPL cannot place: Xiangliu, Hi'iaka, Namaka, MK2 (orrery; for a talk with Tony) | OPEN | -- | 2026-11-22 |
 | ! | L-551 | No saved scenes: the gallery run makes every room's scene fresh at each run, and the saved copies go (gallery; ruled Nov 22, a list first) | OPEN | -- | 2026-11-23 |
 | ! | L-552 | The kind of body: each entry says what it is, and how JPL is asked follows from it (orrery; Tony's idea, for a design talk) | OPEN | -- | 2026-11-23 |
+| ! | L-553 | A body held because JPL did not answer turns the night red (gallery, the builder and the Solar System figures check) | OPEN | -- | 2026-11-24 |
+| ! | L-554 | JPL's own sentence when a path is a prediction (gallery; a decision of Tony's) | OPEN | -- | 2026-11-24 |
+| ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-24 |
 
 ### B. Pending Action (Tony-side)
 
@@ -2265,11 +2268,109 @@ TONY'S RULING ON BEPICOLOMBO.
 - Re-homed: "This mission ended" on days past the end of JPL's data,
   to L-533 (ESCAPADE), every path to its last day. BepiColombo's loop
   drawn, to L-529 (guided encounters).
-**Gap:** Part B, by the brief and the go-ahead, in the same Claude
-Code session: one more report, on the floor and the room, before the
-room's code is touched; then Part C and Tony's look on his phone. Then
-the skill text for gallery-cache-builder, which stands at its cap.
-Until the build, those boxes claim less error than they have.
+**Note:** (2026-11-24, evening, the Claude Code session, Claude Opus
+5.5, on orrery 7513fbab and gallery 9e7bb99f)
+PART B AND PART C BUILT, NOT PUSHED.
+- Part B's first report, `REPORT_L538_partB_floor_20261124.md`: the
+  builder, the validator and the widened Curve error row; the floor
+  measured (BepiColombo, arrival to the end of JPL's data: the chord
+  alone 540 over in 5,547 tests, the floor 0).
+- The second go-ahead, `COORD_L538_partB_goahead2_20261124.md` (the
+  coordinating session): the floor is the SUM, the chord figure plus
+  R x (1 + L); every fourth check point saved; two faults found
+  reading the code, a pooled self-test and capture_of taking the last
+  arrival. All built: `render_spacecraft.position_at` takes the
+  day's reach, which the positions file serves beside t, x, y, z;
+  `capture_self_test` per craft; `captures_of`. No line of
+  `interactive.html` changed.
+- Part C, on throwaway copies of gallery 9e7bb99f, one with the
+  change and one without, built side by side from JPL: 755 served
+  files the same, 80 differing, every one named in the Part C report
+  (the two craft's files, their records, the 71 element logs by their
+  run stamp only, the window's edges by the 30 seconds between the
+  two builds' clocks, and Chariklo, held in one by a JPL 503). The
+  gallery run on the changed copy: 53 of 53 gating checkers, after a
+  second night; the first was red on Chariklo's hold alone.
+- Tonight's figures: Juno whole, 502 fine points, 0 over in 6,967
+  check points and 500 held out; BepiColombo band, 234 fine points,
+  0 over in 3,620 and 232, its reach on 89 days, 5,650 to 66,528 km,
+  and 330 check points over without it.
+- What a night commits: about 112 KB more before packing (the check
+  points 64 KB of it, which change whole each night), against a
+  repository of 84 MB packed and nights of 11 to 860 KB packed.
+- FOUND IN PASSING, not this item: a body held because JPL did not
+  answer is served with no as_of_today (`hold_from_prior`), and the
+  gallery run's Solar System figures row refuses it, so any night JPL
+  refuses one body is red there. Seen on Chariklo in Part C.
+**Note:** (2026-11-24, afternoon, the coordinating session, Claude
+Fable 5.2) THE BUILD REVIEWED, AND TONY'S RULING TO SHIP IT.
+- Read whole from Tony's folders: the three reports,
+  `REPORT_L538_partA_20261124.md`, `REPORT_L538_partB_floor_20261124.md`
+  and `REPORT_L538_partC_20261124.md`; the additions to
+  `tools/test_curve_error.py` as of the first Part B report; the
+  changes to `gallery/assembler/render_spacecraft.py`; in the builder,
+  its settings and its rule for who is in a capture. Not read: the
+  rest of the builder's 710 added lines, and the offline suite.
+- Checked here: the changed room code against GitHub's served cache at
+  9e7bb99f gives the same answer as the code it replaces in 33,600
+  cases on 42 position files with no reach, and a reach of 1,000 km
+  raises BepiColombo's figure by 3,301 km.
+- The floor's form was the session's decision, as method: the sum, the
+  chord figure plus R x (1 + L), where the Code session proposed the
+  larger of the two. Two faults found reading the code and fixed by the
+  Code session: the self-test pooled across craft, and `capture_of`
+  taking a craft's last arrival.
+- Tony, 11:56: "Please review and comment." Tony, 13:53: "Can you show
+  me what the cost is to the part served versus stored in the repo.
+  what do you recommend? we don't want to overly burden serving this
+  path. there are many missions with orbits lasting years and a
+  similar problem. we should define an architecture that will work
+  generally." The session's recommendation: "check points out of the
+  repository, L-538 ships as built, and the general design goes into a
+  design record for our next talk". Tony, 14:00: "i agree with the
+  recommendation".
+- The costs as put to him: served, all 42 spacecraft files 1,084 KB to
+  about 1,125 KB; stored, about 200 KB a night to 312 KB, 64 KB of it
+  the saved check points, 23 to 41 MB a year on a repository of 84 MB.
+- The general design:
+  `documentation/DESIGN_orbiters_in_general_20261124.md`, a proposal
+  for a talk, not a ruling.
+- NOT ANSWERED: the session asked Tony at 11:56's reply whether a
+  spacecraft's box should carry JPL's own sentence when its path is a
+  prediction (BepiColombo's header: "Data fit through 2026-Nov-17,
+  prediction thereafter"). It has its own item.
+**Note:** (2026-11-24, evening, the Claude Code session, Claude Opus
+5.5, on orrery 7513fbab and gallery 9e7bb99f) THE CHECK POINTS LEAVE THE
+REPOSITORY, by `COORD_L538_close_goahead_20261124.md`.
+- The website's `.gitignore` names `data/solar-system/raw/checks/`; the
+  build writes them as before. A throwaway git repository on the built
+  copy: `git add -A -- data/solar-system/` takes 409 files, none under
+  raw/checks, and the night's refusal check sees none.
+- The night is told by a flag: `gallery_maintenance_run.py`'s night pass
+  hands the Curve error row `--night` (NIGHT_ARGS, night_checkers). There
+  a capture craft with no check points is red by name. Anywhere else
+  Curve error names each craft whose JPL half it could not hold here,
+  with its served block's record of the night's own test (Juno 6,967
+  tested, 0 over, worst 0.978; BepiColombo 3,620, 0, 0.984), never
+  counted as held; the held-out half still gates.
+- Planted, in the offline suite: the folder gone, the night's run red
+  naming both stand-in craft; the day's run naming both as not held.
+  604 of 604. The gallery run on the built copy: 53 of 53 by day with
+  no check points ("0 capture craft held ... not held here for
+  bepicolombo, juno") and 53 of 53 with --night ("2 capture craft
+  held").
+- What a night commits now: about 47 KB more before packing (248 KB
+  against 200 KB), in place of the 112 KB of this item's note above;
+  these files change only in part from night to night.
+- Three new items: L-553 (a held body turns the night red), L-554
+  (JPL's sentence when a path is a prediction), L-555 (orbiters in
+  general).
+**Gap:** Tony commits and pushes the orrery, then the website; the
+next night builds the fine layer; then his look on his phone, as the
+Part C report's section 4 writes it, and the item closes on his look.
+The skill text for gallery-cache-builder stays owed to the
+coordinating session. Until the night, those boxes claim less error
+than they have.
 **Ref:** L-297 (the curve's error, Tony's ruling of Nov 19); gallery
 `tools/test_curve_error.py` (run with every kind to measure);
 provenance-discipline, A Computed Position Prints What Its Errors Earn;
@@ -2277,7 +2378,13 @@ the brief, `documentation/COORD_L538_orbiters_brief_20261123.md`,
 placed by `patch_L538_1_design_and_brief.py`; the Part A report,
 `documentation/REPORT_L538_partA_20261124.md`; the go-ahead,
 `documentation/COORD_L538_partB_goahead_20261124.md`, placed by
-`patch_L538_2_partB_ruling_and_encounter.py`.
+`patch_L538_2_partB_ruling_and_encounter.py`; Part B's first report,
+`documentation/REPORT_L538_partB_floor_20261124.md`; the second
+go-ahead, `documentation/COORD_L538_partB_goahead2_20261124.md`; the
+Part C report, `documentation/REPORT_L538_partC_20261124.md`; the
+go-ahead to close, `documentation/COORD_L538_close_goahead_20261124.md`;
+the closing report, `documentation/REPORT_L538_close_20261124.md`;
+`documentation/DESIGN_orbiters_in_general_20261124.md`.
 
 #### [L-539] Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check)
 <!-- L:539 status:OPEN upd:2026-11-22 section:A flag: rice: -->
@@ -2733,6 +2840,68 @@ thirty places", from a list it had cut short. L-548's patch does not
 wait for this.
 **Ref:** L-548; L-539 (every entry checked); L-512 (the plot's data
 path); `celestial_objects.py`.
+
+#### [L-553] A body held because JPL did not answer turns the night red (gallery, the builder and the Solar System figures check)
+<!-- L:553 status:OPEN upd:2026-11-24 section:A flag: rice: -->
+- **Found 2026-11-24** by the Claude Code session (Claude Opus 5.5) in
+  L-538's Part C, on a throwaway copy of gallery 9e7bb99f built from
+  JPL. JPL answered one question for Chariklo with "503 Server Error:
+  Service Temporarily Unavailable"; the builder held Chariklo, drawn
+  from the build of 2026-11-24, as L-525 (hold the bad data) means it
+  to. The gallery run's Solar System figures row then failed:
+  "chariklo: the served cache has no as_of_today or trust".
+- WHY: the held entry is served with `as_of_today: None`
+  (`hold_from_prior` in `tools/gallery_cache_builder.py`, the entry it
+  builds), while its trust is served; the check
+  (`documentation/smoke_solar_system_figures.js`, line 943) refuses a
+  body with either missing. So any night JPL refuses one held body is
+  red on that row, whatever else is right, and the night commits
+  nothing.
+- The next build on the same copy: JPL answered, "HOLD ENDED
+  Chariklo", and the row passed (53 of 53).
+- Not decided: whether a held body should carry the last good build's
+  as_of_today, or the check should accept a held body with its hold
+  named. Not checked: how often JPL's 503s fall on a held body.
+**Gap:** a small build, its choice first: which side changes. A planted
+case in the offline suite either way.
+**Ref:** L-525 (hold the bad data); L-538 (the orbiters' printed
+error), its Part C report, section 5.
+
+#### [L-554] JPL's own sentence when a path is a prediction (gallery; a decision of Tony's)
+<!-- L:554 status:OPEN upd:2026-11-24 section:A flag: rice: -->
+- **Opened 2026-11-24** by the coordinating session (Claude Fable 5.2),
+  from L-538 (the orbiters' printed error); written by the Claude Code
+  session by `COORD_L538_close_goahead_20261124.md`.
+- BepiColombo's path is fitted through 2026-11-17, four days before
+  its arrival at Mercury; JPL's header for it reads "Data fit through
+  2026-Nov-17, prediction thereafter." (read by the builder,
+  `fetch_path_revised`, and printed in each night's record since
+  L-538). ESA reported the capture burn cut short. The website shows
+  the planned orbit, and the box's error covers the working-out
+  between the served points, not that.
+- The coordinating session recommends the sentence in the spacecraft's
+  source line, read from JPL's header by the builder, as a small build
+  of its own.
+- Asked of Tony on 2026-11-24 in the reply to his 11:56: not answered.
+**Gap:** Tony's decision; then, if yes, the small build.
+**Ref:** L-538, the coordinating session's note of 2026-11-24,
+afternoon; L-529 (guided encounters).
+
+#### [L-555] Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first)
+<!-- L:555 status:OPEN upd:2026-11-24 section:A flag: rice: -->
+- **Opened 2026-11-24** by the coordinating session (Claude Fable 5.2),
+  from L-538 (the orbiters' printed error); written by the Claude Code
+  session by `COORD_L538_close_goahead_20261124.md`.
+- Tony, 13:53: "we don't want to overly burden serving this path.
+  there are many missions with orbits lasting years and a similar
+  problem. we should define an architecture that will work generally."
+- The design record:
+  `documentation/DESIGN_orbiters_in_general_20261124.md`, a proposal
+  for a talk, not a ruling.
+- Its first test: BepiColombo's arrival at Mercury (L-529 (guided
+  encounters)).
+**Gap:** the talk with Tony on the design record.
+**Ref:** L-538; L-529; the design record above.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -3465,6 +3634,12 @@ hill sphere."
   whether it waits for JPL's path after the burn; and its place in the
   order. The session asked whether right after L-538, ahead of slice
   2's polish, as it recommends, or after slice 2: not yet answered.
+- (2026-11-24, evening, written by the Claude Code session for the
+  coordinating session) The general design is in
+  `documentation/DESIGN_orbiters_in_general_20261124.md` (L-555
+  (orbiters in general)); the coordinating session recommends, not
+  ruled, that BepiColombo's arrival wait until JPL's path is fitted
+  past it.
 **Gap:** BepiColombo's arrival at Mercury as an encounter, its talk
 first, its place in the order Tony's to say (the note of 2026-11-24).
 Slice 2, its talk first: the two close passes and how the

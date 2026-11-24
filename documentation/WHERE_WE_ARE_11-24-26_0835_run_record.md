@@ -207,10 +207,73 @@ Do you want a spacecraft's box to carry JPL's own sentence when its path is a pr
 
 **Your run order**
 1. Tell the Code session: go ahead by `documentation/COORD_L538_partB_goahead2_20261124.md`. -- done
-2. Still do not commit the website. Commit and push the orrery when you are back. -- 
+2. Still do not commit the website. Commit and push the orrery when you are back. -- 7513fbab23605334f4fec31c8583057350638451; merged with nightly run, all green
 
 **Where this leaves us**
 - L-538 (the orbiters' printed error): the builder and checks are built, and the room's part is cleared to build. Then a whole test build and your look on your phone.
 - BepiColombo's position on the site is JPL's prediction, not a measurement, until JPL updates its path.
 
 One note on the placement: my first copy of the go-ahead arrived with an earlier wording. The read-back caught it by size, and the second copy is identical to what I wrote.
+
+============================
+
+**Done. The Code session has its go-ahead to finish, and the general design is written as a record for our next talk. Both files are in your orrery folder, read back and identical to what I wrote.**
+
+What I checked before clearing the website to go live:
+- I ran the changed room code against the data the website serves today. It gave the same answer as the old code in all 33,600 cases, across all 42 craft files. So the code can go live before the night that builds the new data.
+
+What the Code session does next:
+- **One last change:** the check points stay out of the repository. The night still tests every one; anywhere else, the check says by name what it could not test.
+- **The closing records,** with your ruling in your words. No patch for you to run this time. I will read the records from your folder afterward to confirm them.
+- **Three new ledger items:** a night going red when JPL fails to answer one body; JPL's own sentence when a path is a prediction; and orbiters in general.
+
+The design record is `documentation/DESIGN_orbiters_in_general_20261124.md`. It holds your words, today's measured costs, the five parts I proposed, and the questions for the talk. Nothing in it is a ruling.
+
+One question from earlier is still open and can wait: whether a craft's box should carry JPL's sentence when its path is a prediction. It is going on Where We Are under Waiting on you.
+
+**Your run order**
+1. Tell the Code session: go ahead by `documentation/COORD_L538_close_goahead_20261124.md`.
+2. When it reports and you are at your computer: commit and push the orrery, then the website.
+3. After the next night, open the Solar System room on your phone and check three boxes. These are from Code's test build, so the night's figures will be close, not identical:
+   - **BepiColombo today:** about 0.35553741 AU from the Sun. One more digit than before.
+   - **BepiColombo on Dec 20:** about 0.464 AU. Fewer digits than before; this is the coarser, true figure you ruled for.
+   - **Juno on Dec 16:** about 5.3276211 AU, where it read 5.33. Many more digits.
+
+**Where this leaves us**
+- L-538 (the orbiters' printed error) is built and reviewed. It closes after your push and your look.
+- The general design for orbiters waits for a talk, with BepiColombo's arrival at Mercury as its first test.
+- Step 4 of L-522 (document caps) still waits for a gap.
+
+===========================
+
+**Verified. You are clear to commit and push both, with one extra step on the website: Pull origin before you push.**
+
+Why the extra step:
+- A night ran on GitHub's website repository at 1:35 this afternoon, after the Code session started. So your website folder is one night behind.
+- I checked what that night committed: only data files. The build changed only code and the ignore list. They do not overlap, so the pull should merge cleanly.
+
+What I read from your folders to confirm the close:
+- **The ledger** holds my closing note on L-538 (the orbiters' printed error) word for word, with your rulings in your words.
+- **The three new items** are there with their index rows: L-553 (a held body turns the night red), L-554 (JPL's sentence when a path is a prediction) and L-555 (orbiters in general).
+- **Where We Are** is current and still 130 lines.
+- **The check points** are kept out of the repository by one rule in the website's ignore list, and the check is told it is the night by a flag, not by a guess.
+
+What I did not check: the figures measured against JPL, the suite's 604 of 604 and the 53 of 53. Those are the Code session's claims. The first real night is their test.
+
+I also wrote a short handoff for the next coordinating session, `documentation/HANDOFF_coordinating_20261124.md`, placed in your folder and read back identical. Attach it when you start the next one.
+
+**Your run order**
+1. **Orrery:** commit and push.
+2. **Website:** commit, then Pull origin, then Push origin.
+3. **After the next night,** open the Solar System room on your phone and check the three boxes:
+   - BepiColombo today: one more digit than before.
+   - BepiColombo on Dec 20: fewer digits, about 0.464 AU.
+   - Juno on Dec 16: many more digits, about 5.3276211 AU where it read 5.33.
+4. Tell a coordinating session what you saw. L-538 closes on your look.
+
+**Where this leaves us**
+- L-538 is built, reviewed and recorded. It goes live with your push and proves itself on the next night.
+- Waiting on you, none urgent: L-554 (JPL's sentence when a path is a prediction), where BepiColombo's arrival sits in the order, and the talk on L-555 (orbiters in general).
+- Owed by the next coordinating session: the skill text for the cache builder, which is at its cap.
+
+**One final thought:** today's biggest lesson was mine. I gave you "about 22 KB a craft" as a number before anything was measured, and you ruled on it. The measurement was 1.36 MB. Next time a ruling depends on a size, I should bring you the measurement, not an estimate.
