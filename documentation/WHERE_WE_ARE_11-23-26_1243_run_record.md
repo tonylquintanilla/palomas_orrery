@@ -462,8 +462,8 @@ Part 2 checks out too, and it is safe to commit and push both folders. I read th
 **Your run order**
 
 1. Look at the change list in both folders.
-2. Commit and push the orrery. -- 
-3. Commit and push the website's one file, `CLAUDE.md`.
+2. Commit and push the orrery. -- 0a024d9ff2c8499ff3421d36fec04ac055fc3c14
+3. Commit and push the website's one file, `CLAUDE.md`. -- 9e7bb99ffb77799759abe5a3e6d6dc556853da8e
 4. Tell the Code session: "Part 2 is pushed. Start Part 3."
 
 **Where this leaves us**
@@ -471,3 +471,70 @@ Part 2 checks out too, and it is safe to commit and push both folders. I read th
 - The protocol and the three skills are correct in your folders. The three skills are not yet reinstalled in your account, and the Project still holds the old protocol; both wait for Part 3 to finish.
 - Part 3 is the records: the ledger, Where We Are, and the close.
 - Bring me its report when it is done. I check it, then write this track's handoff for the next coordinator.
+
+==================================
+
+Part 3 is right in substance, but four small things in its records need correcting before you push. One of them matters.
+
+**What I checked, from your folder**
+
+- **The ledger holds the design part word for word.** Every line of it, with your quotes, is on L-522 (document caps).
+- **The three closures are as reported.** I agree with closing L-199 (protocol length), the one call the Code session made on its own reading: your Nov 10 ruling chose a cap, and the cap is now in force.
+- **Where We Are reads correctly** above its marker, and nothing below the marker was touched.
+- **Part 2 is on GitHub** in both repositories.
+
+**The one that matters**
+
+- The Code session's final thought says the orrery's door tells a session to stop when your folder and GitHub differ, and that v4.0 now says otherwise. It recorded that on the ledger as something to correct later.
+- That is a misreading. v4.0 says the same as the door: a build session starts with your folder equal to GitHub, or it says so and stops.
+- Left on the ledger, that note invites a later session to weaken the door.
+
+**Three smaller ones**
+
+- Two old actions for you on L-522 still read as open and are long overtaken: reinstalling an exhibit skill at version 1.41, and ruling on "the stale-looking rules".
+- The ledger gives the wrong line number for one old item's code, 4872 where it is 4907.
+- Where We Are and the ledger name this afternoon's handoff. I have written the closing one, `HANDOFF_document_upkeep_20261123_close.md`, and that is the one to name.
+
+**Your run order**
+
+1. Paste this to the Code session:
+
+   > Four corrections before I push Part 3. (1) On L-522, strike the carried line about the orrery door's step 2: the door and v4.0 agree, since Know Which Copy You Are Reading says "At its start the working copy equals GitHub and git status is clean, or the session says so and stops." (2) On L-522, mark two old Tony-actions as overtaken: "reinstall interactive-exhibit 1.41 ... paste the protocol v3.138", and "the stale-looking rules listed above", which step 3's ratification decided. (3) In L-522's Ref, L-012's line is 4907, not 4872. (4) The coordinating session placed `documentation/HANDOFF_document_upkeep_20261123_close.md`, 8,172 bytes, sha256 `cac0e1343651085aa2f307285aab5506793952bcf315fac4feabe26596408b37`. Check it, then name it in place of `HANDOFF_document_upkeep_20261123.md` in Where We Are and in L-522's Ref. Rebuild the ledger index and run the caps check.
+
+2. Look at the change list, commit, push.
+3. Paste `PROJECT_INSTRUCTIONS.md`, v4.0, into the Project's instructions.
+4. Reinstall three skills from the repository: the records skill, the coding-conventions skill, the pre-test skill.
+
+**Where this leaves us**
+
+- The protocol's reduction is built: v4.0, 795 lines, where it was 1,394. Every old line is kept somewhere, and a script confirmed it.
+- This is the last time a skill change asks you to paste the protocol.
+- The next session with a shell compares your installed skills with the repository before it works. That comparison confirms the three reinstalls, not your word or mine.
+- On this track, the next step is the ledger's cleanup, at the next gap between builds. Your order puts L-538 (the orbiters' printed error) first.
+
+**One final thought:** the Code session did all three parts correctly, and still one plan and one note of its own were wrong. Both were caught by reading the files, not the reports. That check now costs a coordinating session about ten minutes a part, and I would keep paying it.
+
+=====================================
+
+All four corrections landed. I read the ledger and Where We Are from your folder again, and each one is as the Code session reports. Part 3 is safe to commit and push.
+
+**What I confirmed**
+
+- The wrong note about the orrery's door is gone from L-522 (document caps).
+- The two old actions are marked as overtaken, each with its reason.
+- The line number reads 4907.
+- Where We Are and the ledger name the closing handoff, and the Code session's fingerprint of that file matched mine. So the handoff arrived whole.
+- Where We Are is still at its cap, 130 lines above the marker.
+
+**Your run order**
+
+1. Commit and push the orrery. Part 3 is not on GitHub yet. -- 
+2. Paste `PROJECT_INSTRUCTIONS.md`, v4.0, into the Project's instructions on claude.ai.
+3. Reinstall three skills from the repository: the records skill, the coding-conventions skill, the pre-test skill.
+
+**Where this leaves us**
+
+- Step 3 is finished once you push. The protocol is v4.0 at 795 lines, down from 1,394, with every old line kept in a named place.
+- The next coordinating session starts from `HANDOFF_document_upkeep_20261123_close.md`. Its first job is to compare your installed skills with the repository, which is what confirms the three reinstalls.
+- Next on the road is L-538 (the orbiters' printed error). This track's next step, the ledger's cleanup, waits for a gap between builds.
+- This session has nothing further owed. You can close it after the push.

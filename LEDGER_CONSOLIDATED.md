@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*280 live items; 264 need attention (`!`); 164 RICE-scored; 265 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*277 live items; 262 need attention (`!`); 162 RICE-scored; 268 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1022,7 +1022,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
 | ! | L-299 | A hover that quotes a measured number names its source in the hover | OPEN | 5.1 | 2026-09-07 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
-| ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-11-14 |
@@ -1034,7 +1033,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-10-09 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-|  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-11-08 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
@@ -1161,7 +1159,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-31 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
-| ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-29 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 | ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
@@ -1418,6 +1415,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-200 | The `# Resolved:` leg -- record a verdict that landed | DONE | 5.1 | 2026-08-18 |
 |  | L-203 | The visibility convention -- give it a home in the skill | DONE | 5.1 | 2026-08-18 |
 |  | L-189 | Provenance scanner: run history and run-to-run delta | DONE | 4.8 | 2026-08-11 |
+|  | L-199 | Protocol length: govern the growth, not the number | DONE | 4.8 | 2026-11-23 |
 |  | L-279 | A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings | DONE | 4.8 | 2026-09-02 |
 |  | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | DONE | 4.8 | 2026-09-06 |
 |  | L-316 | On a portrait phone the arrow cross moves to the top-right corner | DONE | 4.8 | 2026-09-16 |
@@ -1437,6 +1435,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
 |  | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | DONE | 3.8 | 2026-10-08 |
 |  | L-224 | Streamer belt: one warped band, not a sphere | DONE | 3.8 | 2026-10-21 |
+|  | L-230 | A skill bump does not reach the protocol's version history | DONE | 3.8 | 2026-11-23 |
 |  | L-232 | The gallery's served constants carry sources that nothing checks | DONE | 3.8 | 2026-09-16 |
 |  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
 |  | L-227 | Streamer band hover rendered as one 378-character line | DONE | 3.8 | 2026-10-04 |
@@ -1596,6 +1595,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-495 | Tony's phone look of the night of Oct 26: the wrapped orbit line, the AU note, a comet's farthest planet on a closed orbit, the whole triad, the direction arrows (gallery, the rooms) | DONE | -- | 2026-10-27 |
 |  | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | DONE | -- | 2026-10-28 |
 |  | L-497 | Left-aligned text in every text box (gallery, the rooms) | DONE | -- | 2026-10-28 |
+|  | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | DONE | -- | 2026-11-23 |
 |  | L-501 | 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects) | DONE | -- | 2026-10-28 |
 |  | L-502 | The triad's hover spot, and info crosses in crowded places (gallery, the rooms) | DONE | -- | 2026-10-29 |
 |  | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | DONE | -- | 2026-11-01 |
@@ -2435,9 +2435,11 @@ your lead on this." His idea is L-552 (the kind of body).
 **Gap:** the patch, in the orrery: four lines in
 `celestial_objects.py`, the readers (`palomas_orrery.py`, the
 pre-fetch's two lines and the position fetch's two; `period_fetch.py`)
-and the check. All five consumers of position data are mapped first
-(the protocol's Check All Parallel Pipelines), and the website's own
-chain with them, the builder, the assembler and the page: Gemini 4
+and the check. All six consumers of position data are mapped first
+(the protocol's Check All Parallel Pipelines; the list is
+orrery-coding-conventions 1.14's, six since 2026-11-23, L-522), the
+website's own chain the sixth, the builder, the assembler and the
+page: Gemini 4
 Neon's review of 2026-11-23, finding 3, says the gate's five leave it
 out, and the text bears that out
 (`documentation/REVIEW_CHECK_fundamental_documents_20261123.md`).
@@ -3918,6 +3920,111 @@ was advised against: it needs his rulings and a carry to GPT, and on Nov
   of 904), whose plain history earlier bumps had already moved. Each is
   a candidate for the split the exhibit skill had at step 2; not
   proposed to Tony yet.
+- **Step 3, 2026-11-23, the coordinating session (Claude Fable 5.2),
+  on orrery 7087b3ad and gallery a811d350.** Records:
+  `REVIEW_COMPARE_fundamental_documents_20261123.md` (the three
+  reviews side by side),
+  `DESIGN_protocol_reduction_what_moves_20261123.md` (the list, and
+  his rulings on it),
+  `DESIGN_protocol_reduction_items_for_tony_20261123.md` (25 numbered
+  passages and his answers), `REVIEW_RETURN_cold_read_20261123.md`.
+- The three reviews do not contradict each other or the rulings of Nov
+  10. Six of the ten findings of Nov 10 were found again by GPT or
+  Gemini; the outside two added nine things, two of them faults in
+  checks the protocol calls critical.
+- Tony, 14:44, asked whether step 3 is still the job and offered two
+  sittings: "Confirmed as recommended".
+- Tony, 15:15, on the list of what moves: "please retain the double
+  helix principle in the protocol. This is a foundational idea for
+  working together"; "on the register rule: can we relax this given
+  that 5.2 and 5.5 models already do this much better."; "Otherwise,
+  no objections." The Weasley Principle moves; the ten process lessons
+  stay; the conduct tables shrink (his choices A, B, C, Claude's
+  recommendations).
+- The conduct rules were tested against the ledger (ruling 4): found
+  broken since August 24, going past what was asked (L-250), the wrong
+  size of tool (L-506), plain speech (L-539, L-261); not found,
+  guessing where a question was due.
+- Tony, 15:52, five comments on the first draft: the seven Modes are
+  retired but for Mode 5 and Mode 7 ("Mode 1 is now used only when I
+  explicitly request it"); "My role as coordinator and carrier is
+  largely replaced by Cowork and Code."; "I am not sure that AI roles
+  are still needed or pertinent. Frontier models are broadly
+  capable."; the triggers table, "an outdated effort to curtail
+  verbosity and complexity"; two paragraphs of the Register Rule,
+  "probably not needed".
+- Tony, 15:59: "It seems largely procedural. Should some of this move
+  to skills?" Two blocks became pointers: Check All Parallel Pipelines
+  (to orrery-coding-conventions) and Mode 7 (to
+  ledger-and-session-records). Claude's recommendation; approved with
+  item 21.
+- Tony, 16:44, by number: 3, 4, 6, 9, 12 "drop"; "mode 2 is largely
+  the default mode"; on the uploads rule, "this may be obsolete given
+  Claude reads directly from repo" (cut to one line, not dropped: the
+  session began from an upload); "otherwise approved". 16:51: "14 was
+  a typo I meant the opposite that Claude dropping files into my repo
+  is routine as is Code." and "Yes on the cold read."
+- The Register Rule's earlier relaxation, which Tony gave in a chat on
+  2026-09-29, had never reached the ledger or the protocol.
+- The cold read (a Claude Fable chat in incognito, outside the
+  Project, Tony's carry): all eight cases matched answers written down
+  beforehand, and it found eight faults both had read past, all fixed
+  in the fourth draft.
+- Tony, 18:16, on the fourth draft, 795 lines: "ratified. thanks."
+- The session's two estimates were wrong and were said so: "750 to
+  800", then 831 by parts; the first draft measured 896. His comments
+  and the two pointers brought it under the cap, not tightening.
+- At its start the session compared all twelve installed skills with
+  the repository: equal, one by a line wrap in its header. That met
+  v3.145's obligation for 1.20, 1.21, 1.5, 1.45 and 1.15.
+- Placing files from the linked session: every write was reported
+  written and none could be read back, the tool refusing to stage a
+  file it called hardlinked. The Code session's sha256 is the
+  read-back.
+- CARRIED, with no home in the six steps, one line for each kind:
+  the stamping rule (safe-file-editing, "Stamp What You Change") and
+  `constants_new.py`'s 37 stamps; `PROVENANCE_AUDIT.md`'s "No file's
+  Tier-1 count rose" (L-269 has it) and its 271 "FIX NOW" labels; ten
+  modules with no Role tag (earth_pole_live_check.py,
+  orrery_colors.py, path_drawing.py, test_drawings_export.py,
+  test_earth_pole_of_date.py, test_extractor_pins.py,
+  test_hills_cloud_sampler.py, test_path_drawing.py,
+  test_worksheet_keys.py, worksheet_key_aliases.py); a search rule
+  for Code sessions past the spent patches; the website's
+  `INTERACTIVE_AS_BUILT.md`, uncapped, 2,150 lines on Nov 16 and 2,483
+  on Nov 23; the 55 [CRITICAL] marks in the skills, for L-328.
+- **Step 3 built, the protocol, 2026-11-23** (a Claude Code session,
+  Claude Opus 5.5, through the python_work door, on orrery 7087b3ad and
+  gallery 326863a6; the landing brief's Part 1). Both remotes had
+  moved by nightly commits only (orrery ff461cf1, one data file;
+  gallery two nights to 142ac113); said, and not a missed push. The
+  ratified draft's sha256 read f36e51c7..., as ratified; the six other
+  files of the coordinating session had the brief's sizes.
+  `project_instructions_v3_145.md` equalled the live protocol byte for
+  byte before it was overwritten.
+  - `PROJECT_INSTRUCTIONS.md` is the fourth draft with the brief's fills
+    only (its first line, v4.0, the date 2026-11-23 in six places and on
+    line 3), 795 lines; its copy `documentation/project_instructions_v4_0.md`.
+  - The account, by a throwaway script: all 1,104 non-blank lines of
+    v3.145 outside the table were found, each in the store the brief
+    assigned, the moved runs whole and in the old order: 459 kept, 106
+    to the end of `PROJECT_ORIGIN.md` (under "The protocol's
+    philosophy, as it stood until 2026-11-23"), 125 to the history
+    file's PART 1 with a new v4.0 entry, 599 to its new PART 3, the
+    103-line table not copied, 2 blank. A copy with one line removed
+    made it fail by name.
+  - `skills_index.py` writes the table to `skills/SKILL_MANIFEST.md`,
+    identical to the old table's 100 lines, and the names between the
+    protocol's SKILL-NAMES markers; `--check` fails on a folder missing
+    from the names or a name with no folder, both shown on a throwaway
+    copy. The maintenance run's Skill manifest row writes the file and
+    its Skill headers row quotes the names count; the dashboard's two
+    buttons and `doc_index.py`'s comment say where the table is.
+    `DOCUMENT_CAPS.md`: the protocol's cap 800 (ruling 5 of Nov 10).
+  - Run: 37 of 37 gating checkers. Pushed by Tony as 27c9d8c, merged
+    with the night at 09f633c5. A coordinating session read the
+    changed files from his folder before he pushed and agreed (his
+    run record, `WHERE_WE_ARE_11-23-26_1243_run_record.md`).
 - **Step 3 built, the skills, 2026-11-23** (a Claude Code session,
   Claude Opus 5.5, through the python_work door, on orrery 09f633c5 and
   gallery 142ac113; the landing brief's Part 2,
@@ -3963,12 +4070,40 @@ was advised against: it needs his rulings and a carry to GPT, and on Nov
   - Tony-action (do): reinstall the three (Plugins, in the claude.ai
     sidebar). The next session with a shell compares them with the
     repository; that comparison clears them.
-**Gap:** steps 3 to 6 (step 1 built 2026-11-10, night; step 2 built
-2026-11-11); step 3's talk is held, its draft is not written.
+- **Step 3 closed, the records, 2026-11-23** (the same Code session, on
+  orrery 0a024d9f and gallery 9e7bb99f, Part 2 as Tony pushed it).
+  This item's design part above, from the brief word for word; L-199,
+  L-230 and L-499 closed, each with its reason; L-548's count of
+  consumers made six; Where We Are edited by section.
+- CARRIED by this step, each for the place named (the brief's "Not in
+  this job", and what the build found):
+  - Skills that still name a retired part of the protocol, each for its
+    next version: provenance-discipline ("Skill Manifest",
+    `/mnt/project`), safe-file-editing (the protocol's Skill Manifest,
+    under A Guard Must Not Fence What a Generator Rewrites),
+    interactive-exhibit ("Stale Skill"), gallery-assembler ("Part 4").
+  - safe-file-editing's pointer at a SystemButtonFace workaround that
+    agentic-pre-test records as removed.
+  - The website README's "five" position consumers, for step 6; the
+    orrery README's hand-written lines on "the generated manifest
+    inside the protocol" and Stale Skill = Stop (its lines 97 and
+    325-337 at 0a024d9f), for step 6 too.
+  - Stale words noticed in passing, no step depending on them: the
+    dashboard's Skill Headers text says "Settings > Skills"; the
+    history file's PART 1 heading says "v1.0 through v3.38".
+**Gap:** steps 4 to 6 (step 1 built 2026-11-10, night; step 2 built
+2026-11-11; step 3, the protocol, built 2026-11-23 as v4.0): 4, this
+ledger's closed items and header stamps moved out by a tool; 5, the
+open items triaged by theme; 6, the master plan and both READMEs
+restamped once L-515 step 2b has had Tony's phone look.
 **Tony-action (do):** reinstall interactive-exhibit 1.41 (Settings >
 Skills) and paste the protocol v3.138 into the Project; the next session
 that loads the skill from the account confirms it reads 1.41.
+OVERTAKEN, 2026-11-23: later versions of both were installed since, and
+v4.0 is the paste now owed.
 **Tony-action (decide):** the stale-looking rules listed above.
+OVERTAKEN, 2026-11-23: step 3's ratification decided them (Tony,
+18:16, "ratified. thanks.").
 Step 1's three Tony-actions are done, by his run record
 `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`: the python_work door
 replaced ("done"), ledger-and-session-records 1.23 reinstalled ("done. no
@@ -3976,12 +4111,25 @@ line change."), protocol v3.137 pasted ("done"). The coordinating session
 of Nov 10, night, read the account's copy of the records skill on disk as
 1.23, byte for byte the repo's at d65309a8.
 **Tony-action (decide)**, on step 3's draft: the stale-skill gate's new
-wording, and the gates for the stores in use.
-**Ref:** the review and the design record named above; L-199, L-215,
+wording, and the gates for the stores in use. DONE: he ratified the
+fourth draft whole, 2026-11-23, 18:16 ("ratified. thanks.").
+**Tony-action (do):** paste v4.0 into the Project's instructions on
+claude.ai, the last paste a skill change asks for; reinstall
+ledger-and-session-records 1.24, orrery-coding-conventions 1.14 and
+agentic-pre-test 1.4 (Plugins, in the claude.ai sidebar). The next
+session with a shell compares the installed skills with the
+repository before it works; that comparison clears the three.
+**Tony-action (decide):** the version number, v4.0 unless he says
+otherwise.
+**Ref:** the review and the design record named above; step 3's
+records: `documentation/COORD_L522_step3_landing_brief_20261123.md`,
+`documentation/DRAFT_PROJECT_INSTRUCTIONS_reduced_20261123.md`,
+`documentation/project_instructions_v4_0.md`,
+`documentation/HANDOFF_document_upkeep_20261123_close.md`; L-199, L-215,
 L-230, L-328, L-396; L-417 and L-418 (the 500-line warning and the
 contents lists); L-499 (the kinds of session); L-506 (Token Economy);
 L-012 (the false "fetched fresh" print, still at `palomas_orrery.py`
-line 4872).
+line 4907, read 2026-11-23 at 0a024d9f).
 
 #### [L-521] Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green)
 <!-- L:521 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -6704,74 +6852,6 @@ is next opened for its shape (L-497's build gives it a row, not a new
 shape); the clumps' five when the outer cloud is next re-placed.
 **Ref:** L-412; L-371; `solar_visualization_shells.py`;
 `outer_oort_sampler.py`; gallery `gallery/feature_renderers.js`.
-
-#### [L-499] The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7)
-<!-- L:499 status:OPEN upd:2026-10-29 section:A flag: rice: -->
-- **Ruled at the talk of 2026-10-27** (`documentation/DESIGN_talk_20261027_rulings.md`,
-  section 7). Claude put four kinds to Tony (coordinating, build,
-  talk-only, Code). Tony: "I would included a Code session as a kind
-  of builder session. Thoughts?" Agreed, and confirmed by Tony:
-  - a COORDINATING session (Claude Fable 5.1, linked to Tony's
-    computer) verifies against both repositories at HEAD, runs design
-    talks, and writes rulings and briefs into the orrery's
-    documentation folder; no patch, no code;
-  - a TALK-ONLY session (Opus or Sonnet, not linked) writes design
-    records and handoffs in Tony's words, which he saves by hand; no
-    patch, no code;
-  - a BUILD session writes code, in the PATCH form (Cowork: a patch
-    file Tony runs with the Run button, the spent patch the record,
-    the test result reaching the session through his run record) or
-    the DIRECT form (Claude Code, one repository folder: files edited
-    in place, the tests run and read by the session before it closes,
-    the change list in GitHub Desktop and the Where We Are box the
-    record). In both forms it reads the brief through Where We Are,
-    fires the same skills, ends with the records, and leaves commit
-    and push to Tony.
-- **Two lessons of Oct 27 for the coordinating session's own rules**
-  (the record's section 7): a build session in the direct form
-  verifies against the files in front of it, one step fresher than
-  the repo at HEAD; and a file placed on Tony's computer from the
-  coordinating session is confirmed by reading it back, not by the
-  tool's answer.
-- **The two texts that said four kinds:** the master plan's Section 11
-  paragraph (v37), corrected 2026-10-27, evening, in place, with a
-  note saying so, and the executive summary's line pointing at it;
-  the Oct 26 brief's section 4, which is history and is not edited
-  (the Oct 27 brief corrects it).
-- **2026-10-27, evening:** CLAUDE.md gained its "How to report to
-  Tony" section, word for word from the Oct 27 brief's section 4
-  (Tony, Oct 27: "Code is difficult to follow and technical.").
-- **2026-10-29, the door in the parent folder** (Tony's prompt of Oct 28,
-  night, item e; his ruling of Oct 29, 00:08: "a door in the parent").
-  The "Open in Claude Code" button in Tony's chat opens Code on the
-  folder the chat is linked to, `python_work`, the parent of both
-  repositories. The orrery session of Oct 28 (L-443) ran that way and
-  worked because the orrery's CLAUDE.md was found one folder down; a
-  session opened that way on Oct 29, 00:00, reviewed its prompt instead
-  of starting; and a session on the parent runs without a repository's
-  `.claude\settings.json` guard. Drafted by the gallery's Code session:
-  `documentation/python_work_door/CLAUDE.md` (a few lines that only
-  point: two repositories here, the prompt names which; read that
-  folder's CLAUDE.md, record the base there, work there; the canonical
-  copy lives at this path) and `documentation/python_work_door/settings.json`
-  (the same forbidden commands as the two repositories' copies, checked
-  identical). Tony-action (do): after the push, copy CLAUDE.md to
-  `python_work\CLAUDE.md` and settings.json to
-  `python_work\.claude\settings.json`. The next coordination handoff
-  carries the door into its section 1.
-- **Received 2026-10-29/30 from L-502, at its close:** which fields of
-  `data/objects_config.json` a Code session may edit by hand (a
-  drawing setting such as `info_polar_deg`, a row's words, `find`), or
-  that they come only through a tool; the gallery's CLAUDE.md and
-  interactive-exhibit (Only two tools write the served config) to say
-  which. For the records session, with this item's kinds of session.
-**Gap:** the protocol's Mode 7 text written to the three kinds and
-two forms, at the session the brief names; Tony ratifies a protocol
-amendment.
-**Ref:** `documentation/DESIGN_talk_20261027_rulings.md`;
-`documentation/COORD_next_sessions_brief_20261027.md`;
-`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` (Section 11);
-`PROJECT_INSTRUCTIONS.md` (Mode 7); `CLAUDE.md`; L-498.
 
 #### [L-498] The master plan restamped as v37 at slice 2's close (documentation)
 <!-- L:498 status:OPEN upd:2026-10-27 section:A flag: rice: -->
@@ -14853,113 +14933,6 @@ placement itself.
 **Ref:** L-192 (Break 5, the rule this makes true); L-186 (annotation
 grammar); `documentation/FABLE_REVIEW_worksheet_schema.md` item 5.
 
-#### [L-199] Protocol length: govern the growth, not the number
-<!-- L:199 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/80/1 -->
-- **The question, Tony 2026-08-17.** The protocol is 1021 lines against
-  an earlier target of 850. It keeps growing and none of it is
-  obviously disposable.
-- **Measured @fb63e4b.** Preamble 38 (3.7%), Part 1 138 (13.5%), Part 2
-  158 (15.5%), Part 3 gates and skills 296 (29.0%), Part 4 121 (11.8%),
-  Part 5 268 (26.2%). Inside Part 5, **Version History alone is 129
-  lines, 12.6% of the whole document**.
-- **Length is not a reading problem.** 1021 lines is roughly 14,000
-  tokens. The cost is SALIENCE, not capacity: the resident layer exists
-  so the CRITICAL gates fire unprompted, and everything that is not a
-  gate competes for that. This is the document-scale form of the rule
-  Part 2 already states about the tiers -- if everything is critical,
-  nothing is.
-- **The test for what may leave is not "is it secondary".** It is
-  **does this have a trigger somewhere else**. A skill fires on task
-  match; the ledger is read at session start; a bare archive file has
-  no trigger at all. That is why the v3.37 first cut, which moved all
-  41 lessons out and left a pointer, was reversed the same day. The
-  850 number came from Claude's own recommendation when context length
-  genuinely constrained the work; it has outlived the condition that
-  produced it and should be replaced by the test rather than re-tuned.
-- **Applying the test, only one section passes.** Version History has a
-  real trigger elsewhere -- the ledger appendix below is its store, and
-  the protocol already says so. Quotables shapes voice, Part 4 shapes
-  judgment, and the resident Lessons Archive is by construction the
-  fourteen with no counterpart anywhere. Those have no trigger, but
-  firing is not their job.
-- **A store relationship that is currently false.** The protocol says
-  the full version history lives in this ledger's appendix. The
-  appendix carries v1.0 through **v3.38**; v3.39 and v3.40 exist ONLY
-  in the protocol. Push those two down BEFORE trimming anything, or the
-  trim deletes the only copy.
-- **Also worth stating: 850 may be the wrong thing to measure.** It was
-  set when the protocol was the only layer. Since v3.30 there are two,
-  and the skills carry well over a thousand lines of procedure that
-  used to live here. The number worth watching is what FRACTION of the
-  resident document is gates, not its total.
-
-**Proposal, three parts, none built.**
-1. A short sizing section in the protocol -- roughly fifteen lines --
-   carrying the trigger test, the gates-fraction measure, and a stated
-   cap on resident version-history entries. It earns its lines by
-   governing growth rather than adding to it; the document currently
-   has no rule about itself, which is how it gained 200 lines with
-   nothing objecting.
-2. Copy v3.39 and v3.40 into the ledger appendix, then reduce
-   v3.34-v3.39 in the protocol to a single pointer line, keeping the
-   two most recent entries in full. Recovers roughly 95 lines, taking
-   the protocol to about 925.
-3. One line in Part 5 naming the archive file (now
-   `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`). The
-   file is invisible from the protocol today, which is the only real
-   defect it has.
-
-**Note: do NOT reintegrate the lessons archive.** Tony raised this on
-the reasoning that nothing reads it. Checked by reading the file rather
-than from memory: 27 entries, every one names where it still lives, and
-all four homes that a first automated probe flagged as missing are in
-fact present -- the probe was matching truncated strings. Reintegrating
-would re-add 27 restatements of rules already stated where they fire,
-grow the protocol by about 30 lines, and restore exactly the
-duplication v3.37 removed. Nothing is stranded except the record of the
-decision, and a record is supposed to sit still. The archive's own
-header already sets the standard for reopening this: put a line back if
-it turns out to be doing work its counterpart does not do, judged by
-reading. None of the 27 met that bar on 2026-08-17.
-**Note:** RICE is Claude's proposal, unratified.
-**Tony-action (decide):** approve the sizing section's content before
-it is written into the protocol -- it is a constitutional amendment,
-not a build.
-- **Tony's ruling, 2026-08-18, and it changes part 2.** The store for
-  the version history is NOT this ledger's appendix. The appendix moves
-  out into `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, which is
-  `LESSONS_ARCHIVE.md` renamed and now carrying two records: the
-  version history as PART 1, the v3.37 lessons record verbatim as
-  PART 2. Both are kept -- the lessons record is not displaced by the
-  history arriving beside it. The ledger keeps a pointer.
-- **As built, 2026-08-18** (`patch_L199_1`). Parts 2 and 3 of the
-  proposal landed, part 1 did not.
-  - The appendix repair the bullet above insisted on is satisfied
-    WITHOUT copying anything: v3.39 and v3.40 are two of the three
-    entries that STAY resident, so the trim never reaches them.
-    v3.34-v3.38 come out of the protocol and are not copied, because
-    they are already inside the appendix that became PART 1. Every
-    entry lives in exactly one place.
-  - The rule that keeps it that way is now stated in the protocol:
-    three most recent resident, and a fourth pushes the oldest down.
-    That is the stated cap part 1 asked for, arriving as one line
-    rather than as a sizing section.
-  - Part 3 landed too: Part 5 names the file, which is the only real
-    defect the archive had.
-  - The header gained an anchor and a corrected date. The repo copy
-    read August 16 and the copy installed in the Claude UI read
-    August 17 under the SAME version number -- two stores of one
-    document, one of them hand-edited. v3.41 supersedes both.
-- **Remaining, and it is part 1 alone.** A short sizing section
-  carrying the trigger test and the gates-fraction measure. The cap it
-  was to contain now exists; what is still missing is the reasoning
-  that governs the next thing wanting to move in.
-**Gap:** part 1 unbuilt. Parts 2 and 3 landed 2026-08-18.
-**Ref:** v3.37 (the reversed all-lessons cut, and why an archive has no
-trigger); v3.30 (the two-layer split that moved procedure into skills);
-`documentation/PROJECT_INSTRUCTIONS_HISTORY.md`;
-`documentation/patch_L199_1`.
-
 #### [L-206] Worksheet return filenames carry model and session
 <!-- L:206 status:OPEN upd:2026-08-18 section:A flag: rice:2/3/85/1 -->
 - **The requirement, Tony 2026-08-18.** Beyond tracking, the filename
@@ -15288,55 +15261,6 @@ exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
   `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
   Section 4; `provenance-discipline` 2.6; L-221 (sequencing authority);
   L-224 (the session that surfaced it).
-
-#### [L-230] A skill bump does not reach the protocol's version history
-<!-- L:230 status:DEFERRED upd:2026-08-23 section:A flag: rice:3/3/85/2 -->
-- **Tony's observation, 2026-08-23.** A skill bump runs a four-link
-  chain: `SKILL.md` version line -> `skills_index.py` -> the manifest
-  zone in `PROJECT_INSTRUCTIONS.md` -> a protocol VERSION HISTORY
-  entry. The first three fire. The fourth does not.
-- **Not a new rule -- one that stopped firing.** The archive carries
-  `v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).`
-  A skill bump earning an entry on its own. That is harder to notice
-  than a rule that never existed, and the manifest going current by
-  itself DISGUISES the omission: the protocol looks updated because
-  half of it was.
-- **Prevention landed 2026-08-23** in `ledger-and-session-records`
-  1.9: the binding rule gains its fourth step. Detection is this item.
-- **Tony's design instinct, and it is right:** report it in the
-  maintenance runner. That is the tool already in the routine, and
-  the resident gate says put the check where it runs rather than in a
-  document someone has to remember. An earlier Claude proposal to
-  write the convention into the protocol as prose was redirected for
-  exactly that reason.
-- **THE NAIVE CHECKER DOES NOT WORK, and this was measured rather
-  than guessed.** "For each skill in the manifest, does its current
-  version appear anywhere in the written history?" reports **10 of
-  10** skills as unrecorded at `41c0b279`. Three causes: only three
-  entries stay resident, the archive names older versions, and several
-  skills have sat at 1.1 since creation and were never the subject of
-  any entry. A check that fires on everything is ignored by its second
-  run -- the same failure as an audit whose denominator grows whenever
-  someone thinks of something.
-- **The design that does work watches the TRANSITION, not the state.**
-  If a skill version changed since the last run, the protocol version
-  must have changed too. That needs memory of the previous state,
-  which is the pattern the suite already uses
-  (`data/worksheet_check_state.json`, `data/provenance_history.json`)
-  rather than a new store. It can fail, and it fails exactly once per
-  unrecorded bump, which is what makes it worth running.
-- **Deferred deliberately.** A checker module, a state file, runner
-  wiring and its own test is a build, not a patch, and it deserves the
-  design round. The dead end above is recorded so a future session
-  does not re-derive it.
-- **Note:** RICE 3/3/85/2 -> 3.8 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect, then re-run
-  `ledger_index.py`.
-- **Ref:** `PROJECT_INSTRUCTIONS.md` v3.42 and its Skill Manifest;
-  `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`; `skills_index.py`;
-  `skills/ledger-and-session-records/SKILL.md` v1.9, Protocol and
-  Skills Change Log; L-188 (the maintenance runner); L-226, L-227 (the
-  two bumps whose absence from the history exposed this).
 
 #### [L-231] Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent
 <!-- L:231 status:OPEN upd:2026-10-17 section:A flag: rice:2/2/90/2 -->
@@ -39981,6 +39905,250 @@ header's description, and no word.
 Encounters button); L-541 (a plan's clock: the Room clock row); L-540 (a
 reel: the Link cards row); `palomas_orrery_dashboard.py`;
 documentation/HANDOFF_coordinator_20261122_bump_notes.md.
+
+#### [L-199] Protocol length: govern the growth, not the number
+<!-- L:199 status:DONE upd:2026-11-23 section:C flag: rice:2/3/80/1 -->
+- **The question, Tony 2026-08-17.** The protocol is 1021 lines against
+  an earlier target of 850. It keeps growing and none of it is
+  obviously disposable.
+- **Measured @fb63e4b.** Preamble 38 (3.7%), Part 1 138 (13.5%), Part 2
+  158 (15.5%), Part 3 gates and skills 296 (29.0%), Part 4 121 (11.8%),
+  Part 5 268 (26.2%). Inside Part 5, **Version History alone is 129
+  lines, 12.6% of the whole document**.
+- **Length is not a reading problem.** 1021 lines is roughly 14,000
+  tokens. The cost is SALIENCE, not capacity: the resident layer exists
+  so the CRITICAL gates fire unprompted, and everything that is not a
+  gate competes for that. This is the document-scale form of the rule
+  Part 2 already states about the tiers -- if everything is critical,
+  nothing is.
+- **The test for what may leave is not "is it secondary".** It is
+  **does this have a trigger somewhere else**. A skill fires on task
+  match; the ledger is read at session start; a bare archive file has
+  no trigger at all. That is why the v3.37 first cut, which moved all
+  41 lessons out and left a pointer, was reversed the same day. The
+  850 number came from Claude's own recommendation when context length
+  genuinely constrained the work; it has outlived the condition that
+  produced it and should be replaced by the test rather than re-tuned.
+- **Applying the test, only one section passes.** Version History has a
+  real trigger elsewhere -- the ledger appendix below is its store, and
+  the protocol already says so. Quotables shapes voice, Part 4 shapes
+  judgment, and the resident Lessons Archive is by construction the
+  fourteen with no counterpart anywhere. Those have no trigger, but
+  firing is not their job.
+- **A store relationship that is currently false.** The protocol says
+  the full version history lives in this ledger's appendix. The
+  appendix carries v1.0 through **v3.38**; v3.39 and v3.40 exist ONLY
+  in the protocol. Push those two down BEFORE trimming anything, or the
+  trim deletes the only copy.
+- **Also worth stating: 850 may be the wrong thing to measure.** It was
+  set when the protocol was the only layer. Since v3.30 there are two,
+  and the skills carry well over a thousand lines of procedure that
+  used to live here. The number worth watching is what FRACTION of the
+  resident document is gates, not its total.
+
+**Proposal, three parts, none built.**
+1. A short sizing section in the protocol -- roughly fifteen lines --
+   carrying the trigger test, the gates-fraction measure, and a stated
+   cap on resident version-history entries. It earns its lines by
+   governing growth rather than adding to it; the document currently
+   has no rule about itself, which is how it gained 200 lines with
+   nothing objecting.
+2. Copy v3.39 and v3.40 into the ledger appendix, then reduce
+   v3.34-v3.39 in the protocol to a single pointer line, keeping the
+   two most recent entries in full. Recovers roughly 95 lines, taking
+   the protocol to about 925.
+3. One line in Part 5 naming the archive file (now
+   `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`). The
+   file is invisible from the protocol today, which is the only real
+   defect it has.
+
+**Note: do NOT reintegrate the lessons archive.** Tony raised this on
+the reasoning that nothing reads it. Checked by reading the file rather
+than from memory: 27 entries, every one names where it still lives, and
+all four homes that a first automated probe flagged as missing are in
+fact present -- the probe was matching truncated strings. Reintegrating
+would re-add 27 restatements of rules already stated where they fire,
+grow the protocol by about 30 lines, and restore exactly the
+duplication v3.37 removed. Nothing is stranded except the record of the
+decision, and a record is supposed to sit still. The archive's own
+header already sets the standard for reopening this: put a line back if
+it turns out to be doing work its counterpart does not do, judged by
+reading. None of the 27 met that bar on 2026-08-17.
+**Note:** RICE is Claude's proposal, unratified.
+**Tony-action (decide):** approve the sizing section's content before
+it is written into the protocol -- it is a constitutional amendment,
+not a build.
+- **Tony's ruling, 2026-08-18, and it changes part 2.** The store for
+  the version history is NOT this ledger's appendix. The appendix moves
+  out into `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, which is
+  `LESSONS_ARCHIVE.md` renamed and now carrying two records: the
+  version history as PART 1, the v3.37 lessons record verbatim as
+  PART 2. Both are kept -- the lessons record is not displaced by the
+  history arriving beside it. The ledger keeps a pointer.
+- **As built, 2026-08-18** (`patch_L199_1`). Parts 2 and 3 of the
+  proposal landed, part 1 did not.
+  - The appendix repair the bullet above insisted on is satisfied
+    WITHOUT copying anything: v3.39 and v3.40 are two of the three
+    entries that STAY resident, so the trim never reaches them.
+    v3.34-v3.38 come out of the protocol and are not copied, because
+    they are already inside the appendix that became PART 1. Every
+    entry lives in exactly one place.
+  - The rule that keeps it that way is now stated in the protocol:
+    three most recent resident, and a fourth pushes the oldest down.
+    That is the stated cap part 1 asked for, arriving as one line
+    rather than as a sizing section.
+  - Part 3 landed too: Part 5 names the file, which is the only real
+    defect the archive had.
+  - The header gained an anchor and a corrected date. The repo copy
+    read August 16 and the copy installed in the Claude UI read
+    August 17 under the SAME version number -- two stores of one
+    document, one of them hand-edited. v3.41 supersedes both.
+- **Remaining, and it is part 1 alone.** A short sizing section
+  carrying the trigger test and the gates-fraction measure. The cap it
+  was to contain now exists; what is still missing is the reasoning
+  that governs the next thing wanting to move in.
+**Gap:** none. Part 1, the sizing section, is struck: Tony ruled on
+2026-11-10 that growth is held by a cap ("There really no other method
+to control growth", L-522), and v4.0 carries it as Document Caps, 800
+lines on `DOCUMENT_CAPS.md`, with a home for every line that leaves.
+The trigger test and the gates-fraction measure were the argument for
+not having a number; the ruling chose one, so neither is carried.
+**Closed 2026-11-23** by L-522 step 3 (the protocol v4.0, 795 lines).
+Its Tony-action (decide), the sizing section's content, lapses with it.
+**Ref:** v3.37 (the reversed all-lessons cut, and why an archive has no
+trigger); v3.30 (the two-layer split that moved procedure into skills);
+`documentation/PROJECT_INSTRUCTIONS_HISTORY.md`;
+`documentation/patch_L199_1`.
+
+#### [L-230] A skill bump does not reach the protocol's version history
+<!-- L:230 status:DONE upd:2026-11-23 section:C flag: rice:3/3/85/2 -->
+- **Tony's observation, 2026-08-23.** A skill bump runs a four-link
+  chain: `SKILL.md` version line -> `skills_index.py` -> the manifest
+  zone in `PROJECT_INSTRUCTIONS.md` -> a protocol VERSION HISTORY
+  entry. The first three fire. The fourth does not.
+- **Not a new rule -- one that stopped firing.** The archive carries
+  `v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).`
+  A skill bump earning an entry on its own. That is harder to notice
+  than a rule that never existed, and the manifest going current by
+  itself DISGUISES the omission: the protocol looks updated because
+  half of it was.
+- **Prevention landed 2026-08-23** in `ledger-and-session-records`
+  1.9: the binding rule gains its fourth step. Detection is this item.
+- **Tony's design instinct, and it is right:** report it in the
+  maintenance runner. That is the tool already in the routine, and
+  the resident gate says put the check where it runs rather than in a
+  document someone has to remember. An earlier Claude proposal to
+  write the convention into the protocol as prose was redirected for
+  exactly that reason.
+- **THE NAIVE CHECKER DOES NOT WORK, and this was measured rather
+  than guessed.** "For each skill in the manifest, does its current
+  version appear anywhere in the written history?" reports **10 of
+  10** skills as unrecorded at `41c0b279`. Three causes: only three
+  entries stay resident, the archive names older versions, and several
+  skills have sat at 1.1 since creation and were never the subject of
+  any entry. A check that fires on everything is ignored by its second
+  run -- the same failure as an audit whose denominator grows whenever
+  someone thinks of something.
+- **The design that does work watches the TRANSITION, not the state.**
+  If a skill version changed since the last run, the protocol version
+  must have changed too. That needs memory of the previous state,
+  which is the pattern the suite already uses
+  (`data/worksheet_check_state.json`, `data/provenance_history.json`)
+  rather than a new store. It can fail, and it fails exactly once per
+  unrecorded bump, which is what makes it worth running.
+- **Deferred deliberately.** A checker module, a state file, runner
+  wiring and its own test is a build, not a patch, and it deserves the
+  design round. The dead end above is recorded so a future session
+  does not re-derive it.
+- **Note:** RICE 3/3/85/2 -> 3.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+- **Closed 2026-11-23, no longer needed** (L-522 step 3). Since the
+  protocol's v4.0 a skill bump makes no protocol entry
+  (ledger-and-session-records 1.24, the binding rule), so there is no
+  missing entry for a checker to find. The checker, its state file and
+  its Tony-action on the RICE score are struck with it; nothing is
+  carried.
+- **Ref:** `PROJECT_INSTRUCTIONS.md` v3.42 and its Skill Manifest;
+  `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`; `skills_index.py`;
+  `skills/ledger-and-session-records/SKILL.md` v1.9, Protocol and
+  Skills Change Log; L-188 (the maintenance runner); L-226, L-227 (the
+  two bumps whose absence from the history exposed this).
+
+#### [L-499] The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7)
+<!-- L:499 status:DONE upd:2026-11-23 section:C flag: rice: -->
+- **Ruled at the talk of 2026-10-27** (`documentation/DESIGN_talk_20261027_rulings.md`,
+  section 7). Claude put four kinds to Tony (coordinating, build,
+  talk-only, Code). Tony: "I would included a Code session as a kind
+  of builder session. Thoughts?" Agreed, and confirmed by Tony:
+  - a COORDINATING session (Claude Fable 5.1, linked to Tony's
+    computer) verifies against both repositories at HEAD, runs design
+    talks, and writes rulings and briefs into the orrery's
+    documentation folder; no patch, no code;
+  - a TALK-ONLY session (Opus or Sonnet, not linked) writes design
+    records and handoffs in Tony's words, which he saves by hand; no
+    patch, no code;
+  - a BUILD session writes code, in the PATCH form (Cowork: a patch
+    file Tony runs with the Run button, the spent patch the record,
+    the test result reaching the session through his run record) or
+    the DIRECT form (Claude Code, one repository folder: files edited
+    in place, the tests run and read by the session before it closes,
+    the change list in GitHub Desktop and the Where We Are box the
+    record). In both forms it reads the brief through Where We Are,
+    fires the same skills, ends with the records, and leaves commit
+    and push to Tony.
+- **Two lessons of Oct 27 for the coordinating session's own rules**
+  (the record's section 7): a build session in the direct form
+  verifies against the files in front of it, one step fresher than
+  the repo at HEAD; and a file placed on Tony's computer from the
+  coordinating session is confirmed by reading it back, not by the
+  tool's answer.
+- **The two texts that said four kinds:** the master plan's Section 11
+  paragraph (v37), corrected 2026-10-27, evening, in place, with a
+  note saying so, and the executive summary's line pointing at it;
+  the Oct 26 brief's section 4, which is history and is not edited
+  (the Oct 27 brief corrects it).
+- **2026-10-27, evening:** CLAUDE.md gained its "How to report to
+  Tony" section, word for word from the Oct 27 brief's section 4
+  (Tony, Oct 27: "Code is difficult to follow and technical.").
+- **2026-10-29, the door in the parent folder** (Tony's prompt of Oct 28,
+  night, item e; his ruling of Oct 29, 00:08: "a door in the parent").
+  The "Open in Claude Code" button in Tony's chat opens Code on the
+  folder the chat is linked to, `python_work`, the parent of both
+  repositories. The orrery session of Oct 28 (L-443) ran that way and
+  worked because the orrery's CLAUDE.md was found one folder down; a
+  session opened that way on Oct 29, 00:00, reviewed its prompt instead
+  of starting; and a session on the parent runs without a repository's
+  `.claude\settings.json` guard. Drafted by the gallery's Code session:
+  `documentation/python_work_door/CLAUDE.md` (a few lines that only
+  point: two repositories here, the prompt names which; read that
+  folder's CLAUDE.md, record the base there, work there; the canonical
+  copy lives at this path) and `documentation/python_work_door/settings.json`
+  (the same forbidden commands as the two repositories' copies, checked
+  identical). Tony-action (do): after the push, copy CLAUDE.md to
+  `python_work\CLAUDE.md` and settings.json to
+  `python_work\.claude\settings.json`. The next coordination handoff
+  carries the door into its section 1.
+- **Received 2026-10-29/30 from L-502, at its close:** which fields of
+  `data/objects_config.json` a Code session may edit by hand (a
+  drawing setting such as `info_polar_deg`, a row's words, `find`), or
+  that they come only through a tool; the gallery's CLAUDE.md and
+  interactive-exhibit (Only two tools write the served config) to say
+  which. For the records session, with this item's kinds of session.
+**Gap:** none. The protocol's text is v4.0's Kinds of Session (three
+kinds, the build session in two forms, both routine), ratified by Tony
+2026-11-23, 18:16, and installed that day (L-522 step 3).
+**Closed 2026-11-23.** Its loose ends: the door's copy step is done
+(`python_work\CLAUDE.md` is in place and names its canonical copy);
+L-502's question, which fields of `data/objects_config.json` a Code
+session may edit by hand, is answered in the website's CLAUDE.md
+("Never edit ... `data/objects_config.json` except through the tools
+the gallery-cache-builder and interactive-exhibit skills name") and in
+interactive-exhibit's Only two tools write the served config.
+**Ref:** `documentation/DESIGN_talk_20261027_rulings.md`;
+`documentation/COORD_next_sessions_brief_20261027.md`;
+`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` (Section 11);
+`PROJECT_INSTRUCTIONS.md` (Mode 7); `CLAUDE.md`; L-498.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
