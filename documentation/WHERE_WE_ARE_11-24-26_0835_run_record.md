@@ -175,10 +175,42 @@ documentation/COORD_L538_orbiters_brief_20261123.md. It stops
 after its Part A report; bring that to the coordinating session.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-2. Move the patch into `documentation`, then commit and push the orrery. -- 
+2. Move the patch into `documentation`, then commit and push the orrery. -- 6a42ab3bc703bac58ad80d9b738c3cd546803d47
 3. Start a Claude Code session with `documentation/COORD_L538_orbiters_brief_20261123.md`. Its first part makes no edits and ends with a report. Bring that report here.
 
 **Where this leaves us**
 - L-538 (the orbiters' printed error) is designed, and its build starts once the patch is run and pushed.
 - Nothing is built until the Code session's first report has been read here.
 - Step 4 of L-522 (document caps) waits for a gap and for three small rulings from you, listed on Where We Are once the patch runs.
+
+=================================
+
+**The work is sound and the floor holds. I have sent the Code session its go-ahead for the room, with one change to the floor and two faults I found reading its code.**
+
+What I read, from your folders and not from its summary:
+- The report whole, the widened error check whole, and the builder's rule for who is in a capture. I did not read all 710 new lines of the builder.
+- The patch landed: Where We Are reads November 24, still 130 lines.
+
+My comments:
+- **The floor's form.** It proposed the larger of two parts. I told it to use their sum. Its own reasoning gives the sum, and the larger-of passed its test partly by luck. A visitor sees no difference.
+- **Its question, all the check points or every fourth:** every fourth, as it recommends. All of them would add about 220 MB a year to an 84 MB repository, and the build already tests every one each night.
+- **Fault one: the test's proof that it can fail is pooled across craft.** Once the floor is in, BepiColombo passes by design, so Juno alone would carry the proof and nothing would show BepiColombo's floor can fail. It now has to prove it craft by craft.
+- **Fault two: the rule takes a craft's last arrival.** A craft orbiting one body with a later arrival planned elsewhere would be missed. None is served today.
+
+The finding that matters most is one it reported in passing:
+- JPL's own header for BepiColombo says "Data fit through 2026-Nov-17, prediction thereafter."
+- So the arrival and the whole orbit since are the plan, fitted four days before the burn that ESA says was cut short.
+- The website therefore shows the planned orbit. Our error figure covers our arithmetic, not that.
+- It also answers part of the encounter question: the arrival should wait until JPL's fit passes Nov 21.
+
+Do you want a spacecraft's box to carry JPL's own sentence when its path is a prediction? I recommend yes, as a small build of its own after this one.
+
+**Your run order**
+1. Tell the Code session: go ahead by `documentation/COORD_L538_partB_goahead2_20261124.md`. -- done
+2. Still do not commit the website. Commit and push the orrery when you are back. -- 
+
+**Where this leaves us**
+- L-538 (the orbiters' printed error): the builder and checks are built, and the room's part is cleared to build. Then a whole test build and your look on your phone.
+- BepiColombo's position on the site is JPL's prediction, not a measurement, until JPL updates its path.
+
+One note on the placement: my first copy of the go-ahead arrived with an earlier wording. The read-back caught it by size, and the second copy is identical to what I wrote.

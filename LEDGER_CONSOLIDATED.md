@@ -1176,14 +1176,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
-| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-22 |
+| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-24 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-23 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-24 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-21 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
-| ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-23 |
+| ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-24 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-22 |
 | ! | L-540 | A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea) | OPEN | -- | 2026-11-21 |
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-22 |
@@ -1754,7 +1754,7 @@ go-ahead.
 final).
 
 #### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534)
-<!-- L:533 status:OPEN upd:2026-11-23 section:A flag: rice: -->
+<!-- L:533 status:OPEN upd:2026-11-24 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
   gallery d3e97b15): NASA's article of 2026-11-09,
@@ -1989,6 +1989,11 @@ of it (Tony, 2026-11-22, 21:58, asked which: "Keep its own build"). The loops ne
 an Earth-centred path view in Earth's fold. One later item: a Mars
 arrival counts as one only because JPL's data runs three days past
 orbit insertion; the plan's 30-day remake shows it if JPL trims that.
+For the last-day build (2026-11-24, from L-538's Part A report, not
+checked by the coordinating session): past the end of JPL's data for a
+craft still flying, the box reads "This mission ended on ...", which
+is false. BepiColombo's data ends 2027-04-10, and the date window
+reaches that day about 2027-01-12.
 **Ref:** L-514 (the Mars room); L-529 (guided encounters); L-476 (paths
 by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
 orbiter rule for an arrival).
@@ -2118,7 +2123,7 @@ the digits test) and the website's sentence; the Moon first.
 (Pluto's period at its barycentre); L-514 (the Mars room).
 
 #### [L-538] The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297)
-<!-- L:538 status:OPEN upd:2026-11-23 section:A flag: rice: -->
+<!-- L:538 status:OPEN upd:2026-11-24 section:A flag: rice: -->
 - **Found 2026-11-19** in L-297's Session 2 (Claude Opus 5.5 in Claude
   Code, website 133dbd21), holding the curve's error to every served path.
   LIVE TODAY, before and apart from that round: a spacecraft's box prints
@@ -2198,16 +2203,81 @@ the plan it sends.
 NOT CHECKED: that BepiColombo's loop around Mercury shortens to a few
 hours in the coming months. The session said it from memory; the
 brief's Part A measures it from JPL's own points.
-**Gap:** the build, by the brief, in one Claude Code session in the
-website repository. Its Part A (the map, the measure against JPL, its
-proposal) returns to a coordinating session before any edit. Then the
-skill text for gallery-cache-builder, which stands at its cap. Until
-the build, those boxes claim less error than they have.
+**Note:** (2026-11-24, morning, the same coordinating session, Claude
+Fable 5.2, on orrery 6a42ab3b and gallery 9e7bb99f) PART A READ, AND
+TONY'S RULING ON BEPICOLOMBO.
+- Tony, 08:12, after the session told him the finer-step rule covers
+  the daily part: "yes". The session read it as accepting that and
+  said so; he did not say otherwise. `patch_L538_1_design_and_brief.py`
+  ran and is pushed at 6a42ab3b.
+- The Part A report, `documentation/REPORT_L538_partA_20261124.md`
+  (the Claude Code session, Claude Opus 5.5), read whole from Tony's
+  folder, 16,780 bytes, not yet on GitHub. Its figures are its own, not
+  checked here: Juno cured at 45 minutes on its six close passes of
+  Jupiter in the window, 636 points, about 48 KB; BepiColombo passes
+  the held-out test with a point a day while its box is wrong at 56 of
+  728 real minutes, by up to 2.0 times, so a second test is needed,
+  against JPL's own points between the served ones; with both tests it
+  settles at 15 minutes, 6,179 points and about 472 KB stretch by
+  stretch, about 9,700 points and 740 KB day by day; its loop around
+  Mercury is 28 hours just after arrival, 4.40 hours by 2027-01-20,
+  2.37 hours by 2027-04-06; the chord figure holds, the curve's does
+  not.
+- THE SESSION'S ESTIMATE OF NOV 23 WAS WRONG: "about 270 more points
+  per craft, roughly 22 KB each". For BepiColombo the measured cost is
+  30 times that and more, and Tony's "Yes" of Nov 23 was given on it.
+- What the session added, by its own arithmetic from the report's
+  figures and by reading `interactive.html` at 9e7bb99f: the 740 KB is
+  today's size, and the fine span grows as the window moves, to about
+  13,400 points and 1.0 MB by mid-January, past the report's own limit
+  of 12,000 points about the end of December; and
+  `solarSystemPositionFiles` fetches every spacecraft's positions file
+  before the room draws, 42 files, 1,084 KB together.
+- Tony, 09:30, on the report's question (about 470 KB or about 740
+  KB): "I think it's okay. Comments?" The session's recommendation:
+  "Juno gets the full fix as measured. BepiColombo gets fine points
+  only for the few days around today, and a point a day elsewhere. On
+  the other days its box prints a coarser, true figure: an error no
+  smaller than the reach of its loop around Mercury, which the builder
+  measures from JPL each night. The same second test proves it. The
+  loop itself goes in the BepiColombo encounter you asked for this
+  morning, loaded only by a visitor who opens it." And: "This needs
+  your ruling, because on Nov 19 you declined a coarser figure as a
+  stopgap. I think this one is different: it is permanent and it is
+  true. But it is a coarser figure." Tony, 09:38: "I agree with your
+  recommendation. Fine points around today. And we should also draw
+  the Mercury features for this close encounter especially the hill
+  sphere."
+- SO RULED, Nov 24: for a craft whose loop is too short for fine
+  points across the window to stay small, fine points around today, a
+  point a day elsewhere, and outside the band a figure never smaller
+  than the reach of its loop. It sets aside the whole-window part of
+  the Nov 23 ruling for such a craft. It was put to him as a coarser
+  figure and as different from the stopgap he declined on Nov 19.
+- The session's reading, as method and not his words: which craft
+  gets which shape is decided by a measured size, not by a name.
+- The go-ahead for Part B:
+  `documentation/COORD_L538_partB_goahead_20261124.md`. It restates the
+  outcomes, asks for the floor's form and where it enters the room
+  before the room's code is touched, and carries four smaller things:
+  the limits measured before they are set, the check points' times
+  moved each night, how fresh JPL's path is, what a night commits.
+- Re-homed: "This mission ended" on days past the end of JPL's data,
+  to L-533 (ESCAPADE), every path to its last day. BepiColombo's loop
+  drawn, to L-529 (guided encounters).
+**Gap:** Part B, by the brief and the go-ahead, in the same Claude
+Code session: one more report, on the floor and the room, before the
+room's code is touched; then Part C and Tony's look on his phone. Then
+the skill text for gallery-cache-builder, which stands at its cap.
+Until the build, those boxes claim less error than they have.
 **Ref:** L-297 (the curve's error, Tony's ruling of Nov 19); gallery
 `tools/test_curve_error.py` (run with every kind to measure);
 provenance-discipline, A Computed Position Prints What Its Errors Earn;
 the brief, `documentation/COORD_L538_orbiters_brief_20261123.md`,
-placed by `patch_L538_1_design_and_brief.py`.
+placed by `patch_L538_1_design_and_brief.py`; the Part A report,
+`documentation/REPORT_L538_partA_20261124.md`; the go-ahead,
+`documentation/COORD_L538_partB_goahead_20261124.md`, placed by
+`patch_L538_2_partB_ruling_and_encounter.py`.
 
 #### [L-539] Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check)
 <!-- L:539 status:OPEN upd:2026-11-22 section:A flag: rice: -->
@@ -3142,7 +3212,7 @@ of `solar_system`, or the check allows the Earth room's address.
 **Ref:** L-519 (Scenes); L-540 (a reel on a Featured card); L-529.
 
 #### [L-529] Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20)
-<!-- L:529 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+<!-- L:529 status:OPEN upd:2026-11-24 section:A flag: rice: -->
 - **Tony, 2026-11-12, 20:34,** after his phone look at the finished
   guide (L-527 (a first visit's guide)): "it works great. i'm thinking
   this might be a good way to create encounters, with labels and focus
@@ -3352,7 +3422,52 @@ coordinating session's close moves them here.
   plants a file in each leftover place), pushed at 627acc3f; the night
   run by hand green at 7d1e2e16, all 58 rows PASS. The class is L-543
   (green on Tony's computer, red on GitHub).
-**Gap:** slice 2, its talk first: the two close passes and how the
+**Note:** (2026-11-24, the coordinating session, Claude Fable 5.2, on
+orrery 6a42ab3b and gallery 9e7bb99f) BEPICOLOMBO'S ARRIVAL AT MERCURY,
+AN ENCOUNTER FOR THE LIST. Tony, 08:51: "bepi colombo just arrived at
+mercury. can we add this close encounter to the list? it may be a
+useful test of this architecture too." Tony, 09:38: "And we should
+also draw the Mercury features for this close encounter especially the
+hill sphere."
+- What happened, read on the web on Nov 24 and not from JPL: ESA
+  confirmed the capture into orbit of 2026-11-21; a software fault
+  ended the burn short of its planned 37 minutes; the burn was about
+  635 km above the surface (europeanspaceflight.com, "BepiColombo
+  Enters Orbit Around Mercury Despite Software Glitch"). ESA's
+  timeline: the two orbiters part on 9 to 10 December 2026, MPO
+  reaches its final orbit on 10 March 2027, science begins 6 April
+  2027 (esa.int, "BepiColombo arrival at Mercury timeline").
+- What the website holds: the plan of Nov 4 has the arrival at
+  2026-11-21 18:48, 3,073.0 km from Mercury's centre, staying. L-538's
+  Part A found JPL's answer of Nov 24 thousands of km from that plan's
+  points within a minute, and the loop 28 hours long just after
+  arrival, 3,062 to 55,341 km from the centre (its report; not checked
+  here). How recent JPL's path is, and whether it holds the orbit
+  after the short burn, is not read; L-538's Part B prints it.
+- Why it tests the architecture (the session's reading, told to
+  Tony): a new kind, an arrival that stays, where slice 1 was a pass;
+  a new body, the first row in Mercury's fold; and this item's own
+  open question, a measurement replacing a prediction, as a live case.
+- What Mercury has to draw: the orrery draws eight things for it
+  (`mercury_visualization_shells.py`: inner core, outer core, mantle,
+  crust, atmosphere, sodium tail, magnetosphere, Hill sphere). The
+  website serves none of them: `data/solar-system/feature_configs.json`
+  at 9e7bb99f holds features for the Sun (6), Earth (9), Jupiter (3)
+  and Saturn (2), an empty entry for Mercury, and a Hill sphere for
+  the Sun and for Earth alone. So this encounter needs Mercury's
+  features served first, the Hill sphere at least.
+- From L-538 (the orbiters' printed error), ruled the same morning:
+  BepiColombo's loop around Mercury is not served to the Solar System
+  room; its fine points belong to this package, loaded by the visitor
+  who opens it.
+- OPEN, for its talk: where an arrival's encounter ends (the capture,
+  the first loop, the orbiters' parting); which of the eight features;
+  whether it waits for JPL's path after the burn; and its place in the
+  order. The session asked whether right after L-538, ahead of slice
+  2's polish, as it recommends, or after slice 2: not yet answered.
+**Gap:** BepiColombo's arrival at Mercury as an encounter, its talk
+first, its place in the order Tony's to say (the note of 2026-11-24).
+Slice 2, its talk first: the two close passes and how the
 visitor moves between the three views; escape speed beside the speed
 in the close views; NASA's "powered Earth flybys" through the
 orrery's words; the words on each card. The L2 loiter as an encounter
