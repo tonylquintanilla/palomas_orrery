@@ -406,7 +406,7 @@ To start the next session, give it this file and L-522.
 
 =============================
 
-**Session: OPEN 11-23-26 1432: Fable: L522 Coordination session protocol review**
+**Session: DONE 11-23-26 2236: Fable: L522 Coordination session protocol review**
 
 Part 1 checks out, and it is safe to pull, commit and push. I read the changed files straight from your folder and compared them myself, without relying on the Code session's report.
 
@@ -528,13 +528,38 @@ All four corrections landed. I read the ledger and Where We Are from your folder
 
 **Your run order**
 
-1. Commit and push the orrery. Part 3 is not on GitHub yet. -- 
-2. Paste `PROJECT_INSTRUCTIONS.md`, v4.0, into the Project's instructions on claude.ai.
-3. Reinstall three skills from the repository: the records skill, the coding-conventions skill, the pre-test skill.
+1. Commit and push the orrery. Part 3 is not on GitHub yet. -- 2634031c19ff78e591ebbdc1d724ff4f0d494484
+2. Paste `PROJECT_INSTRUCTIONS.md`, v4.0, into the Project's instructions on claude.ai. -- done. 
+3. Reinstall three skills from the repository: the records skill, the coding-conventions skill, the pre-test skill. -- done
+
+      The three updated skills are in your `skills` folder, each inside its own subfolder as before. Nothing new shows at the top level because a skill is edited in place, in the same file it always had.
+
+      **Where they are**
+
+      - `skills\ledger-and-session-records\SKILL.md`: version 1.24, 44,651 bytes, changed tonight at 8:32 PM.
+      - `skills\orrery-coding-conventions\SKILL.md`: version 1.14, 36,756 bytes, changed tonight at 8:32 PM.
+      - `skills\agentic-pre-test\SKILL.md`: version 1.4, 6,514 bytes, changed tonight at 8:30 PM.
+
+      I read those sizes from your folder just now, and they match the copies on GitHub byte count for byte count. Each file's version is in its first lines if you want to confirm before installing.
+
+      **About `SKILL_MANIFEST.md`**
+
+      - It is the one new file, and it is not a skill. It is the table of skills that used to sit inside the protocol.
+      - Do not install it. A tool rewrites it whenever a skill changes.
+
+      **Your run order**
+
+      1. Reinstall those three the way you have before, from those three subfolders. --done
+
+      **Where this leaves us**
+
+      - Part 3 is on GitHub. Your commit "L522 documents" is there.
+      - The paste is done and confirmed: the protocol this session is now given reads v4.0.
+      - The three reinstalls are the last step. This session cannot confirm them, because the copies it loaded were fixed when it started. The next session with a shell compares them with the repository.
 
 **Where this leaves us**
 
-- Step 3 is finished once you push. The protocol is v4.0 at 795 lines, down from 1,394, with every old line kept in a named place.
+- Step 3 is finished once you push. The protocol is v4.0 at 795 lines, down from 1,394, with every old line kept in a named place. -- done
 - The next coordinating session starts from `HANDOFF_document_upkeep_20261123_close.md`. Its first job is to compare your installed skills with the repository, which is what confirms the three reinstalls.
 - Next on the road is L-538 (the orbiters' printed error). This track's next step, the ledger's cleanup, waits for a gap between builds.
 - This session has nothing further owed. You can close it after the push.
