@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*281 live items; 266 need attention (`!`); 162 RICE-scored; 269 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*282 live items; 267 need attention (`!`); 162 RICE-scored; 269 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1172,11 +1172,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | OPEN | -- | 2026-11-21 |
-| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-23 |
+| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-25 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
-| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-24 |
+| ! | L-529 | Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20) | OPEN | -- | 2026-11-25 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
@@ -1196,10 +1196,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-551 | No saved scenes: the gallery run makes every room's scene fresh at each run, and the saved copies go (gallery; ruled Nov 22, a list first) | OPEN | -- | 2026-11-23 |
 | ! | L-552 | The kind of body: each entry says what it is, and how JPL is asked follows from it (orrery; Tony's idea, for a design talk) | OPEN | -- | 2026-11-23 |
 | ! | L-553 | A body held because JPL did not answer turns the night red (gallery, the builder and the Solar System figures check) | OPEN | -- | 2026-11-24 |
-| ! | L-554 | JPL's own sentence when a path is a prediction (gallery; a decision of Tony's) | OPEN | -- | 2026-11-24 |
+| ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; ruled and briefed Nov 25) | OPEN | -- | 2026-11-25 |
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
 | ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-25 |
+| ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-25 |
 
 ### B. Pending Action (Tony-side)
 
@@ -2221,18 +2222,37 @@ COPY.
 - THE WEBSITE'S PUSH NEEDS A PULL FIRST: GitHub holds the night's
   commit above Tony's folder. The five data files waiting in his
   folder equal the night's, so the pull has nothing to reconcile.
+- **TONY'S PHONE LOOK AND BOTH PUSHES, 2026-11-25** (the coordinating
+  session of the afternoon, Claude Fable 5.2; from his run record
+  `documentation/WHERE_WE_ARE_11-25-26_0827_run_record.md`, read at
+  orrery 18df08b7). Of ESCAPADE-Gold's box "as far as 10 September
+  2027" and ESCAPADE-Blue's "12 September 2027": "-- confirmed on
+  phone". The words' build is pushed, website 3fb13a27, "merged with
+  nightly run, green"; the documents, orrery 580afaa5. Both of his
+  folders sit on those commits (git's own record in each folder, read
+  through the link to his computer; uncommitted edits not seen, there
+  being no shell). So the last-day part of this item is DONE: built,
+  pushed, proved by its night (run #60) and seen on his phone.
+- THE WORDS' ONLY CHECK DOES NOT RUN AT NIGHT. No visitor sees the
+  words before 11 April 2027, so the walk's section 42 is what holds
+  them, and the website's `.github/workflows/nightly.yml` at 3fb13a27
+  runs no walk (read: its one mention of node is a comment). The walks
+  at night are ruled and not built: L-545 (checks that wait to be
+  remembered).
 **Gap:** the row under Mars waits (L-534 (missions by destination),
-Nov 20). The box's last day: BUILT Nov 25 (the note above), not pushed;
-open for a night on GitHub and Tony's phone look (ESCAPADE-Gold "as far
-as 10 September 2027", ESCAPADE-Blue "12 September 2027"). The loops near L2, with
+Nov 20). The box's last day: DONE Nov 25, on Tony's phone look (the
+note above). The loops near L2, with
 an Earth-centred path view in Earth's fold. One later item: a Mars
 arrival counts as one only because JPL's data runs three days past
 orbit insertion; the plan's 30-day remake shows it if JPL trims that.
 Past the end of JPL's data for a craft still flying, the box said
 "This mission ended on ...", which was false: Tony's approved words in
-its place, BUILT Nov 25 (the afternoon note), not pushed; no visitor
+its place, BUILT and pushed Nov 25 (gallery 3fb13a27); no visitor
 sees them until 11 April 2027, BepiColombo's, so the walk's section 42
-is their check until then.
+is their check until then, and it runs only when a session runs it
+(L-545 (checks that wait to be remembered)). The orrery's own drawing
+still stops a flying path at its last 7-day point (`path_drawing.py`),
+for an orrery session (the handoff of Nov 25).
 **Ref:** L-514 (the Mars room); L-529 (guided encounters); L-476 (paths
 by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
 orbiter rule for an arrival).
@@ -3016,8 +3036,8 @@ real night that holds a body or makes a second try, read from its log.
 **Ref:** L-525 (hold the bad data); L-538 (the orbiters' printed
 error), its Part C report, section 5; L-541 (the rooms' clock).
 
-#### [L-554] JPL's own sentence when a path is a prediction (gallery; a decision of Tony's)
-<!-- L:554 status:OPEN upd:2026-11-24 section:A flag: rice: -->
+#### [L-554] JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; ruled and briefed Nov 25)
+<!-- L:554 status:OPEN upd:2026-11-25 section:A flag: rice: -->
 - **Opened 2026-11-24** by the coordinating session (Claude Fable 5.2),
   from L-538 (the orbiters' printed error); written by the Claude Code
   session by `COORD_L538_close_goahead_20261124.md`.
@@ -3032,7 +3052,192 @@ error), its Part C report, section 5; L-541 (the rooms' clock).
   source line, read from JPL's header by the builder, as a small build
   of its own.
 - Asked of Tony on 2026-11-24 in the reply to his 11:56: not answered.
-**Gap:** Tony's decision; then, if yes, the small build.
+**Note:** (2026-11-25, 14:20, the coordinating session, Claude Fable 5.2)
+THE LOOP THE WEBSITE DRAWS AT MERCURY LOOKS LIKE THE PLANNED ONE, NOT
+THE ONE FLOWN.
+- ESA's entry of 23 November 2026 (the read is on L-529 (guided
+  encounters), its note of this date): a 75-hour orbit, not the
+  planned 58-hour one. JPL's fit still ends 2026-Nov-17.
+- A rough reading of the served points, the session's own working
+  and no check of the project's:
+  `data/solar-system/positions/bepicolombo.json` at gallery 3fb13a27
+  (retrieved 2026-11-25T18:42Z, Sun-centred, points a quarter and a
+  half hour apart from 24 November). The craft's acceleration, by
+  second differences, peaks where it passes closest to Mercury: 24
+  November 05:30 UTC and 26 November 16:00 UTC, 58.5 hours apart,
+  and a third 27.5 hours later.
+- CORRECTED, 14:35, and JPL READ LIVE on Tony's question, "Can you
+  check if JPL has updated its BC data with the new orbit?" This
+  note first set the third peak aside as the fine points' end. It is
+  a pass: JPL's path has a burn between 26 and 27 November. Read
+  through the pane on his computer, 14:30 Chicago (`horizons.api`;
+  the answer stamped "Wed Nov 25 12:24:13 2026 Pasadena"): record
+  -121 is "Revised: Nov 23, 2026" and still says "Trajectory for MPO
+  from ESA. Data fit through 2026-Nov-17, prediction thereafter.",
+  the one file `bc_mpo_fcp_00243_20181020_20270411_v01`. Its
+  osculating elements around Mercury (CENTER='500@199', a point a
+  day): period 211,267 to 212,002 seconds from 22 to 26 November,
+  58.7 to 58.9 hours, the far point 55,341 to 55,478 km from
+  Mercury's centre; from 27 November 99,786 to 99,843 seconds, 27.7
+  hours, the far point near 32,370 km.
+- SO JPL HAS NOT TAKEN UP THE NEW ORBIT. Its path is the plan from
+  before the arrival: 58 hours, then lowered to 27.7 hours on the
+  plan's own date. ESA says the craft is on 75 hours and the later
+  burns are replanned. What JPL gives and what is flown part further
+  from 27 November. Not known: when ESA sends JPL a new path. The
+  nightly record prints JPL's fit sentence, so the night it changes
+  is the night to read.
+- This makes the decision heavier than when it was asked: the
+  sentence would no longer mark a path as merely unconfirmed. Still
+  Tony's, still not answered; put to him first by this session.
+- **RULED, Tony, 2026-11-25: BepiColombo's path is cut at JPL's fit
+  date, 17 November 2026, until JPL fits it again** (the coordinating
+  session of the afternoon, Claude Fable 5.2).
+  - His proposal, 14:32, once JPL's live figures were before him:
+    "Should we terminate the oath at the time of the entry when the
+    plan got changed. Then wait" (the path). The session agreed: it
+    is the protocol's own rule, remove what cannot be sourced and
+    say so, and better than the sentence alone, which labels the loop
+    and still prints digits from a path the craft is not on. 14:36:
+    "Good plan. Proceed".
+  - Found before anything was written: the cut is a field that
+    exists, `path_cutoff` on the orrery's entry with `cutoff_note`
+    for the box (`celestial_objects.py`; `path_plan.path_stop`), made
+    for Akatsuki, whose cut was Tony's "cut the path at 2024-04-26,
+    the last day JPL's solution is fitted to tracking" (2026-11-05,
+    L-507). By that rule BepiColombo's day is JPL's "Data fit through
+    2026-Nov-17", not the entry on 21 November. Put to him with the
+    session's recommendation for the 17th: one source, JPL's; a note
+    that needs no retiring; one rule for both craft.
+  - **Tony, 14:41: "Stay with JPL and 11/17 until refit."**
+  - The picture does not change with the day: JPL's positions around
+    Mercury, read live through the pane, 14:38 Chicago
+    (CENTER='500@199', the answer stamped "Wed Nov 25 12:37:58 2026
+    Pasadena"): 168,818 km from Mercury's centre on 17 November 00:00
+    TDB, 66,938 km on 21 November 00:00. In the Solar System room
+    both sit on Mercury.
+  - CORRECTED: the session first told him the cut "lifts by itself".
+    A typed day cannot. When JPL fits past it, a session changes the
+    entry; so the night must say when: a check that is red when JPL's
+    fit date and the entry's cut disagree. The night already reads
+    JPL's sentence (`fetch_path_revised`).
+  - THE PAGE'S GAP, read at gallery 3fb13a27 (`interactive.html`,
+    `pastPath`): a craft with no `mission_end`, shown past its path's
+    last point, takes this morning's words, "JPL's published path for
+    this craft stops on ...", and its `cutoff_note` is not read; only
+    an ended mission's is (`ENDED_EARLY_OPENING`). For a cut path
+    those words would be false: JPL's path runs to 10 April 2027. So
+    the build needs words of its own, Tony's to approve, and every
+    visitor sees them from the first night, today being past the
+    17th.
+  - NOT SEPARATELY RULED: the item's first question, JPL's sentence
+    in the source line of every craft whose path is a prediction.
+- **THE WORDS, APPROVED, AND THE BRIEF, 2026-11-25, 15:10** (the
+  coordinating session of the afternoon, Claude Fable 5.2).
+  - Seven sentences for BepiColombo's box,
+    `documentation/WORDS_L554_path_cut_20261125.md`, each with its
+    source. Tony, 14:52, to six of them: "All the sentences approved,
+    and can we add from ESA a reason for dropping the predicted
+    path?" The seventh, put to him: "ESA reports that the entry burn
+    ended early and the craft is in a 75-hour orbit, not the planned
+    58-hour one; JPL's prediction still shows the planned orbit."
+    Tony, 14:58: "Not at my computer. Words and plan approved.
+    Thanks."
+  - The session had argued against a reason from ESA, as a note that
+    turns false when JPL catches up. It withdrew that: the cut is
+    taken off by a session, and the note goes in the same edit.
+  - APPROVED WITH THE WORDS: the night's check watches two things on
+    JPL's sheet for -121, the fit date and the path file's name
+    (`bc_mpo_fcp_00243_20181020_20270411_v01` today), since JPL could
+    put in a newer prediction and still call it fitted to the 17th.
+  - The brief, for one Code session through the python_work door,
+    the plan first: `documentation/COORD_L554_path_cut_brief_20261125.md`.
+    One question it sends back to Tony if the plan finds it: whether
+    a night made red by JPL changing its sheet fits L-485's rulings
+    (an outside failure is reported and never halts the night).
+- **THE PLAN, READ AGAINST THE CODE, AND THE GO-AHEAD, 2026-11-25,
+  15:50** (the coordinating session of the afternoon, Claude Fable
+  5.2). The plan: `documentation/REPORT_L554_path_cut_plan_20261125.md`
+  (a Claude Code session, Claude Opus 5.5, read-only, on Tony's
+  folders). Accepted as written. Five of its claims read in the code
+  on copies equal to both bases, not run: `path_drawing.last_day`
+  returns None without a `mission_end`; `fetch_path_revised` is
+  called only in `process_capture`; `missionEndIssue` is red on an
+  `end_note` with no `mission_end`; `horizons_check.py` keeps
+  `data/spacecraft_sheets.json`; the workflow's commit step follows
+  its run step, so a red night commits nothing.
+  - WHAT THE PLAN FOUND THAT THE BRIEF HAD NOT: the cut takes the
+    arrival out of BepiColombo's plan, so the website no longer
+    treats it as a capture craft and its night stops reading JPL's
+    sheet for it; the check therefore runs in the orrery's night,
+    where `horizons_check.py` already reads each craft's sheet. One
+    new typed field, `cutoff_file`. The website is pushed first.
+  - THE NIGHT'S REPORT. The brief asked for red; the plan showed that
+    a red orrery night commits nothing, against L-485's R4, and
+    proposed L-539's shape: a clean night whose title starts JPL
+    REFIT, the same check red by day. Tony, 15:33, to that question:
+    "Yellow? Not an issue." Read by the session as: not red at night,
+    the flag. The go-ahead is written on that reading and says so;
+    Tony was asked to confirm it.
+  - NOT BUILT, FOR TONY'S LATER WORD: a day shown before 17 November
+    (a shared address inside the served window) keeps the ordinary
+    words, with "as far as JPL's data runs" in its source line, which
+    is not true of a path we cut. The session's proposal: sentence 7
+    on any day for a craft with a cut.
+  - GitHub's orrery was one commit ahead of Tony's folder, 9de39f3c,
+    the night's record; he pulls before the build.
+  - The go-ahead: `documentation/COORD_L554_path_cut_goahead_20261125.md`.
+- **"YELLOW" CONFIRMED, AND THE WEBSITE HALF BUILT AND READ ON A CLEAN
+  COPY, 2026-11-25, 16:30** (the coordinating session of the
+  afternoon, Claude Fable 5.2).
+  - Tony, 15:46, asked whether "Yellow? Not an issue." means a green
+    night with "JPL REFIT" in its title: "Yes". The go-ahead says so.
+  - Tony, 15:42, away from his computer: "Can we give Code a go ahead
+    from my local folder?" The Code session had stopped, rightly, on
+    the go-ahead's own rule: the orrery folder held records not
+    committed and stood one commit behind GitHub. It offered the
+    website half, whose folder was clean and equal to GitHub. The
+    go-ahead was amended to allow that half, nothing written in the
+    orrery folder until Tony's push. The split is the session's, as
+    method.
+  - THE WEBSITE HALF, by the Code session (Claude Opus 5.5), its
+    report in chat: `interactive.html` (6 edits), the walk (8), the
+    figures check (5), `INTERACTIVE_AS_BUILT.md` (a section
+    replaced), `tools/mirror_objects.py` (its notes only). Not
+    pushed.
+  - READ AND RUN BY THIS SESSION on clean checkouts of gallery
+    e028483d (the night's commit of 21:52 UTC above 3fb13a27; it
+    touches none of the edited files), the session's files laid over:
+    the page's change read whole (`solarSystemPathCut`,
+    `CUT_PATH_WORDS`, `CUT_SOURCE_WORDS`); the walk "PASS: 383 checks
+    on the stand-in scene", section 43 "bepicolombo cut at 17
+    November 2026 (planted), from 21 October 2018; its box reads the
+    seven sentences in order: yes"; the same walk on the page as it
+    was, "FAIL 2 of 383", both section 43's; the figures check exit
+    0 on the built page and "FAIL: 4 problem(s)" on the page as it
+    was, its four new pins; "MIRROR OBJECTS SUITE: pass". Section
+    43's seven sentences are literal in the walk and equal the words
+    file's, word for word.
+  - CLAIMED, not run here: the website's maintenance run (53 of 53),
+    the two other planted pages (42a, 42b), the figures check's
+    self-test on the old rule.
+  - A LIMIT TO KNOW: section 43 holds BepiColombo's own sentences. A
+    second craft served with a cut would be read against them and
+    fail; a second cut widens the section.
+**Gap:** Tony's pushes: the website (Commit, Pull origin, Push
+origin), which changes nothing a visitor sees, and the orrery's
+records with the night's commit pulled; then the orrery half by the
+go-ahead;
+the walk and the new check run on a clean checkout before Tony's
+pushes; a night on GitHub; Tony's phone look at BepiColombo's box.
+Then, when JPL fits past 21 November, the cut and its words come off
+and the arrival's encounter can be built (L-529 (guided encounters)).
+The sentence for every predicted path is still Tony's to say.
+- **Tony-action (do):** Orrery: Commit, Pull origin, Push origin;
+  then tell the Code session its go-ahead is
+  `documentation/COORD_L554_path_cut_goahead_20261125.md`.
+- **Tony-action (decide):** the source line of a cut craft on a day
+  before its cut (the note above).
 **Ref:** L-538, the coordinating session's note of 2026-11-24,
 afternoon; L-529 (guided encounters).
 
@@ -3079,6 +3284,13 @@ MIO, FOR THIS TALK, AND RULED UNTIL THEN.
   file of about three quarters of a megabyte, as BepiColombo's is.
 - OWED: the first coordinating session after 10 December 2026 reads
   JPL's list again.
+**Note:** (2026-11-25, 14:35, the coordinating session of the afternoon, Claude Fable 5.2)
+JPL'S RECORD -121 NOW SAYS MIO "IS AVAILABLE SEPARATELY". Read live
+through the pane, the same read as L-554's note of this date: "This
+trajectory is for ESA's MPO spacecraft. JAXA's "Mio" Mercury
+Magnetospheric Orbiter (MMO) is available separately." The morning's
+read of JPL's whole list found no record for Mio; the list was not
+read again here. For the read owed after 10 December.
 **Gap:** the talk with Tony on the design record.
 **Ref:** L-538; L-529; the design record above.
 
@@ -3280,6 +3492,56 @@ found it.
 **Ref:** L-556 (a date to choose in the rooms); L-538 (the orbiters'
 printed error); L-541 (a plan's clock), the Room clock row; the test
 above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
+
+#### [L-558] The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25)
+<!-- L:558 status:OPEN upd:2026-11-25 section:A flag: rice: -->
+- **Opened 2026-11-25** by the coordinating session of the afternoon
+  (Claude Fable 5.2), at orrery 18df08b7 and gallery 3fb13a27, on
+  Tony's question of 13:50: "wouldn't Jupiter's moon's be next in the
+  build order after the cleanup?" The session had just told him "The
+  road's next new work, Uranus and Neptune, waits behind the
+  cleanup", repeating the road's line without holding it to his
+  order.
+- WHAT THE ROAD SAID, AND WHERE IT CAME FROM. The order Tony
+  confirmed on Nov 5, in the session's words of that day
+  (`documentation/WHERE_WE_ARE_11-4-26_2321_run_record.md`): "the
+  planet rooms in order, starting with Mars, each opening with its
+  moons, with shells after", and "the planet rooms from Mars outward,
+  moons first". From Nov 10 the road's stage 15 read "Mars (Phobos,
+  Deimos) as the first new fold (L-514 (the Mars room)), then Uranus
+  and Neptune. Io, Titan, Charon and Pluto come to standard in their
+  folds" (first in `WHERE_WE_ARE_11-10-26_1211_run_record.md`, the
+  day of L-515 (one nested tree), step 2b), and it kept "then Uranus
+  and Neptune" to Nov 25. No ruling of Tony's for passing over
+  Jupiter and Saturn was found, in this ledger by search or in the
+  road's line across his run records of Nov 10 to 25. Not every run
+  record was read whole.
+- WHAT IS SERVED, read from `data/objects_config.json` at gallery
+  3fb13a27, each entry by its parent: Earth, the Moon and four
+  Lagrange points; Mars, Phobos and Deimos; Jupiter, Io alone;
+  Saturn, Titan alone; Pluto's barycentre, Pluto and Charon; Uranus
+  and Neptune, nothing. The orrery's `celestial_objects.py` at
+  18df08b7 holds, among its moons, Europa, Ganymede and Callisto
+  beside Io; Enceladus beside Titan; Ariel, Umbriel, Titania, Oberon
+  and Miranda; Triton. Its whole list of moons was not read.
+- **RULED, Tony, 14:09: "Yes, I agree with the order."** The order
+  put to him, for after this round's cleanup: (1) BepiColombo's
+  arrival at Mercury, with Mercury's features and its Hill sphere,
+  the talk first, with L-555 (orbiters in general), the build when
+  JPL's fit passes the arrival (L-529 (guided encounters)); (2)
+  Jupiter's moons, the rest beside Io, and Io to standard; (3)
+  Saturn's moons, the same, with Titan; (4) Uranus and Neptune, each
+  with its moons.
+- NOT RULED: which of each planet's moons; where the encounter's
+  slice 2 (L-529) sits against this order; where this round's
+  cleanup ends.
+**Gap:** the road on Where We Are carries the order since this note.
+Each fold then has its design round first, as Mars had (L-514 (the
+Mars room)). The master plan's restamp records the direction (L-522
+(document caps), step 6, its note of this date).
+**Ref:** L-514 (the Mars room); L-515 (one nested tree); L-529 (guided
+encounters); L-555 (orbiters in general); L-554 (JPL's sentence when a
+path is a prediction); L-433 (the direction); L-522 (document caps).
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -3768,7 +4030,7 @@ of `solar_system`, or the check allows the Earth room's address.
 **Ref:** L-519 (Scenes); L-540 (a reel on a Featured card); L-529.
 
 #### [L-529] Guided encounters: a completed pass kept as its own package and played (gallery; slice 1, ESCAPADE's Earth flybys, built Nov 20)
-<!-- L:529 status:OPEN upd:2026-11-24 section:A flag: rice: -->
+<!-- L:529 status:OPEN upd:2026-11-25 section:A flag: rice: -->
 - **Tony, 2026-11-12, 20:34,** after his phone look at the finished
   guide (L-527 (a first visit's guide)): "it works great. i'm thinking
   this might be a good way to create encounters, with labels and focus
@@ -4027,8 +4289,35 @@ hill sphere."
   (orbiters in general)); the coordinating session recommends, not
   ruled, that BepiColombo's arrival wait until JPL's path is fitted
   past it.
-**Gap:** BepiColombo's arrival at Mercury as an encounter, its talk
-first, its place in the order Tony's to say (the note of 2026-11-24).
+- **RULED, Tony, 2026-11-25, 14:09: BepiColombo's arrival is first
+  after the cleanup** (the coordinating session of the afternoon,
+  Claude Fable 5.2). Tony, 13:50: "we had spoken about doing an
+  arrival encounter for Bepicolombo with Mercury's features." The
+  order put to him: "BepiColombo's arrival at Mercury, with Mercury's
+  features and its Hill sphere: the talk first, with L-555 (orbiters
+  in general); the build when JPL's fit passes the arrival", then
+  Jupiter's moons, Saturn's moons, Uranus and Neptune. His answer:
+  "Yes, I agree with the order. 1) I think BC arrived already". The
+  whole order is L-558 (the folds after Mars).
+- IT HAS ARRIVED, AND NOT ON THE PLANNED ORBIT. ESA's page "Latest
+  updates: BepiColombo's arrival at Mercury", its entry dated 23
+  November 2026, read through the pane on Tony's computer on Nov 25,
+  14:12 Chicago: the craft entered orbit on 21 November, from 18:24
+  UTC; the burn ended early and the craft went to safe mode, traced
+  to a software fault; it is in a 75-hour orbit and not the planned
+  58-hour one; the later burns are replanned with none added; MPO
+  and Mio still part on 9 to 10 December. JPL's header for -121 in
+  the night of Nov 25 (gallery run 20261125T184042Z) still reads
+  "Data fit through 2026-Nov-17, prediction thereafter."
+- So "when JPL's fit passes the arrival" means the day JPL's header
+  names a fit date after 21 November; the arrival itself is past.
+  What the website draws at Mercury until then is on L-554 (JPL's
+  sentence when a path is a prediction), its note of this date.
+**Gap:** BepiColombo's arrival at Mercury as an encounter, with
+Mercury's features and its Hill sphere: first after the cleanup
+(Tony, 2026-11-25; L-558 (the folds after Mars)), its talk first,
+held with L-555's (orbiters in general); the build when JPL's header
+names a fit past 21 November.
 Slice 2, its talk first: the two close passes and how the
 visitor moves between the three views; escape speed beside the speed
 in the close views; NASA's "powered Earth flybys" through the
@@ -4239,7 +4528,7 @@ Kepler solver's start, the case that raised it); L-165 (site
 continuity).
 
 #### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
-<!-- L:522 status:OPEN upd:2026-11-23 section:A flag: rice: -->
+<!-- L:522 status:OPEN upd:2026-11-25 section:A flag: rice: -->
 - **The review, 2026-11-10**
   (`documentation/REVIEW_fundamental_documents_20261110.md`, read at
   orrery b3ce81f8 and gallery cea21af1; the coordinating session, Claude
@@ -4988,6 +5277,22 @@ Fable 5.2) TONY'S RUN RECORD IS NOT AN EDIT WAITING, RULED.
 - Written 2026-11-24, night, by the L-553 Code session: the orrery's
   `CLAUDE.md`, step 2, in the go-ahead's four lines word for word; 111
   lines, as before.
+- **THE MASTER PLAN'S RESTAMP, asked by Tony, 2026-11-25, 13:50:**
+  "Should we update the Interactive Master Plan to clarify?" (the
+  coordinating session of the afternoon, Claude Fable 5.2). Read at
+  orrery 18df08b7: `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
+  is v37, of October 27, and stands at its cap, 1,818 lines of
+  1,818. Its direction still gives each planet a room and calls
+  encounters "paths to choose from"; it has nothing of the folds
+  (L-515 (one nested tree)), the built encounter (L-529 (guided
+  encounters)), the orbiters (L-555) or the error away from today
+  (L-557). Step 6's condition, Tony's phone look at L-515's step 2b,
+  was met on Nov 10. The session's answer, NOT RULED: yes, as a
+  session of its own, once the order of L-558 (the folds after Mars)
+  is on the road, with lines moved to
+  `documentation/MASTER_PLAN_HISTORY.md` first; the order itself
+  stays on Where We Are, by the plan's own rule ("Nor the order of
+  the next jobs, which is the road's on Where We Are").
 **Gap:** steps 4 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11; step 3, the protocol, built 2026-11-23 as v4.0): 4, this
 ledger's closed items and header stamps moved out by a tool; 5, the
