@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261125T183644Z | `9b46306` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261125T164437Z | `7b128d8` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261125T162137Z | `7b128d8` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261124T225441Z | `eb90dff` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261124T030826Z | `0a024d9` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261124T023706Z | `09f633c` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
-| 20261124T012538Z | `7087b3a` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 

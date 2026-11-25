@@ -176,9 +176,9 @@ Not urgent, in your order:
 
 **When you are back, in this order**
 1. Website: Commit, then Push origin. -- 3680ebf08c0613c584067b31a554a9b0b7fe44e3
-2. Orrery: Commit, then Push origin. -- 
-3. Reinstall gallery-cache-builder (1.24) to your account from the repository.
-4. Paste this to the Code session, in place of the earlier text:
+2. Orrery: Commit, then Push origin. -- 9b4630687adf2fdc0b6b4e71a12f8e877ce89d31; nightly run #54 ran red, exit code 1
+3. Reinstall gallery-cache-builder (1.24) to your account from the repository. -- done
+4. Paste this to the Code session, in place of the earlier text: 
 ```
 A second small build, after Tony has pushed both repositories. Record both bases again first; if either folder holds edits beyond Tony's run record, say so and stop.
 
@@ -194,3 +194,47 @@ The change; planted cases in the headless walk, each shown failing first, one fo
 - Nothing is waiting on a decision from you.
 - Two builds are queued behind your return: today's pushes, then the words.
 - I replace the handoff at this session's real close, after the words build.
+
+====================
+
+Now the final handoff, replacing this morning's.
+
+**The words build checks out on a clean copy. And there is better news: the website's night has already run, and the last-day build is proved.**
+
+**The night, read from GitHub's log through your computer**
+- **Run #60 started at 12:40 your time,** 36 minutes after your push, and is green: 53 of 53 gating checks.
+- **All 34 paths now end on their plan's last day.** ESCAPADE-Gold 10 September 2027, ESCAPADE-Blue 12 September 2027, BepiColombo 10 April 2027, the comets 25 November 2027.
+- **Both Voyagers took the fallback** exactly as planned, on JPL's own refusal.
+- **Nothing was held and no second try was needed.**
+
+**The words build, run by me on a clean copy at the night's commit**
+- **The headless walk:** PASS, 379 checks. Its new section reads BepiColombo past its path's end, and all 7 ended missions keep their words.
+- **The same test on the page as it was:** fails, on the new case. So the test can fail.
+- **The figures check:** green, "Paths at their span's last day (34 of 34)".
+- **The page's change, read whole:** your four sentences word for word. A comet cannot reach them.
+- **Not run by me:** the two maintenance runs. I rely on the session's report.
+
+**One change to your run order**
+- **GitHub's website is now one commit ahead of your folder,** the night's. So the website needs a pull before the push.
+- **The pull has nothing to reconcile.** The five data files waiting in your folder are identical to the night's.
+
+**Your run order**
+1. Website: Commit, then Pull origin, then Push origin. -- 3fb13a27763600b08cb67f710167d7fafa52153c
+2. Orrery: Commit, then Push origin. -- 
+3. Reinstall gallery-cache-builder (1.24) to your account from the repository, if not done.
+4. On your phone, now: ESCAPADE-Gold's box "as far as 10 September 2027", ESCAPADE-Blue's "12 September 2027".
+
+**What I placed in your orrery folder, each read back identical**
+- **The ledger,** with a note on L-533 (ESCAPADE): the night's proof and my clean-copy result.
+- **Where We Are,** with "Do next" corrected to include the pull and the night's result. Still 129 lines.
+- **The final handoff,** replacing this morning's.
+
+**A slip of mine to tell you**
+- At 12:21 I placed the ledger while the Code session was already working in that folder. I did not know you had started it. Nothing was lost, and I checked that both sets of notes are there. It is in the handoff as a method note.
+
+**Where this leaves us**
+- Every path to its last day is built, pushed and proved by its night. It waits only on your phone look.
+- The words for a craft past the end of JPL's path are built and checked, and go up with your website push.
+- The session's records are complete. After your two pushes, this session can close.
+
+**One final thought:** the orrery's second scheduled night had not arrived when I last looked. If you push the orrery while it happens to be running, it will go red the same harmless way as #54.

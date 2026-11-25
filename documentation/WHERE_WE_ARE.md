@@ -1,15 +1,15 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 25, 2026, afternoon: every path to its span's last day (L-533 (ESCAPADE)) is built, not pushed (Claude Opus 5.5, a Code session through the python_work door). Built on orrery 7b128d8f and gallery b2d9eaa6; your two folders equal them but for this session's edits, in both folders, not pushed.
+Last updated: November 25, 2026, 13:10: the last-day build's first night is read and green; the words for a craft past the end of JPL's path (L-533 (ESCAPADE)) are built and checked on a clean copy, not pushed (Claude Fable 5.2, the coordinating session, over the Code session's update of the same afternoon). Written on orrery 9b463068 and gallery 30713b0d: GitHub's website is one commit ahead of your folder, the night's.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Every path's dashed line and its box now run to its plan's last day, not its last weekly point: all 27 paths still flying stopped 1 to 7 days short. ESCAPADE-Gold's box will read "as far as 10 September 2027" (it read 7 September), ESCAPADE-Blue's "12 September 2027" (10 September). Only the day changes in each box, no other words. The two Voyagers read 31 December 2099, not 1 January 2100: JPL's data for them stops at midnight on its own clock, which is the evening before on the website's (L-533 (ESCAPADE)).
-> - Tried for real on a copy of the website: the first night asked JPL 29 extra questions, one for each path and two refusals for the Voyagers, and every path then ended on its last day; the second night asked none extra. A new nightly check names every path and the day its box prints, and turns red if one stops short. Until the website's next build that check is red on your computer, naming the 27; that is expected, and the night's build makes it green (L-533 (ESCAPADE)). The orrery's run today remade the 13 comets' plans, so their boxes will read 25 November 2027. JPL renamed BepiColombo's record "MPO-BepiColombo (Spacecraft)"; on your word the orrery's list now uses that name, and its check passes again.
+> - The words you approved at 09:57 are built: a spacecraft still flying, shown on a day past the end of JPL's published path, no longer says "This mission ended on". Its box now says JPL's published path stops on that day, its distance is on the last day of JPL's path, and its path is solid because the day shown is past that end. The source line says "as far as JPL's data runs". An ended mission's box (Galileo, the Pioneers, Akatsuki and the rest) and every comet's are unchanged. No visitor sees the new words before 11 April 2027, when BepiColombo's path stops (L-533 (ESCAPADE)).
+> - How it is checked: the headless walk (a test that runs the page without a browser) plants a copy of the room with BepiColombo past its path's end. It failed on the page before the change and on a page planted with the new words on every ended mission, all seven named; on the page as built it passes, 379 checks. The coordinating session ran it again on a clean copy: 379 pass, and the new case fails on the page as it was (L-533 (ESCAPADE)).
 >
-> **Do next:** *Website: Commit, then Push origin; then Orrery: Commit, then Push origin; then reinstall gallery-cache-builder (now 1.24) to your account from the repository. After the night, look on your phone at ESCAPADE-Gold's and ESCAPADE-Blue's boxes. Then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
+> **Do next:** *Website: Commit, then Pull origin (GitHub holds the night's commit), then Push origin; then Orrery: Commit, then Push origin. If not done yet, reinstall gallery-cache-builder (now 1.24) to your account from the repository. The night has run and is green (run #60, 12:40): every one of the 34 paths ends on its plan's last day, nothing held. Look on your phone now at ESCAPADE-Gold's and ESCAPADE-Blue's boxes ("10 September 2027", "12 September 2027"). Then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
@@ -19,7 +19,7 @@ Last updated: November 25, 2026, afternoon: every path to its span's last day (L
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -84,7 +84,7 @@ Waiting behind other work; a line leaves when picked up.
 - A body crossing e = 1: its drawer row waits for JPL's class (L-510 (the typed fields), Nov 5).
 - L-490 (the legacy list).
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261125T042858Z, ok, no retry on the swap (the website's swap log in your folder, read Nov 25).
@@ -94,7 +94,6 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Decided, waiting for a small build: the words for a craft past the end of JPL's path, in place of the false "This mission ended on". You approved them on Nov 25 at 09:57; they are in `WORDS_L533_path_end_20261125.md`. Wanted before 10 April 2027, when BepiColombo's path stops and the room would say it to every visitor (L-533 (ESCAPADE)).
 - What an orbiting craft's box says on a day it shows no distance: today nothing in the box says why, only the i panel's list ("Juno: no distance shown -- no error is served for its worked-out position, so no figures are earned"). Whether to add a sentence (Nov 24; L-553 (a held body turns the night red)).
 - Where the four small builds from the decisions of Nov 22 sit in the order. Until you say: after the protocol's reduction, at the gaps between builds (the road, line b). And where BepiColombo's arrival at Mercury sits (L-529 (guided encounters)): the coordinating session now recommends it wait until JPL's path is fitted past the arrival.
 - Whether a spacecraft's box says so when JPL's path is a prediction, in JPL's own sentence (BepiColombo's: "Data fit through 2026-Nov-17, prediction thereafter"); the coordinating session recommends yes, in its source line (L-554 (JPL's sentence when a path is a prediction)).
@@ -123,7 +122,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation. The orbiters: L-538 (the orbiters' printed error), its brief `COORD_L538_orbiters_brief_20261123.md`, the Part A report `REPORT_L538_partA_20261124.md`, the go-aheads `COORD_L538_partB_goahead_20261124.md` and `COORD_L538_partB_goahead2_20261124.md`, the reports `REPORT_L538_partB_floor_20261124.md`, `REPORT_L538_partC_20261124.md` and `REPORT_L538_close_20261124.md`, the go-ahead to close `COORD_L538_close_goahead_20261124.md`; orbiters in general, `DESIGN_orbiters_in_general_20261124.md`. The hold at the gate: L-553 (a held body turns the night red), its brief `COORD_L553_hold_to_the_gate_brief_20261124.md` and go-ahead `COORD_L553_hold_to_the_gate_goahead_20261124.md`; the website's `CACHE_BUILDER_AS_BUILT.md`. The last day: L-533 (ESCAPADE), its brief `COORD_L533_last_day_brief_20261125.md`, the plan `REPORT_L533_last_day_plan_20261125.md`; the website's `CACHE_BUILDER_AS_BUILT.md`, A Spacecraft Is Fetched by Its Plan. The date picker and the error: L-556 (a date to choose in the rooms), L-557 (the error away from today), the test `check_L557_error_away_from_today.py`.
+- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation. The orbiters: L-538 (the orbiters' printed error), its brief `COORD_L538_orbiters_brief_20261123.md`, the Part A report `REPORT_L538_partA_20261124.md`, the go-aheads `COORD_L538_partB_goahead_20261124.md` and `COORD_L538_partB_goahead2_20261124.md`, the reports `REPORT_L538_partB_floor_20261124.md`, `REPORT_L538_partC_20261124.md` and `REPORT_L538_close_20261124.md`, the go-ahead to close `COORD_L538_close_goahead_20261124.md`; orbiters in general, `DESIGN_orbiters_in_general_20261124.md`. The hold at the gate: L-553 (a held body turns the night red), its brief `COORD_L553_hold_to_the_gate_brief_20261124.md` and go-ahead `COORD_L553_hold_to_the_gate_goahead_20261124.md`; the website's `CACHE_BUILDER_AS_BUILT.md`. The last day: L-533 (ESCAPADE), its brief `COORD_L533_last_day_brief_20261125.md`, the plan `REPORT_L533_last_day_plan_20261125.md`; the words past the end of JPL's path `WORDS_L533_path_end_20261125.md`, the website's `INTERACTIVE_AS_BUILT.md` (A CRAFT STILL FLYING, PAST JPL'S PATH) and the walk's section 42; the website's `CACHE_BUILDER_AS_BUILT.md`, A Spacecraft Is Fetched by Its Plan. The date picker and the error: L-556 (a date to choose in the rooms), L-557 (the error away from today), the test `check_L557_error_away_from_today.py`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's handoff, `HANDOFF_document_upkeep_20261123_close.md` (Nov 23); step 3's brief, `COORD_L522_step3_landing_brief_20261123.md`. The cache builder's split: `COORD_L522_cache_builder_split_brief_20261124.md`, its go-ahead `COORD_L522_cache_builder_split_goahead_20261124.md`, the reports `REPORT_L522_cache_builder_split_part1_20261124.md` and `REPORT_L522_cache_builder_split_close_20261124.md`; the page, the website's `CACHE_BUILDER_AS_BUILT.md`.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

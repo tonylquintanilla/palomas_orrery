@@ -1151,7 +1151,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-05 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-22 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-25 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
@@ -2087,10 +2087,9 @@ healed by its last instant, not asked again the next night).
   plan unchanged, Tier-1 0.
 - OWED: the words for a craft whose path
   ended before the minute shown, APPROVED by Tony on 2026-11-25 at 09:57
-  ("Approved"), in `documentation/WORDS_L533_path_end_20261125.md`, not
-  built: a later small build, wanted before 10 April 2027 (BepiColombo's
-  path stops then, and the room would say it to every visitor); the
-  orrery's own drawing (path_drawing.py adds the last-day pair to an
+  ("Approved"), in `documentation/WORDS_L533_path_end_20261125.md`:
+  BUILT the same afternoon (the note of 2026-11-25, afternoon, below);
+  the orrery's own drawing (path_drawing.py adds the last-day pair to an
   ended path only), an orrery session; the Voyagers' span on the
   orrery's side (FAR_STOP met by JPL's end to the minute; the box reads
   the same day either way), recorded only.
@@ -2140,6 +2139,88 @@ today, after his two pushes, as a second small build by the Code
 session already open, its text given to him to paste: a short plan and
 a stop, then the change with its planted cases, no builder change and
 no orrery code. Mio: on L-555 (orbiters in general).
+**Note:** (2026-11-25, afternoon, Claude Opus 5.5, a Code session
+through the python_work door; built on orrery 9b463068 and gallery
+3680ebf0, both pushed by Tony, his folders equal to them but for his
+run-record copy)
+THE WORDS FOR A CRAFT PAST THE END OF JPL'S PATH ARE BUILT, not pushed.
+On Tony's "Yes." of 11:24 (the note above), as the coordinating session
+gave it: "Build the four approved sentences ... on the website's page";
+"No stop for a plan: build it through."
+- THE CHECK FIRST: the four "Today" sentences in the words file are the
+  page's, word for word (`ENDED_OPENING`, `ENDED_DISTANCE_WORDS`,
+  `ENDED_PATH_WORDS`, the source line's ", to the day the mission
+  ended"), and the data agrees with the brief: of the 21 spacecraft, the
+  7 ended missions carry `mission_end` and the 14 still flying none. No
+  disagreement, so no stop.
+- THE CHANGE (`interactive.html` only): `pastPath`, past the path's
+  last point (the renderer's `ended`) with no `mission_end`, takes the
+  four approved sentences: `PAST_PATH_OPENING` ("JPL's published path
+  for this craft stops on <day>. The marker is where that path ends."),
+  `PAST_PATH_DISTANCE_WORDS` (" on the last day of JPL's path"),
+  `PAST_PATH_WORDS` ("Its path is solid all the way, since the day shown
+  is past the end of JPL's path, from ..."), and the source line ", as
+  far as JPL's data runs". An ended mission, Akatsuki's cut path and
+  every comet take the branches they took before.
+- THE PLANTED CASES, the headless walk's section 42
+  (`tools/headless/walk_solar_system_drawer.js`). No served moment is
+  past a flying craft's path yet (the room's window ends 2027-02-21,
+  BepiColombo's path 2027-04-04 as served today), so a copy of today's
+  payload is planted as `render_spacecraft` marks a minute past a path's
+  last point: BepiColombo's whole path solid, its marker on its last
+  point, `ended` true. 42a, the craft still flying, FAILED on the page
+  before the change: "This mission ended on 4 April 2027. The marker is
+  where it was that day." and its source line "to the day the mission
+  ended". 42b, every ended mission's box as it was, FAILED on a page
+  planted with the new words on every ended craft (`pastPath = ended`):
+  all seven named. On the page as built: "PASS: 379 checks on the
+  stand-in scene" (368 before), "ended missions' words kept, 7 of 7:
+  pioneer_10, pioneer_11, galileo, cassini, rosetta, akatsuki (drawn to
+  26 April 2024), dart".
+- ALSO, put where it runs: the figures check
+  (`documentation/smoke_solar_system_figures.js`) holds three of the
+  page's new lines, as it holds the ended mission's; the as-built page
+  (`INTERACTIVE_AS_BUILT.md`) has a bullet, A CRAFT STILL FLYING, PAST
+  JPL'S PATH.
+- THE WEBSITE'S MAINTENANCE RUN: "1 of 53 gating checkers FAILED",
+  Solar System figures, "=== FAIL: 27 problem(s)", the 27 paths short of
+  their span's last day, red until a night builds this morning's change
+  (the note of 2026-11-25 above); none of the new lines is among them;
+  As-built names PASS. Its objects mirror brought in the orrery's pushed
+  export: BepiColombo's "MPO-BepiColombo (Spacecraft)" and the 13 comets'
+  plans made 2026-11-25.
+- NOT CHANGED: the builder, the orrery's code, any skill.
+**Note:** (2026-11-25, 13:10, the coordinating session, Claude Fable 5.2)
+THE LAST-DAY BUILD'S FIRST NIGHT, READ; AND THE WORDS' BUILD ON A CLEAN
+COPY.
+- THE NIGHT. The website's run #60, scheduled, on Tony's push 3680ebf0,
+  started 18:40 UTC, 36 minutes after the push, and committed
+  30713b0d. Read from its log through the pane on Tony's computer:
+  "[LAST DAY] voyager_1: JPL's data ends at its span's last day's first
+  instant (... after A.D. 2100-JAN-01 00:00:00.0000 TD); asked that
+  instant", the same for voyager_2; "[SECOND TRY] 0 second tries made,
+  0 answered (cap 10 a build)"; "served holds: none held"; the 13
+  comets "fetched again by a new path plan"; "53 of 53 gating checkers
+  passed"; "NIGHT RUN: CLEAN -- orrery 9b463068 pulled and matched".
+  Read from the committed cache: 34 of 34 paths end on their span's
+  last day (ESCAPADE-Gold 2027-09-10, ESCAPADE-Blue 2027-09-12,
+  BepiColombo 2027-04-10, the comets 2027-11-25, the Voyagers at
+  2100-01-01 00:00 on JPL's clock), nothing held, every one of the
+  night's 59 rows PASS. Owed: Tony's phone look.
+- THE WORDS' BUILD, on gallery 30713b0d with the Code session's four
+  files laid over it (its five data files are the night's, byte for
+  byte): the headless walk "PASS: 379 checks on the stand-in scene",
+  section 42 reading "bepicolombo planted past its path's last point,
+  10 April 2027; ended missions' words kept, 7 of 7"; the same walk on
+  the page as it was, "FAIL 2 of 379", 42a; the figures check exit 0,
+  "Paths at their span's last day (34 of 34)", its three new pins
+  among it. The page's change read whole: `pastPath`, and a comet
+  cannot reach it (`ended` is false for a comet's path). The four
+  sentences are the words file's, word for word. Not run here: the
+  two maintenance runs.
+- THE WEBSITE'S PUSH NEEDS A PULL FIRST: GitHub holds the night's
+  commit above Tony's folder. The five data files waiting in his
+  folder equal the night's, so the pull has nothing to reconcile.
 **Gap:** the row under Mars waits (L-534 (missions by destination),
 Nov 20). The box's last day: BUILT Nov 25 (the note above), not pushed;
 open for a night on GitHub and Tony's phone look (ESCAPADE-Gold "as far
@@ -2147,11 +2228,11 @@ as 10 September 2027", ESCAPADE-Blue "12 September 2027"). The loops near L2, wi
 an Earth-centred path view in Earth's fold. One later item: a Mars
 arrival counts as one only because JPL's data runs three days past
 orbit insertion; the plan's 30-day remake shows it if JPL trims that.
-For the last-day build (2026-11-24, from L-538's Part A report, not
-checked by the coordinating session): past the end of JPL's data for a
-craft still flying, the box reads "This mission ended on ...", which
-is false. BepiColombo's data ends 2027-04-10, and the date window
-reaches that day about 2027-01-12.
+Past the end of JPL's data for a craft still flying, the box said
+"This mission ended on ...", which was false: Tony's approved words in
+its place, BUILT Nov 25 (the afternoon note), not pushed; no visitor
+sees them until 11 April 2027, BepiColombo's, so the walk's section 42
+is their check until then.
 **Ref:** L-514 (the Mars room); L-529 (guided encounters); L-476 (paths
 by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
 orbiter rule for an arrival).
@@ -8078,7 +8159,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-11-22 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-11-25 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -8908,6 +8989,37 @@ legacy question. Tony's word pending on the task.
   at the measured 2.4 seconds a question, under the 15 a row may take;
   the served entries have no cap of their own, as the unserved
   entries' ten a night is.
+- **A night's push loses to Tony's, and a clean night goes red,
+  2026-11-25** (the coordinating session, Claude Fable 5.2, 12:20
+  Chicago; read from the run's log through the pane on Tony's
+  computer). Orrery run #54, scheduled, started 17:57 UTC on 7b128d8,
+  hours late by GitHub's lag as the workflow's own comment describes.
+  It ran clean: "NIGHT RUN: CLEAN -- 17 rows run, 35 skipped, 0
+  reported", "10 of 10 gating checkers passed", bepicolombo passing as
+  HELD, the peak night's 190 questions asked in 436.6 seconds. It
+  committed 484d154, four data files, and its push was refused at
+  18:08:15 UTC, "! [rejected] main -> main (fetch first)": Tony's push
+  9b463068 had landed at 18:05. Exit code 1.
+  - LOST: only the night's own record. Tony's push carried the
+    confirmations, the export and the path plans from that morning's
+    maintenance runs.
+  - THE CAUSE: each workflow's last step is a plain `git push` (the
+    orrery's `.github/workflows/nightly.yml`, line 153; the website's,
+    line 180). A push of Tony's during a night's ten minutes turns a
+    clean night red, and a night starts hours late, so he cannot know
+    one is running.
+  - Tony, 12:13: "i should check the Actions tab before committing.
+    that's on me i think." The session's answer: not his; a look he
+    must remember does not close a ten-minute window, and the fix
+    belongs in the night. Asked "Shall I record it in the ledger for
+    that later fix?", 12:14: "yes".
+  - FOR A LATER SMALL BUILD, both workflows: on a refused push, fetch
+    what arrived, replay the night's one commit on it and push again,
+    a bounded number of times. To settle in that build: what the night
+    does when what arrived changed the same files (today, three of its
+    four); the session's guess is that it yields and says so, green.
+    The night commits data only (R1), which is what should make a
+    replay over a push of code safe; that is a reading, not a test.
 **Ref:** `orrery_maintenance_run.py`; gallery `daily_run.py`;
 `documentation/DESIGN_L485_nightly_run_rulings_20261025.md`;
 `documentation/COORD_L461_stop_ruling_20261025.md`; L-461; L-462;
