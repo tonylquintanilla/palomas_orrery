@@ -329,14 +329,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "776142226d4948877864b6239a59234cc4f3f73384d2472ab96cef708dce332f",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "ATLAS",
    "searched": [
     "Sun"
    ],
    "searched_from": "2024-01-11",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2024-01-14"
    },
    "span_rule": {
@@ -378,14 +378,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "31c124043cba1fa21607622bfc9115c6b2f69596084b921c5f90f1bf5bcf5bab",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "3I/ATLAS",
    "searched": [
     "Sun"
    ],
    "searched_from": "2024-10-26",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2024-10-29"
    },
    "span_rule": {
@@ -1062,14 +1062,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "3ac74cd8e08dd0a8cc78dfa214948b6d3c8d323902f2234dae716d9440e07217",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "Borisov",
    "searched": [
     "Sun"
    ],
    "searched_from": "2024-11-13",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2024-11-16"
    },
    "span_rule": {
@@ -1111,14 +1111,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "b2490640780a6aa2ea77a3d73e30674542d57cd6f5ac2c9e9c62aecbaf70c874",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "2I/Borisov",
    "searched": [
     "Sun"
    ],
    "searched_from": "2018-12-05",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2018-12-08"
    },
    "span_rule": {
@@ -1160,14 +1160,14 @@
    "id_type": "designation",
    "inputs_sha256": "3f60768b1174d50a34ec13a4cc7b2419b669e04369ca1030861fb28cf7c89052",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "C/2025_K1",
    "searched": [
     "Sun"
    ],
    "searched_from": "2024-10-05",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2024-10-08"
    },
    "span_rule": {
@@ -1209,14 +1209,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "a8c78eed46ff212d93d8bb5e1aa2b594a1c316fc3c8ee283fba284ed20e04e6c",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "C/2025_K1-B",
    "searched": [
     "Sun"
    ],
    "searched_from": "2024-10-05",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2024-10-08"
    },
    "span_rule": {
@@ -1258,14 +1258,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "2a0fccf1387c0d8841857a293e36568d510850731003c90ab5ec99f91a3bd59c",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "C/2025_K1-D",
    "searched": [
     "Sun"
    ],
    "searched_from": "2024-10-05",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2024-10-08"
    },
    "span_rule": {
@@ -2478,14 +2478,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "e9d3c7ee8617a0a78f74218ac6259ce9343aad3ea88d6bc65b4f7df6a83b9d03",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "McNaught",
    "searched": [
     "Sun"
    ],
    "searched_from": "2006-01-09",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2006-01-12"
    },
    "span_rule": {
@@ -2862,14 +2862,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "32f742c27b34dcbd425cabc3e8692e37b3dd1fc3829ea2e3b46232fe98c96399",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "1I/Oumuamua",
    "searched": [
     "Sun"
    ],
    "searched_from": "2016-09-06",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2016-09-09"
    },
    "span_rule": {
@@ -2911,14 +2911,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "b8a2198cfcc096e412fbfb69084f9cc11487443f432ac86812426f501124b41e",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "PANSTARRS",
    "searched": [
     "Sun"
    ],
    "searched_from": "2025-04-16",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2025-04-19"
    },
    "span_rule": {
@@ -4849,14 +4849,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "45ce007c92605f12b5c9e510256c4eeeee1bb536cca1d1cfec520e24640d50a9",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "Tsuchinshan",
    "searched": [
     "Sun"
    ],
    "searched_from": "2023-09-25",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2023-09-28"
    },
    "span_rule": {
@@ -5097,14 +5097,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "8d913133091bafd2c2b994a6319d8b0a398f28adabdef7506b7619405726190b",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "West",
    "searched": [
     "Sun"
    ],
    "searched_from": "1975-02-22",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "1975-02-25"
    },
    "span_rule": {
@@ -5146,14 +5146,14 @@
    "id_type": "smallbody",
    "inputs_sha256": "6b78d060b75da48655c28cddfd007d76628bb637f83f39189337e22859ff6113",
    "kind": "comet",
-   "made": "2026-10-26",
+   "made": "2026-11-25",
    "name": "Wierzchos",
    "searched": [
     "Sun"
    ],
    "searched_from": "2025-01-17",
    "span": {
-    "end": "2027-10-26",
+    "end": "2027-11-25",
     "start": "2025-01-20"
    },
    "span_rule": {

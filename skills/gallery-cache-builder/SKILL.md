@@ -2,20 +2,20 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day), a held body (HELD), a Lagrange point served as a point (serving_shape 'point'), the clock block and its witness, an encounter's package
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, a path's last day, flying or ended (fetch_path_last_day), a held body (HELD), a Lagrange point served as a point (serving_shape 'point'), the clock block and its witness, an encounter's package
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
 Read this file in 3 parts: lines 1-265, 266-552, 553-728.
 
-Skill version: 1.23 | 2026-11-24, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 2730048b and gallery @ d976d3db. v1.23 (L-553, one
-body JPL does not answer no longer stops the night) adds five rules to
-A Body That Fails Its Test Is Held and one to A Capture Craft's Box,
-word for word from the coordinating session's go-ahead, one corrected
-on its word ("and no loop's reach"). Riding it: Layer 1's count. Five
-passages of history moved out to stay at the cap.
+Skill version: 1.24 | 2026-11-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 7b128d8f and gallery @ b2d9eaa6. v1.24 (L-533, every
+path to its span's last day) widens one rule under A Spacecraft Is
+Fetched by Its Plan from an ended mission to every path, word for word
+from the coordinating session: "Every path's last served point is on
+its span's last day, JPL's clock." The 1.23 entry moved out to stay at
+the cap. Built in the gallery's builder the same day, not yet pushed.
 Earlier: 1.22 | 2026-11-24, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ eb90dff7 and gallery @ 727ebf79. v1.22 (L-522, the
 skill's split; L-538, the orbiters' printed error): what the builder
@@ -35,9 +35,9 @@ Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
 2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507),
-2026-11-05 (L-507), 2026-11-11 (L-525), 2026-11-19 (L-297) and
-2026-11-22 (L-541),
-2026-11-24 (L-522) and 2026-11-24 (L-553).
+2026-11-05 (L-507), 2026-11-11 (L-525), 2026-11-19 (L-297),
+2026-11-22 (L-541), 2026-11-24 (L-522),
+2026-11-24 (L-553) and 2026-11-25 (L-533).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -401,7 +401,7 @@ What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
   revises it.
 - A flyby is never thinned away: an event's window is thinned at its
   own scale and merged after the backbone's thinning.
-- An ended mission's last served point is on its span's last day.
+- Every path's last served point is on its span's last day, JPL's clock.
 - `as_of_today` is today's point, never the path's last; none when no
   point lies within two days before today.
 - The shrink gate holds a re-fetch by a new plan out of its count, and

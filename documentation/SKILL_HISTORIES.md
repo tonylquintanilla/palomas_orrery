@@ -1971,6 +1971,15 @@ reason in its docstring, and the session that wrote the patch had read
 that function an hour earlier. Knowledge that lives only inside a function
 does not fire; that is why it is in the skill now.
 
+Earlier: 1.23 | 2026-11-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 2730048b and gallery @ d976d3db. v1.23 (L-553, one
+body JPL does not answer no longer stops the night) adds five rules to
+A Body That Fails Its Test Is Held and one to A Capture Craft's Box,
+word for word from the coordinating session's go-ahead, one corrected
+on its word ("and no loop's reach"). Riding it: Layer 1's count. Five
+passages of history moved out to stay at the cap.
+(Moved down 2026-11-25, when 1.24 made a fourth entry; L-533.)
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at

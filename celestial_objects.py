@@ -98,6 +98,10 @@ the NASA: "..." form, with that page as its link, by Tony's choices.)
 Module updated: November 19, 2026 with Anthropic's Claude Opus 5.5 (L-432: COLOR_KEY_BY_NAME,
 the name map L-297 added, removed; the colour table, now
 orrery_colors.py, holds the Lagrange points under the names shown.)
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-533:
+BepiColombo's horizons_name is JPL's name for record -121 as read that
+day, "MPO-BepiColombo (Spacecraft)", on Tony's word; the name shown stays
+BepiColombo.)
 """
 
 from datetime import datetime
@@ -1269,7 +1273,7 @@ OBJECT_DEFINITIONS = [
     # 2026-11-18 (documentation/WORDS_L533_escapade_20261118.md).
     'mission_info': 'Horizons: -10. ESCAPADE-Gold is one of NASA\'s two identical ESCAPADE spacecraft, launched on November 13, 2025. At Mars the twins will fly in formation to study how the solar wind interacts with the planet\'s magnetic environment and contributes to the loss of its atmosphere.'},
 
-    {'name': 'BepiColombo', 'key': 'bepicolombo', 'id': '-121', 'horizons_name': 'BepiColombo (Spacecraft)', 'var_name': 'bepicolombo_var', 'color_key': 'BepiColombo', 'symbol': 'diamond-open', 
+    {'name': 'BepiColombo', 'key': 'bepicolombo', 'id': '-121', 'horizons_name': 'MPO-BepiColombo (Spacecraft)', 'var_name': 'bepicolombo_var', 'color_key': 'BepiColombo', 'symbol': 'diamond-open', 
     # 'id': '-121', 2018-080A
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True,
     'start_date': datetime(2018, 10, 21), 

@@ -157,3 +157,40 @@ Not urgent, in your order:
 - The next build, every path to its last day (L-533 (ESCAPADE)), is briefed and starts after your push.
 - The handoff for the next coordinating session is still owed; I write it when this session closes.
 
+================================
+
+**Yes. Everything that needs your judgment is settled; what remains needs your computer, not you deciding anything.**
+
+**What I settled just now, by reading the page's code**
+- **One clean way to tell the two cases apart exists.** The 7 ended missions each carry an end date in the data. The 14 craft still flying carry none. I checked all 34 paths.
+- **So there is no choice left for you in the plan.** The box uses your four sentences when a craft has no end date and the moment shown is past its path's last point. Ended missions keep their words.
+- **Comets are left alone.** A comet's path runs a year ahead and is remade monthly, so nothing reaches that sentence for a comet.
+
+**What that changes**
+- I drop the stop-for-a-plan. The Code session builds straight through and stops only if my text disagrees with the code.
+- For you that means one paste, and the next thing you send me is the finished build.
+
+**What still needs your computer**
+- Your two pushes, the skill reinstall, and pasting the text to the Code session.
+- Nothing is lost by waiting. The words are not needed before April.
+
+**When you are back, in this order**
+1. Website: Commit, then Push origin. -- 3680ebf08c0613c584067b31a554a9b0b7fe44e3
+2. Orrery: Commit, then Push origin. -- 
+3. Reinstall gallery-cache-builder (1.24) to your account from the repository.
+4. Paste this to the Code session, in place of the earlier text:
+```
+A second small build, after Tony has pushed both repositories. Record both bases again first; if either folder holds edits beyond Tony's run record, say so and stop.
+
+Build the four approved sentences in documentation/WORDS_L533_path_end_20261125.md, on the website's page. They apply to a spacecraft whose entry has no mission_end, when the moment shown is after its path's last point. The coordinating session read the data: the 7 ended missions each carry mission_end, the 14 spacecraft still flying carry none. An ended mission's box, a path cut early (Akatsuki), and every comet keep their words exactly.
+
+No stop for a plan: build it through. But if a sentence here or in the words file disagrees with the code, say which, and stop before editing.
+
+The change; planted cases in the headless walk, each shown failing first, one for a craft still flying past its path's end and one showing an ended mission's box unchanged; the as-built page in the same commit where it describes these words; the website's maintenance run. Record it on L-533 (ESCAPADE). No builder change, no orrery code, no skill change.
+```
+5. Send me its report. I run it on a clean copy before you push.
+
+**Where this leaves us**
+- Nothing is waiting on a decision from you.
+- Two builds are queued behind your return: today's pushes, then the words.
+- I replace the handoff at this session's real close, after the words build.

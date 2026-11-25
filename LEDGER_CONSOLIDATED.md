@@ -2007,10 +2007,143 @@ box reads "This mission ended on ..." for a craft still flying; the
 words are Tony's. Tony, 01:23, turning to it from the talk on L-556
 (a date to choose in the rooms): "can we just go to the item we
 deferred instead?"
+**Note:** (2026-11-25, the Claude Code session, Claude Opus 5.5, through
+the python_work door, on orrery 7b128d8f and gallery b2d9eaa6) THE
+LAST-DAY BUILD, BUILT, not pushed. Part 1's plan,
+`documentation/REPORT_L533_last_day_plan_20261125.md`; Tony's go-ahead
+"as written", with the coordinating session's one addition (a Voyager
+healed by its last instant, not asked again the next night).
+- WHAT CHANGED (gallery `tools/gallery_cache_builder.py`):
+  `fetch_path_last_day` asks every path, flying or ended, the first two
+  UTC minutes of its span's last day. Where JPL's data ends at that
+  day's first instant (the Voyagers, 2100-01-01 00:00 TDB, the orrery's
+  far stop), JPL's refusal (`JPL_DATA_ENDS`) turns the question to that
+  instant; the box prints it as 31 December 2099. A night that fetches
+  only the tail asks a path saved without its last day for it once
+  (`path_has_last_day`, read on JPL's clock). A capture craft whose
+  window reaches its span's end prints no distance on the day before
+  its last and the last (`capture_end_days`). `CACHE_BUILDER_AS_BUILT.md`,
+  its section replaced.
+- THE 27, BEFORE AND AFTER (the box's day, UTC): solar_orbiter 19 Nov
+  2030 to 20 Nov 2030; wierzchos 25 Oct 2027, atlas_2024_g3 24 Oct,
+  borisov_2025_v1, borisov_2i and panstarrs_2025_r3 23 Oct, oumuamua 22
+  Oct, mcnaught and tsuchinshan_atlas 21 Oct, atlas_3i, c2025_k1,
+  c2025_k1_b, c2025_k1_d and west 19 Oct, all to 26 Oct 2027;
+  escapade_blue 10 Sep to 12 Sep 2027; escapade_gold 7 Sep to 10 Sep
+  2027; juice 19 Jul to 21 Jul 2031; voyager_1 29 Dec and voyager_2 27
+  Dec, both to 31 Dec 2099; europa_clipper 29 Aug to 3 Sep 2034;
+  osiris_apex 17 Mar to 22 Mar 2030; bepicolombo 4 Apr to 10 Apr 2027;
+  juno 26 Aug to 2 Sep 2028; lucy 6 Mar to 13 Mar 2033; new_horizons 24
+  Dec to 31 Dec 2049; parker_solar_probe 24 Dec to 31 Dec 2029;
+  psyche_spacecraft 17 Feb to 24 Feb 2029. No words but the day change.
+- PROOF ON REAL DATA, a throwaway copy of the website, its builder run
+  against JPL: the first night asked 27 last days, 29 questions with the
+  Voyagers' two refusals ("No ephemeris for target "Voyager 1
+  (spacecraft)" after A.D. 2100-JAN-01 00:00:00.0000 TD"), swapped first
+  time, 34 of 34 paths on their span's last day; the second night asked
+  none. The figures check on that cache: "Paths at their span's last day
+  (34 of 34)", PASS.
+- PLANTED CASES, the builder's offline suite (620 to 631 checks, 0
+  failures): a path still flying ends on its last day (planted: the old
+  rule, stops at 2099-12-29); a night asks a missing last day once, the
+  next night the tail alone (planted: the ask off); JPL's data ending at
+  the day's first instant, one question refused (planted: the refusal not
+  read, the path fails); a Voyager healed by its last instant, three
+  questions, the next night one (planted: the day read on UTC, asked
+  every night); a capture craft's last day prints no distance (planted:
+  unmarked, a figure of 10,329 km along a chord across a day of loops);
+  the end days marked only where the window reaches the end; and "no
+  stop past the span" restated, its old planted fault kept. The figures
+  check (`documentation/smoke_solar_system_figures.js`, part 7) holds
+  every path's last point, index and file, named with its box's day,
+  three planted cases more; on today's served cache it is red, naming
+  the 27, until a build.
+- THE SKILL, the same day, on Tony's go-ahead with the coordinating
+  session's text: gallery-cache-builder 1.24, one line for one line
+  under A Spacecraft Is Fetched by Its Plan, "Every path's last served
+  point is on its span's last day, JPL's clock." (was "An ended
+  mission's ..."), its trigger phrase widened to match, the 1.23 entry
+  moved to `documentation/SKILL_HISTORIES.md` as instructed (that file's
+  rule moves the oldest, 1.21), 728 lines kept. Reinstall to Tony's
+  account owed; the next session's comparison settles it.
+- THE ORRERY'S RUN, after the skill (39 checkers, 38 passed, Tier-1 0):
+  its Path plan row remade the 13 comets' plans, 30 days old, so their
+  span now ends 2027-11-25 and, once pulled, their boxes read 25
+  November 2027, not 26 October (the whole fetch asks the new last
+  day). The one red, not from this build: Horizons confirmations HELD
+  bepicolombo, JPL's record now named "MPO-BepiColombo (Spacecraft)"
+  where the list says "BepiColombo (Spacecraft)" (the website's build of
+  the same day read JPL's target as "MPO-BepiColombo / (Mercury)");
+  "waiting on your look". For the coordinating session: which item, and
+  the list's name.
+- THE HOLD ENDED, the same day. On Tony's word, relayed by the
+  coordinating session ("One more small job, on Tony's word"), with no
+  words of his own quoted: `celestial_objects.py` gives BepiColombo's
+  `horizons_name` as JPL's name for record -121 as read that day,
+  "MPO-BepiColombo (Spacecraft)" (was "BepiColombo (Spacecraft)"); the
+  name shown stays "BepiColombo". The orrery's maintenance run again:
+  "37 of 37 gating checkers passed", Horizons confirmations "pass -- 110
+  of 110 entries", bepicolombo confirmed 2026-11-25 with no hold, its
+  plan unchanged, Tier-1 0.
+- OWED: the words for a craft whose path
+  ended before the minute shown, APPROVED by Tony on 2026-11-25 at 09:57
+  ("Approved"), in `documentation/WORDS_L533_path_end_20261125.md`, not
+  built: a later small build, wanted before 10 April 2027 (BepiColombo's
+  path stops then, and the room would say it to every visitor); the
+  orrery's own drawing (path_drawing.py adds the last-day pair to an
+  ended path only), an orrery session; the Voyagers' span on the
+  orrery's side (FAR_STOP met by JPL's end to the minute; the box reads
+  the same day either way), recorded only.
+**Note:** (2026-11-25, 11:15, the coordinating session, Claude Fable 5.2)
+THE BUILD READ ON A CLEAN COPY, AND FOUR THINGS BESIDE IT.
+- ON A CLEAN COPY: gallery b2d9eaa6 with the Code session's nine
+  website files laid over it, no orrery beside it. The offline suite:
+  "PASS (631 checks, 0 failures)", 14 of them L-533's, six planted
+  faults shown failing. The figures check: exit 1, "=== FAIL: 27
+  problem(s)", the 27 named, and "Paths at their span's last day (7 of
+  34)", as the session said it would read until a build. A first run
+  showed 2 failures, both L-399 (the astroquery questions): the test
+  machine had no astroquery, and the untouched base failed the same
+  two. Part 1's plan was read against the code before the go-ahead.
+  The test for a saved last day is the point's own time on JPL's clock
+  (`path_has_last_day`), stronger than the plan's key prefix. Not run
+  here: either maintenance run, and the dry run against JPL.
+- A CORRECTION OF THIS SESSION'S: Tony was told twice that a question
+  JPL does not answer gets no second try. It does, since L-553 (a held
+  body turns the night red): once more after 10 seconds, ten second
+  tries a build (`SECOND_TRY_PAUSE_S`, `SECOND_TRY_CAP`). The search
+  that found none looked for "retry". A refusal JPL gives in words, the
+  Voyagers', is an answer and is not tried again.
+- BEPICOLOMBO'S NAME. Read live from JPL's lookup through the pane on
+  Tony's computer, 10:35: record -121 is "MPO-BepiColombo
+  (Spacecraft)", its aliases blank (they were "MPO MMO"). ESA's arrival
+  page: captured at Mercury on 21 November 2026, MPO and Mio to part on
+  9 to 10 December. Tony gave no words: asked "Do you accept JPL's new
+  name for the record, with 'BepiColombo' kept as the name visitors
+  see?", he pasted the instruction to the Code session, whose report
+  came back at 10:56. A held body does not turn the orrery's night red
+  (`check_horizons_confirmations.py`: "With --night it passes AS HELD;
+  by day it is red"); the website's own check would have gone red on
+  Nov 30, the confirmation's thirtieth day. FOR A LATER TALK, not
+  opened: Mio flies alone after the parting, and one search of JPL's
+  lookup ("MMO") found no record of its own. With L-555 (orbiters in
+  general).
+- THE WORDS for a craft past the end of JPL's path, Tony's "Approved"
+  of 09:57: `documentation/WORDS_L533_path_end_20261125.md`. The case
+  they are for is the ordinary one, real time passing the end of JPL's
+  published path (BepiColombo, 11 April 2027), not a typed date.
+- THE HANDOFF: `documentation/HANDOFF_coordinating_20261125.md`.
+**Note:** (2026-11-25, 11:25, the coordinating session, Claude Fable 5.2)
+THE WORDS' BUILD IS FOR TODAY. Tony, 11:16, of the approved words and
+of Mio: "can we settle this here?"; 11:24, "Yes." to the words built
+today, after his two pushes, as a second small build by the Code
+session already open, its text given to him to paste: a short plan and
+a stop, then the change with its planted cases, no builder change and
+no orrery code. Mio: on L-555 (orbiters in general).
 **Gap:** the row under Mars waits (L-534 (missions by destination),
-Nov 20). The box's last day: its build, as ruled Nov 19, a build of
-its own straight after L-538 (the orbiters' printed error), not a part
-of it (Tony, 2026-11-22, 21:58, asked which: "Keep its own build"). The loops near L2, with
+Nov 20). The box's last day: BUILT Nov 25 (the note above), not pushed;
+open for a night on GitHub and Tony's phone look (ESCAPADE-Gold "as far
+as 10 September 2027", ESCAPADE-Blue "12 September 2027"). The loops near L2, with
 an Earth-centred path view in Earth's fold. One later item: a Mars
 arrival counts as one only because JPL's data runs three days past
 orbit insertion; the plan's 30-day remake shows it if JPL trims that.
@@ -2844,6 +2977,27 @@ the Lagrange points, gives 0.09 km and 0.005 km at the same minute,
 read from the cache of gallery b2d9eaa6. That would print about three
 more digits. Not built, and no check holds that figure to JPL's points
 for a spacecraft.
+**Note:** (2026-11-25, 11:25, the coordinating session, Claude Fable 5.2)
+MIO, FOR THIS TALK, AND RULED UNTIL THEN.
+- JPL renamed record -121 "MPO-BepiColombo (Spacecraft)" on Nov 25
+  (L-533 (ESCAPADE), its notes of that day). ESA's arrival page: MPO
+  and Mio part on 9 to 10 December 2026, MPO to stay close to Mercury,
+  Mio on a larger ellipse; ESA calls it the first mission with two
+  spacecraft in orbit around Mercury at once.
+- JPL HAS NO RECORD FOR MIO. Its whole list of major bodies and
+  spacecraft, read live through the pane on Tony's computer at 11:20
+  (`horizons.api`, COMMAND='MB', 838 lines), holds one BepiColombo
+  entry, -121, and none for Mio. The name lookup proves nothing here:
+  it matches exact names only ("MPO" finds nothing while
+  "MPO-BepiColombo" exists), so the earlier "one search found no
+  record" on L-533 is weak evidence and this read replaces it.
+- RULED, Tony, 11:24: "Yes." to "Mio left until JPL publishes a
+  record", the choice to add it then made at this talk. The session's
+  reasons, his to weigh there: in the Solar System room the two sit on
+  one spot at Mercury, and a second orbiting craft is another nightly
+  file of about three quarters of a megabyte, as BepiColombo's is.
+- OWED: the first coordinating session after 10 December 2026 reads
+  JPL's list again.
 **Gap:** the talk with Tony on the design record.
 **Ref:** L-538; L-529; the design record above.
 

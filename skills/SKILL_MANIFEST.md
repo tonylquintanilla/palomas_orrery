@@ -76,7 +76,7 @@ gallery-assembler            1.5  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.23 Nightly builder, atomic swap and its
+gallery-cache-builder        1.24 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
@@ -89,7 +89,7 @@ gallery-cache-builder        1.23 Nightly builder, atomic swap and its
                                   uncertainty (position_uncertainty, the match
                                   rule), every JPL question asked fresh
                                   (HORIZONS_CACHE), a drawing named on a room's
-                                  row, an ended mission's last day
+                                  row, a path's last day, flying or ended
                                   (fetch_path_last_day), a held body (HELD), a
                                   Lagrange point served as a point
                                   (serving_shape 'point'), the clock block and
