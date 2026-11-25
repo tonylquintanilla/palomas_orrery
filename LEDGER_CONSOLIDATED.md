@@ -2898,6 +2898,53 @@ layer exists. Read from the gallery's `CACHE_BUILDER_AS_BUILT.md`
 as the Claude Code session wrote it from the code at 727ebf79; not
 checked against the code by the coordinating session. Not changed.
 This item's build covers both rows.
+**Note:** (2026-11-24, night, the coordinating session, Claude
+Fable 5.2, on gallery 727ebf79) THE FIRST CASE COST A NIGHT, AND IT
+WAS L-538'S FIRST. The website's nightly run #58 (scheduled, started
+22:31 UTC on Nov 24, on 727ebf79) was red and committed nothing. Read
+from GitHub's own job log, in the browser pane on Tony's computer.
+- The cause, in the build: "[warn] deimos: trust measurement failed
+  (HTTPSConnectionPool(host='ssd.jpl.nasa.gov', port=443): Max retries
+  exceeded ...". Then the night pass's one red row: "FAIL Solar System
+  figures", "deimos's box cannot be built: Deimos: no distance shown
+  -- no measured error is served for it, so no figures are earned",
+  and "NIGHT RUN: RED".
+- Everything else passed: the pulls, the builder (exit 0, 160 s, the
+  swap on the first try), the run records, and 52 of 53 gating
+  checkers.
+- L-538's fine layer was built on GitHub for the first time that
+  night, and its row was green: "[CAPTURE] Juno by Jupiter since
+  2016-07-05; BepiColombo by Mercury since 2026-11-21", and "CURVE
+  ERROR: ok -- 3043 points held out across 21 served files, and 2
+  capture craft held to JPL's own points, none missed by more than its
+  printed error". None of it was committed.
+- So one unanswered question about one moon kept every body's refresh,
+  and L-538's fine points, off the site for a night. The site serves
+  the cache of run #57 (19:35 UTC, green, before L-538's push).
+- That is one night counted, not a rate. Not ruled. Put to Tony the
+  same night, with this session's recommendation: this item next,
+  before L-533 (ESCAPADE)'s build.
+**Note:** (2026-11-24, night, the coordinating session, Claude
+Fable 5.2) TONY'S WORD, AND WHERE THE RULE STOPS.
+- Tony, 20:00, on being told of run #58: "wait, i thought that our
+  rule was that if one body fails, we continue and report not turn the
+  whole night red, in effect." It is his rule, of 2026-11-11 (L-525,
+  hold the bad data). Tony, 20:11, to the offer of a hand-started
+  night: "You or I can press it, but shouldn't we fix the issue
+  first". So this item is next, ahead of L-533 (ESCAPADE)'s build: his
+  own choice of order, and what the session had recommended.
+- Where the rule stops, read from `tools/gallery_cache_builder.py` at
+  727ebf79 and from run #58's log. Deimos was NOT held. One request,
+  for Deimos's two test positions, failed: "Connection to
+  ssd.jpl.nasa.gov timed out. (connect timeout=30)". `measure_trust`
+  caught it and served a null window. `held_by_test` covers only a
+  Sun-centred body drawn from its elements, so nothing held the moon:
+  it was served with no measured error, and the Solar System figures
+  row refused it. That is a third path, beside Chariklo's (held, and
+  served with no as_of_today) and the capture craft's.
+- The coordinating session first told Tony the builder had held
+  Deimos. That was said before the code was read, and was wrong.
+- The brief: `documentation/COORD_L553_hold_to_the_gate_brief_20261124.md`.
 **Gap:** a small build, its choice first: which side changes. A planted
 case in the offline suite either way.
 **Ref:** L-525 (hold the bad data); L-538 (the orbiters' printed

@@ -148,9 +148,9 @@ Two files of mine are now in your orrery folder, both read back identical, so th
 Not checked by me: the two maintenance runs and the offline tests' 604. Those figures are the Code session's.
 
 **Your run order**
-1. Website: Commit, then Push origin. -- d976d3dba8f04fdb80056ff0b46b7171c4074ada
-2. Orrery: Commit, then Pull origin, then Push origin. -- 
-3. Reinstall gallery-cache-builder 1.22 (Plugins, in the claude.ai sidebar). The next session's own comparison confirms it.
+1. Website: Commit, then Push origin. -- d976d3dba8f04fdb80056ff0b46b7171c4074ada; nightly run #57 at 1:31 PM green, but run #58 at 4:31 PM red. 
+2. Orrery: Commit, then Pull origin, then Push origin. -- 6e24640261ebb8cb23cf1f113e7df88c7bef2d19; nightly runs all green.
+3. Reinstall gallery-cache-builder 1.22 (Plugins, in the claude.ai sidebar). The next session's own comparison confirms it. -- done
 4. After the website's next night: look at the three boxes on your phone, as section 4 of `documentation/REPORT_L538_partC_20261124.md` says. L-538 closes on your look.
 
 **Where this leaves us**
@@ -160,3 +160,42 @@ Not checked by me: the two maintenance runs and the offline tests' 604. Those fi
 - The talk on orbiters in general (L-555) was not held today and is still yours to open.
 
 **One final thought:** if tomorrow's first night is red, check which craft it names before worrying. With no saved fine points to fall back on, one unanswered JPL question for Juno or BepiColombo stops that night by design, and the site keeps today's data.
+
+================================
+
+**Yes, fix first. I have taken that as your ruling: L-553 (a held body turns the night red) is next, ahead of the build of every path to its last day.** Your words of 20:00 and 20:11 are on L-553, and the brief for the fix is in your orrery folder.
+
+**What the fix does**
+- On a night when JPL does not answer for a body, of any kind, the build holds that body and goes on, as it mostly does today.
+- No check after the build may turn the night red just because a body is held.
+- The night commits, and each held body is reported by name.
+- The limits stay: more than five bodies held in one build is still a failed build.
+
+**The three known ways the night breaks the rule today, each to be closed**
+- **A moon whose accuracy test cannot be made.** This was Deimos tonight. It is served without a measured error and a later check refuses it.
+- **A body held because JPL did not answer its main request.** A later check refuses it for a missing date stamp. This was Chariklo, in a test build earlier today.
+- **Juno or BepiColombo kept on saved fine points.** The check for them goes red at night.
+
+The brief also asks the session to look for a fourth.
+
+**How we will know it works**
+- The session plants the failures on purpose: one moon, one Sun-orbiting body and one orbiter, all failing in the same run. The night's own checks must stay green and name all three.
+- That planted test then runs every night.
+- After you push the fix, a hand-started night on GitHub confirms it on the real thing. You or I can press that then.
+
+**What stays yours:** if any choice changes what a visitor reads in a held body's box, the session must say so and it comes to you. Everything else is method.
+
+**Four files are in your orrery folder, each read back identical:**
+- the brief, `documentation/COORD_L553_hold_to_the_gate_brief_20261124.md`
+- the ledger, with your words on L-553
+- Where We Are and the handoff, with my "held Deimos" mistake corrected
+
+**Your run order**
+1. Orrery: Commit, then Push origin. This carries the brief. -- 
+2. Start a Code session at the python_work door, Opus. Tell it: the work starts in the orrery, by `documentation/COORD_L553_hold_to_the_gate_brief_20261124.md`.
+3. It stops after its plan. Tell me, and I read the plan before you give the go-ahead.
+
+**Where this leaves us**
+- L-553 is ruled next and briefed. Its build proves your rule with planted failures, not with a lucky night.
+- L-538 (the orbiters' printed error) worked on GitHub tonight and still needs one green night to reach the site, then your look.
+- The scheduled nights keep trying meanwhile. If JPL connects for every body, tomorrow's will be green without the fix.
