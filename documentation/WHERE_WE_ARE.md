@@ -205,8 +205,8 @@ Not urgent, in your order:
 - `documentation/WHERE_WE_ARE.md`: two lines above the marker, and the handoff's name. Your run record below the marker is untouched.
 
 **Your run order**
-1. Orrery: Commit, then Pull origin, then Push origin. -- 
-2. Reinstall horizons-orbital-mechanics (1.21) to your account from the repository.
+1. Orrery: Commit, then Pull origin, then Push origin. -- 651422cbfcf974d9122aa6189e51c190f92a58bd
+2. Reinstall horizons-orbital-mechanics (1.21) to your account from the repository. -- done
 3. After the next website night, look on your phone at BepiColombo's box.
 
 **Where this leaves us**
