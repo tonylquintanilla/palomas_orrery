@@ -7,9 +7,17 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 4 parts: lines 1-260, 261-523, 524-789, 790-944.
+Read this file in 3 parts: lines 1-237, 238-505, 506-728.
 
-Skill version: 1.21 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
+Skill version: 1.22 | 2026-11-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ eb90dff7 and gallery @ 727ebf79. v1.22 (L-522, the
+skill's split; L-538, the orbiters' printed error): what the builder
+and the Daily Run do moved whole to the gallery's
+`CACHE_BUILDER_AS_BUILT.md`; eight sections keep their headings here,
+with their rules. Adds A Capture Craft's Box Never Claims Less Than Its
+Miss. Riding it, three sentences gone stale (`--commit`, Layer 1's
+count, a field note's line numbers). The 1.19 entry moved out.
+Earlier: 1.21 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
 palomas_orrery @ 849bf462 and gallery @ e6af10ea. v1.21 (L-541, a
 plan's clock; L-529, guided encounters) adds The Clock Block and Its
 Witness and, under Sibling directory semantics, an encounter's package.
@@ -22,25 +30,24 @@ Lagrange points) adds A Lagrange Point Is Served as a Point, the fourth
 serving shape. To stay at the cap, the 1.17 entry, Fetch facts proven
 live and a size note of 2026-10-25 moved out. Read from L-297's notes
 and the gallery's builder at 56bc3fab before it was written.
-Earlier: 1.19 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 02183e4d and gallery @ 173d397a; built in gallery
-db28733e. v1.19 (L-525, hold the bad data) adds A Body That Fails Its
-Test Is Held. Riding it: the night's title, a new abort, Layer 1's
-count, a wrong field note removed (interactive.html does read the served
-cache), and three passages of history moved out to stay at the cap. Read
-from the gallery's code with this session's edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
 2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507),
 2026-11-05 (L-507), 2026-11-11 (L-525), 2026-11-19 (L-297) and
-2026-11-22 (L-541).
+2026-11-22 (L-541) and
+2026-11-24 (L-522).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
 computer, through `daily_run.py --night`, whose gate decides whether the
 night's files are committed; Tony can also run it by hand for a build the
 same day (see Operating mode below).
+What the builder and the Daily Run do now is the gallery's
+`CACHE_BUILDER_AS_BUILT.md`, at its root; this skill keeps the rules.
+A build that changes them changes that page in the same commit, and
+a session reads the page's section for the part it changes (L-522).
+
 
 ## Contents
 
@@ -64,6 +71,7 @@ if this list and the headings disagree (L-418).
 - A Small Body's Own Uncertainty Is Served [QUALITY]
 - Every Question Is Asked of JPL, Fresh [QUALITY]
 - A Body That Fails Its Test Is Held [QUALITY]
+- A Capture Craft's Box Never Claims Less Than Its Miss [QUALITY]
 - The Daily Run's Steps [QUALITY]
 - A Served Number That Changes on Purpose [QUALITY]
 - Validation stance
@@ -83,9 +91,9 @@ from the Actions tab. The first run, by hand, was clean on 2026-10-31
 (commit c1c578f5, by github-actions[bot]). What makes it safe is the
 night's GATE, not a person at the keyboard: the workflow commits only
 when `daily_run.py --night` exits 0, and stages only its allow-list
-(`daily_run.py --allow-list`). The gate's conditions are in The Daily
-Run's Steps, below; one of them is the guard this section used to call
-designed and not built.
+(`daily_run.py --allow-list`). The gate's conditions are on the
+as-built page, under The Daily Run's Steps; one of them is the guard
+this section used to call designed and not built.
 
 - THE DELETIONS-ONLY GUARD IS BUILT, in the gate: a change under
   `data/solar-system/` that is deletions only stops the night, by name.
@@ -111,7 +119,8 @@ working directory, so launching from `tools/` fails at load_config. No
 flags runs nightly mode, and Tony commits in GitHub Desktop. Tony's
 morning order since the night exists: Pull origin on both repositories
 first, then anything else, without waiting for a night that has not
-run yet (The Daily Run's Steps, the night form, says why).
+run yet (the as-built page, The Daily Run's Steps, the night form,
+says why).
 
 The history (the Windows task retired on 2026-08-10, after a scheduled
 run's failed swap was committed on 2026-07-24) is in
@@ -252,11 +261,14 @@ Three conditions make the discard rule safe and they travel WITH it:
   a complete staging directory and never a mixed one;
 - nothing reaches the remote until Tony commits by hand.
 
-Running with `--commit` breaks the third condition and therefore breaks
-the rule. Do not use `--commit` while L-216 is open. The night never
-passes it: its workflow commits after the gate, and a night whose swap
-was not ok, or whose served change is deletions only, commits nothing,
-so the third condition holds at night by the gate instead of by Tony.
+Running with `--commit` breaks the third condition and therefore
+breaks the rule. Do not use `--commit`: Tony commits and pushes
+(the protocol), and at night the workflow commits after the
+gate. L-216 closed on 2026-10-08; this did not lapse with it.
+The night never passes it: its workflow commits after the gate, and a
+night whose swap was not ok, or whose served change is deletions only,
+commits nothing, so the third condition holds at night by the gate
+instead of by Tony.
 
 ## The cause, and what is still open
 
@@ -388,415 +400,185 @@ orrery's file is pulled before the build serves it.
 
 ## The Builder Reads the Period's Centre [QUALITY]
 
-Built 2026-10-14 (L-431 build 3), at the rule horizons-orbital-mechanics
-calls The Drawn Orbit Follows the Period's Centre.
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
 
-- Each object in `data/objects_config.json` carries a `period` block,
-  copied by `tools/mirror_objects.py` from the orrery's export, never by
-  hand. `kind` is `fetched`, `typed` or `none`; a fetched one names its
-  `center`, the Horizons centre JPL's period was taken around.
-- The served `osculating` block, its positions and its trust stay
-  Sun-centred and unchanged. Where a fetched period's centre is the
-  solar system's barycentre ('@0') and the body is drawn from its
-  elements around the Sun (not a comet, not a spacecraft), the builder
-  ALSO fetches the body's elements around that centre at the SAME date
-  as the Sun-centred ones, and serves them as `drawn_orbit` (centre
-  slug `ssb`, `paired_with: osculating`). The room pairs the two sets
-  at that date to find where the barycentre sits seen from the Sun, and
-  draws the ellipse there (`render_orbits.drawn_orbit_offset`). No
-  perturbation lines are drawn for it (Tony, 2026-10-13).
-- A set from another date is never paired: `build_drawn_orbit_block`
-  raises, and the pre-swap check #D aborts a `drawn_orbit` that is
-  around the stored centre, is not at the `osculating` date, or has no
-  mean motion. `tools/check_cache_in_step.py` asks the same question
-  from the other side, with the same rule (`drawn_centre_wanted`):
-  every object whose period wants a drawn orbit has one, and no other
-  object does.
-- A comet whose period is around another centre is drawn from its
-  elements of today, around the Sun (since 2026-10-22, L-443: every
-  comet is anchored at today; until then "at perihelion"), and the
-  builder WARNS rather than fetching. Encke, today, is around the Sun.
-- Which bodies this touches is decided by the orrery's period records,
-  not here. On 2026-10-14 no served body's period was around the
-  barycentre (Sedna is not served), so the first live `drawn_orbit` may
-  come from a planet whose period the orrery fetches around '@0' when
-  Tony plots it.
+- The `period` block is the orrery's, copied onto each entry by
+  `tools/mirror_objects.py` from its export, never by hand.
+- The served `osculating` block, its positions and its trust
+  stay Sun-centred. A `drawn_orbit` is served beside them, at
+  the SAME date, never in their place; no perturbation lines are
+  drawn for it (Tony, 2026-10-13).
+- A set from another date is never paired: the builder raises, the
+  pre-swap check aborts, and `tools/check_cache_in_step.py` asks the
+  same question from the other side, with the same rule.
+- Which bodies this touches is decided by the orrery's period
+  records, not here.
 
 ## A Spacecraft Is Fetched by Its Plan [QUALITY]
 
-Built 2026-10-25 (L-443 build B), on the method horizons-orbital-mechanics
-calls How a Path's Events Are Found. Design: ruling 1 of
-`documentation/DESIGN_L443_slice2_rulings_20261023.md`, "One path rule,
-the orrery's."
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
 
-- THE PLAN IS THE ORRERY'S. `path_plan.py` makes each served
-  spacecraft's plan in the orrery's maintenance run; the objects export
-  carries it; `tools/mirror_objects.py` copies onto the entry in
-  `data/objects_config.json` what the builder and the room need: its
-  `made` date, its `span` (JPL's own, launch to the end of JPL's data,
-  or to the day an ended mission ended, its `mission_end`, since v1.17),
-  its `backbone` (step and thinning), and each event's body, kind,
-  moment, distance, window and step. Never by hand.
-- THE WHOLE PATH, WHEN THE PLAN IS NEW (`fetch_path_by_plan`): the
-  backbone across the span at its step (7 days), thinned by
-  Douglas-Peucker at its tolerance (0.02 AU); each event's window at the
-  event's own step, clipped to the span, thinned at the event's own
-  scale (`WINDOW_THIN_FRACTION`, 1% of its passing distance) and merged
-  after the backbone's thinning so a flyby is never thinned away; then
-  the daily tail. JPL's predicted part is fetched with the rest; nothing
-  is extended past the span. "New" means the raw archive's `plan_made`
-  or `plan_span` differs from the entry's, or a first build, or
-  --refresh-spacecraft; the archive is cleared first, since JPL revises
-  the predicted part.
-- OTHERWISE, ONLY THE TAIL (`fetch_path_tail`): daily from the freeze
-  window before today to two days after (`PATH_TAIL_AHEAD_DAYS`), inside
-  the span, so the room, drawing the minute it is opened, finds a point
-  either side of it until the next build.
-- AN ENDED MISSION'S LAST DAY IS ASKED FOR ITSELF (`fetch_path_last_day`,
-  v1.17, L-507). A path whose span ended before today also gets the
-  first two minutes of its last day, asked as 00:00 and 00:01 UTC (they
-  come back a minute later on JPL's clock, which labels them), merged
-  with the rest, whole fetch and tail alike. The room puts an ended
-  mission's marker on the path's last served point and its text box
-  says the mission ended that day, but the 7-day backbone from the
-  launch can stop up to six days short of it: Galileo's would have
-  stopped on a day the box would then print as its end. The span's end
-  is a day, inside JPL's data by path_plan's own clipping
-  (horizons-orbital-mechanics, An Ended Mission Ends on Its
-  mission_end), so the two minutes are too. Where the path stops
-  before the mission ended (Akatsuki: cut on 2024-04-26, the last day
-  JPL's solution is fitted to tracking, its `path_cutoff`; JAXA's end
-  2025-09-18; v1.18, L-507 more voyages), the span ends on that day, the
-  same two minutes are its last served point, and the room's box says
-  the path is drawn to it. `{}` for a path
-  still running. Such a path serves no `as_of_today`. The offline suite holds
-  it (the last point on the span's last day; planted fault, the last
-  day not asked, leaving 2003-09-23 for an end of 2003-09-29).
-- EVERY POINT IS KEYED TO THE MINUTE (`MINUTE_KEY`), since a window's
-  step can be a minute; every other object keeps day keys.
-- AS_OF_TODAY IS TODAY'S POINT, the latest at or before today, not the
-  path's last (which may be in 2100); none when no point lies within two
-  days before today, so a path whose data ended serves no "you are here"
-  and passes #T.
-- THE SHRINK GATE HOLDS A RE-FETCH BY A NEW PLAN OUT OF ITS COUNT, and
-  names it, old count and new: its count is its plan's, not the old one.
-  The suite shows the gate refusing the same re-fetch without the
-  exemption.
-- THE SPACECRAFT SANITY BOUND IS 1,000 AU (`SPACECRAFT_SANITY_AU`); the
-  Voyagers' JPL data runs to 2100, past 400 AU.
-- NO PLAN AND NO TYPED START: the object fails by name ("no path plan
-  is served for this spacecraft yet") and is served last-good, never
-  asked from 1970. A spacecraft with a typed `overrides.spacecraft`
-  start and no plan keeps the old fetch; none does since 2026-10-25,
-  Voyager 1's typed windows having been replaced by its plan's events.
-- THE OFFLINE SUITE gives a spacecraft with no plan a stand-in plan, as
-  it gives stand-in drawings, so it does not depend on a pull: in the
-  config as committed, a plan arrives only when the mirror copies it.
-- A COMET ON AN OPEN PATH IS A PATH BODY (v1.13, L-443, slice 2, build
-  B part 2). `is_path_body` is one test, a spacecraft or an entry with
-  `open_path`, and every place above that asked "is this a spacecraft?"
-  asks it: the fetch by the plan, last-good serving, structural check
-  #2, the trust branch (`fetched_positions`, no window) and the floor on
-  points. Such a comet is served positions and no `osculating` block,
-  with `open_path: true` on its served entry, which the room reads to
-  draw it as a path. Its plan comes from the orrery like a
-  spacecraft's (horizons-orbital-mechanics, A Comet on an Open Path);
-  its span is a year before its perihelion to a year after today, so
-  "nothing extended past the span" means past that. With no plan yet it
-  fails by name, "no path plan is served for this comet yet". The
-  mirror copies `open_path` from the export (`INSERTED`). The offline
-  suite gives such a comet a stand-in plan and the fake answers it with
-  a straight line past the Sun; four checks hold it, among them one
-  fetched inside its plan's span and no further.
-  A body changes side by itself (v1.18, L-510; gallery 3660993): the
-  orrery draws a small body as a path or an orbit by its database e
-  (horizons-orbital-mechanics), and `tools/mirror_objects.py` follows it
-  across e = 1 both ways (WHEN A BODY CHANGES SIDE): to an orbit it
-  removes `path` and `open_path`, sets availability analytic, frame
-  heliocentric and trace none, and inserts the export's period; to a
-  path, the reverse. It rewrites the entry's note with the day, prints
-  every change, refuses a side change over an entry whose three fields
-  were set by hand, and leaves the drawer row for a person to check. The
-  offline suite compares its comets on open paths with the export BY
-  NAME (no count to bump), and gives a body newly drawn as an orbit a
-  stand-in orbit, named when used.
+- THE PLAN IS THE ORRERY'S ("One path rule, the orrery's."): made by
+  `path_plan.py`, copied by `tools/mirror_objects.py`, never by hand.
+- Nothing is extended past the span. JPL's predicted part is fetched
+  with the rest, and asked again whole when the plan is new, since JPL
+  revises it.
+- A flyby is never thinned away: an event's window is thinned at its
+  own scale and merged after the backbone's thinning.
+- An ended mission's last served point is on its span's last day.
+- `as_of_today` is today's point, never the path's last; none when no
+  point lies within two days before today.
+- The shrink gate holds a re-fetch by a new plan out of its count, and
+  names it.
+- No plan and no typed start: the object fails by name and is served
+  last-good, never asked from 1970.
+- The offline suite gives a path body with no plan a stand-in plan, so
+  it does not depend on a pull.
+- A COMET ON AN OPEN PATH IS A PATH BODY: one test, `is_path_body`,
+  asked wherever the builder asks "is this a spacecraft?".
+- A body that changes side across e = 1 is followed by the mirror,
+  never by hand; a side change over fields set by hand is refused, and
+  the drawer row is left for a person to check. The suite compares
+  such comets with the export by name, with no count to bump.
 
 ## A Lagrange Point Is Served as a Point [QUALITY]
 
-v1.20, L-297: the fourth shape, `serving_shape` 'point' (category
-'lagrange_point'). A point has no mass and no orbit, so no elements
-are fetched: only JPL's positions around the centre it is served
-around (Earth for the Earth-Moon points, the Sun for the Earth-Sun
-ones), a day apart across the served window and a day past each edge,
-and an hour apart from yesterday to the day after tomorrow (`POINT_*`;
-Tony, 2026-11-19). Fetched last, once the window is known
-(`point_window`); a point never takes part in the window
-(`served_window_from`), so it cannot narrow it. JPL's answer is held to
-the point's own name: asked for 3013, JPL answers an asteroid. A failed
-fetch serves the saved days (`serve_last_good_point`), today's point
-nulled; the validator's #L (`point_problems`) refuses elements, a short
-span, a missing day or hour, each planted.
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
+
+- A point has no mass and no orbit: no elements are fetched, only
+  JPL's positions, a day apart across the window and an hour apart
+  near today (Tony, 2026-11-19).
+- A point never takes part in the window, so it cannot narrow it.
+- JPL's answer is held to the point's own name.
+- A failed fetch serves the saved days, today's point nulled.
 
 ## The Clock Block and Its Witness [QUALITY]
 
-v1.21, L-541. A served `jd` is on JPL's clock (TDB) and a visitor's
-minute is UTC, so each build serves the difference in the index.
-- THE CLOCK BLOCK (`build_clock`, "clock"). JPL is asked its TDB-UT (a
-  vectors query for Mercury; the Horizons manual: "After 1962, UT means
-  UTC") at the window's first and last minute and the build's own;
-  astropy works out TDB minus UTC at the same minutes. The build stops,
-  by name, when JPL does not answer or names another body, when the two
-  differ by more than 0.001 s, or when JPL's moves by more than 0.004 s
-  across the window (a leap second inside it). Served: JPL's at the
-  build's minute, 69.1829 s on 2026-11-22.
-- THE WITNESS (`build_witness`). Each build serves JPL's places of
-  Mercury (from its orbit) and 3I/ATLAS (from served points) at its own
-  minute; the gallery run's Room clock row compares the room's places
-  with them. A witness does not share its clock with what it tests.
-- OPEN ON L-541: daily points are asked at 00:01:00 on JPL's clock, 9 s
-  before UTC midnight; keys and plan windows read as UTC.
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
+
+- A served `jd` is on JPL's clock (TDB) and a visitor's minute is UTC,
+  so each build serves the difference, asked of JPL and worked out by
+  astropy; the build stops, by name, when the two disagree or JPL does
+  not answer.
+- A witness does not share its clock with what it tests.
 
 ## A Small Body's Own Uncertainty Is Served [QUALITY]
 
-Built 2026-10-29 (L-399), on the method horizons-orbital-mechanics calls
-A Small Body's Uncertainty Comes With Its Position.
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
 
-- EACH SMALL BODY IS ASKED JPL'S OWN UNCERTAINTY: an asteroid, a comet
-  or a dwarf planet asked as a small body (`is_small_body_target`, the
-  orrery's own test), by Horizons' vector table 2xr, read by column
-  name, at the moment of its served "you are here" point. What is
-  served is `position_uncertainty` on its entry
-  (`build_position_uncertainty`): the 3-sigma of its distance from the
-  Sun. The planets and Pluto keep JPL's planetary report, from the
-  config (`position_accuracy`). It is cache data, so unlike
-  `position_accuracy` it reaches a visitor only after a build.
-- AN ANSWER THAT CANNOT BE SERVED HONESTLY SERVES NOTHING, NAMED, and
-  never costs the orbit: no point to ask at, a body not measured from
-  the Sun, an empty position column, no R_s ("JPL gives no range
-  uncertainty (R_s) for it" -- Bennu, Halley and Ikeya-Seki, whose
-  column reads "n.a."), or a position that does not match. The index's
-  `position_uncertainty` lists who was asked and why each missing one
-  is missing.
-- THE MATCH RULE (`uncertainty_match_tolerance`, corrected
-  2026-10-29). The 2xr answer's position must sit within the body's own
-  3-sigma of the served point, 3 x R_s, R_s read first, floored at
-  1e-7 AU (`UNCERTAINTY_MATCH_AU`, about 15 km, the earlier fixed
-  tolerance, which Ceres and Apophis keep) and capped at 1e-3 AU
-  (`UNCERTAINTY_MATCH_CAP_AU`, about 150,000 km). THE CAP IS SET BY
-  THE CLOSEST COMET PIECES, the one case where another record sits
-  close: C/2025 K1's pieces B and D were 0.0042 AU apart on 2026-10-29
-  and D's own 3-sigma was 0.0043 AU, so D's answer standing in for B's
-  would pass the 3-sigma alone; the cap is under half the closest pair
-  measured that day, the parent and C at 0.0024 AU. Every other body
-  asked had no neighbour nearer than 0.117 AU.
-- A REFUSAL NAMES ITS NUMBERS. The line says how far JPL's 2xr answer
-  sits from the served point against the tolerance, and the run
-  record keeps the refused answer's items under
-  `position_uncertainty.refused` -- the id asked, JPL's X, Y, Z, the
-  served point -- so a refusal can be read later.
-- WHY IT WAS CORRECTED: the fixed 1e-7 AU refused 2026 ED138 at the
-  21:57 UTC build of 2026-10-29, its answer 8.88e-05 AU (13,000 km)
-  from a served point read from astroquery's saved answers after JPL
-  had revised the orbit -- a thirtieth of its own 3-sigma (next).
+- Each small body is asked JPL's own uncertainty; the planets and
+  Pluto keep JPL's planetary report, from the config. It is cache
+  data, so it reaches a visitor only after a build.
+- AN ANSWER THAT CANNOT BE SERVED HONESTLY SERVES NOTHING, NAMED,
+  and never costs the orbit.
+- JPL's answer is matched to the served point within the body's own
+  3-sigma, floored and capped; the cap stays under half the closest
+  pair of records measured, so one record's answer cannot stand in for
+  another's.
+- A REFUSAL NAMES ITS NUMBERS, and the run record keeps the refused
+  answer.
 
 ## Every Question Is Asked of JPL, Fresh [QUALITY]
 
-`HORIZONS_CACHE = False` (L-399, 2026-10-29), passed as `cache=` at
-every astroquery call the builder makes. astroquery keeps each answer
-on disk for a week (`astroquery.cache_conf.cache_timeout`, 604800 s,
-in `~/.astropy/cache/astroquery/Horizons`) and hands it back when the
-same question is asked again, so a second build on the same day served
-the first build's orbit and positions under a new "retrieved" stamp.
-The 2xr question, sent directly, was always fresh, which is how the
-two came to disagree. The offline suite holds every call to the
-setting. The orrery made the same choice the same night (L-504,
-`utc_clock.HORIZONS_CACHE`; horizons-orbital-mechanics).
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
+
+- Every astroquery call the builder makes passes
+  `cache=HORIZONS_CACHE`, which is False: a saved answer handed back
+  serves an old orbit under a new "retrieved" stamp. The offline suite
+  holds every call to the setting; the orrery made the same choice.
 
 ## A Body That Fails Its Test Is Held [QUALITY]
 
-Built 2026-11-11 (L-525; Tony: "Hold the bad data and report, then
-continue."). Before, one failed test cut the site's window to 0.3 days.
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
 
-- WHO. A Sun-centred body drawn from its elements (`held_by_test`) when
-  either test sample is more than `TRUST_TOLERANCE_DEG` (0.5) from JPL,
-  or the test could not be made (`trust_verdict`); and any body but a
-  path that JPL does not answer. A moon, or any body with its own span,
-  is NOT held for a number over the limit: the Moon runs 0.10 to 0.18
-  degrees on ordinary nights from the Sun's pull, so over it is likely
-  physics, and an older orbit draws it worse. Replayed on the 186
-  committed indexes of Jul 11 to Nov 11: Halley on Nov 10 and 11, only.
-- HOW (`hold_from_prior`). Served from its entry in the replaced cache,
-  whole, `as_of_today` cleared as A-3 does, with a `hold` block (since,
-  kind, why, from_generated, passed_before), copied forward each build
-  while it lasts, so it outlives any number of swaps; `.prev` is never
-  the store. It leaves the served window, which the bodies that passed
-  set. Tested every build, it ends when it passes. No entry to hold at:
-  not served, named.
-- REPORTED, NOT RED. The index's `holds` gives each body's line, "HELD
-  Halley since 2026-11-11: its accuracy test was 21.6 degrees from JPL
-  at 30 days (the limit is 0.5); drawn from the build of 2026-11-10",
-  and "HOLD ENDED". `daily_run.py` prints them in both summaries; its
-  `--held-title` starts the night's commit title, "HELD Halley --
-  Nightly run ...", and an unreadable index stops the commit.
-- More than `HOLD_LIMIT` (5) held is a failed build: ABORT, no swap.
-  Before, JPL answering nothing still swapped, 94 of 102 last-good.
-- A fault in the maths, not the data, is held while drawn wrong; the
-  title is then the only signal.
-- CHECKED: the suite's `hold_checks` (11; 1 of 10 on the old builder)
-  and `daily_run.py --check`. The page: interactive-exhibit. NOT BUILT:
-  L-508's quiet half (a ledger handle on the line); it stays loud.
+- Tony, 2026-11-11: "Hold the bad data and report, then continue."
+- A moon, or any body with its own span, is NOT held for a number over
+  the limit: over it is likely physics, and an older orbit draws it
+  worse.
+- A held body is served from its entry in the replaced cache, its hold
+  copied forward while it lasts; `.prev` is never the store. It leaves
+  the served window, is tested every build, and ends when it passes.
+- REPORTED, NOT RED: the night's commit title names each held body.
+- More than `HOLD_LIMIT` held is a failed build.
+- A fault in the maths, not the data, is held while drawn wrong;
+  the title is then the only signal.
+
+## A Capture Craft's Box Never Claims Less Than Its Miss [QUALITY]
+
+v1.22, L-538 (2026-11-24). A craft orbiting a planet turns faster
+than its served points are spaced, so the room's figure for its
+place can be smaller than its real miss (Juno on its close pass of
+2026-12-16: good to 574,000 km, off by 3.2 million). What the
+builder does about it is on the as-built page, under this title.
+These are the rules it follows.
+
+- WHO IS DECIDED BY THE PLAN, NEVER BY A NAME: a craft whose plan
+  carries an arrival whose stretch meets the date window. No craft
+  is named in the logic, and a plan with two arrivals is read for
+  the one that meets the window.
+- WHICH SHAPE IS DECIDED BY A MEASURED SIZE, not by a name (the
+  coordinating session's reading, as method). Fine points across
+  the whole window where they stay small (Tony, 2026-11-23, 23:39:
+  "Yes"). Where they do not, fine points around today, a point a
+  day elsewhere, and outside the band a figure never smaller than
+  the reach of the craft's loop (Tony, 2026-11-24, 09:38: "I agree
+  with your recommendation. Fine points around today."). That is a
+  coarser, TRUE figure, permanent, and not the stopgap he declined
+  on 2026-11-19.
+- THE FINER-STEP RULE. When the test finds a step too coarse for a
+  craft, the builder makes that craft's step finer, down to a
+  floor, and it comes to Tony only if the floor still fails. For a
+  craft served whole it covers the daily part as well as the band
+  around today (Tony, 2026-11-24, 08:12: "yes"); a craft served in
+  the band only keeps a point a day outside it, with the loop's
+  floor.
+- TWO TESTS, AND THE SECOND IS THE ONE THAT SEES. Each served
+  point held out and predicted from the rest; and JPL's own points
+  between the served ones. The first alone passed BepiColombo
+  while its box was wrong (Part A's report, 56 of 728 minutes).
+  Each craft has its own self-test, never a pooled one: a pooled
+  count lets one craft's failures stand for another's.
+- THE FLOOR IS THE SUM of the chord's figure and the loop's term,
+  not the larger of the two: the larger holds only while the two
+  parts do not line up.
+- JPL'S IN-BETWEEN POINTS ARE NOT COMMITTED (Tony, 2026-11-24,
+  14:00: "i agree with the recommendation"). The night tests
+  against them. A run anywhere else names each craft it could not
+  hold, and never counts it as held. The night is told by a flag,
+  never guessed.
+- A SIZE IS MEASURED BEFORE A LIMIT IS SET OR A RULING IS ASKED.
+  On 2026-11-23 "about 22 KB a craft" was offered as a number and
+  ruled on; BepiColombo's measure was 30 times that and more.
 
 ## The Daily Run's Steps [QUALITY]
 
-`daily_run.py`, Tony's design of 2026-09-27 (L-281), is FOUR steps
-since 2026-10-15 (L-446), and the order is the point:
+What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
 
-  1. The guest book updater. First, because it needs Tony's answers,
-     and what he approves is saved at once.
-  2. The pulls from the orrery: `gallery_maintenance_run.py --pull`,
-     which runs only the five pull-and-mirror rows of its GENERATORS
-     (constants export, config mirror, objects export, objects mirror,
-     drawings). BEFORE the builder, so the build reads what the orrery
-     exported today and the served `frame_constants.orrery_sha` names
-     that export. Until 2026-10-15 the pulls ran only in step 4, after
-     the build, so every build read the previous run's pull and its
-     stamp was one step behind (L-380).
-  3. This builder, with no flags.
-  4. The gallery maintenance run, offline. Its pull rows run again and
-     print "no change", which is the proof step 2 did the work.
-
-The pull list has ONE home, the maintenance run's GENERATORS; `--pull`
-reads it through `PULL_ROWS`. Do not add the pulls to `daily_run.py`'s
-STEPS as rows of their own: that is a second copy of the list, and five
-more dashboard buttons for Dashboard Parity to hold.
-
-A PULL THAT CANNOT FETCH FAILS, AND THE DAILY RUN STOPS (Tony's option
-A, 2026-10-15). Each pull prints one line starting `FAIL:` naming what
-it could not fetch, from which address and why, writes nothing, and
-exits 1 (L-388; until 2026-10-15 it printed N-A and exited 0, the
-maintenance run read that as PASS "no change", and the mirror wrote the
-config from the old export). The maintenance run does not run a mirror
-whose pull failed (`FED_BY`): its row is red and names the pull. A
-failed generator fails the whole run and is named in the summary. And
-`daily_run.py` stops after step 2: the builder and the checks do not
-run, and the summary quotes `--pull`'s "=== PULLS:" line. Nothing is
-built on yesterday's export; Tony runs it again later. The builder
-needs the network for Horizons anyway, so a day with no network builds
-nothing either way. Option B -- build on the previous pull and say so
-in red -- was declined. `tools/test_pull_failures.py` ("Pull failures",
-gating) runs each pull with its network replaced by one that fails,
-three ways, so these branches are tested every day and not only on the
-day the network is down.
-
-A PULL THAT DOES NOT MATCH THE PUSH IS A FAILED PULL (L-461; Tony,
-2026-10-25: "stop. confirmed."). After the pulls, `daily_run.py`
-compares each pull's recorded orrery commit (`data/constants_export.sha`,
-`data/objects_export.sha`, `data/drawings/pulled_at.sha`) with the newest
-commit in Tony's orrery folder, the folder `palomas_orrery_for_github`
-beside the website's, read from its `.git` folder (HEAD, then the
-branch's loose ref or packed-refs), so no git command is needed. When
-they differ, the run STOPS before the builder, naming both commits and
-the two likely causes -- the orrery's work is not pushed, or GitHub has
-not finished serving a push -- and says to push, or wait a minute if the
-push just went, then run the Daily Run again. SINCE THE ORRERY'S NIGHT
-COMMITS (L-461's second honest cause, v1.15): Tony's orrery folder is
-behind GitHub every morning the orrery's night committed, until he
-clicks Pull origin, so the pulls (GitHub's copy) and his folder differ
-for that reason too -- not yet pulled. The cure is Pull origin, orrery
-then website, then the Daily Run again. No retry, no wait: the one
-time it happened (2026-10-21) the cause was an unpushed orrery, which
-waiting cannot fix, and a run that waits hides the common cause behind
-the rare one. A folder or commit it cannot read stops it too, saying
-where it looked. `python daily_run.py --check` runs the comparison on
-five made-up cases and two planted faults (one that always matches, one
-that ignores the drawings' pull).
-
-THE RUN RECORDS ARE KEPT, AND CHECKED AFTER THE BUILDER (L-449). Each
-build writes one record to `raw/runs/`, and the builder copies the old
-ones forward. Records went missing after builds on 2026-10-15 and
-2026-10-16, cause unknown, and were put back from `.prev` on Tony's
-word. Tony's rulings: keep EVERY record until the cause is found, then
-a deliberate limit, its number set at that time, with the builder naming
-each record it removes (2026-10-16); and on a loss, stop and name
-(2026-10-17). So:
-
-- The builder prints two `[RUNS]` lines at its copy-forward: how many
-  records `raw/runs` held before the copy and how many the staging
-  copy holds after it, with both paths. It removes no record. These
-  two lines are what the next loss is read from; record them in L-449.
-- `daily_run.py` compares `data/solar-system/raw/runs/` with the
-  replaced cache's `data/solar-system.prev/raw/runs/` between the
-  builder and the maintenance run. On success it prints what it
-  compared ("carried 85 of 85, plus tonight's"). A record in the old
-  and not the new STOPS the Daily Run before the maintenance run,
-  naming each lost record with its copy's path; Tony copies them back
-  in File Explorer, then runs the maintenance run. The copies stay in
-  `.prev` only until the next build clears it. A missing folder is
-  "could not compare", reported as a problem, never as a pass; it does
-  not stop the run, since it is what a failed or rolled-back build
-  leaves.
-- It is not a step of its own and has no dashboard button: it runs no
-  script, and it means something only straight after a build. The
-  builder's offline suite runs the comparison on its own builds and
-  plants a loss, which must stop it by name.
-
-THE NIGHT FORM (v1.15, L-485; `python daily_run.py --night`, run by the
-gallery's workflow at 08:17 UTC). The same steps with no keyboard,
-ending in one gate:
-
-- The guest book is SKIPPED, by name: it needs Tony's answers and stays
-  his morning's (Tony's ruling of 2026-10-31, 10:20). Nothing is read
-  from Google on the runner.
-- The pulls run as by day, asking GitHub's interface with the run's own
-  token.
-- PULL MATCHES PUSH, THE RUNNER FORM (`pull_matches_remote`): there is
-  no orrery folder beside the website on GitHub's computer, so the three
-  pulled commits must agree with each other and with the orrery's
-  GitHub copy, read live with `git ls-remote`. A difference stops the
-  night before the builder: no retry, no wait.
-- The builder with no flags, never `--commit`; its swap read back off
-  the swap log as tonight's, outcome ok. The run records check: a loss,
-  or "could not compare", is red at night.
-- The maintenance run's night pass (`gallery_maintenance_run.py
-  --night`), an UNREACHABLE row red.
-- THE GATE (`night_gate`), exit 0 only when ALL hold, each failure named
-  on the last line, "NIGHT RUN: RED -- ...": the pulls passed and match
-  the orrery's GitHub copy, and did not move after the build; the
-  builder exited 0 and tonight's swap is ok; the run records were
-  carried; the night pass passed with nothing UNREACHABLE; git sees
-  nothing changed or new outside the allow-list (`night_allow_list`);
-  every changed file is ASCII; and the change under
-  `data/solar-system/` is not deletions only.
-- The commit title starts with every held body, "HELD Halley -- "
-  (`--held-title`, v1.19, L-525); a hold is not red.
-- A clean night writes `data/nightly_run_record.json`; a red night
-  writes nothing, and its record is the run's log. `python daily_run.py
-  --check` judges made-up nights and planted faults for the gate and
-  the runner form.
-- THE MORNING DOES NOT WAIT FOR THE NIGHT (v1.16, L-485; Tony's ruling
-  of 2026-11-01, 12:04 Chicago): Tony pulls first and does not wait for
-  the run, and a run that lands later in the day comes with his next
-  Pull origin -- because GitHub's schedule is best-effort. Its page
-  "Events that trigger workflows", read 2026-11-01: "The schedule event
-  can be delayed during periods of high loads of GitHub Actions
-  workflow runs" and "If the load is sufficiently high enough, some
-  queued jobs may be dropped." Both nights started about seven hours
-  late on 2026-11-01. A dropped night is caught the same day by a
-  second scheduled line: the orrery's at 11:17 UTC, the website's at
-  12:17 (each `.github/workflows/nightly.yml`). A second firing is
-  harmless: the concurrency group queues it, and a clean second run
-  commits only its night record. The times stay (no reschedule): the
-  lag is GitHub's, not the clock's.
-
-Apart from the pulls and the records, a step that reports a problem
-does not stop the next: the guest book's problems still do not stop the
-build. Nothing in the Daily Run commits or pushes. The gallery's
-"Horizons confirmations" row still reads the dates JPL confirmed each
-object, from the pulled export, offline, and goes red, naming the
-objects, on the day a confirmation turns 30 days old: the cure is the
-orrery's maintenance run, then the push, then the pull here. `python
-daily_run.py --check` lists the steps and fails if a script is missing;
-the maintenance run runs it.
+- THE ORDER IS THE POINT (Tony's design, 2026-09-27): the guest book,
+  the pulls from the orrery, this builder, the maintenance run. The
+  pulls come BEFORE the builder, so the build reads what the orrery
+  exported today.
+- The pull list has ONE home, the maintenance run's GENERATORS. Do not
+  add the pulls to `daily_run.py`'s STEPS as rows of their own: that
+  is a second copy of the list.
+- A PULL THAT CANNOT FETCH FAILS, AND THE DAILY RUN STOPS (Tony's
+  option A, 2026-10-15): nothing is built on yesterday's export;
+  option B, build on the previous pull and say so in red, was
+  declined.
+- A PULL THAT DOES NOT MATCH THE PUSH IS A FAILED PULL (Tony,
+  2026-10-25: "stop. confirmed."). The cure is Pull origin, orrery
+  then website, then the Daily Run again; no retry, no wait.
+- EVERY RUN RECORD IS KEPT until the cause of the losses is found,
+  then a deliberate limit, its number set at that time, with the
+  builder naming each record it removes (Tony, 2026-10-16); on a loss,
+  stop and name (2026-10-17).
+- AT NIGHT THE GATE DECIDES THE COMMIT: the same steps with no
+  keyboard, the guest book skipped (Tony, 2026-10-31), and a red night
+  commits nothing. A hold is not red.
+- THE MORNING DOES NOT WAIT FOR THE NIGHT (Tony, 2026-11-01): he pulls
+  first, and a night that lands later comes with his next Pull origin.
+- Apart from the pulls and the records, a step that reports a problem
+  does not stop the next. Nothing in the Daily Run commits or pushes.
 
 ## A Served Number That Changes on Purpose [QUALITY]
 
@@ -848,7 +630,7 @@ Two dispositions, and the difference is load-bearing:
 - WARN AND KEEP, never reject: Guard v2 (guard_monitor / emit_guard_warnings,
   the per-object k*a(1+e) distance band). It is a MONITOR, not a gate.
 
-Field note: an inline comment mislabels this as "guard/B3 WARN" (search for that string; it has drifted from line 755 to ~1099 and will move again).
+Field note: an inline comment mislabels this as "guard/B3 WARN" (search for that string; its line moves with every build).
 #B3 is an ABORT -- the code raises ValidationAbort. The module docstring is
 correct; the inline comment is stale (candidate cleanup, tracked separately).
 
@@ -861,7 +643,7 @@ round-trip discipline the project uses by hand, baked into the builder.
 
 ## The three-layer gate (documentation/TESTING_PROTOCOL.md, orrery repo)
 
-- Layer 1 -- offline suite (mocked fetch, 537 checks at v1.19): proves the LOGIC. Run
+- Layer 1 -- offline suite (mocked fetch, 604 checks at v1.22): proves the LOGIC. Run
   `python3 tools/test_gallery_cache_builder_offline.py` from a CLEAN checkout
   after ANY builder or config-layout change -- it is the canary for path
   assumptions (the L-114 config move silently broke it until the test's own
@@ -872,7 +654,8 @@ round-trip discipline the project uses by hand, baked into the builder.
 - Layer 3 -- scheduling (unattended nightly). LIVE AGAIN since
   2026-10-31, in the GitHub Action form (L-485): the gallery's
   workflow at 08:17 UTC. Its gate is the night's (`daily_run.py
-  --night`, The Daily Run's Steps); its health summary is the night's
+  --night`, The Daily Run's Steps, on the as-built page); its health
+  summary is the night's
   record, `data/nightly_run_record.json`, which the orrery's dashboard
   reads. The Windows task retired on 2026-08-10 stays disabled. The
   gap-aware catch-up L-098 / L-111 named is not built.
@@ -893,9 +676,10 @@ two things the general gate description doesn't spell out:
   whose drawing needs the past positions themselves needs --first-build.
   Spacecraft and comets on an open path are the other exception: they
   are fetched by their plan, whole when the plan is new. A comet that
-  changes side needs no onboarding: the mirror follows it (A Comet on an
-  Open Path Is a Path Body, v1.18). An ended mission is a spacecraft
-  keyed with `mission_end` (and `end_note`, `cutoff_note` where set), which the
+  changes side needs no onboarding: the mirror follows it (A Spacecraft
+  Is Fetched by Its Plan, on the as-built page, v1.18). An ended mission
+  is a spacecraft keyed with `mission_end` (and `end_note`, `cutoff_note`
+  where set), which the
   mirror copies (`INSERTED`, since v1.18, L-507 more voyages); its
   config entry is written by hand as Galileo's is, the mirror filling
   the rest.

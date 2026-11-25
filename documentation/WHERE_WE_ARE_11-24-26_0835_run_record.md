@@ -263,8 +263,8 @@ What I did not check: the figures measured against JPL, the suite's 604 of 604 a
 I also wrote a short handoff for the next coordinating session, `documentation/HANDOFF_coordinating_20261124.md`, placed in your folder and read back identical. Attach it when you start the next one.
 
 **Your run order**
-1. **Orrery:** commit and push.
-2. **Website:** commit, then Pull origin, then Push origin.
+1. **Orrery:** commit and push. -- eb90dff7a4a2d0872d0d21e24176238b0d642c5f
+2. **Website:** commit, then Pull origin, then Push origin. -- 727ebf791666a515b9cf18d869ca3507daf11606
 3. **After the next night,** open the Solar System room on your phone and check the three boxes:
    - BepiColombo today: one more digit than before.
    - BepiColombo on Dec 20: fewer digits, about 0.464 AU.

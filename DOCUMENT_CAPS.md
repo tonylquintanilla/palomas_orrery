@@ -36,7 +36,7 @@ shortens a document lowers its cap to the new size.
 | `skills/agentic-pre-test/SKILL.md` | 126 | `documentation/SKILL_HISTORIES.md` |
 | `skills/earth-system-pipeline/SKILL.md` | 199 | `documentation/SKILL_HISTORIES.md` |
 | `skills/gallery-assembler/SKILL.md` | 307 | `documentation/SKILL_HISTORIES.md` |
-| `skills/gallery-cache-builder/SKILL.md` | 944 | `documentation/SKILL_HISTORIES.md` |
+| `skills/gallery-cache-builder/SKILL.md` | 728 | `documentation/SKILL_HISTORIES.md` |
 | `skills/gallery-pipeline/SKILL.md` | 160 | `documentation/SKILL_HISTORIES.md` |
 | `skills/horizons-orbital-mechanics/SKILL.md` | 904 | `documentation/SKILL_HISTORIES.md` |
 | `skills/interactive-exhibit/SKILL.md` | 738 | `documentation/SKILL_HISTORIES.md` |

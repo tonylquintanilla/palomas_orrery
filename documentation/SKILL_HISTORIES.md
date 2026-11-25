@@ -1906,6 +1906,15 @@ Origin: created for L-098 (Phase 1b) from Fable 5's 2026-07-12 Mode 7 review;
 every code fact verified against gallery HEAD 8e060677 / orrery HEAD e83fe9ce
 with Anthropic's Claude Opus 4.8.
 
+Earlier: 1.19 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 02183e4d and gallery @ 173d397a; built in gallery
+db28733e. v1.19 (L-525, hold the bad data) adds A Body That Fails Its
+Test Is Held. Riding it: the night's title, a new abort, Layer 1's
+count, a wrong field note removed (interactive.html does read the served
+cache), and three passages of history moved out to stay at the cap. Read
+from the gallery's code with this session's edits before it was written.
+(Moved down 2026-11-24, when 1.22 made a fourth entry; L-522.)
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at

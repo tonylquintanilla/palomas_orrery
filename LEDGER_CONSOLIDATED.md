@@ -2365,12 +2365,34 @@ REPOSITORY, by `COORD_L538_close_goahead_20261124.md`.
 - Three new items: L-553 (a held body turns the night red), L-554
   (JPL's sentence when a path is a prediction), L-555 (orbiters in
   general).
-**Gap:** Tony commits and pushes the orrery, then the website; the
-next night builds the fine layer; then his look on his phone, as the
-Part C report's section 4 writes it, and the item closes on his look.
-The skill text for gallery-cache-builder stays owed to the
-coordinating session. Until the night, those boxes claim less error
-than they have.
+**Note:** (2026-11-24, evening, the Claude Code session, Claude Opus
+5.5) THE SKILL TEXT WRITTEN, by L-522's split of gallery-cache-builder
+(its note of today): A Capture Craft's Box Never Claims Less Than Its
+Miss in the skill at 1.22, and the same title on the gallery's
+`CACHE_BUILDER_AS_BUILT.md`, written from the code at 727ebf79.
+- FOR THE RECORD (the go-ahead's words): Tony's "Yes" of 2026-11-23,
+  23:39, was to "the builder halves the step for that craft, down to a
+  floor". As built, a day's step halves from 1440 minutes to 45, then
+  goes to 15, 5 and 1; the band's goes 60, 30, 15, 5, 1. Finer faster
+  than halving below 45 minutes, to the same end. The coordinating
+  session told Tony so in chat on Nov 24; his answer, if he gave one,
+  did not reach this session.
+- FOUND, writing the page: WHEN THE FLOOR STILL FAILS, the build does
+  serve the craft's saved fine layer, last-good, and names it in its
+  warnings ("CAPTURE FAILED (too coarse at the floor of 1 minute(s) on
+  ...); served its saved fine layer, last-good") and its record; with
+  none saved, the pre-swap check #O aborts, naming the craft. But
+  nothing turns red for the floor itself: on the night the Curve error
+  row is red because tonight's build wrote no check points, so the
+  night commits nothing, and that line names the missing check points,
+  not the floor. By day the warning is the only signal. Not changed;
+  re-homed to L-553 (a held body turns the night red).
+**Gap:** pushed (orrery eb90dff7, gallery 727ebf79); the next night
+builds the fine layer; then Tony's look on his phone, as the Part C
+report's section 4 writes it, and the item closes on his look. Until
+the night, those boxes claim less error than they have, and the gallery
+run's Curve error row is red on Tony's computer, naming both craft as
+served no fine points (read 2026-11-24 on the cache of 19:34 UTC).
 **Ref:** L-297 (the curve's error, Tony's ruling of Nov 19); gallery
 `tools/test_curve_error.py` (run with every kind to measure);
 provenance-discipline, A Computed Position Prints What Its Errors Earn;
@@ -2862,6 +2884,20 @@ path); `celestial_objects.py`.
 - Not decided: whether a held body should carry the last good build's
   as_of_today, or the check should accept a held body with its hold
   named. Not checked: how often JPL's 503s fall on a held body.
+**Note:** (2026-11-24, evening, the coordinating session, Claude
+Fable 5.2) A SECOND CASE OF THE CLASS, re-homed from L-538's note
+of today. A capture craft served last-good, because JPL did not
+answer its questions or its step failed at the floor, has no check
+points written that night. The night's Curve error row is then red
+by name and the night commits nothing: one craft held, and no body
+on the site refreshed. The standard it misses is Tony's of
+2026-11-11: "Hold the bad data and report, then continue." On a
+craft's first night there is no saved layer, and the pre-swap
+check #O aborts the build instead, which is right until a first
+layer exists. Read from the gallery's `CACHE_BUILDER_AS_BUILT.md`
+as the Claude Code session wrote it from the code at 727ebf79; not
+checked against the code by the coordinating session. Not changed.
+This item's build covers both rows.
 **Gap:** a small build, its choice first: which side changes. A planted
 case in the offline suite either way.
 **Ref:** L-525 (hold the bad data); L-538 (the orbiters' printed
@@ -4449,6 +4485,134 @@ was advised against: it needs his rulings and a carry to GPT, and on Nov
   - Stale words noticed in passing, no step depending on them: the
     dashboard's Skill Headers text says "Settings > Skills"; the
     history file's PART 1 heading says "v1.0 through v3.38".
+**Note:** (2026-11-24, afternoon, the coordinating session, Claude
+Fable 5.2, on orrery eb90dff7 and gallery 727ebf79)
+GALLERY-CACHE-BUILDER'S SPLIT, RULED.
+- Measured on the skill at 1.21, 944 lines at its cap of 944,
+  read whole: seven sections on what the builder fetches and
+  serves, 260 lines (The Builder Reads the Period's Centre, A
+  Spacecraft Is Fetched by Its Plan, A Lagrange Point Is Served as
+  a Point, The Clock Block and Its Witness, A Small Body's Own
+  Uncertainty Is Served, Every Question Is Asked of JPL, Fresh, A
+  Body That Fails Its Test Is Held); The Daily Run's Steps, 152
+  lines; everything else, 532.
+- Put to Tony as the exhibit skill's method of step 2, with its
+  cost: the page has no cap, and `INTERACTIVE_AS_BUILT.md` went
+  from 1,825 lines on Nov 11 to 2,483 on Nov 22 while the exhibit
+  skill stayed at 738. Two alternatives were set aside: moving out
+  only the plain history left, about 55 lines by the session's
+  count; and two skills.
+- Tony, 15:47, to "Shall I go ahead with the skill's split":
+  "yes". Tony, 16:00, to "Do you approve the split, with both
+  groups moving?": "Yes". A recommendation he accepted.
+- Not part of it: horizons-orbital-mechanics, not measured. Still
+  not put to Tony: a cap for the website's as-built pages, now two.
+- The brief:
+  `documentation/COORD_L522_cache_builder_split_brief_20261124.md`.
+**Note:** (2026-11-24, evening, the Claude Code session, Claude Opus
+5.5, on orrery eb90dff7 and gallery 727ebf79) GALLERY-CACHE-BUILDER'S
+SPLIT, BUILT, by the brief and
+`documentation/COORD_L522_cache_builder_split_goahead_20261124.md`.
+gallery-cache-builder 1.22: the skill, the version, and why.
+- The sizes, by name: `skills/gallery-cache-builder/SKILL.md` 944
+  lines to 728, its cap LOWERED to 728 on `DOCUMENT_CAPS.md`; the
+  gallery's new `CACHE_BUILDER_AS_BUILT.md`, 571 lines (the eight
+  sections moved whole, 404 lines with their 8 headings, and L-538's
+  section written new from the code at 727ebf79, 126 lines);
+  `documentation/SKILL_HISTORIES.md` +9 (the 1.19 entry, word for word,
+  and its "Moved down" line). The page has no row on
+  `DOCUMENT_CAPS.md`: the caps check reads the orrery alone.
+- THE ACCOUNT, by script against eb90dff7: 844 non-blank lines (843
+  different), every one found once in the skill, the page or the lines
+  the split added to the history, but 20, none found twice. The 20,
+  each for its reason: the page's two `raw/runs` lines, corrected by
+  the name check after the account ran (below); the 1.21 version line (now "Earlier: 1.21") and
+  the "Older entries" line's end (2026-11-24 added); the read plan
+  (`skills_index.py` rewrote it); four cross-references now naming the
+  page (8 lines: Operating mode's gate conditions and its "says why",
+  the three-layer gate's night, the onboarding's "A Comet on an Open
+  Path Is a Path Body", which named no heading); and the three stale
+  sentences of the go-ahead's section 3 (7 lines: `--commit` and the
+  sentence after it rewrapped, Layer 1's count, now "604 checks at
+  v1.22", the field note's line numbers). New in the skill: the 1.22
+  entry, the pointer to the page near the top, the Contents line, each
+  section's line naming the page and its rules, L-538's section, those
+  edits; nothing else.
+- L-538'S RULES in the skill, word for word, but THE FINER-STEP RULE,
+  in the go-ahead's words: the brief's "halves that craft's step" did
+  not match the code (`CAPTURE_LADDER`), and "it covers the daily part"
+  holds only for a craft served whole.
+- THE NAME CHECK (gallery `tools/check_as_built_names.py`, still one
+  row, "As-built names") reads both pages by a list, `PAGES`, each with
+  its own counts, self-test (six planted faults on a throwaway copy of
+  each page) and `ORRERY_NAMES`. Shown red on a throwaway copy of the
+  new page with `CAPTURE_FLOOR_MINUTES` planted for `CAPTURE_FLOOR_MIN`.
+  ITS FIRST RUN ON THE NEW PAGE, three names not found: `raw/runs/`
+  and `raw/runs`, the run records' folder named from inside the served
+  cache, corrected to `data/solar-system/raw/runs/` (the name plain
+  from the code: `daily_run.py` and the page's own next lines give it
+  so); and `~/.astropy/cache/astroquery/Horizons`, astroquery's folder
+  on a computer, in no repository by its nature, now set aside by kind.
+  AFTER THE COORDINATING SESSION'S REVIEW
+  (`documentation/COORD_L522_cache_builder_split_review_20261124.md`):
+  the page's `data/solar-system.prev/raw/runs/` was looked for on disk,
+  so the row was green in Tony's folder, which has a `.prev`, and red on
+  a clean checkout, which has none. Now a path under one of the
+  builder's leftover folders is never looked for on disk: it is held by
+  the folder's mark as the builder makes it (".prev", ".staging_",
+  ".quarantine_", in the code's text) and the path beneath it in the
+  live cache, and printed by name as held so; the self-test plants a
+  leftover path the live cache lacks, and a path only in a leftover
+  folder on disk, each caught. The row read from its own output, the
+  same in three places: Tony's folder, "examined 144 names: 141 found in
+  the gallery's code, 3 only in the orrery's, 0 marked, 0 not found";
+  a clean copy of 727ebf79 with the three files copied in, no orrery
+  beside it and no `.prev`, "141 found ..., 0 not found, 3 not examined
+  tonight"; the same copy with a `.prev` made, as after a build, the
+  same; each "AS-BUILT NAMES: ok". A made-up
+  `data/solar-system.prev/raw/zz_runs_l522/` on a throwaway copy of the
+  page: "not found in the code (file)", red.
+  Three names found only in the orrery went on the page's list
+  (`path_plan.py`, the L-443 slice 2 rulings, the skill itself). No
+  name the old skill gave is gone from the code; none marked. Then:
+  INTERACTIVE_AS_BUILT.md 718 names examined, 0 not found;
+  CACHE_BUILDER_AS_BUILT.md 144 examined, 141 in the gallery's code,
+  3 only in the orrery's, 0 not found.
+- THE DOORS: the gallery's `CLAUDE.md` names the page beside
+  `INTERACTIVE_AS_BUILT.md`; the skill names it once near its top.
+  Every pointer by title to the eight, in the orrery's skills and the
+  gallery's files, lands on a heading that exists in both (by grep:
+  horizons-orbital-mechanics names two, `INTERACTIVE_AS_BUILT.md` one,
+  twice; the builder's and `tools/test_drawn_orbit.py`'s lines name
+  horizons-orbital-mechanics's own heading, not one of the eight).
+- PASSAGES OUTSIDE THE EIGHT THAT DESCRIBE THE CODE, not moved, by the
+  brief: What it is (its key functions); The swap retries, rolls back,
+  and leaves a record (what the builder does); The sibling report names
+  what the builder did not make; Commit with round-trip verify; the
+  field note A BODY THE ORRERY HOLDS IS NOT YET HONOURED HERE.
+- THREE STALE SENTENCES RODE 1.22, the coordinating session's decision
+  as method, told to Tony, his to overrule: `--commit` no longer tied
+  to L-216 (closed 2026-10-08); Layer 1's count; the field note's line
+  numbers.
+- THE CHECKS: `skills_index.py --check` passes (exit 0);
+  `doc_index.py --caps`, after the cap was lowered: "PASS -- 18
+  document(s) within their caps, 12 skill(s) all listed"; the orrery
+  maintenance run whole: "37 of 37 gating checkers passed"; the
+  gallery maintenance run, offline, whole: "1 of 53 gating checkers
+  FAILED", Curve error, on both capture craft "in a capture inside the
+  window and served no fine points (no capture block)". That row was
+  red at the base too: it reads the served cache in Tony's folder,
+  built by the website's night at 19:34 UTC on 2026-11-24, before
+  L-538's push, and nothing this split changed is read by it (the
+  gallery's changes are `CLAUDE.md`, the names check and the new page,
+  with the run's own generated files). The As-built names row: "ok --
+  every name examined on the 2 pages is in the code". The builder's
+  suite in the same run: "PASS (604 checks, 0 failures)".
+- Owed: Tony reinstalls gallery-cache-builder 1.22; the next session's
+  own comparison clears it, never his word. Still not put to Tony: a
+  cap for the website's as-built pages, now two (`INTERACTIVE_AS_BUILT.md`
+  1,825 lines on Nov 11, 2,483 on Nov 22; the new page 571).
+  horizons-orbital-mechanics: not measured.
 **Gap:** steps 4 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11; step 3, the protocol, built 2026-11-23 as v4.0): 4, this
 ledger's closed items and header stamps moved out by a tool; 5, the
