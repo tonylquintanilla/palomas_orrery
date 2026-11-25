@@ -148,8 +148,8 @@ Not urgent, in your order:
 - `documentation/check_L557_error_away_from_today.py`, the test of the error.
 
 **Your run order**
-1. Orrery: Commit, then Push origin. -- 
-2. Start a Code session at the python_work door, Opus. Tell it: the work starts in the orrery, by `documentation/COORD_L533_last_day_brief_20261125.md`.
+1. Orrery: Commit, then Push origin. -- f054d1f580ac70c27a1a6c8d681cd661026e8460
+2. Start a Code session at the python_work door, Opus. Tell it: the work starts in the orrery, by `documentation/COORD_L533_last_day_brief_20261125.md`. -- started
 3. It reports its plan and stops. Tell me, and I read the plan against the code before you give it the go-ahead.
 
 **Where this leaves us**
