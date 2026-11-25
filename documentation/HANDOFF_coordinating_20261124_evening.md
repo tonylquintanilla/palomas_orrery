@@ -1,15 +1,15 @@
 <!-- Doc-Kind: hand | Handoff: the coordinating session of Nov 24, afternoon to late night. The cache builder's skill split (L-522), L-538's first night read, and L-553 ruled next, briefed, built and reviewed. Communication; the place for the next coordinator to start. -->
-# Handoff: L-553 is pushed and its first night was clean; L-538 waits on Tony's look, November 24, 2026, 22:45
+# Handoff: L-538 is closed; L-553 is pushed and its first night was clean, November 25, 2026, 00:20
 
-Built on orrery 3293c270677bc465b4f7bcf01149d54b1f838129
+Built on orrery 6b8131bd3695f526adcb13367551798dd278dbea
 at https://github.com/tonylquintanilla/palomas_orrery (branch main)
 and gallery b2d9eaa66ed33ec93fc2bbcbdc5b85d5b872e043
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (the
 night's commit of Nov 25, 04:33 UTC, run #59, above Tony's push
 461325f0 of L-553's build).
-When this was written Tony's website folder was one night behind, and
-his orrery folder held this file, two ledger notes and Where We Are's
-edits, not pushed.
+When this was written Tony's two folders equalled those, and his
+orrery folder held this file, the ledger (L-538 closed, L-556 opened)
+and Where We Are's edits, not pushed.
 
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
@@ -17,16 +17,17 @@ gallery
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
 
 Type: HANDOFF, coordination (zero code). From the coordinating session
-of Nov 24, 14:47 to 22:50 Chicago (Claude Fable 5.2, linked to Tony's
+of Nov 24, 14:47, to Nov 25, 00:20 Chicago (Claude Fable 5.2, linked to Tony's
 computer, with no shell on it) to the next coordinator.
 Supersedes `documentation/HANDOFF_coordinating_20261124.md` and every
 earlier writing of this file. The ledger wins on status.
 
 ## Start here
 
-1. Record both bases. The orrery should hold, above 3293c270, a commit
-   of Tony's with this file and the notes of 22:45 on L-553 (a held
-   body turns the night red) and L-538 (the orbiters' printed error).
+1. Record both bases. The orrery should hold, above 6b8131bd, a commit
+   of Tony's with this file, L-538 (the orbiters' printed error) in
+   the ledger's closed section, and L-556 (a date to choose in the
+   rooms) opened.
 2. The skills comparison. gallery-cache-builder changed twice in this
    session (1.22, then 1.23), and Tony's run record says he
    reinstalled both. Only your own comparison clears 1.23.
@@ -37,9 +38,9 @@ earlier writing of this file. The ledger wins on status.
    id>/logs.
 4. Run #59, started by hand on 461325f0, was clean: 53 of 53, no
    second try needed, nothing held, and the fine points of Juno and
-   BepiColombo committed for the first time (b2d9eaa6). Tony's look on
-   his phone now closes L-538:
-   `documentation/REPORT_L538_partC_20261124.md`, section 4.
+   BepiColombo committed for the first time (b2d9eaa6). Tony closed
+   L-538 on his look of Nov 25, 00:11; its last note has the three
+   boxes as read.
 5. The first real night that holds a body, or makes a second try, has
    not happened. When a night's title starts "HELD", or its log's
    "[SECOND TRY]" line is not zero, read that log: it is the rule's
@@ -85,7 +86,9 @@ were not read in the code; the planted cases are what hold them.
 
 ## What the next session owes
 
-- L-538's close on Tony's look.
+- The talk on L-556 (a date to choose in the rooms), Tony's finding
+  at L-538's close: a room's address already carries the minute. It
+  wants a proper reading of the page before any brief.
 - To Tony, one question: what an orbiting craft's box says on a day it
   shows no distance. Today nothing in the box says why. On Where We
   Are, Waiting on you.
@@ -107,6 +110,10 @@ were not read in the code; the planted cases are what hold them.
 - RUN A CHANGED CHECK, AND THE SUITE, ON A CLEAN CHECKOUT before the
   push. A Code session sees only Tony's folder. It caught a names
   check that was green there and red on a fresh clone.
+- A LOOK WAS PASSED TO TONY WITH A STEP THE PAGE DOES NOT HAVE (a date
+  box in a room). Read the page, or open it, before handing him a
+  look. A dated view is a link: ...&show=<slug>&at=2026-12-16T00:00Z.
+  The pane on his computer shows this session what he sees.
 - A RED NIGHT AND NO NIGHT LOOK THE SAME IN THE COMMITS. This session
   twice told Tony no night had run. His run record caught it.
 - THE MECHANISM WAS NAMED TO TONY BEFORE THE CODE WAS READ ("held
@@ -132,9 +139,7 @@ lines; four ledger notes; edits to Where We Are and one page.
 
 ## Tony-actions
 
-- (do) Website: Pull origin. Orrery: Commit, then Push origin.
-- (do) The look on his phone at Juno's and BepiColombo's boxes; L-538
-  closes on it.
+- (do) Orrery: Commit, then Push origin.
 - (decide) The box's words on a no-distance day. L-554. The order of
   BepiColombo's arrival. The stamping rule and the as-built pages' cap
   before step 4 of L-522.

@@ -358,8 +358,31 @@ Both pushes are confirmed on GitHub (website `461325f0`, orrery `3293c270`), and
 
 **Your run order**
 1. Website: Pull origin. This brings the night's commit. -- b2d9eaa66ed33ec93fc2bbcbdc5b85d5b872e043 nightly run, green
-2. Orrery: Commit, then Push origin. -- 
+2. Orrery: Commit, then Push origin. -- 6b8131bd3695f526adcb13367551798dd278dbea
 3. On your phone: close the saved Home Screen tab, reopen the site, and look at the three boxes as section 4 of `documentation/REPORT_L538_partC_20261124.md` says. L-538 closes on your look.
+
+      ## 4. What Tony looks at on his phone
+
+      After he pushes the website and the next night has built (the night
+      pulls, builds, then runs the gallery checks). The Solar System room;
+      choose each date in the date box (it shows 00:00 UTC); tap the craft.
+      The figures below are tonight's build; the night's will be close.
+
+      - BEPICOLOMBO TODAY (Nov 24): before "0.3555374 AU from the Sun
+      (53,187,640 km)", good to 7 km and off by 11.5 km. Now "0.35553741 AU
+      from the Sun (53,187,639 km)", good to 0.4 km and off by less than
+      0.1 km. One more digit. -- see screenshot upload
+      - BEPICOLOMBO ON A DAY OUTSIDE THE BAND (Dec 20): before "0.4641167 AU
+      from the Sun (69,430,900 km)", good to 20 km and off by 3,956 km. Now
+      "0.464 AU from the Sun (69,400,000 km)", good to 25,461 km (the loop's
+      reach) and off by 10 km. Fewer digits: this is the coarser, true
+      figure Tony ruled for. -- cannot check
+      - JUNO ON ITS CLOSE PASS (Dec 16): before "5.33 AU from the Sun
+      (797,000,000 km)", good to 574,154 km and off by 3,238,706 km. Now
+      "5.3276211 AU from the Sun (797,000,770 km)", good to 4.5 km and off
+      by 0.5 km. Many more digits. -- yes, different numbers for today 25 Nov but same precision; see upload
+      The sentence under each ("JPL's own uncertainty ... is not served") is
+      as before. -- yes
 
 **Where this leaves us**
 - L-538 is on the site and waits only on your look.

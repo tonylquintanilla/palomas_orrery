@@ -1,16 +1,16 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 24, 2026, 22:45: L-553 (a held body turns the night red) is pushed, and the first night on it, run #59, was clean and put Juno's and BepiColombo's fine points on the site (Claude Fable 5.2, the coordinating session).
-- Written on orrery 3293c270 and gallery b2d9eaa6 (the night's commit, above your push 461325f0). Your website folder is one night behind; this update's records are in your orrery folder, not pushed.
+Last updated: November 25, 2026, 00:20: L-538 (the orbiters' printed error) is closed on your look; L-553 (a held body turns the night red) is pushed and its first night, run #59, was clean (Claude Fable 5.2, the coordinating session).
+- Written on orrery 6b8131bd and gallery b2d9eaa6; your two folders equal them. This update's records are in your orrery folder, not pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your rule "hold the bad data and report, then continue" now reaches the night's last check (L-553 (a held body turns the night red)). A moon, a spacecraft, a Lagrange point or an orbiting craft JPL does not answer is held at its last good build and named in the night's title, and the checks after the build accept it by that named hold. Run #58's Deimos would now be held, and the night would commit. A question JPL does not answer is asked once more after 10 seconds, at most 10 times a build. More than 5 held still stops the night, and that count now includes spacecraft, points and orbiting craft.
-> - With your "with the no-distance option": an orbiting craft with no fine points for a day shows no distance that day, instead of stopping the build. The box then says nothing about why; only the i panel's list does. That wording is yours (Waiting on you).
+> - Your rule "hold the bad data and report, then continue" now reaches the night's last check (L-553 (a held body turns the night red)). A moon, a spacecraft, a Lagrange point or an orbiting craft JPL does not answer is held at its last good build and named in the night's title, and the checks after the build accept it by that named hold. Run #58's Deimos would now be held, and the night would commit. A question JPL does not answer is asked once more after 10 seconds, at most 10 times a build. More than 5 held still stops the night, and that count now includes spacecraft, points and orbiting craft. With your "with the no-distance option": an orbiting craft with no fine points for a day shows no distance that day, instead of stopping the build. The box then says nothing about why; only the i panel's list does. That wording is yours (Waiting on you).
+> - L-538 (the orbiters' printed error) is closed, on your look of Nov 25: all three boxes read as the night's data says. The two dated ones could only be opened by a link carrying the date, since a room has no date box; from that, your finding that a date picker is possible today is L-556 (a date to choose in the rooms).
 >
-> **Do next:** *Website: Pull origin. Orrery: Commit, then Push origin. Then look at Juno's and BepiColombo's boxes on your phone as `documentation/REPORT_L538_partC_20261124.md` writes it (L-538 (the orbiters' printed error)). Then every path to its last day, a build of its own (L-533 (ESCAPADE)); then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
+> **Do next:** *Orrery: Commit, then Push origin. Then every path to its last day, a build of its own (L-533 (ESCAPADE)); then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
@@ -37,7 +37,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
-               to choose, within the range the data covers.
+               to choose, within the range the data covers. Its first slice may be near: a room's address already carries the minute, your finding of Nov 25 (L-556 (a date to choose in the rooms)), for a design talk.
   l-c. [done]  L-517 (the lobby), L-518 (the shared link) and L-519
                (Featured's rethink): closed Nov 8 and 9 on your phone looks.
   g.   [done]  L-527 (a first visit's guide): closed Nov 12.
@@ -46,7 +46,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11; step 3, the protocol's reduction, built Nov 23 as v4.0 and confirmed that night; the cache builder's skill split Nov 24; step 4, the ledger's closed items moved out,
                at the next gap between builds; then steps 5 and 6.
-  b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' fine points, L-538 (the orbiters' printed error), designed Nov 23, pushed Nov 24, its fine points on the site since run #59, waiting on your phone look << moved this session; then the hold carried to the night's gate, L-553 (a held body turns the night red), built and pushed Nov 24, its first night clean (run #59), open for the box's words on a no-distance day << moved this session; then every path to its last day, a build of its own, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).
+  b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' fine points, L-538 (the orbiters' printed error), designed Nov 23, pushed Nov 24, closed Nov 25 on your look << moved this session; then the hold carried to the night's gate, L-553 (a held body turns the night red), built and pushed Nov 24, its first night clean (run #59), open for the box's words on a no-distance day << moved this session; then every path to its last day, a build of its own, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
