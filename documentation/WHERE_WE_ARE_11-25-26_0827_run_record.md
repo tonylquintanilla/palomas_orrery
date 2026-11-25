@@ -219,10 +219,10 @@ Now the final handoff, replacing this morning's.
 - **The pull has nothing to reconcile.** The five data files waiting in your folder are identical to the night's.
 
 **Your run order**
-1. Website: Commit, then Pull origin, then Push origin. -- 3fb13a27763600b08cb67f710167d7fafa52153c
-2. Orrery: Commit, then Push origin. -- 
-3. Reinstall gallery-cache-builder (1.24) to your account from the repository, if not done.
-4. On your phone, now: ESCAPADE-Gold's box "as far as 10 September 2027", ESCAPADE-Blue's "12 September 2027".
+1. Website: Commit, then Pull origin, then Push origin. -- 3fb13a27763600b08cb67f710167d7fafa52153c; merged with nightly run, green
+2. Orrery: Commit, then Push origin. -- 580afaa5a22847b3720b8ce2e02688dc798cd1f7
+3. Reinstall gallery-cache-builder (1.24) to your account from the repository, if not done. -- already done.
+4. On your phone, now: ESCAPADE-Gold's box "as far as 10 September 2027", ESCAPADE-Blue's "12 September 2027". -- confirmed on phone
 
 **What I placed in your orrery folder, each read back identical**
 - **The ledger,** with a note on L-533 (ESCAPADE): the night's proof and my clean-copy result.
