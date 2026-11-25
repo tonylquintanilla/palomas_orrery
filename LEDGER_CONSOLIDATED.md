@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*280 live items; 265 need attention (`!`); 162 RICE-scored; 269 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*281 live items; 266 need attention (`!`); 162 RICE-scored; 269 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1180,7 +1180,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-24 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-25 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-21 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-19 |
 | ! | L-539 | Every entry the orrery asks JPL for is checked against JPL, not only the website's (orrery, the Horizons check) | OPEN | -- | 2026-11-22 |
@@ -1198,7 +1198,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-553 | A body held because JPL did not answer turns the night red (gallery, the builder and the Solar System figures check) | OPEN | -- | 2026-11-24 |
 | ! | L-554 | JPL's own sentence when a path is a prediction (gallery; a decision of Tony's) | OPEN | -- | 2026-11-24 |
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
-| ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, its talk first) | OPEN | -- | 2026-11-25 |
+| ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
+| ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-25 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1758,7 +1759,7 @@ go-ahead.
 final).
 
 #### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534)
-<!-- L:533 status:OPEN upd:2026-11-24 section:A flag: rice: -->
+<!-- L:533 status:OPEN upd:2026-11-25 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
   gallery d3e97b15): NASA's article of 2026-11-09,
@@ -1986,6 +1987,26 @@ package and opened under Earth's row: L-529's note of the same evening
   for now." Ruled in the same message: "there is also the L2 loiter
   as an encounter"; it is built after the flybys' slice 2, and its
   view is its own question.
+**Note:** (2026-11-25, 02:00, the coordinating session, Claude Fable 5.2)
+THE LAST-DAY BUILD IS BRIEFED:
+`documentation/COORD_L533_last_day_brief_20261125.md`, for a Code
+session through the python_work door, which stops after its plan. Read
+from `data/objects_config.json` and
+`data/solar-system/coverage_index.json` at gallery b2d9eaa6: 34 paths,
+the 7 ended at their last day, and all 27 still flying short of their
+span's end. So the Nov 19 note's "27 of the 34 paths still flying"
+reads: 27 of 34 paths, every one still flying. 7 days short (10):
+new_horizons, juno, parker_solar_probe, lucy, psyche_spacecraft, west,
+c2025_k1, c2025_k1_b, c2025_k1_d, atlas_3i. 6 days (1): bepicolombo.
+5 days (5): voyager_2, osiris_apex, europa_clipper, mcnaught,
+tsuchinshan_atlas. 4 days (1): oumuamua. 3 days (5): voyager_1,
+panstarrs_2025_r3, borisov_2025_v1, borisov_2i, escapade_gold. 2 days
+(3): juice, escapade_blue, atlas_2024_g3. 1 day (2): solar_orbiter,
+wierzchos. The brief also asks, as a fact and not a build, when the
+box reads "This mission ended on ..." for a craft still flying; the
+words are Tony's. Tony, 01:23, turning to it from the talk on L-556
+(a date to choose in the rooms): "can we just go to the item we
+deferred instead?"
 **Gap:** the row under Mars waits (L-534 (missions by destination),
 Nov 20). The box's last day: its build, as ruled Nov 19, a build of
 its own straight after L-538 (the orbiters' printed error), not a part
@@ -2826,7 +2847,7 @@ for a spacecraft.
 **Gap:** the talk with Tony on the design record.
 **Ref:** L-538; L-529; the design record above.
 
-#### [L-556] A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, its talk first)
+#### [L-556] A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session)
 <!-- L:556 status:OPEN upd:2026-11-25 section:A flag: rice: -->
 - **Opened 2026-11-25** by the coordinating session (Claude Fable 5.2),
   on Tony's finding at L-538's close. He could not choose a date in the
@@ -2881,11 +2902,149 @@ for a spacecraft.
   that says it is past its checked span and prints fewer digits. Which
   of the two a chosen date follows, and whether the window follows
   what is ticked, is for the talk.
-**Gap:** a design talk: the control, phone first; its range (one window
-for the room, the window of what is ticked, or the moons' way, drawn
+- **The talk, 2026-11-25, 00:38 to 01:14, and held on Tony's word**
+  (the coordinating session, Claude Fable 5.2). Tony, 00:38: "I think
+  that a key question is the trust window. can we adjust the trust
+  window by essentially the fastest among the planetary objects
+  selected instead of simply defaulting to Mercury's 88 days? so, if i
+  selected Earth something like 365 days. the issue of Moons is
+  another matter." As data, yes: each Sun-centred body's own span is
+  in the served cache every night (read at gallery b2d9eaa6: Earth
+  364.73 days, Venus 224.70, Mars 687.03, Jupiter 4,332.91), and
+  Mercury's 87.97 is a cap of one period (`_TRUST_CAP_DIVISOR`), not a
+  measured limit. One window for the whole scene is checked in two
+  places, `gallery/scene_moment.js` and
+  `gallery/assembler/resolver.py`. Not read: how a path, a Lagrange
+  point or a comet drawn from points would set a window that followed
+  what is ticked.
+- The error that span rests on was then tested against the cache's own
+  history, and it did not hold: L-557 (the error away from today).
+  Tony, 01:02: "this date picker was discovered accidentally when we
+  realized that we could simply type in the date into the url. the
+  accuracy and error are another issue." And his proposal, the same
+  minute: "why don't we simply limit the date picker to 30 days for
+  now until we can determine what the error data is really saying and
+  what we are willing to offer the visitor, especially given the
+  variation by body. one possibility is to show the position with
+  error whiskers, but we are not ready for this."
+- **Tony's ruling, 01:14:** "let's take this information and put it in
+  the ledger for a solid design session when we get there. i jumped
+  the gun on the date picker because i did not consider the error. a
+  visitor could make their own changes to the date in the url, but
+  this would be undocumented and not supported. and i don't think we
+  need to say it either." So no picker is built now. A date typed
+  into the address stays as it is: not documented, not supported, and
+  nothing on the site says so. His 30 days is a proposal, not a
+  ruling; what the test says of it is on L-557.
+**Gap:** waits for L-557's design session. Then this item's own talk:
+the control, phone first; its range (one window for the room, the
+window of what is ticked, Tony's 30 days, or the moons' way, drawn
 past the span and said so); the words. Then a brief.
-**Ref:** L-518 (the shared link); L-165 (the freeze); L-538 (the
-orbiters' printed error), whose close found it.
+**Ref:** L-557 (the error away from today); L-518 (the shared link);
+L-165 (the freeze); L-538 (the orbiters' printed error), whose close
+found it.
+
+#### [L-557] The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session)
+<!-- L:557 status:OPEN upd:2026-11-25 section:A flag: rice: -->
+- **Opened 2026-11-25** by the coordinating session (Claude Fable 5.2),
+  at the talk on L-556 (a date to choose in the rooms); read and
+  tested at gallery b2d9eaa6. Nothing is built. Tony, 01:14: "let's
+  take this information and put it in the ledger for a solid design
+  session when we get there."
+- HOW A BOX'S ERROR IS WORKED OUT TODAY. The night (`measure_trust`,
+  `tools/gallery_cache_builder.py`) asks JPL where a body is at
+  delta_days before and after its orbit's date, delta_days being an
+  eighth of its period and 30 at most: 11.0 days for Mercury, 28.1 for
+  Venus, 30 for every other Sun-centred body. The worse of the two
+  misses, as an angle seen from the Sun, divided by delta_days, is
+  served as its rate. The box (`distanceLine`,
+  `gallery/solar_system_figures.js`) takes distance x rate x days from
+  the orbit's date as its error, or JPL's own accuracy or half a
+  kilometre where that is larger, and rounds the distance to that
+  error's place. So away from the orbit's date the digits rest on a
+  straight line through zero and one measured miss. The orbit is dated
+  today, so today's view is not touched by any of this.
+- THE SPAN is the same rate turned round: 0.5 degrees over twice the
+  rate, capped at one period (half for a comet, an eighth for a moon).
+  The cap is what binds: of the 64 Sun-centred bodies with a rate, 57
+  sit at their cap, and the site's 88 days is Mercury's. The 7 that do
+  not: maps, c2025_k1_c, neowise, hyakutake, leleakuhonua,
+  tno_2017_of201, sedna.
+- THE TEST: `documentation/check_L557_error_away_from_today.py`, run
+  from the website's folder; it reads history only. The history of
+  `data/solar-system/coverage_index.json` holds 123 nights from
+  2026-07-11. Each earlier night's orbit is worked out by two-body
+  motion at tonight's orbit date and held against tonight's orbit at
+  its own date, which is JPL's place. 56 bodies, 2,402 comparisons.
+  WHAT SAYS IT WORKS: at a body's own delta_days it gives back the
+  night's own sample (Earth 24,824.5 km both ways, Jupiter 2,154.5,
+  Saturn 3,671.6, Neptune 1,573.3; Venus within 1 percent, Mercury
+  within 4), 47 of the 56 within 10 percent. The places are the test's
+  own two-body working, not the page's.
+- NOT JUDGED (8), each with e above 0.98, which the test's solver is
+  not built for: c2025_k1_c, hale_bopp, hyakutake, ikeya_seki, lemmon,
+  maps, neowise, swan.
+- INSIDE 30 DAYS, the real miss against the line: 49 of the 56 at or
+  under it, to 5 percent. Over it inside their tested distance (5):
+  Howell 9.6 times at 2 days (229 km against 24; not explained, a
+  comet's orbit revised between nights is one guess), Jupiter 1.9 at 2
+  days (225 against 116), Earth 1.6 at 8 days (6,629 against 4,142),
+  Encke 1.4 at 30 days (341 against 251), Saturn 1.3 at 5 days (469
+  against 375). Past their tested distance (2): Mercury 12.6 times at
+  30 days (296 km against 23), Venus 1.1 (477 against 442).
+- FROM 30 TO 88 DAYS, inside today's window, 47 of 55 bodies are over
+  the line. Mercury 39 times at 50 days (571 km against 14), Apophis
+  7.3 at 51 days (212 against 29), Venus 3.6 at 56 (1,911 against
+  538), Earth 2.3 at 82 (104,900 against 45,006), Pluto's barycentre
+  2.0, Mars 1.7 at 56 (1,750 against 1,002), Saturn 1.7, Uranus 1.6,
+  Encke 1.5, Jupiter 1.3, Neptune 1.3. The other 36 have three nights
+  past 30 days, all near 33 days, and each is 1.1 to 1.2 times over
+  there; the run names them.
+- PAST 88 DAYS, the 6 bodies with a night that far back: Encke 8.2
+  times, Apophis 6.5 at 126 days (5,916 km against 916), Earth 3.1 at
+  126 (190,912 against 62,044), Saturn 2.1 at 124, Jupiter 1.8 at 120;
+  Halley under the line. Nothing past 126 days is tested for a planet,
+  and Mercury, Venus and Mars have 56 days of history.
+- TWO READINGS, the session's, not measured. First: 1.1 at 33 days is
+  what a miss growing with the square of the days gives against a line
+  fixed at 30 (33 over 30). An orbit matches place and speed at its
+  own date, so the miss starts flat and a close check sees the flat
+  part. If that held, the line would understate by days over
+  delta_days: about 3 times at 88 days, 12 at a year. Mercury runs
+  faster than that. Second: Earth's orbit as JPL gives it carries the
+  Moon's monthly pull, and a check at 30 days lands about one lunar
+  month out, which may be why Earth runs over between the two ends.
+- WHAT A BOX PRINTS, from the page's own `distanceLine` on tonight's
+  served rate and accuracy, the places by the test's working. Earth
+  today: "0.98721356 AU from the Sun (147,685,047 km)"; 1 day away
+  "0.98703 AU from the Sun (147,657,000 km)"; 10 days "0.9855 AU from
+  the Sun (147,430,000 km)"; 30 days "0.983 AU from the Sun
+  (147,100,000 km)", its error taken as 26,953 km against a real
+  24,825. Mercury at 30 days: "0.4666380 AU from the Sun (69,808,060
+  km)", its error taken as 9 km against a real 296. Not read: whether
+  another line of the box states the error in words.
+- Tony, 01:07, once the 30 days was set against these figures: "i
+  misunderstood. i thought that the error at 30 days was essentially
+  none. we may actually be essentially at day 1 with the error
+  issue." The session's answer: the measuring is built and runs every
+  night; what is missing is a miss measured at more than two dates,
+  and what the visitor is shown. On a drawing none of it shows: Earth's
+  25,000 km at 30 days is one part in 6,000 of its distance.
+- FOR THE DESIGN SESSION. (1) What the error is measured at: more
+  dates than two; or the worst real miss across the range offered; or
+  the planets served as a point a day, as a path is, which the Curve
+  error check already holds to JPL. (2) Mercury past 11 days: the
+  moons' sentence exists (`pastSpan`). (3) What the visitor is shown;
+  Tony's "error whiskers", quoted on L-556. (4) Tony's 30 days as the
+  picker's range, and whether a date typed into the address, which
+  reaches the served 88 days, follows it. (5) The eight comets not
+  judged, and Howell. (6) Whether a night holds a dated view to JPL:
+  the Room clock row tests only today, where the miss is near zero, so
+  it cannot fail for a dated view.
+**Gap:** a design session of its own. Nothing built, no brief.
+**Ref:** L-556 (a date to choose in the rooms); L-538 (the orbiters'
+printed error); L-541 (a plan's clock), the Room clock row; the test
+above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->

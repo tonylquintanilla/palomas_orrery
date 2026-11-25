@@ -1,16 +1,16 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 25, 2026, 00:20: L-538 (the orbiters' printed error) is closed on your look; L-553 (a held body turns the night red) is pushed and its first night, run #59, was clean (Claude Fable 5.2, the coordinating session).
-- Written on orrery 6b8131bd and gallery b2d9eaa6; your two folders equal them. This update's records are in your orrery folder, not pushed.
+Last updated: November 25, 2026, 02:00: the date picker (L-556 (a date to choose in the rooms)) is held for a design session on the error away from today (L-557 (the error away from today)), your ruling; the brief for every path to its last day (L-533 (ESCAPADE)) is written (Claude Fable 5.2, the coordinating session).
+- Written on orrery a33c1d97 and gallery b2d9eaa6; your two folders equal them. This update's records are in your orrery folder, not pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your rule "hold the bad data and report, then continue" now reaches the night's last check (L-553 (a held body turns the night red)). A moon, a spacecraft, a Lagrange point or an orbiting craft JPL does not answer is held at its last good build and named in the night's title, and the checks after the build accept it by that named hold. Run #58's Deimos would now be held, and the night would commit. A question JPL does not answer is asked once more after 10 seconds, at most 10 times a build. More than 5 held still stops the night, and that count now includes spacecraft, points and orbiting craft. With your "with the no-distance option": an orbiting craft with no fine points for a day shows no distance that day, instead of stopping the build. The box then says nothing about why; only the i panel's list does. That wording is yours (Waiting on you).
-> - L-538 (the orbiters' printed error) is closed, on your look of Nov 25: all three boxes read as the night's data says. The two dated ones could only be opened by a link carrying the date, since a room has no date box; from that, your finding that a date picker is possible today is L-556 (a date to choose in the rooms).
+> - The date picker is held, on your word of Nov 25: "i jumped the gun on the date picker because i did not consider the error." A date typed into a room's address still works; it is not documented, not supported, and the site says nothing about it (L-556 (a date to choose in the rooms)). What stopped it: away from today a box prints more digits than it has earned. The night measures each body's miss once, up to 30 days out (11 for Mercury), and the box draws a straight line from it; against 123 nights of the site's own saved orbits the real miss runs past that line, about 13 times for Mercury at 30 days and about 3 times for Earth at 126 days. Today's view is not affected, and none of it shows on the drawing. It waits for a design session of its own (L-557 (the error away from today)).
+> - The brief for the next build is written: every path still flying is asked of JPL at its plan's last moment too, so its dashed line and its box reach the plan's last day. All 27 paths still flying stop 1 to 7 days short today; the 7 ended missions do not (L-533 (ESCAPADE)).
 >
-> **Do next:** *Orrery: Commit, then Push origin. Then every path to its last day, a build of its own (L-533 (ESCAPADE)); then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
+> **Do next:** *Orrery: Commit, then Push origin. Then a Code session at the python_work door, Opus: the work starts in the orrery, by `documentation/COORD_L533_last_day_brief_20261125.md` (L-533 (ESCAPADE)); it stops after its plan. Then the talk on L-549 (four moons JPL cannot place); then the encounter's slice 2, its talk first (L-529 (guided encounters)).*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
@@ -37,7 +37,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
-               to choose, within the range the data covers. Its first slice may be near: a room's address already carries the minute, your finding of Nov 25 (L-556 (a date to choose in the rooms)), for a design talk.
+               to choose, within the range the data covers. A date typed into a room's address works today (your finding of Nov 25, L-556 (a date to choose in the rooms)); a picker is held until the error away from today has its design session (L-557 (the error away from today)) << moved this session.
   l-c. [done]  L-517 (the lobby), L-518 (the shared link) and L-519
                (Featured's rethink): closed Nov 8 and 9 on your phone looks.
   g.   [done]  L-527 (a first visit's guide): closed Nov 12.
@@ -46,12 +46,12 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11; step 3, the protocol's reduction, built Nov 23 as v4.0 and confirmed that night; the cache builder's skill split Nov 24; step 4, the ledger's closed items moved out,
                at the next gap between builds; then steps 5 and 6.
-  b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' fine points, L-538 (the orbiters' printed error), designed Nov 23, pushed Nov 24, closed Nov 25 on your look << moved this session; then the hold carried to the night's gate, L-553 (a held body turns the night red), built and pushed Nov 24, its first night clean (run #59), open for the box's words on a no-distance day << moved this session; then every path to its last day, a build of its own, L-533 (ESCAPADE); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).
+  b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' fine points, L-538 (the orbiters' printed error), designed Nov 23, pushed Nov 24, closed Nov 25 on your look; then the hold carried to the night's gate, L-553 (a held body turns the night red), built and pushed Nov 24, its first night clean (run #59), open for the box's words on a no-distance day; then every path to its last day, a build of its own, L-533 (ESCAPADE), briefed Nov 25 << moved this session; the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - A skill change makes no protocol version and asks for no paste; only a change to a rule in the protocol does. The protocol's cap is 800 lines (Nov 23; L-522 (document caps)).
@@ -90,9 +90,9 @@ Waiting behind other work; a line leaves when picked up.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261124T193224Z, ok, no retry on the swap (the website's swap log in your folder, read Nov 24).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 24, its run at eb90dff).
-- This page's date and the ledger's newest stamp: both Nov 24. Agree.
+- This page's date and the ledger's newest stamp: both Nov 25. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
 - What an orbiting craft's box says on a day it shows no distance: today nothing in the box says why, only the i panel's list ("Juno: no distance shown -- no error is served for its worked-out position, so no figures are earned"). Whether to add a sentence (Nov 24; L-553 (a held body turns the night red)).
@@ -123,7 +123,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation. The orbiters: L-538 (the orbiters' printed error), its brief `COORD_L538_orbiters_brief_20261123.md`, the Part A report `REPORT_L538_partA_20261124.md`, the go-aheads `COORD_L538_partB_goahead_20261124.md` and `COORD_L538_partB_goahead2_20261124.md`, the reports `REPORT_L538_partB_floor_20261124.md`, `REPORT_L538_partC_20261124.md` and `REPORT_L538_close_20261124.md`, the go-ahead to close `COORD_L538_close_goahead_20261124.md`; orbiters in general, `DESIGN_orbiters_in_general_20261124.md`. The hold at the gate: L-553 (a held body turns the night red), its brief `COORD_L553_hold_to_the_gate_brief_20261124.md` and go-ahead `COORD_L553_hold_to_the_gate_goahead_20261124.md`; the website's `CACHE_BUILDER_AS_BUILT.md`.
+- This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation. The orbiters: L-538 (the orbiters' printed error), its brief `COORD_L538_orbiters_brief_20261123.md`, the Part A report `REPORT_L538_partA_20261124.md`, the go-aheads `COORD_L538_partB_goahead_20261124.md` and `COORD_L538_partB_goahead2_20261124.md`, the reports `REPORT_L538_partB_floor_20261124.md`, `REPORT_L538_partC_20261124.md` and `REPORT_L538_close_20261124.md`, the go-ahead to close `COORD_L538_close_goahead_20261124.md`; orbiters in general, `DESIGN_orbiters_in_general_20261124.md`. The hold at the gate: L-553 (a held body turns the night red), its brief `COORD_L553_hold_to_the_gate_brief_20261124.md` and go-ahead `COORD_L553_hold_to_the_gate_goahead_20261124.md`; the website's `CACHE_BUILDER_AS_BUILT.md`. The last day: L-533 (ESCAPADE), its brief `COORD_L533_last_day_brief_20261125.md`. The date picker and the error: L-556 (a date to choose in the rooms), L-557 (the error away from today), the test `check_L557_error_away_from_today.py`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's handoff, `HANDOFF_document_upkeep_20261123_close.md` (Nov 23); step 3's brief, `COORD_L522_step3_landing_brief_20261123.md`. The cache builder's split: `COORD_L522_cache_builder_split_brief_20261124.md`, its go-ahead `COORD_L522_cache_builder_split_goahead_20261124.md`, the reports `REPORT_L522_cache_builder_split_part1_20261124.md` and `REPORT_L522_cache_builder_split_close_20261124.md`; the page, the website's `CACHE_BUILDER_AS_BUILT.md`.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
