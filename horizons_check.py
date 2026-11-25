@@ -178,6 +178,15 @@ entries the website does not serve, after the served ones; its queries,
 problems and unasked parts join this run's, and the verdict line names
 JPL DIFFERS and NEW JPL NAME, which raise the night's commit title.
 unserved=False tests the served entries alone.)
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-554,
+a cut path: the sheet of a craft still flying whose path the list cuts
+('path_cutoff', no 'mission_end'; BepiColombo's at JPL's fit date) is read
+on every run, not every 30 days, and its record keeps what the sheet says
+of the path, its "Data fit through" day and its path file (parse_cut).
+cut_state holds them to the entry's path_cutoff and cutoff_file. A change
+in either is named on the verdict line as JPL REFIT, which raises the
+night's commit title and makes nothing red here;
+check_horizons_confirmations.py is red on it by day.)
 """
 
 import datetime
@@ -673,6 +682,124 @@ def parse_sheet(text):
     return {"revised": revised, "stated": stated}
 
 
+# ------------------------------------------------------------- a cut path
+#
+# L-554 (JPL's sentence when a path is a prediction). The list may cut a
+# craft still flying short of JPL's path ('path_cutoff' with no
+# 'mission_end'): BepiColombo's, by Tony's ruling of 2026-11-25 ("Stay with
+# JPL and 11/17 until refit."), at the last day JPL's path is fitted to
+# data. The cut is right only while JPL's sheet says what it said when the
+# cut was made: its fit day and its path file ('cutoff_file' on the entry).
+# So that sheet is read on every run, and a change in either is JPL REFIT:
+# a session then reads JPL's new path and takes the cut, the file and the
+# box's words off together. Nothing un-cuts by itself.
+# Source: JPL's sheet for -121, read 2026-11-25 (sheet_url('-121')): its
+# fit sentence, "Data fit through 2026-Nov-17, prediction thereafter.",
+# wraps across two lines; its path file is the first row of the table under
+# "Name  Start (TDB)  Stop (TDB)", as the website's builder reads it
+# (read_path_revised, tools/gallery_cache_builder.py).
+
+FIT = re.compile(r"(Data\s+fit\s+through\s+(\d{4})-([A-Z][a-z]{2})-(\d{2})"
+                 r"[^.]{0,120}\.)")
+PATH_FILE = re.compile(r"^\s*(\S+)\s+\d{4}-[A-Za-z]{3}-\d{2} \d{2}:\d{2}\s+"
+                       r"\d{4}-[A-Za-z]{3}-\d{2} \d{2}:\d{2}\s*$", re.M)
+MONTHS = dict((m, i + 1) for i, m in enumerate(
+    ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
+     "Nov", "Dec")))
+CUT_FIELDS = ("name", "key", "id", "mission_end", "path_cutoff",
+              "cutoff_file")
+
+
+def parse_cut(text):
+    """{fit, fit_day, file} from a spacecraft's data sheet: JPL's "Data fit
+    through ..." sentence, whitespace joined, its day as 'YYYY-MM-DD', and
+    the first path file the sheet names; None for each it does not print."""
+    out = {"fit": None, "fit_day": None, "file": None}
+    m = FIT.search(text or "")
+    if m and m.group(3) in MONTHS:
+        out["fit"] = " ".join(m.group(1).split())
+        out["fit_day"] = "%s-%02d-%s" % (m.group(2), MONTHS[m.group(3)],
+                                         m.group(4))
+    m = PATH_FILE.search(text or "")
+    if m:
+        out["file"] = m.group(1)
+    return out
+
+
+def cut_entries(text):
+    """[{ident, name, key, cutoff, file}] for every entry of the list with
+    a spacecraft id, a 'path_cutoff' and no 'mission_end', in list order:
+    cutoff as 'YYYY-MM-DD', file its 'cutoff_file' or None. An ended
+    mission's cut (Akatsuki's) is for good and is not here."""
+    import ast
+    out = []
+    for entry in export_objects.definitions(text).elts:
+        f = {}
+        for k, v in zip(entry.keys, entry.values):
+            if not (isinstance(k, ast.Constant) and k.value in CUT_FIELDS):
+                continue
+            if (isinstance(v, ast.Call)
+                    and getattr(v.func, "id", None) == "datetime"):
+                f[k.value] = datetime.date(
+                    *[ast.literal_eval(a) for a in v.args[:3]])
+            else:
+                try:
+                    f[k.value] = ast.literal_eval(v)
+                except ValueError:
+                    pass
+        ident = str(f.get("id", ""))
+        if (ident.startswith("-") and f.get("path_cutoff")
+                and not f.get("mission_end")):
+            out.append({"ident": ident, "name": f.get("name"),
+                        "key": f.get("key"),
+                        "cutoff": f["path_cutoff"].isoformat(),
+                        "file": f.get("cutoff_file")})
+    return out
+
+
+def current_cuts(root):
+    """cut_entries for the list as it stands now."""
+    with open(os.path.join(root, export_objects.SOURCE), "rb") as handle:
+        return cut_entries(handle.read().decode("utf-8")
+                           .replace("\r\n", "\n"))
+
+
+def cut_state(cut, record, today):
+    """(state, text) for one cut path against its sheet's record:
+    "holds"    JPL's fit day is the cut and JPL's path file the entry's,
+               both values printed;
+    "refit"    either changed, or the sheet no longer prints it, naming
+               which and to what;
+    "not read" the sheet was not read today;
+    "blind"    the entry carries no cutoff_file, so nothing holds the cut
+               to JPL's path file."""
+    name = "%s (%s)" % (cut.get("name"), cut.get("ident"))
+    if not cut.get("file"):
+        return "blind", ("%s: its path is cut on %s with no cutoff_file, so "
+                         "nothing holds the cut to JPL's path file"
+                         % (name, cut.get("cutoff")))
+    seen = (record or {}).get("cut") or {}
+    if seen.get("read") != today.isoformat():
+        return "not read", ("%s: its sheet was not read today (last read %s)"
+                            % (name, seen.get("read") or "never"))
+    changed = []
+    if seen.get("fit_day") != cut["cutoff"]:
+        changed.append("JPL's fit date changed from %s to %s"
+                       % (cut["cutoff"], seen.get("fit_day")
+                          or "none printed"))
+    if seen.get("file") != cut["file"]:
+        changed.append("JPL's path file changed from %s to %s"
+                       % (cut["file"], seen.get("file") or "none named"))
+    if changed:
+        return "refit", ("%s: %s (sheet read %s); read JPL's new path, then "
+                         "take the cut and its words off the entry"
+                         % (name, "; ".join(changed), seen.get("read")))
+    return "holds", ("%s: the cut holds -- JPL's fit date %s = path_cutoff "
+                     "%s; JPL's path file %s = cutoff_file %s (sheet read %s)"
+                     % (name, seen["fit_day"], cut["cutoff"], seen["file"],
+                        cut["file"], seen["read"]))
+
+
 def spacecraft_entries(text):
     """[(id, name)] for every entry of the list with a spacecraft id (one
     starting with '-'), one per id, in list order."""
@@ -913,6 +1040,9 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
     sheets = load_sheets(sheets_path)
     sheet_records = sheets["sheets"]
     rows = row_values(root)
+    # L-554: a cut path's sheet is read on every run.
+    cuts = current_cuts(root)
+    cut_ids = set(c["ident"] for c in cuts)
 
     echo(LINE)
     echo("  HORIZONS CHECK -- %s" % today.isoformat())
@@ -947,7 +1077,9 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
             tasks.append(("period", key, obj, pdetail))
     for ident, name in spacecraft:
         state, detail = sheet_state(sheet_records.get(ident), today)
-        if state == "current" and not check_all:
+        if ident in cut_ids and state == "current":
+            detail = "its path is cut, so its sheet is read every run (L-554)"
+        elif state == "current" and not check_all:
             continue
         tasks.append(("sheet", ident, name, detail))
     sheets_quiet = len(spacecraft) - sum(1 for t in tasks if t[0] == "sheet")
@@ -977,7 +1109,10 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
                       sheet_url(key), "sheet": None, "notes": []}
             queried += 1
             try:
-                result["sheet"] = parse_sheet(fetch(result["query"]))
+                raw = fetch(result["query"])
+                result["sheet"] = parse_sheet(raw)
+                if key in cut_ids:
+                    result["cut"] = parse_cut(raw)
             except Unreachable as exc:
                 result["status"] = "could not reach JPL"
                 result["error"] = str(exc)
@@ -1020,6 +1155,9 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
                        "revised": new_sheet["revised"],
                        "stated": new_sheet["stated"],
                        "query": result["query"], "notes": notes})
+        # L-554: what a cut path's sheet says of the path, as read today.
+        if result.get("cut") is not None:
+            record["cut"] = dict(result["cut"], read=today.isoformat())
         sheet_records[key] = record
     for ident, _name in spacecraft:
         rec = sheet_records.get(ident)
@@ -1194,6 +1332,13 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
         echo("")
         echo("Sheets that changed, noted for a person (not red): %s."
              % "; ".join(sheet_notes))
+    # L-554: each cut path against what its sheet said today.
+    refits = []
+    for cut in cuts:
+        cstate, ctext = cut_state(cut, sheet_records.get(cut["ident"]), today)
+        echo("  %-18s %s -- %s" % ("path cut", cstate, ctext))
+        if cstate == "refit":
+            refits.append(ctext)
 
     # L-539, every entry checked: the entries the website does not serve,
     # asked by the rule horizons_unserved.py reads from the list, each held
@@ -1324,6 +1469,11 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
     # orrery_maintenance_run.py).
     if unserved:
         line += horizons_unserved.verdict_words(uns)
+    # L-554: JPL has changed what a cut path was cut on. Named here, it
+    # raises the night's commit title (NIGHT_TITLE_FLAGS); by day
+    # check_horizons_confirmations.py is red on it.
+    if refits:
+        line += "; JPL REFIT %s" % "; ".join(refits)
 
     if write:
         ordered = {k: records[k] for k in objects if k in records}
@@ -1348,6 +1498,7 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
             "asked": queried, "due": due_count,
             "problems": problems, "unasked": unasked,
             "taken": taken, "held": held, "reported": reported,
+            "refit": refits,
             "unserved_differs": uns["differs"],
             "unserved_waiting": [w["name"] for w in uns["waiting"]]}))
     echo("")
@@ -1360,7 +1511,7 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
         "verdict": verdict, "results": results, "problems": problems,
         "queried": queried, "due": due_count, "taken": taken,
         "held": held, "reported": reported, "unserved": uns,
-        "line": line}
+        "refits": refits, "line": line}
 
 
 def payload_name(spacecraft, ident):

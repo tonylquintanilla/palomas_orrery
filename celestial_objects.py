@@ -102,6 +102,14 @@ Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-533:
 BepiColombo's horizons_name is JPL's name for record -121 as read that
 day, "MPO-BepiColombo (Spacecraft)", on Tony's word; the name shown stays
 BepiColombo.)
+Module updated: November 25, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-554: BepiColombo's path is cut at JPL's fit date, 17 November
+2026, 'path_cutoff', until JPL fits it again, by Tony's ruling of that
+day; new field 'cutoff_file', the path file in JPL's sheet the cut was
+made on, which the night holds JPL's to (horizons_check.cut_state); the
+box's words in its 'cutoff_note' and 'end_note', Tony's approved
+sentences, each under its source. A craft still flying may now carry
+those two fields.)
 """
 
 from datetime import datetime
@@ -1280,8 +1288,51 @@ OBJECT_DEFINITIONS = [
     # 2018-10-20 02:13:28.719 (min. for current target body)
     # 2027-04-07 00:01:09.186 (max. for current target body)
     # No ephemeris for target "BepiColombo (Spacecraft)" after A.D. 2027-APR-06 23:59:59.9998 UT
-    'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/BepiColombo', 
-    'mission_info': 'Horizons: -121. BepiColombo, led by ESA with Japan\'s space agency JAXA, launched in October 2018 to study Mercury from orbit.'},
+    'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/BepiColombo',
+    'mission_info': 'Horizons: -121. BepiColombo, led by ESA with Japan\'s space agency JAXA, launched in October 2018 to study Mercury from orbit.',
+    # The cut (L-554; Tony, 2026-11-25, 14:41: "Stay with JPL and 11/17
+    # until refit."). The path is drawn to the last day JPL's path is
+    # fitted to data and no further (path_plan.path_stop), as Akatsuki's
+    # is (L-507). It has no mission_end: the craft still flies.
+    # Source: JPL Horizons data sheet for -121, "Revised: Nov 23, 2026",
+    # read 2026-11-25 (14:30 Chicago by the coordinating session; again by
+    # the Code session that afternoon),
+    # https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-121'&OBJ_DATA=YES&MAKE_EPHEM=NO
+    #   "Trajectory for MPO from ESA. Data fit through 2026-Nov-17,
+    #   prediction thereafter."
+    # and its one path file, 2018-Oct-20 02:14 to 2027-Apr-10 23:59 TDB:
+    #   bc_mpo_fcp_00243_20181020_20270411_v01
+    # The night reads that sheet and says JPL REFIT when its fit date or
+    # its path file is no longer these (horizons_check.cut_state). Then a
+    # session reads JPL's new path and takes path_cutoff, cutoff_file,
+    # cutoff_note and end_note off together.
+    'path_cutoff': datetime(2026, 11, 17),
+    # The path file the cut was made on, from the same sheet, read the
+    # same day; the night holds JPL's to it.
+    'cutoff_file': 'bc_mpo_fcp_00243_20181020_20270411_v01',
+    # Tony's approved words for the box (2026-11-25, 14:52 and 14:58: "Words
+    # and plan approved."; documentation/WORDS_L554_path_cut_20261125.md),
+    # sentences 1 to 3, opening the box on any day shown after the cut. The
+    # day in it must be the path's last day as the room prints it; the
+    # website's figures check holds the two together.
+    # Source for 17 November 2026, "fitted to data" and "a prediction": the
+    # JPL sheet above.
+    # Source for the entry burn ended early, 75 hours and 58 hours: ESA,
+    # "Latest updates: BepiColombo's arrival at Mercury", its entry dated
+    # 23 November 2026, read 2026-11-25, 14:12 Chicago, by the coordinating
+    # session,
+    # https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Latest_updates_BepiColombo_s_arrival_at_Mercury
+    #   the craft "has entered a 75-hour orbit, rather than the originally
+    #   planned 58-hour orbit"
+    # Source for "JPL's prediction still shows the planned orbit": JPL's
+    # osculating elements for -121 around Mercury (CENTER='500@199'), read
+    # 2026-11-25, 14:30 Chicago, by the coordinating session: period
+    # 211,267 to 212,002 seconds, 58.7 to 58.9 hours, from 22 to 26
+    # November (the words file, "The source of each fact").
+    'cutoff_note': 'The path is drawn to 17 November 2026, the last day JPL\'s path is fitted to data, and the marker is where it was that day. JPL calls its path after that day a prediction, and it is not drawn. ESA reports that the entry burn ended early and the craft is in a 75-hour orbit, not the planned 58-hour one; JPL\'s prediction still shows the planned orbit.',
+    # Sentence 4. Source: ESA's page above: orbit entry began at 18:24 UTC
+    # on 21 November 2026.
+    'end_note': 'It entered orbit around Mercury on 21 November 2026.'},
 
     {'name': 'SolO', 'key': 'solar_orbiter', 'id': '-144', 'horizons_name': 'Solar Orbiter (spacecraft)', 'var_name': 'solarorbiter_var', 'color_key': 'SolO', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 2, 11), 

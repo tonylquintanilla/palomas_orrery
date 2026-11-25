@@ -1196,7 +1196,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-551 | No saved scenes: the gallery run makes every room's scene fresh at each run, and the saved copies go (gallery; ruled Nov 22, a list first) | OPEN | -- | 2026-11-23 |
 | ! | L-552 | The kind of body: each entry says what it is, and how JPL is asked follows from it (orrery; Tony's idea, for a design talk) | OPEN | -- | 2026-11-23 |
 | ! | L-553 | A body held because JPL did not answer turns the night red (gallery, the builder and the Solar System figures check) | OPEN | -- | 2026-11-24 |
-| ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; ruled and briefed Nov 25) | OPEN | -- | 2026-11-25 |
+| ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed) | OPEN | -- | 2026-11-25 |
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
 | ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-25 |
@@ -3036,7 +3036,7 @@ real night that holds a body or makes a second try, read from its log.
 **Ref:** L-525 (hold the bad data); L-538 (the orbiters' printed
 error), its Part C report, section 5; L-541 (the rooms' clock).
 
-#### [L-554] JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; ruled and briefed Nov 25)
+#### [L-554] JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed)
 <!-- L:554 status:OPEN upd:2026-11-25 section:A flag: rice: -->
 - **Opened 2026-11-24** by the coordinating session (Claude Fable 5.2),
   from L-538 (the orbiters' printed error); written by the Claude Code
@@ -3224,18 +3224,125 @@ THE ONE FLOWN.
   - A LIMIT TO KNOW: section 43 holds BepiColombo's own sentences. A
     second craft served with a cut would be read against them and
     fail; a second cut widens the section.
-**Gap:** Tony's pushes: the website (Commit, Pull origin, Push
-origin), which changes nothing a visitor sees, and the orrery's
-records with the night's commit pulled; then the orrery half by the
-go-ahead;
-the walk and the new check run on a clean checkout before Tony's
-pushes; a night on GitHub; Tony's phone look at BepiColombo's box.
-Then, when JPL fits past 21 November, the cut and its words come off
-and the arrival's encounter can be built (L-529 (guided encounters)).
-The sentence for every predicted path is still Tony's to say.
-- **Tony-action (do):** Orrery: Commit, Pull origin, Push origin;
-  then tell the Code session its go-ahead is
-  `documentation/COORD_L554_path_cut_goahead_20261125.md`.
+- **THE ORRERY HALF BUILT, 2026-11-25, evening** (the Code session,
+  Claude Opus 5.5; built on orrery 65945090 and gallery 972b4a93, both
+  pushed by Tony, his website push 9ce37e1c carrying the website half;
+  the close report `documentation/REPORT_L554_path_cut_close_20261125.md`).
+  Not pushed.
+  - THE ENTRY (`celestial_objects.py`): BepiColombo carries
+    `path_cutoff` 2026-11-17, the new `cutoff_file`
+    `bc_mpo_fcp_00243_20181020_20270411_v01`, `cutoff_note` (sentences
+    1 to 3) and `end_note` (sentence 4), each under a `# Source:` line:
+    JPL's sheet for -121 with its address and the day read, ESA's page
+    with its address and the day read, Tony's ruling and approvals.
+  - THE PLAN, remade from JPL by the maintenance run (made 2026-11-25,
+    span 2018-10-21 to 2026-11-17, 33 events). Two left: the arrival
+    at Mercury, 2026-11-21 18:48, and the Sun's pass of 2027-02-06.
+    (The plan report said 32 events before and 30 after; it was 35 and
+    33.) The export carries the cut plan and both sentences;
+    `cutoff_file` stays in the orrery.
+  - THE ORRERY'S DRAWING (`path_drawing.last_day`): a cut path with no
+    `mission_end` holds its marker on its cut, in the static plot and
+    the animation; the console says PATH CUT (`console_word`). Drawn
+    live from JPL: 1,426 points, 2018-10-21 00:00 to 2026-11-17 00:01,
+    all solid; the marker at 2026-11-17 00:01. Akatsuki and Juno
+    unchanged.
+  - THE NIGHT'S CHECK. `horizons_check.py` reads a cut path's sheet
+    on every run (`current_cuts`, `parse_cut`) and keeps its fit day
+    and path file on the sheet's record; `cut_state` holds them to
+    `path_cutoff` and `cutoff_file`. A change is JPL REFIT on its green
+    verdict line, which raises the night's title (`NIGHT_TITLE_FLAGS`).
+    `check_horizons_confirmations.py` (`cut_lines`) is red on it by
+    day; at night JPL REFIT passes by name, and a sheet not read
+    tonight prints NOT READ, neither a pass nor red. Its line today:
+    "BepiColombo (-121): the cut holds -- JPL's fit date 2026-11-17 =
+    path_cutoff 2026-11-17; JPL's path file
+    bc_mpo_fcp_00243_20181020_20270411_v01 = cutoff_file
+    bc_mpo_fcp_00243_20181020_20270411_v01 (sheet read 2026-11-25)".
+  - PLANTED, EACH CAUGHT BY NAME (`test_horizons_check.py` section 9,
+    "HORIZONS CHECK SUITE: pass -- 144 checks"): JPL's -121 text parsed
+    across its line break; the fit date moved to 2026-Dec-04, the path
+    file renamed `_00251_`, the fit sentence gone, each JPL REFIT by
+    name on a green verdict line, red by day and passing at night; a
+    sheet not read today, red by day and NOT READ at night; no
+    `cutoff_file`, red at any hour; a `cut_state` blind to the file,
+    and a checker passing an unread sheet by day, each caught; the
+    title flag from the Horizons check row only. `test_path_drawing.py`
+    check 6c ("15 of 15"), with a planted `last_day` as before;
+    `test_path_plan.py` check 21 ("40 of 40"), a flying cut alone.
+  - WHAT LEFT WITH THE CAPTURE (go-ahead point 5): the capture rule of
+    `tools/test_curve_error.py` (`capture_craft`) picks juno and
+    bepicolombo today and juno alone with the cut plan laid over the
+    config; no count of capture craft is pinned; BepiColombo's check
+    points are not on disk (not committed), so nothing reads them.
+  - CHECKS: the orrery's maintenance run, before the records and again
+    after them, each "37 of 37 gating checkers passed", "0 TIER-1 --
+    the push gate holds"; agentic-pre-test on a
+    throwaway copy, exit 124 (the window healthy until the timeout),
+    no traceback.
+  - SKILL: horizons-orbital-mechanics 1.21, the line accepted in the
+    go-ahead, at its cap of 904 lines: the 1.18 entry moved to
+    `documentation/SKILL_HISTORIES.md`, now 898 lines. Tony's reinstall
+    is owed.
+  - NOT BUILT, recorded: a day shown before 17 November keeps a flying
+    craft's box, its source line "as far as JPL's data runs" (go-ahead
+    point 2); the coordinating session's proposal for Tony's later word.
+- **THE ORRERY HALF, READ AND RUN ON A CLEAN COPY, 2026-11-25, 17:30**
+  (the coordinating session of the afternoon, Claude Fable 5.2), on
+  orrery 65945090 with the Code session's files laid over. Nothing
+  found against it.
+  - Read whole: the entry (`path_cutoff` 2026-11-17, `cutoff_file`,
+    the two notes, each fact under its source); `path_drawing.py`
+    (`last_day`, `console_word`); `palomas_orrery.py`'s two lines.
+    The entry's `cutoff_note` equals sentences 1 to 3 of the words
+    file and its `end_note` sentence 4, compared by a script.
+  - Run: "HORIZONS CHECK SUITE: pass -- 144 checks, every planted
+    fault caught by name"; "PATH DRAWING SUITE: 15 of 15 checks
+    passed"; "PATH PLAN SUITE: 40 of 40 checks passed"; "OBJECTS
+    EXPORT: pass". The check by day and with --night: "path cut ok
+    -- BepiColombo (-121): the cut holds -- JPL's fit date 2026-11-17
+    = path_cutoff 2026-11-17; JPL's path file
+    bc_mpo_fcp_00243_20181020_20270411_v01 = cutoff_file ... (sheet
+    read 2026-11-25)".
+  - PLANTED BY THIS SESSION, in a copy of `data/spacecraft_sheets.json`:
+    the fit date moved to 2026-12-04, by day exit 1, "path cut FAIL --
+    JPL REFIT: ... JPL's fit date changed from 2026-11-17 to
+    2026-12-04", at night exit 0, "JPL REFIT, not red at night (the
+    night's title says so)"; the file renamed, by day exit 1, by
+    name; the sheet read the day before, by day exit 1, "its sheet
+    was not read today", at night "NOT READ tonight, neither passed
+    nor red".
+  - The plan as made: span 2018-10-21 to 2026-11-17, 33 events, no
+    arrival. The new export through the website's mirror, on a clean
+    gallery 972b4a93: "Wrote 3 field(s)", the path, `end_note` and
+    `cutoff_note`; `cutoff_file` stays in the orrery.
+  - A CHECK SEEN TO FAIL FOR THE RIGHT REASON: on that half-made copy
+    (the plan mirrored, the cache not rebuilt) the figures check is
+    red, "bepicolombo: its last served point is 2027-04-10 00:01, not
+    its span's last day, 2026-11-17". So a night whose builder did
+    not fetch the path again is red by name. The builder's offline
+    suite on the unmodified copy: "PASS (631 checks, 0 failures)".
+  - CLAIMED, not run here, there being no road to JPL from the test
+    machine: both maintenance runs whole, the path drawn live to 17
+    November, the orrery's window on a throwaway copy. NOT TESTED BY
+    ANYONE: the website's builder meeting the cut plan against JPL;
+    its first night is the test.
+  - KNOWN: by day the check is red when JPL's sheet was not read that
+    day, so a daytime run that cannot reach JPL does not close green.
+    Where We Are stands at 130 of its 130 lines.
+  - The handoff: `documentation/HANDOFF_coordinating_20261125_evening.md`.
+**Gap:** Tony pushes the orrery half (the website half is pushed;
+both read and run on clean copies, the notes above). The first
+website night after that serves the cut: then a
+night on GitHub, and Tony's phone look at BepiColombo's box. When JPL
+fits past 21 November, the night's title says JPL REFIT; a session
+reads JPL's new path and takes path_cutoff, cutoff_file, cutoff_note
+and end_note off together, and the arrival's encounter can be built
+(L-529 (guided encounters)). The sentence for every predicted path is
+still Tony's to say.
+- **Tony-action (do):** Orrery: Commit, Pull origin, Push origin.
+- **Tony-action (do):** reinstall horizons-orbital-mechanics (1.21) to
+  your account from the repository.
 - **Tony-action (decide):** the source line of a cut craft on a day
   before its cut (the note above).
 **Ref:** L-538, the coordinating session's note of 2026-11-24,

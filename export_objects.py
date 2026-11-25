@@ -105,7 +105,10 @@ One JSON file, data/objects_export.json:
                                    JPL's data ('path_cutoff', Akatsuki):
                                    the sentence saying why, printed after
                                    the box's opening (L-507); absent on
-                                   every other entry
+                                   every other entry. L-554: also on a
+                                   craft still flying whose path is cut
+                                   (BepiColombo), where it opens the box
+                                   past the cut and its end_note follows
                       path         a spacecraft's (a trajectory whose
                                    id starts with '-') and a comet's on an
                                    open path: its plan from
@@ -309,6 +312,10 @@ Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5 (L-297,
 the Lagrange points: NO_PERIOD_TYPES; a point serves no period, null as
 the Sun's is, where the period block would have said "Not yet fetched
 from JPL".)
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-554:
+the docstring says a cutoff_note and end_note may come on a craft still
+flying whose path is cut; the code is unchanged, writing both wherever
+the entry sets them.)
 """
 
 import ast

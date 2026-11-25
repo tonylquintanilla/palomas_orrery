@@ -936,9 +936,9 @@
      "body": "Mercury",
      "body_id": "199",
      "closest": "2026-10-26 12:57",
-     "dist_km": 88204.6,
+     "dist_km": 88203.9,
      "hill_km": 205004,
-     "ideal_step_s": 14697.0,
+     "ideal_step_s": 14696.8,
      "jd": 2461340.039583,
      "kind": "flyby",
      "stays": false,
@@ -953,7 +953,7 @@
      "body": "Sun",
      "body_id": "10",
      "closest": "2026-11-10 10:00",
-     "dist_km": 45808049.8,
+     "dist_km": 45808060.5,
      "hill_km": null,
      "ideal_step_s": 81197.5,
      "jd": 2461354.916667,
@@ -965,47 +965,13 @@
       "2026-09-17 13:42",
       "2027-01-03 06:17"
      ]
-    },
-    {
-     "body": "Mercury",
-     "body_id": "199",
-     "closest": "2026-11-21 18:48",
-     "dist_km": 3073.0,
-     "hill_km": 196366,
-     "ideal_step_s": 86.4,
-     "jd": 2461366.283333,
-     "kind": "arrival",
-     "stays": true,
-     "step": "1m",
-     "v_kms": 3.725,
-     "window": [
-      "2026-11-21 17:25",
-      "2026-11-21 20:10"
-     ]
-    },
-    {
-     "body": "Sun",
-     "body_id": "10",
-     "closest": "2027-02-06 06:29",
-     "dist_km": 45993833.5,
-     "hill_km": null,
-     "ideal_step_s": 81644.7,
-     "jd": 2461442.770139,
-     "kind": "perihelion",
-     "stays": false,
-     "step": "6h",
-     "v_kms": 58.993,
-     "window": [
-      "2026-12-14 03:04",
-      "2027-04-01 09:53"
-     ]
     }
    ],
    "horizons_id": "-121",
    "id_type": "id",
-   "inputs_sha256": "3f3ed2199b440e8448cc425107f236ab2075d9e29833c16a35ba281c3e5d5c27",
+   "inputs_sha256": "ebd9235b4b9c8b06a5b395f1e100761953a29c8b091b9e523f5724614ab903c0",
    "kind": "spacecraft",
-   "made": "2026-11-04",
+   "made": "2026-11-25",
    "name": "BepiColombo",
    "searched": [
     "Sun",
@@ -1029,7 +995,7 @@
    ],
    "searched_from": "2018-10-21",
    "span": {
-    "end": "2027-04-10",
+    "end": "2026-11-17",
     "start": "2018-10-21"
    }
   },

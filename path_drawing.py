@@ -72,6 +72,12 @@ hold_last_day, so an ended mission's marker sits on its path's last day
 in the static plot and the animation, as the website puts it; and
 draw_plan adds the website's last-day pair to a path that has ended, so
 its line ends at that marker).
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5
+(L-554: last_day also answers for a craft still flying whose path is cut,
+'path_cutoff' with no 'mission_end' -- BepiColombo's at JPL's fit date,
+17 November 2026 -- so its marker sits on its cut in the static plot and
+the animation, not on JPL's prediction; the console says PATH CUT for
+it, console_word).
 """
 
 import datetime
@@ -169,14 +175,19 @@ LAST_DAY_MINUTE = 1
 
 
 def last_day(obj, plans=None):
-    """The day an ended mission's path ends, as a plain UTC datetime at
-    00:00; None for an entry with no 'mission_end' (a mission still
-    flying, or no mission at all). A planned entry's is its plan's last
-    day, which already stops at the earlier of mission_end and
-    path_cutoff and inside JPL's data (path_plan.path_stop): Akatsuki's
-    is 2024-04-26, not its mission_end. An entry with no plan takes the
+    """The day an ended mission's path ends, or a cut path's (L-554), as a
+    plain UTC datetime at 00:00; None for an entry with neither
+    'mission_end' nor 'path_cutoff' (a mission still flying, uncut, or no
+    mission at all). A planned entry's is its plan's last day, which
+    already stops at the earlier of mission_end and path_cutoff and inside
+    JPL's data (path_plan.path_stop): Akatsuki's is 2024-04-26, not its
+    mission_end; BepiColombo's, still flying, is its cut, 2026-11-17, the
+    last day JPL's path is fitted to data. An entry with no plan takes the
     earlier of those two days from the entry itself."""
-    if not obj.get("mission_end"):
+    # L-554: a craft still flying whose path is cut has no mission_end; its
+    # marker stops at the cut as an ended mission's does at its last day,
+    # not on JPL's prediction past it.
+    if not obj.get("mission_end") and not obj.get("path_cutoff"):
         return None
     plan = plan_for(obj, plans)
     if plan:
@@ -193,7 +204,9 @@ def marker_moment(obj, when, plans=None):
     at the end of its drawn path, where the website puts it (L-476; Tony,
     2026-11-05: "an ended mission's marker on its last day, static plot
     and animation, Galileo too"). Before that day nothing changes, and
-    neither does any entry with no 'mission_end'."""
+    neither does any entry with no 'mission_end' and no 'path_cutoff'.
+    A cut path still flying (L-554, BepiColombo) is held at its cut the
+    same way."""
     day = last_day(obj, plans)
     if day is None:
         return when, False
@@ -222,19 +235,28 @@ def hold_last_day(obj, dates, positions, fetch_at, plans=None):
         return positions
     point = fetch_at(moment)
     if not point or "x" not in point:
-        print("[ENDED MISSION] %s: JPL gave no position for its last day, "
+        print("[%s] %s: JPL gave no position for its last day, "
               "%s, so its marker is hidden after it"
-              % (obj.get("name"), moment.strftime("%Y-%m-%d")), flush=True)
+              % (console_word(obj), obj.get("name"),
+                 moment.strftime("%Y-%m-%d")), flush=True)
         return positions
     out = list(positions)
     for i in after:
         held = dict(point)
         held["position_date"] = moment
         out[i] = held
-    print("[ENDED MISSION] %s: marker held on its last day, %s, for %d "
-          "frame(s) after it" % (obj.get("name"), moment.strftime("%Y-%m-%d"),
-                                 len(after)), flush=True)
+    print("[%s] %s: marker held on its last day, %s, for %d "
+          "frame(s) after it" % (console_word(obj), obj.get("name"),
+                                 moment.strftime("%Y-%m-%d"), len(after)),
+          flush=True)
     return out
+
+
+def console_word(obj):
+    """The console's word for an entry held on its path's last day: ENDED
+    MISSION where it has a 'mission_end', PATH CUT for a craft still
+    flying whose path is cut (L-554), which has none."""
+    return "ENDED MISSION" if obj.get("mission_end") else "PATH CUT"
 
 
 def span_label(key, plans=None):

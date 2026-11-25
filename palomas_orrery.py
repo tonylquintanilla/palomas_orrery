@@ -207,6 +207,10 @@ two leftover asks, with L-539): the eight Lagrange points are on both
 element pre-fetches' SKIP_HORIZONS_PREFETCH, with the failure JPL
 answers named, and the close-approach extras pass over a point; a
 point's position is still asked of JPL. What is drawn does not change.
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-554:
+the static worker's two marker loops print PATH CUT, not ENDED MISSION,
+for a craft still flying whose marker sits on its cut
+(path_drawing.console_word); BepiColombo's is 17 November 2026.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -5341,7 +5345,7 @@ def plot_objects():
                         # is after that day (path_drawing.marker_moment).
                         marker_date, ended = path_drawing.marker_moment(obj, date_obj)
                         if ended:
-                            print(f"[ENDED MISSION] {obj['name']}: marker on its last day, "
+                            print(f"[{path_drawing.console_word(obj)}] {obj['name']}: marker on its last day, "
                                   f"{marker_date:%Y-%m-%d}", flush=True)
                         pos_report = {}   # L-512 A2: what JPL answered
                         obj_data = fetch_position(fetch_id, marker_date, center_id=center_id, id_type=fetch_id_type,
@@ -5803,7 +5807,7 @@ def plot_objects():
                     # last day, as in the loop above.
                     marker_date, ended = path_drawing.marker_moment(obj, date_obj)
                     if ended:
-                        print(f"[ENDED MISSION] {obj['name']}: marker on its last day, "
+                        print(f"[{path_drawing.console_word(obj)}] {obj['name']}: marker on its last day, "
                               f"{marker_date:%Y-%m-%d}", flush=True)
                     pos_report = {}   # L-512 A2: what JPL answered
                     obj_data = fetch_position(fetch_id, marker_date, center_id=center_id, id_type=fetch_id_type,

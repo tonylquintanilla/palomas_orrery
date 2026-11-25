@@ -45,6 +45,14 @@ WHAT MAKES IT FAIL, NAMED BY ENTRY
       fits neither "asked" nor "not asked"; two entries with one name.
       By day also one whose first answer waits on Tony's look, or one JPL
       now differs on; at night those pass, by name.
+    - (L-554) a craft still flying whose path the list cuts ('path_cutoff',
+      no 'mission_end'; BepiColombo's at JPL's fit date): by day, red when
+      JPL's sheet, read today, gives another fit day or path file than the
+      entry was cut on (JPL REFIT), when the sheet was not read today, or
+      when the entry has no cutoff_file. At night JPL REFIT passes by name,
+      the night's commit title saying it, and a sheet not read tonight is
+      printed as NOT READ, neither a pass nor red (R4). A pass prints both
+      values compared.
 
     THE NIGHT RUN (L-485, R4: an outside failure is reported, never
     halting). With --night, which orrery_maintenance_run.py --night
@@ -93,6 +101,10 @@ Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-539,
 every entry checked: it judges the entries the website does not serve
 too, through horizons_unserved.offline; unserved=False judges the served
 entries alone, for their tests.)
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-554:
+a cut path held to JPL's sheet, by horizons_check.cut_state, red by day
+on JPL REFIT and on a sheet not read today; at night the first passes by
+name and the second is NOT READ, neither pass nor red. cut_lines.)
 """
 
 import datetime
@@ -105,6 +117,31 @@ import export_objects
 import horizons_check as hc
 
 
+def cut_lines(cuts, sheet_records, today, night=False):
+    """([failure], [line]) for the cut paths (L-554): each one's state by
+    horizons_check.cut_state. By day all but "holds" fail. At night
+    "refit" passes by name (the night's title carries JPL REFIT) and "not
+    read" is NOT READ, neither a pass nor red; "blind", the list's own
+    fault, fails at any hour."""
+    failures, lines = [], []
+    for cut in cuts:
+        state, text = hc.cut_state(cut, sheet_records.get(cut["ident"]),
+                                   today)
+        if state == "holds":
+            lines.append("  %-18s ok   -- %s" % ("path cut", text))
+        elif night and state == "refit":
+            lines.append("  %-18s JPL REFIT, not red at night (the night's "
+                         "title says so) -- %s" % ("path cut", text))
+        elif night and state == "not read":
+            lines.append("  %-18s NOT READ tonight, neither passed nor red "
+                         "(the night run, R4) -- %s" % ("path cut", text))
+        else:
+            failures.append("path cut %s" % text)
+            lines.append("  %-18s FAIL -- %s%s" % (
+                "path cut", "JPL REFIT: " if state == "refit" else "", text))
+    return failures, lines
+
+
 def run(root, today, echo=print, night=False, unserved=True):
     """0 when every confirmation passes, else 1. With unserved (the
     default), the entries the website does not serve are judged too, by
@@ -115,6 +152,7 @@ def run(root, today, echo=print, night=False, unserved=True):
         confirmations = hc.load_confirmations(os.path.join(root,
                                                            hc.CONFIRMATIONS))
         sheets = hc.load_sheets(os.path.join(root, hc.SHEETS))
+        cuts = hc.current_cuts(root)
     except (export_objects.ExportError, ValueError, OSError) as exc:
         echo("FAIL: %s" % exc)
         echo("HORIZONS CONFIRMATIONS: FAIL")
@@ -177,6 +215,11 @@ def run(root, today, echo=print, night=False, unserved=True):
             echo("  %-18s FAIL -- %s" % ("%s (%s)" % (name, ident), text))
     echo("  %-18s %d of %d current, each figure a row quotes as the sheet "
          "gives it" % ("sheets", len(spacecraft) - sheet_bad, len(spacecraft)))
+    # L-554: each cut path held to what its sheet said today.
+    cut_fail, lines = cut_lines(cuts, sheet_records, today, night=night)
+    for line in lines:
+        echo(line)
+    failures.extend(cut_fail)
     # L-539, every entry checked: the entries the website does not serve,
     # each held to the name and kind JPL gave its id. A first answer not
     # yet looked at, or one JPL now differs on, passes at night by name and
@@ -249,9 +292,10 @@ def run(root, today, echo=print, night=False, unserved=True):
                    if (o.get("period") or {}).get("kind") == "fetched")
     held = [k for k in objects if (records.get(k) or {}).get("hold")]
     echo("HORIZONS CONFIRMATIONS: pass -- %d of %d entries and %d periods "
-         "confirmed, %d sheets read, within %d days%s"
+         "confirmed, %d sheets read, within %d days; %d cut path(s) held to "
+         "JPL's sheet%s"
          % (len(objects) - len(held), len(objects), compared,
-            len(spacecraft), hc.CADENCE_DAYS,
+            len(spacecraft), hc.CADENCE_DAYS, len(cuts),
             "; HELD %s" % ", ".join(
                 "%s since %s" % (k, records[k]["hold"].get("since"))
                 for k in held) if held else ""))

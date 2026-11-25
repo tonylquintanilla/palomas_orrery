@@ -32,6 +32,11 @@ WHAT IT CHECKS
          once; frames before it and a mission still flying are as they
          came. Planted fault: the last day lost, and those frames stay
          empty, which hides the marker.
+      6c. (L-554) A craft still flying whose path is cut (a
+         path_cutoff, no mission_end): its marker, chosen after the cut,
+         is asked for the cut's day at 00:01, and an animation's frames
+         after it hold it there; the console says PATH CUT. Planted
+         fault: last_day answering only for a mission_end, as before.
       8. An ended path's line ends at its marker: drawn after its
          span, its last point is the last-day pair's 00:01, the
          moment marker_moment asks the marker for. Planted fault: JPL
@@ -60,6 +65,9 @@ Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5
 static plot and the animation, and check 8, its line ending at that
 marker by the last-day pair, each with a planted fault; check 2 counts
 the pair; the --galileo check now expects the pair drawn).
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5
+(L-554: check 6c, a craft still flying whose path is cut, its marker and
+frames held on its cut, with a planted fault).
 """
 
 import datetime
@@ -202,6 +210,20 @@ def offline():
     check(not bad7, "7. planted fault caught: with the last day lost, the "
           "frames after it stay empty")
 
+    # L-554: a craft still flying whose path is cut.
+    ok, why = cut_flying()
+    check(ok, "6c. a craft still flying whose path is cut: its marker and "
+          "frames are held on its cut: %s" % why)
+    pd.last_day = lambda obj, plans=None: (None if not obj.get("mission_end")
+                                           else saved(obj, plans))
+    try:
+        bad6c = cut_flying()[0]
+    finally:
+        pd.last_day = saved
+    check(not bad6c, "6c. planted fault caught: with last_day answering only "
+          "for a mission_end, as before L-554, the marker sits on JPL's "
+          "prediction")
+
     last, marker = ended_line()
     check(last == marker, "8. an ended path's line ends at its marker: its "
           "last point %s, the marker %s" % (last, marker))
@@ -216,7 +238,44 @@ def offline():
 
 # An ended mission's made-up plan, and one cut before its mission_end.
 ENDED = {"craft_ended": {"span": {"start": "1972-03-04", "end": "2003-01-23"}},
-         "craft_cut": {"span": {"start": "2010-05-22", "end": "2024-04-26"}}}
+         "craft_cut": {"span": {"start": "2010-05-22", "end": "2024-04-26"}},
+         # L-554: a craft still flying whose path is cut (BepiColombo's days).
+         "craft_cut_flying": {"span": {"start": "2018-10-21",
+                                       "end": "2026-11-17"}}}
+CUT_FLYING = {"key": "craft_cut_flying", "name": "Cut craft",
+              "path_cutoff": datetime.datetime(2026, 11, 17)}
+
+
+def cut_flying():
+    """(ok, why) for L-554: a craft still flying whose path is cut, no
+    mission_end. Its marker, chosen after the cut, is asked for the cut's
+    day at 00:01, before it the date chosen; an animation's frames after
+    the cut hold it there."""
+    today = datetime.datetime(2026, 11, 25, 21, 0)
+    before = datetime.datetime(2026, 9, 1)
+    after = pd.marker_moment(CUT_FLYING, today, ENDED)
+    earlier = pd.marker_moment(CUT_FLYING, before, ENDED)
+    dates = [datetime.datetime(2026, m, 1) for m in (9, 10, 11, 12)]
+    asked = []
+
+    def fetch_at(moment):
+        asked.append(moment)
+        return {"x": 0.31, "y": 0.0, "z": 0.0}
+
+    held = pd.hold_last_day(CUT_FLYING, dates, [{"x": 1.0}, {"x": 2.0},
+                                                {"x": 3.0}, None],
+                            fetch_at, ENDED)
+    moment = datetime.datetime(2026, 11, 17, 0, 1)
+    ok = (after == (moment, True) and earlier == (before, False)
+          and held[3] and held[3]["x"] == 0.31
+          and held[3]["position_date"] == moment and held[2]["x"] == 3.0
+          and asked == [moment]
+          and pd.console_word(CUT_FLYING) == "PATH CUT"
+          and pd.console_word({"mission_end": moment}) == "ENDED MISSION")
+    return ok, ("marker after %s, before %s; frames %s; console %s"
+                % (after, earlier, [None if p is None else p["x"]
+                                    for p in held],
+                   pd.console_word(CUT_FLYING)))
 
 
 def ended_marker():

@@ -275,15 +275,22 @@
     },
     "-121": {
       "name": "BepiColombo",
-      "read": "2026-10-31",
-      "revised": "Sep 30, 2026",
+      "read": "2026-11-25",
+      "revised": "Nov 23, 2026",
       "stated": null,
       "rows": {},
       "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-121'&OBJ_DATA=YES&MAKE_EPHEM=NO",
       "notes": [
         "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)",
-        "2026-10-31: Revised moved from Jun 30, 2026 to Sep 30, 2026; what it states is unchanged"
-      ]
+        "2026-10-31: Revised moved from Jun 30, 2026 to Sep 30, 2026; what it states is unchanged",
+        "2026-11-25: Revised moved from Sep 30, 2026 to Nov 23, 2026; what it states is unchanged"
+      ],
+      "cut": {
+        "fit": "Data fit through 2026-Nov-17, prediction thereafter.",
+        "fit_day": "2026-11-17",
+        "file": "bc_mpo_fcp_00243_20181020_20270411_v01",
+        "read": "2026-11-25"
+      }
     },
     "-144": {
       "name": "SolO",

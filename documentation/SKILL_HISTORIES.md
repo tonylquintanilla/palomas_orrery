@@ -2232,6 +2232,26 @@ build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
   A906 UL are found in one. Whether the drawing says "shared centre" is
   the barycenter rule's, in orrery-coding-conventions.
 
+Earlier: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.18 (L-507, more
+voyages, with L-510's carried sentence). An Ended Mission Ends on Its
+mission_end takes the AGENCY'S own page (NASA, ESA, JAXA), and gains
+Tony's rulings of 2026-11-05: a craft that flew on stops on the day
+its mission ended and carries an end_note saying it still flies; a
+mission that ended after JPL's data stops prints the agency's day; a
+page with several dates takes the last day anyone heard from the craft;
+and JPL's last weeks are read before its last day is trusted, a path
+cut on the last day JPL's solution is fitted to tracking (path_cutoff,
+Akatsuki 2024-04-26). A Capture's Passes of
+the Sun Are Its Loops, new under How a Path's Events Are Found
+(riding_passes): Akatsuki's 289 passes made by its loops around Venus
+are not events. And AN OPEN ORBIT IS NOT AN ELLIPSE says piece C's
+website drawing follows the orrery's since 2026-11-05, closing what it
+called an open difference on L-484. Read from path_plan.py, the
+export and the plans made on 2026-11-05 before it was written.
+(Moved down 2026-11-25, when 1.21 made a fourth entry, L-554; the
+skill at its cap of 904 lines.)
+
 ## earth-system-pipeline
 
 Moved here 2026-11-14, when 1.3 (L-001) was applied on Tony's word

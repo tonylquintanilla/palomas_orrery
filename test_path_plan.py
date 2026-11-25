@@ -89,7 +89,9 @@ WHAT IT CHECKS
      21. A cutoff (L-507, more voyages): a path is asked to the earlier
          of its mission_end and its path_cutoff (made-up dates; Akatsuki's
          real cutoff is 2024-04-26), and the cutoff is among the plan's
-         inputs only where set. Planted fault: the cutoff ignored.
+         inputs only where set. L-554: a craft still flying with a cutoff
+         alone (BepiColombo's, 2026-11-17) stops at it, and the cutoff
+         makes its plan again. Planted fault: the cutoff ignored.
      22. The loiter (L-533, ESCAPADE's path): two made-up craft ride a
          loop on Earth's far side for months. Craft F, as ESCAPADE did,
          makes a powered flyby and leaves about 12 days later: its plan
@@ -142,6 +144,9 @@ Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5
 (L-533, ESCAPADE's path: check 22, the loiter, with two planted faults;
 the made-up JPL answers for SEMB-L1 and SEMB-L2, and Earth can be made
 slightly eccentric for that check.)
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5
+(L-554: check 21 also stops a craft still flying at a cutoff alone,
+BepiColombo's day, and its plan is made again for it.)
 """
 
 import datetime
@@ -997,9 +1002,12 @@ def cutoff_stop(plant=False):
     both = {"mission_end": d(2025, 9, 18), "path_cutoff": d(2025, 7, 23)}
     stop = ((lambda p: p["mission_end"].date() if p.get("mission_end")
              else pp.FAR_STOP) if plant else pp.path_stop)
-    got = (stop(both), stop({"mission_end": d(2003, 9, 21)}), stop({}))
+    # L-554: a craft still flying, cut alone (BepiColombo's day).
+    flying = {"path_cutoff": d(2026, 11, 17)}
+    got = (stop(both), stop({"mission_end": d(2003, 9, 21)}), stop({}),
+           stop(flying))
     want = (datetime.date(2025, 7, 23), datetime.date(2003, 9, 21),
-            pp.FAR_STOP)
+            pp.FAR_STOP, datetime.date(2026, 11, 17))
     if got != want:
         return False, "stops %r, not %r" % (got, want)
     base = {"id": "-5", "start_date": d(2010, 5, 22)}
@@ -1007,7 +1015,14 @@ def cutoff_stop(plant=False):
             or pp.plan_inputs(dict(base, **both), [])["path_cutoff"]
             != "2025-07-23"):
         return False, "the cutoff is not among the inputs only where set"
-    return True, "2025-07-23 for a cutoff before the end, the end alone "                  "otherwise, FAR_STOP for neither"
+    # L-554: setting a cutoff on a flying craft changes what its plan was
+    # made from, so the plan is made again.
+    flown = {"id": "-121", "start_date": d(2018, 10, 21)}
+    if (pp.inputs_sha256(pp.plan_inputs(flown, []))
+            == pp.inputs_sha256(pp.plan_inputs(dict(flown, **flying), []))):
+        return False, "a cut on a flying craft does not make its plan again"
+    return True, "2026-11-17 for a flying craft cut alone, its plan made " \
+                 "again; 2025-07-23 for a cutoff before the end, the end alone "                  "otherwise, FAR_STOP for neither"
 
 
 def loiters(plant=None):

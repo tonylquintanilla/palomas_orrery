@@ -17,7 +17,7 @@ safe-file-editing            1.15 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.4  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.20 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.21 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -40,10 +40,12 @@ horizons-orbital-mechanics   1.20 Horizons queries, centers, frames, osculating
                                   barycentre, an ended mission's mission_end
                                   (its path stopped on the day it ended; the
                                   agency's own page; a craft that flew on and
-                                  its end_note; an end after JPL's data), a
-                                  capture's passes of the Sun (riding_passes),
-                                  a loiter near a Lagrange point (ESCAPADE's),
-                                  the orrery's drawing of a path by its plan
+                                  its end_note; an end after JPL's data; a cut
+                                  on a craft still flying, path_cutoff and
+                                  cutoff_file, JPL REFIT), a capture's passes
+                                  of the Sun (riding_passes), a loiter near a
+                                  Lagrange point (ESCAPADE's), the orrery's
+                                  drawing of a path by its plan
                                   (path_drawing.py, only around the Sun), a
                                   small body drawn as a path or an orbit by its
                                   database e (path_or_orbit.py,

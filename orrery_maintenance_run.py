@@ -332,6 +332,9 @@ Module updated: November 23, 2026 with Anthropic's Claude Opus 5.5 (L-522,
 step 3, the protocol's v4.0: the Skill manifest row's outputs gain
 skills/SKILL_MANIFEST.md, where the table now goes; the Skill headers
 row quotes the names count its check compared.)
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-554:
+the night's title is raised by JPL REFIT from the Horizons check row, when
+JPL changes what a cut path was cut on.)
 """
 
 import hashlib
@@ -811,9 +814,15 @@ def night_allowed(path, allowed):
 # when JPL now gives an entry the website does not serve another name or
 # kind than its record, and NEW JPL NAME while a first answer waits on
 # Tony's look (horizons_unserved.verdict_words).
+# L-554 (Tony, 2026-11-25, 15:46: "Yes", to a green night with JPL REFIT in
+# its title): the Horizons check says JPL REFIT when JPL's sheet for a cut
+# path gives another fit day or path file than the entry was cut on
+# (horizons_check.cut_state); by day check_horizons_confirmations.py is
+# red on it.
 NIGHT_TITLE_FLAGS = (('El Nino check', 'EL NINO DUE'),
                      ('Horizons check', 'JPL DIFFERS'),
-                     ('Horizons check', 'NEW JPL NAME'))
+                     ('Horizons check', 'NEW JPL NAME'),
+                     ('Horizons check', 'JPL REFIT'))
 
 
 def night_title_flags(project_dir='.'):

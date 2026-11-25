@@ -1,9 +1,9 @@
 {
   "schema": 4,
-  "source_sha256": "273ff872e0dbf268c1c135bc16ffe29eaafa93b536071620698a267ee318e701",
+  "source_sha256": "8e1f90cadf79c0ae305d97cd1db50c9eee63494e763d43bd0cecb8debac162aa",
   "period_inputs_sha256": "709a6d44dc5bf3155912cbf6f26c9f084a80116c4626d4b8b9bfd784b50b59e2",
   "confirmations_sha256": "cdca42ccbdb879332810dcbaa4748dffb3ba6addfaeb359c546c96e7e6429e94",
-  "paths_sha256": "77d433983702c0d6a3245814195d1bd3f453be604017ae4b25bd081ca6dc9f57",
+  "paths_sha256": "48fbfc65a7b9f1e7504df58e217b05bdf3d04c391363dd451ba9bd2c9a4f252c",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -9276,6 +9276,8 @@
       "object_type": "trajectory",
       "description": "BepiColombo, led by ESA with Japan's space agency JAXA, launched in October 2018 to study Mercury from orbit.",
       "info_url": "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo",
+      "cutoff_note": "The path is drawn to 17 November 2026, the last day JPL's path is fitted to data, and the marker is where it was that day. JPL calls its path after that day a prediction, and it is not drawn. ESA reports that the entry burn ended early and the craft is in a 75-hour orbit, not the planned 58-hour one; JPL's prediction still shows the planned orbit.",
+      "end_note": "It entered orbit around Mercury on 21 November 2026.",
       "period": null,
       "confirmation": {
         "identity": {
@@ -9288,9 +9290,9 @@
         "hold": null
       },
       "path": {
-        "made": "2026-11-04",
+        "made": "2026-11-25",
         "span": {
-          "end": "2027-04-10",
+          "end": "2026-11-17",
           "start": "2018-10-21"
         },
         "backbone": {
@@ -9829,9 +9831,9 @@
             "body": "Mercury",
             "body_id": "199",
             "closest": "2026-10-26 12:57",
-            "dist_km": 88204.6,
+            "dist_km": 88203.9,
             "hill_km": 205004,
-            "ideal_step_s": 14697.0,
+            "ideal_step_s": 14696.8,
             "jd": 2461340.039583,
             "kind": "flyby",
             "stays": false,
@@ -9846,7 +9848,7 @@
             "body": "Sun",
             "body_id": "10",
             "closest": "2026-11-10 10:00",
-            "dist_km": 45808049.8,
+            "dist_km": 45808060.5,
             "hill_km": null,
             "ideal_step_s": 81197.5,
             "jd": 2461354.916667,
@@ -9857,40 +9859,6 @@
             "window": [
               "2026-09-17 13:42",
               "2027-01-03 06:17"
-            ]
-          },
-          {
-            "body": "Mercury",
-            "body_id": "199",
-            "closest": "2026-11-21 18:48",
-            "dist_km": 3073.0,
-            "hill_km": 196366,
-            "ideal_step_s": 86.4,
-            "jd": 2461366.283333,
-            "kind": "arrival",
-            "stays": true,
-            "step": "1m",
-            "v_kms": 3.725,
-            "window": [
-              "2026-11-21 17:25",
-              "2026-11-21 20:10"
-            ]
-          },
-          {
-            "body": "Sun",
-            "body_id": "10",
-            "closest": "2027-02-06 06:29",
-            "dist_km": 45993833.5,
-            "hill_km": null,
-            "ideal_step_s": 81644.7,
-            "jd": 2461442.770139,
-            "kind": "perihelion",
-            "stays": false,
-            "step": "6h",
-            "v_kms": 58.993,
-            "window": [
-              "2026-12-14 03:04",
-              "2027-04-01 09:53"
             ]
           }
         ],
@@ -10954,7 +10922,13 @@
       "2025"
     ],
     "bepicolombo": [
-      "2018"
+      "2018",
+      "17",
+      "2026",
+      "75",
+      "58",
+      "21",
+      "2026"
     ],
     "solar_orbiter": [
       "2020"

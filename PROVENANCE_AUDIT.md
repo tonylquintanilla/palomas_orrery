@@ -3,8 +3,8 @@
 
 Generated: November 25, 2026
 Files scanned: 181
-Total findings: 1188
-Constants: 323 | Dicts: 82 | Display strings: 783
+Total findings: 1189
+Constants: 323 | Dicts: 83 | Display strings: 783
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261125T225130Z | `6594509` | 181 | 1189 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 200 | 6 | 0 |
+| 20261125T224239Z | `6594509` | 181 | 1189 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 200 | 6 | 0 |
 | 20261125T183644Z | `9b46306` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261125T164437Z | `7b128d8` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261125T162137Z | `7b128d8` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 | 20261124T225441Z | `eb90dff` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
-| 20261124T030826Z | `0a024d9` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
-| 20261124T023706Z | `09f633c` | 181 | 1188 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 712 | 199 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -62,7 +62,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 271 |
 | 2 | 10-15 | REVIEW | 712 |
-| 3 | 5-9 | LOW PRIORITY | 199 |
+| 3 | 5-9 | LOW PRIORITY | 200 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
 **Whole tree, Tier-1: 271: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
@@ -185,6 +185,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `asteroid_belt_visualization_shells.py` | orrery | 0 | 4 | 0 | 0 | 4 |
 | `horizons_check.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
+| `test_path_drawing.py` | unclassified | 2 | 0 | 1 | 0 | 3 |
 | `object_type_analyzer.py` | orrery | 3 | 0 | 0 | 0 | 3 |
 | `orrery_rendering.py` | orrery | 2 | 1 | 0 | 0 | 3 |
 | `scenarios_coral_bleaching.py` | earth_science | 1 | 2 | 0 | 0 | 3 |
@@ -198,7 +199,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `module_atlas.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
-| `test_path_drawing.py` | unclassified | 2 | 0 | 0 | 0 | 2 |
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
@@ -255,7 +255,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
-| Unclassified (no Domain: tag, or one outside the six) | 2 | 2 | 5 | 0 | 0 | 7 |
+| Unclassified (no Domain: tag, or one outside the six) | 2 | 2 | 5 | 1 | 0 | 8 |
 
 **Domain coverage gap (2):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
@@ -820,8 +820,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 85 | dict | PLAN[...] | (1 entry) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
-| 91 | dict | STEPS[...] | (3 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+| 93 | dict | PLAN[...] | (1 entry) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+| 99 | dict | STEPS[...] | (3 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### uranus_visualization_shells.py
 
@@ -880,42 +880,42 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 1 | string | display string @ line 1 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 157 | string | display string @ line 157 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 205 | string | display string @ line 205 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 244 | string | display string @ line 244 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 260 | string | display string @ line 260 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 293 | string | display string @ line 293 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 360 | string | display string @ line 360 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 368 | string | display string @ line 368 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 391 | string | display string @ line 391 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 631 | string | display string @ line 631 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 816 | string | display string @ line 816 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 910 | string | display string @ line 910 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1075 | string | display string @ line 1075 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1344 | string | display string @ line 1344 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1349 | string | display string @ line 1349 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1354 | string | display string @ line 1354 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1359 | string | display string @ line 1359 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1479 | string | display string @ line 1479 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1484 | string | display string @ line 1484 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1539 | string | display string @ line 1539 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1546 | string | display string @ line 1546 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1553 | string | display string @ line 1553 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1560 | string | display string @ line 1560 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1567 | string | display string @ line 1567 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1573 | string | display string @ line 1573 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1579 | string | display string @ line 1579 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1589 | string | display string @ line 1589 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 165 | string | display string @ line 165 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 213 | string | display string @ line 213 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 252 | string | display string @ line 252 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 268 | string | display string @ line 268 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 301 | string | display string @ line 301 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 368 | string | display string @ line 368 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 376 | string | display string @ line 376 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 399 | string | display string @ line 399 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 639 | string | display string @ line 639 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 824 | string | display string @ line 824 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 918 | string | display string @ line 918 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1083 | string | display string @ line 1083 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1395 | string | display string @ line 1395 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1400 | string | display string @ line 1400 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1405 | string | display string @ line 1405 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1410 | string | display string @ line 1410 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1530 | string | display string @ line 1530 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1535 | string | display string @ line 1535 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1590 | string | display string @ line 1590 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1597 | string | display string @ line 1597 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1605 | string | display string @ line 1605 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1613 | string | display string @ line 1613 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1621 | string | display string @ line 1621 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1629 | string | display string @ line 1629 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1637 | string | display string @ line 1637 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1645 | string | display string @ line 1645 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1604 | string | display string @ line 1604 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1611 | string | display string @ line 1611 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1618 | string | display string @ line 1618 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1624 | string | display string @ line 1624 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1630 | string | display string @ line 1630 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1640 | string | display string @ line 1640 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1648 | string | display string @ line 1648 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1656 | string | display string @ line 1656 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1664 | string | display string @ line 1664 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1687 | string | display string @ line 1687 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1695 | string | display string @ line 1695 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1672 | string | display string @ line 1672 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1680 | string | display string @ line 1680 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1688 | string | display string @ line 1688 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1696 | string | display string @ line 1696 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1715 | string | display string @ line 1715 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1738 | string | display string @ line 1738 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1746 | string | display string @ line 1746 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### close_approach_data.py
 
@@ -1524,11 +1524,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 98 | constant | TAIL_BEHIND_DAYS | 7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 99 | constant | TAIL_AHEAD_DAYS | 2 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 105 | constant | TAIL_LEAD_MINUTES | 2 | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
-| 168 | constant | LAST_DAY_MINUTE | 1 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
-| 92 | constant | WINDOW_THIN_FRACTION | 0.01 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 104 | constant | TAIL_BEHIND_DAYS | 7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 105 | constant | TAIL_AHEAD_DAYS | 2 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 111 | constant | TAIL_LEAD_MINUTES | 2 | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
+| 174 | constant | LAST_DAY_MINUTE | 1 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
+| 98 | constant | WINDOW_THIN_FRACTION | 0.01 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
 
 ### path_or_orbit.py
 
@@ -1916,8 +1916,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 328 | constant | SCHEMA | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 329 | constant | CADENCE_DAYS | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 335 | constant | SCHEMA | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 336 | constant | CADENCE_DAYS | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### export_orbit_cache.py
 
@@ -1941,10 +1941,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 233 | constant | OPEN_ORBIT_FLOOR | 1e+90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 216 | constant | PAUSE_SECONDS | 2.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 217 | constant | TIMEOUT_SECONDS | 30 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 231 | dict | INDEX_WORD[...] | (2 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 242 | constant | OPEN_ORBIT_FLOOR | 1e+90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 225 | constant | PAUSE_SECONDS | 2.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 226 | constant | TIMEOUT_SECONDS | 30 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 240 | dict | INDEX_WORD[...] | (2 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### horizons_unserved.py
 
@@ -2022,12 +2022,12 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 625 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1054 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1173 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1174 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 678 | constant | ASK_EVERYTHING_SECONDS | 1800 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 682 | dict | NIGHT_SKIP_WHY[...] | (5 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 628 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1063 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1182 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1183 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 681 | constant | ASK_EVERYTHING_SECONDS | 1800 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 685 | dict | NIGHT_SKIP_WHY[...] | (5 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 
@@ -2039,9 +2039,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2455 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2488 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 4063 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2459 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2492 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 4067 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 
 ### palomas_orrery_dashboard.py
 
@@ -2226,15 +2226,21 @@ is planned for a future session.
 | 310 | dict | FETCHED_DAYS[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 312 | dict | FETCHED_ERR[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
+### test_path_drawing.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 245 | dict | CUT_FLYING[...] | (2 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (key vocabulary) |
+
 ### test_path_plan.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 161 | constant | DAY | 86400.0 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
-| 181 | dict | FLYBY_A[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 183 | dict | FLYBY_B[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 200 | dict | CIRCLES[...] | (11 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 240 | dict | ECCENTRIC[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 166 | constant | DAY | 86400.0 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
+| 186 | dict | FLYBY_A[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 188 | dict | FLYBY_B[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 205 | dict | CIRCLES[...] | (11 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 245 | dict | ECCENTRIC[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### test_period_fetch.py
 

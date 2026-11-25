@@ -137,6 +137,19 @@ answer with no elements row is reported, and a changed entry held.)
 Module updated: November 22, 2026 with Anthropic's Claude Opus 5.5 (L-539,
 every entry checked: section 8 is test_horizons_unserved.py; sections 1
 to 7 call each run through run_of(), on the served entries alone.)
+Module updated: November 25, 2026 with Anthropic's Claude Opus 5.5 (L-554,
+a cut path: section 9. JPL's sheet for -121 as read that day, its
+trajectory lines word for word (SHEET_121), parsed for its fit day across
+the line break and its path file; a run in a throwaway folder asks a cut
+path's sheet on every run and records it; the cut holds, printing both
+values; two planted changes, the fit date moved and the path file
+renamed, each JPL REFIT by name on the verdict line, which stays green;
+the offline checker red on it by day and passing it at night by name; a
+sheet not read today red by day and NOT READ at night, neither; an entry
+cut with no cutoff_file red at any hour; a planted cut_state blind to
+the file and a planted checker passing an unread sheet by day, each
+caught; the night's title raised by JPL REFIT from the Horizons check row
+only.)
 """
 
 import datetime
@@ -349,6 +362,185 @@ def checker_with(old, new):
     exec(compile(src.replace(old, new), MODULE + " [planted]", "exec"),
          mod.__dict__)
     return mod
+
+
+# L-554: JPL's data sheet for -121 (MPO-BepiColombo), read 2026-11-25
+# through https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=
+# '-121'&OBJ_DATA=YES&MAKE_EPHEM=NO, its header line and its trajectory
+# lines word for word; the rest of the sheet is left out.
+SHEET_121 = (
+    "API VERSION: 1.2\n"
+    "API SOURCE: NASA/JPL Horizons API\n\n"
+    "*******************************************************************"
+    "************\n"
+    " Revised: Nov 23, 2026           MPO-BepiColombo / (Mercury)         "
+    "      -121\n"
+    " SPACECRAFT TRAJECTORY: \n"
+    "  Trajectory for MPO from ESA. Data fit through 2026-Nov-17, "
+    "prediction \n"
+    "  thereafter.\n\n"
+    "  Name                                    Start (TDB)          "
+    "Stop (TDB)\n"
+    "  --------------------------------------  -----------------  "
+    "-----------------\n"
+    "  bc_mpo_fcp_00243_20181020_20270411_v01  2018-Oct-20 02:14  "
+    "2027-Apr-10 23:59\n"
+    "*******************************************************************"
+    "************\n")
+CUT_FILE = "bc_mpo_fcp_00243_20181020_20270411_v01"
+CUT_ENTRY = ("    {'name': 'BepiColombo', 'id': '-121', 'id_type': 'id', "
+             "'object_type': 'trajectory', 'path_cutoff': "
+             "datetime(2026, 11, 17), 'cutoff_file': %r},\n" % CUT_FILE)
+
+
+def cut_section(t, answers, inputs, real_cache):
+    """Section 9 (L-554): a cut path held to JPL's sheet."""
+    import orrery_maintenance_run as runner
+    quiet = lambda *a: None  # noqa: E731
+    got = hc.parse_cut(SHEET_121)
+    t.check(got == {"fit": "Data fit through 2026-Nov-17, prediction "
+                           "thereafter.", "fit_day": "2026-11-17",
+                    "file": CUT_FILE},
+            "JPL's sheet for -121: its fit day across the line break and "
+            "its path file (%s)" % got)
+    t.check(hc.parse_cut("Revised: Nov 23, 2026\n") ==
+            {"fit": None, "fit_day": None, "file": None},
+            "a sheet with neither is read as neither, never as the cut")
+    listed = hc.cut_entries(
+        "from datetime import datetime\nOBJECT_DEFINITIONS = [\n" + CUT_ENTRY +
+        "    {'name': 'Akatsuki', 'id': '-5', 'mission_end': "
+        "datetime(2025, 9, 18), 'path_cutoff': datetime(2024, 4, 26)},\n"
+        "    {'name': 'Juno', 'id': '-61'},\n"
+        "    {'name': 'Cut moon', 'id': '501', 'path_cutoff': "
+        "datetime(2026, 1, 1)},\n]\n")
+    t.check([(c["name"], c["cutoff"], c["file"]) for c in listed] ==
+            [("BepiColombo", "2026-11-17", CUT_FILE)],
+            "the cut paths: a craft still flying with a path_cutoff, not an "
+            "ended mission's cut, an uncut craft or a body (%s)" % listed)
+
+    today = TODAY
+    tmp = tempfile.mkdtemp(prefix="cut_path_")
+    try:
+        build_root(tmp, real_cache, inputs)
+        with open(os.path.join(tmp, "celestial_objects.py"), "w") as handle:
+            handle.write("from datetime import datetime\n" +
+                         fixture_list(SERVED).replace("\n]\n",
+                                                      "\n" + CUT_ENTRY + "]\n"))
+        url = hc.sheet_url("-121")
+
+        def fetch_with(text):
+            base = recorded_fetch(answers, extra={url: text})
+            asked = []
+
+            def fetch(u):
+                asked.append(u)
+                return base(u)
+            return fetch, asked
+
+        fetch, asked = fetch_with(SHEET_121)
+        code, out = run_of(hc, tmp, fetch, today, pause=0, echo=quiet)
+        rec = hc.load_sheets(os.path.join(tmp, hc.SHEETS))["sheets"].get(
+            "-121") or {}
+        t.check(code == 0 and url in asked and (rec.get("cut") or {}).get(
+                    "fit_day") == "2026-11-17" and not out["refits"]
+                and "JPL REFIT" not in out["line"],
+                "a run asks the cut path's sheet and records its fit day and "
+                "file (%s; %s)" % (out.get("verdict"), rec.get("cut")))
+        fetch, asked = fetch_with(SHEET_121)
+        code, out = run_of(hc, tmp, fetch, today, pause=0, echo=quiet)
+        t.check(url in asked and not [u for u in asked if u != url
+                                      and "OBJ_DATA" in u],
+                "the same day again: only the cut path's sheet is asked "
+                "(%d queries)" % len(asked))
+        sheets = hc.load_sheets(os.path.join(tmp, hc.SHEETS))["sheets"]
+        cut = hc.current_cuts(tmp)[0]
+        state, text = hc.cut_state(cut, sheets["-121"], today)
+        t.check(state == "holds" and "2026-11-17 = path_cutoff 2026-11-17"
+                in text and "%s = cutoff_file %s" % (CUT_FILE, CUT_FILE)
+                in text, "the cut holds, both values printed: %s" % text)
+
+        # The two planted changes, each a JPL REFIT by name.
+        for label, text_in, needle in (
+                ("the fit date moved",
+                 SHEET_121.replace("2026-Nov-17", "2026-Dec-04"),
+                 "JPL's fit date changed from 2026-11-17 to 2026-12-04"),
+                ("the path file renamed",
+                 SHEET_121.replace("_00243_", "_00251_"),
+                 "JPL's path file changed from %s to %s" % (
+                     CUT_FILE, CUT_FILE.replace("_00243_", "_00251_"))),
+                ("the fit sentence gone",
+                 SHEET_121.replace("Data fit through 2026-Nov-17, "
+                                   "prediction \n  thereafter.", ""),
+                 "JPL's fit date changed from 2026-11-17 to none printed")):
+            fetch, _asked = fetch_with(text_in)
+            code, out = run_of(hc, tmp, fetch, today, pause=0, echo=quiet)
+            t.check(code == 0 and len(out["refits"]) == 1
+                    and needle in out["refits"][0]
+                    and "; JPL REFIT BepiColombo (-121): " in out["line"],
+                    "planted, %s: JPL REFIT by name on a green verdict line "
+                    "(%s)" % (label, out["line"][-200:]))
+            sheets = hc.load_sheets(os.path.join(tmp, hc.SHEETS))["sheets"]
+            day_fail, _lines = offline.cut_lines([cut], sheets, today)
+            night_fail, lines = offline.cut_lines([cut], sheets, today,
+                                                  night=True)
+            t.check(len(day_fail) == 1 and needle in day_fail[0]
+                    and not night_fail and "JPL REFIT, not red at night"
+                    in lines[0],
+                    "planted, %s: the checker is red by day, and at night "
+                    "passes it by name" % label)
+        planted = checker_with('    if seen.get("file") != cut["file"]:',
+                               '    if False:')
+        moved = dict(sheets["-121"], cut=dict(
+            sheets["-121"]["cut"], fit_day="2026-11-17",
+            file=CUT_FILE.replace("_00243_", "_00251_")))
+        t.check(planted.cut_state(cut, moved, today)[0] == "holds"
+                and hc.cut_state(cut, moved, today)[0] == "refit",
+                "planted: a cut_state blind to the path file passes a "
+                "renamed file, and the real one does not")
+
+        # A sheet not read today; and an entry cut with no cutoff_file.
+        stale = dict(sheets["-121"], cut=dict(sheets["-121"]["cut"],
+                                              read="2026-10-13"))
+        day_fail, _l = offline.cut_lines([cut], {"-121": stale}, today)
+        night_fail, lines = offline.cut_lines([cut], {"-121": stale}, today,
+                                              night=True)
+        t.check(len(day_fail) == 1 and "not read today (last read "
+                "2026-10-13)" in day_fail[0] and not night_fail
+                and "NOT READ tonight, neither passed nor red" in lines[0]
+                and " ok " not in lines[0],
+                "a sheet not read today: red by day, NOT READ at night, "
+                "neither a pass nor red")
+        blind = dict(cut, file=None)
+        t.check(all(offline.cut_lines([blind], sheets, today, night=n)[0]
+                    for n in (False, True)),
+                "an entry cut with no cutoff_file is red at any hour")
+        planted_off = module_with(
+            os.path.join(HERE, "check_horizons_confirmations.py"),
+            "check_horizons_confirmations_planted",
+            '        elif night and state == "not read":',
+            '        elif state == "not read":')
+        t.check(not planted_off.cut_lines([cut], {"-121": stale}, today)[0],
+                "planted: a checker passing an unread sheet by day is caught "
+                "(it finds no failure where the real one finds one)")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    tmp = tempfile.mkdtemp(prefix="cut_flag_")
+    try:
+        os.makedirs(os.path.join(tmp, "data"))
+        with open(os.path.join(tmp, runner.NIGHT_RECORD), "w") as handle:
+            json.dump({"rows": [
+                {"row": "Horizons check", "verdict": "HORIZONS CHECK: PASS "
+                 "-- 3 checked today, 3 queries; JPL REFIT BepiColombo "
+                 "(-121): JPL's fit date changed"},
+                {"row": "Horizons check suite", "verdict": "pass -- JPL "
+                 "REFIT tested"}]}, handle)
+        flags = runner.night_title_flags(tmp)
+        t.check(flags == "JPL REFIT ",
+                "the night's title starts JPL REFIT, from the Horizons check "
+                "row only: %r" % flags)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
 
 
 def module_with(path, name, old, new):
@@ -939,6 +1131,9 @@ def main():
           "(L-539)")
     import test_horizons_unserved
     test_horizons_unserved.section(t)
+
+    print("9. A cut path held to JPL's sheet (L-554)")
+    cut_section(t, answers, inputs, real_cache)
 
     print("")
     print("%d checks passed, %d failed." % (t.passed, len(t.failed)))

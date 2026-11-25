@@ -35,7 +35,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 512.8 MB (4403 files)
+**Total size:** 512.8 MB (4405 files)
 
 **GitHub Pages headroom:** 511 MB remaining of 1024 MB ceiling (50.1% used)
 
@@ -43,14 +43,14 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 3171 | 456.7 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-25 |
-| .jsonl | 782 | 20.7 MB | encke.jsonl (70.5 KB) | 2026-11-24 |
+| .json | 3173 | 456.7 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-25 |
+| .jsonl | 782 | 20.7 MB | encke.jsonl (71.2 KB) | 2026-11-25 |
 | .kmz | 38 | 14.3 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-29 |
 | .py | 303 | 10.4 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-11-25 |
 | .png | 15 | 7.7 MB | palomas_orrery_logo.png (5.1 MB) | 2026-11-17 |
 | .js | 56 | 1.5 MB | feature_renderers.js (214.5 KB) | 2026-11-25 |
-| .html | 7 | 812.0 KB | interactive.html (517.4 KB) | 2026-11-25 |
-| .md | 10 | 327.9 KB | INTERACTIVE_AS_BUILT.md (168.0 KB) | 2026-11-25 |
+| .html | 7 | 814.7 KB | interactive.html (520.1 KB) | 2026-11-25 |
+| .md | 10 | 330.4 KB | INTERACTIVE_AS_BUILT.md (170.5 KB) | 2026-11-25 |
 | .jpg | 4 | 210.8 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-11-08 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
