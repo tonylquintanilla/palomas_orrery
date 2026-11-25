@@ -2387,12 +2387,19 @@ Miss in the skill at 1.22, and the same title on the gallery's
   night commits nothing, and that line names the missing check points,
   not the floor. By day the warning is the only signal. Not changed;
   re-homed to L-553 (a held body turns the night red).
-**Gap:** pushed (orrery eb90dff7, gallery 727ebf79); the next night
-builds the fine layer; then Tony's look on his phone, as the Part C
-report's section 4 writes it, and the item closes on his look. Until
-the night, those boxes claim less error than they have, and the gallery
-run's Curve error row is red on Tony's computer, naming both craft as
-served no fine points (read 2026-11-24 on the cache of 19:34 UTC).
+**Note:** (2026-11-24, 22:45 Chicago, the coordinating session,
+Claude Fable 5.2) THE FINE LAYER IS ON THE SITE. Run #58 (22:31 UTC)
+built it and committed nothing, red for Deimos (L-553). Run #59, started
+by hand on 461325f0 after L-553's push, was clean and committed it:
+gallery b2d9eaa6, 04:33 UTC on Nov 25. Its log: "[CAPTURE] Juno by
+Jupiter since 2016-07-05; BepiColombo by Mercury since 2026-11-21", and
+"CURVE ERROR: ok -- 3056 points held out across 21 served files, and 2
+capture craft held to JPL's own points". Read from the committed index:
+Juno served whole, its worst miss 0.978 of its figure; BepiColombo in
+the band only, 0.984; nothing held.
+**Gap:** Tony's look on his phone, as the Part C report's section 4
+writes it; the item closes on his look. The fine layer is served since
+gallery b2d9eaa6.
 **Ref:** L-297 (the curve's error, Tony's ruling of Nov 19); gallery
 `tools/test_curve_error.py` (run with every kind to measure);
 provenance-discipline, A Computed Position Prints What Its Errors Earn;
@@ -3041,9 +3048,25 @@ with the no-distance option."
   count of occurrences, the conflict copy's story, the rmtree case of
   2026-09-20). The website's `CACHE_BUILDER_AS_BUILT.md`, its sections
   in the same commit. Tony-action (do): reinstall gallery-cache-builder.
-**Gap:** OPEN for a night on GitHub, read from its log by the
-coordinating session after Tony's push: the [SECOND TRY] line, and any
-HELD title. Then Tony's word on a no-distance day's box wording.
+**Note:** (2026-11-24, 22:45 Chicago, the coordinating session,
+Claude Fable 5.2) THE FIRST NIGHT ON THE NEW CODE: CLEAN. Tony, 22:27:
+"go ahead with a nightly run test". Both pushes confirmed first
+(gallery 461325f0, orrery 3293c270). The website's nightly run #59,
+started by hand from the browser pane on his computer, on 461325f0;
+its log read there.
+- "[SECOND TRY] 0 second tries made, 0 answered (cap 10 a build)".
+- "53 of 53 gating checkers passed"; "served holds: none held"; no
+  HELD title, since JPL answered everything.
+- "NIGHT RUN: CLEAN -- orrery 3293c270 pulled and matched, swap
+  20261125T042858Z ok, run records carried 172 of 172 ... 221 served
+  files changed". The bot's commit: gallery b2d9eaa6, 04:33 UTC.
+- What this night shows: the new code runs whole on GitHub, and As-built
+  names is ok there on two pages. What it does not: no body was held
+  and no second try was made, so the rule's proof on the real thing is
+  still to come; until then it is the 15 planted cases.
+**Gap:** the night on GitHub is read (run #59, clean, above). OPEN
+for Tony's word on a no-distance day's box wording, and for the first
+real night that holds a body or makes a second try, read from its log.
 **Ref:** L-525 (hold the bad data); L-538 (the orbiters' printed
 error), its Part C report, section 5; L-541 (the rooms' clock).
 

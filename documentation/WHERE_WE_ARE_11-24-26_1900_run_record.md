@@ -318,9 +318,9 @@ I read the test file in your website folder myself before saying so.
 - **The handoff in your orrery folder:** rewritten for where things stand now.
 
 **Your run order**
-1. Website: Commit, then Push origin. -- 
-2. Orrery: Commit, then Push origin.
-3. Reinstall gallery-cache-builder 1.23.
+1. Website: Commit, then Push origin. -- 461325f0efd8f8f438e0db9993de61158038b96d
+2. Orrery: Commit, then Push origin. -- 3293c270677bc465b4f7bcf01149d54b1f838129
+3. Reinstall gallery-cache-builder 1.23. -- done
 4. Tell me when both pushes are done. I will start a night by hand from the browser pane and read its log, as you offered. Or press it yourself: Actions, Nightly run, Run workflow.
 5. After a green night: your phone look at the three boxes for L-538 (the orbiters' printed error).
 
@@ -330,3 +330,39 @@ I read the test file in your website folder myself before saying so.
 - One question waits for you afterwards: what an orbiter's box says on a day it shows no distance.
 
 **One final thought:** the limit of five now counts about a hundred things, where it used to count about sixty. I would leave it alone until we have seen a few real nights, then look at whether five is still the right number.
+
+=========================
+
+Both pushes are confirmed on GitHub (website `461325f0`, orrery `3293c270`), and I have started the night by hand: **Nightly run #59**, on the new code. It takes about five minutes. I will read its log when it finishes.
+
+**The night was clean, and Juno's and BepiColombo's fine points are on the site for the first time.** I started Nightly run #59 by hand on your pushed code and read its log.
+
+**What the log says**
+- **"53 of 53 gating checkers passed"** and "NIGHT RUN: CLEAN".
+- **The orbiters:** "2 capture craft held to JPL's own points", none missed by more than its printed error.
+- **The second try:** "0 second tries made, 0 answered". JPL answered everything, so none was needed.
+- **Nothing was held,** so the night's title is the ordinary one.
+- **The names check passed on GitHub** on both as-built pages. That was its first real night.
+- **The bot committed:** the website is now at `b2d9eaa6`, with 221 data files changed.
+
+**What I confirmed in the committed data**
+- Juno is served fine points across the whole window. Its worst miss is 0.978 of the error its box prints.
+- BepiColombo is served fine points around today only, as you ruled. Its worst miss is 0.984 of its figure.
+
+**What this night did not test**
+- No body was held and no request needed a second try. The first real proof of your rule outside the planted failures will be the first night whose title starts "HELD". The next coordinator is told to read that log when it comes.
+
+**The records are updated, three files read back identical in your orrery folder**
+- The ledger: the clean night on L-553 (a held body turns the night red) and on L-538 (the orbiters' printed error).
+- Where We Are and the handoff: where things stand now.
+
+**Your run order**
+1. Website: Pull origin. This brings the night's commit. -- b2d9eaa66ed33ec93fc2bbcbdc5b85d5b872e043 nightly run, green
+2. Orrery: Commit, then Push origin. -- 
+3. On your phone: close the saved Home Screen tab, reopen the site, and look at the three boxes as section 4 of `documentation/REPORT_L538_partC_20261124.md` says. L-538 closes on your look.
+
+**Where this leaves us**
+- L-538 is on the site and waits only on your look.
+- L-553 is built, pushed and ran clean. It stays open for one question of yours: what an orbiter's box says on a day it shows no distance.
+- Next build is every path to its last day (L-533 (ESCAPADE)). Its brief is not written yet.
+- The handoff for the next coordinating session is `documentation/HANDOFF_coordinating_20261124_evening.md`.

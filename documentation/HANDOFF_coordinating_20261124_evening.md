@@ -1,13 +1,15 @@
 <!-- Doc-Kind: hand | Handoff: the coordinating session of Nov 24, afternoon to late night. The cache builder's skill split (L-522), L-538's first night read, and L-553 ruled next, briefed, built and reviewed. Communication; the place for the next coordinator to start. -->
-# Handoff: L-553 is built and waits on Tony's push and one real night, November 24, 2026, late night
+# Handoff: L-553 is pushed and its first night was clean; L-538 waits on Tony's look, November 24, 2026, 22:45
 
-Built on orrery 2730048b3afb326574cfc77fb5acd3dbd215a0d7
+Built on orrery 3293c270677bc465b4f7bcf01149d54b1f838129
 at https://github.com/tonylquintanilla/palomas_orrery (branch main)
-and gallery d976d3dba8f04fdb80056ff0b46b7171c4074ada
-at https://github.com/tonylquintanilla/tonyquintanilla.github.io.
-When this was written both of Tony's folders held L-553's build, not
-pushed: the website's six changed code files and its as-built page,
-the orrery's skill, rule file, records and this file.
+and gallery b2d9eaa66ed33ec93fc2bbcbdc5b85d5b872e043
+at https://github.com/tonylquintanilla/tonyquintanilla.github.io (the
+night's commit of Nov 25, 04:33 UTC, run #59, above Tony's push
+461325f0 of L-553's build).
+When this was written Tony's website folder was one night behind, and
+his orrery folder held this file, two ledger notes and Where We Are's
+edits, not pushed.
 
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
@@ -15,32 +17,33 @@ gallery
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
 
 Type: HANDOFF, coordination (zero code). From the coordinating session
-of Nov 24, 14:47 to 22:30 Chicago (Claude Fable 5.2, linked to Tony's
+of Nov 24, 14:47 to 22:50 Chicago (Claude Fable 5.2, linked to Tony's
 computer, with no shell on it) to the next coordinator.
 Supersedes `documentation/HANDOFF_coordinating_20261124.md` and every
 earlier writing of this file. The ledger wins on status.
 
 ## Start here
 
-1. Record both bases. Above d976d3db the website should hold L-553's
-   (a held body turns the night red) build: `ask_jpl` in
-   `tools/gallery_cache_builder.py`, `night_hold_checks` in its offline
-   suite. Above 2730048b the orrery should hold gallery-cache-builder
-   1.23 and step 2 of `CLAUDE.md` with its one exception.
+1. Record both bases. The orrery should hold, above 3293c270, a commit
+   of Tony's with this file and the notes of 22:45 on L-553 (a held
+   body turns the night red) and L-538 (the orbiters' printed error).
 2. The skills comparison. gallery-cache-builder changed twice in this
-   session (1.22, then 1.23). Tony reinstalled 1.22; 1.23 is owed.
-   Only your own comparison clears it.
+   session (1.22, then 1.23), and Tony's run record says he
+   reinstalled both. Only your own comparison clears 1.23.
 3. THE WEBSITE'S NIGHTS: read GitHub's list of runs, not the commits.
    A red night and no night look the same in the commits. The browser
    pane on Tony's computer is signed in to GitHub; a job's whole log
    is plain text at the repository's /commit/<sha>/checks/<job
    id>/logs.
-4. The first night on the new code closes L-553 when its log shows
-   the "[SECOND TRY]" line and, if JPL missed anything, a title
-   starting "HELD". A green night also commits the fine points of
-   Juno and BepiColombo for the first time, and then Tony's look on
-   his phone closes L-538 (the orbiters' printed error):
+4. Run #59, started by hand on 461325f0, was clean: 53 of 53, no
+   second try needed, nothing held, and the fine points of Juno and
+   BepiColombo committed for the first time (b2d9eaa6). Tony's look on
+   his phone now closes L-538:
    `documentation/REPORT_L538_partC_20261124.md`, section 4.
+5. The first real night that holds a body, or makes a second try, has
+   not happened. When a night's title starts "HELD", or its log's
+   "[SECOND TRY]" line is not zero, read that log: it is the rule's
+   first proof outside the planted cases.
 
 ## What was done
 
@@ -82,9 +85,7 @@ were not read in the code; the planted cases are what hold them.
 
 ## What the next session owes
 
-- L-553's close on a real night's log. A hand-started night is Tony's
-  to press, or the coordinating session's on his word of Nov 24, 20:11
-  ("You or I can press it").
+- L-538's close on Tony's look.
 - To Tony, one question: what an orbiting craft's box says on a day it
   shows no distance. Today nothing in the box says why. On Where We
   Are, Waiting on you.
@@ -131,11 +132,9 @@ lines; four ledger notes; edits to Where We Are and one page.
 
 ## Tony-actions
 
-- (do) Website: Commit, then Push origin. Orrery: Commit, then Push
-  origin.
-- (do) Reinstall gallery-cache-builder 1.23.
-- (do) A hand-started night after both pushes, his or the coordinating
-  session's; then, after a green night, the look on his phone.
+- (do) Website: Pull origin. Orrery: Commit, then Push origin.
+- (do) The look on his phone at Juno's and BepiColombo's boxes; L-538
+  closes on it.
 - (decide) The box's words on a no-distance day. L-554. The order of
   BepiColombo's arrival. The stamping rule and the as-built pages' cap
   before step 4 of L-522.
