@@ -2945,10 +2945,107 @@ Fable 5.2) TONY'S WORD, AND WHERE THE RULE STOPS.
 - The coordinating session first told Tony the builder had held
   Deimos. That was said before the code was read, and was wrong.
 - The brief: `documentation/COORD_L553_hold_to_the_gate_brief_20261124.md`.
-**Gap:** a small build, its choice first: which side changes. A planted
-case in the offline suite either way.
+**Note:** (2026-11-24, night, BUILT by the Claude Code session, Claude
+Opus 5.5, through the python_work door, on orrery 2730048b and gallery
+d976d3db, by the brief and
+`documentation/COORD_L553_hold_to_the_gate_goahead_20261124.md`.) Part 1,
+the plan, went to Tony at 21:04 and is section 1 of the session's
+closing report. Tony's word on the go-ahead's section 2, as he typed it:
+"go ahead by `documentation/COORD_L553_hold_to_the_gate_goahead_20261124.md`,
+with the no-distance option."
+- A, a moon whose test JPL did not answer (run #58's Deimos): the
+  builder. `measure_trust` marks a null test `unanswered` when the
+  test's own request failed; `trust_held` holds such a body whatever it
+  orbits (the Moon, Phobos, Deimos, Io, Titan, Pluto, Charon), kind
+  'untested', at its last good build. A test that cannot apply (no mean
+  motion, an open orbit) keeps its own treatment. Its box opens with the
+  sentence of Nov 11, its distance from the orbit held at.
+- B, a held body with no "you are here" point (Chariklo): the check.
+  The Solar System figures check accepts it only by the hold its entry
+  names and the index's list, the held sentence printable and a
+  measured error served; it prints "Held bodies accepted by their named
+  hold (N): ...". A visitor reads no change.
+- C, a capture craft served last-good: both. `capture_hold` puts it on
+  the list (kind 'capture'); Curve error at night accepts it by its
+  named hold, its held-out half still gating. WITH THE NO-DISTANCE
+  OPTION: every day of a craft's span with no fine points and no loop's
+  reach is served as `data.nofig_t`, and the room's `position_at` gives
+  no figure there -- all the days with no saved layer, the window's last
+  day with a saved layer a night old (C's weak point, closed). #O no
+  longer stops the build for one craft. On such a day the box reads the
+  craft's name and its two path sentences, no distance, nothing saying
+  why; the i panel's list says "Juno: no distance shown -- no error is
+  served for its worked-out position, so no figures are earned". The
+  wording is Tony's question afterwards, not built.
+- D, a path JPL did not answer, and E, a Lagrange point: held by name
+  (`last_good_hold`), accepted by the figures check; boxes unchanged.
+- F, Earth held: Artifact 1's T1 accepts it by its named hold (`t1_line`).
+- G, a body JPL did not answer with no good build to hold at: was SERVED
+  its last elements from the raw archive with no measured error (the
+  builder's A-3 branch for a non-path body); now NOT SERVED, and named,
+  as L-525 rules.
+- H, the clock: not changed; it stops the build as L-541 rules, after
+  its second try.
+- THE SECOND TRY (the go-ahead's section 3): `ask_jpl`, every JPL
+  request; a connection that failed or timed out, or JPL's 503, is asked
+  once more after 10 s, capped at 10 a build (a night JPL is down waits
+  about 7 minutes more at most); an answer JPL gave, never. Every build
+  prints "[SECOND TRY] N second tries made, M answered (cap 10 a build)".
+- HOLD_LIMIT NOW ALSO COUNTS paths, Lagrange points and capture craft.
+  The example is L-297's case: JPL answering none of the 8 Lagrange
+  points was a night that swapped with all 8 on their saved days; now it
+  is 8 held, more than 5, a failed build. The coordinating session's
+  reading, checked against the code: before this build one such body
+  unanswered was already red -- a flying path, an open-path comet or a
+  point at the figures check ("no as_of_today"), a capture craft at
+  Curve error by night or #O -- with ONE EXCEPTION: an ended mission
+  (Galileo, Cassini, Pioneer 10, Pioneer 11, Rosetta, Akatsuki, DART)
+  asks JPL only on the night its plan is made again (every 30 days),
+  and served from its archive it passed the figures check's ended
+  branch. Now it is held and counts, so a night with five other bodies
+  held and an ended mission's re-plan unanswered turns red. No other
+  green night turns red.
+- PLANTED CASES, the offline suite's `night_hold_checks`, 15: (1)
+  Deimos's test timed out twice, held; (2) a guard: a test that cannot
+  apply, not held; (3) Chariklo's fetch at JPL's 503, held; (4) its hold
+  taken off, the figures check red by name; (5) Juno's capture questions
+  timed out, held on its saved layer a night old with no distance on its
+  one uncovered day, and with no saved layer the build goes on with no
+  distance on all 178 days; (6) Juno's hold taken off, Curve error red;
+  (7, 8) Voyager 1's path and EM-L2's days unanswered, held, accepted;
+  (9) Earth held, T1 names it, its hold taken off FAILs; (10) THE
+  PLANTED NIGHT, 1, 3 and 5 at once, the figures check whole green, Curve
+  error's capture half green, the title "HELD Deimos, Chariklo, Juno --
+  "; (11) a guard: six held, a failed build, no swap; the second try
+  answered, not held; the cap reached. On the base copy, 13 of 15 red;
+  green there, case 3 (the builder already held Chariklo; its fix, case
+  4, red) and case 2 (a guard). The figures check passed whole on the
+  suite's folder (no fallback needed). Not in the suite: the night's
+  gate itself (git and the network) and Curve error's half for the
+  Lagrange points and comets.
+- THREE OLDER PINS MOVED ON PURPOSE, accepted by the coordinating
+  session: L-149's Pluto (a first build's unanswered test: now held, not
+  served, named); L-538's craft with no saved layer (now held with no
+  distance, not the night stopped); L-297's points (one unanswered,
+  held; all eight, a failed build).
+- CHECKS: the builder's offline suite PASS 620 checks (604 at the
+  base); the gallery run (offline, whole) as below in the close; two dry
+  runs against JPL on a throwaway copy (Deimos validated; Chariklo
+  stopped at the clock, as on the base builder: L-541's note).
+- gallery-cache-builder 1.23 (cut at orrery 2730048b, gallery
+  d976d3db): five rules under A Body That Fails Its Test Is Held and one
+  under A Capture Craft's Box, the go-ahead's words, its one line
+  corrected on its word, "AND NO LOOP'S REACH". At its cap of 728: the
+  1.20 entry and five passages moved to SKILL_HISTORIES.md (the
+  deletions-only guard's earlier state, the swap's opening account, the
+  count of occurrences, the conflict copy's story, the rmtree case of
+  2026-09-20). The website's `CACHE_BUILDER_AS_BUILT.md`, its sections
+  in the same commit. Tony-action (do): reinstall gallery-cache-builder.
+**Gap:** OPEN for a night on GitHub, read from its log by the
+coordinating session after Tony's push: the [SECOND TRY] line, and any
+HELD title. Then Tony's word on a no-distance day's box wording.
 **Ref:** L-525 (hold the bad data); L-538 (the orbiters' printed
-error), its Part C report, section 5.
+error), its Part C report, section 5; L-541 (the rooms' clock).
 
 #### [L-554] JPL's own sentence when a path is a prediction (gallery; a decision of Tony's)
 <!-- L:554 status:OPEN upd:2026-11-24 section:A flag: rice: -->
@@ -3152,6 +3249,15 @@ session that changes the page already tests on a push copy
 (interactive-exhibit 1.45, Phone first). The reasons given him: most
 website pushes carry a session's work; a step to remember before every
 push is the weak kind of check; a red night writes nothing.
+**Note:** (2026-11-24, night, the L-553 Code session, Claude Opus 5.5)
+FOUND, NOT CHASED: a dry run of one slow body cannot pass the clock.
+`gallery_cache_builder.py --dry-run --object chariklo`, against JPL on a
+throwaway copy of gallery d976d3db, set a served window of 22,790.6 days
+either side of today from Chariklo's span alone, and the build stopped:
+"[ABORT] clock: JPL's TDB-UT moves 33.897811 s across the served window,
+more than 0.004 s -- a leap second inside the window". The base builder
+does the same; a full build's window is short, so the night is not
+touched. Layer 2's dry run is the instrument it costs.
 **Gap:** a small build in the website: the copy script becomes a tool
 in `tools/`, so a Code session working in Tony's folder makes the push
 copy in one step. No dashboard button, no step for Tony.
@@ -4660,6 +4766,30 @@ gallery-cache-builder 1.22: the skill, the version, and why.
   cap for the website's as-built pages, now two (`INTERACTIVE_AS_BUILT.md`
   1,825 lines on Nov 11, 2,483 on Nov 22; the new page 571).
   horizons-orbital-mechanics: not measured.
+**Note:** (2026-11-24, night, the coordinating session, Claude
+Fable 5.2) TONY'S RUN RECORD IS NOT AN EDIT WAITING, RULED.
+- The Code session for L-553 (a held body turns the night red) stopped
+  at its start. Tony's folder equalled GitHub, and `git status` showed
+  one waiting edit: the pushed SHA he had just written into his run
+  record copy. The orrery's `CLAUDE.md`, step 2, says to say so and
+  stop, with no exception, and the session was right to.
+- The protocol has Tony write each pushed SHA in his run record after
+  the push. So that edit is there after every push, and the stop fires
+  for nothing at the start of nearly every Code session.
+- Put to Tony: a waiting edit in his own run record copies is named in
+  one line and does not stop the session; any other waiting edit still
+  stops it. Tony, 20:52: "Yes. I've been doing this a long time. As
+  you said, it can't be helped. Every sha written supersedes that
+  sha." A recommendation he accepted.
+- To be written: the orrery's `CLAUDE.md`, step 2, within its 111
+  lines, by the L-553 session at its close, from its go-ahead's text.
+  The gallery's `CLAUDE.md` needs none: no run record lives there. The
+  protocol's own sentence (Know Which Copy You Are Reading: "git
+  status is clean, or the session says so and stops") gets the same
+  exception at its next version, not a version of its own.
+- Written 2026-11-24, night, by the L-553 Code session: the orrery's
+  `CLAUDE.md`, step 2, in the go-ahead's four lines word for word; 111
+  lines, as before.
 **Gap:** steps 4 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11; step 3, the protocol, built 2026-11-23 as v4.0): 4, this
 ledger's closed items and header stamps moved out by a tool; 5, the

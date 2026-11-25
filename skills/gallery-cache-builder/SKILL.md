@@ -7,9 +7,16 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 3 parts: lines 1-237, 238-505, 506-728.
+Read this file in 3 parts: lines 1-265, 266-552, 553-728.
 
-Skill version: 1.22 | 2026-11-24, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.23 | 2026-11-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 2730048b and gallery @ d976d3db. v1.23 (L-553, one
+body JPL does not answer no longer stops the night) adds five rules to
+A Body That Fails Its Test Is Held and one to A Capture Craft's Box,
+word for word from the coordinating session's go-ahead, one corrected
+on its word ("and no loop's reach"). Riding it: Layer 1's count. Five
+passages of history moved out to stay at the cap.
+Earlier: 1.22 | 2026-11-24, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ eb90dff7 and gallery @ 727ebf79. v1.22 (L-522, the
 skill's split; L-538, the orbiters' printed error): what the builder
 and the Daily Run do moved whole to the gallery's
@@ -24,19 +31,13 @@ Witness and, under Sibling directory semantics, an encounter's package.
 Riding it: the website's second night run exists. Written by the
 coordinating session from the ledger and the builder at e6af10ea. The
 1.18 entry and five passages of history moved out to stay at the cap.
-Earlier: 1.20 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.20 (L-297, the
-Lagrange points) adds A Lagrange Point Is Served as a Point, the fourth
-serving shape. To stay at the cap, the 1.17 entry, Fetch facts proven
-live and a size note of 2026-10-25 moved out. Read from L-297's notes
-and the gallery's builder at 56bc3fab before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
 2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507),
 2026-11-05 (L-507), 2026-11-11 (L-525), 2026-11-19 (L-297) and
-2026-11-22 (L-541) and
-2026-11-24 (L-522).
+2026-11-22 (L-541),
+2026-11-24 (L-522) and 2026-11-24 (L-553).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -99,9 +100,7 @@ this section used to call designed and not built.
   `data/solar-system/` that is deletions only stops the night, by name.
   That is the August 10 failure -- a half-swapped cache committed by
   someone who did not know a build was running -- refused by the
-  machine. (Until 2026-10-31 this was a `pre-commit` hook "deliberately
-  NOT built", relevant "if the builder ever runs unattended in any
-  other form". It now does.)
+  machine.
 - The builder runs with no flags, never `--commit`: it swaps the new
   cache in and stops, and the workflow's own commit step commits after
   the gate.
@@ -184,12 +183,6 @@ documentation/SKILL_HISTORIES.md).
   folder by name (interactive-exhibit, An encounter is a package).
 
 ## The swap retries, rolls back, and leaves a record [QUALITY]
-
-Built 2026-09-20 (L-216), at gallery `a1a516cf`. Before it, a refused
-`staging -> live` rename left the working copy with no served cache, a
-change list that looked like total loss, and the run's own record stranded
-inside a directory `.gitignore` hides. Whether anything bad happened next
-depended on Tony reading that change list correctly.
 
 THREE THINGS THE BUILDER NOW DOES, in the order L-216 asked for them.
 
@@ -279,11 +272,6 @@ cleanup is harmless and self-heals; the roughly 30
 one per night, printing as normal because the builder is built to survive
 it. Catching `staging -> live` is the one that hurts.
 
-FIVE OCCURRENCES: 2026-07-24, 2026-08-19, 2026-09-17, and TWICE on
-2026-09-20. The exposure is established, not bad luck. The first was
-not caught and was committed; the last two came with OneDrive paused,
-so pausing is no cure. The account is in documentation/SKILL_HISTORIES.md.
-
 MOVING THE REPOSITORIES OFF ONEDRIVE is the lasting fix and it is
 UNDECIDED. Tony, 2026-09-17: "not at this time"; on 2026-09-20, having
 seen occurrences four and five, he ruled "do option 1" -- harden the swap
@@ -306,16 +294,9 @@ read-only; only the directories are. Use the `_rmtree_force` pattern: an
 the count of entries that needed it so a recovery that fired is reported
 rather than silent.
 
-THIS APPLIES TO ANY CODE TOUCHING THE TREE, not only the builder. On
-2026-09-20 a patch script moving 42 run records out of a conflict copy
-called plain `shutil.rmtree` and failed exactly this way, after the
-records had been copied and verified. Nothing was lost and the commit was
-unaffected -- rmtree unlinks files before it removes directories, and it
-failed at the rmdir of a folder it had just emptied -- but a second patch
-was needed to finish. The fix already existed in `_rmtree_force` with the
-reason in its docstring, and the session that wrote the patch had read
-that function an hour earlier. Knowledge that lives only inside a function
-does not fire; that is why it is in the skill now.
+THIS APPLIES TO ANY CODE TOUCHING THE TREE, not only the builder:
+knowledge that lives only inside a function does not fire (the case of
+2026-09-20, a patch script: SKILL_HISTORIES.md).
 
 [QUALITY] rather than [CRITICAL] on this document's own promotion test:
 the failure is LOUD and recoverable, and the critical tier only works
@@ -334,14 +315,9 @@ carries the two known conflict-copy shapes, `data/solar-system (*)/` and
 `data/[0-9]*-solar-system/`. Neither the rules nor the report removes
 anything; they make it visible.
 
-JUDGE A CONFLICT COPY BY WHAT IS INSIDE IT, not by its name. One of those
-four had been committed and published by accident and was described as 42
-published files that serve nothing -- a count, from someone who had not
-opened them. They turned out to be the ONLY copy of the run history for
-2026-07-29 to 2026-09-04, 38 days the live cache's own records skip,
-including the 2026-08-19 failure. Those 42 records now live at
-`documentation/cache_run_history/` in the gallery repo, with a README
-saying where they came from.
+JUDGE A CONFLICT COPY BY WHAT IS INSIDE IT, not by its name: one of
+them held the only copy of 38 days of run records, now in the gallery's
+`documentation/cache_run_history/` (the story: SKILL_HISTORIES.md).
 
 ## A config change is not deployed until the cache is rebuilt [CRITICAL]
 
@@ -502,6 +478,26 @@ What it does: `CACHE_BUILDER_AS_BUILT.md`, under this title.
 - More than `HOLD_LIMIT` held is a failed build.
 - A fault in the maths, not the data, is held while drawn wrong;
   the title is then the only signal.
+- THE HOLD RUNS TO THE NIGHT'S GATE (L-553, v1.23). Tony,
+  2026-11-24: "i thought that our rule was that if one body
+  fails, we continue and report not turn the whole night red".
+  No check after the build is red because a body is held. A
+  check accepts a held body only by the hold its served entry
+  names and the cache's list of held bodies; it prints each one
+  it accepted, by name, with the count; a body with something
+  missing and no hold stays red. Run #58 of 2026-11-24: one
+  request for Deimos timed out, and the night committed nothing.
+- JPL NOT ANSWERING A BODY'S ACCURACY TEST HOLDS THE BODY,
+  whatever it orbits. "A moon is not held" is for a test that
+  ran and came back over the limit. A test that cannot apply is
+  neither, and keeps its own treatment.
+- EVERY HELD BODY IS ON THE CACHE'S LIST: a capture craft on its
+  saved layer, a path or a Lagrange point served last-good. So
+  the night's title names it and `HOLD_LIMIT` counts it.
+- THE CLOCK IS NOT A BODY. JPL not answering the clock or its
+  witness still stops the build (L-541).
+- A REQUEST JPL DID NOT ANSWER GETS ONE SECOND TRY, capped for the
+  build; an answer JPL gave gets none.
 
 ## A Capture Craft's Box Never Claims Less Than Its Miss [QUALITY]
 
@@ -549,6 +545,10 @@ These are the rules it follows.
 - A SIZE IS MEASURED BEFORE A LIMIT IS SET OR A RULING IS ASKED.
   On 2026-11-23 "about 22 KB a craft" was offered as a number and
   ruled on; BepiColombo's measure was 30 times that and more.
+- A DAY WITH NO FINE POINTS AND NO LOOP'S REACH PRINTS NO DISTANCE
+  (L-553; Tony, 2026-11-24: "with the no-distance option"). A
+  missing figure never claims less than the miss, and one craft JPL
+  did not answer does not stop the build.
 
 ## The Daily Run's Steps [QUALITY]
 
@@ -643,7 +643,7 @@ round-trip discipline the project uses by hand, baked into the builder.
 
 ## The three-layer gate (documentation/TESTING_PROTOCOL.md, orrery repo)
 
-- Layer 1 -- offline suite (mocked fetch, 604 checks at v1.22): proves the LOGIC. Run
+- Layer 1 -- offline suite (mocked fetch, 620 checks at v1.23): proves the LOGIC. Run
   `python3 tools/test_gallery_cache_builder_offline.py` from a CLEAN checkout
   after ANY builder or config-layout change -- it is the canary for path
   assumptions (the L-114 config move silently broke it until the test's own

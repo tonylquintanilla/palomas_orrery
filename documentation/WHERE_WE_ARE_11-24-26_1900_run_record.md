@@ -191,7 +191,7 @@ The brief also asks the session to look for a fourth.
 - Where We Are and the handoff, with my "held Deimos" mistake corrected
 
 **Your run order**
-1. Orrery: Commit, then Push origin. This carries the brief. -- 
+1. Orrery: Commit, then Push origin. This carries the brief. -- 2730048b3afb326574cfc77fb5acd3dbd215a0d7
 2. Start a Code session at the python_work door, Opus. Tell it: the work starts in the orrery, by `documentation/COORD_L553_hold_to_the_gate_brief_20261124.md`.
 3. It stops after its plan. Tell me, and I read the plan before you give the go-ahead.
 
@@ -199,3 +199,134 @@ The brief also asks the session to look for a fourth.
 - L-553 is ruled next and briefed. Its build proves your rule with planted failures, not with a lucky night.
 - L-538 (the orbiters' printed error) worked on GitHub tonight and still needs one green night to reach the site, then your look.
 - The scheduled nights keep trying meanwhile. If JPL connects for every body, tomorrow's will be green without the fix.
+
+==========================
+
+**Your ruling is recorded, in your words, on L-522 (document caps), the item for the governing documents.** The ledger in your orrery folder has the note, read back identical, and its own check passes.
+
+What the note says:
+- A waiting edit in your own run record copies is named in one line and does not stop a Code session. Any other waiting edit still stops it.
+- Your reason: "Every sha written supersedes that sha."
+
+One correction to what I told you: only the orrery's rule file needs the change. The website's has the same stop, but no run record lives in that folder, so it never fires there for this reason.
+
+How it gets written:
+- The L-553 (a held body turns the night red) session makes the edit at its close, from text I put in its go-ahead. The rule file stays within its 111 lines.
+- The protocol's own sentence gets the same exception at its next version. I am not making a version for this alone.
+
+One thing to know: that ledger note is now a second waiting edit in your orrery folder, beside your run record. It rides your next commit, with the L-553 work. The Code session is only reading in Part 1, so it does not collide.
+
+**Your run order**
+1. Tell the Code session: yes, go ahead with Part 1, and leave the run record where it is. -- done
+2. When it reports its plan, tell me. I read it from your folder before you give the go-ahead.
+
+**Where this leaves us**
+- L-553's Code session is one word from starting its plan.
+- From its close on, your run record no longer stops a session.
+
+==============================
+
+**The plan is good and I accept it. One decision in it is yours, and I recommend "with".** The go-ahead is in your orrery folder, read back identical: `documentation/COORD_L553_hold_to_the_gate_goahead_20261124.md`.
+
+**Your decision: a day with no fine points prints no distance**
+- Today, if JPL does not answer for Juno on a night with no saved fine points, the whole build stops.
+- The session proposes that Juno's box simply prints no distance for those days, and the build goes on.
+- I recommend it. A missing figure never claims more accuracy than we have, and it is your own rule: continue and report.
+- It also fixes a weak spot the session found: saved fine points never reach the newest day of the date window, so on that one day the box could claim too little error.
+- One thing I asked the session to report: whether the box says why the distance is missing. If it does not, that is a wording question I will bring you afterwards.
+
+**What the session found that I did not know**
+- **Seven bodies** take the Deimos path: the Moon, Phobos, Deimos, Io, Titan, Pluto and Charon.
+- **Five more ways** one unanswered request can turn a night red, beyond the three we knew. Four get the same fix. These are its reading of the code, not mine; its planted failures are what prove them.
+- **One it will not fix: the site's clock.** If JPL does not answer the clock question, the build still stops. That is your rule from L-541 (a plan's clock), and it concerns the whole site, not one body.
+- **No request to JPL is ever tried twice.** Tonight's red night was a single 30-second timeout.
+
+**What I added as method, yours to overrule**
+- **One second try** for a request JPL did not answer, capped per build so an outage does not double the wait. It would have saved tonight's night outright, and it is the only help for the clock case.
+- **The skill's new rules, word for word,** written from the plan this time and not before it.
+- **Your run-record exception,** word for word, for the rule file.
+
+**Your run order**
+1. Tell the Code session: go ahead by `documentation/COORD_L553_hold_to_the_gate_goahead_20261124.md`, and say "with" or "without" the no-distance option, in your own words. -- done 
+2. It runs through to its close without another stop, unless something fails.
+3. When it reports, tell me. I read the result from your folders before you commit.
+
+**Where this leaves us**
+- L-553 (a held body turns the night red) is planned for eight paths, with eleven planted failures and a second try.
+- Until this is pushed and a night has saved fine points, one unanswered question about Juno or BepiColombo still stops a night.
+- Three things wait in your orrery folder for your next commit: the go-ahead, one ledger note, and your run record.
+
+===========================
+
+**Yes to the session's wording, and the three changed tests are right. Nothing here needs a decision from you tonight.**
+
+I read the test file in your website folder myself before saying so.
+
+**The skill line**
+- The session is right and my line was loose. BepiColombo's ordinary days have no fine points but do have its loop's measured reach, and they still print a distance.
+- The line should read: "A DAY WITH NO FINE POINTS AND NO LOOP'S REACH PRINTS NO DISTANCE."
+
+**The three older tests it changed on purpose**
+- **Pluto:** on a first-ever build, a body whose test JPL did not answer has nothing to hold at, so it is left out and named. That is your rule of Nov 11, and it cannot happen on the live site, which always has an earlier build.
+- **The orbiter with no saved fine points:** held with no distance, where the build used to stop. That is your "with".
+- **All eight Lagrange points failing at once:** now a failed build, because eight held is more than the limit of five.
+
+**One thing to know about the limit of five**
+- It now also counts spacecraft paths, Lagrange points and the two orbiters, not only planets, moons and small bodies.
+- I believe no night that was green before goes red because of this: before tonight's fix, one unanswered Lagrange point already turned the night red at a later check. I have asked the session to confirm that from the code.
+- More than five unanswered in one night is treated as a JPL outage, as you ruled. You may want to revisit the number once we have seen real nights.
+
+**What I checked in the planted test**
+- It makes Deimos, Chariklo and Juno fail in one run, then runs the real checks whole. They come out green and the title reads "HELD Deimos, Chariklo, Juno".
+- It then removes a hold on purpose and the check goes red by name. So the test can fail.
+- The session's count, not mine: 13 of the 15 new cases are red on the old code. The two that are green there are guards, not fixes.
+
+**Still to come, for you:** on a no-distance day the box says nothing about why; the reason is only in the i panel. I will bring you that wording question after the build closes.
+
+**Paste this to the Code session:**
+
+> From the coordinating session:
+> 1. Yes. The skill's line reads "A DAY WITH NO FINE POINTS AND NO LOOP'S REACH PRINTS NO DISTANCE", with Tony's words quoted exactly as he typed them.
+> 2. The three moved cases are accepted as moved: L-149's Pluto, L-538's craft with no saved layer, L-297's eight points.
+> 3. On L-553, say plainly that HOLD_LIMIT now also counts paths, Lagrange points and capture craft, with the L-297 case as the example. Confirm from the code, or correct: before this build, one such body unanswered was already red at the figures check, so no night that was green becomes red.
+> 4. Go on to the close.
+
+**Where this leaves us**
+- The build is done in code and proven by planted failures; the skill, the final runs and the records remain.
+- When the session reports its close, I read the result from your folders before you commit.
+
+======================
+
+**L-553 (a held body turns the night red) holds up, and you are clear to commit.** I ran the session's work myself on a clean copy of the website, with no orrery folder beside it, the way GitHub's night sees it.
+
+**What I ran**
+- **The whole offline suite:** "PASS (620 checks, 0 failures)".
+- **The 15 planted failures:** all pass on the new code, and 13 fail on the old code. So the tests can fail, and they failed where they should.
+- **The names check:** passes on both as-built pages.
+- **The figures check on tonight's real data:** passes, and prints "Held bodies accepted by their named hold (0)". Nothing is held right now, so nothing is being waved through.
+
+**What I read**
+- **The second try:** one more attempt after 10 seconds, only when JPL gave no answer at all, capped at 10 per build. Tonight's Deimos timeout is exactly the kind it retries.
+- **The skill:** every line accounted for. The new rules are there word for word, and it is still 728 lines.
+- **The rule file:** your run-record exception is in, in the same four lines.
+- **The ledger:** L-553's record is thorough, with your words quoted as you typed them.
+
+**Not checked by me:** the maintenance runs in your own folders, the session's test against real JPL, and most of the builder's 37 edits. The planted failures are what stand behind those.
+
+**Two files I changed just now, both read back identical**
+- **The website's as-built page:** the sentence naming the seven bodies now says they are worked out by a rule, with today's seven as dated examples.
+- **The handoff in your orrery folder:** rewritten for where things stand now.
+
+**Your run order**
+1. Website: Commit, then Push origin. -- 
+2. Orrery: Commit, then Push origin.
+3. Reinstall gallery-cache-builder 1.23.
+4. Tell me when both pushes are done. I will start a night by hand from the browser pane and read its log, as you offered. Or press it yourself: Actions, Nightly run, Run workflow.
+5. After a green night: your phone look at the three boxes for L-538 (the orbiters' printed error).
+
+**Where this leaves us**
+- Your rule now reaches the night's last check: one body JPL does not answer is held and named, and the night commits. More than five held is still a failed night.
+- The first night on this code is the real test. It should also be the first to put Juno's and BepiColombo's fine points on the site.
+- One question waits for you afterwards: what an orbiter's box says on a day it shows no distance.
+
+**One final thought:** the limit of five now counts about a hundred things, where it used to count about sixty. I would leave it alone until we have seen a few real nights, then look at whether five is still the right number.

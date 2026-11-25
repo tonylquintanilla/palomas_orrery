@@ -1915,6 +1915,62 @@ cache), and three passages of history moved out to stay at the cap. Read
 from the gallery's code with this session's edits before it was written.
 (Moved down 2026-11-24, when 1.22 made a fourth entry; L-522.)
 
+Earlier: 1.20 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.20 (L-297, the
+Lagrange points) adds A Lagrange Point Is Served as a Point, the fourth
+serving shape. To stay at the cap, the 1.17 entry, Fetch facts proven
+live and a size note of 2026-10-25 moved out. Read from L-297's notes
+and the gallery's builder at 56bc3fab before it was written.
+(Moved down 2026-11-24, when 1.23 made a fourth entry; L-553.)
+
+Five passages moved here word for word on 2026-11-24 (L-553, the
+skill at its cap of 728), each under the section it left:
+
+Operating mode, the deletions-only guard's earlier state:
+
+  machine. (Until 2026-10-31 this was a `pre-commit` hook "deliberately
+  NOT built", relevant "if the builder ever runs unattended in any
+  other form". It now does.)
+
+The swap retries, its opening account:
+
+Built 2026-09-20 (L-216), at gallery `a1a516cf`. Before it, a refused
+`staging -> live` rename left the working copy with no served cache, a
+change list that looked like total loss, and the run's own record stranded
+inside a directory `.gitignore` hides. Whether anything bad happened next
+depended on Tony reading that change list correctly.
+
+The Cause, its count of occurrences:
+
+FIVE OCCURRENCES: 2026-07-24, 2026-08-19, 2026-09-17, and TWICE on
+2026-09-20. The exposure is established, not bad luck. The first was
+not caught and was committed; the last two came with OneDrive paused,
+so pausing is no cure. The account is in documentation/SKILL_HISTORIES.md.
+
+The sibling report, the conflict copy's story (the rule kept in three lines):
+
+JUDGE A CONFLICT COPY BY WHAT IS INSIDE IT, not by its name. One of those
+four had been committed and published by accident and was described as 42
+published files that serve nothing -- a count, from someone who had not
+opened them. They turned out to be the ONLY copy of the run history for
+2026-07-29 to 2026-09-04, 38 days the live cache's own records skip,
+including the 2026-08-19 failure. Those 42 records now live at
+`documentation/cache_run_history/` in the gallery repo, with a README
+saying where they came from.
+
+Never shutil.rmtree, the case of 2026-09-20 (the rule kept in three lines):
+
+THIS APPLIES TO ANY CODE TOUCHING THE TREE, not only the builder. On
+2026-09-20 a patch script moving 42 run records out of a conflict copy
+called plain `shutil.rmtree` and failed exactly this way, after the
+records had been copied and verified. Nothing was lost and the commit was
+unaffected -- rmtree unlinks files before it removes directories, and it
+failed at the rmdir of a folder it had just emptied -- but a second patch
+was needed to finish. The fix already existed in `_rmtree_force` with the
+reason in its docstring, and the session that wrote the patch had read
+that function an hour earlier. Knowledge that lives only inside a function
+does not fire; that is why it is in the skill now.
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at

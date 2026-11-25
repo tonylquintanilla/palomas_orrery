@@ -40,8 +40,8 @@ same name is not invoked (L-522).
    details.
 2. Record the base: run `git rev-parse HEAD` and `git ls-remote origin
    HEAD`. Both are read-only. If they differ, or `git status` shows
-   edits already waiting, say so and stop; Tony's loop is commit and
-   push after every session, so the folder should match the remote.
+   edits waiting, say so and stop. One exception: an edit in Tony's own
+   run record copy is named in one line and does not stop (L-522).
 3. Say what you are about to do, in one sentence, and wait for his
    go-ahead.
 
