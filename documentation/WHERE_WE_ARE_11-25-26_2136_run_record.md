@@ -180,3 +180,66 @@ Not urgent, in your order:
 **Size:** no token count prints here. This session read about 3,500 lines and wrote about 1,000, across seven files.
 
 **One final thought:** the order was interrupted twice today, first for BepiColombo's cut and then for the plan, which became the protocol. Both were right. I would still hold the protocol's review to one session for its list, so it does not become the third.
+
+========================
+
+**Session: OPEN: 11-25-26 2152: Fable: Coordinator: Project protocol update for 3-way architecture** 
+
+I'll start by locating the handoff on your computer and reading it, then work through the protocol against the current three-part architecture.
+
+The review is done and a draft of the protocol's v4.1 is in your `documentation/` folder. The live `PROJECT_INSTRUCTIONS.md` is untouched, and the draft waits on your rulings below.
+
+**The verdict**
+- By your six-part test, v4.0 fails two parts: it never says what the project is for, and it names two parts where there are three.
+- The draft fixes both with one new section at the very top, "The Project", ahead of the Preamble.
+- The other four parts of the test pass and are left alone.
+
+**What "The Project" says, in plain words**
+- **What it is for:** your three subjects, "the Earth System, the orrery and the stars"; the website as "a legacy gift for Paloma" that must stay running and right without you; and the road's goal.
+- **Part 1, the orrery, defines.** Python on your computer, in three components: the Solar System orrery, the Stars and the Earth System. Every definition lives here.
+- **Part 2, the website's night, fetches and serves.** It pulls the orrery's exports, asks JPL itself, and writes the files the page reads.
+- **Part 3, the page, works out and draws.** It asks JPL nothing.
+- **Not every subject is live.** Only the Solar System has rooms. Earth System pages are built by your own run. The stars are eight saved pictures.
+- **The words.** "Gallery" was the old word for the website; file and skill names keep it.
+
+**Three things the code corrected in last night's description**
+- A spacecraft's path plan travels inside the objects export; it is not a file the website pulls separately.
+- An encounter is fetched once, by hand; the night never fetches one.
+- The old sentence that the orrery has "no local math" is not true: it has its own orbit solvers, as L-524 (the Kepler solver's start) records.
+
+**Your rulings, by number** ("yes to all" works; the exact text is in the two files)
+1. **The names of the parts.** Tonight you called the middle part "the website assembler". In the code, "assembler" is the Python that runs in the visitor's browser, part of the page. I recommend keeping the code's meaning and calling the middle part "the website's night".
+2. **The Project section** as written, 58 lines, at the top.
+3. **Five blocks leave** for the history file, 59 lines. Each is carried by a skill or a principle already: The Orrery and the Assembler, the Lessons Archive, the Anti-Patterns table, Visual Verification (its sentences move into Mode 5) and Multi-File Changes.
+4. **Graceful Fallback** gains the website's rule: the night holds a body at its last good build and says so.
+5. **New rule, "Measure, Then Say":** a number or a behaviour told to you is measured or read first. Six handoffs of Nov 23 to 25 each record one said first and found wrong; you ruled on "about 22 KB" that measured 1.36 MB.
+6. **New rule, one line:** one writer in a folder at a time.
+7. **Changed rule:** a placed file is compared byte for byte, not by size alone. This amends your Nov 2 "Read back is enough"; on Nov 25 a wrong file arrived at the same size.
+8. **The cap.** The draft is 808 lines; your cap is 800. Without items 5 and 6 it is exactly 800. Raise the cap to 810, or those two rules wait.
+9. **The strategy slot.** The ledger skill still names the master plan as "strategy". I propose The Project section takes that place.
+
+**Not done**
+- The cold read by a session holding only the draft. Its answer key is written in the review file. Say the word and I run it, or you paste the draft into an incognito chat as on Nov 23.
+- The orrery's maintenance run.
+- BepiColombo's night proof and your phone look, both still owed from the last handoff.
+- The ledger note on L-559 (the protocol as the project's instructions), Where We Are and the handoff: these wait for your rulings.
+
+**Run order**
+1. Nothing to run.
+2. Read the top of `documentation/DRAFT_PROJECT_INSTRUCTIONS_v4_1_20261125.md`, down to "PREAMBLE".
+3. Answer items 1 to 9 here.
+4. The three new files in `documentation/` (the draft, `REVIEW_L559_protocol_review_20261125.md` and `build_L559_protocol_v4_1_draft.py`) can ride your next orrery commit. Nothing for the website.
+
+**Checks behind this**
+- Both bases read: orrery 9daf6a3d (your "master plan update" commit), website 972b4a93.
+- All 12 installed skills equal the repository's.
+- The skill-names check passes with the draft laid over the protocol; the caps check goes red at 808, as it should.
+- All three files were read back from your folder, equal byte for byte.
+
+**Where this leaves us**
+- The protocol has a draft that says what the project is, in three parts, checked against the code of both repositories.
+- Nothing is ratified. On your answers I build v4.1, move the 59 lines to the history file, and fix the two skills that point at the old paragraph.
+
+**One final thought:** written down plainly, the description shows that your top goal names three subjects and the night-and-page machinery serves one. The Earth System and the stars reach the website by hand, and the road has them behind everything else.
+
+**Size:** no token count prints here. Read: the handoff, Where We Are, L-559 whole, the protocol's 795 lines, the ledger skill, parts of five other skills, seven handoffs' method sections, and both repositories' code by description and search. Written: the draft (808 lines), the review (406) and the build script (409).
