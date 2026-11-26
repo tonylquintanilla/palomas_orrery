@@ -1196,7 +1196,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-551 | No saved scenes: the gallery run makes every room's scene fresh at each run, and the saved copies go (gallery; ruled Nov 22, a list first) | OPEN | -- | 2026-11-23 |
 | ! | L-552 | The kind of body: each entry says what it is, and how JPL is asked follows from it (orrery; Tony's idea, for a design talk) | OPEN | -- | 2026-11-23 |
 | ! | L-553 | A body held because JPL did not answer turns the night red (gallery, the builder and the Solar System figures check) | OPEN | -- | 2026-11-24 |
-| ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed) | OPEN | -- | 2026-11-25 |
+| ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed) | OPEN | -- | 2026-11-26 |
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
 | ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-25 |
@@ -3038,7 +3038,7 @@ real night that holds a body or makes a second try, read from its log.
 error), its Part C report, section 5; L-541 (the rooms' clock).
 
 #### [L-554] JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed)
-<!-- L:554 status:OPEN upd:2026-11-25 section:A flag: rice: -->
+<!-- L:554 status:OPEN upd:2026-11-26 section:A flag: rice: -->
 - **Opened 2026-11-24** by the coordinating session (Claude Fable 5.2),
   from L-538 (the orbiters' printed error); written by the Claude Code
   session by `COORD_L538_close_goahead_20261124.md`.
@@ -3332,10 +3332,23 @@ THE ONE FLOWN.
     day, so a daytime run that cannot reach JPL does not close green.
     Where We Are stands at 130 of its 130 lines.
   - The handoff: `documentation/HANDOFF_coordinating_20261125_evening.md`.
-**Gap:** Tony pushes the orrery half (the website half is pushed;
-both read and run on clean copies, the notes above). The first
-website night after that serves the cut: then a
-night on GitHub, and Tony's phone look at BepiColombo's box. When JPL
+**Note:** (2026-11-26, 12:10 Chicago, the coordinating session, Claude
+Fable 5.2) THE ORRERY HALF IS PUSHED, AND ITS FIRST NIGHT IS CLEAN.
+- Pushed by Tony at 651422cb ("code L554", 2026-11-25, 17:29).
+  horizons-orbital-mechanics 1.21: the installed copy equals the
+  repository's, by this session's comparison of all 12 skills at
+  0666ad67. Both Tony-actions (do) below are done.
+- The orrery's night of 2026-11-26, clean at 17:44 UTC, its commit
+  99749f0c, the first on the new check. Read from
+  `data/nightly_run_record.json`, the row Horizons confirmations:
+  "pass -- 110 of 110 entries and 67 periods confirmed, 28 sheets
+  read, within 30 days; 1 cut path(s) held to JPL's sheet". Its title
+  carries no JPL REFIT. 17 rows, nothing held, nothing reported.
+- The website has had no night since: its newest night commit is
+  e028483d, of 2026-11-25, 21:52 UTC, which pulled the orrery at
+  9de39f3c, before the push.
+**Gap:** the first website night after the orrery push 651422cb
+serves the cut; then Tony's phone look at BepiColombo's box. When JPL
 fits past 21 November, the night's title says JPL REFIT; a session
 reads JPL's new path and takes path_cutoff, cutoff_file, cutoff_note
 and end_note off together, and the arrival's encounter can be built
@@ -3977,10 +3990,62 @@ RUN, AT NIGHT AND ON TONY'S COMPUTER.
 - THE BRIEF, for one Claude Code session through the python_work
   door, the plan first:
   `documentation/COORD_L545_walks_in_the_runner_brief_20261126.md`.
-**Gap:** the build, from the brief: its plan, a go-ahead, the build.
-Then a first night on GitHub carrying both checks, and Tony's
-one-time install and first run on his computer. interactive-exhibit's
-rule on the walks is rewritten at the build's close.
+**Note:** (2026-11-26, 12:10 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 99749f0c and gallery 972b4a93, both read live)
+THE PLAN READ AGAINST THE CODE; TONY'S RULING B; THE GO-AHEAD.
+- The plan, `documentation/REPORT_L545_walks_plan_20261126.md`, by the
+  Code session (Claude Opus 5.5), read from Tony's folder. Two rows,
+  `Drawer walk` and `Clock walk`, run by one new tool
+  (`tools/headless/run_walk.py`); a new kind of row, "walk", whose
+  exit code 3 means it could not run; the library in the home folder,
+  `C:\Users\tonyq\palomas_orrery_walks`, outside OneDrive; the
+  install a command and no button; the website pushed first.
+- RUN HERE, on a clean clone of gallery 972b4a93: the drawer walk at
+  the served window's last minute, 2027-02-21T21:05Z, "FAIL 1 of
+  383", Io's box alone, as the plan's table has it. READ: Io's served
+  orbit is dated JD 2461369.5, 25 November 2026, the day of the
+  build; L-485's R4 as the plan quotes it; the night's held title in
+  `daily_run.py` and the workflow; `test_dashboard_parity.py` asking
+  only whether a row is "node"; `run_tool`, where a Python row has no
+  way today to say it could not run. NOT CHECKED here: Dashboard
+  parity's rule 3; the night's commit step refusing new files; the
+  walks on Windows, which the plan measured on Tony's computer.
+- THE PLAN'S QUESTION, a night when the library cannot be downloaded:
+  A, red and nothing committed, as the run's header has it; B, the
+  night commits, the two rows are reported and not red, and the
+  commit's title says so every night it lasts (L-485's R4). Both
+  sessions recommended B. Tony, in his run record copy
+  `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`, beside the
+  recommendation: "-- confirmed"; beside the ask: "-- B and
+  recommendations approved." In chat, 11:57: "recommendations
+  approved. please proceed with the prompt to Code." A recommendation
+  he accepted.
+- APPROVED WITH IT, the coordinating session's four additions: the
+  title says what is known, "WALKS NOT RUN: library did not install",
+  not "npm unreachable"; all 63 packages pinned by a lock file kept
+  in the website, since jsdom 24.1.3 asks for its dependencies by
+  range ("cssstyle": "^4.0.1", read from the lock npm wrote here);
+  interactive-exhibit's sentence "the drawer walk is no gate and is
+  kept green all the same" corrected in the same bump; Io recorded.
+- IO, FOUND BY THE PLAN, NOT FIXED: the drawer walk allows 1 percent
+  on Io's distance and the page prints two figures far from Io's
+  orbit date ("0.0028 AU from Jupiter (400,000 km)"), so the walk
+  passes 80 days from that date and fails at 88. With nightly builds
+  the date is a day old. The one case with fresh data: Io alone held
+  on an old orbit that long would turn the night red, against L-553
+  (a held body turns the night red). What the walks check was out of
+  the build's scope.
+- FOR THE FOLDS' BRIEFS: with the drawer walk a gate, an orrery push
+  that changes a served row can fail the website's night if the
+  walk's typed expectations were not brought along. Each fold's build
+  updates the walk in the same sitting.
+- The go-ahead:
+  `documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`.
+**Gap:** the build, on the go-ahead. The coordinating session runs
+both new checks on a clean checkout before Tony pushes, the website
+first. Then Tony's one-time install and first run on his computer,
+and a first night on GitHub carrying both checks. interactive-exhibit
+1.46 at the build's close, its reinstall cleared by a later session.
 **Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
 (the website's checks); L-535; L-550 (a website check with no
 dashboard button); L-551 (no saved scenes); L-485 (the nightly run).

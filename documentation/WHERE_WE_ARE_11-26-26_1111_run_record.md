@@ -156,12 +156,296 @@ On Nov 25 the Mercury talk came first and only its build waited for JPL. I read 
 - **Where We Are:** in the box and on the road. The question "where this round's cleanup ends" has left the Waiting on you list. The page is still 130 lines of 130.
 
 **Run order (unchanged from my last message)**
-1. Orrery: Commit, then Pull origin, then Push origin. GitHub Desktop will show 3 files: `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/COORD_L545_walks_in_the_runner_brief_20261126.md`. -- 
+1. Orrery: Commit, then Pull origin, then Push origin. GitHub Desktop will show 3 files: `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/COORD_L545_walks_in_the_runner_brief_20261126.md`. -- 78f32c5e828262c81a8c1ab436a725b9f08b315e; no night yet
 2. Nothing to run, and nothing for the website.
 3. Start the Claude Code session for the walks with the prompt I gave, and bring its plan back here.
+
+   Prompt: Build session in both repositories, the orrery first. The brief is documentation/COORD_L545_walks_in_the_runner_brief_20261126.md in the orrery folder. Plan first.
+
 4. After the next website night: your phone look at BepiColombo's box.
 
 **Where this leaves us**
 - The cleanup has an end: the walks' build, which is briefed and waits for its Code session.
 - After it comes Jupiter's moons, with their design talk first, or BepiColombo at Mercury if JPL has fitted its path by then.
 - BepiColombo's cut still waits for the first website night after your push, then your look.
+
+============================
+
+**Session: OPEN: 11-26-26 0927: L545 Code session**
+
+Reading the ledger items now (bases are fine in both folders).
+
+Reading the two skills that govern this build (the page's exhibit rules and the night's builder rules).
+
+Still reading the website's run code: how a check row runs, then the night's workflow and the two walks.
+
+Still reading: now checking which faults could be planted in each walk, and whether Node is on this computer for a measured run.
+
+Reading the dashboard's button format; after that I'll measure the walks on this computer, then write the plan.
+
+Measuring done for the main cases; one finding needs a closer look (the drawer walk fails near the edges of the served window), so I'm narrowing where it starts, and choosing the planted faults.
+
+Writing the plan next; one last check on the skill caps and the narrowing run.
+
+The drawer walk holds up to 81 days after a build. Before writing the plan, I'm checking that the planted fault I'd name for the drawer walk actually gets caught, on a scratch copy.
+
+The planted fault is caught: an ended mission's last day printed one day early turns 7 of 66 checks red, one per ended mission. Writing the plan file now.
+
+I've written the plan, and nothing in either repository has been changed. The plan is in [REPORT_L545_walks_plan_20261126.md](palomas_orrery_for_github/documentation/REPORT_L545_walks_plan_20261126.md) in the orrery's documentation folder, for the coordinating session to check against the code before the build.
+
+   ## The plan
+
+   ### 1. Two rows, their place, their buttons
+
+   - Rows `Drawer walk` and `Clock walk` in `OFFLINE_CHECKERS`, right
+   after `Room clock`, with the page's other checks.
+   - Both run one new Python tool, `tools/headless/run_walk.py drawer` and
+   `run_walk.py clock`, from the gallery root. It finds the library and
+   Node, makes the scenes fresh, walks the real page, then walks a
+   planted page, and prints one last line the row shows: "DRAWER WALK:
+   PASS -- 383 checks on the real page at 2026-11-26 17:22 UTC; planted
+   fault (an ended mission's last day one day early) caught, 7 of 66
+   red".
+   - A new runner kind, `"walk"`: run under Python like a `"python"` row,
+   except that exit code 3 means it could not run, and the row is
+   UNREACHABLE. Only the walk rows use it, so no other row changes.
+   Dashboard parity reads it as a Python step (it only asks whether a
+   row is `"node"`).
+   - Dashboard buttons `Drawer Walk` and `Clock Walk`, indented in
+   "Gallery -- checks and data", each running `tools/headless/run_walk.py`
+   with `drawer` or `clock`, from the gallery root, and a short line each
+   in CARD_LINES (twelve words or fewer). This session adds them (L-550
+   (a website check with no dashboard button)).
+
+   ### 2. Which moment, and whether it holds
+
+   - The drawer walk's scene is made at the run's own minute (UTC, to the
+   minute). The clock walk makes two per room: the run's minute and the
+   last whole minute at or before the served window's end, read from
+   `coverage_index.json`.
+   - The clock walk holds at any minute inside the window by how it is
+   written: it reads the window's end and the real clock itself.
+   Measured only today, in both rooms.
+   - The drawer walk holds from 42 days before the build to 80 days after
+   it, and fails on Io's digits at 88 days either side (the table). The
+   run's minute is never before the build, and the night rebuilds every
+   night, so the run's minute sits a day or two after the build. It goes
+   red only when the served cache is 81 or more days old, when the room
+   is days from freezing at its last day and the nights have been red
+   for weeks for other reasons. Not a red night for nothing in practice.
+   - WHAT THIS SETTLES OF L-551 (no saved scenes): for the two walks, no
+   saved scene, a fresh one at every run, at the run's minute (and the
+   window's last minute for the clock walk). WHAT IT LEAVES: the ten
+   smoke checks and the two walks (drawer order, shell reset) that read
+   the three saved copies; `tools/record_earth_scene.py`; and whether
+   one moment is enough for those. Io's 1 percent is recorded on L-545.
+
+   ### 3. Which rooms the clock walk walks
+
+   Both the walk knows: solar-system and earth. Earth is measured at 1
+   second, so it costs nothing to keep.
+
+   ### 4. Where the library lives, how it is found, another version
+
+   - One place in the code: `WALKS_LIBRARY` in `run_walk.py`, the folder
+   `palomas_orrery_walks` in the home folder. On Tony's computer that is
+   `C:\Users\tonyq\palomas_orrery_walks`, outside OneDrive (which holds
+   only `C:\Users\tonyq\OneDrive`) and outside both repositories. On
+   GitHub it is `/home/runner/palomas_orrery_walks`, outside the
+   checkout, so the night's commit step, which refuses anything new in
+   the checkout, never sees it. Same line of code, both computers; no
+   setting to keep in step.
+   - The tool reads `node_modules/jsdom/package.json` there. Missing, or
+   any version but 24.1.3: UNREACHABLE, exit 3, in one sentence naming
+   the library, the folder looked in, the version found if any, and the
+   command that installs it. Node missing: UNREACHABLE too.
+   - The tool hands the walk the library through NODE_PATH for that one
+   run; nothing global changes.
+   - At night the workflow installs it with the same command, a step
+   before the night's step. Nothing of it is committed.
+
+   ### 5. The install: a command, not a button
+
+   The command, typed once in PowerShell, printed by the UNREACHABLE
+   sentence itself:
+
+      npm install --prefix "$HOME\palomas_orrery_walks" jsdom@24.1.3
+
+   Why not a button: Dashboard parity's rule 3 holds every indented
+   button in "Gallery -- checks and data" to a step of the run, so an
+   install button there is red, and one placed elsewhere is code kept for
+   one use. The command is in the sentence Tony would read anyway, the
+   day the library goes missing. The same command mends a wrong version.
+
+   ### 6. A night when npm cannot be reached (the question for Tony)
+
+   As the run's header has it today, the walk rows would be UNREACHABLE
+   and UNREACHABLE is red at night: the night commits nothing, the site
+   keeps the previous night's data, and the next night tries again.
+
+   That sits badly with L-485's R4. Tony's words: "the other failure points
+   are beyond our control and should be reported but not halt the rest of
+   the run or future runs", and R4 names "an outside library's address
+   failing". Every row would still run, but one outside failure would stop
+   the night's data. (The night already has this exposure today: its
+   `pip install` step stops the whole job if PyPI cannot be reached. Not
+   in this build.)
+
+   - A. Keep the header's rule: red, nothing committed. Nothing new to
+   build. Loud in the Actions tab and the dashboard's last-run line.
+   - B. R4's way, and the loudest report that fits it: the install step is
+   allowed to fail and says so to the night's step. Then the walk rows
+   print "NOT RUN TONIGHT: npm could not be reached" and are reported,
+   not red; the night commits, and its commit title STARTS "WALKS NOT
+   RUN: npm unreachable", every night it lasts, where Tony reads titles
+   (as a held body's name is). Any other cause (the library missing on
+   a computer that installed it, a wrong version, Node missing) stays
+   red. Costs one line in the workflow, one exit code, and the title's
+   words from the Daily Run, their one home.
+   - RECOMMENDED: B. A night that cannot fetch the walks' library still
+   runs every other check of the page, and the night never changes the
+   page's code, only its data.
+
+   ### 7. The time added, and the run's order
+
+   About 70 to 80 seconds a run: the drawer walk 53 s and its planted page
+   13 s, the clock walk 4 s, the scenes about 5 s; the clock walk's
+   planted page is not measured yet (a few seconds, by its size). Nothing
+   in the run's order needs to change. At night the checkers run after
+   the build, so the walks walk that night's served data, which is the
+   point.
+
+**Skills read** (the repository's copies): interactive-exhibit 1.45, gallery-cache-builder 1.24, safe-file-editing 1.15, agentic-pre-test 1.4, and ledger-and-session-records 1.25, which I read for the records at the end.
+
+**Starting point:** both folders match GitHub (orrery 78f32c5e, which is your push of the brief; website 972b4a93). The one change waiting is your own run record copy.
+
+**Measured on your computer today:**
+- I installed the library (jsdom 24.1.3) in a temporary folder of this session's. It took 5 seconds, and both walks run on Windows.
+- **Drawer walk:** passes all 383 checks at every date from 42 days before the website's last data build to 80 days after it. At the two far edges of the data's date range (88 days either side) it fails one check, Io's distance. That check expects three significant figures, and the page rightly prints only two that far from the date of Io's orbit. The nightly rebuild keeps "today" close to the build, so this shouldn't cause a false red night. I'm recording it, not fixing it, because changing what the walks check is outside this job.
+- **Clock walk:** 13 of 13 checks in the Solar System room and 10 of 10 in the Earth room, a few seconds each.
+- **Planted fault for the drawer walk:** a copy of the page that prints each ended mission's last day one day early, the same kind of mistake the walk caught on Nov 21. It was caught: 7 of 66 checks went red, one per ended mission (Cassini read 14 September instead of 15, and so on).
+
+**What the plan says:**
+- **The checks:** two new rows in the website's maintenance run, "Drawer walk" and "Clock walk", and a dashboard button for each, "Drawer Walk" and "Clock Walk".
+- **Where the library goes:** a folder called `palomas_orrery_walks` in your home folder (`C:\Users\tonyq\palomas_orrery_walks`), outside OneDrive and both repositories. On GitHub it goes in the same place relative to the home folder, so the location is written once in the code.
+- **Installing it:** one command you type once, not a button. The dashboard's own button check would turn an install button red. The check prints the command itself whenever the library is missing.
+- **Push order:** the website first, then the orrery. Neither one's checks go red in between.
+- **Time added:** about a minute and a quarter to each run.
+
+**Decision for you:** on a night when GitHub can't download the library from npm (the internet's store for JavaScript code), which should happen?
+- **A, as the run is set up today:** the night is red, nothing is committed, and the site keeps the previous night's data.
+- **B, the way your rule on outside failures reads (L-485, the nightly run):** the night still commits. The two walks report "not run tonight", and the night's commit title starts "WALKS NOT RUN: npm unreachable" every night it lasts, where you read titles.
+
+I recommend B. Every other check still runs that night, and the night only ever changes data, never the page's code.
+
+**Files changed so far:**
+- new `palomas_orrery_for_github/documentation/REPORT_L545_walks_plan_20261126.md` (the plan)
+
+**Your run order:** nothing to commit or run yet. The coordinating session reads the plan, and the build waits for your go-ahead with your answer below.
+
+**Your actions:** answer the question below.
+
+At night, if npm can't be reached: A (red night, nothing committed) or B (commit, with "WALKS NOT RUN" at the start of the title)?
+
+=================================
+
+**Coordinator:**
+
+I'll read the plan itself from your folder and check its main claims against the code and by running the walks here.
+
+**The plan is sound, and I agree with its recommendation: B.** I checked its main claims against the code and by running the walks myself, and they hold. I would add three things to the go-ahead.
+
+**What I checked**
+
+- **The starting point.** Your push 78f32c5e holds this morning's ledger, Where We Are and brief exactly as I built them.
+- **The date finding, reproduced.** I ran the drawer walk here at the last minute the data covers, 21 February 2027. It failed exactly the one check the plan names, Io's distance, and passed the other 382.
+- **Why that is safe in practice.** Io's orbit in the served data is dated 25 November, the day of the last build, so it is renewed with each build. The walk fails only when the data is 81 or more days old.
+- **Your ruling on outside failures.** The plan quotes you correctly from L-485 (the nightly run): "the other failure points are beyond our control and should be reported but not halt the rest of the run or future runs." That item's list of examples includes an outside library's address failing.
+- **The title mechanism B relies on already exists.** A held body's name starts the night's commit title today, by the same route.
+- **The dashboard claim.** The orrery's button check only asks whether a check runs under Node, so the plan's new kind of check does not disturb it.
+
+**Your decision: A or B**
+
+   - A. Keep the header's rule: red, nothing committed. Nothing new to
+   build. Loud in the Actions tab and the dashboard's last-run line.
+   - B. R4's way, and the loudest report that fits it: the install step is
+   allowed to fail and says so to the night's step. Then the walk rows
+   print "NOT RUN TONIGHT: npm could not be reached" and are reported,
+   not red; the night commits, and its commit title STARTS "WALKS NOT
+   RUN: npm unreachable", every night it lasts, where Tony reads titles
+   (as a held body's name is). Any other cause (the library missing on
+   a computer that installed it, a wrong version, Node missing) stays
+   red. Costs one line in the workflow, one exit code, and the title's
+   words from the Daily Run, their one home.
+   - RECOMMENDED: B. A night that cannot fetch the walks' library still
+   runs every other check of the page, and the night never changes the
+   page's code, only its data.
+
+- **I recommend B.** A night that cannot download the library should still commit its data and say loudly that the walks did not run. -- confirmed
+- **One change to B's wording.** The plan's title says "npm unreachable", but the workflow would only know that the install step failed, not why. The title should say what is known: "WALKS NOT RUN: library did not install".
+
+**What I would add to the go-ahead (method, not yours to decide)**
+
+1. **Pin the whole library, not only jsdom.** jsdom brings 62 other packages, and it asks for each by a version range, not an exact version. So GitHub could download a newer one on some later night, and a walk could change its answer with no change of ours. A lock file fixes all 63 versions. It is one text file of 28 KB kept in the website.
+2. **One more stale sentence in the skill.** interactive-exhibit says "the drawer walk is no gate and is kept green all the same". After this build the drawer walk is a gate at night, so that sentence goes in the same edit.
+3. **Record the Io finding with its one odd case.** If JPL stopped answering for Io alone for 81 days, Io would be held on its old orbit and the walk would turn the night red. Your ruling is that one held body is never a red night. It is remote, so I would record it on L-545 (checks that wait to be remembered), not fix it now.
+
+**My ask:** A or B? On your answer I write the go-ahead for you to give the Code session. -- B and recommendations approved. 
+
+**Where this leaves us**
+- The walks' plan is checked and ready. It waits only for your answer.
+- BepiColombo's cut still waits for the first website night after your push. Neither repository had a night's commit newer than Nov 25 when I read them just now.
+
+**One final thought:** once the drawer walk gates the night, a change you push in the orrery can fail the website's night if the walk's expectations were not updated with it. That is the behaviour you ruled on Nov 22, and it is the right one. It does mean each fold's build, starting with Jupiter's moons, has to update the walk in the same sitting.
+
+==============
+
+**Coordinator:**
+
+All three written. Waiting a minute before the read-back.
+
+The go-ahead is written and your ruling is recorded. Three files are in your orrery folder, each read back and equal byte for byte to what I built.
+
+**The prompt for Code**
+
+Give it this after step 1 of the run order below, not before:
+
+> Go-ahead for Part 2. Read documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md in the orrery folder, whole, before the first edit. Tony ruled B. Record both bases again first.
+
+**Why step 1 comes first**
+- **The orrery's night ran while we worked.** It committed at 11:44, so your folder is one commit behind GitHub.
+- **Code stops if the folder has edits waiting.** Your commit, pull and push bring the night's commit in and leave the folder clean.
+
+**What the go-ahead tells Code**
+- **The plan is accepted,** with your ruling B in your own words from the run record.
+- **The night's title says what is known:** "WALKS NOT RUN: library did not install".
+- **All 63 packages are pinned** by a lock file kept in the website.
+- **The skill's stale sentence** about the drawer walk is corrected in the same edit.
+- **The Io finding is recorded,** not fixed.
+- **Nothing is pushed** until I have run both new checks on a clean copy.
+
+**News from the orrery's night**
+- **It ran clean at 11:44,** with all 17 of its checks passing.
+- **It was the first night with the new check on BepiColombo's cut.** That check passed: the cut still matches JPL's sheet, and there is no "JPL REFIT" in the title.
+- **The website's night has not run yet.** That one is the proof of the cut on the website, and your phone look follows it.
+
+I recorded this on L-554 (JPL's sentence when a path is a prediction) and cleared two finished actions from its list.
+
+**Run order**
+1. Orrery: Commit, then Pull origin, then Push origin. GitHub Desktop will show 5 files:
+   - `LEDGER_CONSOLIDATED.md`
+   - `documentation/WHERE_WE_ARE.md`
+   - `documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`
+   - `documentation/REPORT_L545_walks_plan_20261126.md`
+   - your run record copy
+
+-- 
+
+2. Paste the prompt above into the Code session.
+3. When Code reports, bring its report here before you push anything.
+4. After the next website night: your phone look at BepiColombo's box.
+
+**Where this leaves us**
+- The walks' build has its go-ahead and starts when you paste the prompt.
+- The orrery half of BepiColombo's cut has now passed its first night. The website half still waits for its night.
+- After the walks: Jupiter's moons, or BepiColombo at Mercury if JPL has fitted its path by then.
