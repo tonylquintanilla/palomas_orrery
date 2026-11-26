@@ -608,10 +608,10 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-2. Orrery: Commit, then Pull origin, then Push origin. GitHub Desktop will show 13 files; the list is under Tony-actions in `documentation/HANDOFF_coordinating_20261125_protocol_v4_1.md`. Your run-record copy is not counted in the 13. -- 
+2. Orrery: Commit, then Pull origin, then Push origin. GitHub Desktop will show 13 files; the list is under Tony-actions in `documentation/HANDOFF_coordinating_20261125_protocol_v4_1.md`. Your run-record copy is not counted in the 13. -- 5d99eb3b23f78593768626a1dfe75d647d11069e
 3. Website: nothing to push.
-4. Paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions on claude.ai, replacing v4.0. This session is still running on v4.0.
-5. Reinstall two skills from the repository: gallery-assembler and ledger-and-session-records. The next session's comparison clears them, not this one.
+4. Paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions on claude.ai, replacing v4.0. This session is still running on v4.0. -- done
+5. Reinstall two skills from the repository: gallery-assembler and ledger-and-session-records. The next session's comparison clears them, not this one. -- done
 6. After the next website night: your phone look at BepiColombo's box.
 
 **Where this leaves us**
@@ -619,6 +619,6 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 - The master plan is retired with something in its place. L-559 closes once your push, paste and two reinstalls are confirmed by the next session.
 - Then come BepiColombo's night and your look, your decision on where the cleanup ends, and the braid.
 
-**One final thought:** the cold reader's biggest complaint was vocabulary. Handoff, run record, ledger handle and brief are never explained in the protocol, and at 810 of 810 there is no room to explain them without moving something out.
+**One final thought:** the cold reader's biggest complaint was vocabulary. Handoff, run record, ledger handle and brief are never explained in the protocol, and at 810 of 810 there is no room to explain them without moving something out. 
 
 **Size:** no token count prints here. Read: your run record twice, parts of six skills, and both repositories' code by description and search. The cold-read session used about 110,000 tokens. Written: 118 new or changed lines of the protocol, 237 lines in the history file, 71 in the ledger, nine lines of Where We Are, 46 lines across two skills, and the handoff.
