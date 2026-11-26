@@ -166,11 +166,11 @@ Not urgent, in your order:
    - `documentation/WHERE_WE_ARE.md`
    - `documentation/HANDOFF_coordinating_20261125_night.md`
 
--- 
+-- 9daf6a3dd932c0bf456798a984aa814c84edb215
 
-2. Website: nothing to push.
-3. Tomorrow morning: Fetch origin and Pull origin on both, then look on your phone at BepiColombo's box.
-4. Then start a coordinating session from the new handoff, for the protocol's review.
+2. Website: nothing to push. -- 
+3. Tomorrow morning: Fetch origin and Pull origin on both, then look on your phone at BepiColombo's box. -- tomorrow
+4. Then start a coordinating session from the new handoff, for the protocol's review. 
 
 **Where this leaves us**
 - The master plan is archived at v38 by your ruling. The real update is the protocol, reviewed against your question: "is the protocol serving its purpose as the 'project instructions'".
