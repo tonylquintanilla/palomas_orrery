@@ -92,6 +92,10 @@ Module updated: November 23, 2026 with Anthropic's Claude Opus 5.5
 (L-522, step 3, the protocol's v4.0: the Skill Manifest and Skill
 Headers buttons say where the table now goes, skills/SKILL_MANIFEST.md,
 and that the protocol keeps the skills' names.)
+Module updated: November 26, 2026 with Anthropic's Claude Opus 5.5
+(L-545: the website's Drawer Walk and Clock Walk buttons and lines,
+after Room Clock, for the gallery run's new "Drawer walk" and "Clock
+walk" checks, added in the same session by the brief (L-550).)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1295,6 +1299,34 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Room clock"],
+        True),
+        ("Drawer Walk",
+        os.path.join("tools", "headless", "run_walk.py"),
+        "The drawer walk (L-545): opens the real website page in a "
+        "stand-in browser, makes the Solar System room's scene fresh at "
+        "this minute, and walks its drawer step by step as a visitor "
+        "would, each step held to values the walk works out itself; then "
+        "walks a planted copy of the page, an ended mission's last day "
+        "one day early, which must fail. Needs its library installed "
+        "once (the row says how if it is missing). GATES the gallery "
+        "runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["drawer"],
+        True),
+        ("Clock Walk",
+        os.path.join("tools", "headless", "run_walk.py"),
+        "The clock walk (L-545): opens the real website page in a "
+        "stand-in browser, the Solar System and Earth rooms, at this "
+        "minute and frozen at the last minute the served data covers, "
+        "and checks the date line, the frozen note and the today words; "
+        "then a planted page whose freeze never answers, which must fail. "
+        "Needs its library installed once (the row says how if it is "
+        "missing). GATES the gallery runner. Runs from the gallery repo "
+        "ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["clock"],
         True),
         ("Drawer Places",
         os.path.join("tools", "test_drawer_places.py"),
@@ -2597,6 +2629,12 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Room Clock"):
         "Checks each room reads JPL's clock and keeps every body in place.",
+    ("Gallery -- checks and data",
+     "Drawer Walk"):
+        "Walks the real page's drawer like a visitor, then a planted page.",
+    ("Gallery -- checks and data",
+     "Clock Walk"):
+        "Walks both rooms today and frozen at the data's last minute.",
     ("Gallery -- checks and data",
      "Drawer Places"):
         "Checks the editor's drawer tree matches the website's drawer and folds.",

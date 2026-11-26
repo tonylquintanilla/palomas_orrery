@@ -4041,14 +4041,109 @@ THE PLAN READ AGAINST THE CODE; TONY'S RULING B; THE GO-AHEAD.
   updates the walk in the same sitting.
 - The go-ahead:
   `documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`.
-**Gap:** the build, on the go-ahead. The coordinating session runs
-both new checks on a clean checkout before Tony pushes, the website
-first. Then Tony's one-time install and first run on his computer,
-and a first night on GitHub carrying both checks. interactive-exhibit
-1.46 at the build's close, its reinstall cleared by a later session.
+**Note:** (2026-11-26, afternoon Chicago, L-545's Code session, Claude
+Opus 5.5, on orrery 55dbdb5a and gallery 972b4a93, both equal to
+GitHub with only Tony's run record waiting) BUILT, BY THE GO-AHEAD,
+WITH TONY'S RULING B. Not pushed; nothing committed.
+- THE TOOL: `tools/headless/run_walk.py` in the website, `drawer`,
+  `clock` and `--install`. One run reads the library against the lock
+  package by package, makes its scenes fresh with `run_room_driver.py`
+  in a temporary folder outside the repository at the run's own minute
+  (the clock walk also at the served window's last whole minute, in
+  the solar-system and earth rooms), walks the real page, then a
+  planted copy that must fail on the check named, and prints the
+  row's line. A fault that cannot be planted is a FAIL, never
+  "caught".
+- THE ROWS: `Drawer walk` and `Clock walk` in `OFFLINE_CHECKERS`, after
+  `Room clock`, of the new runner kind "walk": exit 3 UNREACHABLE,
+  exit 4 NOT RUN. Both gate, by day and at night.
+- THE LIBRARY: `WALKS_LIBRARY`, the folder palomas_orrery_walks in the
+  home folder (`C:\Users\tonyq\palomas_orrery_walks`; on GitHub
+  /home/runner/palomas_orrery_walks, outside the checkout). All 63
+  packages pinned by `tools/headless/walks_library/package-lock.json`
+  (28,073 bytes, written by npm from a package.json naming jsdom
+  24.1.3 exactly); `--install` copies both files there and runs `npm
+  ci`, which installs the lock's versions and never writes a lock, then
+  reads the folder back. A package missing, at another version, or not
+  in the lock makes the row UNREACHABLE by name (tested: "cssstyle is
+  4.6.1, the lock has 4.6.0; left-pad is not in the lock").
+- RULING B AS BUILT: the workflow's step "Install the walks' library
+  (L-545)" runs `run_walk.py --install` with continue-on-error and
+  hands its outcome to the night (`PO_WALKS_INSTALL`). After a failed
+  install the rows print NOT RUN TONIGHT with npm's FIRST error line
+  (its last line only points at npm's log file; measured: "npm error
+  A complete log of this run can be found in: ..."), are listed apart
+  and are not red; the night's record carries "NOT RUN", and
+  `daily_run.py --held-title` reads it (`walks_not_run`) and starts
+  the title "WALKS NOT RUN: library did not install". BESIDE A HOLD:
+  the walks' words come first, then the HELD words, one title: "WALKS
+  NOT RUN: library did not install; HELD Halley -- Nightly run ...".
+  `daily_run.py --check`: 8 of 8 made-up titles right, and the planted
+  fault "leaves the walks not run out" caught on 2 of 8 nights; 37 of
+  37 fixture checks.
+- THE PLANTED FAULTS, by name: the drawer walk, AN ENDED MISSION'S
+  LAST DAY ONE DAY EARLY (`solarSystemMissionEndDay`), caught as 7 of
+  66 red in section 42b, one per ended mission (Pioneer 10, Pioneer
+  11, Galileo, Cassini, Rosetta, Akatsuki, DART); the clock walk, THE
+  FREEZE THAT NEVER ANSWERS (`?freeze=1` read as "0"), caught as 7 of
+  13 red, all in the frozen step. `walk_scene_moment.js` takes the
+  planted page as an optional fifth argument; what it checks is
+  unchanged.
+- SHOWN THREE WAYS, on Tony's computer (Windows 11, Node 24.13.1), on a
+  push copy of the website: PASS with the library, "DRAWER WALK: PASS
+  -- 383 checks on the real page ... planted fault ... caught, 7 of 66
+  red (63 s)" and "CLOCK WALK: PASS -- solar-system 13 of 13, earth 10
+  of 10 ... caught in solar-system, 7 of 13 red, all in the frozen step
+  (9 s)"; UNREACHABLE without it by day (neither pass nor fail) and
+  under the night pass (red, "UNREACHABLE row(s) are red tonight");
+  NOT RUN at night after a failed install (exit 0, "REPORTED, not
+  red"); FAIL on a broken page (drawer 8 of 383 red with the ended
+  mission's words changed; clock, solar-system 12 of 13 with the
+  frozen words changed); FAIL when the fault cannot be planted, and
+  when a planted page is not caught by the check named. Node missing:
+  UNREACHABLE, naming Node first.
+- HEADERS: the drawer walk, the clock walk, `page_harness.js` and
+  `run_room_driver.py` no longer say "Claude-only". THE PAGES:
+  `INTERACTIVE_AS_BUILT.md`, The headless recipe, its opening and a
+  walk bullet replaced, one added; `CACHE_BUILDER_AS_BUILT.md`, the
+  night form's install step, NOT RUN and the title. THE BUTTONS:
+  Drawer Walk and Clock Walk in "Gallery -- checks and data", with
+  their lines; Dashboard parity "118 steps matched to their buttons".
+- interactive-exhibit 1.46 (the bump's four steps, here): A SESSION
+  THAT CHANGES THE PAGE READS THE WALKS rewritten as built; "the
+  drawer walk is no gate and is kept green all the same (L-521)" now
+  "the drawer walk is a gate of the gallery run, at night too
+  (L-545)"; the 1.43 entry and the 1.45 install moved to
+  `documentation/SKILL_HISTORIES.md`, word for word; 738 lines, its
+  cap. Tony reinstalls it; a later session clears it.
+- IO, RECORDED AND NOT FIXED (the go-ahead's point 3): the walk allows
+  1 percent on Io's distance; the page prints two figures far from
+  Io's orbit date ("0.0028 AU from Jupiter (400,000 km)"). Measured
+  here: passes at 80 days after the build, fails at 88 days either
+  side. The one case it can bite with fresh data: Io alone held on an
+  old orbit that long would turn the night red, against L-553 (a held
+  body turns the night red).
+- FOR THE FOLDS' BRIEFS (point 4): with the drawer walk a gate, an
+  orrery push that changes a served row can fail the website's night
+  if the walk's typed expectations were not brought along; each fold's
+  build updates the walk in the same sitting.
+- FOUND, NOT CHASED: the night's `pip install` step stops the whole
+  job when PyPI cannot be reached, the exposure ruling B answers for
+  npm.
+**Gap:** Tony's pushes, the website first, then the orrery; the
+coordinating session runs both new checks on a clean checkout before
+them. Then Tony's one-time install, `python
+"C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py"
+--install` in PowerShell, his two buttons and his first run; a first
+night on GitHub carrying both checks; interactive-exhibit 1.46's
+reinstall, cleared by a later session.
 **Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
 (the website's checks); L-535; L-550 (a website check with no
-dashboard button); L-551 (no saved scenes); L-485 (the nightly run).
+dashboard button); L-551 (no saved scenes); L-485 (the nightly run);
+L-553 (a held body turns the night red); L-543 (green on Tony's
+computer, red on GitHub). The plan
+`documentation/REPORT_L545_walks_plan_20261126.md`; the go-ahead
+`documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`.
 
 #### [L-546] Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded)
 <!-- L:546 status:OPEN upd:2026-11-21 section:A flag: rice: -->

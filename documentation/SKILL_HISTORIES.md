@@ -1334,6 +1334,20 @@ loaded on 2026-11-22):
 and L-540, from the repo's copy of 1.43; a session that loads the
 account's copy confirms it reads 1.44 before exhibit work.
 
+Earlier: 1.43 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.43 (L-297, the
+Lagrange points) adds A point is a marker, and a name has a side: a
+point drawn as its marker alone at the minute shown, its box, and a
+name's side set per body on Tony's look. Install and verify names the
+skills page where it now is (L-537). To stay at the cap, the 1.40 entry
+moved out. Read from L-297's notes and the gallery at 56bc3fab before
+it was written.
+(Moved down 2026-11-26, when 1.46 made a fourth entry.)
+The 1.45 install, from Install and verify, moved 2026-11-26 (L-545):
+1.45 was written on 2026-11-22 by the coordinating session for L-541,
+L-545 and L-550, from the repo's copy of 1.44; a session that loads the
+account's copy confirms it reads 1.45 before exhibit work.
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

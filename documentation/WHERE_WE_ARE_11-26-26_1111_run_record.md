@@ -439,9 +439,9 @@ I recorded this on L-554 (JPL's sentence when a path is a prediction) and cleare
    - `documentation/REPORT_L545_walks_plan_20261126.md`
    - your run record copy
 
--- 
+-- 55dbdb5a2976aa1f6339f63e3fa6be7fbcc8c457; merged with night. all green. 
 
-2. Paste the prompt above into the Code session.
+2. Paste the prompt above into the Code session. -- done
 3. When Code reports, bring its report here before you push anything.
 4. After the next website night: your phone look at BepiColombo's box.
 
@@ -449,3 +449,55 @@ I recorded this on L-554 (JPL's sentence when a path is a prediction) and cleare
 - The walks' build has its go-ahead and starts when you paste the prompt.
 - The orrery half of BepiColombo's cut has now passed its first night. The website half still waits for its night.
 - After the walks: Jupiter's moons, or BepiColombo at Mercury if JPL has fitted its path by then.
+
+===========================
+
+**Coordinator:**
+
+I'll lay the Code session's files over clean copies of both repositories and run the new checks myself before you push.
+
+**The build is sound and ready to push, and I agree with leaving the data files out.** I laid the Code session's files over clean copies of both repositories and ran the new checks myself.
+
+**What I ran here, on Linux (as GitHub's computers are)**
+
+- **The install from the pinned list:** 63 packages installed, exactly as the list has them. That list was made on your Windows computer, so this was the first test that it also installs on Linux.
+- **The drawer walk through the new tool:** passes all 383 checks, and catches its planted mistake (7 of 66 red).
+- **The clock walk:** passes 13 of 13 in the Solar System room and 10 of 10 in the Earth room, and catches its planted mistake.
+- **A missing package:** I removed one. The check said it could not run, named the missing package and printed the install command.
+- **A wrong version:** I changed one version number. The check said it could not run and named it.
+- **Your ruling B:** with the install step marked as failed, the check reports "NOT RUN TONIGHT" and is not red.
+- **The Daily Run's own check:** 37 of 37, including the new title.
+- **The orrery's checks:** the dashboard's button check matched 118 steps to their buttons. The skills check, the caps check and the ledger check all pass. The skill is 738 lines of 738 and Where We Are 130 of 130.
+
+**Three small things, none holding the push**
+
+- **The report says seven data files. I find five that differ from GitHub:** `objects_config.json`, `objects_export.json`, `objects_export.sha`, `constants_export.sha` and `drawings/pulled_at.sha`. All are under `data/`. I confirmed they carry BepiColombo's cut, which should not go live before the cache is rebuilt.
+- **Two things I could not repeat:** the rebuild from JPL with the cut, and the run on Windows. Those are the Code session's measurements.
+- **One line in the new tool is badly wrapped.** It works, so I will note it for a later tidy.
+
+**Run order**
+
+1. Website, in GitHub Desktop: untick every file under `data/`. -- done
+2. Commit the other 14 files. Do not pull yet. -- done
+3. Website: the only files left in the Changes list are now the `data/` ones. Right-click them and choose Discard Changes. This puts them back to GitHub's copy, and tonight's night writes them fresh. -- done 
+4. Website: Pull origin, then Push origin. -- 571ac6768108cf6109a29db69a38bb346ee93a67; nightly run #62 red at 12:27 now 1:57 pm
+5. Orrery: Commit everything, then Pull origin, then Push origin. -- 
+6. Once, in PowerShell, paste this line and press Enter:
+   ```powershell
+   python "C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py" --install
+   ```
+   - **What it does:** it downloads the 63 library files, about 16 MB, into `C:\Users\tonyq\palomas_orrery_walks`, outside OneDrive. It changes nothing else.
+   - **What you should see at the end:** "WALKS LIBRARY: installed -- 63 packages as the lock has them".
+   - **If it says python or npm is not recognized:** stop and paste the message here.
+7. On the dashboard, press Drawer Walk, then Clock Walk. The drawer walk takes about a minute.
+8. Reinstall interactive-exhibit (1.46) to your account from the repository.
+9. After the next website night: look at the night's title, and on your phone at BepiColombo's box.
+
+I changed one thing from the Code session's order: the discard comes before the pull, not after the push. If the website's night commits before you pull, a pull with those files still changed would make Desktop stash them.
+
+**Where this leaves us**
+- The walks are built, checked twice, and wait for your two pushes, the website first.
+- After the pushes I confirm both on GitHub and record this review on L-545 (checks that wait to be remembered).
+- BepiColombo's cut still waits for the website's night. At 13:24 it had not run.
+
+**One final thought:** if you push before tonight's website night, that night carries two firsts at once: the cut's data and the new walks. Both were tested ahead, so I would push now. If you would rather keep them apart, wait for the night's commit before step 1; a red night would cost one day and commit nothing.

@@ -96,7 +96,7 @@ gallery-cache-builder        1.24 Nightly builder, atomic swap and its
                                   Lagrange point served as a point
                                   (serving_shape 'point'), the clock block and
                                   its witness, an encounter's package
-interactive-exhibit          1.45 a room or exhibit in interactive.html
+interactive-exhibit          1.46 a room or exhibit in interactive.html
                                   (?exhibit=); its drawer and chrome (nav
                                   cluster, frame zoom, i panel, HUD, text box,
                                   consent, back link); the served words and

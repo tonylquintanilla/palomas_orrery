@@ -6,9 +6,13 @@ fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and ch
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-258, 259-527, 528-738.
+Read this file in 3 parts: lines 1-254, 255-527, 528-738.
 
-Skill version: 1.45 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
+Skill version: 1.46 | 2026-11-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 55dbdb5a and gallery @ 972b4a93. v1.46 (L-545): the
+walks are rows of the gallery run, at night too, as built, and the
+drawer walk gates. The 1.43 entry and the 1.45 install moved out.
+Earlier: 1.45 | 2026-11-22, with Anthropic's Claude Fable 5.2, at
 palomas_orrery @ 849bf462 and gallery @ e6af10ea. v1.45 (L-541, L-545,
 L-550) adds A VISITOR READS UTC; JPL'S DATES ARE ON JPL'S CLOCK and,
 under Phone first, A SESSION THAT CHANGES THE PAGE RUNS THE WALKS, with
@@ -24,14 +28,6 @@ Encounters, Links, Saved pictures. Written by the coordinating session
 from the two builds' ledger notes and the gallery at 828362fd, not by
 their Code sessions. To stay at the cap, the 1.41 entry and four field
 notes of September (L-291, L-318) moved out.
-Earlier: 1.43 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v1.43 (L-297, the
-Lagrange points) adds A point is a marker, and a name has a side: a
-point drawn as its marker alone at the minute shown, its box, and a
-name's side set per body on Tony's look. Install and verify names the
-skills page where it now is (L-537). To stay at the cap, the 1.40 entry
-moved out. Read from L-297's notes and the gallery at 56bc3fab before
-it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
@@ -40,8 +36,8 @@ twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
 2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
 (L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515)
-and 2026-11-11 (L-522) and 2026-11-12 (L-527) and
-2026-11-19 (L-297), 2026-11-21 (L-529) and 2026-11-22 (L-541).
+and 2026-11-11 (L-522) and 2026-11-12 (L-527) and 2026-11-19 (L-297),
+2026-11-21 (L-529), 2026-11-22 (L-541) and 2026-11-26 (L-545).
 
 ## Contents
 
@@ -208,7 +204,7 @@ is then in no fold. A tap on a scene or an encounter keeps the room's
 place for Back; a link opens in a new tab and keeps nothing. Find
 counts each kind by its own name. The logic is
 `gallery/picture_folds.js`, held by the run's Picture folds row; the
-drawer walk is no gate and is kept green all the same (L-521).
+drawer walk is a gate of the gallery run, at night too (L-545).
 As built: the gallery's `INTERACTIVE_AS_BUILT.md`.
 
 ### The Solar System room's drawer: bodies, not shells [QUALITY]
@@ -458,16 +454,20 @@ is not a fault; the phone look and the walks are upright, and sideways
 they check only the line and the pause. A saved picture, Earth
 Science's above all, may still be landscape; a room is not.
 
-A SESSION THAT CHANGES THE PAGE RUNS THE WALKS (v1.45, L-545; Tony,
-2026-11-21: "should this be method?"). After a change to
-`interactive.html` or a script it loads, before the closing report:
-`tools/headless/walk_solar_system_drawer.js` and `walk_scene_moment.js`
-(jsdom 24.1.3 from npm, in a scratch folder), each count and any red
-check by name; and the gallery run on a copy holding only what a push
-carries (L-543). On Nov 21 a walk caught a day one day early that 53
-green rows had passed. A NEW GALLERY-RUN ROW NEEDS A DASHBOARD BUTTON
-in the orrery, which a website session may not edit: the brief says
-who adds it, and the closing report names it as owed (L-550).
+A SESSION THAT CHANGES THE PAGE READS THE WALKS (v1.46, L-545; Tony,
+2026-11-21: "should this be method?"). The drawer walk and the clock
+walk are the gallery run's rows `Drawer walk` and `Clock walk`
+(`run_walk.py`), by day and at night, each with its dashboard button, a
+scene made at the run's minute and a planted fault shown caught. Their
+library, pinned whole by `walks_library/package-lock.json`, is
+`WALKS_LIBRARY`; not the lock's, the row is UNREACHABLE and names the
+install command; at night after a failed install, NOT RUN, not red, and
+the title says so (Tony's ruling B). After a change to
+`interactive.html` or a script it loads, the closing report gives both
+rows' counts and any red check by name, from the gallery run on a push
+copy (L-543). A NEW GALLERY-RUN ROW NEEDS A DASHBOARD BUTTON in the
+orrery: the brief says who adds it, and the closing report names it as
+owed (L-550).
 
 ### A guide asks for one action and waits for it [QUALITY]
 L-527, Tony's rulings of 2026-11-11 and 12. A first visit's guide is
@@ -732,7 +732,7 @@ Install to the account (Plugins, in the claude.ai sidebar). Run
 `skills_index.py` so the manifest in PROJECT_INSTRUCTIONS.md carries the
 version. Per Stale Skill = Stop, the session that installs a version
 cannot verify the install. Earlier installs and their confirmations,
-1.0 to 1.44: documentation/SKILL_HISTORIES.md, under interactive-exhibit.
-1.45 was written on 2026-11-22 by the coordinating session for L-541,
-L-545 and L-550, from the repo's copy of 1.44; a session that loads the
-account's copy confirms it reads 1.45 before exhibit work.
+1.0 to 1.45: documentation/SKILL_HISTORIES.md, under interactive-exhibit.
+1.46 was written on 2026-11-26 by L-545's Code session, from the repo's
+copy of 1.45; a session that loads the account's copy confirms it reads
+1.46 before exhibit work.
