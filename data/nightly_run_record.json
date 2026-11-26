@@ -5,9 +5,9 @@
   "held": [],
   "jpl_differs": [],
   "jpl_waiting": [],
-  "clean_run_utc": "2026-11-25T20:31:43.545564+00:00",
+  "clean_run_utc": "2026-11-26T17:44:27.488703+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/45695492591",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/45870046254",
   "reported_not_red": [],
   "rows": [
     {
@@ -23,12 +23,12 @@
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (3 checked, not written) -- NOTHING DUE -- 110 entries and 28 sheets current, no query asked"
+      "verdict": "unchanged (3 checked, not written) -- PASS -- 1 checked today, 1 queries"
     },
     {
       "row": "Path plan",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written) -- 34 paths, events akatsuki 15, atlas_2024_g3 1, atlas_3i 1, bepicolombo 35, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_d 1, cassini 7, dart 1, escapade_blue 3, escapade_gold 3, europa_clipper 5, galileo 7, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, pioneer_10 1, pioneer_11 2, psyche_spacecraft 2, rosetta 12, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing."
+      "verdict": "unchanged (1 checked, not written) -- 34 paths, events akatsuki 15, atlas_2024_g3 1, atlas_3i 1, bepicolombo 33, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_d 1, cassini 7, dart 1, escapade_blue 3, escapade_gold 3, europa_clipper 5, galileo 7, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, pioneer_10 1, pioneer_11 2, psyche_spacecraft 2, rosetta 12, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing."
     },
     {
       "row": "El Nino check",
@@ -58,12 +58,12 @@
     {
       "row": "Horizons confirmations",
       "kind": "checker",
-      "verdict": "pass -- 110 of 110 entries and 67 periods confirmed, 28 sheets read, within 30 days"
+      "verdict": "pass -- 110 of 110 entries and 67 periods confirmed, 28 sheets read, within 30 days; 1 cut path(s) held to JPL's sheet"
     },
     {
       "row": "Horizons check suite",
       "kind": "checker",
-      "verdict": "pass -- 127 checks, every planted fault caught by name"
+      "verdict": "pass -- 144 checks, every planted fault caught by name"
     },
     {
       "row": "Period fetch suite",
