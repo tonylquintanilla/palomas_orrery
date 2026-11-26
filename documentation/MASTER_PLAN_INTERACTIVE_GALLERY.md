@@ -1,4 +1,13 @@
-<!-- Doc-Kind: hand | The strategy for the interactive gallery: what the website is for, how it is built, and where the work goes over months. The order of the work is the road on WHERE_WE_ARE.md; status is the ledger's. -->
+<!-- Doc-Kind: hand | ARCHIVED 2026-11-25 at v38, its last version: the master plan for the interactive gallery, kept as a dated record. The project's description is The Project, the first section of PROJECT_INSTRUCTIONS.md; the order of the work is the road on WHERE_WE_ARE.md; status is the ledger's. -->
+> **Archived 2026-11-25, at v38, its last version (L-559; Tony's ruling
+> of 2026-11-25, 20:14).** His words: "now the road itself has a
+> direction and momentum of its own and the master plan is outdated
+> documentation." What the project is for, what its parts are and how
+> they connect is now The Project, the first section of
+> `PROJECT_INSTRUCTIONS.md` (v4.1). The order of the work is the road
+> on `documentation/WHERE_WE_ARE.md`. What follows is kept as a dated
+> record and is not updated.
+
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
 ## Executive summary -- v38, November 25, 2026

@@ -6,9 +6,15 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Read this file in 4 parts: lines 1-195, 196-451, 452-743, 744-787.
+Read this file in 4 parts: lines 1-178, 179-434, 435-726, 727-770.
 
-Skill version: 1.24 | 2026-11-23, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.25 | 2026-11-25, with Anthropic's Claude Fable 5.2, at
+palomas_orrery @ de65fb87. v1.25 (L-559, the protocol's v4.1): the
+master plan is archived, and STRATEGY, the first of the seven kinds of
+document, is The Project, the protocol's first section (Tony,
+2026-11-25, to that proposal: "approved"). The paragraph on the plan's
+restamps moved to documentation/SKILL_HISTORIES.md.
+Earlier: 1.24 | 2026-11-23, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 09f633c5. v1.24 (L-522, step 3, the protocol's v4.0):
 a skill bump makes no protocol entry, so the binding rule's four steps
 are the version line, skills_index.py, the ledger note and one
@@ -23,18 +29,11 @@ row over `DOCUMENT_CAPS.md`, its date half left on L-396; and a turn's
 close may add one line, "One final thought:", a concern nobody asked
 for (Tony, 2026-11-10, 16:11: "Yes but at the 'where this leaves us'
 part.").
-Earlier: 1.22 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ b995472a. v1.22 (L-469) gives Where We Are a DEFERRED
-section, between Settled and Signals: one line per item waiting behind
-the current work, its handle with its label, the date it was deferred
-and what it waits behind; a line leaves when the item is picked up.
-Tony, 2026-10-22, in the coordination session Claude Fable 5.1
-recorded: "keep the deferred list prominent so we can come back to
-it."
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418),
 2026-10-10 (L-395), 2026-10-11 (L-421), 2026-10-14 (L-442),
-2026-10-22 (L-469), 2026-11-10 (L-522) and 2026-11-23 (L-522).
+2026-10-22 (L-469), 2026-11-10 (L-522), 2026-11-23 (L-522) and
+2026-11-25 (L-559).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -74,13 +73,14 @@ scanner report." He said "Yes" to the statement below.
 
 Seven kinds, each with what it is for and WHEN IT IS READ:
 
-1. STRATEGY: the master plan. What the gallery is for, how it is
-   built, where the work goes over months. Read when a decision changes
-   direction, when a new class of work opens, and at a restamp. Never
-   read to learn what is next.
+1. STRATEGY: The Project, the first section of the protocol (Tony's
+   ruling of 2026-11-25, L-559; until then the master plan, archived
+   that day at v38). What the project is for, what its parts are and
+   how they connect. Read every session, because the protocol is
+   resident. Never read to learn what is next.
 2. TACTICS: Where We Are, and on it the road. What is next and in what
    order. Read at the start of every session and written at the end.
-   The ONLY place sequencing lives; the plan defers to it.
+   The ONLY place sequencing lives.
 3. COMMUNICATION: briefs, design records, manifests, closing reports
    and handoffs, coordination notes, review prompts and returns, and
    the run record in Tony's hand. A document that carries work from
@@ -92,9 +92,9 @@ Seven kinds, each with what it is for and WHEN IT IS READ:
    schedule. Read two ways: as the work-order list when sizing or
    choosing a slice; as the archive when asking what was already
    decided. It wins on STATUS (what is done, what was ruled).
-5. THE FIELD MANUAL: the protocol and the skills. How we work
-   together. The protocol is read every session because it is
-   resident; a skill when its trigger fires. Neither says what to
+5. THE FIELD MANUAL: the protocol, below The Project, and the skills.
+   How we work together. The protocol is read every session because it
+   is resident; a skill when its trigger fires. Neither says what to
    build.
 6. REFERENCE: generated documents that make no claim of their own and
    are read to learn the current state of the code or the data: the
@@ -133,8 +133,8 @@ the other:
 
 | Doc-Kind | How it is written | Kinds of document carrying it |
 |---|---|---|
-| hand | by hand throughout | strategy (the plan), tactics (Where We Are), communication (briefs, handoffs, records) |
-| zoned | by hand around a zone a tool writes | the field manual (the protocol and its archived copies), logistics (the ledger), the README |
+| hand | by hand throughout | tactics (Where We Are), communication (briefs, handoffs, records), the archived master plan |
+| zoned | by hand around a zone a tool writes | strategy and the field manual (the protocol and its archived copies), logistics (the ledger), the README |
 | generated | wholly by a tool | reference (MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, DATA_INVENTORY.md, WORKSHEET_CHECK.md, EXACT_ROWS_PRINTED.md) |
 
 No value is added: every kind in use has one, and a second tag per file
@@ -143,31 +143,14 @@ from its name (HANDOFF_, DESIGN_, MANIFEST_, SURVEY_, REVIEW_) and its
 place. A skill opens with frontmatter and carries no Doc-Kind; the
 work carries its Role: and Domain: tags.
 
-**The master plan is not a rung in the round trip** (Tony's ruling,
-2026-08-20, L-221). It is the STRATEGY (Tony's ruling of 2026-10-13,
-L-442; until then this skill called it the ROADMAP): where the work goes
-over months, not what is directly in front. It is ONE document at two
-zooms (v1.12, Tony's ruling of 2026-09-28, L-333 and L-362): an
-EXECUTIVE SUMMARY at the top, and the body, which keeps the shape of
-the critical path as Section 5a. Its dated session history and its
-lineage moved to `documentation/MASTER_PLAN_HISTORY.md` on 2026-10-14
-(L-442), a dated record like the two retired companions. The summary is
-REWRITTEN from the current state at every restamp, never carried
-forward, so it cannot fall behind the body the way the two separate
-companion files did: they restamped with v19 and v20 and then stood
-still for a month while the plan reached v33. Those files,
-`MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
-`MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`, carry a retirement line and are
-dated records. The plan restamps once per DESIGN BUILD; stepwise
-updating is the ledger's job. That is Tony's ruling of 2026-09-06
-(L-296), replacing "at key junctures": a juncture is not countable, so
-the rule could not be applied without a judgment call every time, and
-the call kept landing on Tony. A design build is countable. Versions
-are REPLACED, not archived -- only the PROTOCOL keeps a versioned copy
-per version -- and git holds the superseded bytes either way, which is
-why the plan's own rolling stamp keeps three entries and simply drops
-the fourth instead of pushing it down into a history file. That cadence
-is not staleness to be corrected by restamping more often.
+**The master plan is archived** (Tony's ruling, 2026-11-25, L-559).
+`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` stands at v38, its
+last version, a dated record with a retirement line, like its two
+summaries and `documentation/MASTER_PLAN_HISTORY.md`. Its place as
+STRATEGY is The Project's, which changes only as the protocol does: by
+a new version that Tony ratifies. (The plan's rules, one document at
+two zooms and a restamp at every design build, stood here until v1.25
+and are in documentation/SKILL_HISTORIES.md.)
 
 Where any two documents disagree about what is done, the ledger wins:
 that is STATUS. The order of the work is the road's on Where We Are:

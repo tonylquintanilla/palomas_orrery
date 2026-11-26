@@ -65,10 +65,10 @@ earth-system-pipeline        1.3  KMZ layers, Google Earth web, a layer's page
 gallery-pipeline             1.3  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards, the gallery editor's
                                   scene, encounter and link cards
-ledger-and-session-records   1.24 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.25 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
-gallery-assembler            1.5  render_orbits.py, resolver.py,
+gallery-assembler            1.6  render_orbits.py, resolver.py,
                                   cache_reader.py, the seam between UTC and
                                   JPL's clock, propagation math, golden
                                   artifact builds, Mode 5 acceptance,

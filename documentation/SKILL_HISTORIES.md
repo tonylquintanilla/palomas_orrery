@@ -1644,6 +1644,47 @@ version earlier -- Fable skills-layer review, Job 3 #8. `skills_index.py`
 now prints what the manifest was advertising before it overwrites it, so
 running the tool reports the drift instead of silently absorbing it.)
 
+Moved here on 2026-11-25 (L-559), when 1.25 made a fourth entry. The
+v1.22 entry:
+
+Earlier: 1.22 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b995472a. v1.22 (L-469) gives Where We Are a DEFERRED
+section, between Settled and Signals: one line per item waiting behind
+the current work, its handle with its label, the date it was deferred
+and what it waits behind; a line leaves when the item is picked up.
+Tony, 2026-10-22, in the coordination session Claude Fable 5.1
+recorded: "keep the deferred list prominent so we can come back to
+it."
+
+And the paragraph on the master plan that stood under The Document
+Stack until 1.25, when the plan was archived, word for word:
+
+**The master plan is not a rung in the round trip** (Tony's ruling,
+2026-08-20, L-221). It is the STRATEGY (Tony's ruling of 2026-10-13,
+L-442; until then this skill called it the ROADMAP): where the work goes
+over months, not what is directly in front. It is ONE document at two
+zooms (v1.12, Tony's ruling of 2026-09-28, L-333 and L-362): an
+EXECUTIVE SUMMARY at the top, and the body, which keeps the shape of
+the critical path as Section 5a. Its dated session history and its
+lineage moved to `documentation/MASTER_PLAN_HISTORY.md` on 2026-10-14
+(L-442), a dated record like the two retired companions. The summary is
+REWRITTEN from the current state at every restamp, never carried
+forward, so it cannot fall behind the body the way the two separate
+companion files did: they restamped with v19 and v20 and then stood
+still for a month while the plan reached v33. Those files,
+`MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
+`MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`, carry a retirement line and are
+dated records. The plan restamps once per DESIGN BUILD; stepwise
+updating is the ledger's job. That is Tony's ruling of 2026-09-06
+(L-296), replacing "at key junctures": a juncture is not countable, so
+the rule could not be applied without a judgment call every time, and
+the call kept landing on Tony. A design build is countable. Versions
+are REPLACED, not archived -- only the PROTOCOL keeps a versioned copy
+per version -- and git holds the superseded bytes either way, which is
+why the plan's own rolling stamp keeps three entries and simply drops
+the fourth instead of pushing it down into a history file. That cadence
+is not staleness to be corrected by restamping more often.
+
 ## gallery-cache-builder
 
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's
@@ -2351,6 +2392,29 @@ largest trace in that scene is 4,332 points and the one that hung is 400.
 - The last line of Field note: a plotly_click bubbles as a DOM click,
   folded into the line above it:
 Live example: gallery `700b426d`, `index.html`.
+
+Moved here on 2026-11-25 (L-559), when 1.6 made a fourth entry. The
+v1.3 entry:
+
+v1.3 (L-304) adds four field notes from the 2026-09-07/08 gallery
+session. Three are Plotly 2.35.2 behaviours READ OUT OF THE SHIPPED
+BUNDLE rather than inferred, and each one cost a real defect Tony
+found on the served Earth-and-Moon card. The fourth is not Plotly's
+at all. They sit beside the event-handler note because they are the
+same class: the library does something reasonable that is not what
+the calling code meant.
+
+And from The boundary this skill exists to protect, as it stood until
+1.6, word for word (its "no local math" was not true: L-524):
+
+a problem the orrery never has. The orrery asks Horizons the right
+question, live, every time; there's no local math to get wrong because
+there's no local math. The assembler has no live connection (Pyodide can't
+reach Horizons), so it must cache a recipe once and reconstruct it
+correctly later, alone. Nearly everything distinguishing the two --
+staging/atomic-swap, client-side propagation, trust measurement itself --
+exists because of that one constraint. Full treatment: master plan sec. 3,
+protocol Part 4 ("The Orrery and the Assembler").
 
 ## agentic-pre-test
 

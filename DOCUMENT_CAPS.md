@@ -32,7 +32,7 @@ shortens a document lowers its cap to the new size.
 
 | Document | Cap in lines | Where old lines go |
 |---|---|---|
-| `PROJECT_INSTRUCTIONS.md` | 800 | `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` |
+| `PROJECT_INSTRUCTIONS.md` | 810 | `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` |
 | `skills/agentic-pre-test/SKILL.md` | 126 | `documentation/SKILL_HISTORIES.md` |
 | `skills/earth-system-pipeline/SKILL.md` | 199 | `documentation/SKILL_HISTORIES.md` |
 | `skills/gallery-assembler/SKILL.md` | 307 | `documentation/SKILL_HISTORIES.md` |
@@ -46,7 +46,6 @@ shortens a document lowers its cap to the new size.
 | `skills/provenance-discipline/SKILL.md` | 1512 | `documentation/SKILL_HISTORIES.md` |
 | `skills/safe-file-editing/SKILL.md` | 765 | `documentation/SKILL_HISTORIES.md` |
 | `documentation/WHERE_WE_ARE.md` | 130 above the marker | git only |
-| `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` | 1755 | `documentation/MASTER_PLAN_HISTORY.md` |
 | `README.md` | 664 | git only |
 | `CLAUDE.md` | 111 | git only |
 | `DOCUMENT_CAPS.md` | 58 | git only |
@@ -56,3 +55,4 @@ Where We Are's cap counts only the lines above its run-record marker,
 the line that begins "--- Your run record below this line". The ledger
 gets its cap when step 4 of L-522 gives its closed items a place of
 their own; until then the run prints its size and says it has none.
+The protocol's cap is 810 from 2026-11-25, Tony's raise; the archived plan has no row (L-559).

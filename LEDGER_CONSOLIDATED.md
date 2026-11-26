@@ -3845,13 +3845,77 @@ path is a prediction); L-433 (the direction); L-522 (document caps).
   L-442), so what holds that place is his to say. gallery-assembler,
   which carries the old paragraph and two pointers to "master plan
   sec. 3". A new protocol version, which Tony pastes into the Project.
-**Gap:** a coordinating session's review, by the test, within the
-bounds, on the evidence: first the three-part description checked
-against the builder's and the assembler's code and widened to the
-Earth System and the stars; then the list, section by section, to
-Tony; then, on his rulings, the build (the protocol's new version,
-the two skills, the plan's retirement line and its caps row).
-- **Tony-action (decide):** at the review, from its list.
+- **THE REVIEW, AND v4.1 BUILT, 2026-11-25, 21:52 to 23:30 Chicago**,
+  by the next coordinating session (Claude Fable 5.2, linked to Tony's
+  computer, with a shell of its own and none on his), at orrery
+  9daf6a3d, then his push de65fb87, and website 972b4a93. Tony's words
+  opening it, 21:52: "the task is to update the protocol and bring it
+  up to date consistent with the current 3-way architecture: the python
+  orrery with its three components, the solar system orrery, the stars,
+  and the earth science; the website assembler; and the interactive
+  website that renders the images." And: "the purpose of the protocol
+  is to be a functional project description to guide Claude."
+- **The description checked against the code, and widened.** Four
+  sentences corrected: a path plan rides inside the objects export and
+  is not pulled as a file; an encounter is fetched once by a tool,
+  never by the night; the orrery has its own Kepler solvers (L-524), so
+  "no local math" was wrong; a path is also an open comet's. The Earth
+  System's chain and the stars added: only the Solar System has rooms.
+  What was read, what was not, the list section by section, and the
+  slips of seven handoffs sorted by Tony's three failure modes:
+  `documentation/REVIEW_L559_protocol_review_20261125.md`.
+- **RULED, nine items, in Tony's run record**
+  (`WHERE_WE_ARE_11-25-26_2136_run_record.md`), his words after each.
+  1, the middle part is "the website's night" and "assembler" stays the
+  name of the Python on the page: "confirmed". 2, The Project as
+  written, at the top: "confirmed". 3, five blocks leave for the
+  history file: "confirmed". 4, Graceful Fallback gains the website's
+  rule: "confirmed". 5, the new rule Measure, Then Say: "confirmed". 6,
+  the new rule, one writer in a folder at a time: "confirmed. this is
+  also a rule for Tony to observe when working across sessions". 7, the
+  read-back compares bytes, amending his ruling of 2026-11-02:
+  "confirmed". 8, the cap, 800 to 810: "raise approved". 9, The Project
+  takes the strategy slot among the seven kinds of document (L-442):
+  "approved". Then, to a cold read before the build: "yes"; and to the
+  build's order, with his word that no other session was writing in the
+  orrery folder: "approved".
+- **The cold read**, by a fresh session holding only the draft,
+  answered the test's six questions and both traps (the page asks JPL
+  nothing; "assembler" is the Python on the page) as the key written
+  before it had them. Its faults in the new text, ten sentences
+  changed before the build: the pointer in Check All Parallel Pipelines
+  named no heading; "the road's goal" came before any word of the road;
+  the orrery's night was not said to run on GitHub's computers;
+  no sentence said which repository holds the documents; "each body on
+  one"; the goal in the present tense; "a room" not explained; an
+  encounter "fetched by hand" with no word of by what; palomasorrery.com
+  not tied to the website repository; "To v4.0" in the header. Its
+  faults in older text, not touched, are in the handoff.
+- **BUILT 2026-11-25, placed in Tony's folder, each file read back.**
+  `PROJECT_INSTRUCTIONS.md` v4.1, 810 lines at the cap of 810, and its
+  copy `documentation/project_instructions_v4_1.md`. The history file:
+  one entry in PART 1, and PART 4, the 103 lines of v4.0 not kept
+  exactly, in 22 runs, word for word (692 lines stand as they were).
+  `DOCUMENT_CAPS.md`: the protocol's row 810, the plan's row gone, the
+  page still 58 lines. The plan's retirement line, with Tony's words.
+  gallery-assembler 1.6: its boundary section points at The Project and
+  drops "no local math"; its v1.3 entry to
+  `documentation/SKILL_HISTORIES.md`. ledger-and-session-records 1.25:
+  STRATEGY is The Project; the paragraph on the plan's restamps and the
+  v1.22 entry to `documentation/SKILL_HISTORIES.md`.
+  `skills/SKILL_MANIFEST.md` by `skills_index.py`. Checked on a clean
+  copy of de65fb87 with the build laid over: `skills_index.py --check`
+  exits 0; `doc_index.py --caps` passes at 810 of 810; every moved run
+  found whole in the history file; this ledger's index tool run.
+  NOT RUN: the orrery's maintenance run.
+**Gap:** Tony's maintenance run and push; his paste of v4.1 into the
+Project's instructions on claude.ai; his reinstall of gallery-assembler
+(1.6) and ledger-and-session-records (1.25), cleared only by the next
+session's own comparison. Then this item closes. `README.md` still
+tells the chain in the old words; it waits for its restamp (L-522
+(document caps), step 6).
+- **Tony-action (do):** run the maintenance run; Commit, Pull origin,
+  Push origin; paste v4.1 into the Project; reinstall the two skills.
 **Ref:** L-522 (document caps), its notes of 2026-11-25; L-442 (the
 seven kinds of document); L-558 (the folds after Mars);
 `documentation/HANDOFF_coordinating_20261125_night.md`;

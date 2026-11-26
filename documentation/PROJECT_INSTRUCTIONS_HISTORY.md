@@ -32,6 +32,11 @@ rather than from memory.
           Part 4" pointers now lead to PROJECT_ORIGIN.md for the
           passages that moved there.
 
+  PART 4  The lines that left at v4.1, moved 2026-11-25 (L-559), when
+          The Project went first and the protocol took over the
+          archived master plan's job: every line of v4.0 not kept
+          exactly in v4.1, word for word, in the old order.
+
 Why they sit together. Both answer the same kind of question -- what
 the protocol used to say and why it stopped saying it -- and neither
 has a trigger, which is precisely why neither belongs in the resident
@@ -5261,6 +5266,54 @@ THE OBLIGATION TRAVELS. Tony pastes v4.0 into the Project's
 instructions on claude.ai. From now on a skill change asks for no
 paste; only a change to a rule here does.
 
+v4.1 (November 25, 2026): THE PROJECT (L-559, the protocol as the
+project's instructions). The protocol went from 795 lines to 810,
+under a cap Tony raised that night from 800 to 810.
+
+WHAT PROMPTED IT. Tony archived the master plan on 2026-11-25 (20:14:
+"now the road itself has a direction and momentum of its own and the
+master plan is outdated documentation") and asked whether the protocol
+serves "its purpose as the "project instructions"", with a test he
+ruled: a cold session holding only the protocol can say what the
+project is for, what its parts are and how they connect, who Tony is
+and what is his to decide, how a session starts, checks and ends, where
+the order of the work lives, and what must never be done. v4.0 failed
+the first two. His words opening the review session, 21:52: "the
+purpose of the protocol is to be a functional project description to
+guide Claude." The coordinating session (Claude Fable 5.2) read both
+repositories at orrery 9daf6a3d and website 972b4a93, checked the
+three-part description against the code, and wrote a draft and a
+review (documentation/REVIEW_L559_protocol_review_20261125.md). Tony
+ruled on nine numbered items in his run record
+(WHERE_WE_ARE_11-25-26_2136_run_record.md), "confirmed" or "approved"
+on each, and on the cap "raise approved". A cold read by a session
+holding only the draft answered the test's six questions; its faults
+in the new text were fixed before this version was built.
+
+WHAT CHANGED. The Project is new and stands first: what the project is
+for, its three parts (the orrery defines; the website's night fetches
+and serves; the page works out and draws), which subjects are live,
+One Body of Knowledge, Two Machineries, and The Words. It replaces The
+Orrery and the Assembler, which leaves Part 4, and does the archived
+master plan's job. Measure, Then Say [QUALITY] is new. One writer in a
+folder at a time is new, and Tony's to keep too. The read-back
+compares bytes, amending his ruling of 2026-11-02. Graceful Fallback
+gains the website's rule. The Lessons Archive, the Anti-Patterns
+table, Visual Verification and Multi-File Changes leave as sections:
+Mode 5 takes Visual Verification's sentences, four one-line Core
+Principles carry what had no other home, and the rest is in a skill
+already. "Gallery" gives way to "the website" in prose; the old mode
+numbers and "As of v3.30" go.
+
+WHERE EACH LINE WENT. 692 lines of v4.0 stand in v4.1 as they were.
+The other 103, in 22 runs, are in PART 4 of this file, word for
+word, in the old order; a line whose wording changed is there as it
+stood. v4.0's copy is documentation/project_instructions_v4_0.md;
+v4.1's is documentation/project_instructions_v4_1.md.
+
+THE OBLIGATION TRAVELS. Tony pastes v4.1 into the Project's
+instructions on claude.ai.
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
@@ -6050,3 +6103,187 @@ Claude: Partner who tests, proposes, implements, teaches, documents, asks
 when unsure, flags CRITICAL checks, maintains implementation continuity
 Gemini/ChatGPT: Domain specialists and genuine dialogue partners on
 structural questions.
+
+================================================================
+PART 4 -- THE LINES THAT LEFT AT v4.1, MOVED 2026-11-25
+================================================================
+
+Moved out of PROJECT_INSTRUCTIONS.md on 2026-11-25, when v4.1 put The
+Project first (L-559; Tony's rulings of that night, in his run record
+WHERE_WE_ARE_11-25-26_2136_run_record.md). Every line of v4.0 that v4.1
+does not keep exactly, word for word, in the old order: 103 lines in 22
+runs. A line whose wording changed is here as it stood. Each run is
+headed by its line numbers in v4.0 and the heading it stood under
+there. A line of v4.0 found neither here nor in v4.1 is a fault of the
+move. The whole of v4.0 is documentation/project_instructions_v4_0.md.
+
+THIS PART IS A RECORD, NOT A STORE OF RULES. Nothing in it fires.
+
+--- v4.0 line 1, the document's first line ---
+
+<!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated list of skill names. -->
+
+--- v4.0 line 3, under the document's head, above the PREAMBLE ---
+
+Tony Quintanilla, PE | Claude | v4.0 | November 23, 2026
+
+--- v4.0 lines 5-9, under the document's head, above the PREAMBLE ---
+
+Cut from 7087b3ad at https://github.com/tonylquintanilla/palomas_orrery
+(branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
+Every earlier version and the stories behind the rules:
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md. The philosophy as it
+stood until this version: PROJECT_ORIGIN.md.
+
+--- v4.0 lines 11-15, under the document's head, above the PREAMBLE ---
+
+The anchor names the state this document was CUT FROM, not a promise
+that the repo still sits there. It is here because this file's own
+CRITICAL gate requires it of any document leaving a live session, and
+a relay partner reading this has no other way to know what it
+describes.
+
+--- v4.0 lines 30-33, under PREAMBLE: WHY THIS PROTOCOL EXISTS ---
+
+(Origin: not asserted philosophy -- Mode 1 and targeted-for-existing-code
+trace to full-file replacement corrupting the single-file GPT-4 orrery in
+2024; see PROJECT_ORIGIN.md at the repo root.) Each shortcut looks harmless
+in isolation; together they are how the project drifts.
+
+--- v4.0 lines 44-53, under PREAMBLE: WHY THIS PROTOCOL EXISTS ---
+
+As of v3.30 the protocol is the CONSTITUTION of a two-layer system: this
+document stays resident every session and carries the judgment, the modes,
+and the checkpoint gates that must fire unprompted; task-specific procedures
+and conventions live in on-demand SKILLS (see the Skill Manifest, Part 3),
+authored in the repo under skills/ and installed to Tony's account. The
+skills are versioned and SHA-pinned like everything else; the ledger is
+their change log.
+
+Everything that follows -- the modes, the criticality tiers, the technical
+checks, the philosophy -- is downstream of this. Apply the rules in its light.
+
+--- v4.0 line 68, under Session Start ---
+
+Record the base - both repositories; see the SHA Round Trip, Part 3.
+
+--- v4.0 lines 77-78, under Two Modes Are Still Named ---
+
+Mode 5 - Visual. Claude implements; Tony judges. His eyes on the
+  render, on his own screen or phone, are the gate.
+
+--- v4.0 lines 80-85, under Two Modes Are Still Named ---
+
+The default is agentic, the old Mode 2: the session does the job whole
+and verifies it. That is who does the work. HOW existing code is
+changed is still Targeted for Existing Code: an edit in place, never a
+regenerated file. A snippet for Tony to place by hand, the old Mode 1,
+is made only when he asks. (The seven-mode table moved to the history
+file 2026-11-23.)
+
+--- v4.0 line 99, under Kinds of Session ---
+
+You Are Reading, Part 3).
+
+--- v4.0 lines 215-223, under Anti-Patterns ---
+
+Anti-Patterns
+Don't                       Why                         Do Instead
+Assume                      Guess wrong, redo            Ask
+Rewrite working code        Breaks things                Targeted changes
+Change unrelated code       Scope creep                  Fix only what asked
+Build first architecture    Complexity locks in          Iterate design in conversation first
+Guard strips with if list:  Stale data survives          Strip unconditionally before the guard
+Duplicate rendering         Double maintenance           Extract to source module
+
+
+--- v4.0 lines 226-228, under Multi-File Changes ---
+
+Multi-File Changes
+Map touchpoints and order (dep_trace.py): data -> processing -> UI -> docs.
+
+
+--- v4.0 line 231, under Graceful Fallback ---
+
+Explicit lists, not automatic. Document assumptions.
+
+--- v4.0 line 306, under Session-Start Base and the SHA Round Trip [CRITICAL] ---
+
+Gallery: https://github.com/tonylquintanilla/tonyquintanilla.github.io.
+
+--- v4.0 lines 360-364, under Know Which Copy You Are Reading [CRITICAL] ---
+
+  read back from the folder and compared, by its size at least. Each
+  write is sent as a fresh copy, never a re-send of an earlier one. A
+  write that cannot be read back is reported as unconfirmed.
+  (2026-11-10, L-522: a re-sent file delivered the first write's
+  bytes; the read-back caught it by the file's size.)
+
+--- v4.0 line 458, under A Report Names Its Items [QUALITY] ---
+
+  "two limits" name what they count; "5 parallel pipelines" does not.
+
+--- v4.0 lines 475-478, under Check All Parallel Pipelines [CRITICAL -- resident pointer] ---
+
+them in the gallery repository, and a fix in one does not reach the
+others. Before patching anything in the data flow -- a change as small
+as hover text counts -- load orrery-coding-conventions and map ALL of
+them from its list. (L-269; the sixth, the website's own chain, L-522.)
+
+--- v4.0 lines 486-491, under Agentic Pre-Test [CRITICAL -- resident pointer] ---
+
+
+Visual Verification [QUALITY]
+"Runs without errors" != correct. The render is the ground truth and
+Tony's eyes are the gate. Looks wrong? Check reference frames. When Claude
+explains away what Tony's eyes see, that is the moment to be most
+skeptical. (Verification specifics: orrery-coding-conventions.)
+
+--- v4.0 lines 711-726, under The Orrery and the Assembler ---
+
+The Orrery and the Assembler
+Two instruments, one body of understanding underneath them. The orrery solves
+"ask Horizons the right question, live" -- there is no local math to get wrong,
+because there is no local math. The assembler solves a problem the orrery never
+faces: no live connection, so it must cache a recipe once and reconstruct it
+correctly, later, alone. Nearly everything distinguishing the two -- caching,
+client-side propagation, trust measurement itself -- exists because of that one
+difference. What transfers is knowledge (orbital mechanics, Horizons convention,
+the visual language); what doesn't is the machinery. Forgetting this both ways
+is a failure mode: porting orrery code into the assembler expecting orrery
+behavior, or "fixing" the assembler by translating between frames it was
+deliberately built never to translate between (subtraction was tried and
+retired for cause -- catastrophic cancellation, real numbers, not a style
+preference). The assembler exists because the orrery's Python requirement is
+a wall between the work and everyone who isn't Tony.
+
+
+--- v4.0 lines 728-744, under PART 5: REFERENCE ---
+
+
+Lessons Archive
+Technical lessons live as field notes in their skills. These process
+lessons exist nowhere else. (The philosophical lessons and the
+quotations moved to PROJECT_ORIGIN.md on 2026-11-23.)
+
+Process:
+- Bugs become lessons when documented. Stories make science memorable
+- Pure design sessions (zero code) are first-class outputs
+- Derive from known quantities, don't estimate manually
+- Module Atlas as prompt artifact: complete and current reference for codebase-aware sessions
+- Fixing an invisible thing surfaces its neighbors. Budget for "now I can see it's too close to its neighbors" as the follow-on to any "nothing renders" fix
+- Central factories need explicit migration intent: migrate-in-scope, defer-with-tracked-backlog, or declare new-code-only. The danger zone is the unstated fourth option (factory exists, no plan) -- it gets quoted as a standard while call sites bypass it
+- Testing iterates in dependency order: regression gate, then features, then animation. Some bugs are only findable in later rounds (the Sun-checkbox-off bug needed Round 3). A three-round fix is fine when each round teaches something new
+- When deferring a pipeline patch, smoke-test the deferred pipeline to confirm it is in a KNOWN state, not just that it does not error
+- Handoff item numbers get rebased across versions (Paloma's shell track rebased twice: c4 1-22 -> D1 1-41 -> D2 42-54). A number means different things in different handoffs; items leak at the rebase. One authoritative running ledger beats per-handoff renumbering
+- Skills are stores too: author them in the repo, version them, SHA-stamp them, and let the ledger log their changes -- an unversioned knowledge layer is the drift class this protocol exists to kill
+
+--- v4.0 lines 783-784, under Roles ---
+
+This matters beyond this chat. A relay partner (Fable, GPT, a fresh Claude
+instance with no memory of prior sessions) has this protocol as its ONLY
+
+--- v4.0 lines 790-791, under Version History ---
+
+This is v4.0 (2026-11-23): the reduction of L-522, step 3. Every
+earlier entry, and the stories behind the rules, are in

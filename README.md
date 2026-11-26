@@ -178,7 +178,7 @@ further down this file for the rest.
 | Document | Kind | What it is for |
 |---|---|---|
 | [LEDGER_CONSOLIDATED.md](LEDGER_CONSOLIDATED.md) | hand + generated zone | The running ledger: every open and closed item under a stable handle, with the decisions behind it. Carries a generated INDEX. |
-| [PROJECT_INSTRUCTIONS.md](PROJECT_INSTRUCTIONS.md) | hand + generated zone | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated list of skill names. |
+| [PROJECT_INSTRUCTIONS.md](PROJECT_INSTRUCTIONS.md) | hand + generated zone | The protocol: the project's instructions. What the project is, how a session is run, which checks are load-bearing, and why. Carries the generated list of skill names. |
 | [README.md](README.md) | hand + generated zone | The front door: what the project is, where its pieces are, and how the work is kept correct. |
 | [ADDING_OBJECTS_GUIDE.md](ADDING_OBJECTS_GUIDE.md) | hand-written | Step by step for adding a new celestial object. |
 | [CLAUDE.md](CLAUDE.md) | hand-written | The door into the protocol for a Claude Code session: it points at PROJECT_INSTRUCTIONS.md and the skills, and states what a Code session writes. |

@@ -208,15 +208,15 @@ The review is done and a draft of the protocol's v4.1 is in your `documentation/
 - The old sentence that the orrery has "no local math" is not true: it has its own orbit solvers, as L-524 (the Kepler solver's start) records.
 
 **Your rulings, by number** ("yes to all" works; the exact text is in the two files)
-1. **The names of the parts.** Tonight you called the middle part "the website assembler". In the code, "assembler" is the Python that runs in the visitor's browser, part of the page. I recommend keeping the code's meaning and calling the middle part "the website's night".
-2. **The Project section** as written, 58 lines, at the top.
-3. **Five blocks leave** for the history file, 59 lines. Each is carried by a skill or a principle already: The Orrery and the Assembler, the Lessons Archive, the Anti-Patterns table, Visual Verification (its sentences move into Mode 5) and Multi-File Changes.
-4. **Graceful Fallback** gains the website's rule: the night holds a body at its last good build and says so.
-5. **New rule, "Measure, Then Say":** a number or a behaviour told to you is measured or read first. Six handoffs of Nov 23 to 25 each record one said first and found wrong; you ruled on "about 22 KB" that measured 1.36 MB.
-6. **New rule, one line:** one writer in a folder at a time.
-7. **Changed rule:** a placed file is compared byte for byte, not by size alone. This amends your Nov 2 "Read back is enough"; on Nov 25 a wrong file arrived at the same size.
-8. **The cap.** The draft is 808 lines; your cap is 800. Without items 5 and 6 it is exactly 800. Raise the cap to 810, or those two rules wait.
-9. **The strategy slot.** The ledger skill still names the master plan as "strategy". I propose The Project section takes that place.
+1. **The names of the parts.** Tonight you called the middle part "the website assembler". In the code, "assembler" is the Python that runs in the visitor's browser, part of the page. I recommend keeping the code's meaning and calling the middle part "the website's night". -- confirmed
+2. **The Project section** as written, 58 lines, at the top. -- confirmed
+3. **Five blocks leave** for the history file, 59 lines. Each is carried by a skill or a principle already: The Orrery and the Assembler, the Lessons Archive, the Anti-Patterns table, Visual Verification (its sentences move into Mode 5) and Multi-File Changes. -- confirmed 
+4. **Graceful Fallback** gains the website's rule: the night holds a body at its last good build and says so. -- confirmed
+5. **New rule, "Measure, Then Say":** a number or a behaviour told to you is measured or read first. Six handoffs of Nov 23 to 25 each record one said first and found wrong; you ruled on "about 22 KB" that measured 1.36 MB. -- confirmed
+6. **New rule, one line:** one writer in a folder at a time. -- confirmed. this is also a rule for Tony to observe when working across sessions
+7. **Changed rule:** a placed file is compared byte for byte, not by size alone. This amends your Nov 2 "Read back is enough"; on Nov 25 a wrong file arrived at the same size. -- confirmed
+8. **The cap.** The draft is 808 lines; your cap is 800. Without items 5 and 6 it is exactly 800. Raise the cap to 810, or those two rules wait. -- raise approved
+9. **The strategy slot.** The ledger skill still names the master plan as "strategy". I propose The Project section takes that place. -- approved
 
 **Not done**
 - The cold read by a session holding only the draft. Its answer key is written in the review file. Say the word and I run it, or you paste the draft into an incognito chat as on Nov 23.
@@ -225,8 +225,78 @@ The review is done and a draft of the protocol's v4.1 is in your `documentation/
 - The ledger note on L-559 (the protocol as the project's instructions), Where We Are and the handoff: these wait for your rulings.
 
 **Run order**
-1. Nothing to run.
-2. Read the top of `documentation/DRAFT_PROJECT_INSTRUCTIONS_v4_1_20261125.md`, down to "PREAMBLE".
+1. Nothing to run. -- orrery moved to de65fb877712d6e586f8b55b4e47755991603b9c
+2. Read the top of `documentation/DRAFT_PROJECT_INSTRUCTIONS_v4_1_20261125.md`, down to "PREAMBLE". -- confirmed
+
+      PROJECT INSTRUCTIONS
+      Tony Quintanilla, PE | Claude | DRAFT of v4.1 | November 25, 2026
+
+      The project's instructions: what Paloma's Orrery is, how a session works
+      in it, and which checks are never skipped. Written for Claude, starting cold.
+      Cut from 9daf6a3d at https://github.com/tonylquintanilla/palomas_orrery
+      (branch main), the website repository tonyquintanilla.github.io at 972b4a93:
+      the state this was cut from, not a promise either still sits there. Earlier
+      versions and the stories behind the rules:
+      documentation/PROJECT_INSTRUCTIONS_HISTORY.md. To v4.0: PROJECT_ORIGIN.md.
+
+      THE PROJECT
+      What it is for, its parts, how they connect. It stands where the master
+      plan did (archived 2026-11-25, L-559).
+
+      WHAT IT IS FOR. Paloma's Orrery explores three subjects, in Tony's words
+      "the Earth System, the orrery and the stars": Earth's climate, the solar
+      system, and the Sun's stellar neighbourhood. It is named for his daughter,
+      and "this website is a legacy gift for Paloma": it must stay running, and
+      stay right, without him. "Data Preservation is Climate Action." WHERE IT IS
+      GOING (the road's goal): the website does what the desktop orrery does,
+      with a date to choose, within the range the data covers.
+
+      THREE PARTS, connected in one direction, by files.
+      1. THE ORRERY defines. Python in the orrery repository, run on Tony's
+         computer, asking its sources live and drawing on his screen. Three
+         components, each a window opened from palomas_orrery_dashboard.py: the
+         Solar System orrery (palomas_orrery.py), the Stars
+         (star_visualization_gui.py) and the Earth System
+         (earth_system_visualization_gui.py, the generators). Every definition
+         lives here: the bodies and how JPL is asked for each (celestial_objects.py),
+         the constants (constants_new.py), each spacecraft's path plan, the stored
+         drawings, the words. Its checks hold them to their sources; its night
+         (orrery_maintenance_run.py --night) writes the exports.
+      2. THE WEBSITE'S NIGHT fetches and serves. Python in the website repository,
+         on GitHub's computers (daily_run.py --night). It pulls the orrery's
+         exports and mirrors their facts into data/objects_config.json; then
+         tools/gallery_cache_builder.py asks JPL itself: an orbit for each body
+         on one, the positions themselves for each on a path. It measures how far
+         each orbit can be trusted, holds a body it cannot stand behind, and
+         writes the files the page reads (data/solar-system/).
+      3. THE PAGE works out and draws, in a visitor's browser, at palomasorrery.com.
+         It asks JPL nothing. In a room (interactive.html), Python in the browser
+         (gallery/assembler/, under Pyodide) works out where a body on an orbit is
+         at the minute shown and draws a path from its served points; JavaScript
+         (gallery/*.js) draws the tree, the boxes and the shells. An encounter
+         is a package fetched once, by hand, and played with no Python.
+
+      NOT EVERY SUBJECT IS LIVE. Only the Solar System has rooms. An Earth System
+      layer's generator, run by Tony, writes its page, pictures and Google Earth
+      file (earth/); for El Nino the orrery's night checks NOAA and flags, and
+      never changes a page. The Stars, and older views of all three, are pictures
+      saved from the orrery and curated by hand (index.html; gallery-pipeline).
+
+      ONE BODY OF KNOWLEDGE, TWO MACHINERIES. The orrery asks JPL live for each
+      place it draws. The page cannot ask, so it works each place out from what
+      the night served, alone. Orbital mechanics, JPL's conventions and the
+      visual language carry across as knowledge; code does not. Two failures come
+      of forgetting it: porting orrery code to the page and expecting orrery
+      behaviour, and "fixing" the page by subtracting one large JPL answer from
+      another (retired for catastrophic cancellation: gallery-assembler). A body
+      is defined in the orrery first and reaches the website by the export, never
+      typed there. Tony's pushes carry code and words; the two nights carry data.
+
+      THE WORDS. "Gallery" was the old word for the website, and "assembler" for
+      the Python on the page. Both stay in the names of files, folders and skills
+      (gallery/, gallery_cache_builder.py, gallery-assembler), which do not
+      change. Prose says the website, the night, the page, and a room.
+
 3. Answer items 1 to 9 here.
 4. The three new files in `documentation/` (the draft, `REVIEW_L559_protocol_review_20261125.md` and `build_L559_protocol_v4_1_draft.py`) can ride your next orrery commit. Nothing for the website.
 
@@ -243,3 +313,312 @@ The review is done and a draft of the protocol's v4.1 is in your `documentation/
 **One final thought:** written down plainly, the description shows that your top goal names three subjects and the night-and-page machinery serves one. The Earth System and the stars reach the website by hand, and the road has them behind everything else.
 
 **Size:** no token count prints here. Read: the handoff, Where We Are, L-559 whole, the protocol's 795 lines, the ledger skill, parts of five other skills, seven handoffs' method sections, and both repositories' code by description and search. Written: the draft (808 lines), the review (406) and the build script (409).
+
+====================
+
+All nine rulings are read from your run record, and your push is confirmed: GitHub's orrery stands at de65fb87 with the draft, the review and the build script in it. The website has not moved (972b4a93).
+
+**Your rulings, as I will record them**
+- Items 1 to 5, 7 and 9: "confirmed" or "approved".
+- Item 6: "confirmed. this is also a rule for Tony to observe when working across sessions". I will word the line so it binds you as well as a session, and show you the sentence.
+- Item 8: "raise approved". The cap goes from 800 to 810.
+
+**Next steps, in order**
+1. **The cold read, before anything lands.** A fresh session holding only the draft answers your six questions against the key in the review file. On Nov 23 this step found eight faults that two readers had missed. -- yes
+2. **Build v4.1** from the same script, with any cold-read fixes and the item 6 wording:
+   - `PROJECT_INSTRUCTIONS.md`, and its archived copy `documentation/project_instructions_v4_1.md`.
+   - The 59 lines that leave, copied word for word into the history file with one version entry.
+3. **The caps page:** the protocol's row to 810; the master plan's row comes off.
+4. **The master plan:** its retirement line at the top, pointing at The Project.
+5. **Two skills, one bump each:**
+   - gallery-assembler: its two pointers to the old paragraph and to the master plan.
+   - ledger-and-session-records: The Project takes the strategy slot.
+6. **The records:** the note on L-559 (the protocol as the project's instructions) with your words; Where We Are, which is at 130 of 130, so something moves out first; the handoff.
+7. **Checks I run here on a clean copy:** the skill-names check, the caps check, the ledger's index, the moved lines found whole in the history file, and each placed file read back byte for byte.
+
+**What will be yours afterwards**
+- Run the orrery's maintenance run; I cannot run it from here.
+- Commit and push the orrery. Nothing for the website.
+- Paste v4.1 into the Project's instructions on claude.ai.
+- Reinstall the two skills. The next session's comparison clears them, not this one.
+
+**After the protocol**
+- BepiColombo's night proof and your phone look, still owed.
+- Where this round's cleanup ends, your decision.
+- Then the braid.
+
+**Where this leaves us**
+- The draft is ratified in substance and pushed; nothing live has changed yet.
+- The build is one session's work, this one, and it ends with one push from you.
+
+**The one thing I need:** your go-ahead for this order with the cold read included, and your word that no other session is writing in the orrery folder tonight, since steps 2 to 6 edit files already there. -- approved
+
+===================
+
+Your go-ahead and both answers are read from the run record ("-- yes" on the cold read, "-- approved" on the order and the folder). I'm starting the cold read now and preparing the build beside it.
+
+The cold read is back: it answered all six of your test's questions and both traps correctly. It also found real faults in my new text, which I'm fixing before the build.
+
+**v4.1 is built and in your orrery folder.** All 13 files were read back from your folder, equal byte for byte. Nothing is pushed yet, and nothing was written in the website folder.
+
+**The cold read**
+- A fresh session holding only the draft answered all six of your test's questions and both traps correctly: the page asks JPL nothing, and "assembler" is the Python on the page.
+- It found faults in my new text, and I changed ten sentences before building. The ones that matter:
+  - Nothing said the orrery's night runs on GitHub's computers. It does now.
+  - Nothing said which repository holds the protocol, the skills, the ledger and `documentation/`. One sentence now does.
+  - The goal read as already true. It now says the website "will do" what the desktop orrery does.
+  - "A room" is now explained as a live view, and an encounter as a package a tool fetched from JPL once.
+- It also found faults in older text that no ruling of yours covers. I left those alone and listed them in the handoff.
+
+**The item 6 sentence, as built**
+- "One writer in a folder at a time, a rule Tony keeps too when he works across sessions: before a session places a file another session edits, it asks him whether one is running."
+
+**What was built**
+- **The protocol, v4.1:** 810 lines, exactly at your new cap of 810.
+- **Its archived copy:** `documentation/project_instructions_v4_1.md`.
+- **The history file:** one entry, and a new Part 4 holding 103 lines of v4.0 word for word. That is the 59 that left plus 44 whose wording changed.
+- **The caps page:** the protocol's row is 810, and the master plan's row is gone.
+- **The master plan:** its retirement line, with your words of 20:14.
+- **gallery-assembler 1.6:** points at The Project and drops "no local math".
+- **ledger-and-session-records 1.25:** The Project holds the strategy slot.
+- **The records:** the note on L-559 (the protocol as the project's instructions) with your rulings word for word, Where We Are, and a new handoff.
+
+**Checks**
+- The skill-names check, the caps check and the ledger's index tool all pass on a clean copy with the build laid over.
+- Every one of v4.0's 795 lines is either unchanged in v4.1 (692) or found whole in the history file (103).
+- Not run: the orrery's maintenance run. I cannot run it from here.
+
+**Run order**
+1. Orrery: run the maintenance run from the dashboard.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261125T225130Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 4.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 2 rewritten, content
+                                     identical)
+  Constants export             1.8s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (2 checked, not written) --
+                                     NOTHING MISSING -- 110 served objects
+                                     examined, no query asked
+  Horizons check               0.7s  rewrote data/spacecraft_sheets.json -- PASS
+                                     -- 1 checked today, 1 queries
+  Path plan                    0.3s  unchanged (1 checked, not written) -- 34
+                                     paths, events akatsuki 15, atlas_2024_g3 1,
+                                     atlas_3i 1, bepicolombo 33, borisov_2025_v1
+                                     1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1,
+                                     c2025_k1_d 1, cassini 7, dart 1,
+                                     escapade_blue 3, escapade_gold 3,
+                                     europa_clipper 5, galileo 7, juice 10, juno
+                                     4, lucy 7, mcnaught 1, new_horizons 2,
+                                     osiris_apex 13, oumuamua 1,
+                                     panstarrs_2025_r3 1, parker_solar_probe 49,
+                                     pioneer_10 1, pioneer_11 2,
+                                     psyche_spacecraft 2, rosetta 12,
+                                     solar_orbiter 31, tsuchinshan_atlas 1,
+                                     voyager_1 2, voyager_2 5, west 1, wierzchos
+                                     1. Asked JPL for: nothing.
+  El Nino check                1.1s  unchanged (1 checked, not written) --
+                                     CURRENT -- the page shows NOAA's latest:
+                                     discussion of 12 November 2026, RONI to ASO
+                                     2026, chances issued November 2026; nothing
+                                     written.
+  Objects export               0.3s  unchanged (1 checked, not written)
+  Drawings export              1.8s  unchanged (8 checked, not written)
+  Module atlas                 6.8s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               3.0s  rewrote DATA_INVENTORY.md
+  Exact rows report            4.4s  unchanged (1 checked, not written) -- 11 of
+                                     47 exact rows printed at 40 lines (25
+                                     orrery, 15 gallery); 14 drawn only, 3 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  rewrote README.md
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              2.1s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       4.0s  Export matches the store: sha256
+                                     9358fd112b64 on both sides; 234 rows
+                                     re-read, 57 not exported, 46 tokens; 835
+                                     conversions re-computed, 12 of 12 worked
+                                     cases hold; 234 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Constants rounding           0.1s  PASS -- 7 of 7 pins held; 2 of 2 planted
+                                     faults caught by name.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.5s  pass -- 110 of 110 entries and 67 periods
+                                     confirmed, 28 sheets read, within 30 days; 1
+                                     cut path(s) held to JPL's sheet
+  Horizons check suite         2.6s  pass -- 144 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.4s  pass -- 39 checks, every planted fault
+                                     caught (22 planted, 8 of them for Earth's
+                                     period, L-445, 2 for Pluto's, L-443)
+  El Nino check suite          0.6s  PASS -- 22 checks: a planted fault caught; a
+                                     newer discussion, RONI season and chances
+                                     each flag EL NINO DUE and save the copies
+                                     once; NOAA's files as the page shows them
+                                     write nothing; an outage and a changed
+                                     sentence are reported; the page is never
+                                     touched; the folder output, the gate and the
+                                     commit title hold.
+  Path plan suite              5.4s  40 of 40 checks passed
+  Path drawing suite           0.4s  15 of 15 checks passed
+  Path or orbit suite          0.3s  17 of 17 checks passed, every planted fault
+                                     caught
+  Skill headers                0.2s  12 skills parsed, no consistency problems.;
+                                     Names: 12 in PROJECT_INSTRUCTIONS.md's
+                                     SKILL-NAMES zone, 12 folders under skills/.
+  Exact rows by the count      3.9s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   2.3s  No unit contradicts its arithmetic: 62
+                                     derived row(s) read -- 53 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 229 status lines in constants_new.py are
+                                     well formed; 59 rows carry none.
+  Row shape                    0.1s  All 291 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          15.9s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                 13.0s  All 24 orbit cache tests passed: cache
+                                     loads, old formats convert, corrupted
+                                     entries are dropped; the clock reads UTC and
+                                     both forms of the fetched stamp read back;
+                                     the repository-wide fresh check examined 149
+                                     .py files and 20 JPL calls, every one asked
+                                     fresh (2 not JPL, excepted); JPL's answers
+                                     told apart (no such body, more than one,
+                                     unreachable, other) on 10 faked answers to
+                                     fetch_trajectory, 10 to fetch_position by
+                                     astroquery and 11 by both its routes, and 4
+                                     fallback branches ask before drawing (3
+                                     bodies JPL has no solution for drawn from
+                                     their papers whatever it answers); nothing
+                                     left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    1.0s  PASS -- 6 of 6 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.0
+                                     deg
+  Drawings export check       54.4s  PASS -- 22 of 22 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5; main_belt 6000 dots, no
+                                     plane recorded, sha256 712caffec391
+  Position digits (L-401)      2.4s  PASS -- 18 of 18 planted faults caught by
+                                     name; 28 hovers examined, 221 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 499 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 22 period sentences
+  Orbit markers (L-431, L-401)    9.0s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.4s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.6s  PASS -- 15 of 15 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named; 13
+                                     night-gate cases
+  Dashboard parity             0.4s  PASS -- 10 of 10 planted faults caught; 116
+                                     steps matched to their buttons by name and
+                                     script; 149 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Document caps                0.1s  PASS -- 17 document(s) within their caps, 12
+                                     skill(s) all listed; no cap yet:
+                                     LEDGER_CONSOLIDATED.md (45428 lines)
+  Worksheet checker            7.9s  72 of 99 routed, 8 clean
+  Worksheet checker tests     18.1s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.6s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 25 string sites carry the pinned 73
+                                     claims and 0 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          56.1s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 271: orrery 110, Earth System 144,
+                                     stars 13, utilities 2, unclassified 2.
+
+======================================================================
+  37 of 37 gating checkers passed -- 256.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 99 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 271: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2824 file(s) examined, 9 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   README.md
+    written   data/horizons_check_last_run.json
+    written   data/provenance_history.json
+    written   data/spacecraft_sheets.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      skills/SKILL_MANIFEST.md
+    19 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+2. Orrery: Commit, then Pull origin, then Push origin. GitHub Desktop will show 13 files; the list is under Tony-actions in `documentation/HANDOFF_coordinating_20261125_protocol_v4_1.md`. Your run-record copy is not counted in the 13. -- 
+3. Website: nothing to push.
+4. Paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions on claude.ai, replacing v4.0. This session is still running on v4.0.
+5. Reinstall two skills from the repository: gallery-assembler and ledger-and-session-records. The next session's comparison clears them, not this one.
+6. After the next website night: your phone look at BepiColombo's box.
+
+**Where this leaves us**
+- The protocol now opens by saying what the project is for, what its three parts are and how they connect, and it passes your six-part test on a cold read.
+- The master plan is retired with something in its place. L-559 closes once your push, paste and two reinstalls are confirmed by the next session.
+- Then come BepiColombo's night and your look, your decision on where the cleanup ends, and the braid.
+
+**One final thought:** the cold reader's biggest complaint was vocabulary. Handoff, run record, ledger handle and brief are never explained in the protocol, and at 810 of 810 there is no room to explain them without moving something out.
+
+**Size:** no token count prints here. Read: your run record twice, parts of six skills, and both repositories' code by description and search. The cold-read session used about 110,000 tokens. Written: 118 new or changed lines of the protocol, 237 lines in the history file, 71 in the ledger, nine lines of Where We Are, 46 lines across two skills, and the handoff.

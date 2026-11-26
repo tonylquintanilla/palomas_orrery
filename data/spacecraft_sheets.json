@@ -275,7 +275,7 @@
     },
     "-121": {
       "name": "BepiColombo",
-      "read": "2026-11-25",
+      "read": "2026-11-26",
       "revised": "Nov 23, 2026",
       "stated": null,
       "rows": {},
@@ -289,7 +289,7 @@
         "fit": "Data fit through 2026-Nov-17, prediction thereafter.",
         "fit_day": "2026-11-17",
         "file": "bc_mpo_fcp_00243_20181020_20270411_v01",
-        "read": "2026-11-25"
+        "read": "2026-11-26"
       }
     },
     "-144": {

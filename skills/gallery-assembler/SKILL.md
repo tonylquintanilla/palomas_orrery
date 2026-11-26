@@ -6,11 +6,16 @@ fires_when: render_orbits.py, resolver.py, cache_reader.py, the seam between UTC
 
 # Gallery Assembler
 
-Read this file in 2 parts: lines 1-262, 263-307.
+Read this file in 2 parts: lines 1-260, 261-305.
 
-Skill version: 1.5 | Cut from orrery @ 849bf462 and gallery @ e6af10ea
-(v1.5), earlier @ b3ce81f8 and cea21af1 (v1.4), @ 159c5a2c (v1.3) |
-2026-11-22, with Anthropic's Claude Fable 5.2
+Skill version: 1.6 | Cut from orrery @ de65fb87 and gallery @ 972b4a93
+(v1.6), earlier @ 849bf462 and e6af10ea (v1.5), @ b3ce81f8 and cea21af1
+(v1.4) | 2026-11-25, with Anthropic's Claude Fable 5.2
+v1.6 (L-559, the protocol's v4.1) points the boundary section at The
+Project, the protocol's first section, which replaced The Orrery and
+the Assembler and the archived master plan; and it drops "no local
+math", which was not true: the orrery has its own Kepler solvers
+(L-524). The v1.3 entry moved to documentation/SKILL_HISTORIES.md.
 v1.5 (L-541, a plan's clock) adds One seam between the visitor's clock
 and JPL's: resolver.py adds the served difference once and nothing
 downstream converts again. Written by the coordinating session from
@@ -26,27 +31,20 @@ the root's driver, the resolver's frame rule unchanged. It adds the
 64-bit shift the page makes before a centred view (moving our own
 drawing, not a subtraction of answers) and its measured reason. Read
 from the gallery's code with that session's edits before it was written.
-v1.3 (L-304) adds four field notes from the 2026-09-07/08 gallery
-session. Three are Plotly 2.35.2 behaviours READ OUT OF THE SHIPPED
-BUNDLE rather than inferred, and each one cost a real defect Tony
-found on the served Earth-and-Moon card. The fourth is not Plotly's
-at all. They sit beside the event-handler note because they are the
-same class: the library does something reasonable that is not what
-the calling code meant.
 Sources: render_orbits.py, resolver.py, cache_reader.py (read live this
-session); master plan sec. 3; L-149/L-150/L-151.
+session); the protocol's The Project; L-149/L-150/L-151.
 
 ## The boundary this skill exists to protect
 
 The assembler is not a port of the desktop orrery -- it's new code solving
 a problem the orrery never has. The orrery asks Horizons the right
-question, live, every time; there's no local math to get wrong because
-there's no local math. The assembler has no live connection (Pyodide can't
-reach Horizons), so it must cache a recipe once and reconstruct it
-correctly later, alone. Nearly everything distinguishing the two --
-staging/atomic-swap, client-side propagation, trust measurement itself --
-exists because of that one constraint. Full treatment: master plan sec. 3,
-protocol Part 4 ("The Orrery and the Assembler").
+question, live, for each place it draws. The assembler has no live
+connection (Pyodide can't reach Horizons), so it must cache a recipe
+once and reconstruct it correctly later, alone. Nearly everything
+distinguishing the two -- staging/atomic-swap, client-side propagation,
+trust measurement itself -- exists because of that one constraint. The
+whole picture, in three parts: the protocol's first section, The
+Project.
 
 What carries over: orbital mechanics, Horizons conventions, the visual
 language (single-info-marker pattern, AU-hover convention,
