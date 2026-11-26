@@ -1,13 +1,13 @@
 <!-- Doc-Kind: hand | The strategy for the interactive gallery: what the website is for, how it is built, and where the work goes over months. The order of the work is the road on WHERE_WE_ARE.md; status is the ledger's. -->
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-## Executive summary -- v37, October 27, 2026
+## Executive summary -- v38, November 25, 2026
 
-Built on orrery `7c61e7fd5813f61e7f776beebf92c70c2c3f7b6c` at
+Built on orrery `87ece129935227f0afdb7c4253c708d246c703a0` at
 https://github.com/tonylquintanilla/palomas_orrery and gallery
-`7d422e57e6411e552317b4e836ef06a0f502e12f` at
+`972b4a9366224160d03f84708c9d33f55b811b87` at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io, read live
-on 2026-10-27. This summary is rewritten at every restamp, never
+on 2026-11-25. This summary is rewritten at every restamp, never
 carried forward.
 
 **What this plan is, and what it is not.** It is the strategy for the
@@ -19,181 +19,102 @@ the ledger's. Read this plan when a decision changes direction, when a
 new kind of work opens, or at a restamp. (Tony's ruling, 2026-10-13.)
 
 **Seven kinds of document** (Tony, 2026-10-13; the full statement, with
-when each is read, is in the skill ledger-and-session-records):
-1. Strategy: this plan. Where the work goes over months.
-2. Tactics: Where We Are, and the road on it. What is next, in order.
-3. Communication: briefs, design records, manifests, handoffs, review
-   prompts and Tony's run records. Each carries work from one session,
-   person or model to another.
-4. Logistics: the ledger. Every job's history and the open work
-   orders. Never a schedule.
-5. The field manual: the protocol and the skills. How we work together.
-6. Reference: generated documents read for the current state, such as
-   the module atlas and the provenance audit.
-7. The work: the code builds. The render is its ground truth; the SHA
-   is its state.
+when each is read, is in the skill ledger-and-session-records).
+Strategy: this plan. Tactics: Where We Are, and the road on it.
+Communication: briefs, design records, handoffs, review prompts and
+Tony's run records. Logistics: the ledger, never a schedule. The field
+manual: the protocol and the skills. Reference: the generated
+documents. The work: the code builds, whose ground truth is the render
+and whose state is the SHA.
 
 **The end goal** (Section 5a). The website does what the desktop
 orrery does, for anyone, with nothing to install, and with a date to
-choose within the range the data covers.
+choose within the range the data covers. Since v38 Section 5a says it
+in those words too. Until v37 it named a means as the goal, the Python
+orrery running in the browser. Tony, 2026-11-25, on the rewording:
+"Yes, I agree on the goal."
 
 **Where the work stands, by the five segments of Section 5a.**
-- Segment 3, the website draws: done, and the orrery's objects are on
-  it. Three rooms are live: the Sun (2026-08-29), Earth (2026-09-10),
-  and the Solar System room, which a bare `interactive.html` link opens
-  since 2026-10-22. The rest of the orrery's objects came to that room
-  in two slices (L-443): fifty bodies on 2026-10-22; then twelve
-  spacecraft on 2026-10-25 and fourteen comets on open paths on
-  2026-10-26, each drawn from its own path plan. Slice 2 closed on
-  Tony's phone look of 2026-10-26.
+- Segment 3, the website draws: done, and since 2026-11-10 as one
+  tree. The Sun's and Earth's rooms folded into the Solar System room
+  (L-515): a planet's row opens into its shells and moons by distance,
+  and a body with something drawn or fetched around it can be made the
+  centre. Mars, with Phobos and Deimos, was the first new fold (L-514,
+  closed 2026-11-15). Served under a parent, read from
+  `data/objects_config.json` at gallery `972b4a93`: Earth's Moon and
+  the four Earth-Moon Lagrange points; Phobos and Deimos; Io; Titan;
+  Pluto and Charon, around their barycentre. Uranus and Neptune have
+  nothing under them yet. The first encounter, ESCAPADE's Earth
+  flybys, has played on the live page since 2026-11-20 (L-529).
 - Segment 2, the numbers reach the website without a hand copy: done.
   The orrery exports its constants, its objects and its stored
-  drawings, and the website pulls them. JPL's orbital periods have
-  travelled that way since 2026-10-14, and each path's plan since slice
-  2, on the orrery's object list.
+  drawings, and the website pulls them. The two nightly runs now do
+  both unattended (L-485).
 - Segment 1, the orrery's numbers are right: worked room by room, never
-  as one sweep. Earth is the first closed slice (2026-09-22). The Sun's
-  slice was built through 2026-10-22; its ledger item, L-412, still
-  reads open, waiting on Tony's looks at that day's builds.
-- Segment 5, shipping: the three rooms are shipped, and the Solar
-  System room is the gallery's front door.
-- Segment 4, Jupiter and Saturn's golden artifact: not next. Their
-  rooms follow the inner planets' (Section 5a, The direction).
+  as one sweep. Earth is the first closed slice (2026-09-22), and the
+  Sun's slice is closed (L-412, 2026-10-27). In November the same care
+  turned to what JPL is asked: every entry the orrery asks JPL for is
+  checked against JPL, not only the website's (L-539, built
+  2026-11-22).
+- Segment 5, shipping: the Solar System room is the gallery's front
+  door, with a lobby for a first-time phone visitor (L-517), a shared
+  link that carries the ticked bodies and the minute (L-518), scenes on
+  Featured (L-519) and a first visit's guide (L-527), each closed
+  between 2026-11-08 and 2026-11-12. Of the Earth System, El Nino's
+  page is live (L-060, 2026-11-17), and Sudan's layer opens on Google
+  Earth web with a guided walk (L-001, 2026-11-13 and 14).
+- Segment 4, Jupiter and Saturn's golden artifact: not next, and not
+  ruled on since v36. Their moons are folds on the road (L-558).
 
-**The direction** (Tony, 2026-10-10 and 2026-10-12, L-433; and since
-v36, L-485, L-489 and L-490). Section 5a, The direction, has it. In
-short: the objects are done. Next on the plan's horizon are the inner
-planets' rooms, with the Earth System layers beside them, and
-encounters as a path to choose. Three new kinds of work opened since
-v36: compositions, a curated view within a room with its own address
-and an interpretation (L-489); the nightly run on GitHub's computers,
-which brings back the retired nightly schedule by a different
-mechanism (L-485); and the legacy list of what the site leans on
-outside its two repositories, "a legacy gift for Paloma" (L-490).
+**The direction** (Section 5a, The direction, rewritten at v38 from
+Tony's rulings of 2026-11-07 to 2026-11-25). In short: one folding
+tree in place of separate rooms, with only the Earth System and the
+stars keeping rooms of their own; a thing sits under the body JPL is
+asked around for it; the planets outward, each fold opening with its
+moons; encounters as a built kind of work, each a completed pass
+played from JPL's positions; JPL's limits said in the visitor's box;
+and a date to choose, held behind the error away from today (L-557).
+The lean is Tony's of 2026-11-25: "The lean is still on serving rather
+than processing." The order of the folds is the road's.
 
-**Signals, read from files.** Last cache build: 20261027T140105Z,
-swapped in first time (gallery `data/cache_swap_log.jsonl`). Tier-1 on
-what leaves the orrery: 0 (`PROVENANCE_AUDIT.md`, generated
-2026-10-27). Whole tree: 276: orrery 112, Earth System 149, stars 13,
-utilities 2.
+**Signals, read from files.** Last cache build: 20261125T214734Z,
+swapped in first time (gallery `data/cache_swap_log.jsonl` at
+`972b4a93`). Tier-1 on what leaves the orrery: 0 (`PROVENANCE_AUDIT.md`,
+generated 2026-11-25, its run of 20261125T225130Z). Whole tree: 271:
+orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2.
 
 **How to read the rest.** Sections 1 to 4 are the architecture.
 Section 5 is the phases. Section 5a is the shape of the work: the end
 goal, one pipeline in one direction, the five segments, the braid and
 the direction. Section 6 is the prep work and Section 7 the
 architectural decisions, both with their history. Section 11 opens
-with one paragraph on the three kinds of session that do the work now
-(it said four at v37; corrected 2026-10-27, evening, L-499).
-The plan's dated history is in `documentation/MASTER_PLAN_HISTORY.md`:
-the critical path's session record from August 23 to September 29,
-2026, and the lineage (formerly Section 10). The status block below is
-the running record the restamps kept from July to v35; it is not
-updated, except for its Last updated line, which carries the three
-latest restamps. Where it and this summary disagree, this summary and
-Section 5a are current.
+with one paragraph on how sessions run now. Sections 1 to 5, 8 and 9
+were not read again for v38; where one of them and this summary
+disagree, this summary and Section 5a are current. The plan's dated
+history is in `documentation/MASTER_PLAN_HISTORY.md`: the critical
+path's session record from August 23 to September 29, 2026 (PART 1);
+the lineage, formerly Section 10 (PART 2); the status block the
+restamps kept from July to v35, which stood below this summary until
+v38 (PART 3); The direction as v37 had it (PART 4); and the Phase 0
+review with the plan's closing base block, from Section 11 (PART 5).
 
 ---
 
-**Status:** v35 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
-**the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
-ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
-from the landing page, Mode 5 accepted 2026-08-29 (gallery
-`ac9a5c7b`). Its GUI (L-267) is complete on desktop as of 2026-09-03
-(gallery `98cc99bd`): a drawer replaces the legend, cross markers and
-rows move the camera, and the i panel follows the focus and carries
-each shell's curated link (L-265, DONE). The phone pass is DONE as of
-2026-09-06, and the frame HUD with it (L-289, closed on Tony's Mode
-5). **The second exhibit, EARTH, is LIVE AND COMPLETE** (L-291, closed
-2026-09-10 on Tony's Mode 5): `interactive.html?exhibit=earth`,
-shells plus the Moon, arriving at low Earth orbit -- eleven sourced
-features, the axis, the Sun line and terminator, and the Moon on its
-trusted arc -- with its card featured in the lobby (gallery
-`57fd93c6`). Its magnetosphere, absent and named at launch, has been
-drawn from the store since 2026-09-15 -- Shue's magnetopause and
-Jelinek's bow shock (L-305). **Since 2026-09-22 Earth is the first
-CLOSED SLICE of the store** (L-322 Stage C2): every number its room
-prints comes from `constants_new.py` at the figure count its row
-declares, and every measured row behind a served number records who
-read its source. Earth made the rooms a TABLE, `EXHIBITS` in
-`interactive.html`, one row per room, and it found L-168, the
-planetocentric mean-motion bug, on the first moon it drew.
-**The braid, ruled 2026-08-22:** provenance stops being a GATE and
-becomes a per-artifact slice, and the rendering layer is worked first.
-The five segments of Section 5a do NOT move; the order they are worked
-in does. Argument in
-`documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
-Section 1. Design
-handoff v0.1 -> v0.3 resolved every open question (Pluto/Charon composition,
-Apophis close-encounter scope, OQ-4/closeup-shape routing). Competitive
-manifest cross-check (Fable + GPT independent builds) completed two rounds
-of mutual review; synthesis v2 incorporates both.
-7 golden artifacts settled: Earth, Jupiter/Saturn, Moon/Io/Titan, Halley/Encke,
-Voyager 1, Pluto/Charon, Halley+event_link. **Artifact 1 (Earth alone)
-CLOSED** -- L-080 harness live, golden fingerprint `abbd01094852b57f`
-locked, Mode 5 confirmed. F1-F4 (+ F6, non-blocking) now have ledger
-handles: L-118 (F1), L-119 (F2), L-120 (F3), L-121 (F4), L-122 (F6) --
-L-118 (F1) now DONE (feature_configs.json serves real ported values,
-served_window populated, both proven live over --first-build AND --nightly
-July 21-22); L-120 (F3, Halley in the served index) DONE 2026-07-27;
-L-119, L-121 and L-122 still OPEN.
-F1's own design handoff (PHASE2_F1_FEATURE_SERVING_DESIGN_HANDOFF_v0.4.md)
-CONVERGED July 16, 2026, via the same competitive cross-check pattern as
-Phase 2's assembler design (Fable + GPT independent manifests, comparative
-review, reconciled into PHASE2_F1_BUILD_MANIFEST_v2.md) -- catching a real,
-high-impact bug (planetocentric mean-motion in `propagate_marker`) GPT's
-manifest missed entirely. Purpose: the existing text reads as
-"handled"; this makes the caught-vs-fixed distinction explicit and
-points to the handle. (Distinct from L-166, the trust-consumption item
-referenced later in this section, and from L-167, an unrelated
-rendering-conventions item.) See "New in v14" below.
-F1a (M2, trust/served_window) fully closed July 21-22: L-149 built, tested
-offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
---first-build, --nightly, resolver date-picker, fetch-cost note). L-118
-closed in the same session.
-**Next: the order lives on the road on `documentation/WHERE_WE_ARE.md`
-(v36, Tony's ruling of 2026-10-13; until v36 this line named Section
-5a's newest subsection).** The five-step order dated 2026-09-03 -- the Sun room's phone
-controls, the lobby with its rooms and editor (L-282, L-286, L-287;
-the hall, L-280, was retired 2026-09-04), Earth into the assembler, the
-transport (segment 2) built alongside Earth, then Jupiter and Saturn --
-stands in its own subsection as it was written. The paragraph that stood here until v22 said the
-feature-rendering JS layer was "never written" and was the gate before
-Artifact 2. That layer is `feature_renderers.js`; it shipped with the
-Sun exhibit on 2026-08-29 and has drawn 18 shells on the live page
-since. The sentence outlived the fact by five days and two plan
-versions -- The Correction Does Not Travel, on this document's own
-front page. Alongside the order, the trust system's consumption side is tracked as L-166
-(F1b: per-object trust enforcement in the resolver + soft-edge date-picker
-UX -- a deliberate golden-fingerprint re-open when it lands; the per-object
-trust blocks are already served nightly, dormant). Independently: Layer 3 (nightly Task Scheduler) is RETIRED as of
-2026-08-10 (Tony). The task is DISABLED, not deleted, and the builder now
-runs manually with Tony committing the result himself. His reasoning: the
-build cannot run without his machine on anyway, so the schedule created an
-appearance of automation the setup could not deliver -- three nights were
-missed in the week before the ruling and the failure was silent. Running
-it by hand also dissolves the surprise behind the August 10 gallery
-incident, because a build in flight is no longer something he can walk
-into unaware. First manual build ran clean end to end on 2026-08-11
-(gallery `d5437f0`).
-The layer's history is kept because it becomes live again the moment the
-build runs unattended by ANY mechanism, including a GitHub Action: its
-core mechanism was proven -- unattended trigger, Horizons fetch, and data
-assembly all confirmed working end to end -- but the final promotion step
-had a known intermittent failure under the scheduler's execution context
-(see S3a addendum, July 24).
-**Base:** orrery @ `38923c1`, gallery @ `493a0bd` -- v19 was BUILT on
-those and PUSHED at orrery `f504c06` / gallery `02aefc0` on 2026-08-23.
-(Both bases confirmed against the live remote, not carried forward.
-Design ratified at orrery
-`c10a424` / gallery `e864fd42`; Artifact 1 built+pushed at orrery
-`6fc52b9a` / gallery `f89d83c4`; v18 stood at orrery `ee0da47c` /
-gallery `61a78c00`. F1a (M2) fully closed: L-149 and L-118 both DONE,
-Layer 2 Steps 1-5 passed live. Layer 3 RETIRED 2026-08-10 -- the v18
-text here read "enabled with a known open issue", contradicting its own
-header forty lines below. L-151 (gallery-assembler skill) DONE
-2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** October 27, 2026 (v37: a DOCUMENTATION build, L-498,
+**Last updated:** November 25, 2026 (v38: a DOCUMENTATION build, L-522
+step 6, at Tony's direction of 2026-11-25: "we are interrupting the
+order to update the master plan." The executive summary is rewritten.
+Section 5a's end goal is reworded to the road's, on his "Yes, I agree
+on the goal.", and its pipeline drawing is corrected. The direction is
+rewritten from his rulings of 2026-11-07 to 2026-11-25, and the v37
+text moved word for word to `documentation/MASTER_PLAN_HISTORY.md`
+PART 4. The status block kept from July to v35 moved there word for
+word as PART 3, and the Phase 0 review with the closing base block as
+PART 5. Section 11's first paragraph is brought to the protocol's
+v4.0. Sections 6 and 7 were held to the ledger by a script and nothing
+in them changed. Made by a coordinating session linked to Tony's
+computer, with Anthropic's Claude Fable 5.2. v37, October 27, 2026: a
+DOCUMENTATION build, L-498,
 at Tony's direction, at slice 2's close: queue item 4a of
 `documentation/COORD_next_sessions_brief_20261026.md`. The executive
 summary is rewritten; Section 5a, The direction, records the objects
@@ -210,19 +131,10 @@ shape and gains The direction (L-433); the dated history of the
 critical path and the lineage (Section 10) move to
 `documentation/MASTER_PLAN_HISTORY.md`, on Tony's ruling of 2026-10-14;
 Sections 6 and 7 get one pass against the ledger; with Anthropic's
-Claude Opus 5.5. v35, September 29, 2026: a DESIGN BUILD, L-363. The
-Solar System room becomes the gallery's front door (the design session
-of 2026-09-29), and the order changes on Tony's ruling C: the room's
-second half through his Mode 5 first, then the Sun's slice, then the
-swap that makes the room the default. After the Sun, in outline: the
-orrery's objects rebuilt in the gallery from its own dictionary and
-checked against Horizons, then encounters, then shells and slices. The
-executive summary is rewritten and Section 5a gains the 2026-09-29
-subsection; with Anthropic's Claude Opus 5.5, from a review Claude
-Fable 5.1 did in parallel.)
+Claude Opus 5.5.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Opus 5.5, Claude Fable 5, Claude Fable 5.1,
-Claude Sonnet 5, Claude Sonnet 5.5, GPT
+Claude Fable 5.2, Claude Sonnet 5, Claude Sonnet 5.5, GPT
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
 application. The gallery IS the web publication -- growing interactive
@@ -1006,11 +918,36 @@ section's: it is the road's.
 
 ### The end goal
 
-**The Python orrery, running in the browser under Pyodide, serving the
-interactive gallery.** Not a translation of the orrery into JavaScript
--- the same computation engines, the same conventions, one codebase.
-Architecture B' (Section 5, Phase 0). The static gallery it replaces
-stays as the pedagogical exhibit layer.
+**The website does what the desktop orrery does, for anyone, with
+nothing to install, and with a date to choose within the range the
+data covers.** This is the road's last stage on
+`documentation/WHERE_WE_ARE.md`, in the words this plan's summary had
+at v37. Since v38 they are this subsection's too (Tony, 2026-11-25:
+"Yes, I agree on the goal.").
+
+Until v37 this subsection read: "The Python orrery, running in the
+browser under Pyodide, serving the interactive gallery. Not a
+translation of the orrery into JavaScript -- the same computation
+engines, the same conventions, one codebase." That sentence named a
+means as the goal, and its "one codebase" is not what was built: the
+orrery and the website are two instruments that share their knowledge
+and not their machinery (`PROJECT_INSTRUCTIONS.md`, The Orrery and the
+Assembler).
+
+The means are two, and both are in use.
+- WORKED OUT IN THE BROWSER. The assembler, in Python under Pyodide
+  (Architecture B', Section 5, Phase 0), works a body's place out from
+  the orbit JPL gave that night. The rooms draw their orbits this way.
+- JPL'S POSITIONS SERVED. The night asks JPL for the positions
+  themselves and the page draws those: every spacecraft's path and
+  every comet on an open path, each by its plan (L-443); a body whose
+  trusted span is short, by Tony's ruling of 2026-11-07, "Yes I would
+  say at least 48 hours" (L-515, ruling 11); and an encounter, a
+  package of JPL's positions around its centre, played with no Python
+  at all (L-529).
+
+The lean between the two is in The direction, below. The static
+gallery this replaces stays as the pedagogical exhibit layer.
 
 ### One pipeline, one direction
 
@@ -1021,8 +958,8 @@ point downstream of the orrery at which a wrong constant can be caught.
 ```
     ORRERY                the source of truth for feature constants
       |                   (ring radii, belt distances, shell bounds)
-      |  transport        currently a HAND COPY into
-      v                   gallery/data/objects_config.json
+      |  transport        EXPORTED by the orrery and PULLED by the
+      v                   website (segment 2); a hand copy until then
     CACHE BUILDER         nightly; fetches ephemerides FRESH from
       |                   Horizons; passes feature constants THROUGH
       v
@@ -1034,6 +971,15 @@ point downstream of the orrery at which a wrong constant can be caught.
       v
     INTERACTIVE GALLERY   Pyodide + Plotly.js, static GitHub Pages
 ```
+
+**The drawing was corrected at v38 (2026-11-25).** Until then its
+transport line read "currently a HAND COPY into
+gallery/data/objects_config.json". Segment 2 ended that: the orrery
+exports its constants, its objects and its stored drawings, and the
+website pulls them. The copy is now faithful. It is still a copy, so
+the asymmetry below stands. And the drawing shows the first of the two
+means of The end goal; an encounter's package reaches the page with no
+assembler at all.
 
 **The two data kinds behave differently and only one is
 self-correcting.**
@@ -1083,6 +1029,9 @@ have been caught the same way and by nothing else.
 What depends on what. The segments are numbered by DEPENDENCY, not by
 the order they are worked in -- that is the subsection after this one,
 and since 2026-08-22 the two are different.
+
+The figures quoted inside the segments are of 2026-08-23, when they
+were measured. Where each segment stands today is the summary's.
 
 **Segment 1 -- Make the orrery right.** Track 0 (L-181): one store for
 feature constants, provenance carried as data, display text derived.
@@ -1157,73 +1106,129 @@ DONE on 2026-08-24. (Until v36 this paragraph also said the plan
 carries sequencing authority. Since 2026-10-13 the road on Where We
 Are does, and the ledger keeps status: L-442.)
 
-### The direction, after the Sun and Earth rooms
+### The direction
 
-Tony's direction of 2026-10-10, confirmed on 2026-10-12 (L-433). The
-Sun and Earth rooms are finished first, and "the Sun and Earth rooms"
-includes the Solar System room's features: the fuzzy boundaries and
-the scattered disk sit inside that work, not after it. Finished, they
-are the template for every body's room. The rest of the orrery's
-objects then come to the website as plotted positions. Then the inner
-planets get their rooms, Mercury, Venus and Mars, from the template,
-with Jupiter and Saturn after them; the Earth System layers are built
-beside the planets' rooms, not after them. Encounters and the golden
-artifacts stay paths to choose from then, not fixed steps. The checks
-that keep the work honest are cleared beside the rooms, so nothing is
-in front of them when they close. The end of the road is the website
-doing what the desktop orrery does, with a date to choose, within the
-range the data covers.
+Rewritten at v38, 2026-11-25, from Tony's rulings of 2026-11-07 to
+2026-11-25. Each is in the ledger; what follows quotes them and adds
+no strategy of its own. The direction as v37 had it, Tony's of
+2026-10-10 and 2026-10-12 (L-433) with the three kinds of work that
+opened in October, is `documentation/MASTER_PLAN_HISTORY.md` PART 4.
+The order of the folds is the road's, not this section's.
 
-**At v37 the objects are done.** The rest of the orrery's objects are on
-the website (L-443): slice 1's fifty bodies on 2026-10-22, and slice 2's
-twelve spacecraft on 2026-10-25 and fourteen comets on open paths on
-2026-10-26, each spacecraft and open-path comet drawn from its own path
-plan. Slice 2 closed on Tony's phone look of 2026-10-26. Encounters, the
-inner planets' rooms, and the Earth System layers beside them stay as
-the paragraph above says.
+**One tree, not separate rooms (L-515).** Tony, 2026-11-07: "I think
+we need to rethink the room system before we go further. The model we
+are using is that of isolated room with their defined features ... the
+problem is that they are isolated and their features cannot be
+shared." And on 2026-11-09: "the planetary folds should follow the
+pattern used in the solar view: Planet * shells by distance * moons by
+distance * shells by distance (for example, radiation belts, rings,
+magnetotails) so, basically the whole tree in one folding display. and
+saved and scenes are carried by their objects. this replicates the
+flat concept of the orrery object selection tree. the only objects
+that have isolated rooms would be the earth science and stars." So
+v36's "the inner planets get their rooms" is withdrawn. A planet is a
+fold in the Solar System room, and the Sun's and Earth's rooms folded
+into it on 2026-11-10.
 
-**Three new kinds of work opened since v36.** Each is in the ledger
-with Tony's rulings; what follows quotes them and adds no strategy of
-its own.
+**What sits where, and what can be the centre (L-515).** Tony,
+2026-11-07: "What is the fetched center should rule." A thing sits
+under the body JPL is asked around for it, and nowhere else by
+placement. A body with something drawn or fetched around it can be
+made the centre; any other is focused on, the camera moved to it in
+the view it is in. The website still never moves a position from one
+centre to another by subtraction (`PROJECT_INSTRUCTIONS.md`, The
+Orrery and the Assembler). The orrery's own picture, every body
+measured from the centre over a span, is a later step that waits for
+the date span (ruling 15).
 
-- **Compositions, the curatorial layer (L-489).** Tony, 2026-10-25:
-  "What's new here is the curatorial element. Up to now it's all general
-  rules for all rooms. Specific curatorial decisions by room is a new
-  approach. Perhaps this could be part of gallery editor." His rulings:
-  a composition is a named selection from what its host room can draw,
-  authored in the editor, served as data, with its own address (C1);
-  it carries an interpretation, "a way to explain what it shows ... Maybe
-  in the info panel" (C2); and a spacecraft is a story, "they weave
-  together the astronomy and the human exploration," sourced from the
-  agencies, not recalled (C3). The general rules for every room stay
-  method, in the skills; compositions are curation, Tony's, and data. Its
-  noun ("view" or "scene") and the first one to build are still his to
-  decide.
-- **The nightly run, on GitHub's computers (L-485).** Its purpose, Tony,
-  2026-10-25: "There are really only two reasons for automation: keeping
-  a cadence of midnight runs and fully automated in the event I cannot
-  work the website." His rulings: the checkers are the gate for the
-  nightly push, which touches only what the tools write (R1); the 30-day
-  checks move inside it (R2); it runs on GitHub Actions, not on his
-  machine, "Yes on running on GitHub" (R3); outside failures are reported
-  and never halt it (R4); the guest book step reports and continues (R5).
-  This REVIVES LAYER 3 BY A DIFFERENT MECHANISM. The status block below
-  records Layer 3, the nightly Task Scheduler on Tony's machine, as
-  retired on 2026-08-10, and says in the same place that its history
-  "becomes live again the moment the build runs unattended by ANY
-  mechanism, including a GitHub Action." L-485 is that case. The status
-  block is not updated; this paragraph is the current word. The build
-  waits on Tony's decision of P1 (whether a body keeps its last
-  confirmed values when a 30-day check disagrees at night) and on the
-  checks its design record lists first.
-- **The legacy list (L-490).** Its purpose, from L-485's talk, Tony:
-  "This website is a legacy gift for Paloma." What the website leans on
-  outside its two repositories, for when Tony cannot work it: each thing
-  named, its failure mode written down, and its failure made visible
-  rather than silent. The first question is who besides Tony can hold
-  the accounts, the GitHub account and the Google sign-in, and it is
-  Tony's and Paloma's to settle. Discovery first, one list; repair later,
-  in slices.
+**The planets outward, each fold opening with its moons.** The order
+Tony confirmed on 2026-11-05 was "the planet rooms from Mars outward,
+moons first", in the session's words of that day; since L-515 a room
+there is a fold. Mars, Phobos and Deimos closed on 2026-11-15 (L-514).
+On 2026-11-25 he caught the road passing over Jupiter and Saturn, and
+ruled the order for after the cleanup then under way, "Yes, I agree
+with the order.": BepiColombo's arrival at Mercury, with Mercury's
+features and its Hill sphere; Jupiter's moons; Saturn's moons; Uranus
+and Neptune, each with its moons (L-558). Not ruled: which of each
+planet's moons. Earth's own fold, the small bodies' moons, and the
+stars and exoplanets come after, on the road.
+
+**Encounters are a built kind of work (L-529, L-534).** At v37 they
+were "paths to choose from". Tony, 2026-11-15: "There are three paths:
+paths under spacecraft, paths under destinations, encounters at every
+flyby and destination". And on 2026-11-20: "perhaps we should just
+build completed encounters at this time." An encounter is a completed
+pass of a craft by a body, kept as its own package of JPL's positions
+around that body for a window chosen ahead, and played; its row sits
+in the fold of the body it is centred on. Its dates are served for its
+own bodies only: "it would not depend on an open ended data picker for
+the solar system room" (Tony, 2026-11-12). The first, ESCAPADE's Earth
+flybys, is live since 2026-11-20. A mission's row under its
+destination, the second of the three paths, waits: "The path ends at
+Mars. That is enough for now." (Tony, 2026-11-20.)
+
+**The lean: JPL's positions served, before working them out.** Tony,
+2026-11-25, asked which way new work should lean between the two means
+of The end goal: "On the error issue this is a consequence of how we
+are serving the data and not a lean. The lean is still on serving
+rather than processing." The session reads "serving" as JPL's
+positions served and "processing" as a place worked out in the
+browser; the reading is the session's, the words are his. What serving
+costs is a design question of its own, his of 2026-11-24 on the craft
+that orbit a planet for years: "we should define an architecture that
+will work generally" (L-555, its talk not yet held).
+
+**JPL's limits are said where the visitor reads (L-525, L-553, L-533,
+L-554, L-538).** The website does not draw past what JPL gives, and it
+says so in the body's box. One body JPL does not answer, or whose
+orbit fails its test, is held and reported, and the night stays green;
+more than five held is red. Every path runs to its span's last day and
+stops. BepiColombo's path, which JPL predicts past 2026-11-17 on an
+orbit the craft did not reach, is cut at the day JPL's data is fitted:
+Tony, 2026-11-25, "Stay with JPL and 11/17 until refit." The sentence
+for every other predicted path is still his to say. A craft orbiting a
+planet prints only the digits its served points earn.
+
+**A date to choose (L-556, L-557).** It is the road's last stage.
+Tony, 2026-11-25, with a room's address on his screen: "this is the
+"now" date. so, in effect, we could type in alternative dates. this
+means a date picker is possible today." A date typed into a room's
+address works within the served window, 88 days either side of today
+on that date. The picker is held behind the error away from today: a
+box's digits rest on one close check and a straight line from it, and
+the measured miss outruns the line. His words: "we may actually be
+essentially at day 1 with the error issue." A design session of its
+own comes first (L-557).
+
+**The Earth System on the web (L-060, L-001, L-531, L-530).** At v37
+its layers were to be built beside the planets' rooms. Two are live:
+El Nino's page (2026-11-17), which the night checks against NOAA and
+never changes, and Sudan's layer on Google Earth web with a guided
+walk (2026-11-13 and 14). The Earth Science room, one of the two kinds
+that keep a room of their own, is recorded and not built (L-531); the
+other layers wait (L-530).
+
+**The nightly run is built (L-485).** At v37 it waited on a decision.
+It runs on GitHub's computers for both repositories: the orrery's
+night makes the exports and holds the orrery's entries to JPL, and the
+website's night pulls the exports and builds the cache. A night
+commits data only and never changes a page. What needs Tony is raised
+in the night's title ("EL NINO DUE", "JPL REFIT"). Its purpose is as
+he gave it on 2026-10-25: "There are really only two reasons for
+automation: keeping a cadence of midnight runs and fully automated in
+the event I cannot work the website."
+
+**Compositions and the legacy list, as at v37 (L-489, L-490).** A
+scene now exists in a small form: a shared link that carries the
+ticked bodies and the minute, kept as a card (L-518, L-519). A
+composition with its own interpretation is not built. The legacy list
+waits on Where We Are's Deferred list; its purpose stands, Tony: "This
+website is a legacy gift for Paloma." Its first dated item is the
+domain's renewal, by 2027-02-13 (L-516).
+
+**How the work is done changed too.** That is the protocol's and the
+skills', not this plan's. Section 11's first paragraph names what
+changed.
 
 ### Where the order and the history are
 
@@ -1722,97 +1727,29 @@ Moved on 2026-10-14, word for word, to
 
 ## Section 11 -- Protocol & Skills Review (from Phase 0)
 
-**How sessions run, at v37.** How the work is done is the protocol's
+**How sessions run, at v38.** How the work is done is the protocol's
 and the skills', not this plan's, and the rules are not restated here.
-One fact is recorded because it changes how this plan's work reaches
-the two repositories. Since October 2026 sessions come in three kinds,
-told apart by what each may write: a coordinating session, which
-verifies against both repositories, runs design talks and writes
-rulings and briefs, but no patch and no code; a talk-only session,
-which writes design records that Tony saves by hand; and a build
-session, which writes code in one of two forms. In the patch form
-(Cowork) it writes a patch file Tony runs, and the spent patch is the
-record. In the direct form (Claude Code, since 2026-10-26, its door
-`CLAUDE.md` in the orrery's root) it edits the files in place and runs
-the tests itself, and the change list in GitHub Desktop is the record.
-Either way Tony commits and pushes. Tony confirmed the three kinds and
-two forms at the talk of 2026-10-27
-(`documentation/DESIGN_talk_20261027_rulings.md`, section 7; L-499).
-At v37 this paragraph said four kinds, the Claude Code session counted
-apart, from the coordination brief of 2026-10-26, section 4; corrected
-2026-10-27, evening. The protocol's Mode 7 text follows at a later
-session. The rules: `PROJECT_INSTRUCTIONS.md`.
+What is recorded is what changes how this plan's work reaches the two
+repositories. Sessions come in three kinds, told apart by what each
+may write (L-499): a coordinating session, which verifies against both
+repositories, runs design talks and writes rulings, briefs and
+records, with no code; a talk-only session, which writes design
+records; and a build session, which writes code, directly in Claude
+Code through `CLAUDE.md` or as a patch Tony runs. A session linked to
+Tony's computer places its files in his folders and reads each back.
+Tony commits and pushes, whatever the kind. Since v37 three things
+changed. Tokens are spent where they buy verification or a decision,
+and counted (L-506, 2026-11-02). Each working document has a cap in
+lines and a home for what leaves it (`DOCUMENT_CAPS.md`, L-522,
+2026-11-10); this plan's restamp at v38 is part of step 6 of that
+work. And Tony's part, in his words of 2026-11-10: "focus on the
+architecture and my goals"; the sessions and the records carry the
+detail between them. The protocol was cut down to v4.0 on 2026-11-23.
+The rules: `PROJECT_INSTRUCTIONS.md`.
 
-The rest of this section is the Phase 0 review as it was written.
-
-Phase 0 stress-tested the protocol across three models in a single day.
-Detailed findings in `PROTOCOL_SKILLS_REVIEW_PHASE0.md`. Summary:
-
-**New lessons for protocol v3.32 consideration:**
-- "Measure before analyzing" -- when an architectural fork hinges on a
-  measurable quantity, build the measurement before the analysis.
-- Frozen artifacts don't accrue sync tax -- refines the parallel-pipeline
-  anti-pattern.
-- Consent gate as a UX pattern for unfamiliar technology.
-- Provenance markers (*(est.)*, *(fetched)*) belong in relay prompts too.
-
-**Skill updates needed:**
-- `gallery-pipeline` v1.1: Option C viewer, consent gate, two-tier model,
-  `interactive.html` conventions, `?exhibit=` parameter. **LANDED** -- the
-  skill is at 1.2.
-- Decide: separate `pyodide-interactive` skill or extend `gallery-pipeline`.
-  Still open.
-
-**What worked:** SHA round-trip caught real provenance errors; three-model
-relay produced genuine error correction; "each round simpler" held (feared
-B cost: 15-25 s -> measured 2.1 s). **What to improve:** re-pull SHAs at
-draft time (not just session start); mark estimates as *(est.)* in relay
-prompts.
-
----
-
-Base: orrery @ `38923c1` / gallery @ `493a0bd` -- v19 built on those,
-pushed at orrery `f504c06` / gallery `02aefc0` on 2026-08-23. (All
-confirmed against the live remote; v17-v18 stood at orrery `ee0da47` /
-gallery `61a78c0`;
-v16 was orrery `4b82384` / gallery `e7e8c5e`; v15 was orrery
-`b59cb72` / gallery `22c947c9`).
-Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B'.
-Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
-fully tested and closed -- L-149 and L-118 both DONE; L-151 DONE
-2026-07-27; L-150 still decided, not built.
-Scanner detour: Phase 1 (1a-1f + D8.5) COMPLETE. Phase 2 Piece 1 (D4
-scanner mechanism) COMPLETE -- V2 rung live, zero population. Phase 2
-Track 1 Batch 1 COMPLETE -- three-model competitive cross-check of 5 shell
-modules + Mars, geometry follow-up, Fable consistency audit. Phase 2
-Track 1 Batch 2 (gas giants: jupiter, saturn, uranus, neptune) is NO
-LONGER the gate before Artifact 2 -- the braid narrowed that gate on
-2026-08-22 to the slice Artifact 2 renders (Section 5a). Push gate for
-this phase:
-Tier-1 = 0 ON THE INTERACTIVE BUILD PATH, with the path computed from
-the import graph rather than listed by hand. The gate gets built
-before the batches it scopes.
-New structural items from Fable audit: L-176 (illustrated dimensions in
-hover text), L-177 (Mercury Hill sphere convention), L-178-180
-(Earth/solar inconsistencies), L-181 (single-source-of-truth constant
-layer).
-
-SKILL AND PROTOCOL VERSIONS ARE NOT RESTATED HERE. This block used to
-carry ten of them by hand; five had drifted by 2026-08-23 and nothing
-watched them. The authority is the generated Skill Manifest in
-`PROJECT_INSTRUCTIONS.md`, Part 3 -- rebuilt by `skills_index.py`, and
-the copy Stale Skill = Stop actually compares a loaded skill against.
-Read it there. (Tony's ruling, 2026-08-23: fix the producer, not N
-consumers.)
-NEXT is not restated here; it drifted the same way the skill versions
-did. Until v22 this line said the feature-rendering JS layer was still
-to be written, five days after it shipped with the Sun exhibit. The
-order lives on the road on `documentation/WHERE_WE_ARE.md`, and only
-there (Tony's ruling of 2026-10-13; until v36 this line named Section
-5a, dated 2026-09-03; the same fix-the-producer ruling as the
-paragraph above). Layer 3 (nightly Task
-Scheduler) RETIRED 2026-08-10 -- task disabled not deleted, builder run
-manually, first manual build clean 2026-08-11. The known intermittent
-promotion-step glitch (S3a addendum, July 24) is moot while manual and
-returns with the schedule if it ever does.
-Solar System Explorer live at palomasorrery.com/interactive.html.
+The rest of this section, the Phase 0 review as it was written and the
+plan's closing base block, moved word for word to
+`documentation/MASTER_PLAN_HISTORY.md` PART 5 at v38 (2026-11-25). Two
+of that block's sentences had gone stale: the skills' table is now
+`skills/SKILL_MANIFEST.md`, and a nightly run is back, on GitHub's
+computers (Section 5a, The direction).

@@ -46,7 +46,7 @@ shortens a document lowers its cap to the new size.
 | `skills/provenance-discipline/SKILL.md` | 1512 | `documentation/SKILL_HISTORIES.md` |
 | `skills/safe-file-editing/SKILL.md` | 765 | `documentation/SKILL_HISTORIES.md` |
 | `documentation/WHERE_WE_ARE.md` | 130 above the marker | git only |
-| `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` | 1818 | `documentation/MASTER_PLAN_HISTORY.md` |
+| `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` | 1755 | `documentation/MASTER_PLAN_HISTORY.md` |
 | `README.md` | 664 | git only |
 | `CLAUDE.md` | 111 | git only |
 | `DOCUMENT_CAPS.md` | 58 | git only |

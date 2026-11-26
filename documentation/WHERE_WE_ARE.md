@@ -1,15 +1,15 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 25, 2026, evening: BepiColombo's path cut at JPL's fit date is built, both halves; the website half is pushed; the orrery half is checked on a clean copy by the coordinating session and waits only for your push (Claude Fable 5.2, the coordinating session, 17:30, over the Code session's update). Written on orrery 65945090 and gallery 972b4a93, both pushed by you.
+Last updated: November 25, 2026, night: you ruled the master plan archived at v38, and named the real update, the protocol reviewed as the project's instructions; BepiColombo's cut is pushed in both halves and waits for its first night and your look (Claude Fable 5.2, the coordinating session of the evening, 21:15). Written on orrery 87ece129 and gallery 972b4a93, both pushed by you.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your order for after the cleanup, at 14:09 ("Yes, I agree with the order."): BepiColombo's arrival at Mercury, with Mercury's features and its Hill sphere; then Jupiter's moons, the rest beside Io; then Saturn's moons, with Titan; then Uranus and Neptune, each with its moons. The road had read "then Uranus and Neptune" since Nov 10 and passed over Jupiter and Saturn; your question caught it (L-558 (the folds after Mars)).
-> - BepiColombo's path is cut at 17 November 2026, the last day JPL's path is fitted to data, by your ruling ("Stay with JPL and 11/17 until refit."). Its box will read your seven sentences on every day after the 17th; the orrery's own plot stops its path and marker there too. Every night now reads JPL's sheet for BepiColombo: while JPL still says "Data fit through 2026-Nov-17" from the same path file, the check passes and prints both; when either changes, the night stays green and its title starts "JPL REFIT", and by day the check is red until a session takes the cut off. Each check was seen to fail on a planted change first. The website half is pushed; the orrery half waits for the coordinating session's check, then your push, and visitors see the cut the first night after that (L-554 (JPL's sentence when a path is a prediction)).
+> - The master plan is archived, by your word ("the road itself has a direction and momentum of its own and the master plan is outdated documentation"). v38, written this evening, is its last version; three old blocks left it for `documentation/MASTER_PLAN_HISTORY.md` and it is 1,755 lines. What replaces it is a description of how the project works, in three parts: the orrery defines; the website's night fetches from JPL and serves; the page works out and draws. Your question for the next coordinator: "is the protocol serving its purpose as the "project instructions"". Its test, which you ruled: a cold session holding only the protocol can say what the project is for, what its parts are and how they connect, who you are and what is yours to decide, how a session starts, checks and ends, where the order lives, and what must never be done. It fails the first two today (L-559 (the protocol as the project's instructions)).
+> - BepiColombo's path cut at 17 November 2026 is pushed in both halves (your orrery push 651422cb); all 12 installed skills equal the repository's, so your reinstall of horizons-orbital-mechanics 1.21 is cleared. No night has run on the new code yet: the first website night is the proof, and it is also the first time the website's builder fetches the cut path from JPL (L-554 (JPL's sentence when a path is a prediction)). Your order for after the cleanup stands as ruled at 14:09 (the road, line 15; L-558 (the folds after Mars)).
 >
-> **Do next:** *Orrery: Commit, then Pull origin, then Push origin; the coordinating session has checked the orrery half on a clean copy. Reinstall horizons-orbital-mechanics (now 1.21) to your account from the repository. After the next night, look on your phone at BepiColombo's box. Then this round's cleanup, in the order proposed under Waiting on you if you agree to it; then your order of today (the road, line 15) (L-554 (JPL's sentence when a path is a prediction)).*
+> **Do next:** *Orrery: Commit, then Pull origin, then Push origin (six files: the master plan, its history, the caps page, the ledger, this page and the new handoff; nothing for the website). After the next website night, look on your phone at BepiColombo's box. Then start a coordinating session from `documentation/HANDOFF_coordinating_20261125_night.md` for the protocol's review (L-559 (the protocol as the project's instructions)); it brings you a list before it changes anything. The cleanup and the braid follow it.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
@@ -45,16 +45,16 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  15a.  [later] The Earth Science room, after Mars and the moons (L-531 (the Earth Science room)).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11; step 3, the protocol's reduction, built Nov 23 as v4.0 and confirmed that night; the cache builder's skill split Nov 24; step 4, the ledger's closed items moved out,
-               at the next gap between builds; then steps 5 and 6.
+               at the next gap between builds; then steps 5 and 6; the master plan's half of step 6 done Nov 25 as v38, its last version. Next, by your word of Nov 25: the protocol's review (L-559 (the protocol as the project's instructions)).
   b.   [beside] This round's cleanup: every entry checked against JPL, L-539 (every entry checked), built Nov 22; the L4 and L5 tie, L-544 (L4 and L5 tie), built and closed Nov 22; then the orbiters' fine points, L-538 (the orbiters' printed error), designed Nov 23, pushed Nov 24, closed Nov 25 on your look; then the hold carried to the night's gate, L-553 (a held body turns the night red), built and pushed Nov 24, its first night clean (run #59), open for the box's words on a no-distance day; then every path to its last day, a build of its own, L-533 (ESCAPADE), built and pushed Nov 25, proved by its night, its last-day part closed on your phone look; the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. Four small builds from the decisions of Nov 22, after step 3, at the gaps: the walks at night, L-545 (checks that wait to be remembered); no saved scenes, its list first, L-551 (no saved scenes); the push-copy script, L-543 (green on your computer, red on GitHub); no guessed id_type, L-548 (a missing id_type).
   h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- A skill change makes no protocol version and asks for no paste; only a change to a rule in the protocol does. The protocol's cap is 800 lines (Nov 23; L-522 (document caps)).
+- The master plan is archived; v38 is its last version. The architecture is three parts: the orrery defines, the website's night fetches and serves, the page works out and draws. "Gallery" was the old word for the website. The top goal stays: the Earth System, the orrery and the stars. No "lean" is written anywhere: the description says it (Nov 25; L-559 (the protocol as the project's instructions)).
 - No saved scenes: the gallery's checks get every room's scene made fresh at each run, as the Sun's always was, and the saved copies are removed (Nov 22; L-551 (no saved scenes)).
 - The two walks run at night on GitHub only; a failed walk makes the night red; nothing is added to your computer (Nov 22; L-545 (checks that wait to be remembered)). You run no push-copy check before your own pushes; the night catches those (Nov 22; L-543 (green on your computer, red on GitHub)).
 - Nothing guesses a missing id_type: every entry writes it, and a reader that finds none leaves that object out and names it (Nov 23; L-548 (a missing id_type)).
@@ -85,20 +85,20 @@ Waiting behind other work; a line leaves when picked up.
 - A body crossing e = 1: its drawer row waits for JPL's class (L-510 (the typed fields), Nov 5).
 - L-490 (the legacy list).
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261125T214734Z, ok, no retry on the swap (the website's swap log at gallery 972b4a93, read Nov 25).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 25, its run on the orrery half at 65945090 with its edits).
 - This page's date and the ledger's newest stamp: both Nov 25. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
 - What an orbiting craft's box says on a day it shows no distance: today nothing in the box says why, only the i panel's list ("Juno: no distance shown -- no error is served for its worked-out position, so no figures are earned"). Whether to add a sentence (Nov 24; L-553 (a held body turns the night red)).
-- Where the four small builds from the decisions of Nov 22 sit in the order. Until you say: after the protocol's reduction, at the gaps between builds (the road, line b). The coordinating session's proposal of Nov 25, not answered: first one small build on the nights (a refused push tried again, L-485 (the nightly run); the walks at night, L-545 (checks that wait to be remembered), now the only check on the new words; L-554's sentence if you say yes); then the talk on L-549 (four moons JPL cannot place); then the design session on L-557 (the error away from today), ahead of the encounter's slice 2, since a shared link opened weeks later already shows a dated view; then the ledger's move (L-522 (document caps), step 4).
+- Where this round's cleanup ends. Your words of Nov 25, 17:52: "After that we can reassess any remaining cleanup items and go back to the braid." The evening session's proposal, not answered: before the folds, one small build on the nights (a refused push tried again, L-485 (the nightly run); the walks at night, L-545 (checks that wait to be remembered), now the only check on the page's words) and the design session on L-557 (the error away from today); beside the folds, the talk on L-549 (four moons JPL cannot place), the ledger's move (L-522 (document caps), step 4), and the other three small builds of Nov 22 (L-551, L-543, L-548; the road, line b).
 - Whether a spacecraft's box says so when JPL's path is a prediction, in JPL's own sentence (BepiColombo's: "Data fit through 2026-Nov-17, prediction thereafter"); the coordinating session recommends yes, in its source line. BepiColombo's own case is ruled, Nov 25: its path is cut at JPL's fit date; the sentence for every other predicted path is still open (L-554 (JPL's sentence when a path is a prediction)).
-- Two things on the document track never put to you, before step 4 of L-522 (document caps): the stamping rule (safe-file-editing, "Stamp What You Change"), which refills the header stamps step 4 empties; and a cap for the website's as-built pages, now two (`INTERACTIVE_AS_BUILT.md` grew from 1,825 lines on Nov 11 to 2,483 on Nov 22; `CACHE_BUILDER_AS_BUILT.md` starts at 571). gallery-cache-builder's split is ruled and built (Nov 24); horizons-orbital-mechanics's still waits, not measured. A third, your question of Nov 25: the master plan's restamp. It is v37, of Oct 27, at its cap, and still gives each planet a room; the coordinating session recommends a session of its own once this order is on the road (L-522 (document caps), step 6).
+- Two things on the document track never put to you, before step 4 of L-522 (document caps): the stamping rule (safe-file-editing, "Stamp What You Change"), which refills the header stamps step 4 empties; and a cap for the website's as-built pages, now two (`INTERACTIVE_AS_BUILT.md` grew from 1,825 lines on Nov 11 to 2,483 on Nov 22; `CACHE_BUILDER_AS_BUILT.md` starts at 571). gallery-cache-builder's split is ruled and built (Nov 24); horizons-orbital-mechanics's still waits, not measured. The master plan is v38 and archived (L-559 (the protocol as the project's instructions)); both READMEs remain for step 6.
 
 At the next design talk:
 - El Nino's step 5, its last sentence: name NOAA as the source of the open question, and say it is the swing on NOAA's index that is studied. Your words: "in today's political environment the hedge can read as ideological not just scientific" (Nov 17; L-060 (El Nino)).
@@ -124,94 +124,12 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
 - This round: L-539 (every entry checked), its brief `COORD_L539_every_entry_brief_20261122.md`, the list you scanned `CHECK_L539_every_entry_names_20261122.md`, the check `horizons_unserved.py`. The clock: L-541 (a plan's clock). The encounter: L-529 (guided encounters), `DESIGN_encounters_20261120.md`. The tie: L-544 (L4 and L5 tie), `patch_L544_1_tie_break.py` in the website's documentation. The orbiters: L-538 (the orbiters' printed error), its brief `COORD_L538_orbiters_brief_20261123.md`, the Part A report `REPORT_L538_partA_20261124.md`, the go-aheads `COORD_L538_partB_goahead_20261124.md` and `COORD_L538_partB_goahead2_20261124.md`, the reports `REPORT_L538_partB_floor_20261124.md`, `REPORT_L538_partC_20261124.md` and `REPORT_L538_close_20261124.md`, the go-ahead to close `COORD_L538_close_goahead_20261124.md`; orbiters in general, `DESIGN_orbiters_in_general_20261124.md`. The hold at the gate: L-553 (a held body turns the night red), its brief `COORD_L553_hold_to_the_gate_brief_20261124.md` and go-ahead `COORD_L553_hold_to_the_gate_goahead_20261124.md`; the website's `CACHE_BUILDER_AS_BUILT.md`. The last day: L-533 (ESCAPADE), its brief `COORD_L533_last_day_brief_20261125.md`, the plan `REPORT_L533_last_day_plan_20261125.md`; the words past the end of JPL's path `WORDS_L533_path_end_20261125.md`, the website's `INTERACTIVE_AS_BUILT.md` (A CRAFT STILL FLYING, PAST JPL'S PATH) and the walk's section 42; the website's `CACHE_BUILDER_AS_BUILT.md`, A Spacecraft Is Fetched by Its Plan. BepiColombo's cut: L-554 (JPL's sentence when a path is a prediction), the words `WORDS_L554_path_cut_20261125.md`, the brief `COORD_L554_path_cut_brief_20261125.md`, the plan `REPORT_L554_path_cut_plan_20261125.md`, the go-ahead `COORD_L554_path_cut_goahead_20261125.md`, the close `REPORT_L554_path_cut_close_20261125.md`; the night's check `horizons_check.py` (`cut_state`) and `check_horizons_confirmations.py`, its suite's section 9; the website's `INTERACTIVE_AS_BUILT.md` (A CRAFT STILL FLYING, PAST ITS PATH'S LAST POINT) and the walk's section 43; the order after the cleanup, L-558 (the folds after Mars). The date picker and the error: L-556 (a date to choose in the rooms), L-557 (the error away from today), the test `check_L557_error_away_from_today.py`.
-- The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's handoff, `HANDOFF_document_upkeep_20261123_close.md` (Nov 23); step 3's brief, `COORD_L522_step3_landing_brief_20261123.md`. The cache builder's split: `COORD_L522_cache_builder_split_brief_20261124.md`, its go-ahead `COORD_L522_cache_builder_split_goahead_20261124.md`, the reports `REPORT_L522_cache_builder_split_part1_20261124.md` and `REPORT_L522_cache_builder_split_close_20261124.md`; the page, the website's `CACHE_BUILDER_AS_BUILT.md`.
+- The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's handoff, `HANDOFF_document_upkeep_20261123_close.md` (Nov 23); step 3's brief, `COORD_L522_step3_landing_brief_20261123.md`. The cache builder's split: `COORD_L522_cache_builder_split_brief_20261124.md`, its go-ahead `COORD_L522_cache_builder_split_goahead_20261124.md`, the reports `REPORT_L522_cache_builder_split_part1_20261124.md` and `REPORT_L522_cache_builder_split_close_20261124.md`; the page, the website's `CACHE_BUILDER_AS_BUILT.md`. The master plan, v38: `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`; what left it, `documentation/MASTER_PLAN_HISTORY.md`, PARTs 3 to 5. The protocol's review: L-559 (the protocol as the project's instructions).
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.
-- The door: `documentation/python_work_door/`; the place for the next coordinating session to start, `HANDOFF_coordinating_20261125_evening.md`, and L-499 (kinds of session).
+- The door: `documentation/python_work_door/`; the place for the next coordinating session to start, `HANDOFF_coordinating_20261125_night.md`, and L-499 (kinds of session).
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy.
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-25-26 1337: Fable: Coordinating session L554**
-
-**The website half checks out on a clean copy. It is ready for you to push.**
-
-**What I ran, on a clean copy of GitHub's website with the Code session's files laid over**
-- **The walk** (the test that runs the page without a browser): PASS, 383 checks. Its new section reads your seven sentences in order.
-- **The same walk on the page as it was:** FAIL, 2 of 383, both in the new section. So the test can fail.
-- **The figures check:** passes on the built page. On the page as it was it fails on its four new lines.
-- **The mirror's suite:** pass.
-- **The page's change, read whole:** the seven sentences are word for word yours. No other craft's branch is touched.
-
-**What I did not run, and rely on the report for**
-- The website's maintenance run, 53 of 53.
-- The two other planted pages, one for a craft with no cut and one for Akatsuki.
-
-**Two things worth knowing**
-- **A night committed to the website while the build ran.** It touches none of the edited files, and the three small files the build rewrote equal the night's. Your pull has nothing to reconcile.
-- **The new walk section holds BepiColombo's own sentences.** If a second craft is ever cut, that section must be widened first, or it will fail. It is noted on the ledger.
-
-**One change to the Code session's run order**
-- It has the website pushed after the orrery half. I would push it as soon as you sit down. It changes nothing a visitor sees, and it gets a real night on the new page before the cut arrives.
-
-**What I placed in your orrery folder, each read back identical**
-- `LEDGER_CONSOLIDATED.md`: your "Yes" on yellow, the amended go-ahead, and this review, on L-554 (JPL's sentence when a path is a prediction).
-- `documentation/WHERE_WE_ARE.md`: "Do next" updated. Still 129 lines.
-
-**Your run order, at your computer**
-1. Website: Commit, then Pull origin, then Push origin. -- 972b4a9366224160d03f84708c9d33f55b811b87; merge all green
-2. Orrery: Commit, then Pull origin, then Push origin. -- 65945090bfe85129fefd9b3d74600e7687a39728; merge all green
-3. Tell the Code session "go" for the orrery half.
-4. Send me its report. I check it on a clean copy before you push it.
-
-**Where this leaves us**
-- The website half of BepiColombo's cut is built and checked. It waits only for your push.
-- The orrery half, which makes the cut itself, waits for your orrery push and your "go".
-- Visitors see the cut on the first website night after the orrery half is pushed.
-
-**One final thought:** this session has run long and its handoff is still owed. I would write it at the next pause, after your two pushes, so that the orrery half's review can start from a fresh session if you prefer.
-
-=====================
-
-**The orrery half checks out on a clean copy. I found nothing against it, and it is ready for you to push.**
-
-**What I ran, on a clean copy of GitHub's orrery with the Code session's files laid over**
-- **The Horizons check suite:** pass, 144 checks.
-- **The path drawing suite:** 15 of 15. **The path plan suite:** 40 of 40. **The export's suite:** pass.
-- **The new check, as built:** it passes and prints both values it compared, JPL's fit date and JPL's path file against the entry's.
-- **The entry's words:** equal to your approved sentences, compared by a script.
-
-**What I planted myself, to see the check fail**
-- **JPL's fit date moved:** red by day, by name. At night it stays green and says "JPL REFIT".
-- **JPL's path file renamed:** red by day, by name.
-- **JPL's sheet not read that day:** red by day. At night it prints "NOT READ", neither a pass nor red.
-
-**The two halves together**
-- I fed the orrery's new export to the website's mirror on a clean copy. BepiColombo gets both notes and a plan that ends on 17 November, with no arrival.
-- On that half-made copy the website's figures check went red, by name: BepiColombo's last served point is not its plan's last day. That is the right failure. If a night's build ever skips the new path, the night says so.
-
-**What nobody has tested**
-- **The website's builder fetching the cut path from JPL.** My test machine cannot reach JPL, and the Code session did not run it. The first website night after your push is that test.
-- **Also claimed, not run by me:** both maintenance runs whole, and the orrery's own window.
-
-**Two things to know**
-- **Where We Are is at 130 of its 130 lines.** The next session must move something out before it adds anything.
-- **By day, the new check is red when JPL's sheet was not read that day.** A daytime run that cannot reach JPL will not close green.
-
-**What I placed in your orrery folder, each read back identical**
-- `documentation/HANDOFF_coordinating_20261125_evening.md`: this session's handoff, new.
-- `LEDGER_CONSOLIDATED.md`: this review on L-554 (JPL's sentence when a path is a prediction).
-- `documentation/WHERE_WE_ARE.md`: two lines above the marker, and the handoff's name. Your run record below the marker is untouched.
-
-**Your run order**
-1. Orrery: Commit, then Pull origin, then Push origin. -- 651422cbfcf974d9122aa6189e51c190f92a58bd
-2. Reinstall horizons-orbital-mechanics (1.21) to your account from the repository. -- done
-3. After the next website night, look on your phone at BepiColombo's box.
-
-**Where this leaves us**
-- BepiColombo's path cut at 17 November 2026 is built in both halves and checked on clean copies. The website half is pushed; the orrery half waits for your push.
-- The cut shows on the first website night after that push, and that night is also the builder's first real test.
-- The session's handoff is written. The next coordinator starts from it, with the night and your phone look.
-
-**One final thought:** today went from a plan review to a ruled, built and checked change in one afternoon, and it was the right change. It was also one more build that the last build produced. The cleanup order I proposed at the start is still unanswered, and Uranus, Neptune and Jupiter's moons have not moved.

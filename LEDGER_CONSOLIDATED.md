@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*282 live items; 267 need attention (`!`); 162 RICE-scored; 269 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*283 live items; 268 need attention (`!`); 162 RICE-scored; 269 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1201,6 +1201,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
 | ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-25 |
 | ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-25 |
+| ! | L-559 | The protocol as the project's instructions: Tony's question for a review; the master plan archived; the architecture in three parts (protocol, skills, the master plan; a review first) | OPEN | -- | 2026-11-25 |
 
 ### B. Pending Action (Tony-side)
 
@@ -3398,6 +3399,12 @@ trajectory is for ESA's MPO spacecraft. JAXA's "Mio" Mercury
 Magnetospheric Orbiter (MMO) is available separately." The morning's
 read of JPL's whole list found no record for Mio; the list was not
 read again here. For the read owed after 10 December.
+- **THE LEAN, RULED, Tony, 2026-11-25, 19:36** (L-522 (document
+  caps), the master plan's v38): "The lean is still on serving rather
+  than processing." The plan's Section 5a, The direction, names this
+  item's talk as where the cost of serving is designed. At 20:37 he
+  dropped the term "lean"; the three-part description on L-559 (the
+  protocol as the project's instructions) is what stands.
 **Gap:** the talk with Tony on the design record.
 **Ref:** L-538; L-529; the design record above.
 
@@ -3595,6 +3602,17 @@ found it.
   judged, and Howell. (6) Whether a night holds a dated view to JPL:
   the Room clock row tests only today, where the miss is near zero, so
   it cannot fail for a dated view.
+- **THE LEAN, RULED, Tony, 2026-11-25, 19:36,** at the master plan's
+  v38 (L-522 (document caps), its note of that evening): "On the
+  error issue this is a consequence of how we are serving the data
+  and not a lean. The lean is still on serving rather than
+  processing." At 20:37 he dropped the term: "Drop the "lean". You
+  expressed the lean in the way it actually works." What stands is
+  the three-part description on L-559 (the protocol as the project's
+  instructions): the website's night serves, the page works out. The
+  session's reading, not ruled: of point (1)'s three choices below,
+  the planets served as a point a day moves work from the page to
+  the night. The choice is still the design session's and his.
 **Gap:** a design session of its own. Nothing built, no brief.
 **Ref:** L-556 (a date to choose in the rooms); L-538 (the orbiters'
 printed error); L-541 (a plan's clock), the Room clock row; the test
@@ -3642,6 +3660,17 @@ above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
 - NOT RULED: which of each planet's moons; where the encounter's
   slice 2 (L-529) sits against this order; where this round's
   cleanup ends.
+- **Tony, 2026-11-25, 17:52,** as the master plan's restamp began
+  (L-522 (document caps), its note of that evening): "Yes, we are
+  interrupting the order to update the master plan. After that we can
+  reassess any remaining cleanup items and go back to the braid." So
+  where this round's cleanup ends is reassessed with him after v38.
+  The evening session's proposal, put to him at 17:33 and not
+  answered: before the folds, the one small build on the nights
+  (L-545 (checks that wait to be remembered), L-485 (the nightly
+  run)) and the design session on L-557 (the error away from today);
+  beside the folds, L-549's talk (four moons JPL cannot place) and
+  the ledger's move (L-522, step 4).
 **Gap:** the road on Where We Are carries the order since this note.
 Each fold then has its design round first, as Mars had (L-514 (the
 Mars room)). The master plan's restamp records the direction (L-522
@@ -3649,6 +3678,185 @@ Mars room)). The master plan's restamp records the direction (L-522
 **Ref:** L-514 (the Mars room); L-515 (one nested tree); L-529 (guided
 encounters); L-555 (orbiters in general); L-554 (JPL's sentence when a
 path is a prediction); L-433 (the direction); L-522 (document caps).
+
+#### [L-559] The protocol as the project's instructions: Tony's question for a review; the master plan archived; the architecture in three parts (protocol, skills, the master plan; a review first)
+<!-- L:559 status:OPEN upd:2026-11-25 section:A flag: rice: -->
+- **Opened 2026-11-25, night**, by the coordinating session of the
+  evening (Claude Fable 5.2, linked to Tony's computer with no shell on
+  it), at orrery 87ece129 and gallery 972b4a93, after it had restamped
+  the master plan as v38 (L-522 (document caps), its note of that
+  evening). What follows is the talk that came next, 20:03 to 20:57
+  Chicago, Tony's messages word for word, straight quotes for his
+  curly ones.
+- **Tony, 20:03:** "The purpose of the master plan is to be a roadmap
+  for creating the orrery in the website. Documentation is a separate
+  document in history. The primary reader is Claude when in doubt.
+  Does it work for Claude?" The session's answer: not yet. It works
+  for its first 140 lines and Section 5a's direction. It is too long
+  to read when in doubt (the session had restamped it without reading
+  about 740 of its lines); its Section 5 still opens "The gallery
+  gains one interactive page per phase"; and "does what the desktop
+  orrery does" is itemized nowhere.
+- **Tony, 20:09:** "Question: if I archived the master plan would
+  Claude miss it?" The answer: mostly no. It stood wrong on rooms
+  from Nov 7 to Nov 25 and nothing broke; no session is told to read
+  it at its start; the protocol and `CLAUDE.md` do not name it. What
+  would be missed is one place that says where the work is going.
+- **RULED, THE PLAN IS ARCHIVED, Tony, 20:14:** "The master plan
+  originated when we first started the refactoring of the website. We
+  then started a summary website which is not kept up. Now the road
+  itself has a direction and momentum of its own and the master plan
+  is outdated documentation. I would archive it and add the goals and
+  methods to a place that Claude actually reads, maybe the protocol."
+  And 20:15: "I meant a summary master plan not website."
+- **Tony, 20:22**, on the session's proposal to write "the lean" into
+  the protocol: "Does the lean matter? Does Claude know that the
+  orrery serves and the website draws basically? Isn't that method?"
+  The answer: it is method, by the protocol's own test (Method Belongs
+  to the Skill), so not the protocol's; and what a session reads says
+  the other way, the website "must cache a recipe once and reconstruct
+  it correctly later, alone" (the protocol's The Orrery and the
+  Assembler, and gallery-assembler's boundary section, the same
+  words).
+- **Tony, 20:26:** "Maybe my understanding is behind. Question: how
+  would you describe the function of the python code in the orrery
+  repo and that of the website and how they are connected. That is
+  the master plan in action as it stands now."
+- **THE THREE-PART DESCRIPTION, the session's answer to that.** The
+  orrery defines; the website's night fetches and serves; the page
+  works out and draws.
+  1. THE ORRERY REPOSITORY, the instrument and the source of truth.
+     The desktop orrery, 181 Python files at its root, run on Tony's
+     computer; it asks JPL live and draws on his screen. Everything is
+     defined there: the list of bodies and how JPL is asked for each,
+     the constants, the stored drawings, the words in the boxes, each
+     spacecraft's path plan. Its checks keep those right. It exports
+     the definitions as files (`data/constants_export.json`,
+     `data/objects_export.json`, `data/path_plans.json`, the
+     drawings). It sends the website no positions of bodies.
+  2. THE WEBSITE'S NIGHT, Python in the website repository
+     (`daily_run.py --night`, `tools/gallery_cache_builder.py`,
+     `tools/pull_*.py`, `tools/mirror_*.py`,
+     `tools/encounter_fetch.py`), on GitHub's computers. It pulls the
+     orrery's exports. It then asks JPL itself: an orbit for each
+     body, and the positions themselves for each spacecraft path and
+     each encounter. It measures how far each orbit can be trusted.
+     It writes the files the page reads. This is the serving.
+  3. THE PAGE, in the visitor's browser (`interactive.html`,
+     `gallery/*.js`, `gallery/assembler/*.py` under Pyodide). For a
+     body on an orbit, the Python in the browser works its place out
+     at the minute shown. For a path or an encounter it draws the
+     positions as served, an encounter with no Python at all.
+     JavaScript draws the tree, the boxes and the shells.
+  - CONNECTED in one direction, by files: the orrery's exports, the
+    website's night, the served files, the page. Two nights an hour
+    apart, by each `nightly.yml`'s cron lines: the orrery's at 07:17
+    and 11:17 UTC, the website's at 08:17 and 12:17. Tony's pushes
+    carry code; the nights carry data.
+  - WHAT IT RESTS ON: both repositories' file lists at the two bases,
+    both `nightly.yml`, the orrery's `data/nightly_run_record.json`,
+    and this ledger's notes (L-557 for the orbit dated today). NOT
+    READ: the builder's code, the assembler's code. It is to be
+    checked sentence by sentence before the protocol states it.
+  - WHAT IT LEAVES OUT, found at the close: the Earth System's own
+    chain (the orrery's generators, the website's `earth/` pages, El
+    Nino's page) and the stars. Tony's top goal names both.
+- **Tony, 20:32:** "You just rewrote the master plan de-facto.
+  Question: where would this description help Claude when in doubt
+  about direction and function?" The answer: in the protocol, in the
+  paragraph it already has on the subject, The Orrery and the
+  Assembler (lines 711 to 726 at 87ece129, 16 lines), which names two
+  instruments and leaves out the website's night. A swap, not an
+  addition: the protocol stands at 795 of its 800 lines. The session
+  had said "nothing in the protocol" two messages before, for the lean
+  alone; a description of what each part is for is the protocol's.
+  Put to Tony as a question; his next message built on it and did not
+  type a yes.
+- **RULED, Tony, 20:37:** "Drop the "lean". You expressed the lean in
+  the way it actually works. And we should check the protocol so that
+  other sections are consistent with this goal and approach. I'm glad
+  that we are doing this. This is the real update."
+- **RULED, Tony, 20:47:** "If the next coordinator is to review and
+  update the protocol update are we providing enough guidance here.
+  The top goal of the orrery and the stars remains. Gallery was our
+  old term for the website. The three part description you wrote is
+  the architecture. The bottom line question for the next
+  coordinator: is the protocol serving its purpose as the "project
+  instructions". This project is now 26 months old and a lot of this
+  language is legacy". And 20:57, to the test below: "Yes and I
+  omitted the earth system part."
+- **THE TEST, RULED ("Yes", 20:57).** The protocol serves as the
+  project's instructions when a cold session holding only the protocol
+  can say six things: what the project is for; what its parts are and
+  how they connect; who Tony is and what is his to decide; how a
+  session starts, what it must check, and how it ends; where the order
+  of the work lives; what must never be done. By this session's
+  evidence it fails the first two and passes the rest.
+- **THE BOUNDS, the session's, put in the same message; his "Yes"
+  answered the question asked, the test, and he did not object to
+  these.** Legacy words are not legacy rules: "gallery", "assembler"
+  and the old phase names are words, each gate is a rule a failure
+  earned, and a rule leaves only on Tony's ruling. File and skill
+  names stay (`gallery_cache_builder.py`, the gallery-* skills); the
+  prose says "website". A LIST FIRST, NOTHING EDITED: every section
+  marked as serving, as legacy wording, as a candidate to leave, or as
+  missing; Tony rules from the list. The skills are out of scope,
+  except where one repeats a paragraph that changes.
+- **THE EVIDENCE TO USE, the session's, the same standing.** The
+  handoffs of recent weeks each end with their session's own slips
+  ("Method, for the next coordinator"); sort them by Tony's three
+  failure modes (the protocol, Procedural Criticality): no rule
+  existed, the rule was not enforced, the rule was not followed. And
+  this session as one data point: the start checks, the read-back,
+  the caps and the planted-fault check each caught something real;
+  nothing told it what the website is or how the parts connect.
+- **THE PLACES FOUND, by a search of `PROJECT_INSTRUCTIONS.md` at
+  87ece129 for the website, the browser, serving and the goal, each
+  hit judged. A search finds words; the review reads all 795 lines.**
+  1. The Orrery and the Assembler (lines 711 to 726): two parts where
+     the build has three; the paragraph to replace.
+  2. The goal: stated nowhere. "goal" appears only in Tony's quoted
+     words on his role (lines 757 and 758). His top goal, 20:47 and
+     20:57: the Earth System, the orrery and the stars. The website's
+     goal is the road's stage 18 on Where We Are. Asked at 20:40 and
+     not answered as asked: whether the new paragraph opens with the
+     goal in one sentence.
+  3. Graceful Fallback (line 230): "API fails -> Check fallback list
+     -> Calculate locally -> Attribute source." On the website the
+     rule is to hold the body and say so (L-525, L-553). The line
+     reads as general.
+  4. Check All Parallel Pipelines (lines 473 to 478): "SIX parallel
+     consumers"; the three-part description must agree with that list
+     and point to it.
+  5. A Report Names Its Items (line 458): its example still says "5
+     parallel pipelines".
+  6. The names: "gallery" 6 times, "website" once, "assembler" 6.
+     Settled by Tony: "Gallery was our old term for the website."
+  7. WITHDRAWN on Tony's word: the Project's description on claude.ai
+     ("Create a python script that explores the Earth system, solar
+     system and the near stellar "neighborhood""), which the session
+     had flagged for naming no website. The top goal remains.
+- **WHAT ARCHIVING THE PLAN TOUCHES, for the build that follows the
+  review.** A retirement line at the plan's top, as its two summaries
+  carry; v38 is its last version, and its section "The lean" stands as
+  the record of Tony's words of 19:36. Its row on `DOCUMENT_CAPS.md`.
+  ledger-and-session-records, which names the plan as STRATEGY, the
+  first of Tony's seven kinds of document (his ruling of 2026-10-13,
+  L-442), so what holds that place is his to say. gallery-assembler,
+  which carries the old paragraph and two pointers to "master plan
+  sec. 3". A new protocol version, which Tony pastes into the Project.
+**Gap:** a coordinating session's review, by the test, within the
+bounds, on the evidence: first the three-part description checked
+against the builder's and the assembler's code and widened to the
+Earth System and the stars; then the list, section by section, to
+Tony; then, on his rulings, the build (the protocol's new version,
+the two skills, the plan's retirement line and its caps row).
+- **Tony-action (decide):** at the review, from its list.
+**Ref:** L-522 (document caps), its notes of 2026-11-25; L-442 (the
+seven kinds of document); L-558 (the folds after Mars);
+`documentation/HANDOFF_coordinating_20261125_night.md`;
+`PROJECT_INSTRUCTIONS.md`; `skills/gallery-assembler/SKILL.md`;
+`skills/ledger-and-session-records/SKILL.md`.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -5400,11 +5608,83 @@ Fable 5.2) TONY'S RUN RECORD IS NOT AN EDIT WAITING, RULED.
   `documentation/MASTER_PLAN_HISTORY.md` first; the order itself
   stays on Where We Are, by the plan's own rule ("Nor the order of
   the next jobs, which is the road's on Where We Are").
+- **THE MASTER PLAN RESTAMPED AS v38, 2026-11-25, evening** (the
+  coordinating session of the evening, Claude Fable 5.2, linked to
+  Tony's computer with no shell on it; built on orrery 87ece129 and
+  gallery 972b4a93, both read live). Tony, 17:41: "While we wait for
+  the nightly run, let's update the Interactive Master Plan." And
+  17:52, on the list of eight stale places put to him: "Yes, we are
+  interrupting the order to update the master plan. After that we can
+  reassess any remaining cleanup items and go back to the braid."
+  - RULED, THE END GOAL, Tony, 19:36: "Yes, I agree on the goal." Put
+    to him: Section 5a's end goal read "The Python orrery, running in
+    the browser under Pyodide ... one codebase", a means named as the
+    goal, against the protocol's two instruments. It becomes the
+    road's: the website does what the desktop orrery does, with a
+    date to choose, within the range the data covers. Both ways of
+    drawing are named under it as means: worked out in the browser,
+    and JPL's positions served.
+  - RULED, THE LEAN, Tony, the same message, on the session's wish to
+    record as open which way new work should lean: "On the error
+    issue this is a consequence of how we are serving the data and
+    not a lean. The lean is still on serving rather than processing."
+    The plan quotes it. The session's reading, written in the plan as
+    the session's: "serving" is JPL's positions served, "processing"
+    a place worked out in the browser.
+    WITHDRAWN AS A TERM the same night, 20:37: "Drop the "lean". You
+    expressed the lean in the way it actually works." What stands is
+    the three-part description on L-559 (the protocol as the project's
+    instructions). The plan's v38 keeps his words of 19:36 as said.
+  - WHAT v38 CHANGES (`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`,
+    1,818 lines to 1,755): the executive summary rewritten; Section
+    5a's end goal reworded, and its pipeline drawing's transport line
+    ("currently a HAND COPY") corrected, with a note; two lines saying
+    the segments' figures are of 2026-08-23; The direction rewritten
+    from his rulings of Nov 7 to 25, its parts by name: one tree
+    (L-515), the fetched centre, the planets outward (L-558),
+    encounters (L-529, L-534), the lean, JPL's limits in the box
+    (L-525, L-553, L-533, L-554, L-538), a date to choose (L-556,
+    L-557), the Earth System on the web (L-060, L-001, L-531, L-530),
+    the nightly run built (L-485), compositions and the legacy list
+    (L-489, L-490, L-516); Section 11's first paragraph brought to
+    v4.0; the Last updated line carries v38, v37 and v36, v35's entry
+    dropped.
+  - MOVED OUT FIRST, word for word, to
+    `documentation/MASTER_PLAN_HISTORY.md` (1,707 lines to 1,989), the
+    plan's home on `DOCUMENT_CAPS.md`: PART 3, the status block of
+    July to v35 (98 lines); PART 4, The direction as v37 had it (67);
+    PART 5, the Phase 0 review and the closing base block from
+    Section 11 (73). The session had told Tony "about 130 lines", the
+    status block alone, which is 98; PART 5 was added when the build
+    came out over the cap.
+  - THE CAP: the plan's row on `DOCUMENT_CAPS.md` lowered from 1818
+    to 1755, its new size, by that page's own rule.
+  - CHECKED: each moved block found whole in the history file and
+    gone from the plan, by a script; the build's own arithmetic
+    (lines kept, moved, replaced) and no heading doubled. A first
+    build had doubled the end goal and the drawing; it was found by
+    reading the result, and the arithmetic was added after. No
+    non-ASCII byte, no CRLF. `doc_index.py --caps` on a clean copy
+    of 87ece129: "DOCUMENT CAPS: PASS -- 18 document(s) within their
+    caps" as pushed and with v38 laid over; with one line planted in
+    the plan, "DOCUMENT CAPS: RED -- over its cap:
+    documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md (1756 lines, cap
+    1755)". Sections 6 and 7: 28 ledger handles named, each held to
+    its status here by a script; five lines flagged (L-154 twice,
+    L-162, L-179, L-180), each read, each already a dated history
+    line; nothing changed. That script matches status words near a
+    handle and would miss a stale sentence that names none.
+  - NOT DONE: Sections 1 to 5, 8 and 9 of the plan not read again
+    (its summary says so); both READMEs, step 6's other half; the
+    orrery's maintenance run, which this session cannot run.
 **Gap:** steps 4 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11; step 3, the protocol, built 2026-11-23 as v4.0): 4, this
 ledger's closed items and header stamps moved out by a tool; 5, the
-open items triaged by theme; 6, the master plan and both READMEs
-restamped once L-515 step 2b has had Tony's phone look.
+open items triaged by theme; 6, both READMEs restamped. The master
+plan's half of step 6 is done: v38, 2026-11-25 (the note above), and
+v38 is its last version: Tony ruled the plan archived the same night,
+and its retirement line and its row on `DOCUMENT_CAPS.md` go with the
+build on L-559 (the protocol as the project's instructions).
 **Tony-action (do):** reinstall interactive-exhibit 1.41 (Settings >
 Skills) and paste the protocol v3.138 into the Project; the next session
 that loads the skill from the account confirms it reads 1.41.
