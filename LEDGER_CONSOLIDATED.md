@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*283 live items; 268 need attention (`!`); 162 RICE-scored; 269 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*282 live items; 267 need attention (`!`); 162 RICE-scored; 270 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1172,7 +1172,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | OPEN | -- | 2026-11-21 |
-| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-25 |
+| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-26 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
@@ -1188,7 +1188,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-22 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 | ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-23 |
-| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-23 |
+| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-26 |
 | ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
 | ! | L-547 | Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded) | OPEN | -- | 2026-11-22 |
 | ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-23 |
@@ -1200,8 +1200,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
 | ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-25 |
-| ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-25 |
-| ! | L-559 | The protocol as the project's instructions: Tony's question for a review; the master plan archived; the architecture in three parts (protocol, skills, the master plan; a review first) | OPEN | -- | 2026-11-25 |
+| ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-26 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1619,6 +1618,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | DONE | -- | 2026-11-25 |
 |  | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | DONE | -- | 2026-11-23 |
 |  | L-550 | A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump) | DONE | -- | 2026-11-23 |
+|  | L-559 | The protocol as the project's instructions: Tony's question for a review; the master plan archived; the architecture in three parts (protocol, skills, the master plan; a review first) | DONE | -- | 2026-11-26 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -3619,7 +3619,7 @@ printed error); L-541 (a plan's clock), the Room clock row; the test
 above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
 
 #### [L-558] The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25)
-<!-- L:558 status:OPEN upd:2026-11-25 section:A flag: rice: -->
+<!-- L:558 status:OPEN upd:2026-11-26 section:A flag: rice: -->
 - **Opened 2026-11-25** by the coordinating session of the afternoon
   (Claude Fable 5.2), at orrery 18df08b7 and gallery 3fb13a27, on
   Tony's question of 13:50: "wouldn't Jupiter's moon's be next in the
@@ -3671,6 +3671,45 @@ above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
   run)) and the design session on L-557 (the error away from today);
   beside the folds, L-549's talk (four moons JPL cannot place) and
   the ledger's move (L-522, step 4).
+**Note:** (2026-11-26, 11:05 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 0666ad67 and gallery 972b4a93) RULED: WHERE THE
+CLEANUP ENDS, AND THE ORDER AFTER IT.
+- Asked by Tony at 10:05, "What's left in the cleanup?", the session
+  read each item's Gap in this ledger and listed them, then put to
+  him: "do you want the cleanup to end here, with the Mercury talk
+  next and these builds taken at the gaps, L-545 first?" He ruled the
+  walks' build first (L-545 (checks that wait to be remembered), its
+  note of this date).
+- **Tony, 10:59: "Yes the walks ends the cleanup and the other items
+  you mentioned in the braid or as needed. Then BepiColombo and
+  Mercury when JPL updates the path. The before or after start the
+  Jupiter moons."**
+- THE SESSION'S READING, told to him in its reply:
+  1. This round's cleanup ends with the walks' build.
+  2. The other items listed to him wait for the braid, taken when a
+     fold's work opens their files, or until one is needed. By
+     handle: L-551 (no saved scenes), L-543 (green on Tony's
+     computer, red on GitHub), L-548 (a missing id_type), L-536 (a
+     moon's yearly change), L-432 (the default goldenrod); and the
+     four the evening session of Nov 25 had proposed adding: a
+     refused push tried again, L-485 (the nightly run); the design
+     session on L-557 (the error away from today); the talk on L-549
+     (four moons JPL cannot place); this ledger's move, L-522
+     (document caps), step 4.
+  3. BepiColombo's arrival at Mercury waits for JPL to fit the path
+     past the arrival. On Nov 25 its talk came first and only the
+     build waited; as read, the talk now waits with it.
+  4. Jupiter's moons start before or after it, whichever JPL allows:
+     after the walks they are next, unless JPL has refitted by then.
+     His last sentence is quoted as typed; "The before or after" is
+     read as "Then, before or after".
+- Saturn's moons, then Uranus and Neptune, stand as ordered on Nov
+  25. The two sentences waiting on his word are not part of this:
+  L-553 (a held body turns the night red) and L-554 (JPL's sentence
+  when a path is a prediction).
+- STILL NOT RULED: which of each planet's moons; where the
+  encounter's slice 2 (L-529 (guided encounters)) sits against this
+  order.
 **Gap:** the road on Where We Are carries the order since this note.
 Each fold then has its design round first, as Mars had (L-514 (the
 Mars room)). The master plan's restamp records the direction (L-522
@@ -3678,249 +3717,6 @@ Mars room)). The master plan's restamp records the direction (L-522
 **Ref:** L-514 (the Mars room); L-515 (one nested tree); L-529 (guided
 encounters); L-555 (orbiters in general); L-554 (JPL's sentence when a
 path is a prediction); L-433 (the direction); L-522 (document caps).
-
-#### [L-559] The protocol as the project's instructions: Tony's question for a review; the master plan archived; the architecture in three parts (protocol, skills, the master plan; a review first)
-<!-- L:559 status:OPEN upd:2026-11-25 section:A flag: rice: -->
-- **Opened 2026-11-25, night**, by the coordinating session of the
-  evening (Claude Fable 5.2, linked to Tony's computer with no shell on
-  it), at orrery 87ece129 and gallery 972b4a93, after it had restamped
-  the master plan as v38 (L-522 (document caps), its note of that
-  evening). What follows is the talk that came next, 20:03 to 20:57
-  Chicago, Tony's messages word for word, straight quotes for his
-  curly ones.
-- **Tony, 20:03:** "The purpose of the master plan is to be a roadmap
-  for creating the orrery in the website. Documentation is a separate
-  document in history. The primary reader is Claude when in doubt.
-  Does it work for Claude?" The session's answer: not yet. It works
-  for its first 140 lines and Section 5a's direction. It is too long
-  to read when in doubt (the session had restamped it without reading
-  about 740 of its lines); its Section 5 still opens "The gallery
-  gains one interactive page per phase"; and "does what the desktop
-  orrery does" is itemized nowhere.
-- **Tony, 20:09:** "Question: if I archived the master plan would
-  Claude miss it?" The answer: mostly no. It stood wrong on rooms
-  from Nov 7 to Nov 25 and nothing broke; no session is told to read
-  it at its start; the protocol and `CLAUDE.md` do not name it. What
-  would be missed is one place that says where the work is going.
-- **RULED, THE PLAN IS ARCHIVED, Tony, 20:14:** "The master plan
-  originated when we first started the refactoring of the website. We
-  then started a summary website which is not kept up. Now the road
-  itself has a direction and momentum of its own and the master plan
-  is outdated documentation. I would archive it and add the goals and
-  methods to a place that Claude actually reads, maybe the protocol."
-  And 20:15: "I meant a summary master plan not website."
-- **Tony, 20:22**, on the session's proposal to write "the lean" into
-  the protocol: "Does the lean matter? Does Claude know that the
-  orrery serves and the website draws basically? Isn't that method?"
-  The answer: it is method, by the protocol's own test (Method Belongs
-  to the Skill), so not the protocol's; and what a session reads says
-  the other way, the website "must cache a recipe once and reconstruct
-  it correctly later, alone" (the protocol's The Orrery and the
-  Assembler, and gallery-assembler's boundary section, the same
-  words).
-- **Tony, 20:26:** "Maybe my understanding is behind. Question: how
-  would you describe the function of the python code in the orrery
-  repo and that of the website and how they are connected. That is
-  the master plan in action as it stands now."
-- **THE THREE-PART DESCRIPTION, the session's answer to that.** The
-  orrery defines; the website's night fetches and serves; the page
-  works out and draws.
-  1. THE ORRERY REPOSITORY, the instrument and the source of truth.
-     The desktop orrery, 181 Python files at its root, run on Tony's
-     computer; it asks JPL live and draws on his screen. Everything is
-     defined there: the list of bodies and how JPL is asked for each,
-     the constants, the stored drawings, the words in the boxes, each
-     spacecraft's path plan. Its checks keep those right. It exports
-     the definitions as files (`data/constants_export.json`,
-     `data/objects_export.json`, `data/path_plans.json`, the
-     drawings). It sends the website no positions of bodies.
-  2. THE WEBSITE'S NIGHT, Python in the website repository
-     (`daily_run.py --night`, `tools/gallery_cache_builder.py`,
-     `tools/pull_*.py`, `tools/mirror_*.py`,
-     `tools/encounter_fetch.py`), on GitHub's computers. It pulls the
-     orrery's exports. It then asks JPL itself: an orbit for each
-     body, and the positions themselves for each spacecraft path and
-     each encounter. It measures how far each orbit can be trusted.
-     It writes the files the page reads. This is the serving.
-  3. THE PAGE, in the visitor's browser (`interactive.html`,
-     `gallery/*.js`, `gallery/assembler/*.py` under Pyodide). For a
-     body on an orbit, the Python in the browser works its place out
-     at the minute shown. For a path or an encounter it draws the
-     positions as served, an encounter with no Python at all.
-     JavaScript draws the tree, the boxes and the shells.
-  - CONNECTED in one direction, by files: the orrery's exports, the
-    website's night, the served files, the page. Two nights an hour
-    apart, by each `nightly.yml`'s cron lines: the orrery's at 07:17
-    and 11:17 UTC, the website's at 08:17 and 12:17. Tony's pushes
-    carry code; the nights carry data.
-  - WHAT IT RESTS ON: both repositories' file lists at the two bases,
-    both `nightly.yml`, the orrery's `data/nightly_run_record.json`,
-    and this ledger's notes (L-557 for the orbit dated today). NOT
-    READ: the builder's code, the assembler's code. It is to be
-    checked sentence by sentence before the protocol states it.
-  - WHAT IT LEAVES OUT, found at the close: the Earth System's own
-    chain (the orrery's generators, the website's `earth/` pages, El
-    Nino's page) and the stars. Tony's top goal names both.
-- **Tony, 20:32:** "You just rewrote the master plan de-facto.
-  Question: where would this description help Claude when in doubt
-  about direction and function?" The answer: in the protocol, in the
-  paragraph it already has on the subject, The Orrery and the
-  Assembler (lines 711 to 726 at 87ece129, 16 lines), which names two
-  instruments and leaves out the website's night. A swap, not an
-  addition: the protocol stands at 795 of its 800 lines. The session
-  had said "nothing in the protocol" two messages before, for the lean
-  alone; a description of what each part is for is the protocol's.
-  Put to Tony as a question; his next message built on it and did not
-  type a yes.
-- **RULED, Tony, 20:37:** "Drop the "lean". You expressed the lean in
-  the way it actually works. And we should check the protocol so that
-  other sections are consistent with this goal and approach. I'm glad
-  that we are doing this. This is the real update."
-- **RULED, Tony, 20:47:** "If the next coordinator is to review and
-  update the protocol update are we providing enough guidance here.
-  The top goal of the orrery and the stars remains. Gallery was our
-  old term for the website. The three part description you wrote is
-  the architecture. The bottom line question for the next
-  coordinator: is the protocol serving its purpose as the "project
-  instructions". This project is now 26 months old and a lot of this
-  language is legacy". And 20:57, to the test below: "Yes and I
-  omitted the earth system part."
-- **THE TEST, RULED ("Yes", 20:57).** The protocol serves as the
-  project's instructions when a cold session holding only the protocol
-  can say six things: what the project is for; what its parts are and
-  how they connect; who Tony is and what is his to decide; how a
-  session starts, what it must check, and how it ends; where the order
-  of the work lives; what must never be done. By this session's
-  evidence it fails the first two and passes the rest.
-- **THE BOUNDS, the session's, put in the same message; his "Yes"
-  answered the question asked, the test, and he did not object to
-  these.** Legacy words are not legacy rules: "gallery", "assembler"
-  and the old phase names are words, each gate is a rule a failure
-  earned, and a rule leaves only on Tony's ruling. File and skill
-  names stay (`gallery_cache_builder.py`, the gallery-* skills); the
-  prose says "website". A LIST FIRST, NOTHING EDITED: every section
-  marked as serving, as legacy wording, as a candidate to leave, or as
-  missing; Tony rules from the list. The skills are out of scope,
-  except where one repeats a paragraph that changes.
-- **THE EVIDENCE TO USE, the session's, the same standing.** The
-  handoffs of recent weeks each end with their session's own slips
-  ("Method, for the next coordinator"); sort them by Tony's three
-  failure modes (the protocol, Procedural Criticality): no rule
-  existed, the rule was not enforced, the rule was not followed. And
-  this session as one data point: the start checks, the read-back,
-  the caps and the planted-fault check each caught something real;
-  nothing told it what the website is or how the parts connect.
-- **THE PLACES FOUND, by a search of `PROJECT_INSTRUCTIONS.md` at
-  87ece129 for the website, the browser, serving and the goal, each
-  hit judged. A search finds words; the review reads all 795 lines.**
-  1. The Orrery and the Assembler (lines 711 to 726): two parts where
-     the build has three; the paragraph to replace.
-  2. The goal: stated nowhere. "goal" appears only in Tony's quoted
-     words on his role (lines 757 and 758). His top goal, 20:47 and
-     20:57: the Earth System, the orrery and the stars. The website's
-     goal is the road's stage 18 on Where We Are. Asked at 20:40 and
-     not answered as asked: whether the new paragraph opens with the
-     goal in one sentence.
-  3. Graceful Fallback (line 230): "API fails -> Check fallback list
-     -> Calculate locally -> Attribute source." On the website the
-     rule is to hold the body and say so (L-525, L-553). The line
-     reads as general.
-  4. Check All Parallel Pipelines (lines 473 to 478): "SIX parallel
-     consumers"; the three-part description must agree with that list
-     and point to it.
-  5. A Report Names Its Items (line 458): its example still says "5
-     parallel pipelines".
-  6. The names: "gallery" 6 times, "website" once, "assembler" 6.
-     Settled by Tony: "Gallery was our old term for the website."
-  7. WITHDRAWN on Tony's word: the Project's description on claude.ai
-     ("Create a python script that explores the Earth system, solar
-     system and the near stellar "neighborhood""), which the session
-     had flagged for naming no website. The top goal remains.
-- **WHAT ARCHIVING THE PLAN TOUCHES, for the build that follows the
-  review.** A retirement line at the plan's top, as its two summaries
-  carry; v38 is its last version, and its section "The lean" stands as
-  the record of Tony's words of 19:36. Its row on `DOCUMENT_CAPS.md`.
-  ledger-and-session-records, which names the plan as STRATEGY, the
-  first of Tony's seven kinds of document (his ruling of 2026-10-13,
-  L-442), so what holds that place is his to say. gallery-assembler,
-  which carries the old paragraph and two pointers to "master plan
-  sec. 3". A new protocol version, which Tony pastes into the Project.
-- **THE REVIEW, AND v4.1 BUILT, 2026-11-25, 21:52 to 23:30 Chicago**,
-  by the next coordinating session (Claude Fable 5.2, linked to Tony's
-  computer, with a shell of its own and none on his), at orrery
-  9daf6a3d, then his push de65fb87, and website 972b4a93. Tony's words
-  opening it, 21:52: "the task is to update the protocol and bring it
-  up to date consistent with the current 3-way architecture: the python
-  orrery with its three components, the solar system orrery, the stars,
-  and the earth science; the website assembler; and the interactive
-  website that renders the images." And: "the purpose of the protocol
-  is to be a functional project description to guide Claude."
-- **The description checked against the code, and widened.** Four
-  sentences corrected: a path plan rides inside the objects export and
-  is not pulled as a file; an encounter is fetched once by a tool,
-  never by the night; the orrery has its own Kepler solvers (L-524), so
-  "no local math" was wrong; a path is also an open comet's. The Earth
-  System's chain and the stars added: only the Solar System has rooms.
-  What was read, what was not, the list section by section, and the
-  slips of seven handoffs sorted by Tony's three failure modes:
-  `documentation/REVIEW_L559_protocol_review_20261125.md`.
-- **RULED, nine items, in Tony's run record**
-  (`WHERE_WE_ARE_11-25-26_2136_run_record.md`), his words after each.
-  1, the middle part is "the website's night" and "assembler" stays the
-  name of the Python on the page: "confirmed". 2, The Project as
-  written, at the top: "confirmed". 3, five blocks leave for the
-  history file: "confirmed". 4, Graceful Fallback gains the website's
-  rule: "confirmed". 5, the new rule Measure, Then Say: "confirmed". 6,
-  the new rule, one writer in a folder at a time: "confirmed. this is
-  also a rule for Tony to observe when working across sessions". 7, the
-  read-back compares bytes, amending his ruling of 2026-11-02:
-  "confirmed". 8, the cap, 800 to 810: "raise approved". 9, The Project
-  takes the strategy slot among the seven kinds of document (L-442):
-  "approved". Then, to a cold read before the build: "yes"; and to the
-  build's order, with his word that no other session was writing in the
-  orrery folder: "approved".
-- **The cold read**, by a fresh session holding only the draft,
-  answered the test's six questions and both traps (the page asks JPL
-  nothing; "assembler" is the Python on the page) as the key written
-  before it had them. Its faults in the new text, ten sentences
-  changed before the build: the pointer in Check All Parallel Pipelines
-  named no heading; "the road's goal" came before any word of the road;
-  the orrery's night was not said to run on GitHub's computers;
-  no sentence said which repository holds the documents; "each body on
-  one"; the goal in the present tense; "a room" not explained; an
-  encounter "fetched by hand" with no word of by what; palomasorrery.com
-  not tied to the website repository; "To v4.0" in the header. Its
-  faults in older text, not touched, are in the handoff.
-- **BUILT 2026-11-25, placed in Tony's folder, each file read back.**
-  `PROJECT_INSTRUCTIONS.md` v4.1, 810 lines at the cap of 810, and its
-  copy `documentation/project_instructions_v4_1.md`. The history file:
-  one entry in PART 1, and PART 4, the 103 lines of v4.0 not kept
-  exactly, in 22 runs, word for word (692 lines stand as they were).
-  `DOCUMENT_CAPS.md`: the protocol's row 810, the plan's row gone, the
-  page still 58 lines. The plan's retirement line, with Tony's words.
-  gallery-assembler 1.6: its boundary section points at The Project and
-  drops "no local math"; its v1.3 entry to
-  `documentation/SKILL_HISTORIES.md`. ledger-and-session-records 1.25:
-  STRATEGY is The Project; the paragraph on the plan's restamps and the
-  v1.22 entry to `documentation/SKILL_HISTORIES.md`.
-  `skills/SKILL_MANIFEST.md` by `skills_index.py`. Checked on a clean
-  copy of de65fb87 with the build laid over: `skills_index.py --check`
-  exits 0; `doc_index.py --caps` passes at 810 of 810; every moved run
-  found whole in the history file; this ledger's index tool run.
-  NOT RUN: the orrery's maintenance run.
-**Gap:** Tony's maintenance run and push; his paste of v4.1 into the
-Project's instructions on claude.ai; his reinstall of gallery-assembler
-(1.6) and ledger-and-session-records (1.25), cleared only by the next
-session's own comparison. Then this item closes. `README.md` still
-tells the chain in the old words; it waits for its restamp (L-522
-(document caps), step 6).
-- **Tony-action (do):** run the maintenance run; Commit, Pull origin,
-  Push origin; paste v4.1 into the Project; reinstall the two skills.
-**Ref:** L-522 (document caps), its notes of 2026-11-25; L-442 (the
-seven kinds of document); L-558 (the folds after Mars);
-`documentation/HANDOFF_coordinating_20261125_night.md`;
-`PROJECT_INSTRUCTIONS.md`; `skills/gallery-assembler/SKILL.md`;
-`skills/ledger-and-session-records/SKILL.md`.
 
 #### [L-540] A reel on a Featured card, beside a link into the room on its scene (gallery; the Links fold built Nov 21, a card that plays video an idea)
 <!-- L:540 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -4104,7 +3900,7 @@ copy in one step. No dashboard button, no step for Tony.
 website's checks); L-485 (a nightly run).
 
 #### [L-545] Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked)
-<!-- L:545 status:OPEN upd:2026-11-23 section:A flag: rice: -->
+<!-- L:545 status:OPEN upd:2026-11-26 section:A flag: rice: -->
 - **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
   THE WALKS load the page itself; the gallery run's rows test its
   scripts and a recorded scene. On Nov 21 L-541's build left three boxes
@@ -4138,11 +3934,56 @@ RULED, both.
 - THE RECORDED SCENE is not re-recorded at all: L-551 (no saved
   scenes), opened from Tony's answer. Ten checks read
   `payload_earth_scene.json` on Nov 22, not six.
-**Gap:** the build of the walks at night, after step 3 of L-522
-(document caps); interactive-exhibit's rule on the walks then says the
-night runs them.
+**Note:** (2026-11-26, 10:50 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 0666ad67 and gallery 972b4a93, both read live)
+RULED AGAIN, WIDER: THE WALKS ARE CHECKS OF THE WEBSITE'S MAINTENANCE
+RUN, AT NIGHT AND ON TONY'S COMPUTER.
+- Tony, 10:25, told that nothing runs the walks unasked: "Why don't we
+  add the walks to the website maintenance runner?" Three options
+  were put to him: 1, as it is, a session's job; 2, the night on
+  GitHub only, his "B" of 2026-11-22; 3, the night and his computer,
+  with the library installed there. The session recommended 2,
+  written so 3 could be turned on later. Tony, 10:37: "Option 3 and
+  add it to the dashboard". His choice, not the recommendation. It
+  replaces "B" where the two differ: jsdom is installed on his
+  computer.
+- To the session's reading of "add it to the dashboard", a button for
+  each walk and a button that installs the library, Tony, 10:45: "Yes
+  and I can do terminal commands with guidance too for one time
+  operations." So the install is a button, or one command typed once
+  with guidance; the build's plan says which.
+- WHY A BUTTON EACH IN ANY CASE: every step of the website's
+  maintenance run has a dashboard button of the same name, and the
+  orrery's Dashboard parity check is red without one (L-550).
+- MEASURED by this session on a clean clone of gallery 972b4a93, Node
+  22.23.5, jsdom 24.1.3 from npm in a scratch folder (63 packages, 16
+  MB, 1,419 files): the scene from `run_room_driver.py
+  SOLAR_SYSTEM_DRIVER` at 2026-11-26T16:38:00Z, "430 traces, 0
+  warnings", under a second, Python alone; the drawer walk, "PASS:
+  383 checks on the stand-in scene", 52 seconds; the clock walk, room
+  solar-system, with a second scene at the served window's last
+  minute (2027-02-21T21:05:00Z), "13 of 13 checks passed", 2 seconds.
+  `gallery_maintenance_run.py`, `daily_run.py` and
+  `.github/workflows/nightly.yml` searched for the walks: not named.
+- NOT MEASURED: either walk on Windows or at another moment; the
+  clock walk in the Earth room; a night with the install step. Read
+  in the run's header and not in a run: a check that could not run
+  is red at night and neither pass nor fail by day.
+- IN THE BUILD: the two walks the method names
+  (`walk_solar_system_drawer.js`, `walk_scene_moment.js`). The other
+  seven walk scripts stay a session's job: put to Tony with the
+  reading he answered at 10:45, as left out "unless you say
+  otherwise"; he did not say otherwise.
+- THE BRIEF, for one Claude Code session through the python_work
+  door, the plan first:
+  `documentation/COORD_L545_walks_in_the_runner_brief_20261126.md`.
+**Gap:** the build, from the brief: its plan, a go-ahead, the build.
+Then a first night on GitHub carrying both checks, and Tony's
+one-time install and first run on his computer. interactive-exhibit's
+rule on the walks is rewritten at the build's close.
 **Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
-(the website's checks); L-535.
+(the website's checks); L-535; L-550 (a website check with no
+dashboard button); L-551 (no saved scenes); L-485 (the nightly run).
 
 #### [L-546] Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded)
 <!-- L:546 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -4907,7 +4748,7 @@ Kepler solver's start, the case that raised it); L-165 (site
 continuity).
 
 #### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
-<!-- L:522 status:OPEN upd:2026-11-25 section:A flag: rice: -->
+<!-- L:522 status:OPEN upd:2026-11-26 section:A flag: rice: -->
 - **The review, 2026-11-10**
   (`documentation/REVIEW_fundamental_documents_20261110.md`, read at
   orrery b3ce81f8 and gallery cea21af1; the coordinating session, Claude
@@ -5741,6 +5582,45 @@ Fable 5.2) TONY'S RUN RECORD IS NOT AN EDIT WAITING, RULED.
   - NOT DONE: Sections 1 to 5, 8 and 9 of the plan not read again
     (its summary says so); both READMEs, step 6's other half; the
     orrery's maintenance run, which this session cannot run.
+**Note:** (2026-11-26, 10:30 Chicago, the coordinating session, Claude
+Fable 5.2) CARRIED HERE FROM L-559 (the protocol as the project's
+instructions) AT ITS CLOSE, for the next time each file is open.
+Nothing below is ruled, and nothing was changed.
+- `README.md` tells the chain in the old words ("the assembler", "the
+  interactive gallery"). For its restamp, step 6.
+- THE PROTOCOL'S OLDER TEXT: the faults the cold read of 2026-11-25
+  found in text v4.1 did not touch, in the cold reader's order, as
+  `documentation/HANDOFF_coordinating_20261125_protocol_v4_1.md` has
+  them. Until now they stood only there.
+  1. "The critical tier must stay short" stands beside ten [CRITICAL]
+     marks, and nothing in the document is tagged PRACTICE.
+  2. A Report Names Its Items gives "two limits" as a counted claim
+     that names what it counts; nothing in the protocol has two
+     limits.
+  3. Check All Parallel Pipelines says SIX consumers and names none;
+     the list is in orrery-coding-conventions, by design.
+  4. Roles says Tony looks "on his own phone"; Mode 5 says "screen or
+     phone".
+  5. Terms a newcomer cannot act on from the protocol alone: handoff,
+     brief, manifest, run record, a ledger handle, Tier-1, a linked
+     session against a Code session. `CLAUDE.md`, the Anchor
+     Requirement and a skill's read plan are named and live outside
+     it.
+  6. "Two Modes Are Still Named", numbered 5 and 7, and "Roles" with
+     one role, read as left over.
+  7. Its last word: it could run a coordinating or talk-only session
+     from the protocol alone, and not a build session.
+- WHAT THE PROJECT SAYS OF CODE NOBODY READ, CLAIMED and not checked
+  by the session that wrote it (the same handoff): its sentences about
+  the website's builder and the page rest on those files' own
+  descriptions and on searches, not on a reading of the builder's
+  5,185 lines or the page's 10,551; the star pipeline's and the Earth
+  System generators' part rests on docstrings, the dashboard's launch
+  table and the two skills. A build session that reads one of those
+  files holds The Project's sentence about it to what it finds.
+- ROOM: the protocol stands at 810 lines of 810, `DOCUMENT_CAPS.md`
+  at 58 of 58 and Where We Are at 130 of 130. The next edit to any of
+  the three moves something out first.
 **Gap:** steps 4 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11; step 3, the protocol, built 2026-11-23 as v4.0): 4, this
 ledger's closed items and header stamps moved out by a tool; 5, the
@@ -42155,6 +42035,282 @@ Part C report, `documentation/REPORT_L538_partC_20261124.md`; the
 go-ahead to close, `documentation/COORD_L538_close_goahead_20261124.md`;
 the closing report, `documentation/REPORT_L538_close_20261124.md`;
 `documentation/DESIGN_orbiters_in_general_20261124.md`.
+
+#### [L-559] The protocol as the project's instructions: Tony's question for a review; the master plan archived; the architecture in three parts (protocol, skills, the master plan; a review first)
+<!-- L:559 status:DONE upd:2026-11-26 section:C flag: rice: -->
+- **Opened 2026-11-25, night**, by the coordinating session of the
+  evening (Claude Fable 5.2, linked to Tony's computer with no shell on
+  it), at orrery 87ece129 and gallery 972b4a93, after it had restamped
+  the master plan as v38 (L-522 (document caps), its note of that
+  evening). What follows is the talk that came next, 20:03 to 20:57
+  Chicago, Tony's messages word for word, straight quotes for his
+  curly ones.
+- **Tony, 20:03:** "The purpose of the master plan is to be a roadmap
+  for creating the orrery in the website. Documentation is a separate
+  document in history. The primary reader is Claude when in doubt.
+  Does it work for Claude?" The session's answer: not yet. It works
+  for its first 140 lines and Section 5a's direction. It is too long
+  to read when in doubt (the session had restamped it without reading
+  about 740 of its lines); its Section 5 still opens "The gallery
+  gains one interactive page per phase"; and "does what the desktop
+  orrery does" is itemized nowhere.
+- **Tony, 20:09:** "Question: if I archived the master plan would
+  Claude miss it?" The answer: mostly no. It stood wrong on rooms
+  from Nov 7 to Nov 25 and nothing broke; no session is told to read
+  it at its start; the protocol and `CLAUDE.md` do not name it. What
+  would be missed is one place that says where the work is going.
+- **RULED, THE PLAN IS ARCHIVED, Tony, 20:14:** "The master plan
+  originated when we first started the refactoring of the website. We
+  then started a summary website which is not kept up. Now the road
+  itself has a direction and momentum of its own and the master plan
+  is outdated documentation. I would archive it and add the goals and
+  methods to a place that Claude actually reads, maybe the protocol."
+  And 20:15: "I meant a summary master plan not website."
+- **Tony, 20:22**, on the session's proposal to write "the lean" into
+  the protocol: "Does the lean matter? Does Claude know that the
+  orrery serves and the website draws basically? Isn't that method?"
+  The answer: it is method, by the protocol's own test (Method Belongs
+  to the Skill), so not the protocol's; and what a session reads says
+  the other way, the website "must cache a recipe once and reconstruct
+  it correctly later, alone" (the protocol's The Orrery and the
+  Assembler, and gallery-assembler's boundary section, the same
+  words).
+- **Tony, 20:26:** "Maybe my understanding is behind. Question: how
+  would you describe the function of the python code in the orrery
+  repo and that of the website and how they are connected. That is
+  the master plan in action as it stands now."
+- **THE THREE-PART DESCRIPTION, the session's answer to that.** The
+  orrery defines; the website's night fetches and serves; the page
+  works out and draws.
+  1. THE ORRERY REPOSITORY, the instrument and the source of truth.
+     The desktop orrery, 181 Python files at its root, run on Tony's
+     computer; it asks JPL live and draws on his screen. Everything is
+     defined there: the list of bodies and how JPL is asked for each,
+     the constants, the stored drawings, the words in the boxes, each
+     spacecraft's path plan. Its checks keep those right. It exports
+     the definitions as files (`data/constants_export.json`,
+     `data/objects_export.json`, `data/path_plans.json`, the
+     drawings). It sends the website no positions of bodies.
+  2. THE WEBSITE'S NIGHT, Python in the website repository
+     (`daily_run.py --night`, `tools/gallery_cache_builder.py`,
+     `tools/pull_*.py`, `tools/mirror_*.py`,
+     `tools/encounter_fetch.py`), on GitHub's computers. It pulls the
+     orrery's exports. It then asks JPL itself: an orbit for each
+     body, and the positions themselves for each spacecraft path and
+     each encounter. It measures how far each orbit can be trusted.
+     It writes the files the page reads. This is the serving.
+  3. THE PAGE, in the visitor's browser (`interactive.html`,
+     `gallery/*.js`, `gallery/assembler/*.py` under Pyodide). For a
+     body on an orbit, the Python in the browser works its place out
+     at the minute shown. For a path or an encounter it draws the
+     positions as served, an encounter with no Python at all.
+     JavaScript draws the tree, the boxes and the shells.
+  - CONNECTED in one direction, by files: the orrery's exports, the
+    website's night, the served files, the page. Two nights an hour
+    apart, by each `nightly.yml`'s cron lines: the orrery's at 07:17
+    and 11:17 UTC, the website's at 08:17 and 12:17. Tony's pushes
+    carry code; the nights carry data.
+  - WHAT IT RESTS ON: both repositories' file lists at the two bases,
+    both `nightly.yml`, the orrery's `data/nightly_run_record.json`,
+    and this ledger's notes (L-557 for the orbit dated today). NOT
+    READ: the builder's code, the assembler's code. It is to be
+    checked sentence by sentence before the protocol states it.
+  - WHAT IT LEAVES OUT, found at the close: the Earth System's own
+    chain (the orrery's generators, the website's `earth/` pages, El
+    Nino's page) and the stars. Tony's top goal names both.
+- **Tony, 20:32:** "You just rewrote the master plan de-facto.
+  Question: where would this description help Claude when in doubt
+  about direction and function?" The answer: in the protocol, in the
+  paragraph it already has on the subject, The Orrery and the
+  Assembler (lines 711 to 726 at 87ece129, 16 lines), which names two
+  instruments and leaves out the website's night. A swap, not an
+  addition: the protocol stands at 795 of its 800 lines. The session
+  had said "nothing in the protocol" two messages before, for the lean
+  alone; a description of what each part is for is the protocol's.
+  Put to Tony as a question; his next message built on it and did not
+  type a yes.
+- **RULED, Tony, 20:37:** "Drop the "lean". You expressed the lean in
+  the way it actually works. And we should check the protocol so that
+  other sections are consistent with this goal and approach. I'm glad
+  that we are doing this. This is the real update."
+- **RULED, Tony, 20:47:** "If the next coordinator is to review and
+  update the protocol update are we providing enough guidance here.
+  The top goal of the orrery and the stars remains. Gallery was our
+  old term for the website. The three part description you wrote is
+  the architecture. The bottom line question for the next
+  coordinator: is the protocol serving its purpose as the "project
+  instructions". This project is now 26 months old and a lot of this
+  language is legacy". And 20:57, to the test below: "Yes and I
+  omitted the earth system part."
+- **THE TEST, RULED ("Yes", 20:57).** The protocol serves as the
+  project's instructions when a cold session holding only the protocol
+  can say six things: what the project is for; what its parts are and
+  how they connect; who Tony is and what is his to decide; how a
+  session starts, what it must check, and how it ends; where the order
+  of the work lives; what must never be done. By this session's
+  evidence it fails the first two and passes the rest.
+- **THE BOUNDS, the session's, put in the same message; his "Yes"
+  answered the question asked, the test, and he did not object to
+  these.** Legacy words are not legacy rules: "gallery", "assembler"
+  and the old phase names are words, each gate is a rule a failure
+  earned, and a rule leaves only on Tony's ruling. File and skill
+  names stay (`gallery_cache_builder.py`, the gallery-* skills); the
+  prose says "website". A LIST FIRST, NOTHING EDITED: every section
+  marked as serving, as legacy wording, as a candidate to leave, or as
+  missing; Tony rules from the list. The skills are out of scope,
+  except where one repeats a paragraph that changes.
+- **THE EVIDENCE TO USE, the session's, the same standing.** The
+  handoffs of recent weeks each end with their session's own slips
+  ("Method, for the next coordinator"); sort them by Tony's three
+  failure modes (the protocol, Procedural Criticality): no rule
+  existed, the rule was not enforced, the rule was not followed. And
+  this session as one data point: the start checks, the read-back,
+  the caps and the planted-fault check each caught something real;
+  nothing told it what the website is or how the parts connect.
+- **THE PLACES FOUND, by a search of `PROJECT_INSTRUCTIONS.md` at
+  87ece129 for the website, the browser, serving and the goal, each
+  hit judged. A search finds words; the review reads all 795 lines.**
+  1. The Orrery and the Assembler (lines 711 to 726): two parts where
+     the build has three; the paragraph to replace.
+  2. The goal: stated nowhere. "goal" appears only in Tony's quoted
+     words on his role (lines 757 and 758). His top goal, 20:47 and
+     20:57: the Earth System, the orrery and the stars. The website's
+     goal is the road's stage 18 on Where We Are. Asked at 20:40 and
+     not answered as asked: whether the new paragraph opens with the
+     goal in one sentence.
+  3. Graceful Fallback (line 230): "API fails -> Check fallback list
+     -> Calculate locally -> Attribute source." On the website the
+     rule is to hold the body and say so (L-525, L-553). The line
+     reads as general.
+  4. Check All Parallel Pipelines (lines 473 to 478): "SIX parallel
+     consumers"; the three-part description must agree with that list
+     and point to it.
+  5. A Report Names Its Items (line 458): its example still says "5
+     parallel pipelines".
+  6. The names: "gallery" 6 times, "website" once, "assembler" 6.
+     Settled by Tony: "Gallery was our old term for the website."
+  7. WITHDRAWN on Tony's word: the Project's description on claude.ai
+     ("Create a python script that explores the Earth system, solar
+     system and the near stellar "neighborhood""), which the session
+     had flagged for naming no website. The top goal remains.
+- **WHAT ARCHIVING THE PLAN TOUCHES, for the build that follows the
+  review.** A retirement line at the plan's top, as its two summaries
+  carry; v38 is its last version, and its section "The lean" stands as
+  the record of Tony's words of 19:36. Its row on `DOCUMENT_CAPS.md`.
+  ledger-and-session-records, which names the plan as STRATEGY, the
+  first of Tony's seven kinds of document (his ruling of 2026-10-13,
+  L-442), so what holds that place is his to say. gallery-assembler,
+  which carries the old paragraph and two pointers to "master plan
+  sec. 3". A new protocol version, which Tony pastes into the Project.
+- **THE REVIEW, AND v4.1 BUILT, 2026-11-25, 21:52 to 23:30 Chicago**,
+  by the next coordinating session (Claude Fable 5.2, linked to Tony's
+  computer, with a shell of its own and none on his), at orrery
+  9daf6a3d, then his push de65fb87, and website 972b4a93. Tony's words
+  opening it, 21:52: "the task is to update the protocol and bring it
+  up to date consistent with the current 3-way architecture: the python
+  orrery with its three components, the solar system orrery, the stars,
+  and the earth science; the website assembler; and the interactive
+  website that renders the images." And: "the purpose of the protocol
+  is to be a functional project description to guide Claude."
+- **The description checked against the code, and widened.** Four
+  sentences corrected: a path plan rides inside the objects export and
+  is not pulled as a file; an encounter is fetched once by a tool,
+  never by the night; the orrery has its own Kepler solvers (L-524), so
+  "no local math" was wrong; a path is also an open comet's. The Earth
+  System's chain and the stars added: only the Solar System has rooms.
+  What was read, what was not, the list section by section, and the
+  slips of seven handoffs sorted by Tony's three failure modes:
+  `documentation/REVIEW_L559_protocol_review_20261125.md`.
+- **RULED, nine items, in Tony's run record**
+  (`WHERE_WE_ARE_11-25-26_2136_run_record.md`), his words after each.
+  1, the middle part is "the website's night" and "assembler" stays the
+  name of the Python on the page: "confirmed". 2, The Project as
+  written, at the top: "confirmed". 3, five blocks leave for the
+  history file: "confirmed". 4, Graceful Fallback gains the website's
+  rule: "confirmed". 5, the new rule Measure, Then Say: "confirmed". 6,
+  the new rule, one writer in a folder at a time: "confirmed. this is
+  also a rule for Tony to observe when working across sessions". 7, the
+  read-back compares bytes, amending his ruling of 2026-11-02:
+  "confirmed". 8, the cap, 800 to 810: "raise approved". 9, The Project
+  takes the strategy slot among the seven kinds of document (L-442):
+  "approved". Then, to a cold read before the build: "yes"; and to the
+  build's order, with his word that no other session was writing in the
+  orrery folder: "approved".
+- **The cold read**, by a fresh session holding only the draft,
+  answered the test's six questions and both traps (the page asks JPL
+  nothing; "assembler" is the Python on the page) as the key written
+  before it had them. Its faults in the new text, ten sentences
+  changed before the build: the pointer in Check All Parallel Pipelines
+  named no heading; "the road's goal" came before any word of the road;
+  the orrery's night was not said to run on GitHub's computers;
+  no sentence said which repository holds the documents; "each body on
+  one"; the goal in the present tense; "a room" not explained; an
+  encounter "fetched by hand" with no word of by what; palomasorrery.com
+  not tied to the website repository; "To v4.0" in the header. Its
+  faults in older text, not touched, are in the handoff.
+- **BUILT 2026-11-25, placed in Tony's folder, each file read back.**
+  `PROJECT_INSTRUCTIONS.md` v4.1, 810 lines at the cap of 810, and its
+  copy `documentation/project_instructions_v4_1.md`. The history file:
+  one entry in PART 1, and PART 4, the 103 lines of v4.0 not kept
+  exactly, in 22 runs, word for word (692 lines stand as they were).
+  `DOCUMENT_CAPS.md`: the protocol's row 810, the plan's row gone, the
+  page still 58 lines. The plan's retirement line, with Tony's words.
+  gallery-assembler 1.6: its boundary section points at The Project and
+  drops "no local math"; its v1.3 entry to
+  `documentation/SKILL_HISTORIES.md`. ledger-and-session-records 1.25:
+  STRATEGY is The Project; the paragraph on the plan's restamps and the
+  v1.22 entry to `documentation/SKILL_HISTORIES.md`.
+  `skills/SKILL_MANIFEST.md` by `skills_index.py`. Checked on a clean
+  copy of de65fb87 with the build laid over: `skills_index.py --check`
+  exits 0; `doc_index.py --caps` passes at 810 of 810; every moved run
+  found whole in the history file; this ledger's index tool run.
+  NOT RUN: the orrery's maintenance run.
+**Note:** (2026-11-26, 10:30 Chicago, the coordinating session, Claude
+Fable 5.2, linked to Tony's computer with a shell of its own and none
+on his; on orrery 0666ad67 and gallery 972b4a93, both read live)
+CLOSED, on Tony's word, 10:11: "Yes close L559."
+- THE GAP'S FOUR PARTS, each checked by this session, none taken on
+  his "-- done" in the run record:
+  - The push. Orrery 5d99eb3b, the SHA he wrote in his run record,
+    holds the build's 13 files, each found by name in the change from
+    de65fb87; with them eight of the nine files his maintenance run
+    wrote and his run record, 22 files in all. HEAD is 0666ad67, his run
+    record's commit of 09:21.
+  - The maintenance run, his, pasted in
+    `documentation/WHERE_WE_ARE_11-25-26_2136_run_record.md`: "37 of 37
+    gating checkers passed -- 256.4s total" and "0 TIER-1 -- the push
+    gate holds".
+  - The paste. The instructions this session was given open "v4.1 |
+    November 25, 2026" and carry The Project. Read, not compared byte
+    for byte: a session is given that text, not a file of it.
+  - The reinstalls. All 12 installed skills compared with the
+    repository's at 0666ad67, the body byte for byte and the header
+    with its line breaks ignored: 12 equal. The installed
+    gallery-assembler reads 1.6 and ledger-and-session-records 1.25;
+    both are cleared.
+- Four files in Tony's folder equal GitHub's at 0666ad67, byte for
+  byte: `PROJECT_INSTRUCTIONS.md`, this ledger, Where We Are and his
+  run record. The live protocol is 810 lines and equals its archived
+  copy, `documentation/project_instructions_v4_1.md`.
+- LOOSE ENDS, each given a home in an open item (A Closing Item
+  Re-homes Its Loose Ends), all three on L-522 (document caps), its
+  note of 2026-11-26: `README.md`'s old words; the cold read's seven
+  faults in the protocol's older text, which stood only in the
+  handoff; and what The Project says of code nobody read.
+- NOT DONE HERE, and not this item's: no night had run in either
+  repository when this was written (the newest night commits are the
+  orrery's 9de39f3c and the website's e028483d, both of Nov 25), so
+  BepiColombo's cut still waits for its night and Tony's look (L-554
+  (JPL's sentence when a path is a prediction)).
+**Gap:** none. Closed 2026-11-26 on Tony's word, his push, paste and
+two reinstalls each confirmed by this session's own checks.
+**Ref:** L-522 (document caps), its notes of 2026-11-25 and
+2026-11-26; L-442 (the seven kinds of document); L-558 (the folds
+after Mars);
+`documentation/HANDOFF_coordinating_20261125_night.md`;
+`documentation/HANDOFF_coordinating_20261125_protocol_v4_1.md`;
+`PROJECT_INSTRUCTIONS.md`; `skills/gallery-assembler/SKILL.md`;
+`skills/ledger-and-session-records/SKILL.md`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
