@@ -699,14 +699,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2026%20ED138&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-11-25",
+        "confirmed": "2026-11-27",
         "center": "@0",
         "target": "2026 ED138",
-        "epoch": "2026-10-28 14:53",
-        "days": 103248.9414310349,
-        "error_days": 10.294,
-        "jpl_days": 103249.7029099222,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2026%20ED138%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.120138889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-27 17:29",
+        "days": 103249.7006144794,
+        "error_days": 1.8992,
+        "jpl_days": 103249.7006144795,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2026%20ED138%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461372.228472223'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "em_l1": {
@@ -1269,14 +1269,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2014%20MU69&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-11-25",
+        "confirmed": "2026-11-27",
         "center": "@0",
         "target": "2014 MU69",
-        "epoch": "2026-10-28 14:53",
-        "days": 107374.0052121068,
+        "epoch": "2026-11-27 17:29",
+        "days": 107374.0115894353,
         "error_days": 36.584,
-        "jpl_days": 107374.0052121068,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2014%20MU69%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.120138889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "jpl_days": 107374.0115894353,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2014%20MU69%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461372.228472223'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "ixion": {
