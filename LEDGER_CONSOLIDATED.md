@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*283 live items; 268 need attention (`!`); 162 RICE-scored; 270 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*282 live items; 267 need attention (`!`); 162 RICE-scored; 271 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1188,7 +1188,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-22 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 | ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-23 |
-| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-27 |
 | ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
 | ! | L-547 | Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded) | OPEN | -- | 2026-11-22 |
 | ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-23 |
@@ -1618,6 +1617,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-537 | The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump) | DONE | -- | 2026-11-19 |
 |  | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | DONE | -- | 2026-11-25 |
 |  | L-544 | Earth-Moon L4 and L5 tie in the drawer's order, so which is listed first changes from minute to minute (gallery; recorded, not fixed) | DONE | -- | 2026-11-23 |
+|  | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | DONE | -- | 2026-11-27 |
 |  | L-550 | A website check added by a website session leaves the orrery's dashboard check red (method; for the skills bump) | DONE | -- | 2026-11-23 |
 |  | L-559 | The protocol as the project's instructions: Tony's question for a review; the master plan archived; the architecture in three parts (protocol, skills, the master plan; a review first) | DONE | -- | 2026-11-26 |
 
@@ -4145,7 +4145,206 @@ Neon." Nothing built.
 - THE REVIEWERS, named by Tony: the first return is GPT 6.2 Astra,
   Medium; the second is Gemini 4 Neon. Both files' headers now say so;
   their names are unchanged.
-**Gap:** the rule applied, body by body, at the design talk for
+**Note:** (2026-11-27, 12:37 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 8678143 and gallery 95bdd6a, both read live)
+AFTER THE CLOSE: HOW THE RULE IS BUILT, TONY'S TWO POINTS ON IT, AND A
+SECOND REQUEST TO THE OUTSIDE MODELS. Nothing built, nothing ruled.
+- Tony, 10:48: "how do we implement it across the orrery and the
+  website?" Read from the code at orrery 7d53e865 and gallery fafdaeb6:
+  each repository already has one place. The orrery's is
+  `position_accuracy.py` (L-401), which works out the error "for one
+  body seen from one centre on one date", has a state for "no stated
+  error", and formats through `distance_text` and `speed_text`;
+  `apsidal_markers.py` and `idealized_orbits.py` call it, among others.
+  The website's is `distanceLine` in `gallery/solar_system_figures.js`.
+  The 12 rows travel by the constants export and its mirror, and both
+  sides ask JPL (vector table 2xr) for a small body's uncertainty. So
+  the rule is a change to those two places and to the rows, not a new
+  system; after both builds, sourcing a body is a row in the orrery and
+  one night.
+- A SCOPE QUESTION FOUND, NOT RULED: the orrery's module also formats
+  speeds, and the q, Q and a lines of an orbit. Whether the four figures
+  cap those too. The saved pictures keep the digits they were made with:
+  L-520 (old pictures carry old words).
+- Tony, 12:14: "1) I don't think it makes sense for the spacecraft to go
+  blank. JPL knows where they are. 2) we use au and km as standard
+  units. The same 4 digits will read differently and maybe even as zero.
+  If we used scientific notation different again." 12:15: "Is there a
+  standard that we can pick? Maybe a national level planetarium that we
+  can lean on for a standard?"
+- SAID BACK. This session's statement at 10:50, that the 21 spacecraft
+  would show no distance until each is sourced, overstated it: under a
+  ceiling of four figures one source for the class, on how well
+  deep-space tracking places a craft, would do for the part of a path
+  fitted to tracking data. It is to be read before the build; Gemini's
+  first reply names a candidate, not read. Four significant figures are
+  not four decimals, so nothing prints as zero.
+- FOUND, through search results and not the pages themselves. NASA
+  prints a distance for the public in three ways: its Voyager status
+  page, in a copy saved in October 2025, "15,709,189,949 mi" and
+  "168.99637871 AU"; its Planetary Fact Sheet, in millions of
+  kilometres, "57.9", "108.2", "149.6"; its prose, "about 122 AU, or
+  about 11 billion miles (18 billion kilometers)". The IAU's 2012
+  Resolution B2: the astronomical unit exactly 149 597 870 700 m, its
+  symbol "au". No standard from a planetarium was found; none was
+  searched.
+- A CANDIDATE STYLE, NOT APPROVED: the astronomical unit as a plain
+  decimal to four figures; kilometres from the same figures, with the
+  word million or billion; no scientific notation; "AU" or "au" open. To
+  "Shall we take the fact-sheet style as our display standard?", Tony,
+  12:34: "Can you write another request to GPT and Gemini to review this
+  style? And throw in a search of Adler (Chicago) and Hayden." Written:
+  `documentation/REVIEW_REQUEST_L560_display_style_20261127.md`, six
+  questions.
+- THE NIGHTS SINCE THE CLOSE: orrery 8678143, 11:29, a clean night, its
+  title with no "JPL REFIT"; website 95bdd6a, 12:19, committed, both
+  walks passing (the drawer walk at 381).
+**Note:** (2026-11-27, 14:08 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery e6b7651 and gallery 95bdd6a, both read live)
+THE SECOND REQUEST'S TWO RETURNS, SAVED AND NOT CHECKED; AND A DISPLAY
+STYLE PUT TO TONY, NOT APPROVED.
+- Brought by Tony at 14:06 as two attachments with no words. Saved as
+  pasted, under a header, on the precedent of the first two:
+  `documentation/worksheets/GPT_L560_display_style_review_RETURN_20261127.md`
+  (it names itself "OpenAI Codex, based on GPT-6") and
+  `documentation/worksheets/Gemini_L560_display_style_review_RETURN_20261127.md`
+  ("Gemini", no version). No quotation or figure in either is repeated
+  here as fact.
+- WHERE THEY AGREE: no standard governs the whole label, and none comes
+  from a planetarium or a museum association; kilometres with the word
+  million or billion; lowercase "au", explained once; each unit rounded
+  once from the underlying distance and never from the other's rounded
+  figure; "billion" explained once; for spacecraft, Thornton and
+  Border's monograph supports the part of a path fitted to tracking data
+  and not a prediction; three sigma only where a source gives a sigma.
+- WHERE THEY DIFFER: a small value in au (GPT keeps both units with
+  kilometres leading; Gemini drops au below a threshold); grouping
+  digits (GPT a thin space; Gemini commas, as normal on an English
+  page); miles (GPT leaves them out, with one bridge in the au's
+  explanation; Gemini calls it a real loss and suggests a toggle); a
+  planetarium precedent (GPT reports a table in Hayden's Digital
+  Universe Guide that prints millions and billions with the word; Gemini
+  found none); how far one source carries for spacecraft (GPT: none
+  found for every craft, date and centre, the sentence it quotes being
+  about angle and "under favorable conditions"; Gemini: yes, for the
+  fitted part).
+- NEW POINTS: the test of the last place differs between the two units,
+  so equal figures in both need the count the more demanding unit
+  supports (GPT); the page's own error between served points still
+  counts, which the website's drift term already carries (GPT); the
+  distance is from centre to centre and the page should say so once
+  (Gemini); an archived craft's trajectory against a modern ephemeris,
+  near a planet (Gemini).
+- GPT ON THIS SESSION'S EXAMPLE PAIR: 172.5 au and 25.80 billion km are
+  both right only as roundings of the one underlying distance;
+  converting the rounded 172.5 gives 25.81. By arithmetic here on
+  Voyager 1's printed 25,801,570,615 km: 172.47285 au, so both round as
+  written.
+- THE STYLE PUT TO TONY AT THIS HOUR, NOT APPROVED, six statements. (a)
+  Both units are worked from the one underlying distance and each is
+  rounded once; neither is converted from the other's rounded figure;
+  both carry the same number of figures, the number the more demanding
+  of the two supports. (b) The astronomical unit is written "au", as a
+  plain decimal, and is explained once on the page. (c) Kilometres are
+  written with the word million or billion from one million up, and as a
+  whole number with commas below that; "billion" is explained once as a
+  thousand million. (d) Both units always; au leads for a distance from
+  the Sun, kilometres lead for a moon or a craft measured from the body
+  it is near. (e) No miles in the box and no scientific notation. (f)
+  One standing sentence on the page says distances are from centre to
+  centre and rounded to at most four significant figures for the reader,
+  fewer where the evidence supports fewer.
+- FOR THE SPACECRAFT, said to him with it: a craft's distance from the
+  Sun prints on the part of its path JPL says is fitted to data, on one
+  class source still to be read; a craft measured from a body it is near
+  needs evidence of its own (L-538 (the orbiters' printed error) already
+  works that way).
+- A third orrery night since the close, e6b7651, 14:02, its title with
+  no "JPL REFIT".
+**Note:** (2026-11-27, 14:25 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery e6b7651 and gallery 95bdd6a)
+THE DISPLAY STYLE SETTLED ON TONY'S WORD; TWO OF ITS SOURCES CHECKED;
+THE TRACKING SOURCE FOR SPACECRAFT READ, AND PUT TO HIM AS THE CLASS
+EVIDENCE, NOT APPROVED.
+- Tony, 14:18: "Do you need to double check any of their sources or is
+  this final?" Checked, each at the source's own page through the web
+  tool. The IAU's 2012 Resolution B2
+  (https://iauarchive.eso.org/static/resolutions/IAU2012_English.pdf):
+  "the unique symbol "au" be used for the astronomical unit", and "149
+  597 870 700 m exactly". The NASA Glenn Content Guide, "Numbers and
+  percentages"
+  (https://nasa.github.io/content-guide/numbers-and-percentages): "We
+  express these numbers with a numeral and a word." GPT's two worked
+  conversions, redone by hand here, are right. NOT CONFIRMED: GPT's
+  table in Hayden's Digital Universe Guide; Gemini found none, and one
+  search here did not find it. Seen in passing: a JPL education guide
+  heads its table "Distance from Sun (au)".
+- Tony, 14:23, quoting this session's line that the tracking source was
+  unread: "everything is settled except this part. Do you want me to get
+  it?" READ AS HIS APPROVAL OF THE SIX STATEMENTS in the note above.
+  They are the display style.
+- THE TRACKING SOURCE, READ through the web tool: the first 100,000 of
+  144,828 characters of a copy of Thornton and Border, "Radiometric
+  Tracking Techniques for Deep-Space Navigation", JPL Publication 00-11,
+  October 2000, at
+  https://corpora.tika.apache.org/base/docs/govdocs1/215/215333.pdf.
+  Chapter 5 was not reached. Found, with the tool's section and page:
+  3.5, p. 32, "This instrument bias is about 2 m."; 3.6, p. 37, of
+  Ulysses, "range accuracies of a few meters were achievable", and a
+  spacecraft's declination "to 200 nrad" at low declinations; 4.2, p.
+  55, "the typical accuracy of the" Delta-DOR "system in 1992 was 16
+  nrad"; 4.2, p. 54, a requirement of "a one-sigma accuracy of 50 nrad"
+  for Galileo and Mars Observer; 4.2, p. 56, Magellan's declination from
+  Doppler alone "biased by at least 2.3" microradians; 3.3.4.2, p. 24,
+  about 70 nrad "corresponds to about 16 km at Mars". NOT FOUND in the
+  part read: GPT's quotation about long arcs of Doppler and range and
+  "40 nrad or better" in 3.6. Gemini's two quotations were found.
+- WHAT IT SUPPORTS, by this session's arithmetic. The largest angular
+  error among those, 2.3 microradians, is about 2 parts in a million of
+  a craft's distance from Earth (344 km at 1 au; about 59,000 km at
+  172.5 au). A fourth significant figure is never finer than 1 part in
+  10,000. Range is to metres. So for a craft tracked by range and
+  Doppler, on the part of its path fitted to tracking data, four figures
+  of its distance from the Sun are supported with a margin of about
+  forty or more. This is a statement of what deep-space tracking
+  achieves, published in 2000; it is not JPL's uncertainty for any one
+  craft, and by the rule's fifth statement the page must not call it
+  that. It does not reach a craft measured from a body it is near, nor a
+  predicted path.
+- PUT TO TONY, NOT APPROVED: that this monograph is the class evidence
+  for spacecraft, within those limits.
+- OWED before a row is typed: the document itself read from JPL's own
+  copy, with its quotations and pages; the 1980 S-band column of its
+  Table 3-3, for the Pioneers; Chapter 5.
+**Note:** (2026-11-27, 14:34 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery e6b7651 and gallery 95bdd6a)
+THE EVIDENCE FOR SPACECRAFT AS A CLASS, APPROVED. With it the rule and
+its display style are whole. Nothing built.
+- Tony, 14:32, to the reading above: "Are you suggesting we can hold 5
+  significant digits? If you give me the url I can find the document."
+  Answered: no; four stays the ceiling, an editorial choice (statement
+  1); the margin only shows four is safe, and in the worst case the
+  monograph mentions the margin over a fifth figure would be about four.
+  JPL's own copy of the monograph was not located by a search and no
+  address was given from memory; the copy read is the address in the
+  note above.
+- Tony, 14:34, to "whether deep-space tracking, as these sources state
+  it, is the evidence for spacecraft as a class, within the three limits
+  I listed": "Yes, settled." THE THREE LIMITS: it states what tracking
+  achieves and is never called JPL's uncertainty for a craft; it covers
+  the part of a path fitted to tracking data and not a prediction; it
+  does not reach a craft measured from a body it is near, which needs
+  evidence of its own.
+- A SECOND SOURCE FOUND AND NOT READ: NASA's technical reports server,
+  "Radiometric Spacecraft Tracking for Deep Space Navigation" (2008),
+  https://ntrs.nasa.gov/citations/20100032906, whose summary says it
+  gives a detailed error budget for the three kinds of tracking
+  measurement. It may be the better one to cite.
+**Gap:** before a row for spacecraft is typed, the monograph read whole
+from a saved copy, with its quotations and pages, and the 2008 paper
+read; the other claims in the four returns checked as each is used.
+Then the rule applied, body by body,
+at the design talk for
 Jupiter's moons and after (L-558 (the folds after Mars)). First the 12
 rows, against what their source says. Then Io, Titan, Pluto and Charon,
 each for the distance its box prints; the 13 path bodies' first rung;
@@ -4453,325 +4652,6 @@ in `tools/`, so a Code session working in Tony's folder makes the push
 copy in one step. No dashboard button, no step for Tony.
 **Ref:** L-529 (guided encounters); L-541 (a plan's clock); L-423 (the
 website's checks); L-485 (a nightly run).
-
-#### [L-545] Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked)
-<!-- L:545 status:OPEN upd:2026-11-27 section:A flag: rice: -->
-- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
-  THE WALKS load the page itself; the gallery run's rows test its
-  scripts and a recorded scene. On Nov 21 L-541's build left three boxes
-  printing a path's day one day early (Juno, West, Galileo). It passed
-  53 gallery rows on Tony's copy and on a push copy, and the
-  coordinating session's own run of the new check.
-  `walk_solar_system_drawer.js` caught it, run only because the
-  coordinating session asked for the walks before the commit. A session
-  does not run them unasked: they need jsdom (24.1.3, from npm, into a
-  scratch folder), and neither the gallery run nor the night runs them.
-- Tony, Nov 21, on "that should not depend on someone remembering":
-  "-- correct. should this be method?"
-  (`documentation/WHERE_WE_ARE_11-21-26_1515_run_record.md`). Yes. THE METHOD: a session that changes
-  `interactive.html` or a script it loads runs both walks before its
-  closing report, and reports each count and any red check by name. A
-  brief says so until interactive-exhibit does.
-- THE RECORDED EARTH SCENE (`documentation/payload_earth_scene.json`,
-  made by `tools/record_earth_scene.py`) is re-recorded only by hand.
-  Six checks read it. Re-recorded on Nov 21 for L-541, it brought in
-  Earth's period sentence, served since L-535, which Typed facts had
-  never read (the build's closing thought).
-**Note:** (2026-11-22, the coordinating session, Claude Fable 5.2)
-RULED, both.
-- THE WALKS. Tony, 22:54, of three choices (a session's job only; at
-  night on GitHub only; everywhere, the website keeping the library):
-  "B". The night on GitHub installs jsdom at its fixed version in a
-  scratch folder and runs both walks; a failed walk makes the night
-  red; nothing is added to Tony's computer or to the website's files.
-  The night's workflow file was not read when he ruled, so the build
-  is not sized.
-- THE RECORDED SCENE is not re-recorded at all: L-551 (no saved
-  scenes), opened from Tony's answer. Ten checks read
-  `payload_earth_scene.json` on Nov 22, not six.
-**Note:** (2026-11-26, 10:50 Chicago, the coordinating session, Claude
-Fable 5.2, on orrery 0666ad67 and gallery 972b4a93, both read live)
-RULED AGAIN, WIDER: THE WALKS ARE CHECKS OF THE WEBSITE'S MAINTENANCE
-RUN, AT NIGHT AND ON TONY'S COMPUTER.
-- Tony, 10:25, told that nothing runs the walks unasked: "Why don't we
-  add the walks to the website maintenance runner?" Three options
-  were put to him: 1, as it is, a session's job; 2, the night on
-  GitHub only, his "B" of 2026-11-22; 3, the night and his computer,
-  with the library installed there. The session recommended 2,
-  written so 3 could be turned on later. Tony, 10:37: "Option 3 and
-  add it to the dashboard". His choice, not the recommendation. It
-  replaces "B" where the two differ: jsdom is installed on his
-  computer.
-- To the session's reading of "add it to the dashboard", a button for
-  each walk and a button that installs the library, Tony, 10:45: "Yes
-  and I can do terminal commands with guidance too for one time
-  operations." So the install is a button, or one command typed once
-  with guidance; the build's plan says which.
-- WHY A BUTTON EACH IN ANY CASE: every step of the website's
-  maintenance run has a dashboard button of the same name, and the
-  orrery's Dashboard parity check is red without one (L-550).
-- MEASURED by this session on a clean clone of gallery 972b4a93, Node
-  22.23.5, jsdom 24.1.3 from npm in a scratch folder (63 packages, 16
-  MB, 1,419 files): the scene from `run_room_driver.py
-  SOLAR_SYSTEM_DRIVER` at 2026-11-26T16:38:00Z, "430 traces, 0
-  warnings", under a second, Python alone; the drawer walk, "PASS:
-  383 checks on the stand-in scene", 52 seconds; the clock walk, room
-  solar-system, with a second scene at the served window's last
-  minute (2027-02-21T21:05:00Z), "13 of 13 checks passed", 2 seconds.
-  `gallery_maintenance_run.py`, `daily_run.py` and
-  `.github/workflows/nightly.yml` searched for the walks: not named.
-- NOT MEASURED: either walk on Windows or at another moment; the
-  clock walk in the Earth room; a night with the install step. Read
-  in the run's header and not in a run: a check that could not run
-  is red at night and neither pass nor fail by day.
-- IN THE BUILD: the two walks the method names
-  (`walk_solar_system_drawer.js`, `walk_scene_moment.js`). The other
-  seven walk scripts stay a session's job: put to Tony with the
-  reading he answered at 10:45, as left out "unless you say
-  otherwise"; he did not say otherwise.
-- THE BRIEF, for one Claude Code session through the python_work
-  door, the plan first:
-  `documentation/COORD_L545_walks_in_the_runner_brief_20261126.md`.
-**Note:** (2026-11-26, 12:10 Chicago, the coordinating session, Claude
-Fable 5.2, on orrery 99749f0c and gallery 972b4a93, both read live)
-THE PLAN READ AGAINST THE CODE; TONY'S RULING B; THE GO-AHEAD.
-- The plan, `documentation/REPORT_L545_walks_plan_20261126.md`, by the
-  Code session (Claude Opus 5.5), read from Tony's folder. Two rows,
-  `Drawer walk` and `Clock walk`, run by one new tool
-  (`tools/headless/run_walk.py`); a new kind of row, "walk", whose
-  exit code 3 means it could not run; the library in the home folder,
-  `C:\Users\tonyq\palomas_orrery_walks`, outside OneDrive; the
-  install a command and no button; the website pushed first.
-- RUN HERE, on a clean clone of gallery 972b4a93: the drawer walk at
-  the served window's last minute, 2027-02-21T21:05Z, "FAIL 1 of
-  383", Io's box alone, as the plan's table has it. READ: Io's served
-  orbit is dated JD 2461369.5, 25 November 2026, the day of the
-  build; L-485's R4 as the plan quotes it; the night's held title in
-  `daily_run.py` and the workflow; `test_dashboard_parity.py` asking
-  only whether a row is "node"; `run_tool`, where a Python row has no
-  way today to say it could not run. NOT CHECKED here: Dashboard
-  parity's rule 3; the night's commit step refusing new files; the
-  walks on Windows, which the plan measured on Tony's computer.
-- THE PLAN'S QUESTION, a night when the library cannot be downloaded:
-  A, red and nothing committed, as the run's header has it; B, the
-  night commits, the two rows are reported and not red, and the
-  commit's title says so every night it lasts (L-485's R4). Both
-  sessions recommended B. Tony, in his run record copy
-  `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`, beside the
-  recommendation: "-- confirmed"; beside the ask: "-- B and
-  recommendations approved." In chat, 11:57: "recommendations
-  approved. please proceed with the prompt to Code." A recommendation
-  he accepted.
-- APPROVED WITH IT, the coordinating session's four additions: the
-  title says what is known, "WALKS NOT RUN: library did not install",
-  not "npm unreachable"; all 63 packages pinned by a lock file kept
-  in the website, since jsdom 24.1.3 asks for its dependencies by
-  range ("cssstyle": "^4.0.1", read from the lock npm wrote here);
-  interactive-exhibit's sentence "the drawer walk is no gate and is
-  kept green all the same" corrected in the same bump; Io recorded.
-- IO, FOUND BY THE PLAN, NOT FIXED: the drawer walk allows 1 percent
-  on Io's distance and the page prints two figures far from Io's
-  orbit date ("0.0028 AU from Jupiter (400,000 km)"), so the walk
-  passes 80 days from that date and fails at 88. With nightly builds
-  the date is a day old. The one case with fresh data: Io alone held
-  on an old orbit that long would turn the night red, against L-553
-  (a held body turns the night red). What the walks check was out of
-  the build's scope.
-- FOR THE FOLDS' BRIEFS: with the drawer walk a gate, an orrery push
-  that changes a served row can fail the website's night if the
-  walk's typed expectations were not brought along. Each fold's build
-  updates the walk in the same sitting.
-- The go-ahead:
-  `documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`.
-**Note:** (2026-11-26, afternoon Chicago, L-545's Code session, Claude
-Opus 5.5, on orrery 55dbdb5a and gallery 972b4a93, both equal to
-GitHub with only Tony's run record waiting) BUILT, BY THE GO-AHEAD,
-WITH TONY'S RULING B. Not pushed; nothing committed.
-- THE TOOL: `tools/headless/run_walk.py` in the website, `drawer`,
-  `clock` and `--install`. One run reads the library against the lock
-  package by package, makes its scenes fresh with `run_room_driver.py`
-  in a temporary folder outside the repository at the run's own minute
-  (the clock walk also at the served window's last whole minute, in
-  the solar-system and earth rooms), walks the real page, then a
-  planted copy that must fail on the check named, and prints the
-  row's line. A fault that cannot be planted is a FAIL, never
-  "caught".
-- THE ROWS: `Drawer walk` and `Clock walk` in `OFFLINE_CHECKERS`, after
-  `Room clock`, of the new runner kind "walk": exit 3 UNREACHABLE,
-  exit 4 NOT RUN. Both gate, by day and at night.
-- THE LIBRARY: `WALKS_LIBRARY`, the folder palomas_orrery_walks in the
-  home folder (`C:\Users\tonyq\palomas_orrery_walks`; on GitHub
-  /home/runner/palomas_orrery_walks, outside the checkout). All 63
-  packages pinned by `tools/headless/walks_library/package-lock.json`
-  (28,073 bytes, written by npm from a package.json naming jsdom
-  24.1.3 exactly); `--install` copies both files there and runs `npm
-  ci`, which installs the lock's versions and never writes a lock, then
-  reads the folder back. A package missing, at another version, or not
-  in the lock makes the row UNREACHABLE by name (tested: "cssstyle is
-  4.6.1, the lock has 4.6.0; left-pad is not in the lock").
-- RULING B AS BUILT: the workflow's step "Install the walks' library
-  (L-545)" runs `run_walk.py --install` with continue-on-error and
-  hands its outcome to the night (`PO_WALKS_INSTALL`). After a failed
-  install the rows print NOT RUN TONIGHT with npm's FIRST error line
-  (its last line only points at npm's log file; measured: "npm error
-  A complete log of this run can be found in: ..."), are listed apart
-  and are not red; the night's record carries "NOT RUN", and
-  `daily_run.py --held-title` reads it (`walks_not_run`) and starts
-  the title "WALKS NOT RUN: library did not install". BESIDE A HOLD:
-  the walks' words come first, then the HELD words, one title: "WALKS
-  NOT RUN: library did not install; HELD Halley -- Nightly run ...".
-  `daily_run.py --check`: 8 of 8 made-up titles right, and the planted
-  fault "leaves the walks not run out" caught on 2 of 8 nights; 37 of
-  37 fixture checks.
-- THE PLANTED FAULTS, by name: the drawer walk, AN ENDED MISSION'S
-  LAST DAY ONE DAY EARLY (`solarSystemMissionEndDay`), caught as 7 of
-  66 red in section 42b, one per ended mission (Pioneer 10, Pioneer
-  11, Galileo, Cassini, Rosetta, Akatsuki, DART); the clock walk, THE
-  FREEZE THAT NEVER ANSWERS (`?freeze=1` read as "0"), caught as 7 of
-  13 red, all in the frozen step. `walk_scene_moment.js` takes the
-  planted page as an optional fifth argument; what it checks is
-  unchanged.
-- SHOWN THREE WAYS, on Tony's computer (Windows 11, Node 24.13.1), on a
-  push copy of the website: PASS with the library, "DRAWER WALK: PASS
-  -- 383 checks on the real page ... planted fault ... caught, 7 of 66
-  red (63 s)" and "CLOCK WALK: PASS -- solar-system 13 of 13, earth 10
-  of 10 ... caught in solar-system, 7 of 13 red, all in the frozen step
-  (9 s)"; UNREACHABLE without it by day (neither pass nor fail) and
-  under the night pass (red, "UNREACHABLE row(s) are red tonight");
-  NOT RUN at night after a failed install (exit 0, "REPORTED, not
-  red"); FAIL on a broken page (drawer 8 of 383 red with the ended
-  mission's words changed; clock, solar-system 12 of 13 with the
-  frozen words changed); FAIL when the fault cannot be planted, and
-  when a planted page is not caught by the check named. Node missing:
-  UNREACHABLE, naming Node first.
-- HEADERS: the drawer walk, the clock walk, `page_harness.js` and
-  `run_room_driver.py` no longer say "Claude-only". THE PAGES:
-  `INTERACTIVE_AS_BUILT.md`, The headless recipe, its opening and a
-  walk bullet replaced, one added; `CACHE_BUILDER_AS_BUILT.md`, the
-  night form's install step, NOT RUN and the title. THE BUTTONS:
-  Drawer Walk and Clock Walk in "Gallery -- checks and data", with
-  their lines; Dashboard parity "118 steps matched to their buttons".
-- interactive-exhibit 1.46 (the bump's four steps, here): A SESSION
-  THAT CHANGES THE PAGE READS THE WALKS rewritten as built; "the
-  drawer walk is no gate and is kept green all the same (L-521)" now
-  "the drawer walk is a gate of the gallery run, at night too
-  (L-545)"; the 1.43 entry and the 1.45 install moved to
-  `documentation/SKILL_HISTORIES.md`, word for word; 738 lines, its
-  cap. Tony reinstalls it; a later session clears it.
-- IO, RECORDED AND NOT FIXED (the go-ahead's point 3): the walk allows
-  1 percent on Io's distance; the page prints two figures far from
-  Io's orbit date ("0.0028 AU from Jupiter (400,000 km)"). Measured
-  here: passes at 80 days after the build, fails at 88 days either
-  side. The one case it can bite with fresh data: Io alone held on an
-  old orbit that long would turn the night red, against L-553 (a held
-  body turns the night red).
-- FOR THE FOLDS' BRIEFS (point 4): with the drawer walk a gate, an
-  orrery push that changes a served row can fail the website's night
-  if the walk's typed expectations were not brought along; each fold's
-  build updates the walk in the same sitting.
-- FOUND, NOT CHASED: the night's `pip install` step stops the whole
-  job when PyPI cannot be reached, the exposure ruling B answers for
-  npm.
-**Note:** (2026-11-26, 16:00 Chicago, the coordinating session, Claude
-Fable 5.2, at its close, on orrery c5412342 and gallery 571ac676)
-THE BUILD CHECKED ON LINUX BEFORE THE PUSH, AND PUSHED.
-- RUN HERE, on clean clones with the Code session's files laid over:
-  `run_walk.py --install` from the lock made on Windows, "WALKS
-  LIBRARY: installed -- 63 packages as the lock has them"; "DRAWER
-  WALK: PASS -- 383 checks on the real page ... caught, 7 of 66 red
-  (62 s)"; "CLOCK WALK: PASS -- solar-system 13 of 13, earth 10 of 10
-  ... 7 of 13 red, all in the frozen step (6 s)"; one package moved
-  away, UNREACHABLE, exit 3, "nwsapi missing"; jsdom's version changed,
-  UNREACHABLE, "jsdom is 24.1.4, the lock has 24.1.3"; with
-  PO_WALKS_INSTALL=failure, "NOT RUN TONIGHT", exit 4; the run's own
-  `run_tool` reading the three as PASS, N-A and NOT RUN; `daily_run.py
-  --check`, 37 of 37; Dashboard parity, "118 steps matched to their
-  buttons"; the skills, caps and ledger checks. NOT RUN HERE: the
-  walks on Windows and a night with the rebuilt cache, the Code
-  session's.
-- The report named seven pulled data files in Tony's website folder;
-  five differ from GitHub (`objects_config.json`,
-  `objects_export.json`, `objects_export.sha`, `constants_export.sha`,
-  `drawings/pulled_at.sha`). Tony left them out and discarded them.
-- PUSHED by Tony: website 571ac676 (13:55), orrery 3955c056 (13:59),
-  each equal, file by file, to what was checked. The orrery's night
-  of 14:17 ran clean on it (c5412342).
-- The website's night #62 of 12:27 was red; it ran before these
-  pushes, on 972b4a93, and is L-554's (JPL's sentence when a path is a
-  prediction), its notes of this date.
-- A badly wrapped line in `run_walk.py` (379): it works; for whoever
-  next opens the file. The Code session ended both builds at 42
-  percent of its context (Tony, 15:42).
-**Note:** (2026-11-26, 21:00 Chicago, the coordinating session, Claude
-Fable 5.2, on orrery ae40544e and gallery bc89fd3b, both read live)
-TONY'S INSTALL AND FIRST RUNS, AND THE WALKS' FIRST NIGHT ON GITHUB.
-- From his run record copy
-  `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`, as
-  uploaded at 18:09: the install, "WALKS LIBRARY: installed -- 63
-  packages as the lock has them, in C:\Users\tonyq\palomas_orrery_walks";
-  his Drawer Walk button, "DRAWER WALK: PASS -- 383 checks on the real
-  page ... caught, 7 of 66 red (68 s)"; his Clock Walk button, "CLOCK
-  WALK: PASS -- solar-system 13 of 13, earth 10 of 10 ... (10 s)". His
-  reinstall of interactive-exhibit 1.46: "-- done", not cleared here;
-  a session's installed copy is bound when it starts.
-- THE WALKS' FIRST NIGHT ON GITHUB, #64, 27 Nov 00:11 UTC, from the
-  log Tony pasted: "PASS Drawer walk 38.8s ... 381 checks on the real
-  page ... caught, 7 of 64 red (39 s)" and "PASS Clock walk 4.1s". No
-  "WALKS NOT RUN" in the run. The night was red on another check
-  (L-515, its notes of this date), so nothing was committed.
-**Note:** (2026-11-27, 00:20 Chicago, the coordinating session, Claude
-Fable 5.2, on orrery 489e4128 and gallery fafdaeb6, both read live;
-Tony's two folders at the same commits)
-THE GAP'S CONDITIONS ARE MET; THE ITEM WAITS ONLY FOR TONY'S WORD.
-- THE FIRST GREEN NIGHT WITH BOTH ROWS: #65, by hand; Tony's run
-  record copy `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`,
-  read from his folder at 00:15: "nightly run #65 at 11:23 pm, green".
-  Committed as gallery fafdaeb6, its title "Nightly run 2026-11-27
-  UTC: ...", no "WALKS NOT RUN". `data/nightly_run_record.json`
-  there: clean_run_utc 2026-11-27T05:26:55, the orrery pulled at
-  489e4128, 61 rows, every one PASS, no holds. "DRAWER WALK: PASS --
-  381 checks on the real page, the scene at 2026-11-27 05:26 UTC;
-  planted fault (an ended mission's last day one day early) caught, 7
-  of 64 red (45 s)". "CLOCK WALK: PASS -- solar-system 13 of 13,
-  earth 10 of 10 checks on the real page ... planted fault (the freeze
-  that never answers) caught in solar-system, 7 of 13 red, all in the
-  frozen step (5 s)". The live site serves that record
-  (palomasorrery.com/data/nightly_run_record.json, fetched shortly
-  after midnight).
-- 381, NOT 383, NAMED. Run in this session's shell, the library
-  installed from the lock ("63 packages as the lock has them"), each
-  check's message logged from a throwaway copy of the walk: on gallery
-  fafdaeb6, 381; on 104fd40f, whose cache is Nov 25's, 383. The names
-  differ only in sections 42 and 43. Section 42 (a craft still flying
-  past its path's last point) takes voyager_2 where it took
-  bepicolombo, three checks either way. Section 43 (the cut) ran four
-  checks while it had to plant the cut ("the payload serves no
-  BepiColombo or no clock to plant"; "path, marker or name is not in
-  the payload to plant"; the seven sentences, "(planted)"; the source
-  line) and runs two now the cut is served (the seven sentences, "(as
-  served)"; the source line). So 381 is the count while a cut is
-  served and 383 when none is; night #64's 381 was the same thing.
-  The count said nothing; the names did.
-- interactive-exhibit 1.46 CLEARED by this session's comparison at its
-  start: all 12 installed skills equal the repository's at 489e4128,
-  the body byte for byte, the header with its line breaks ignored.
-- Tony's install and his two buttons: the note above.
-- LOOSE ENDS, and where each now lives: the drawer walk's section 33
-  and the badly wrapped line in `run_walk.py` (379), on L-515 (one
-  nested tree), its note of this date; the line every fold's brief
-  carries, that the walk's expectations are updated in the same
-  sitting, on L-558 (the folds after Mars), its note of this date;
-  the recorded Earth scene is L-551's (no saved scenes), as this
-  item's body says.
-**Gap:** Tony's word to close. Nothing else is owed here.
-- **Tony-action (decide):** close L-545.
-**Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
-(the website's checks); L-535; L-550 (a website check with no
-dashboard button); L-551 (no saved scenes); L-485 (the nightly run);
-L-553 (a held body turns the night red); L-543 (green on Tony's
-computer, red on GitHub). The plan
-`documentation/REPORT_L545_walks_plan_20261126.md`; the go-ahead
-`documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`.
 
 #### [L-546] Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded)
 <!-- L:546 status:OPEN upd:2026-11-21 section:A flag: rice: -->
@@ -43194,6 +43074,336 @@ after Mars);
 `documentation/HANDOFF_coordinating_20261125_protocol_v4_1.md`;
 `PROJECT_INSTRUCTIONS.md`; `skills/gallery-assembler/SKILL.md`;
 `skills/ledger-and-session-records/SKILL.md`.
+
+#### [L-545] Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked)
+<!-- L:545 status:DONE upd:2026-11-27 section:C flag: rice: -->
+- **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
+  THE WALKS load the page itself; the gallery run's rows test its
+  scripts and a recorded scene. On Nov 21 L-541's build left three boxes
+  printing a path's day one day early (Juno, West, Galileo). It passed
+  53 gallery rows on Tony's copy and on a push copy, and the
+  coordinating session's own run of the new check.
+  `walk_solar_system_drawer.js` caught it, run only because the
+  coordinating session asked for the walks before the commit. A session
+  does not run them unasked: they need jsdom (24.1.3, from npm, into a
+  scratch folder), and neither the gallery run nor the night runs them.
+- Tony, Nov 21, on "that should not depend on someone remembering":
+  "-- correct. should this be method?"
+  (`documentation/WHERE_WE_ARE_11-21-26_1515_run_record.md`). Yes. THE METHOD: a session that changes
+  `interactive.html` or a script it loads runs both walks before its
+  closing report, and reports each count and any red check by name. A
+  brief says so until interactive-exhibit does.
+- THE RECORDED EARTH SCENE (`documentation/payload_earth_scene.json`,
+  made by `tools/record_earth_scene.py`) is re-recorded only by hand.
+  Six checks read it. Re-recorded on Nov 21 for L-541, it brought in
+  Earth's period sentence, served since L-535, which Typed facts had
+  never read (the build's closing thought).
+**Note:** (2026-11-22, the coordinating session, Claude Fable 5.2)
+RULED, both.
+- THE WALKS. Tony, 22:54, of three choices (a session's job only; at
+  night on GitHub only; everywhere, the website keeping the library):
+  "B". The night on GitHub installs jsdom at its fixed version in a
+  scratch folder and runs both walks; a failed walk makes the night
+  red; nothing is added to Tony's computer or to the website's files.
+  The night's workflow file was not read when he ruled, so the build
+  is not sized.
+- THE RECORDED SCENE is not re-recorded at all: L-551 (no saved
+  scenes), opened from Tony's answer. Ten checks read
+  `payload_earth_scene.json` on Nov 22, not six.
+**Note:** (2026-11-26, 10:50 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 0666ad67 and gallery 972b4a93, both read live)
+RULED AGAIN, WIDER: THE WALKS ARE CHECKS OF THE WEBSITE'S MAINTENANCE
+RUN, AT NIGHT AND ON TONY'S COMPUTER.
+- Tony, 10:25, told that nothing runs the walks unasked: "Why don't we
+  add the walks to the website maintenance runner?" Three options
+  were put to him: 1, as it is, a session's job; 2, the night on
+  GitHub only, his "B" of 2026-11-22; 3, the night and his computer,
+  with the library installed there. The session recommended 2,
+  written so 3 could be turned on later. Tony, 10:37: "Option 3 and
+  add it to the dashboard". His choice, not the recommendation. It
+  replaces "B" where the two differ: jsdom is installed on his
+  computer.
+- To the session's reading of "add it to the dashboard", a button for
+  each walk and a button that installs the library, Tony, 10:45: "Yes
+  and I can do terminal commands with guidance too for one time
+  operations." So the install is a button, or one command typed once
+  with guidance; the build's plan says which.
+- WHY A BUTTON EACH IN ANY CASE: every step of the website's
+  maintenance run has a dashboard button of the same name, and the
+  orrery's Dashboard parity check is red without one (L-550).
+- MEASURED by this session on a clean clone of gallery 972b4a93, Node
+  22.23.5, jsdom 24.1.3 from npm in a scratch folder (63 packages, 16
+  MB, 1,419 files): the scene from `run_room_driver.py
+  SOLAR_SYSTEM_DRIVER` at 2026-11-26T16:38:00Z, "430 traces, 0
+  warnings", under a second, Python alone; the drawer walk, "PASS:
+  383 checks on the stand-in scene", 52 seconds; the clock walk, room
+  solar-system, with a second scene at the served window's last
+  minute (2027-02-21T21:05:00Z), "13 of 13 checks passed", 2 seconds.
+  `gallery_maintenance_run.py`, `daily_run.py` and
+  `.github/workflows/nightly.yml` searched for the walks: not named.
+- NOT MEASURED: either walk on Windows or at another moment; the
+  clock walk in the Earth room; a night with the install step. Read
+  in the run's header and not in a run: a check that could not run
+  is red at night and neither pass nor fail by day.
+- IN THE BUILD: the two walks the method names
+  (`walk_solar_system_drawer.js`, `walk_scene_moment.js`). The other
+  seven walk scripts stay a session's job: put to Tony with the
+  reading he answered at 10:45, as left out "unless you say
+  otherwise"; he did not say otherwise.
+- THE BRIEF, for one Claude Code session through the python_work
+  door, the plan first:
+  `documentation/COORD_L545_walks_in_the_runner_brief_20261126.md`.
+**Note:** (2026-11-26, 12:10 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 99749f0c and gallery 972b4a93, both read live)
+THE PLAN READ AGAINST THE CODE; TONY'S RULING B; THE GO-AHEAD.
+- The plan, `documentation/REPORT_L545_walks_plan_20261126.md`, by the
+  Code session (Claude Opus 5.5), read from Tony's folder. Two rows,
+  `Drawer walk` and `Clock walk`, run by one new tool
+  (`tools/headless/run_walk.py`); a new kind of row, "walk", whose
+  exit code 3 means it could not run; the library in the home folder,
+  `C:\Users\tonyq\palomas_orrery_walks`, outside OneDrive; the
+  install a command and no button; the website pushed first.
+- RUN HERE, on a clean clone of gallery 972b4a93: the drawer walk at
+  the served window's last minute, 2027-02-21T21:05Z, "FAIL 1 of
+  383", Io's box alone, as the plan's table has it. READ: Io's served
+  orbit is dated JD 2461369.5, 25 November 2026, the day of the
+  build; L-485's R4 as the plan quotes it; the night's held title in
+  `daily_run.py` and the workflow; `test_dashboard_parity.py` asking
+  only whether a row is "node"; `run_tool`, where a Python row has no
+  way today to say it could not run. NOT CHECKED here: Dashboard
+  parity's rule 3; the night's commit step refusing new files; the
+  walks on Windows, which the plan measured on Tony's computer.
+- THE PLAN'S QUESTION, a night when the library cannot be downloaded:
+  A, red and nothing committed, as the run's header has it; B, the
+  night commits, the two rows are reported and not red, and the
+  commit's title says so every night it lasts (L-485's R4). Both
+  sessions recommended B. Tony, in his run record copy
+  `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`, beside the
+  recommendation: "-- confirmed"; beside the ask: "-- B and
+  recommendations approved." In chat, 11:57: "recommendations
+  approved. please proceed with the prompt to Code." A recommendation
+  he accepted.
+- APPROVED WITH IT, the coordinating session's four additions: the
+  title says what is known, "WALKS NOT RUN: library did not install",
+  not "npm unreachable"; all 63 packages pinned by a lock file kept
+  in the website, since jsdom 24.1.3 asks for its dependencies by
+  range ("cssstyle": "^4.0.1", read from the lock npm wrote here);
+  interactive-exhibit's sentence "the drawer walk is no gate and is
+  kept green all the same" corrected in the same bump; Io recorded.
+- IO, FOUND BY THE PLAN, NOT FIXED: the drawer walk allows 1 percent
+  on Io's distance and the page prints two figures far from Io's
+  orbit date ("0.0028 AU from Jupiter (400,000 km)"), so the walk
+  passes 80 days from that date and fails at 88. With nightly builds
+  the date is a day old. The one case with fresh data: Io alone held
+  on an old orbit that long would turn the night red, against L-553
+  (a held body turns the night red). What the walks check was out of
+  the build's scope.
+- FOR THE FOLDS' BRIEFS: with the drawer walk a gate, an orrery push
+  that changes a served row can fail the website's night if the
+  walk's typed expectations were not brought along. Each fold's build
+  updates the walk in the same sitting.
+- The go-ahead:
+  `documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`.
+**Note:** (2026-11-26, afternoon Chicago, L-545's Code session, Claude
+Opus 5.5, on orrery 55dbdb5a and gallery 972b4a93, both equal to
+GitHub with only Tony's run record waiting) BUILT, BY THE GO-AHEAD,
+WITH TONY'S RULING B. Not pushed; nothing committed.
+- THE TOOL: `tools/headless/run_walk.py` in the website, `drawer`,
+  `clock` and `--install`. One run reads the library against the lock
+  package by package, makes its scenes fresh with `run_room_driver.py`
+  in a temporary folder outside the repository at the run's own minute
+  (the clock walk also at the served window's last whole minute, in
+  the solar-system and earth rooms), walks the real page, then a
+  planted copy that must fail on the check named, and prints the
+  row's line. A fault that cannot be planted is a FAIL, never
+  "caught".
+- THE ROWS: `Drawer walk` and `Clock walk` in `OFFLINE_CHECKERS`, after
+  `Room clock`, of the new runner kind "walk": exit 3 UNREACHABLE,
+  exit 4 NOT RUN. Both gate, by day and at night.
+- THE LIBRARY: `WALKS_LIBRARY`, the folder palomas_orrery_walks in the
+  home folder (`C:\Users\tonyq\palomas_orrery_walks`; on GitHub
+  /home/runner/palomas_orrery_walks, outside the checkout). All 63
+  packages pinned by `tools/headless/walks_library/package-lock.json`
+  (28,073 bytes, written by npm from a package.json naming jsdom
+  24.1.3 exactly); `--install` copies both files there and runs `npm
+  ci`, which installs the lock's versions and never writes a lock, then
+  reads the folder back. A package missing, at another version, or not
+  in the lock makes the row UNREACHABLE by name (tested: "cssstyle is
+  4.6.1, the lock has 4.6.0; left-pad is not in the lock").
+- RULING B AS BUILT: the workflow's step "Install the walks' library
+  (L-545)" runs `run_walk.py --install` with continue-on-error and
+  hands its outcome to the night (`PO_WALKS_INSTALL`). After a failed
+  install the rows print NOT RUN TONIGHT with npm's FIRST error line
+  (its last line only points at npm's log file; measured: "npm error
+  A complete log of this run can be found in: ..."), are listed apart
+  and are not red; the night's record carries "NOT RUN", and
+  `daily_run.py --held-title` reads it (`walks_not_run`) and starts
+  the title "WALKS NOT RUN: library did not install". BESIDE A HOLD:
+  the walks' words come first, then the HELD words, one title: "WALKS
+  NOT RUN: library did not install; HELD Halley -- Nightly run ...".
+  `daily_run.py --check`: 8 of 8 made-up titles right, and the planted
+  fault "leaves the walks not run out" caught on 2 of 8 nights; 37 of
+  37 fixture checks.
+- THE PLANTED FAULTS, by name: the drawer walk, AN ENDED MISSION'S
+  LAST DAY ONE DAY EARLY (`solarSystemMissionEndDay`), caught as 7 of
+  66 red in section 42b, one per ended mission (Pioneer 10, Pioneer
+  11, Galileo, Cassini, Rosetta, Akatsuki, DART); the clock walk, THE
+  FREEZE THAT NEVER ANSWERS (`?freeze=1` read as "0"), caught as 7 of
+  13 red, all in the frozen step. `walk_scene_moment.js` takes the
+  planted page as an optional fifth argument; what it checks is
+  unchanged.
+- SHOWN THREE WAYS, on Tony's computer (Windows 11, Node 24.13.1), on a
+  push copy of the website: PASS with the library, "DRAWER WALK: PASS
+  -- 383 checks on the real page ... planted fault ... caught, 7 of 66
+  red (63 s)" and "CLOCK WALK: PASS -- solar-system 13 of 13, earth 10
+  of 10 ... caught in solar-system, 7 of 13 red, all in the frozen step
+  (9 s)"; UNREACHABLE without it by day (neither pass nor fail) and
+  under the night pass (red, "UNREACHABLE row(s) are red tonight");
+  NOT RUN at night after a failed install (exit 0, "REPORTED, not
+  red"); FAIL on a broken page (drawer 8 of 383 red with the ended
+  mission's words changed; clock, solar-system 12 of 13 with the
+  frozen words changed); FAIL when the fault cannot be planted, and
+  when a planted page is not caught by the check named. Node missing:
+  UNREACHABLE, naming Node first.
+- HEADERS: the drawer walk, the clock walk, `page_harness.js` and
+  `run_room_driver.py` no longer say "Claude-only". THE PAGES:
+  `INTERACTIVE_AS_BUILT.md`, The headless recipe, its opening and a
+  walk bullet replaced, one added; `CACHE_BUILDER_AS_BUILT.md`, the
+  night form's install step, NOT RUN and the title. THE BUTTONS:
+  Drawer Walk and Clock Walk in "Gallery -- checks and data", with
+  their lines; Dashboard parity "118 steps matched to their buttons".
+- interactive-exhibit 1.46 (the bump's four steps, here): A SESSION
+  THAT CHANGES THE PAGE READS THE WALKS rewritten as built; "the
+  drawer walk is no gate and is kept green all the same (L-521)" now
+  "the drawer walk is a gate of the gallery run, at night too
+  (L-545)"; the 1.43 entry and the 1.45 install moved to
+  `documentation/SKILL_HISTORIES.md`, word for word; 738 lines, its
+  cap. Tony reinstalls it; a later session clears it.
+- IO, RECORDED AND NOT FIXED (the go-ahead's point 3): the walk allows
+  1 percent on Io's distance; the page prints two figures far from
+  Io's orbit date ("0.0028 AU from Jupiter (400,000 km)"). Measured
+  here: passes at 80 days after the build, fails at 88 days either
+  side. The one case it can bite with fresh data: Io alone held on an
+  old orbit that long would turn the night red, against L-553 (a held
+  body turns the night red).
+- FOR THE FOLDS' BRIEFS (point 4): with the drawer walk a gate, an
+  orrery push that changes a served row can fail the website's night
+  if the walk's typed expectations were not brought along; each fold's
+  build updates the walk in the same sitting.
+- FOUND, NOT CHASED: the night's `pip install` step stops the whole
+  job when PyPI cannot be reached, the exposure ruling B answers for
+  npm.
+**Note:** (2026-11-26, 16:00 Chicago, the coordinating session, Claude
+Fable 5.2, at its close, on orrery c5412342 and gallery 571ac676)
+THE BUILD CHECKED ON LINUX BEFORE THE PUSH, AND PUSHED.
+- RUN HERE, on clean clones with the Code session's files laid over:
+  `run_walk.py --install` from the lock made on Windows, "WALKS
+  LIBRARY: installed -- 63 packages as the lock has them"; "DRAWER
+  WALK: PASS -- 383 checks on the real page ... caught, 7 of 66 red
+  (62 s)"; "CLOCK WALK: PASS -- solar-system 13 of 13, earth 10 of 10
+  ... 7 of 13 red, all in the frozen step (6 s)"; one package moved
+  away, UNREACHABLE, exit 3, "nwsapi missing"; jsdom's version changed,
+  UNREACHABLE, "jsdom is 24.1.4, the lock has 24.1.3"; with
+  PO_WALKS_INSTALL=failure, "NOT RUN TONIGHT", exit 4; the run's own
+  `run_tool` reading the three as PASS, N-A and NOT RUN; `daily_run.py
+  --check`, 37 of 37; Dashboard parity, "118 steps matched to their
+  buttons"; the skills, caps and ledger checks. NOT RUN HERE: the
+  walks on Windows and a night with the rebuilt cache, the Code
+  session's.
+- The report named seven pulled data files in Tony's website folder;
+  five differ from GitHub (`objects_config.json`,
+  `objects_export.json`, `objects_export.sha`, `constants_export.sha`,
+  `drawings/pulled_at.sha`). Tony left them out and discarded them.
+- PUSHED by Tony: website 571ac676 (13:55), orrery 3955c056 (13:59),
+  each equal, file by file, to what was checked. The orrery's night
+  of 14:17 ran clean on it (c5412342).
+- The website's night #62 of 12:27 was red; it ran before these
+  pushes, on 972b4a93, and is L-554's (JPL's sentence when a path is a
+  prediction), its notes of this date.
+- A badly wrapped line in `run_walk.py` (379): it works; for whoever
+  next opens the file. The Code session ended both builds at 42
+  percent of its context (Tony, 15:42).
+**Note:** (2026-11-26, 21:00 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery ae40544e and gallery bc89fd3b, both read live)
+TONY'S INSTALL AND FIRST RUNS, AND THE WALKS' FIRST NIGHT ON GITHUB.
+- From his run record copy
+  `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`, as
+  uploaded at 18:09: the install, "WALKS LIBRARY: installed -- 63
+  packages as the lock has them, in C:\Users\tonyq\palomas_orrery_walks";
+  his Drawer Walk button, "DRAWER WALK: PASS -- 383 checks on the real
+  page ... caught, 7 of 66 red (68 s)"; his Clock Walk button, "CLOCK
+  WALK: PASS -- solar-system 13 of 13, earth 10 of 10 ... (10 s)". His
+  reinstall of interactive-exhibit 1.46: "-- done", not cleared here;
+  a session's installed copy is bound when it starts.
+- THE WALKS' FIRST NIGHT ON GITHUB, #64, 27 Nov 00:11 UTC, from the
+  log Tony pasted: "PASS Drawer walk 38.8s ... 381 checks on the real
+  page ... caught, 7 of 64 red (39 s)" and "PASS Clock walk 4.1s". No
+  "WALKS NOT RUN" in the run. The night was red on another check
+  (L-515, its notes of this date), so nothing was committed.
+**Note:** (2026-11-27, 00:20 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 489e4128 and gallery fafdaeb6, both read live;
+Tony's two folders at the same commits)
+THE GAP'S CONDITIONS ARE MET; THE ITEM WAITS ONLY FOR TONY'S WORD.
+- THE FIRST GREEN NIGHT WITH BOTH ROWS: #65, by hand; Tony's run
+  record copy `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`,
+  read from his folder at 00:15: "nightly run #65 at 11:23 pm, green".
+  Committed as gallery fafdaeb6, its title "Nightly run 2026-11-27
+  UTC: ...", no "WALKS NOT RUN". `data/nightly_run_record.json`
+  there: clean_run_utc 2026-11-27T05:26:55, the orrery pulled at
+  489e4128, 61 rows, every one PASS, no holds. "DRAWER WALK: PASS --
+  381 checks on the real page, the scene at 2026-11-27 05:26 UTC;
+  planted fault (an ended mission's last day one day early) caught, 7
+  of 64 red (45 s)". "CLOCK WALK: PASS -- solar-system 13 of 13,
+  earth 10 of 10 checks on the real page ... planted fault (the freeze
+  that never answers) caught in solar-system, 7 of 13 red, all in the
+  frozen step (5 s)". The live site serves that record
+  (palomasorrery.com/data/nightly_run_record.json, fetched shortly
+  after midnight).
+- 381, NOT 383, NAMED. Run in this session's shell, the library
+  installed from the lock ("63 packages as the lock has them"), each
+  check's message logged from a throwaway copy of the walk: on gallery
+  fafdaeb6, 381; on 104fd40f, whose cache is Nov 25's, 383. The names
+  differ only in sections 42 and 43. Section 42 (a craft still flying
+  past its path's last point) takes voyager_2 where it took
+  bepicolombo, three checks either way. Section 43 (the cut) ran four
+  checks while it had to plant the cut ("the payload serves no
+  BepiColombo or no clock to plant"; "path, marker or name is not in
+  the payload to plant"; the seven sentences, "(planted)"; the source
+  line) and runs two now the cut is served (the seven sentences, "(as
+  served)"; the source line). So 381 is the count while a cut is
+  served and 383 when none is; night #64's 381 was the same thing.
+  The count said nothing; the names did.
+- interactive-exhibit 1.46 CLEARED by this session's comparison at its
+  start: all 12 installed skills equal the repository's at 489e4128,
+  the body byte for byte, the header with its line breaks ignored.
+- Tony's install and his two buttons: the note above.
+- LOOSE ENDS, and where each now lives: the drawer walk's section 33
+  and the badly wrapped line in `run_walk.py` (379), on L-515 (one
+  nested tree), its note of this date; the line every fold's brief
+  carries, that the walk's expectations are updated in the same
+  sitting, on L-558 (the folds after Mars), its note of this date;
+  the recorded Earth scene is L-551's (no saved scenes), as this
+  item's body says.
+**Note:** (2026-11-27, 10:42 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 7d53e865 and gallery fafdaeb6, both read live)
+CLOSED ON TONY'S WORD. His run record copy
+`documentation/WHERE_WE_ARE_11-27-26_1034_run_record.md`, against the
+line "(decide) Whether L-545 (checks that wait to be remembered) closes.
+It is the only decision left from this session.": "-- yes with L560 as
+the answer". This session reads "yes" as his word to close, and "with
+L560 as the answer" as his note that the session's other decision was
+answered on L-560 (a digit is earned). If he meant otherwise the item is
+reopened; nothing waits on it. Its loose ends are where the note above
+says: L-515 (one nested tree), L-558 (the folds after Mars), L-551 (no
+saved scenes).
+**Gap:** none. Closed 2026-11-27.
+**Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
+(the website's checks); L-535; L-550 (a website check with no
+dashboard button); L-551 (no saved scenes); L-485 (the nightly run);
+L-553 (a held body turns the night red); L-543 (green on Tony's
+computer, red on GitHub). The plan
+`documentation/REPORT_L545_walks_plan_20261126.md`; the go-ahead
+`documentation/COORD_L545_walks_in_the_runner_goahead_20261126.md`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

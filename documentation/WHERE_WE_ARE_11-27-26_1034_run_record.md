@@ -151,11 +151,36 @@ Not urgent, in your order:
 I told you no path's distance changes by as much as its fourth figure within the minute shown. I had reasoned that from Parker Solar Probe alone, so I checked it against all 34 measured rates before it went into the ledger. It holds: the largest change is 3,700 km in a minute, against a fourth figure worth 10,000 km.
 
 **Your actions**
-1. (do) Orrery, in GitHub Desktop: Commit, then Pull origin, then Push origin. It carries the ledger, Where We Are, the handoff, your run record, the JUP365 file, the review request and the two replies. -- 
-2. (do) Note this session's context size from the app in your run record.
-3. (decide) Whether L-545 (checks that wait to be remembered) closes. It is the only decision left from this session.
+1. (do) Orrery, in GitHub Desktop: Commit, then Pull origin, then Push origin. It carries the ledger, Where We Are, the handoff, your run record, the JUP365 file, the review request and the two replies. -- 7d53e8657fca09e4faa22086bff20fda5e6b1bee; 
+2. (do) Note this session's context size from the app in your run record. -- 14%
+3. (decide) Whether L-545 (checks that wait to be remembered) closes. It is the only decision left from this session. -- yes with L560 as the answer
 
 **Where this leaves us**
-- The website is green, the cut is live, and the walks run nightly.
+- The website is green, the cut is live, and the walks run nightly. -- no nights run as of 10:39 am 11/27/26
 - What a box may print now has a rule: four figures at most, fewer where the evidence is coarser, and no number without a source.
 - Nothing is built. The next session applies the rule at the design talk for Jupiter's moons, starting with the 12 rows we already print by and then Io.
+
+=======================
+
+**Recorded. The rule, its display style and the evidence for spacecraft are all settled on your word, and the three files were read back from your folder equal byte for byte to what I built.**
+
+**What is settled today, all on L-560 (a digit is earned)**
+- **The rule,** five statements: at most four significant figures; fewer where a sourced uncertainty is coarser; the evidence must fit the body, centre and date; no source, no number; say what each thing is.
+- **The display style,** six statements: both units worked from the one underlying distance, each rounded once; lowercase "au", explained once; kilometres with the word million or billion; au first from the Sun, kilometres first near a body; no miles and no scientific notation; one standing sentence on the page.
+- **The evidence for spacecraft:** deep-space tracking, within three limits. It is never called JPL's uncertainty for a craft, it covers only the part of a path fitted to tracking data, and a craft measured from a body it is near needs its own evidence.
+
+**What is not done**
+- Nothing is built. The page still prints "0.32001664 AU (47,873,807 km)".
+- Before a row for spacecraft is typed, the monograph is read whole from a saved copy, and the 2008 paper on NASA's server is read too.
+- The remaining claims in the four replies are checked as each is used. One of GPT's quotations has already failed that check, and Hayden's table is unconfirmed.
+
+**Your actions**
+1. (do) Orrery, in GitHub Desktop: Commit first, then Pull origin, then Push origin. Nights have committed since your last push. The commit carries seven files: the ledger, Where We Are, the handoff, the second request, its two replies and, from the earlier close, nothing else new. -- 
+2. (do, if you wish) Save the tracking monograph in `papers`. Its address is on L-560.
+
+No decision is waiting on you.
+
+**Where this leaves us**
+- What a box may print, and how it is written, is now a complete rule that is yours.
+- The next session is the design talk for Jupiter's moons. It applies the rule, starting with the 12 rows we already print by and then Io, and it starts from `HANDOFF_coordinating_20261127_green_night.md`.
+- The build comes after that: one existing place in the orrery, one on the website, and the rows of evidence.

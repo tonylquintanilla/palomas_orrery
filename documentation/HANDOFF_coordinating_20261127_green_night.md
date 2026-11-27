@@ -1,5 +1,5 @@
-<!-- Doc-Kind: hand | Handoff: the coordinating session of Nov 26, 23:59 to Nov 27, 10:27. The website's first green night since Nov 25 read and checked; BepiColombo's cut live and looked at by Tony; the walks' first green night on GitHub, its 381 checks named; the skills cleared; L-545 waiting only for Tony's word. Then the talk on L-560: the objective restated, the ladder's last rung now the literature, Io's own JPL file read and silent. Communication; the place for the next session to start. -->
-# Handoff: the green night, and the talk on what a box may print, November 27, 2026, 10:27
+<!-- Doc-Kind: hand | Handoff: the coordinating session of Nov 26, 23:59 to Nov 27, 14:34. The website's first green night since Nov 25 read and checked; BepiColombo's cut live and looked at by Tony; the walks' first green night on GitHub, its 381 checks named; the skills cleared; L-545 waiting only for Tony's word. Then the talk on L-560: the objective restated, the ladder's last rung now the literature, Io's own JPL file read and silent. Communication; the place for the next session to start. -->
+# Handoff: the green night, and the talk on what a box may print, November 27, 2026, 14:34
 
 Built on orrery 489e4128056cd08fa46b0c11b90c64fe477ab028
 at https://github.com/tonylquintanilla/palomas_orrery (branch main)
@@ -7,11 +7,18 @@ and website fafdaeb6ce199b0d5f436dc4c77870f7d1c5c33e
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
 (branch main), both read 2026-11-26, 23:59 Chicago, and again Nov 27,
 08:53, unmoved.
-Tony's orrery folder stood at 489e4128 (its `.git/refs/heads/main`,
-read 09:18). When this was written it held, not pushed: the ledger,
-Where We Are, this handoff, his run record copy with his own lines of
-the night, and `papers/JUP365 Satellite Ephemeris with Jupiter
-barycenter.txt`.
+Pushed at orrery 7d53e8657fca09e4faa22086bff20fda5e6b1bee (Tony, 10:36;
+his run record copy `WHERE_WE_ARE_11-27-26_1034_run_record.md`), read
+live at 10:41 and compared file by file with what was built. After
+that push this session closed L-545 and edited the ledger, Where We
+Are and this handoff once more; those three waited, not pushed, when
+this was written. `papers/` is never pushed: the JUP365 file is on
+Tony's computer only.
+After the close the talk went on (What was done, its last bullet), and
+the nights committed: orrery 8678143 (11:29) and e6b7651 (14:02),
+website 95bdd6a (12:19), read at 14:07. Tony's orrery folder was then one night behind
+GitHub, holding this session's last records not committed: he commits
+first, then pulls, then pushes.
 
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
@@ -19,7 +26,7 @@ gallery
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
 
 Type: HANDOFF, coordination and a design talk (zero code). From the
-coordinating session of Nov 26, 23:59 to Nov 27, 10:27 Chicago, with a
+coordinating session of Nov 26, 23:59 to Nov 27, 14:34 Chicago, with a
 pause from 01:50 to 08:51 (Claude Fable 5.2, linked to Tony's computer,
 with a shell of its own and none on his) to the next session, which is
 a design talk.
@@ -28,15 +35,16 @@ The ledger wins on status.
 
 ## Start here
 
-1. Record both bases. The orrery should hold, above 489e4128, Tony's
-   push of this session's records. The website moves only by its
-   nights until the next build.
+1. Record both bases. The orrery should hold, above e6b7651, Tony's
+   push of the close: the ledger, Where We Are, this handoff, and the
+   second review request, and its two returns. The website moves only
+   by its nights until the next build.
 2. Compare the skills. All 12 were equal at 489e4128; none changed
    this session.
-3. Read Tony's newest run record copy for one word of his: whether
-   L-545 (checks that wait to be remembered) closes. If he says so
-   and it is still OPEN, close it; its loose ends are already on L-515
-   (one nested tree) and L-558 (the folds after Mars).
+3. Read Tony's newest run record copy. L-545 (checks that wait to be
+   remembered) is closed on his "yes"; the rest of that line of his,
+   "with L560 as the answer", was read as a note on L-560, and the
+   closing note says so. Reopen it if he says he meant otherwise.
 4. THE JOB: the design talk for Jupiter's moons (L-558). It applies
    THE RULE TONY APPROVED on Nov 27, five statements, on L-560 (a
    digit is earned), its last note: at most four significant figures;
@@ -57,6 +65,22 @@ The ledger wins on status.
    provenance-cross-check loaded, and check each figure at its source
    before it is used; they disagree on Io. Tony names them: GPT 6.2
    Astra, Medium, and Gemini 4 Neon.
+   A SECOND REQUEST WENT OUT AND CAME BACK, on the style a distance
+   is shown in, with a search of the Adler and Hayden planetariums and
+   one source for spacecraft:
+   `documentation/REVIEW_REQUEST_L560_display_style_20261127.md`, and
+   its two returns in `documentation/worksheets/`, ending
+   `_L560_display_style_review_RETURN_20261127.md`. Saved as pasted
+   and not checked beyond three claims; check each before use. THE
+   DISPLAY STYLE, six statements, IS APPROVED (Tony, 14:23:
+   "everything is settled except this part"). "This part" is the
+   evidence for spacecraft: the tracking monograph was then read
+   through the web tool, most of it, and APPROVED as the class
+   evidence within three limits (Tony, 14:34: "Yes, settled."). Before
+   a row is typed it is read whole from a saved copy, and a 2008 paper
+   on NASA's reports server is read too. L-560's last notes hold all
+   of it, with how the rule is built (one existing
+   place in each repository) and one scope question.
 5. Unless an orrery night's title says "JPL REFIT": then BepiColombo
    at Mercury comes first (L-554 (JPL's sentence when a path is a
    prediction), its Gap).
@@ -72,9 +96,8 @@ The ledger wins on status.
   00:01); Tony's phone look, "correct."; the cut's build closed, the
   item open for JPL's refit and his two sentences.
 - THE WALKS, L-545: both rows in a green night on GitHub; 381 against
-  383 named check by check; 1.46 cleared. The item waits for Tony's
-  word alone. Closing an item has been on his word (L-559: "Yes close
-  L559."), so this session did not close it.
+  383 named check by check; 1.46 cleared. CLOSED on Tony's word in
+  his run record of 10:34, and moved to the closed section.
 - THE TALK ON L-560, at Tony's word ("i intended to do L560 in this
   session."). His objective: "show what we know at its correct
   accuracy and precision, and its source", with no figure beside a
@@ -88,13 +111,21 @@ The ledger wins on status.
   standard practice, and where do the uncertainties live by class.
   Its two returns came back at 10:11 and are saved, unread beyond a
   first pass.
-- Notes on L-545, L-554, L-560 (three), L-558, L-515; the index
+- AFTER THE CLOSE, the same day: Tony asked how the rule is built
+  (two existing places, read from the code), said the spacecraft
+  should not go blank and that four figures read differently in au and
+  in kilometres, and asked for a standard to lean on. NASA's three
+  ways of printing a distance and the IAU's unit were found by search.
+  A second request went to the outside models on his word, and its
+  two returns were saved at 14:06.
+- Notes on L-545, L-554, L-560 (four), L-558, L-515; the index
   regenerated; Where We Are edited by section, 130 lines of 130.
 
 ## Verified by this session, and what is only claimed
 
 VERIFIED here:
-- Both HEADs, twice, and Tony's orrery folder equal to its HEAD.
+- Both HEADs, three times, and Tony's push 7d53e865: eight files, the
+  six records each equal to what was built.
 - The 12 installed skills against the repository at 489e4128: body
   byte for byte, header with line breaks ignored.
 - The night's record, read from a clean clone of fafdaeb6 and fetched
@@ -128,7 +159,6 @@ CLAIMED, not checked here:
 
 ## What the next session owes
 
-- Start here, 3.
 - At the next build that opens the walk: section 33 mended, and the
   wrapped line in `run_walk.py` (L-515, its note of Nov 27).
 - In every fold's brief, the two lines on L-558, its note of Nov 27.
@@ -160,13 +190,16 @@ CLAIMED, not checked here:
   a clone. Its library is jsdom alone.
 - NAIF's server refuses a session's shell, and the web tool returns a
   `.cmt` file as unreadable. Tony's browser fetches it in a minute.
+- `papers/` IS NEVER PUSHED (the repository's .gitignore, 2026-09-10).
+  This session listed the JUP365 file among the things to commit; a
+  record that cites a file there says it is on Tony's computer only.
 - Tony's folder commits are read from `.git/refs/heads/main`, staged
   like any file, when a session has no shell on his computer.
 
 ## Size
 
-No token count prints here; Tony reads the app's context size at the
-close. Read: the last handoff, Where We Are whole, one skill whole,
+No token count prints here. Tony, in his run record of 10:34, gives
+the app's context size as "14%". Read: the last handoff, Where We Are whole, one skill whole,
 parts of the ledger for seven items, the night record, the figures
 check's output, the words for the cut, Tony's run record's tail twice,
 one screenshot, four web pages by summary, two searches, 200 lines of
@@ -176,10 +209,11 @@ Where We Are edited twice.
 ## Tony-actions
 
 - (do) Orrery, in GitHub Desktop: Commit, then Pull origin, then Push
-  origin: the ledger, Where We Are, this handoff, your run record, and
-  the JUP365 file in `papers`.
-- (decide) Close L-545 (checks that wait to be remembered)? All it
-  waited for is in.
+  origin: the ledger, Where We Are, this handoff, the second review
+  request and its two returns in `worksheets`. Commit first: nights
+  have committed since your last push.
+- (do, if you wish) Save the tracking monograph in `papers`; its
+  address is on L-560 (a digit is earned), in its notes of Nov 27.
 - (do, standing) When an orrery night's title starts "JPL REFIT",
   start a session.
 - (decide, later) The three sentences listed under What the next
