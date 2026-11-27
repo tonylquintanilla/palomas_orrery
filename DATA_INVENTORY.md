@@ -50,7 +50,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .png | 15 | 7.7 MB | palomas_orrery_logo.png (5.1 MB) | 2026-11-17 |
 | .js | 56 | 1.5 MB | feature_renderers.js (214.5 KB) | 2026-11-26 |
 | .html | 7 | 814.7 KB | interactive.html (520.1 KB) | 2026-11-25 |
-| .md | 10 | 333.5 KB | INTERACTIVE_AS_BUILT.md (172.6 KB) | 2026-11-26 |
+| .md | 10 | 333.8 KB | INTERACTIVE_AS_BUILT.md (172.9 KB) | 2026-11-26 |
 | .jpg | 4 | 210.8 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-11-08 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |

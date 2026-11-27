@@ -481,7 +481,10 @@ I'll lay the Code session's files over clean copies of both repositories and run
 2. Commit the other 14 files. Do not pull yet. -- done
 3. Website: the only files left in the Changes list are now the `data/` ones. Right-click them and choose Discard Changes. This puts them back to GitHub's copy, and tonight's night writes them fresh. -- done 
 4. Website: Pull origin, then Push origin. -- 571ac6768108cf6109a29db69a38bb346ee93a67; nightly run #62 red at 12:27 now 1:57 pm
-5. Orrery: Commit everything, then Pull origin, then Push origin. -- 
+5. Orrery: Commit everything, then Pull origin, then Push origin. -- 3955c0567fcb6b9e3f82c0a343ce1f0da0b6d51a 
+
+-- stopped for Fable review before proceeding due to the Red night
+
 6. Once, in PowerShell, paste this line and press Enter:
    ```powershell
    python "C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py" --install
@@ -491,7 +494,7 @@ I'll lay the Code session's files over clean copies of both repositories and run
    - **If it says python or npm is not recognized:** stop and paste the message here.
 7. On the dashboard, press Drawer Walk, then Clock Walk. The drawer walk takes about a minute.
 8. Reinstall interactive-exhibit (1.46) to your account from the repository.
-9. After the next website night: look at the night's title, and on your phone at BepiColombo's box.
+9.  After the next website night: look at the night's title, and on your phone at BepiColombo's box.
 
 I changed one thing from the Code session's order: the discard comes before the pull, not after the push. If the website's night commits before you pull, a pull with those files still changed would make Desktop stash them.
 
@@ -501,3 +504,87 @@ I changed one thing from the Code session's order: the discard comes before the 
 - BepiColombo's cut still waits for the website's night. At 13:24 it had not run.
 
 **One final thought:** if you push before tonight's website night, that night carries two firsts at once: the cut's data and the new walks. Both were tested ahead, so I would push now. If you would rather keep them apart, wait for the night's commit before step 1; a red night would cost one day and commit nothing.
+
+=======================
+
+The brief is written. Waiting a minute before the read-back.
+
+The brief for the fix is in your orrery folder, read back and equal byte for byte to what I built.
+
+Because the Code session is running, I wrote only this one new file. I did not touch the ledger or Where We Are, and the brief asks Code to record the red night there itself.
+
+**The prompt for Code**
+
+> A small fix, website code only. Read documentation/COORD_L554_cut_in_the_suite_brief_20261126.md in the orrery folder, whole, before the first edit. No plan round: build, show, report.
+
+**What the brief asks for**
+
+- **The rule is made true.** A craft whose cut date lies after the last day the served data covers is still flying there, and its notes are no fault. A craft whose cut date lies inside the served data, with its path not ended, is still a fault.
+- **The check can still fail.** It gains a worked pair: one case that must pass and one that must go red.
+- **The whole night is shown green before any push.** Code rebuilds the cache from JPL on a throwaway copy with the cut's data and runs every check the night requires. Yesterday's build of the cut lacked this proof.
+- **Other checks with a fixed clock are named,** not fixed, so we know where this could happen again.
+- **I run the suite and the figures check on a clean copy** before you push.
+
+**One piece of news**
+
+- **The orrery's second night ran clean at 14:17,** on your push with the new dashboard buttons and the skill. Your orrery folder is one night's commit behind GitHub again, so your next orrery push starts with Commit, then Pull origin.
+
+**Run order**
+
+1. Paste the prompt above into the Code session. -- done, with a yes to its question to leave the 7 data files out
+2. When Code reports, bring its report here before you push anything.
+3. Any time: the one-time install in PowerShell and the two dashboard buttons, from my earlier run order. They do not depend on this fix.
+4. Reinstall interactive-exhibit (1.46) to your account.
+5. After the first green website night: look at its title, and on your phone at BepiColombo's box.
+
+**Where this leaves us**
+
+- The walks are pushed in both repositories. The orrery's night is green with them.
+- The website's night stays red until this fix is pushed. The site is safe meanwhile and shows yesterday's data.
+- BepiColombo's cut is proved on the orrery's side and still unproved on the website.
+
+=======================
+
+**Coordinator:**
+
+The close is written. Waiting a minute before the read-back.
+
+Thank you, it was a good session. I have written its close now, so the next coordinator can start cold, on Opus or Fable.
+
+Three files are in your orrery folder, each read back and equal byte for byte to what I built. They ride in the same orrery push you already owe.
+
+**What the close holds**
+
+- **The handoff:** `documentation/HANDOFF_coordinating_20261126_walks_and_red_night.md`. It tells the next coordinator what to check first: the fix's push, the first green website night, your install, and the skill reinstall.
+- **The ledger:** my checks of both builds, on L-545 (checks that wait to be remembered) and L-554 (JPL's sentence when a path is a prediction). ESA's news about the 75-hour orbit is on L-554, with its source.
+- **Where We Are:** brought to this hour and pointing at the new handoff. It is still 130 lines of 130.
+
+**One correction to something I told you**
+
+At midday I said I had cleared two finished actions from L-554's list. I had only noted them as done. They are removed now.
+
+**On Opus for coordination**
+
+That fits the project's own method table, which already gives coordination to Opus. Your note on the Fable allowance is in the handoff, so the next session sees it. Spending the reset on the walks and the red night was a sound choice: both were faults in the machinery, and Opus would have had to find them cold.
+
+**Run order**
+
+1. Website, in GitHub Desktop: untick every file under `data/`. -- done
+2. Commit the other 2 files. -- done
+3. Right-click the `data/` files and choose Discard Changes. -- done
+4. Then Pull origin, Push origin. -- bc89fd3b3c64f4d65b6ee35afb34090a2b74bff0; nightly run #63 at 3:39 pm is Red on exit code 1
+5. Orrery: Commit everything, then Pull origin, then Push origin. This carries the ledger, Where We Are, the handoff, the fix's brief, your run record and the four files the maintenance run wrote. -- 
+6. Once, in PowerShell:
+   ```powershell
+   python "C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py" --install
+   ```
+   Then the dashboard's Drawer Walk and Clock Walk buttons.
+7. Reinstall interactive-exhibit (1.46) to your account.
+8. After the first green website night: look at its title, and on your phone at BepiColombo's box.
+9. Note this session's context size from the app in your run record. No token count prints here.
+
+**Where this leaves us**
+
+- The protocol's v4.1 is closed. The walks are built and pushed. The cleanup ends with them.
+- The red night's cause is fixed and checked. It waits for your website push, and the first green night proves both the cut and the walks.
+- Next in the braid is Jupiter's moons, with their design talk first. BepiColombo at Mercury waits for JPL's refit.

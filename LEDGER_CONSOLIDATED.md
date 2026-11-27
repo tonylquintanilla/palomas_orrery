@@ -3347,16 +3347,145 @@ Fable 5.2) THE ORRERY HALF IS PUSHED, AND ITS FIRST NIGHT IS CLEAN.
 - The website has had no night since: its newest night commit is
   e028483d, of 2026-11-25, 21:52 UTC, which pulled the orrery at
   9de39f3c, before the push.
-**Gap:** the first website night after the orrery push 651422cb
-serves the cut; then Tony's phone look at BepiColombo's box. When JPL
+**Note:** (2026-11-26, afternoon Chicago, L-545's Code session, Claude
+Opus 5.5, by the brief
+`documentation/COORD_L554_cut_in_the_suite_brief_20261126.md`, on
+gallery 571ac676 and orrery 3955c056, Tony's folder one night's commit
+behind GitHub's c5412342, which changes only
+`data/nightly_run_record.json`) THE WEBSITE'S NIGHT #62 WAS RED ON
+THE CUT, IN THE SUITE'S PRETEND NIGHTS; MENDED IN THE RULE. Not
+pushed; nothing committed. The coordinating session wrote nothing in
+the ledger or on Where We Are while this ran; this note and the page
+are this session's.
+- WHAT FAILED: the night of 2026-11-26, 12:27 Chicago, on gallery
+  972b4a93, the first website night to pull the orrery after
+  651422cb. The cache builder's offline suite, a gate of the night,
+  failed two checks: "L-553 (10): the Solar System figures check,
+  whole, is GREEN on the planted night" and "L-553 (7, 8, paths D and
+  E): ... the figures check green and naming both". On each planted
+  folder the figures check printed "bepicolombo: serves a mission_end,
+  end_note or cutoff_note but its path has not ended".
+- WHY: the suite builds its nights with the clock at FIXED_NOW,
+  2026-07-09 (`tools/test_gallery_cache_builder_offline.py`, line
+  204), from the live `data/objects_config.json`. In July the served
+  window ends before 17 November, so the path has not ended there,
+  and the live entry says it is cut. The rule ("a mission still
+  flying serves no mission_end or end_note") was true only on a night
+  later than every dated fact in the list. A rebuild does not clear
+  it; the L-545 report's "the rebuild clears both" was wrong for this
+  row (the coordinating session's finding).
+- WHAT CHANGED, in `documentation/smoke_solar_system_figures.js`
+  only (the rule mended, not the suite's nights: the rule is what was
+  untrue, and a pretend night moved to a later day would break the
+  next time a dated fact lands after it): `endsAfterWindow`. A craft's
+  last day is its mission_end, or, cut and still flying, its path's
+  last day; where it lies after the served window's last day
+  (`served_window.end_jd`, keyed as a served day is), the craft is
+  still flying in that folder, its notes are no fault, and it is
+  printed by name ("Craft still flying in this folder, their last day
+  after its window (n): ..."). Inside the window with the path not
+  ended, the fault it was. No window served, no dated last day, or an
+  end_note alone: never excused.
+- THE WORKED CASES, by name (all must hold, or "the still-flying check
+  cannot fail, or fails a right one (L-554)"): BepiColombo's cut on a
+  window ending 2026-10-05, green; on one ending 2027-02-21, red;
+  Cassini's mission_end after a window ending 2017-06-30, green; inside
+  one ending 2017-12-31, red; an end_note alone, red; no window, red.
+- SHOWN, on a throwaway copy of gallery 571ac676 with this file, the
+  orrery's exports pulled (`gallery_maintenance_run.py --pull`: 5 of 5)
+  and Tony's computer (Windows 11, Node 24.13.1): the builder's suite
+  before the rebuild, "PASS (631 checks, 0 failures)"; the same data
+  with the figures check as at 571ac676, "FAIL (631 checks, 2
+  failures)", the two named above. Then the cache rebuilt from JPL
+  ("[done] run 20261126T204511Z (nightly): 114 objects", the swap
+  right first time) and the night's pass, `gallery_maintenance_run.py
+  --night`, with the walks' library: "55 of 55 gating checkers
+  passed", exit 0; Cache builder suite "PASS (631 checks, 0
+  failures)", Solar System figures PASS with "bepicolombo ... on the
+  last day drawn, 2026-11-17 (cut, still flying); then: It entered
+  orbit around Mercury on 21 November 2026.", Drawer walk PASS (381
+  checks), Clock walk PASS. A fault planted in the new rule (every
+  dated last day read as after the window) is caught: "the
+  still-flying check cannot fail, or fails a right one (L-554)".
+  `INTERACTIVE_AS_BUILT.md`, the figures check's part 7, names
+  `endsAfterWindow`; As-built names ok.
+- THE CLASS, RECORDED AND NOT CHASED: a check with a fixed clock that
+  reads the live list of objects meets every dated fact added to the
+  list after its clock. In the website's checks today: the cache
+  builder's offline suite (FIXED_NOW 2026-07-09, this case); and the
+  drawer walk's section 43, which plants BepiColombo's end at a fixed
+  17 November 2026, 00:01 UTC (`walk_solar_system_drawer.js`, line
+  801) beside the live list's cut: when JPL refits and the cut moves
+  or comes off, that section must move with it, in the JPL REFIT
+  session. Read and not of the class: `smoke_scene_address.js` (fixed
+  days on a made-up window; the live list read for row keys only),
+  `tools/test_drawn_orbit.py` and
+  `gallery/assembler/tests/test_artifact1_earth.py` (their dates are
+  the served cache's, L-237; the fixed year 2000 is J2000's epoch).
+- IN TONY'S FOLDERS: the website's maintenance run, row by row against
+  this session's earlier run on the same data: one row changed, Cache
+  builder suite FAIL (631 checks, 2 failures) to PASS (631 checks, 0
+  failures). Still red, and red at the base on the same pulled data:
+  Solar System figures, "bepicolombo: its last served point is
+  2027-04-10 00:01, not its span's last day, 2026-11-17", because the
+  folder's cache was built on Nov 25, before the cut reached it; the
+  night's rebuild clears it, as the copy shows. Drawer walk and Clock
+  walk UNREACHABLE until Tony's install. The run pulled five data files
+  into the folder, not for the push: `data/objects_config.json`,
+  `data/objects_export.json`, `data/objects_export.sha`,
+  `data/constants_export.sha`, `data/drawings/pulled_at.sha`. The
+  orrery's run: "37 of 37 gating checkers passed", 0 Tier-1.
+**Note:** (2026-11-26, 16:00 Chicago, the coordinating session, Claude
+Fable 5.2, at its close) THE RED NIGHT FOUND, THE FIX CHECKED FOUR
+WAYS, AND ESA'S NEWS.
+- FOUND before any log was read (GitHub's run logs cannot be reached
+  from this session's shell): the five data files the gallery run had
+  pulled into Tony's folder, laid over a clean clone of gallery
+  571ac676, turn two checks of the builder's suite red, and the
+  figures check on the suite's own folders prints "bepicolombo: serves
+  a mission_end, end_note or cutoff_note but its path has not ended".
+  The brief: `documentation/COORD_L554_cut_in_the_suite_brief_20261126.md`;
+  Tony, 14:26: "Yes please write the fix for code, who is running now."
+- THE FIX CHECKED, the Code session's two files laid over a clean
+  clone, astroquery 0.4.11 installed here so the count is exact: as
+  pushed, "PASS (631 checks, 0 failures)"; the old rule with the
+  cut's data, "FAIL (631 checks, 2 failures)", L-553 (10) and L-553
+  (7, 8, paths D and E); the new rule with the cut's data, 631 and 0;
+  the new rule on GitHub's data, 631 and 0. Two faults planted here
+  in `endsAfterWindow`, one excusing every craft and one none: each
+  red, "the still-flying check cannot fail, or fails a right one".
+  The cut's config on the cache of Nov 25 is still red, "its last
+  served point is 2027-04-10 00:01, not its span's last day,
+  2026-11-17", which is right until a night rebuilds. NOT RUN HERE:
+  the whole night on a rebuilt cache, 55 of 55, the Code session's.
+- WHY THE CUT'S BUILD MISSED IT: its website half was checked before
+  the orrery's export carried the notes. FOR EVERY BRIEF OF A BUILD
+  IN BOTH REPOSITORIES: not checked until the whole night has run on
+  a copy holding both halves.
+- JPL, as the orrery's check last read its sheet (2026-11-26; Revised
+  Nov 23, 2026): "Data fit through 2026-Nov-17, prediction
+  thereafter.", the file bc_mpo_fcp_00243_20181020_20270411_v01. No
+  refit; both orrery nights of this date held the cut to it.
+- ESA, its page "Latest updates: BepiColombo's arrival at Mercury",
+  the update of 23 November 2026, read 2026-11-26
+  (https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Latest_updates_BepiColombo_s_arrival_at_Mercury):
+  the craft entered orbit on 21 November at 18:24 UTC; a burn ended
+  early on a software fault, leaving a 75-hour orbit where 58 hours
+  was planned; no further burns are needed, and Mio's release on 9 to
+  10 December is not affected. So JPL's path past the arrival, drawn
+  for the planned orbit, is known to be wrong, and the cut stands on
+  more than "a prediction". The served `end_note`, "It entered orbit
+  around Mercury on 21 November 2026.", agrees with ESA.
+**Gap:** Tony's website push of the fix, then the orrery's; the first
+green website night serves
+the cut; then Tony's phone look at BepiColombo's box. When JPL
 fits past 21 November, the night's title says JPL REFIT; a session
 reads JPL's new path and takes path_cutoff, cutoff_file, cutoff_note
 and end_note off together, and the arrival's encounter can be built
 (L-529 (guided encounters)). The sentence for every predicted path is
 still Tony's to say.
-- **Tony-action (do):** Orrery: Commit, Pull origin, Push origin.
-- **Tony-action (do):** reinstall horizons-orbital-mechanics (1.21) to
-  your account from the repository.
+- **Tony-action (do):** Website: commit the fix's two files, none
+  under `data/`; then Pull origin, Push origin. Then the orrery.
 - **Tony-action (decide):** the source line of a cut craft on a day
   before its cut (the note above).
 **Ref:** L-538, the coordinating session's note of 2026-11-24,
@@ -4130,9 +4259,37 @@ WITH TONY'S RULING B. Not pushed; nothing committed.
 - FOUND, NOT CHASED: the night's `pip install` step stops the whole
   job when PyPI cannot be reached, the exposure ruling B answers for
   npm.
-**Gap:** Tony's pushes, the website first, then the orrery; the
-coordinating session runs both new checks on a clean checkout before
-them. Then Tony's one-time install, `python
+**Note:** (2026-11-26, 16:00 Chicago, the coordinating session, Claude
+Fable 5.2, at its close, on orrery c5412342 and gallery 571ac676)
+THE BUILD CHECKED ON LINUX BEFORE THE PUSH, AND PUSHED.
+- RUN HERE, on clean clones with the Code session's files laid over:
+  `run_walk.py --install` from the lock made on Windows, "WALKS
+  LIBRARY: installed -- 63 packages as the lock has them"; "DRAWER
+  WALK: PASS -- 383 checks on the real page ... caught, 7 of 66 red
+  (62 s)"; "CLOCK WALK: PASS -- solar-system 13 of 13, earth 10 of 10
+  ... 7 of 13 red, all in the frozen step (6 s)"; one package moved
+  away, UNREACHABLE, exit 3, "nwsapi missing"; jsdom's version changed,
+  UNREACHABLE, "jsdom is 24.1.4, the lock has 24.1.3"; with
+  PO_WALKS_INSTALL=failure, "NOT RUN TONIGHT", exit 4; the run's own
+  `run_tool` reading the three as PASS, N-A and NOT RUN; `daily_run.py
+  --check`, 37 of 37; Dashboard parity, "118 steps matched to their
+  buttons"; the skills, caps and ledger checks. NOT RUN HERE: the
+  walks on Windows and a night with the rebuilt cache, the Code
+  session's.
+- The report named seven pulled data files in Tony's website folder;
+  five differ from GitHub (`objects_config.json`,
+  `objects_export.json`, `objects_export.sha`, `constants_export.sha`,
+  `drawings/pulled_at.sha`). Tony left them out and discarded them.
+- PUSHED by Tony: website 571ac676 (13:55), orrery 3955c056 (13:59),
+  each equal, file by file, to what was checked. The orrery's night
+  of 14:17 ran clean on it (c5412342).
+- The website's night #62 of 12:27 was red; it ran before these
+  pushes, on 972b4a93, and is L-554's (JPL's sentence when a path is a
+  prediction), its notes of this date.
+- A badly wrapped line in `run_walk.py` (379): it works; for whoever
+  next opens the file. The Code session ended both builds at 42
+  percent of its context (Tony, 15:42).
+**Gap:** Tony's one-time install, `python
 "C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py"
 --install` in PowerShell, his two buttons and his first run; a first
 night on GitHub carrying both checks; interactive-exhibit 1.46's
