@@ -175,8 +175,9 @@ I told you no path's distance changes by as much as its fourth figure within the
 - The remaining claims in the four replies are checked as each is used. One of GPT's quotations has already failed that check, and Hayden's table is unconfirmed.
 
 **Your actions**
-1. (do) Orrery, in GitHub Desktop: Commit first, then Pull origin, then Push origin. Nights have committed since your last push. The commit carries seven files: the ledger, Where We Are, the handoff, the second request, its two replies and, from the earlier close, nothing else new. -- 
-2. (do, if you wish) Save the tracking monograph in `papers`. Its address is on L-560.
+1. (do) Orrery, in GitHub Desktop: Commit first, then Pull origin, then Push origin. Nights have committed since your last push. The commit carries seven files: the ledger, Where We Are, the handoff, the second request, its two replies and, from the earlier close, nothing else new. -- 4ae9068cc89ac8d9002dae537ff3f89405c2810b; nightly runs #58 and #59 green. 
+-- Website: 95bdd6a04c8a68c8968a30824710eb6d70138a77; night #66 green
+2. (do, if you wish) Save the tracking monograph in `papers`. Its address is on L-560. -- cannot be reached on Chrome. on Edge it goes to generic Apache pages. 
 
 No decision is waiting on you.
 
@@ -184,3 +185,19 @@ No decision is waiting on you.
 - What a box may print, and how it is written, is now a complete rule that is yours.
 - The next session is the design talk for Jupiter's moons. It applies the rule, starting with the 12 rows we already print by and then Io, and it starts from `HANDOFF_coordinating_20261127_green_night.md`.
 - The build comes after that: one existing place in the orrery, one on the website, and the rows of evidence.
+
+==========================
+
+The order is recorded, and all three files in your folder match what I built, byte for byte: the ledger (3,032,005 bytes), Where We Are (25,385) and the handoff (15,419).
+
+One action for you, in GitHub Desktop on the orrery: Commit, then Pull origin, then Push origin. The three files are `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/HANDOFF_coordinating_20261127_green_night.md`. -- 
+
+**Where this leaves us**
+
+- The rule for what a box may print is approved and recorded on L-560 (a digit is earned), with its display style and the evidence for spacecraft. None of it is built yet, so every box on the website still prints the old way.
+- The next session writes the rule into the skills, and does nothing else. It starts from the handoff named above.
+- After that comes one design talk, then the rule's build in both repositories, then Jupiter's fold.
+
+Thank you, Tony. It was a good session.
+
+-- reference: papers/Descanso1_all Radiometric Tracking Techniques

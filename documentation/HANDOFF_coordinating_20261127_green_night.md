@@ -1,5 +1,5 @@
-<!-- Doc-Kind: hand | Handoff: the coordinating session of Nov 26, 23:59 to Nov 27, 14:34. The website's first green night since Nov 25 read and checked; BepiColombo's cut live and looked at by Tony; the walks' first green night on GitHub, its 381 checks named; the skills cleared; L-545 waiting only for Tony's word. Then the talk on L-560: the objective restated, the ladder's last rung now the literature, Io's own JPL file read and silent. Communication; the place for the next session to start. -->
-# Handoff: the green night, and the talk on what a box may print, November 27, 2026, 14:34
+<!-- Doc-Kind: hand | Handoff: the coordinating session of Nov 26, 23:59 to Nov 27, 15:58. The website's first green night since Nov 25 read and checked; BepiColombo's cut live and looked at by Tony; the walks' first green night on GitHub, its 381 checks named; the skills cleared; L-545 waiting only for Tony's word. Then the talk on L-560: the objective restated, the ladder's last rung now the literature, Io's own JPL file read and silent. Communication; the place for the next session to start. -->
+# Handoff: the green night, and the talk on what a box may print, November 27, 2026, 15:58
 
 Built on orrery 489e4128056cd08fa46b0c11b90c64fe477ab028
 at https://github.com/tonylquintanilla/palomas_orrery (branch main)
@@ -14,6 +14,11 @@ that push this session closed L-545 and edited the ledger, Where We
 Are and this handoff once more; those three waited, not pushed, when
 this was written. `papers/` is never pushed: the JUP365 file is on
 Tony's computer only.
+Pushed again at orrery 4ae9068cc89ac8d9002dae537ff3f89405c2810b (Tony,
+15:06), which holds every record of the afternoon, each compared with
+what was built; after it only the ledger's last note, Where We Are
+and this handoff changed, and those three waited when this was
+written.
 After the close the talk went on (What was done, its last bullet), and
 the nights committed: orrery 8678143 (11:29) and e6b7651 (14:02),
 website 95bdd6a (12:19), read at 14:07. Tony's orrery folder was then one night behind
@@ -26,7 +31,7 @@ gallery
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
 
 Type: HANDOFF, coordination and a design talk (zero code). From the
-coordinating session of Nov 26, 23:59 to Nov 27, 14:34 Chicago, with a
+coordinating session of Nov 26, 23:59 to Nov 27, 15:58 Chicago, with a
 pause from 01:50 to 08:51 (Claude Fable 5.2, linked to Tony's computer,
 with a shell of its own and none on his) to the next session, which is
 a design talk.
@@ -35,17 +40,41 @@ The ledger wins on status.
 
 ## Start here
 
-1. Record both bases. The orrery should hold, above e6b7651, Tony's
-   push of the close: the ledger, Where We Are, this handoff, and the
-   second review request, and its two returns. The website moves only
-   by its nights until the next build.
+1. Record both bases. The orrery should hold, above 4ae9068c, Tony's
+   last push of this session: the ledger, Where We Are, this handoff.
+   The website moves only by its nights until the next build.
 2. Compare the skills. All 12 were equal at 489e4128; none changed
    this session.
 3. Read Tony's newest run record copy. L-545 (checks that wait to be
    remembered) is closed on his "yes"; the rest of that line of his,
    "with L560 as the answer", was read as a note on L-560, and the
    closing note says so. Reopen it if he says he meant otherwise.
-4. THE JOB: the design talk for Jupiter's moons (L-558). It applies
+4. THE JOB, by Tony's word of 15:52: THE RULE INTO THE SKILLS, a
+   short session of its own, before Jupiter. Load safe-file-editing.
+   From L-560 (a digit is earned), its notes of Nov 27, take the exact
+   words: the rule's five statements, the display style's six, and the
+   evidence for spacecraft with its three limits (typical performance,
+   not a bound). Write them into provenance-discipline's section "A
+   Computed Position Prints What Its Errors Earn", whose sentence that
+   a body with no source accuracy "prints by its drift and SAYS so"
+   is now contrary to the rule; bring orrery-coding-conventions'
+   "Hover Text AU Convention", and its copies in the earth-system and
+   gallery skills, to "au" and the style. Write as OPEN, not guessed:
+   whether the ceiling caps speeds and the q, Q and a lines; the box's
+   words. Grep all twelve skills first. Four steps for each skill
+   bumped (version line, skills_index.py, ledger note, one commit),
+   one bump each; Tony pushes and reinstalls; the session after clears
+   them. No code changes: the page prints as before until the build.
+   THE ORDER AFTER IT, by Tony's word of 15:58: one design talk, for
+   the rule's two open points and then Jupiter's moons; THE RULE'S
+   BUILD, at the orrery's one place (`position_accuracy.py`) and the
+   website's (`distanceLine` in `gallery/solar_system_figures.js`),
+   which changes every box at once and comes BEFORE Jupiter's fold is
+   built; then Jupiter's fold. The build's brief first confirms that
+   every room's box goes through that one function. L-560's last note
+   lists what is read before that build.
+   THE SESSION AFTER THE SKILLS is the design talk for Jupiter's moons
+   (L-558). It applies
    THE RULE TONY APPROVED on Nov 27, five statements, on L-560 (a
    digit is earned), its last note: at most four significant figures;
    fewer where a sourced uncertainty is coarser; the evidence must fit
@@ -117,7 +146,10 @@ The ledger wins on status.
   in kilometres, and asked for a standard to lean on. NASA's three
   ways of printing a distance and the IAU's unit were found by search.
   A second request went to the outside models on his word, and its
-  two returns were saved at 14:06.
+  two returns were saved at 14:06. The display style and the evidence
+  for spacecraft were settled; Tony read p. 34 of the tracking
+  monograph himself and saved its Chapter 3; and the rule's move into
+  the skills, in a session of its own before Jupiter, is his word.
 - Notes on L-545, L-554, L-560 (four), L-558, L-515; the index
   regenerated; Where We Are edited by section, 130 lines of 130.
 
@@ -190,6 +222,19 @@ CLAIMED, not checked here:
   a clone. Its library is jsdom alone.
 - NAIF's server refuses a session's shell, and the web tool returns a
   `.cmt` file as unreadable. Tony's browser fetches it in a minute.
+- "FAILED" WAS SAID OF A QUOTATION WHOSE PAGE HAD NOT BEEN READ. The
+  web tool's text of the monograph skips p. 34, where GPT places its
+  sentence. "Not found in the part read" was true; "failed" was not.
+  Tony then opened JPL's copy on his phone and sent p. 34: the
+  sentence is there, word for word. His eyes on the page settled in a
+  minute what two tool readings could not. The same page showed this
+  session's "margin of forty" to be nearer ten (L-560, its last note).
+  And a source was approved from a copy Tony then could not open: give
+  him the publisher's address, found by search, before asking.
+- A PDF PAGE WITH NO TEXT IN IT IS INVISIBLE TO A TEXT READER. In the
+  monograph's Chapter 3, 12 of 38 pages give no text, and p. 34 is
+  one of them. `pdftotext -f N -l N` on a page shows it in a second.
+  Such a page is read as a picture.
 - `papers/` IS NEVER PUSHED (the repository's .gitignore, 2026-09-10).
   This session listed the JUP365 file among the things to commit; a
   record that cites a file there says it is on Tony's computer only.
@@ -209,11 +254,11 @@ Where We Are edited twice.
 ## Tony-actions
 
 - (do) Orrery, in GitHub Desktop: Commit, then Pull origin, then Push
-  origin: the ledger, Where We Are, this handoff, the second review
-  request and its two returns in `worksheets`. Commit first: nights
-  have committed since your last push.
-- (do, if you wish) Save the tracking monograph in `papers`; its
-  address is on L-560 (a digit is earned), in its notes of Nov 27.
+  origin: the ledger, Where We Are, this handoff.
+- (do, if you wish) Chapter 3 of the tracking monograph is in
+  `papers`. Chapters 4 and 5, from the same JPL page
+  (https://descanso.jpl.nasa.gov/monograph/mono.html, Volume 1), would
+  complete it.
 - (do, standing) When an orrery night's title starts "JPL REFIT",
   start a session.
 - (decide, later) The three sentences listed under What the next

@@ -4340,8 +4340,165 @@ its display style are whole. Nothing built.
   https://ntrs.nasa.gov/citations/20100032906, whose summary says it
   gives a detailed error budget for the three kinds of tracking
   measurement. It may be the better one to cite.
-**Gap:** before a row for spacecraft is typed, the monograph read whole
-from a saved copy, with its quotations and pages, and the 2008 paper
+**Note:** (2026-11-27, 15:14 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 4ae9068c and gallery 95bdd6a, both read live)
+THE SESSION'S LAST NOTE: TONY'S PUSH CONFIRMED, THE MONOGRAPH'S OWN
+ADDRESS FOUND, AND ONE OF THIS SESSION'S STATEMENTS CORRECTED.
+- Tony's run record copy
+  `documentation/WHERE_WE_ARE_11-27-26_1034_run_record.md`, as he
+  brought it at 15:12: the push
+  "4ae9068cc89ac8d9002dae537ff3f89405c2810b; nightly runs #58 and #59
+  green."; and of the monograph's address, "cannot be reached on Chrome.
+  on Edge it goes to generic Apache pages." In chat, 15:12: "the nasa
+  paper at https://hdl.handle.net/hdl:2014/41645 can't be reached either
+  (cannot connect to server)", and "thanks, important session."
+- CONFIRMED: GitHub's orrery is at 4ae9068c, his commit 9e293a6 merged
+  with the nights. The six records it carries from this afternoon are
+  each equal to what was built: the ledger, Where We Are, the handoff,
+  the second request and its two returns.
+- THE MONOGRAPH'S OWN ADDRESS, found by a search: JPL's DESCANSO book
+  series page, https://descanso.jpl.nasa.gov/monograph/mono.html, Volume
+  1, "Full Version (pdf - 3 MB)"; the file itself,
+  https://descanso.jpl.nasa.gov/monograph/series1/Descanso1_all.pdf. The
+  web tool read the first 100,000 of its 142,085 characters; "This
+  instrument bias is about 2 m." is on its p. 32 too. The archive copy
+  read at 14:24 is one Tony cannot open, so nothing is to be cited from
+  it. Whether his browser opens JPL's: not known.
+- A CORRECTION. At 14:36 this session told Tony that one of GPT's
+  quotations "has already failed that check". It has not failed. GPT
+  places its sentence in 3.6 on p. 34, and in both copies the text the
+  tool could see runs from Table 3-3 on p. 33 straight to the header of
+  p. 35. Page 34 was never read. The quotation is unconfirmed, not
+  refuted; the wording of the note above, "NOT FOUND in the part read",
+  stands.
+- The 2008 paper's file is not reachable by the link Tony tried; its
+  record on NASA's server is the address in the note above. Not read by
+  anyone here.
+**Note:** (2026-11-27, 15:36 Chicago, the coordinating session, Claude
+Fable 5.2)
+PAGE 34, READ BY TONY ON JPL'S OWN COPY: GPT'S QUOTATION IS CONFIRMED,
+AND THIS SESSION'S MARGIN WAS TOO GENEROUS.
+- Tony, 15:35, with a screenshot from his phone of the monograph's p. 34
+  on JPL's site (the address bar ends "nso.jpl.nasa.gov"; the page is
+  headed "34" and "Chapter 3"): "Here is page 34." So JPL's address
+  opens for him. The picture is saved, on his computer only, as
+  `papers/Thornton_Border_2000_JPL_Pub_00-11_p34_tony_read.png`.
+- GPT'S SENTENCE IS THERE, word for word, in section 3.6, "Range and
+  Doppler System Positioning Performance", at the place GPT gave: long
+  arcs of Doppler and range, "under favorable conditions", 40 nrad or
+  better. The same paragraph puts a single 12-hour Doppler pass at about
+  50 to 100 nrad for a declination of 23 degrees. So the quotation this
+  session called "failed" at 14:36 and "unconfirmed" at 15:14 is
+  CONFIRMED, by Tony's reading.
+- THE PAGE ALSO CARRIES A LIMIT this session had not seen: its next
+  paragraph says a craft's angular position from Doppler and range "may
+  also be severely degraded" by forces modelled badly, and names gas
+  leaks, thruster firings and solar radiation pressure.
+- THE MARGIN, CORRECTED. The note of 14:25 took 2.3 microradians as the
+  largest error the monograph mentions and wrote "a margin of about
+  forty or more". By the web tool's reading of p. 35, not yet seen on
+  the page by anyone here, the monograph illustrates that limit with an
+  effect of 5 m in range read as about 1000 km sideways at 10^8 km: 1
+  part in 100,000. A fourth significant figure is never finer than 1
+  part in 10,000, and half its place is 1 part in 20,000. So the margin
+  is nearer ten, or five against half a place, not forty. Four figures
+  still hold for a tracked craft's distance from the Sun; the approval
+  of 14:34 stands on the same three limits; a fifth figure would not.
+**Note:** (2026-11-27, 15:41 Chicago, the coordinating session, Claude
+Fable 5.2)
+CHAPTER 3 OF THE MONOGRAPH SAVED ON TONY'S WORD, AND READ: PAGE 35
+CONFIRMED, AND IT IS AN ILLUSTRATION, NOT A BOUND.
+- Tony, 15:40, with the file: "Here is the complete chapter 3. Please
+  put in papers/ as our reference". Placed, on his computer only, as
+  `papers/Thornton_Border_2000_JPL_Pub_00-11_Chapter_3.pdf`: his file
+  "Descanso1_C03.pdf", 1,576,525 bytes, 38 pages, the book's pages 9 to
+  46.
+- READ FROM ITS TEXT, with the book's pages: p. 32, "This instrument
+  bias is about 2 m."; p. 37, of Ulysses, "range accuracies of a few
+  meters were achievable", and declination "to 200 nrad"; p. 24, about
+  70 nrad as "about 16 km at Mars"; p. 33, Table 3-3 whole. Its 1980
+  S-band column, owed for the Pioneers: range 200 cm random, a bias of 5
+  m, solar plasma up to 229 m along the line of sight at 20 degrees from
+  the Sun; the table gives no figure for angle.
+- PAGE 35, the page owed. The example is the monograph's own
+  "hypothetical example" after its reference [94]: a change of 5 m in
+  range at 10^8 km, read by the estimator as 1000 km in the plane of the
+  sky. It adds that solving an orbit from Doppler and range alone "can
+  be highly risky". So 1 part in 100,000 is confirmed on the page, and
+  the margin of about ten over a fourth figure stands. BUT IT IS AN
+  ILLUSTRATION AND NOT A BOUND: the chapter states no worst case. The
+  class evidence is what tracking typically achieves, with one
+  illustrated failure, and the box must not suggest more.
+- WHY TWO TOOL READINGS MISSED PAGE 34: in this file that page has no
+  text a reader can extract (the PDF's page 26 yields none; its page 27
+  does). Measured page by page: of the chapter's 38 pages, 12 give no
+  text, the book's pages 10, 12, 13, 15 to 20, 22, 34 and 36. Those are
+  read as pictures, as Tony read p. 34.
+- STILL BY THE WEB TOOL ONLY: the three figures from section 4.2, which
+  is in Chapter 4. Chapter 5 and the 2008 paper are unread.
+**Note:** (2026-11-27, 15:52 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 4ae9068c)
+THE RULE GOES INTO THE SKILLS BEFORE JUPITER, IN A SESSION OF ITS OWN.
+Tony's word.
+- Tony, 15:49: "Should we add the three limits as method in a skill
+  before we go to Jupiter?" Said back, from the skills read at orrery
+  4ae9068c: yes, and the whole rule with them. provenance-discipline
+  2.37 holds the method's home, the section "A Computed Position Prints
+  What Its Errors Earn", and it states the rule as it stood: the largest
+  of drift, the source's accuracy and the curve's error, never finer
+  than a floor, and "A body with no source-accuracy row yet prints by
+  its drift and SAYS so in the display", which the rule's fourth
+  statement now contradicts. orrery-coding-conventions 1.14 holds "Hover
+  Text AU Convention", which prints "AU" and says it is duplicated in
+  the earth-system and gallery skills. A grep of the twelve skills for
+  the old sentences found those two files only; the copies of the AU
+  convention were not opened.
+- PUT TO HIM AND APPROVED (15:52: "Yes."): a short session of its own,
+  not this one, before the design talk for Jupiter's moons. It writes
+  into provenance-discipline's section the five statements of the rule,
+  the six of the display style, and the evidence for spacecraft with its
+  three limits and the fact that it is typical performance and not a
+  bound; it brings the AU convention and its copies to "au" and the
+  style; it writes the two open points as open (whether the ceiling also
+  caps speeds and the q, Q and a lines; the box's words); it follows the
+  binding rule's four steps, one bump for each skill. Tony pushes and
+  reinstalls; the session after clears them by its own comparison.
+- WHY NOT THIS SESSION, said to him: a skill is followed by every
+  session without being noticed, this session is very long, and it has
+  made several slips today that Tony or a check caught.
+**Note:** (2026-11-27, 15:58 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 4ae9068c)
+THE ORDER, ON TONY'S WORD: THE SKILLS; ONE DESIGN TALK; THE RULE'S
+BUILD; THEN JUPITER'S FOLD. The session's last note.
+- Tony, 15:56: "Should we go back to previous builds and amend them
+  first?" Said back: not room by room. Each repository formats a
+  distance in one place (read this morning: `position_accuracy.py`;
+  `distanceLine` in `gallery/solar_system_figures.js`), so the rooms
+  already built are readers of one producer, and one build of the rule
+  changes every box at once. That build belongs before Jupiter's fold is
+  built, since Io's box would stand on the same function and the skills
+  will by then state the new rule. NOT TRACED: each room's box to that
+  function, line by line; the build's brief confirms it first.
+- THE ORDER PUT TO HIM AND APPROVED (15:58: "Yes. Thanks good
+  session."): (1) the skills session; (2) one design talk, for the
+  rule's two open points (the box's words; whether the ceiling caps
+  speeds and the q, Q and a lines) and then Jupiter's moons; (3) the
+  rule's build, at the orrery's one place and the website's, with the
+  rows of evidence in hand, the walk's expectations and the figures
+  check changed in the same sitting, and the whole night run on a copy
+  holding both halves; (4) Jupiter's fold, built on it.
+- READ BEFORE THE RULE'S BUILD, so that few bodies show no number on its
+  first day: the 12 rows against their source; Jupiter's, Saturn's and
+  Pluto's moons; JPL's own figures for the 13 path bodies; the
+  spacecraft's row.
+- LEFT AS IT IS: the saved pictures (L-520 (old pictures carry old
+  words)). The Earth System pages carry a copy of the AU convention;
+  what distances they print was not looked at.
+**Gap:** FIRST, THE SKILLS SESSION; then the design talk; then THE
+RULE'S BUILD, before Jupiter's fold (the two notes above). And,
+before a row for spacecraft is typed: Chapter 3's pages that
+have no text read as pictures; Chapter 4's three figures and Chapter 5
+read from JPL's copy; the 2008 paper
 read; the other claims in the four returns checked as each is used.
 Then the rule applied, body by body,
 at the design talk for
