@@ -5,9 +5,9 @@
   "held": [],
   "jpl_differs": [],
   "jpl_waiting": [],
-  "clean_run_utc": "2026-11-26T20:17:21.274740+00:00",
+  "clean_run_utc": "2026-11-27T17:29:21.785201+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/45889657581",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/46041993340",
   "reported_not_red": [],
   "rows": [
     {
@@ -18,12 +18,12 @@
     {
       "row": "Period fetch",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 110 served objects examined, no query asked"
+      "verdict": "rewrote data/osculating_cache.json -- PASS -- no period missing; elements on the 30-day cycle for 2: 2026 ED138, Arrokoth; drawing refused: McNaught"
     },
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (3 checked, not written) -- PASS -- 1 checked today, 1 queries"
+      "verdict": "rewrote data/horizons_confirmations.json, data/spacecraft_sheets.json -- PASS -- 3 checked today, 3 queries"
     },
     {
       "row": "Path plan",
@@ -38,7 +38,7 @@
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written)"
+      "verdict": "rewrote data/objects_export.json"
     },
     {
       "row": "Drawings export",
