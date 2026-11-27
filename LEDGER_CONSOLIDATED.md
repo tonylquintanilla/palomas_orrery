@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*282 live items; 267 need attention (`!`); 162 RICE-scored; 270 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*283 live items; 268 need attention (`!`); 162 RICE-scored; 270 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1168,7 +1168,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-22 |
-| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
+| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-26 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | OPEN | -- | 2026-11-21 |
@@ -1199,8 +1199,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed) | OPEN | -- | 2026-11-26 |
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
-| ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-25 |
+| ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-26 |
 | ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-26 |
+| ! | L-560 | A digit is earned: what a box prints when no error is served for a position (gallery + orrery; design, ruled in principle, its form at a design talk) | OPEN | -- | 2026-11-26 |
 
 ### B. Pending Action (Tony-side)
 
@@ -3476,16 +3477,32 @@ WAYS, AND ESA'S NEWS.
   for the planned orbit, is known to be wrong, and the cut stands on
   more than "a prediction". The served `end_note`, "It entered orbit
   around Mercury on 21 November 2026.", agrees with ESA.
-**Gap:** Tony's website push of the fix, then the orrery's; the first
-green website night serves
+**Note:** (2026-11-26, 21:00 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery ae40544e and gallery bc89fd3b, both read live)
+THE FIX IS PUSHED; TWO MORE RED NIGHTS, NEITHER ON THE CUT.
+- Pushed by Tony: website bc89fd3b (17:57), holding the fix's two
+  files and nothing under `data/`; orrery ae40544e (18:00).
+- Night #63, 15:39, red: it ran before that push, on 571ac676.
+- Night #64, by hand, 27 Nov 00:11 UTC, from the log Tony pasted: the
+  pulls fetched the orrery at ae40544e; "[warn] shrink gate:
+  bepicolombo fetched again by a new path plan; held out of the count
+  (old 1521, new 1426)"; "PASS Cache builder suite 33.4s PASS (631
+  checks, 0 failures)"; "PASS Solar System figures"; "1 of 55 gating
+  checkers FAILED", View centre, by the luck of the date (L-515 (one
+  nested tree)). So the cut passed every check on GitHub, and no
+  night has yet committed it: the site still serves the cache of Nov
+  25.
+**Gap:** Tony's push of the View centre fix; the first green website
+night serves
 the cut; then Tony's phone look at BepiColombo's box. When JPL
 fits past 21 November, the night's title says JPL REFIT; a session
 reads JPL's new path and takes path_cutoff, cutoff_file, cutoff_note
 and end_note off together, and the arrival's encounter can be built
 (L-529 (guided encounters)). The sentence for every predicted path is
 still Tony's to say.
-- **Tony-action (do):** Website: commit the fix's two files, none
-  under `data/`; then Pull origin, Push origin. Then the orrery.
+- **Tony-action (do):** Website: commit the View centre fix's two
+  files, none under `data/`; then Pull origin, Push origin. Then the
+  orrery.
 - **Tony-action (decide):** the source line of a cut craft on a day
   before its cut (the note above).
 **Ref:** L-538, the coordinating session's note of 2026-11-24,
@@ -3648,7 +3665,7 @@ L-165 (the freeze); L-538 (the orbiters' printed error), whose close
 found it.
 
 #### [L-557] The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session)
-<!-- L:557 status:OPEN upd:2026-11-25 section:A flag: rice: -->
+<!-- L:557 status:OPEN upd:2026-11-26 section:A flag: rice: -->
 - **Opened 2026-11-25** by the coordinating session (Claude Fable 5.2),
   at the talk on L-556 (a date to choose in the rooms); read and
   tested at gallery b2d9eaa6. Nothing is built. Tony, 01:14: "let's
@@ -3755,10 +3772,134 @@ found it.
   session's reading, not ruled: of point (1)'s three choices below,
   the planets served as a point a day moves work from the page to
   the night. The choice is still the design session's and his.
+**Note:** (2026-11-26, 21:00 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery ae40544e and gallery bc89fd3b, both read live)
+FOR THE DESIGN SESSION, from the talk recorded on L-560 (a digit is
+earned).
+- Tony, 20:02: "And we should consider that when we implement date
+  picking the errors will increase substantially from propagation."
+- The page's own straight-line drift, from the served rates in the
+  cache of Nov 25, one day after the orbit's date: the Moon 342 km, Io
+  190, Phobos 19, Titan 8, Deimos 1.4, Charon 0.1. Carried by
+  multiplication, not measured, to the window's edge at 88 days: about
+  30,000, 16,700, 1,700, 700, 120 and 9 km. Phobos's is near a fifth
+  of its distance from Mars. This item's own finding is that the real
+  miss outruns that line.
+- The page already says a moon does not last: Tony's drawer walk of
+  this date printed "Io past its span (5.3 hours)".
+- SO, for the session: a chosen date needs an orbit dated near that
+  date, not today's carried forward, which is a question of what the
+  night serves. The drawer walk's Io check failing at the window's
+  edges (L-545, its notes of this date) is the same effect.
 **Gap:** a design session of its own. Nothing built, no brief.
 **Ref:** L-556 (a date to choose in the rooms); L-538 (the orbiters'
 printed error); L-541 (a plan's clock), the Room clock row; the test
 above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
+
+#### [L-560] A digit is earned: what a box prints when no error is served for a position (gallery + orrery; design, ruled in principle, its form at a design talk)
+<!-- L:560 status:OPEN upd:2026-11-26 section:A flag: rice: -->
+- **Opened 2026-11-26, evening**, by the coordinating session (Claude
+  Fable 5.2), out of the talk on night #64's red check (L-515 (one
+  nested tree), its note of this date). Nothing built.
+- TONY'S WORDS, in order, in chat. 19:48: "Does it make sense to fail
+  at even 7.7 km?" 19:55: "Wait, is JPL serving those precisions?"
+  19:57: "That's the problem. We are hitting the floor." 20:02: "And
+  we should consider that when we implement date picking the errors
+  will increase substantially from propagation." 20:23: "I'll be
+  honest to say that printing all those decimals makes me uneasy even
+  though or especially because we do not have a served precision. For
+  the layman they read those figures as precision discounting the
+  disclaimer."
+- WHAT THE PAGE DOES TODAY, read in `gallery/solar_system_figures.js`:
+  a distance prints by the largest of three errors, the drift of the
+  page's own orbit from JPL's points, JPL's own error where one is
+  served, and a floor of half a kilometre (`FINEST_KM`, "the room
+  prints whole kilometres at most"). With no JPL error served the box
+  adds "JPL's own uncertainty for this position is not yet included."
+  (Tony's words of 2026-10-01, L-399). A position the page works out
+  with no measured error prints no distance at all ("so no figures
+  are earned"); a position taken from JPL's path with no JPL error
+  prints every digit. The two are not consistent.
+- WHERE IT SHOWS, measured. Tony's drawer walk of this date, Pioneer
+  10's box: "82.13069427 AU from the Sun (12,286,576,981 km) on its
+  last day", then the sentence above. From the cache of Nov 25
+  (`data/solar-system/coverage_index.json`,
+  `data/objects_config.json`): JPL's accuracy is served for the Moon
+  (the 0.001 km place, the DE430 report's "submeter") and for Phobos
+  and Deimos (the 10 km place, the 2025 paper on MAR099); none for Io,
+  Titan, Charon or Pluto. So the floor stands in for it while drift is
+  small: after the orbit's date, for 2.1 minutes at the Moon, 3.8 at
+  Io, 89 at Titan, and 11,895 (8 days, so always) at Charon.
+- THREE WAYS were put to him: 1, a round figure and the sentence; 2,
+  no figure, only the sentence, as Juno has; 3, a sourced error for
+  each body. **Tony, 20:28: "I think rule 1 is right with rule 3 where
+  available, but we still need a standard for rule 1. I would suggest
+  the various catalogues and standard sources. Pick a source or a few
+  we can use until a better one (option 3) is found on a per body
+  basis."** To a convention as the next step, 20:35: "this is a last
+  resort. What other astronomical authorities can we cite? For
+  example when nasa talks about spacecraft, etc." To the ladder below,
+  **20:40: "Accepted. And I would add that if we fallback to option 3
+  that should be a ledger item to search for a better source."** His
+  "option 3" there is the ladder's third rung, the convention, as
+  this session read it and said back to him.
+- THE LADDER, accepted. (1) The body's own figure from JPL. (2) For a
+  planet or a moon, the figure its ephemeris's own reference states
+  for its family; for a spacecraft, the accuracy note in its own
+  trajectory file. (3) Only where both are silent, a round figure by
+  a stated convention, with the sentence; a last resort, and every
+  body on it is owed a search for a better source. The error comes
+  from the source of the numbers, so JPL and the agencies that make
+  the files come before other catalogues.
+- THE SOURCES PICKED, found in a web search this evening and NOT YET
+  READ for any figure (source, then cite):
+  - Planets and the Moon: JPL's planetary ephemeris report, in use in
+    its 2014 edition (DE430 and DE431, IPN Progress Report 42-196).
+    To check at JPL's own pages: Horizons is reported, by Wikipedia in
+    a search result, to have moved to DE440 and DE441 in April 2021
+    (their report is Park et al. 2021, AJ 161:105,
+    https://ssd.jpl.nasa.gov/doc/de440_de441.html); if so the citation
+    moves to it.
+  - Moons: JPL's page "Planetary Satellite Ephemerides"
+    (https://ssd.jpl.nasa.gov/sats/ephem/sep.html), which names for
+    each moon the ephemeris Horizons uses and its reference: Phobos
+    and Deimos MAR099, reference 7, the paper already cited; Io,
+    Europa, Ganymede and Callisto JUP365, reference 29.
+  - Asteroids and comets: JPL's own uncertainty, in use for 52 of 55.
+  - Spacecraft: JPL's data sheet for the craft, which names its
+    trajectory file; then that file's own comments, for which NAIF's
+    "SPK Required Reading", Appendix B, gives a template with the
+    headings Status, Pedigree, Usage and Accuracy
+    (https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/spk.html);
+    NAIF's archives by mission
+    (https://naif.jpl.nasa.gov/naif/data_archived.html); for ESA's
+    craft the ESA SPICE Service
+    (https://www.cosmos.esa.int/web/spice/spice-for-bepicolombo).
+    The files are binary; reading their comments takes NAIF's toolkit.
+  - Named and not looked up: the Astronomical Almanac, for how finely
+    planets and major moons are printed; the Minor Planet Center.
+    NASA's mission pages give round figures and state no accuracy: a
+    check on our rounding, not its source.
+- BODIES ON THE LAST RUNG, by name: none yet; a body is put there
+  only by a build that has tried rungs 1 and 2, and this list is then
+  the work order for the searches. TO BE WALKED DOWN THE LADDER: Io,
+  Titan, Charon, Pluto, and the spacecraft (the drawer's 21).
+- FOR THE DESIGN TALK, with Jupiter's moons (L-558 (the folds after
+  Mars)), where "Io to standard" already sits: the convention's form
+  (one candidate, three significant figures); whether the half
+  kilometre stays one floor for every moon, since by this session's
+  arithmetic, not measured, a moon farther than about 0.03 to 0.06 AU
+  from its planet can round by more than half a kilometre even with
+  its planet at the middle (Jupiter's four large moons are inside
+  that; its far small moons and Phoebe are not); and the date to
+  choose, where drift outruns everything (L-557 (the error away from
+  today), its note of this date).
+**Gap:** the design talk; then a build that touches every spacecraft's
+box. Nothing built, no brief.
+**Ref:** L-399 (the sentence when JPL's figure is missing); L-513 and
+L-514 (the Moon's and Mars's standards); L-398; L-484; L-401 (the
+spacecraft data sheets); L-515, L-557, L-558; L-554 (JPL's sentence
+when a path is a prediction); `gallery/solar_system_figures.js`.
 
 #### [L-558] The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25)
 <!-- L:558 status:OPEN upd:2026-11-26 section:A flag: rice: -->
@@ -4289,11 +4430,27 @@ THE BUILD CHECKED ON LINUX BEFORE THE PUSH, AND PUSHED.
 - A badly wrapped line in `run_walk.py` (379): it works; for whoever
   next opens the file. The Code session ended both builds at 42
   percent of its context (Tony, 15:42).
-**Gap:** Tony's one-time install, `python
-"C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py"
---install` in PowerShell, his two buttons and his first run; a first
-night on GitHub carrying both checks; interactive-exhibit 1.46's
-reinstall, cleared by a later session.
+**Note:** (2026-11-26, 21:00 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery ae40544e and gallery bc89fd3b, both read live)
+TONY'S INSTALL AND FIRST RUNS, AND THE WALKS' FIRST NIGHT ON GITHUB.
+- From his run record copy
+  `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`, as
+  uploaded at 18:09: the install, "WALKS LIBRARY: installed -- 63
+  packages as the lock has them, in C:\Users\tonyq\palomas_orrery_walks";
+  his Drawer Walk button, "DRAWER WALK: PASS -- 383 checks on the real
+  page ... caught, 7 of 66 red (68 s)"; his Clock Walk button, "CLOCK
+  WALK: PASS -- solar-system 13 of 13, earth 10 of 10 ... (10 s)". His
+  reinstall of interactive-exhibit 1.46: "-- done", not cleared here;
+  a session's installed copy is bound when it starts.
+- THE WALKS' FIRST NIGHT ON GITHUB, #64, 27 Nov 00:11 UTC, from the
+  log Tony pasted: "PASS Drawer walk 38.8s ... 381 checks on the real
+  page ... caught, 7 of 64 red (39 s)" and "PASS Clock walk 4.1s". No
+  "WALKS NOT RUN" in the run. The night was red on another check
+  (L-515, its notes of this date), so nothing was committed.
+**Gap:** a first GREEN night on GitHub carrying both checks;
+interactive-exhibit 1.46 cleared by a later session's comparison. The
+drawer walk's section 33 is mended at the next build that opens the
+walk (L-515).
 **Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
 (the website's checks); L-535; L-550 (a website check with no
 dashboard button); L-551 (no saved scenes); L-485 (the nightly run);
@@ -6160,7 +6317,7 @@ goes red when the drawer leaves its rules.
 - **Ref:** L-165 (site continuity); L-490 (the legacy list).
 
 #### [L-515] One nested tree in place of isolated rooms (gallery, the room system; design)
-<!-- L:515 status:OPEN upd:2026-11-10 section:A flag: rice: -->
+<!-- L:515 status:OPEN upd:2026-11-26 section:A flag: rice: -->
 - **Opened 2026-11-07, 00:17 Chicago**, in the coordinating session
   (Claude Opus 5.5), built on orrery 33c699bb and gallery 3f2ce7fc.
   Tony: "I think we need to rethink the room system before we go
@@ -7325,6 +7482,25 @@ goes red when the drawer leaves its rules.
     received note on Reset's frame); gallery-assembler 1.3 -> 1.4 (No
     composition between frames says which kind is retired; it now has a
     read plan); protocol v3.136; the manifest regenerated.
+**Note:** (2026-11-26, 21:00 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery ae40544e and gallery bc89fd3b, both read live)
+THE VIEW CENTRE FIX CHECKED, AND SECTION 33 DECIDED.
+- RUN HERE, the Code session's two files laid over a clean clone of
+  gallery bc89fd3b: the check as pushed passes on the cache of Nov 25;
+  the mended check passes, its five worked cases hold and its
+  self-test fails all seven moons with the shift left out; a fault
+  planted here, `shiftFault` made to pass everything, turns it red;
+  `tools/check_as_built_names.py` passes. NOT RUN HERE: night #64's
+  own failure, which needs the cache of 27 November from JPL; the
+  Code session reproduced it to the last digit.
+- Tony read the fix before it was built and asked what the limit
+  means; the rule became the header's alone on his questions (L-560
+  (a digit is earned)).
+- THE DRAWER WALK'S SECTION 33, left to this session: mended at the
+  next build that opens `tools/headless/walk_solar_system_drawer.js`,
+  by dropping `ioErrSun > 1` and keeping Io's own half kilometre. It
+  is a gate of the night since L-545, and red by luck on about 20
+  dates in 3,650. Jupiter's fold opens that file for Io.
 **Gap:** step 2b passed Tony's look on 2026-11-10, night (below). Next,
 step 3, L-514 (the Mars room), with ruling 11's 48-hour positions; whether
 the exhibit skill's split (L-522, document caps) goes first is Tony's
@@ -7435,6 +7611,75 @@ skill's split (L-522).
     measured (ruling 4).
   - So step 2b is seen and passed on his phone. The skill, carried
     above, also takes his ruling on the Sun line at its next version.
+- **The website's night #64 red on the View centre check, 2026-11-26,
+  evening Chicago** (L-545's Code session, Claude Opus 5.5, by the
+  coordinating session's brief carried in chat, on gallery bc89fd3b and
+  orrery ae40544e, both read 20:04 Chicago). Not pushed; nothing
+  committed.
+  - WHAT FAILED: night #64, 27 Nov 00:11 UTC, red on one gating check
+    of 55: "moon: with earth at the middle its 32-bit error is
+    0.014916876744076638 km, not under half a kilometre and a hundredth
+    of its error from the Sun".
+  - WHY: `documentation/smoke_view_centre.js` asked two things of each
+    moon: its 32-bit error with its planet at the middle under half a
+    kilometre, as its header states, and under a hundredth of its error
+    from the Sun, which the header never stated. Both are float32
+    rounding errors, whose sizes fall by the luck of the date: the
+    Moon's error from the Sun was 0.9 km that night, so a hundredth of
+    it was 0.009 km, under the 0.0149 km shifted. The positions are
+    taken at each orbit's epoch, the build day's 00:00 UTC, so every
+    run on 27 November UTC failed alike. Measured on the served
+    elements carried over 3,650 days: the ratio fails the Moon on 336
+    of them (about one night in 11), Titan on 29, Io on 13, Deimos on 1;
+    the half kilometre, on none (the worst, Titan, 0.07 km).
+  - WHAT CHANGED, in that file only: `shiftFault`, the rule the header
+    states and nothing more: the shifted error under
+    `SolarSystemFigures.FINEST_KM`, now read from
+    `gallery/solar_system_figures.js` instead of typed as 0.5. Both
+    errors still printed by name. Worked cases, all must hold: night
+    #64's Moon (0.0149 km) green; 0.9 km, exactly 0.5 km, not a number,
+    and no finest figure read, each red. A planted fault on the served
+    data every run: the moons measured again with the shift left out
+    must fail the rule, by name. `INTERACTIVE_AS_BUILT.md`'s View centre
+    row says so.
+  - SHOWN on a throwaway copy of gallery bc89fd3b with this file, the
+    orrery's exports pulled (5 of 5) and the cache rebuilt from JPL
+    ("[done] run 20261127T021201Z (nightly): 114 objects"): the check
+    as at bc89fd3b, "=== FAIL: 1 ===" with night #64's own line, to the
+    last digit; the mended check, "=== PASS"; the Moon 0.9 km from the
+    Sun, shifted 0.01492 km. The rule planted to pass everything is
+    caught: "=== FAIL: 5 ===", four worked cases and the shift left
+    out. The night's pass, `gallery_maintenance_run.py --night`, with
+    the walks' library: "55 of 55 gating checkers passed", exit 0; View
+    centre, Cache builder suite (631 checks, 0 failures), Solar System
+    figures, Drawer walk (381 checks) and Clock walk all PASS; the swap
+    right first time.
+  - THE SAME KIND, RECORDED AND NOT MENDED: the drawer walk's section
+    33 (`tools/headless/walk_solar_system_drawer.js`, line 2193) asks
+    `ioErrKm < 0.5 && ioErrSun > 1`. No ratio, but the same fault: a
+    demand on the error from the Sun, which falls by chance. Measured
+    as above, Io's error from the Sun is 1 km or under on 20 of 3,650
+    days, about two nights a year red by luck. Its own half kilometre
+    is right. Searched for the rest (`fround`, `float32` and
+    `float32ErrorKm` in the website's .js, .py and .html files): only
+    the View centre check and section 33 rule on a 32-bit error;
+    `tools/test_compose_children.py` uses float32 to plant a fault, not
+    as a rule.
+  - IN TONY'S FOLDERS: the website's maintenance run, "1 of 55 gating
+    checkers FAILED": View centre PASS; Drawer walk PASS (383 checks)
+    and Clock walk PASS, the walks' library now installed there; the one
+    red row, Solar System figures, "bepicolombo: its last served point
+    is 2027-04-10 00:01, not its span's last day, 2026-11-17", as at the
+    base, because the folder's cache was built on Nov 25 before the cut
+    reached it (L-554); the night's rebuild clears it, as the copy
+    shows. The run pulled five data files into the folder, not for the
+    push: `data/objects_config.json`, `data/objects_export.json`,
+    `data/objects_export.sha`, `data/constants_export.sha`,
+    `data/drawings/pulled_at.sha`. The orrery's run: "37 of 37 gating
+    checkers passed", 0 Tier-1; its Horizons check moved
+    `data/spacecraft_sheets.json`'s read date for BepiColombo to
+    2026-11-27, JPL's sentence unchanged ("Data fit through
+    2026-Nov-17, prediction thereafter."): no refit.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.

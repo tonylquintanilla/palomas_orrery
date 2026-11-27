@@ -573,14 +573,100 @@ That fits the project's own method table, which already gives coordination to Op
 2. Commit the other 2 files. -- done
 3. Right-click the `data/` files and choose Discard Changes. -- done
 4. Then Pull origin, Push origin. -- bc89fd3b3c64f4d65b6ee35afb34090a2b74bff0; nightly run #63 at 3:39 pm is Red on exit code 1
-5. Orrery: Commit everything, then Pull origin, then Push origin. This carries the ledger, Where We Are, the handoff, the fix's brief, your run record and the four files the maintenance run wrote. -- 
+5. Orrery: Commit everything, then Pull origin, then Push origin. This carries the ledger, Where We Are, the handoff, the fix's brief, your run record and the four files the maintenance run wrote. -- ae40544e8e1f010e18b1680d1abbcb1e11ef64b6; merged with night #57
 6. Once, in PowerShell:
    ```powershell
    python "C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py" --install
    ```
-   Then the dashboard's Drawer Walk and Clock Walk buttons.
-7. Reinstall interactive-exhibit (1.46) to your account.
-8. After the first green website night: look at its title, and on your phone at BepiColombo's box.
+
+   C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python "C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools\headless\run_walk.py" --install
+   Installing the walks' library into C:\Users\tonyq\palomas_orrery_walks, exactly as
+   tools/headless/walks_library/package-lock.json has it (npm ci) ...
+   npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+
+   added 63 packages in 5s
+   WALKS LIBRARY: installed -- 63 packages as the lock has them, in C:\Users\tonyq\palomas_orrery_walks
+
+   C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+   Then the dashboard's Drawer Walk 
+   
+  library: 63 packages as tools/headless/walks_library/package-lock.json has them, in C:\Users\tonyq\palomas_orrery_walks
+  scene: SOLAR_SYSTEM_DRIVER: 430 traces, 0 warnings -> C:\Users\tonyq\AppData\Local\Temp\po_walks_j8rty9it\scene_solar_system_now.json
+  the real page:
+      Center on: sun, earth, jupiter, saturn, mars, pluto_barycenter; no label on: venus
+      27: shells 35; ?exhibit=sun opens as the Solar System view on center, earth, mars, mercury, venus at +/-1.944 AU
+      28: parents comets_all (6 groups, 27 bodies), spacecraft_all (2 groups, 21 bodies), apollo_amor (2 groups, 11 bodies)
+      32: moons earth > em_l1, moon, em_l4, em_l5, em_l2; mars > phobos, deimos; jupiter > io; saturn > titan; pluto_barycenter > pluto, charon; Io past its span (5.3 hours)
+      33: Io's 32-bit error 18.2 km from the Sun, 0.0093 km with Jupiter at the middle; Center on Jupiter framed at +/-0.00340 AU
+      34: Earth's fold 43 traces, its drawings 109944 bytes, 23 shell and guide rows with the Moon; centred at +/-0.0000490 AU
+      35: Jupiter 14 and Saturn 14 traces in their folds, fetching nothing; the Pluto system's open square; New Horizons ticks jupiter, pluto_barycenter
+      36: Find 'Jupiter' brings 8 rows; Io ticked at Jupiter's middle frames at 0.0034 AU; Jupiter's orbit misses it by 0.000 km
+      37: Mars's fold phobos, deimos; Centre on Mars at the middle, moons off, its fold open; Go To Phobos 9,500 km (past its span), Go To Deimos 23,460 km (past its span)
+      38: upright phone -- Centre on Mars 1.212 times wider, Go To Deimos 1.212, Home 1.000; what each frames reaches 1.00000, 1.00000, 0.66248 of the half-width with 10 percent; each grid the one it earns
+      39: the drawer opens at its handle's row -- the opening earth; a tap on Venus venus; a tap on the Sun center; Centre on Mars mars
+      40: ESCAPADE-Blue's box carries its loiter line; companions ["earth","mars"]
+      29: 17 folds on a desktop; Earth 7 on a desktop, 6 on a phone; Artemis 5
+      30: Scenes under the Sun, 2 scenes; Back to &show=earth,venus&at=2026-11-27T00:05Z
+      31: places: a scene beside Jupiter and Sun: Heliopause; 6 pictures beside 3I/ATLAS and the belt's cloud
+      41: Links under Earth, 1 link(s): escapade_reel; Find 'twins': 1 link matches
+      42: bepicolombo planted past its path's last point, 10 April 2027; ended missions' words kept, 7 of 7: pioneer_10, pioneer_11, galileo, cassini, rosetta, akatsuki (drawn to 26 April 2024), dart
+      43: bepicolombo cut at 17 November 2026 (planted), from 21 October 2018; its box reads the seven sentences in order: yes
+    PASS: 383 checks on the stand-in scene
+  the planted page (an ended mission's last day one day early):
+      29: 17 folds on a desktop; Earth 7 on a desktop, 6 on a phone; Artemis 5
+      30: Scenes under the Sun, 2 scenes; Back to &show=earth,venus&at=2026-11-27T00:06Z
+      31: places: a scene beside Jupiter and Sun: Heliopause; 6 pictures beside 3I/ATLAS and the belt's cloud
+      41: Links under Earth, 1 link(s): escapade_reel; Find 'twins': 1 link matches
+      42: bepicolombo planted past its path's last point, 10 April 2027; ended missions' words kept, 0 of 7:
+      43: bepicolombo cut at 17 November 2026 (planted), from 21 October 2018; its box reads the seven sentences in order: yes
+    FAIL 7 of 66 (planted C:\Users\tonyq\AppData\Local\Temp\po_walks_j8rty9it\planted_interactive.html):
+      42b: pioneer_10's box, an ended mission's, is not as it was: Pioneer 10 &#8226; This mission ended on 22 January 2003. The marker is where it was that day. &#8226; It is still flying, heading out of the solar system, but no one has heard from it since. &#8226; 82.13069427 AU from the Sun (12,286,576,981 km) on its last day &#8226; JPL's own uncertainty for this position is not yet included. &#8226; Its path is solid all the way, since all of it was flown, from 4 March 1972 to  | JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -23. Positions measured from the Sun's centre, from 4 March 1972 UTC to 23 January 2003 UTC, to the day the mission ended, retrieved 25 November 2026 UTC. A
+      42b: pioneer_11's box, an ended mission's, is not as it was: Pioneer 11 &#8226; This mission ended on 23 November 1995. The marker is where it was that day. &#8226; It is still flying, heading out of the solar system, but no one has heard from it since. &#8226; 44.44647712 AU from the Sun (6,649,098,337 km) on its last day &#8226; JPL's own uncertainty for this position is not yet included. &#8226; Its path is solid all the way, since all of it was flown, from 7 April 1973 to  | JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -24. Positions measured from the Sun's centre, from 7 April 1973 UTC to 24 November 1995 UTC, to the day the mission ended, retrieved 25 November 2026 UTC.
+      42b: galileo's box, an ended mission's, is not as it was: Galileo &#8226; This mission ended on 20 September 2003. The marker is where it was that day. &#8226; 5.37211985 AU from the Sun (803,657,690 km) on its last day &#8226; JPL's own uncertainty for this position is not yet included. &#8226; Its path is solid all the way, since all of it was flown, from 20 October 1989 to 21 September 2003. &#8226; Its path covers the mission's own dates, but the planets are drawn where | JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -77. Positions measured from the Sun's centre, from 20 October 1989 UTC to 21 September 2003 UTC, to the day the mission ended, retrieved 25 November 2026 U
+      42b: cassini's box, an ended mission's, is not as it was: Cassini &#8226; This mission ended on 14 September 2017. The marker is where it was that day. &#8226; 10.06364205 AU from the Sun (1,505,499,421 km) on its last day &#8226; JPL's own uncertainty for this position is not yet included. &#8226; Its path is solid all the way, since all of it was flown, from 16 October 1997 to 15 September 2017. &#8226; Its path covers the mission's own dates, but the planets are drawn wh | JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -82. Positions measured from the Sun's centre, from 16 October 1997 UTC to 15 September 2017 UTC, to the day the mission ended, retrieved 25 November 2026 U
+      42b: rosetta's box, an ended mission's, is not as it was: Rosetta &#8226; This mission ended on 29 September 2016. The marker is where it was that day. &#8226; 3.83108460 AU from the Sun (573,122,098 km) on its last day &#8226; JPL's own uncertainty for this position is not yet included. &#8226; Its path is solid all the way, since all of it was flown, from 3 March 2004 to 30 September 2016. &#8226; Its path covers the mission's own dates, but the planets are drawn where th | JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -226. Positions measured from the Sun's centre, from 3 March 2004 UTC to 30 September 2016 UTC, to the day the mission ended, retrieved 25 November 2026 UTC
+      42b: akatsuki's box, an ended mission's, is not as it was: Akatsuki &#8226; This mission ended on 17 September 2025. Contact was lost at the end of April 2024. The path is drawn to 26 April 2024, the last day JPL's solution is fitted to tracking, and the marker is where it was that day. &#8226; It was orbiting Venus at the time. &#8226; 0.72464318 AU from the Sun (108,405,077 km) on the last day drawn &#8226; JPL's own uncertainty for this position is not yet included. &#822 | JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -5. Positions measured from the Sun's centre, from 22 May 2010 UTC to 26 April 2024 UTC, to the last day drawn, retrieved 25 November 2026 UTC. A point ever
+      42b: dart's box, an ended mission's, is not as it was: DART &#8226; This mission ended on 25 September 2022. The marker is where it was that day. &#8226; 1.04676132 AU from the Sun (156,593,264 km) on its last day &#8226; JPL's own uncertainty for this position is not yet included. &#8226; Its path is solid all the way, since all of it was flown, from 25 November 2021 to 26 September 2022. &#8226; Its path covers the mission's own dates, but the planets are drawn where t | JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -135. Positions measured from the Sun's centre, from 25 November 2021 UTC to 26 September 2022 UTC, to the day the mission ended, retrieved 25 November 2026
+DRAWER WALK: PASS -- 383 checks on the real page, the scene at 2026-11-27 00:05 UTC; planted fault (an ended mission's last day one day early) caught, 7 of 66 red (68 s)
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>   
+   
+   and Clock Walk buttons.
+
+  library: 63 packages as tools/headless/walks_library/package-lock.json has them, in C:\Users\tonyq\palomas_orrery_walks
+  scene: SOLAR_SYSTEM_DRIVER: 430 traces, 0 warnings -> C:\Users\tonyq\AppData\Local\Temp\po_walks_bv_nysub\scene_solar-system_now.json
+  scene: SOLAR_SYSTEM_DRIVER: 430 traces, 0 warnings -> C:\Users\tonyq\AppData\Local\Temp\po_walks_bv_nysub\scene_solar-system_end.json
+  the real page, solar-system:
+    plain:  EPOCH_ISO 2026-11-27T00:05:00Z, subtitle "27 Nov 2026, 00:05 UTC", 235 drawer rows
+    frozen: EPOCH_ISO 2027-02-21T21:05:00Z, subtitle "21 Feb 2027, 21:05 UTC, the last day our data covers"
+            i panel: This room shows 21 Feb 2027, 21:05 UTC, the last day its data covers, and not today. The positions are checked against JPL only up to that day, so the room stops there rather than guess beyond it.
+    solar-system: 13 of 13 checks passed
+  the planted page, solar-system (the freeze that never answers):
+    plain:  EPOCH_ISO 2026-11-27T00:06:00Z, subtitle "27 Nov 2026, 00:05 UTC", 235 drawer rows
+    frozen: EPOCH_ISO 2026-11-27T00:06:00Z, subtitle "21 Feb 2027, 21:05 UTC"
+    solar-system: 6 of 13 checks passed
+    FAIL:
+      frozen: EPOCH_ISO 2026-11-27T00:06:00Z is not the window's last minute (end JD 2461458.3790375716)
+      frozen: the payload was not built at 2026-11-27T00:06:00Z -- rebuild it at that minute
+      frozen: the subtitle reads "21 Feb 2027, 21:05 UTC", not "21 Feb 2027, 21:05 UTC, the last day our data covers"
+      frozen: the i panel has no note naming 21 Feb 2027, 21:05 UTC
+      frozen: the note is not right under the room's heading in the i panel
+      frozen: a box still says "today"
+      frozen: no spacecraft box says "on the day shown"
+  scene: EARTH_DRIVER: 5 traces, 0 warnings -> C:\Users\tonyq\AppData\Local\Temp\po_walks_bv_nysub\scene_earth_now.json
+  scene: EARTH_DRIVER: 5 traces, 0 warnings -> C:\Users\tonyq\AppData\Local\Temp\po_walks_bv_nysub\scene_earth_end.json
+  the real page, earth:
+    plain:  EPOCH_ISO 2026-11-27T00:06:00Z, subtitle "27 Nov 2026, 00:05 UTC", 2 drawer rows
+    frozen: EPOCH_ISO 2027-02-21T21:05:00Z, subtitle "21 Feb 2027, 21:05 UTC, the last day our data covers"
+            i panel: This room shows 21 Feb 2027, 21:05 UTC, the last day its data covers, and not today. The positions are checked against JPL only up to that day, so the room stops there rather than guess beyond it.
+    earth: 10 of 10 checks passed
+CLOCK WALK: PASS -- solar-system 13 of 13, earth 10 of 10 checks on the real page, at 2026-11-27 00:05 UTC and the window's last minute 2027-02-21 21:05 UTC; planted fault (the freeze that never answers) caught in solar-system, 7 of 13 red, all in the frozen step (10 s)
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+7. Reinstall interactive-exhibit (1.46) to your account. -- done
+8. After the first green website night: look at its title, and on your phone at BepiColombo's box. -- none yet
 9. Note this session's context size from the app in your run record. No token count prints here.
 
 **Where this leaves us**
@@ -588,3 +674,86 @@ That fits the project's own method table, which already gives coordination to Op
 - The protocol's v4.1 is closed. The walks are built and pushed. The cleanup ends with them.
 - The red night's cause is fixed and checked. It waits for your website push, and the first green night proves both the cut and the walks.
 - Next in the braid is Jupiter's moons, with their design talk first. BepiColombo at Mercury waits for JPL's refit.
+
+=========================
+
+**Yes, run it by hand now.** Run #63 was red for the same reason as #62, and that was expected: it ran before your fix reached GitHub.
+
+- **Run #63 ran at 15:39.**
+- **Your fix was pushed at 17:57.** I read that time from GitHub just now. The push holds exactly the two files I checked, and nothing under `data/`.
+- **No night has run on the fix yet.** The schedule has two runs a day and both have gone, so the next scheduled one is tomorrow.
+
+**How to run it**
+
+1. On GitHub, open the website repository, `tonyquintanilla.github.io`.
+2. Click Actions, then "Nightly run" in the left list.
+3. Click "Run workflow", leave the branch as main, and click the green "Run workflow" button. -- #64 is also red exit code 1.
+
+**What to expect**
+
+- **It takes a few minutes longer than before,** because it now installs the walks' library and runs both walks.
+- **Do not push to the website while it runs.**
+- **If it is green:** a commit titled "Nightly run 2026-11-27 UTC" appears. Pull origin on the website, then look on your phone at BepiColombo's box. Its path should stop at 17 November, with its Mercury sentence.
+- **If it is red:** open the run, open the step that runs the night, and paste here the last line, which starts "NIGHT RUN: RED".
+
+NIGHT RUN: RED -- the maintenance run's night pass failed (a gating checker or a generator; scroll up) (263 seconds)
+Error: Process completed with exit code 1.
+
+**Your other steps all went well**
+
+- **The install:** "63 packages as the lock has them", as it should read.
+- **Drawer walk on your computer:** passes 383 checks and catches its planted mistake.
+- **Clock walk:** passes in both rooms and catches its planted mistake.
+- **Both pushes are on GitHub:** website bc89fd3b, orrery ae40544e.
+
+So the only thing still open today is this one green night.
+
+================================
+
+I'll check the fix on a clean copy first, then write tonight's records in one pass, since the Code session is finished.
+
+The fix is checked and the records are written. Waiting a minute before the read-back.
+
+**The View centre fix is right and ready to push.** Tonight's records are written too, in three files in your orrery folder, each read back and equal byte for byte to what I built.
+
+**What I checked on the fix**
+
+- **The mended check passes** on a clean copy with the Code session's two files laid over.
+- **Its own proofs hold.** Night #64's Moon passes, the four cases that must fail do fail, and all seven moons fail when the centring is left out.
+- **A fault I planted myself turns it red.** I made the rule pass everything, and the check failed.
+- **The as-built page's name check passes.**
+- **Not run here:** night #64's own failure, which needs today's data from JPL. The Code session reproduced it to the last digit.
+
+**One decision the Code session left to me**
+
+- **The drawer walk has a similar rule on Io** that fails by luck about twice a year.
+- **I decided to mend it at the next build that opens the walk,** which is Jupiter's fold. It is recorded on L-515 (one nested tree).
+
+**What the records now hold**
+
+- **A new item, L-560 (a digit is earned).** It has your words in order, the ladder you accepted, the sources I found, and your rule that every body left on the last rung is owed a search.
+- **L-557 (the error away from today):** your point about date picking, with the measured drift.
+- **L-545 and L-554:** your install and button results, and what night #64's log proved.
+- **The handoff** has an addendum, so the next coordinator starts from tonight.
+- **Where We Are** is still 130 lines of 130, with your ruling in the box and under Settled.
+
+**Run order**
+
+1. Website, in GitHub Desktop:
+   1. Untick every file under `data/`. -- done
+   2. Commit the other 2 files: `documentation/smoke_view_centre.js` and `INTERACTIVE_AS_BUILT.md`. -- done
+   3. Right-click the `data/` files and choose Discard Changes. -- done
+   4. Pull origin, then Push origin. -- 104fd40f45336134a25af62eb0698756c870b256; no nightly or merge
+2. Orrery:
+   1. Untick `data/spacecraft_sheets.json`, then right-click it and choose Discard Changes. -- done
+   2. Commit the rest, including your run record copy. -- 
+   3. Pull origin, then Push origin.
+3. Then run the website's night by hand, as before. With this fix it no longer depends on the date, so tonight is fine.
+4. If it is green: Pull origin on the website, then look on your phone at BepiColombo's box.
+5. Note this session's context size from the app in your run record.
+
+**Where this leaves us**
+
+- Three faults were found and fixed today, none of them in the walks: the cut in the test suite, the luck-dependent rule, and the over-fine digits, which is ruled and waits for its design talk.
+- The first green website night will prove BepiColombo's cut and the walks together.
+- Next in the braid: Jupiter's moons, whose design talk now also carries L-560.

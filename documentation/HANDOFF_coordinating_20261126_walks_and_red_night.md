@@ -146,6 +146,42 @@ lines of ledger notes, and Where We Are edited five times. Tony,
 15:48: "my use of Fable on this second 'week' is 72%. In future
 sessions I will have to use Opus more for coordination."
 
+## Addendum, 21:00: what changed after this was written
+
+On orrery ae40544e and gallery bc89fd3b, both read 2026-11-26, 20:41
+Chicago. Where this and the text above differ, this wins.
+
+- PUSHED by Tony at 17:57 and 18:00: the cut's fix (website bc89fd3b)
+  and the records with this handoff (orrery ae40544e). His install,
+  both buttons and the 1.46 reinstall are done (L-545, its note of
+  21:00); Start here, 6, is down to your skills comparison.
+- TWO MORE RED NIGHTS. #63 ran before the push. #64, by hand, passed
+  the suite, the figures check and both walks, and was red on View
+  centre alone, by the luck of the date (L-515 (one nested tree)).
+  Its fix, by the Code session, is checked here and waits for Tony's
+  push: website `documentation/smoke_view_centre.js` and
+  `INTERACTIVE_AS_BUILT.md`. So Start here, 2, still stands: no night
+  has committed since Nov 25.
+- A NEW ITEM, L-560 (a digit is earned): Tony's ruling that a box
+  with no served error prints a round figure and says so, by a ladder
+  of sources, the convention a last resort owed a search. Its form
+  goes to the design talk for Jupiter's moons, with the notes on
+  L-557 (the error away from today).
+- OWED, added: the drawer walk's section 33 mended at the next build
+  that opens the walk (L-515).
+- METHOD, added. This session told Tony twice what it had not
+  measured: that no JPL accuracy is served for moons (it is, for
+  three), and that no moon's box prints near the floor (four do).
+  Both came from reading one line or one run and saying "all". And a
+  night's orbits are dated at the build day's 00:00 UTC, so a second
+  run on the same UTC day repeats a failure that depends on them.
+- Tony-actions, replacing the first two below: Website: untick the
+  files under `data/`, commit the other 2, discard the data files,
+  Pull origin, Push origin. Orrery: untick and discard
+  `data/spacecraft_sheets.json`, commit the rest, Pull origin, Push
+  origin. Then the night, by hand or at its schedule: the first
+  green one, its title, and the phone look.
+
 ## Tony-actions
 
 - (do) Website, in GitHub Desktop: untick every file under `data/`;
