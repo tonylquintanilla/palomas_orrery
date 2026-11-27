@@ -1168,7 +1168,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-22 |
-| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-26 |
+| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-27 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Red checks in the drawer walk, eleven by Nov 21, each judged stale (gallery, the headless walk; the walk brought up to date Nov 21, green) | OPEN | -- | 2026-11-21 |
@@ -1188,7 +1188,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-541 | A plan's moment is on JPL's clock (TDB), and some places read or print it as UTC (orrery + gallery; the rooms' clock LIVE Nov 21, the builder's and the orrery's readings still open) | OPEN | -- | 2026-11-22 |
 | ! | L-542 | The gallery editor let a scene be saved into room solar_system/earth, which the Scene cards check refuses (gallery; recorded, not fixed) | OPEN | -- | 2026-11-20 |
 | ! | L-543 | A check green on Tony's computer and red on GitHub: the gallery's checks are not read from what a push carries (gallery; recorded, a ruling asked) | OPEN | -- | 2026-11-23 |
-| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-26 |
+| ! | L-545 | Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked) | OPEN | -- | 2026-11-27 |
 | ! | L-546 | Tony could not find INTERACTIVE_AS_BUILT.md: the dashboard's documents list does not open it (orrery, the dashboard; recorded) | OPEN | -- | 2026-11-21 |
 | ! | L-547 | Second ids the orrery asks JPL for are unchecked: served bodies' own ids around other centres, and centre ids (orrery, the Horizons check; recorded) | OPEN | -- | 2026-11-22 |
 | ! | L-548 | The orbit pre-fetch reads a missing id_type as 'smallbody'; the position fetch reads it as none (orrery, the plot's data path; recorded) | OPEN | -- | 2026-11-23 |
@@ -1196,12 +1196,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-551 | No saved scenes: the gallery run makes every room's scene fresh at each run, and the saved copies go (gallery; ruled Nov 22, a list first) | OPEN | -- | 2026-11-23 |
 | ! | L-552 | The kind of body: each entry says what it is, and how JPL is asked follows from it (orrery; Tony's idea, for a design talk) | OPEN | -- | 2026-11-23 |
 | ! | L-553 | A body held because JPL did not answer turns the night red (gallery, the builder and the Solar System figures check) | OPEN | -- | 2026-11-24 |
-| ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed) | OPEN | -- | 2026-11-26 |
+| ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed) | OPEN | -- | 2026-11-27 |
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
 | ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-26 |
-| ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-26 |
-| ! | L-560 | A digit is earned: what a box prints when no error is served for a position (gallery + orrery; design, ruled in principle, its form at a design talk) | OPEN | -- | 2026-11-26 |
+| ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-27 |
+| ! | L-560 | A digit is earned: what a box prints when no error is served for a position (gallery + orrery; design, ruled in principle, its form at a design talk) | OPEN | -- | 2026-11-27 |
 
 ### B. Pending Action (Tony-side)
 
@@ -3039,7 +3039,7 @@ real night that holds a body or makes a second try, read from its log.
 error), its Part C report, section 5; L-541 (the rooms' clock).
 
 #### [L-554] JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed)
-<!-- L:554 status:OPEN upd:2026-11-26 section:A flag: rice: -->
+<!-- L:554 status:OPEN upd:2026-11-27 section:A flag: rice: -->
 - **Opened 2026-11-24** by the coordinating session (Claude Fable 5.2),
   from L-538 (the orbiters' printed error); written by the Claude Code
   session by `COORD_L538_close_goahead_20261124.md`.
@@ -3492,17 +3492,38 @@ THE FIX IS PUSHED; TWO MORE RED NIGHTS, NEITHER ON THE CUT.
   nested tree)). So the cut passed every check on GitHub, and no
   night has yet committed it: the site still serves the cache of Nov
   25.
-**Gap:** Tony's push of the View centre fix; the first green website
-night serves
-the cut; then Tony's phone look at BepiColombo's box. When JPL
+**Note:** (2026-11-27, 00:20 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 489e4128 and gallery fafdaeb6, both read live;
+Tony's two folders at the same commits)
+THE CUT IS SERVED AND TONY HAS LOOKED: THE CUT'S BUILD IS CLOSED.
+- Night #65, green (gallery fafdaeb6; L-545's note of this date):
+  "Cache builder suite ... PASS (631 checks, 0 failures)"; Solar
+  System figures PASS. The served `coverage_index.json` gives
+  bepicolombo's positions "end": "2026-11-17 00:01", 1426 points. The
+  figures check, run here on a clean clone of fafdaeb6, prints
+  "bepicolombo 0.32001664 AU from the Sun (47,873,807 km) on the last
+  day drawn, 2026-11-17 (cut, still flying); then: It entered orbit
+  around Mercury on 21 November 2026." That line is in the check's
+  output, not in the night record's row.
+- TONY'S PHONE LOOK, in his run record copy
+  `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`: "Its path
+  should stop at 17 November, with its Mercury sentence. -- correct."
+  His screenshot (palomasorrery.com, the Solar System room, the scene
+  at 27 Nov 2026, 05:36 UTC) shows the box with sentences 1 to 6 of
+  `documentation/WORDS_L554_path_cut_20261125.md`, word for word. The
+  seventh, the source line's end, is not in the box pictured; the
+  drawer walk's section 43 holds it every night.
+- The (do) of the note above is done: website 104fd40f (23:15),
+  orrery 489e4128 (23:20).
+- NOT SEEN BY THIS SESSION: JPL's sheet. The orrery's newest night
+  commit is c5412342 (26 Nov, 14:17), its title without "JPL REFIT".
+**Gap:** the cut's build is closed on Tony's look. The item stays open
+for JPL's refit and for Tony's two sentences. When JPL
 fits past 21 November, the night's title says JPL REFIT; a session
 reads JPL's new path and takes path_cutoff, cutoff_file, cutoff_note
 and end_note off together, and the arrival's encounter can be built
 (L-529 (guided encounters)). The sentence for every predicted path is
 still Tony's to say.
-- **Tony-action (do):** Website: commit the View centre fix's two
-  files, none under `data/`; then Pull origin, Push origin. Then the
-  orrery.
 - **Tony-action (decide):** the source line of a cut craft on a day
   before its cut (the note above).
 **Ref:** L-538, the coordinating session's note of 2026-11-24,
@@ -3797,7 +3818,7 @@ printed error); L-541 (a plan's clock), the Room clock row; the test
 above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
 
 #### [L-560] A digit is earned: what a box prints when no error is served for a position (gallery + orrery; design, ruled in principle, its form at a design talk)
-<!-- L:560 status:OPEN upd:2026-11-26 section:A flag: rice: -->
+<!-- L:560 status:OPEN upd:2026-11-27 section:A flag: rice: -->
 - **Opened 2026-11-26, evening**, by the coordinating session (Claude
   Fable 5.2), out of the talk on night #64's red check (L-515 (one
   nested tree), its note of this date). Nothing built.
@@ -3894,15 +3915,251 @@ above; `gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`.
   that; its far small moons and Phoebe are not); and the date to
   choose, where drift outruns everything (L-557 (the error away from
   today), its note of this date).
-**Gap:** the design talk; then a build that touches every spacecraft's
-box. Nothing built, no brief.
+**Note:** (2026-11-27, 00:20 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 489e4128 and gallery fafdaeb6, both read live;
+Tony's two folders at the same commits)
+ONE MORE MEASURED CASE, from Tony's phone look at the cut (L-554,
+its note of this date): BepiColombo's box prints "0.32001664 AU from
+the Sun (47,873,807 km) on the last day drawn" and, under it, "JPL's
+own uncertainty for this position is not yet included." For the
+design talk.
+**Note:** (2026-11-27, 09:22 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 489e4128 and gallery fafdaeb6, both read again at
+08:53 and unmoved; the talk ran 00:26 to 01:50 and 08:51 to 09:17)
+THE TALK, HELD IN THIS SESSION ON TONY'S WORD (00:26: "i intended to do
+L560 in this session."). THE OBJECTIVE RESTATED AND THE LADDER CHANGED:
+ITS THIRD RUNG IS THE LITERATURE, AND NO BOX PRINTS A FIGURE BESIDE A
+DISCLAIMER. Nothing built.
+- TONY'S WORDS, in order, in chat. 00:45: "the rung idea was an attempt
+  at a solution. here is the basic problem: we are quoting figures to
+  minute distances which are not supported by actual precision. my
+  objective is simple: show what we know at its correct accuracy and
+  precision, and its source. and we should not give figures with the
+  disclaimer that JPL offers no error figure for it. the lay person will
+  see our figures and accept them as "true"." 01:25: "1) distinguish
+  accuracy and precision. The number of figures is about precision,
+  right? The right measurement is precision and we assume a JPL number
+  is accurate. If JPL quotes a precision that is rung 1. 2) however it
+  seems that JPL does not offer precision for many objects. However
+  there are other sources with reliable precisions, the published
+  ephemeris, and other sources the last session found. For those classes
+  we should establish the quotable precision (rung 2). For some there
+  are no standard sources and we may need to look at the literature
+  (rung 3)." 01:34, to the wording in the next bullet: "Yes. And this
+  connects with the source provenance too. And as you said, if we have
+  no source we quote configure until we find a source. We could say
+  something like, "No distance provided pending sourcing". The problem
+  with that is that the visitor sees a render without a quoted source.
+  In other words, there is a source. Another case are a few objects that
+  we render (dwarf planets) which have no horizons data and we render
+  from literature numbers only." 01:50: "then our authoritative source
+  is JUP365 and we can rely on their own sourcing. We don't have to
+  drill down to primary sources unless there is nothing else." 09:08: "I
+  assume that we should not quote distances with many decimal points
+  that mean nothing and instead round to a meaningful number." 09:17:
+  "Record it".
+- "quote configure", at 01:34, is as he typed it. This session reads it
+  as "quote no figure". THAT READING IS NOT CONFIRMED; the question was
+  put to him at 00:45's reply and not answered in so many words.
+- THE WORDING HE ACCEPTED (01:34, "Yes."). The count of digits is
+  precision. What earns a digit is an UNCERTAINTY: the source's own
+  statement of how far the truth may be from its number. The source
+  states an uncertainty, and the box prints only the digits it supports
+  and names the source. JPL's printed digits are never the source. JPL's
+  value is the best estimate and is not second-guessed. The case in
+  house: BepiColombo's predicted path, stated to the kilometre and known
+  to be wrong (L-554 (JPL's sentence when a path is a prediction)).
+- THE LADDER AS IT NOW STANDS. (1) JPL's own stated uncertainty for the
+  body, served with its position. (2) For a class of bodies, the
+  uncertainty its standard source states: the ephemeris as JPL publishes
+  it, and what that names; a primary study only where that is silent.
+  (3) The literature. THERE IS NO CONVENTION RUNG: the third rung of the
+  opening note, and its candidate of three significant figures, are
+  superseded. Only an uncertainty's power of ten is needed, since that
+  picks the place a figure rounds to; the 12 rows in use are all of that
+  kind.
+- A BOX NAMES TWO SOURCES: the position's, always, because the marker
+  and the path are drawn from it; and the uncertainty's, when a distance
+  prints. A candidate sentence, put to him and NOT approved: "Drawn from
+  JPL's path. No distance is printed until a source states how accurate
+  this position is."
+- PUT BY THIS SESSION AND WITHDRAWN: rounding to the digits that hold
+  through the day shown. Tony, 00:38: "where does this precision come
+  from?" It comes from the body's motion and states no accuracy. The
+  measurement behind it stays as a finding: by the served path points of
+  gallery fafdaeb6, each of the 34 path distances changes, in the minute
+  the room shows, by between 24 km (Juno) and 3,700 km (Parker Solar
+  Probe).
+- WHO PRINTS WHOLE KILOMETRES WITH NO UNCERTAINTY SERVED, 41 boxes, from
+  `documentation/smoke_solar_system_figures.js` run on a clone of
+  fafdaeb6. The 21 spacecraft. 13 small bodies drawn as paths, which the
+  opening note did not list: west, mcnaught, tsuchinshan_atlas,
+  wierzchos, atlas_2024_g3, c2025_k1, c2025_k1_b, c2025_k1_d,
+  panstarrs_2025_r3, borisov_2025_v1, oumuamua, borisov_2i, atlas_3i. 3
+  on orbits, each with "JPL states no accuracy for this position.":
+  halley, ikeya_seki, bennu. And the moons Io, Titan, Pluto and Charon,
+  by the opening note's reading of Nov 25's cache, not measured again.
+  Whether JPL has an uncertainty for the 13 that the night does not ask
+  for: not checked.
+- THE 12 WITH A SOURCED ROW, `position_accuracy` in
+  `data/objects_config.json` at fafdaeb6: Mercury, Venus, Earth and
+  Mars, 1 km; Jupiter and Saturn, 100 km; Uranus, Neptune and the
+  Pluto-Charon barycenter, 10,000 km; the Moon, 0.001 km; Phobos and
+  Deimos, 10 km. Haumea's served figure, for the contrast Tony asked
+  about at 01:45: 12,539 km at three sigma (`coverage_index.json`, JPL
+  Horizons vector table 2xr, column R_s). All 114 served bodies carry a
+  Horizons id, so none on the website is drawn from the literature
+  alone. The desktop orrery's bodies of that kind were not named this
+  session; L-549 (four moons JPL cannot place) is the nearest item.
+- PAGES READ, each through the web tool's summary of it and owed a
+  reading of the page itself before anything is cited.
+- JPL, "Planetary Satellite Ephemerides",
+    https://ssd.jpl.nasa.gov/sats/ephem/sep.html: Io, Europa, Ganymede
+    and Callisto, JUP365, reference 29, R. A. Jacobson (2021), "The
+    Orbits of the Regular Jovian Satellites and the Orientation of the
+    Pole of Jupiter", "personal communication to Horizons/NAIF"; Titan,
+    SAT441, reference 36, Jacobson (2022), AJ 164:199; Charon, PLU060,
+    reference 6, Brozovic and Jacobson (2024), AJ 167:256; Phobos and
+    Deimos, MAR099, reference 7. The page states no accuracy. 28 of its
+    52 references are personal communications.
+- JPL, https://ssd.jpl.nasa.gov/doc/de440_de441.html: no figures. The
+    paper it names: Park, Folkner, Williams and Boggs (2021), AJ
+    161:105.
+- JPL, the Horizons manual, "Statement of Ephemeris Limitations",
+    https://ssd.jpl.nasa.gov/horizons/manual.html: "Uncertainties in
+    major planet ephemerides range from meter to 1000+ km."; no figure
+    for natural satellites; none for interplanetary spacecraft.
+- Found by its title and not read: W. M. Folkner, "Uncertainties in the
+    JPL Planetary Ephemeris",
+    https://syrte.obspm.fr/journees2010/pdf/Folkner.pdf.
+- JUP365'S OWN COMMENT FILE, READ: `papers/JUP365 Satellite Ephemeris
+  with Jupiter barycenter.txt`, saved by Tony at 08:55 from
+  https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/jup365.cmt,
+  1,325 lines, 69,591 bytes. It states no uncertainty for any moon and
+  names no reference for the fit. Lines 1 to 196 are the build record
+  ("Global fit: JUP365.26", January 2021, on DE440); from 197 on,
+  DE440's comments. Its one figure, "Chebyshev interpolation error:
+  16.00 meters", is the file's precision and not the orbit's accuracy.
+  So for Io the second rung is silent and the third is next.
+- THE OPENING NOTE CORRECTED: a satellite ephemeris's comments are a
+  separate text file in NAIF's folder (jup365.cmt, sat441.cmt and
+  mar099.cmt are listed there) and need no toolkit. NAIF's server
+  refuses this session's shell, and the web tool returned the file as
+  unreadable, so Tony fetched it with his browser.
+- FOR IO, CANDIDATES FROM ONE SEARCH, NONE READ: arXiv 2310.00807
+  (mutual events; its observations set against DE440 with JUP365); arXiv
+  2308.06779 (estimating the moons' ephemerides for JUICE; a table of
+  kilometre figures for Io by direction, its columns not understood);
+  arXiv 1905.12520 (a stellar occultation by Europa). The search's
+  snippets run from a few kilometres to tens.
+- BY CLASS, where the uncertainty lives. Planets and the Moon: the
+  planetary ephemeris's own report; done, 10 rows. Moons: one source for
+  each planet's system; Mars done, Jupiter, Saturn and Pluto to read.
+  Small bodies: JPL serves it; 52. Spacecraft: no group source, each
+  mission its own; 21, none read.
+- AFTER THE RECORD, 09:24, Tony: "Does this setup make sense? I don't
+  want to reinvent the wheel. I am an amateur." Said back, from general
+  knowledge and not from a source: the rule is the standard practice of
+  any measuring science; no ready table of uncertainties by class was
+  found for moons or spacecraft; and one idea of this session's own, NOT
+  RULED: fix first how many figures a lay reader can use (four, say), so
+  that a source need only show the uncertainty is below the last printed
+  digit. To the offer of a request for an outside model, 09:27: "Yes".
+  Written (Mode 7):
+  `documentation/REVIEW_REQUEST_L560_printed_precision_20261127.md`,
+  eight questions, for GPT or Gemini. Its return is read at the next
+  session, each figure checked at its source before use.
+- THE RETURNS, 10:11. Tony brought GPT's and Gemini's replies ("Please
+  save them to documentation/worksheets for reference."). Saved as
+  pasted, under a header:
+  `documentation/worksheets/GPT_L560_printed_precision_review_RETURN_20261127.md`
+  and
+  `documentation/worksheets/Gemini_L560_printed_precision_review_RETURN_20261127.md`.
+  The worksheet checker names both as uncited, 58 to 60, and still
+  passes. NOT VERIFIED AND NOT ADJUDICATED: no figure in either has been
+  checked at its source, and none is repeated here. What they say, for
+  the next session to check: both hold the rule to be standard
+  measurement practice (the GUM, 7.2.6) and not what an ephemeris
+  service does with its own output; both find no table by class; both
+  favour a ceiling of four significant figures, with fewer where the
+  evidence is coarser. GPT adds: an uncertainty belongs to one distance,
+  from one centre, on one date, so Titan from Saturn is not Titan from
+  the Sun; the project's planetary rows are rounding places and not
+  JPL's stated uncertainties; Horizons returns a one-sigma radial
+  uncertainty for West (fragment A), 'Oumuamua and 3I/ATLAS, and none
+  for Halley, Ikeya-Seki and Bennu; Titan from Saturn is in a table of
+  Jacobson's paper. Gemini adds a figure for the Galilean moons from a
+  2024 paper. GPT leaves Io open where Gemini gives a figure: a
+  disagreement to settle at the sources. Gemini could not fetch the rule
+  files; GPT says it read both.
+- HELD OPEN, not ruled: his confirmation that a body with no source
+  prints no distance; the box's words; the marker as a claim of its own,
+  honest only while the uncertainty is below what the picture can show;
+  the first rung for the 13 path bodies.
+**Note:** (2026-11-27, 10:27 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 489e4128 and gallery fafdaeb6)
+THE RULE, APPROVED. Put to Tony at 10:22's reply as five statements,
+after the two outside readings; his word, 10:26: "Approved. By the way
+the first response was GPT 6.2 Astra Medium and the second Gemini 4
+Neon." Nothing built.
+- THE FIVE STATEMENTS, as he approved them.
+- (1) "At most four significant figures, in both units alike. This is an
+    editorial choice for the reader, said once on the page as such, and
+    not a claim about accuracy."
+- (2) "Fewer when the evidence is coarser. Where a sourced uncertainty
+    is larger than the fourth figure, the distance is rounded to the
+    place that uncertainty supports, at three sigma where the source
+    gives a sigma."
+- (3) "The evidence must fit the distance printed: this body, from this
+    centre, on this date. A moon's uncertainty around its planet does
+    not by itself support its distance from the Sun."
+- (4) "No source, no number. The marker and path stay, with the
+    position's source named, and the box says no distance is printed
+    because no source states how well it is known. No figure ever stands
+    beside a disclaimer."
+- (5) "Say what each thing is. The box names the position's source and
+    what the rounding rests on. A rounding place we chose is never
+    called JPL's uncertainty."
+- HOW IT SITS WITH THE NOTE ABOVE. The ceiling is not a rung and not a
+  stand-in for a missing uncertainty: it limits what is shown, and the
+  ladder (JPL's own figure, else the class's standard source, else the
+  literature) still supplies the evidence for statements 2 to 4.
+  Statement 4 answers the question held open above; its Tony-action is
+  removed. With the ceiling, a source need only show that the
+  uncertainty is below the fourth figure.
+- WHERE THE RULE PARTS FROM A REVIEWER, said to Tony and approved with
+  the rest: GPT's proposed wording ends "When the source gives no
+  uncertainty for that distance, say so", which could still print a
+  number; statement 4 does not.
+- MEASURED FOR IT, from the figures check on gallery fafdaeb6: at three
+  figures the two ESCAPADE craft read the same, 1.01 AU; at four they
+  differ, 1.007 and 1.005 (1.00671044 and 1.00528154 as printed today).
+  And no path's distance changes by as much as its fourth figure within
+  the minute the room shows (the most, Parker Solar Probe, 3,700 km in a
+  minute against a fourth figure worth 10,000 km).
+- THE RULE RESTS ON NO UNCHECKED FIGURE. It is policy. Each source is
+  checked when the rule is applied to a body, and the first check is the
+  reviewer's claim that the 12 planetary and lunar rows are the
+  project's rounding places and not JPL's stated uncertainties
+  (statement 5 turns on it).
+- THE REVIEWERS, named by Tony: the first return is GPT 6.2 Astra,
+  Medium; the second is Gemini 4 Neon. Both files' headers now say so;
+  their names are unchanged.
+**Gap:** the rule applied, body by body, at the design talk for
+Jupiter's moons and after (L-558 (the folds after Mars)). First the 12
+rows, against what their source says. Then Io, Titan, Pluto and Charon,
+each for the distance its box prints; the 13 path bodies' first rung;
+Halley, Ikeya-Seki and Bennu; the spacecraft, one by one. The box's
+words, for Tony's approval, with the sentence that says the four figures
+are an editorial choice. Then a build that touches every box. Nothing
+built, no brief.
 **Ref:** L-399 (the sentence when JPL's figure is missing); L-513 and
 L-514 (the Moon's and Mars's standards); L-398; L-484; L-401 (the
 spacecraft data sheets); L-515, L-557, L-558; L-554 (JPL's sentence
 when a path is a prediction); `gallery/solar_system_figures.js`.
 
 #### [L-558] The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25)
-<!-- L:558 status:OPEN upd:2026-11-26 section:A flag: rice: -->
+<!-- L:558 status:OPEN upd:2026-11-27 section:A flag: rice: -->
 - **Opened 2026-11-25** by the coordinating session of the afternoon
   (Claude Fable 5.2), at orrery 18df08b7 and gallery 3fb13a27, on
   Tony's question of 13:50: "wouldn't Jupiter's moon's be next in the
@@ -3993,6 +4250,21 @@ CLEANUP ENDS, AND THE ORDER AFTER IT.
 - STILL NOT RULED: which of each planet's moons; where the
   encounter's slice 2 (L-529 (guided encounters)) sits against this
   order.
+**Note:** (2026-11-27, 00:20 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 489e4128 and gallery fafdaeb6, both read live;
+Tony's two folders at the same commits)
+JUPITER'S MOONS ARE NEXT, THEIR DESIGN TALK FIRST.
+- The walks' first green night is in (L-545, its note of this date),
+  which ends this round's cleanup. The orrery's newest night commit,
+  c5412342 of 26 Nov 14:17, has no "JPL REFIT" in its title, so
+  BepiColombo at Mercury still waits.
+- The talk carries L-560 (a digit is earned) and the notes on L-557
+  (the error away from today).
+- EVERY FOLD'S BRIEF CARRIES TWO LINES, kept here from the handoff of
+  Nov 26 so they outlive L-545's close: the walk's expectations are
+  updated in the same sitting (L-545); and a build split across both
+  repositories is not checked until the whole night has run on a copy
+  holding both halves (L-554).
 **Gap:** the road on Where We Are carries the order since this note.
 Each fold then has its design round first, as Mars had (L-514 (the
 Mars room)). The master plan's restamp records the direction (L-522
@@ -4183,7 +4455,7 @@ copy in one step. No dashboard button, no step for Tony.
 website's checks); L-485 (a nightly run).
 
 #### [L-545] Two checks of the page wait to be remembered: the walks, and the recorded Earth scene (gallery; the session's part is method, two rulings asked)
-<!-- L:545 status:OPEN upd:2026-11-26 section:A flag: rice: -->
+<!-- L:545 status:OPEN upd:2026-11-27 section:A flag: rice: -->
 - **Opened 2026-11-21** by the coordinating session (Claude Fable 5.2).
   THE WALKS load the page itself; the gallery run's rows test its
   scripts and a recorded scene. On Nov 21 L-541's build left three boxes
@@ -4447,10 +4719,52 @@ TONY'S INSTALL AND FIRST RUNS, AND THE WALKS' FIRST NIGHT ON GITHUB.
   page ... caught, 7 of 64 red (39 s)" and "PASS Clock walk 4.1s". No
   "WALKS NOT RUN" in the run. The night was red on another check
   (L-515, its notes of this date), so nothing was committed.
-**Gap:** a first GREEN night on GitHub carrying both checks;
-interactive-exhibit 1.46 cleared by a later session's comparison. The
-drawer walk's section 33 is mended at the next build that opens the
-walk (L-515).
+**Note:** (2026-11-27, 00:20 Chicago, the coordinating session, Claude
+Fable 5.2, on orrery 489e4128 and gallery fafdaeb6, both read live;
+Tony's two folders at the same commits)
+THE GAP'S CONDITIONS ARE MET; THE ITEM WAITS ONLY FOR TONY'S WORD.
+- THE FIRST GREEN NIGHT WITH BOTH ROWS: #65, by hand; Tony's run
+  record copy `documentation/WHERE_WE_ARE_11-26-26_1111_run_record.md`,
+  read from his folder at 00:15: "nightly run #65 at 11:23 pm, green".
+  Committed as gallery fafdaeb6, its title "Nightly run 2026-11-27
+  UTC: ...", no "WALKS NOT RUN". `data/nightly_run_record.json`
+  there: clean_run_utc 2026-11-27T05:26:55, the orrery pulled at
+  489e4128, 61 rows, every one PASS, no holds. "DRAWER WALK: PASS --
+  381 checks on the real page, the scene at 2026-11-27 05:26 UTC;
+  planted fault (an ended mission's last day one day early) caught, 7
+  of 64 red (45 s)". "CLOCK WALK: PASS -- solar-system 13 of 13,
+  earth 10 of 10 checks on the real page ... planted fault (the freeze
+  that never answers) caught in solar-system, 7 of 13 red, all in the
+  frozen step (5 s)". The live site serves that record
+  (palomasorrery.com/data/nightly_run_record.json, fetched shortly
+  after midnight).
+- 381, NOT 383, NAMED. Run in this session's shell, the library
+  installed from the lock ("63 packages as the lock has them"), each
+  check's message logged from a throwaway copy of the walk: on gallery
+  fafdaeb6, 381; on 104fd40f, whose cache is Nov 25's, 383. The names
+  differ only in sections 42 and 43. Section 42 (a craft still flying
+  past its path's last point) takes voyager_2 where it took
+  bepicolombo, three checks either way. Section 43 (the cut) ran four
+  checks while it had to plant the cut ("the payload serves no
+  BepiColombo or no clock to plant"; "path, marker or name is not in
+  the payload to plant"; the seven sentences, "(planted)"; the source
+  line) and runs two now the cut is served (the seven sentences, "(as
+  served)"; the source line). So 381 is the count while a cut is
+  served and 383 when none is; night #64's 381 was the same thing.
+  The count said nothing; the names did.
+- interactive-exhibit 1.46 CLEARED by this session's comparison at its
+  start: all 12 installed skills equal the repository's at 489e4128,
+  the body byte for byte, the header with its line breaks ignored.
+- Tony's install and his two buttons: the note above.
+- LOOSE ENDS, and where each now lives: the drawer walk's section 33
+  and the badly wrapped line in `run_walk.py` (379), on L-515 (one
+  nested tree), its note of this date; the line every fold's brief
+  carries, that the walk's expectations are updated in the same
+  sitting, on L-558 (the folds after Mars), its note of this date;
+  the recorded Earth scene is L-551's (no saved scenes), as this
+  item's body says.
+**Gap:** Tony's word to close. Nothing else is owed here.
+- **Tony-action (decide):** close L-545.
 **Ref:** L-541 (a plan's clock); L-521 (the walk's red checks); L-423
 (the website's checks); L-535; L-550 (a website check with no
 dashboard button); L-551 (no saved scenes); L-485 (the nightly run);
@@ -6317,7 +6631,7 @@ goes red when the drawer leaves its rules.
 - **Ref:** L-165 (site continuity); L-490 (the legacy list).
 
 #### [L-515] One nested tree in place of isolated rooms (gallery, the room system; design)
-<!-- L:515 status:OPEN upd:2026-11-26 section:A flag: rice: -->
+<!-- L:515 status:OPEN upd:2026-11-27 section:A flag: rice: -->
 - **Opened 2026-11-07, 00:17 Chicago**, in the coordinating session
   (Claude Opus 5.5), built on orrery 33c699bb and gallery 3f2ce7fc.
   Tony: "I think we need to rethink the room system before we go
@@ -7680,6 +7994,13 @@ skill's split (L-522).
     `data/spacecraft_sheets.json`'s read date for BepiColombo to
     2026-11-27, JPL's sentence unchanged ("Data fit through
     2026-Nov-17, prediction thereafter."): no refit.
+- **Two things owed at the next build that opens the walk,
+  2026-11-27** (the coordinating session, Claude Fable 5.2, on gallery
+  fafdaeb6; here so they outlive the close of L-545 (checks that wait
+  to be remembered)): the drawer walk's section 33 mended, as the note
+  above says; and a badly wrapped line in the website's
+  `tools/headless/run_walk.py` (379 at 571ac676), which works. Jupiter's
+  fold is the likely build.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.

@@ -746,11 +746,15 @@ The fix is checked and the records are written. Waiting a minute before the read
    4. Pull origin, then Push origin. -- 104fd40f45336134a25af62eb0698756c870b256; no nightly or merge
 2. Orrery:
    1. Untick `data/spacecraft_sheets.json`, then right-click it and choose Discard Changes. -- done
-   2. Commit the rest, including your run record copy. -- 
-   3. Pull origin, then Push origin.
-3. Then run the website's night by hand, as before. With this fix it no longer depends on the date, so tonight is fine.
-4. If it is green: Pull origin on the website, then look on your phone at BepiColombo's box.
-5. Note this session's context size from the app in your run record.
+   2. Commit the rest, including your run record copy. -- done
+   3. Pull origin, then Push origin. -- 489e4128056cd08fa46b0c11b90c64fe477ab028; no merge
+3. Then run the website's night by hand, as before. With this fix it no longer depends on the date, so tonight is fine. -- nightly run #65 at 11:23 pm, green
+4. If it is green: Pull origin on the website, -- fafdaeb6ce199b0d5f436dc4c77870f7d1c5c33e
+5. then look on your phone at BepiColombo's box.
+
+      Its path should stop at 17 November, with its Mercury sentence. -- correct. 
+
+6. Note this session's context size from the app in your run record. -- 12%
 
 **Where this leaves us**
 
