@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*282 live items; 267 need attention (`!`); 162 RICE-scored; 271 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*283 live items; 268 need attention (`!`); 162 RICE-scored; 271 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1198,9 +1198,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-554 | JPL's own sentence when a path is a prediction; BepiColombo's path cut at JPL's fit date (gallery + orrery; built Nov 25, the orrery half not pushed) | OPEN | -- | 2026-11-27 |
 | ! | L-555 | Orbiters in general: how a craft orbiting a planet is served when there are many, for years (gallery; its talk first) | OPEN | -- | 2026-11-25 |
 | ! | L-556 | A date to choose in the rooms: the address already carries the minute (gallery; Tony's finding, held for L-557's design session) | OPEN | -- | 2026-11-25 |
-| ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-26 |
+| ! | L-557 | The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session) | OPEN | -- | 2026-11-27 |
 | ! | L-558 | The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25) | OPEN | -- | 2026-11-27 |
 | ! | L-560 | A digit is earned: what a box prints when no error is served for a position (gallery + orrery; design, ruled in principle, its form at a design talk) | OPEN | -- | 2026-11-27 |
+| ! | L-561 | A speed in the website's box: three ways, parked (gallery; Tony's question at L-560's talk) | OPEN | -- | 2026-11-27 |
 
 ### B. Pending Action (Tony-side)
 
@@ -3686,7 +3687,7 @@ L-165 (the freeze); L-538 (the orbiters' printed error), whose close
 found it.
 
 #### [L-557] The error away from today: a box's digits follow a straight line from one close check, and the real miss outruns it (gallery; found at L-556's talk, for a design session)
-<!-- L:557 status:OPEN upd:2026-11-26 section:A flag: rice: -->
+<!-- L:557 status:OPEN upd:2026-11-27 section:A flag: rice: -->
 - **Opened 2026-11-25** by the coordinating session (Claude Fable 5.2),
   at the talk on L-556 (a date to choose in the rooms); read and
   tested at gallery b2d9eaa6. Nothing is built. Tony, 01:14: "let's
@@ -3812,6 +3813,44 @@ earned).
   date, not today's carried forward, which is a question of what the
   night serves. The drawer walk's Io check failing at the window's
   edges (L-545, its notes of this date) is the same effect.
+**Note:** (2026-11-27, 21:30 Chicago, a design talk, Claude Fable 5.2,
+on gallery 78deb5d5, read live)
+FROM THE TALK ON L-560 (a digit is earned), FOR THIS ITEM'S DESIGN
+SESSION. Nothing is ruled here.
+- Tony, 19:25: "typing a date is unsupported so not something to be
+  considered. however, propagation through a window of 88 days
+  (mercury's period) should be considered. also, we should consider at
+  least the path for addressing one orbit for the fastest object
+  plotted." So a typed date is out of the reasoning, and the served
+  window is in.
+- ACROSS THE WINDOW, from tonight's served cache, by the page's own
+  straight line, which this item found the real miss outruns: 63 of 64
+  bodies on orbits around the Sun keep four figures to 88 days; Earth
+  does not (about 89,000 km, a fourth figure worth 100,000 km). At three
+  times the line, Kamo'oalewa joins it. Of 35 bodies on paths, 22 drop
+  below four figures somewhere in the window; their names are on L-560,
+  its note of this hour.
+- ONE ORBIT: the session's reading of his second sentence, put to him
+  and NOT ANSWERED: a box holds its four figures for at least one orbit
+  of the body, as 88 days is one orbit of Mercury. The fastest thing
+  drawn is Phobos, 7.7 hours. By the served rate, a straight line and so
+  the best case, four figures hold for: Phobos 2.9 hours (one orbit 7.7
+  hours); Io 20 hours (1.8 days); the Moon 16 hours (27.3 days); Deimos
+  8.9 days (1.3 days); Pluto 17.6 days (6.4 days); Titan 199 days (15.9
+  days); Charon 474 days (6.4 days). Phobos, Io and the Moon fail; they
+  are also the three whose page error is larger than a fourth figure
+  today, the night's one orbit being one to two days old when it is
+  read.
+- THREE ROUTES for those three, put to him. Leave the serving alone: the
+  rule's sentence drops them to three figures. The night fetches more
+  orbits, the page using the nearest: one a day for the Moon and Io,
+  about four a day for Phobos, by the straight line, an estimate NOT
+  TESTED against JPL. Serve them as points: Phobos alone would need a
+  point about every half hour, over 8,000 across the window. Tony,
+  19:56, of the first: "let's stay with this". The other two are
+  recorded here, not chased.
+- A speed dated at the night's minute, and how fast speeds change: L-561
+  (a speed in the website's box).
 **Gap:** a design session of its own. Nothing built, no brief.
 **Ref:** L-556 (a date to choose in the rooms); L-538 (the orbiters'
 printed error); L-541 (a plan's clock), the Room clock row; the test
@@ -4550,9 +4589,157 @@ no code changed; the page and the orrery print as before.
   ASCII with LF endings.
 - OWED: Tony commits and pushes, then reinstalls the three skills; the
   next session's own comparison clears them, never his word.
-**Gap:** THE SKILLS SESSION DONE (the note above); next the design
-talk, for the open points there and Jupiter's moons; then THE RULE'S
-BUILD, before Jupiter's fold. And,
+**Note:** (2026-11-27, 21:30 Chicago, a design talk, Claude Fable 5.2,
+linked to Tony's computer with a shell of its own and none on his, on
+orrery 5de1ed84 and gallery 78deb5d5, both read live and equal to his
+folders)
+THE RULE'S THREE OPEN POINTS RULED, AND STATEMENT 4 GIVEN AN INTERIM, ON
+TONY'S WORDS. Nothing built. The skill still carries the old text (OWED,
+at this note's end).
+- THE SKILLS CLEARED: all 12 installed copies equal the repository's at
+  5de1ed84, by this session's own comparison (the text below the header
+  byte for byte, the header with its line breaks ignored). So
+  provenance-discipline 2.38, orrery-coding-conventions 1.15 and
+  interactive-exhibit 1.47 are cleared. Tony's run record copy
+  `documentation/WHERE_WE_ARE_11-27-26_1811_run_record.md`, read from
+  his folder: the push "5de1ed8409a0c521994def96e50a21f36a993170" and,
+  of the reinstall, "--done".
+- MEASURED FIRST, from the served cache at gallery 78deb5d5 (generated
+  2026-11-27T21:27Z). For a body on an orbit, `distanceLine`'s own
+  arithmetic redone in Python by this session, the orbit taken as one
+  day old (between nights it is one to two days old). For a body on a
+  path, the page's own `render_spacecraft.position_at` run on the served
+  positions. Neither is read off the live page, and the scripts are not
+  saved. At the cache's witness minute 105 bodies print a distance: 71
+  on orbits and 34 on paths (8 more path bodies are outside their served
+  span: akatsuki, bepicolombo, cassini, dart, galileo, pioneer_10,
+  pioneer_11, rosetta). The page's own error is larger than a fourth
+  figure for four: the Moon from Earth (360,440 km, drift 241 km, a
+  fourth figure worth 100 km); Phobos from Mars (9,495 km, 13 km, 1 km);
+  Io from Jupiter (423,525 km, 186 km, 100 km); Parker Solar Probe from
+  the Sun (33.3 million km, 44,600 km between served points, 10,000 km).
+  For the other 101 it is at most about 5 percent of half a fourth place
+  (Solar Orbiter; Earth 2 percent).
+- OPEN POINT 1, THE PAGE'S OWN ERROR: IT LOWERS THE COUNT. Put to Tony,
+  with three routes for the fast moons: "The page's own error,
+  where it is larger than the fourth figure, lowers the count the same
+  way. The box says the rounding is this page's working-out, never JPL's
+  uncertainty. The page's own error can only take figures away: it never
+  stands in for a missing source." Tony, 19:25: "typing a date is
+  unsupported so not something to be considered. however, propagation
+  through a window of 88 days (mercury's period) should be considered.
+  also, we should consider at least the path for addressing one orbit
+  for the fastest object plotted." Measured again across the served
+  window (the next bullet, and L-557 (the error away from today), its
+  note of this hour). Tony, 19:56, quoting the first route, "Leave the
+  serving alone: the sentence drops them to three figures (the Moon
+  reads 360,000 km). Nothing to build.": "let's stay with this". READ AS
+  his ruling on the point: the sentence stands and nothing is built for
+  the moons. He chose the route in which the sentence acts; he did not
+  answer the wording as a question by itself.
+- ACROSS THE WINDOW, 88 days either side of today, sampled every 3
+  hours. Orbits around the Sun, by the page's own straight line: 63 of
+  64 keep four figures to the window's edge; Earth does not (about
+  89,000 km at 88 days, a fourth figure worth 100,000 km). Paths: 22 of
+  35 drop below four figures somewhere in the window, their points being
+  fine around today and coarse elsewhere: atlas_2024_g3, bepicolombo,
+  borisov_2025_v1, c2025_k1, c2025_k1_b, c2025_k1_d, em_l1, em_l2,
+  em_l4, em_l5, escapade_blue, escapade_gold, europa_clipper, juice,
+  lucy, osiris_apex, panstarrs_2025_r3, parker_solar_probe (one figure
+  at its worst), psyche_spacecraft, solar_orbiter, tsuchinshan_atlas,
+  wierzchos. Never below four (13): atlas_3i, borisov_2i, juno,
+  mcnaught, new_horizons, oumuamua, semb_l1, semb_l2, semb_l4, semb_l5,
+  voyager_1, voyager_2, west. So the rule needs the sentence whatever is
+  done for the moons.
+- OPEN POINT 2, WHAT THE CEILING CAPS: EVERYTHING WORKED OUT, NOTHING
+  REPEATED FROM JPL. Put as three parts; Tony, 20:09: "Yes. We
+  should not change JPL orbital elements. The point of rounding is
+  accuracy. Changing the orbital elements would distort the orbit not
+  reflect known accuracy." (1) Every distance worked out takes the rule
+  in whatever unit: au, kilometres, light-time, the distance to the
+  surface, and q and Q on an orbit's markers. (2) A speed takes the same
+  count as its distance, four at most, from the same centre, and prints
+  nothing where the distance prints nothing: the ruling of Oct 11
+  (L-401) with the ceiling added. (3) An element repeated from JPL (a,
+  e, i, omega, Omega, Tp; `position_accuracy.as_given`) stays as JPL
+  gave it. Read for it at orrery 5de1ed84: the hover prints AU,
+  kilometers, light-minutes or light-hours, the surface line, AU/day,
+  km/hr and km/sec (`distance_speed_lines`), and the orbit's hover
+  prints, for Earth, "a=0.9991798225592001 AU". The website prints no
+  speed; its orbit line is held to three figures (`ORBIT_FIGURES`), left
+  as it is, the rule saying at most four. NOT READ: whether the
+  website's i panel repeats an element.
+- OPEN POINT 3, THE BOX'S WORDS. The shape; Tony, 20:36:
+  "yes". No sentence in the usual box; one sentence when the box shows
+  fewer than four figures, or none; both sources, the position's and the
+  uncertainty's, in the i panel; the standing sentence and "au" on the
+  page, once. Said to him with it: statement 5's "The box names the
+  position's source and what the rounding rests on" is then met by the
+  box with its i panel, not by the box alone. The sentences, with his
+  words on each, are in
+  `documentation/WORDS_L560_box_words_20261127.md`: ten approved or
+  taken as approved, one held for its source, one held for the 12 rows'
+  check.
+- THE DISPLAY STYLE'S (c) CHANGED: "billion" is not explained. Tony,
+  20:53, of "A billion is a thousand million.": "omit".
+- STATEMENT 4 GIVEN AN INTERIM: "B until we have A". Tony, 20:53, of the
+  sentence that printed no number for Io, Titan, Pluto and Charon: "we
+  can't say that we don't know these distances. we do."; and of the one
+  for Bennu, Halley and Ikeya-Seki: "again, we do know the distance."
+  Put to him as two ways. A: keep statement 4 and read the
+  sources before the rule's build. B: where JPL gives the position and
+  states no uncertainty, the box prints four figures anyway. The session
+  recommended A. Tony, 21:02: of statement 4, "in principle, yes. what
+  bothers me is that such well known bodies have no source we can quote.
+  nothing reliable."; of B, "let's go with this option and say so."; and
+  to "Which is it, A or B?", "B until we have A." SO: statement 4 stays
+  the principle and the end state. Until a body's source is read, its
+  box prints four figures and says what they rest on. For such a body
+  the last sentence of statement 4, "No figure ever stands beside a
+  disclaimer", does not hold; said to him. The two sentences, approved
+  21:22, are in the words file.
+- PRINTING UNDER B TODAY, each owed its reading to move it to A (15). No
+  source read: Io, Titan, Pluto, Charon. JPL answered and states none:
+  Bennu, Halley, Ikeya-Seki. Their box says today that JPL states none:
+  the eight Lagrange points (em_l1, em_l2, em_l4, em_l5, semb_l1,
+  semb_l2, semb_l4, semb_l5). NOT under B: a question to JPL that
+  failed, or an answer that did not match, keeps "No distance is shown",
+  since JPL has an uncertainty there and it may be coarse (asteroid 2024
+  DW earns two figures tonight by JPL's own figure). Of the 64 bodies on
+  orbits with a sourced uncertainty tonight, 60 are known more finely
+  than their fourth figure; the four that are not: phobos (by its row),
+  asteroid_2023_jf, asteroid_2024_dw and arrokoth (by JPL's 3-sigma).
+- A SPEED ON THE WEBSITE, asked by Tony at 20:09 and parked at 20:20:
+  L-561 (a speed in the website's box).
+- NOT WRITTEN, NOT PUT TO HIM. The spacecraft's line in the i panel: the
+  tracking evidence covers only the part of a path fitted to tracking
+  data, and for a craft still flying today is usually past JPL's last
+  fit, so the line waits on L-554 (JPL's sentence when a path is a
+  prediction). Whether B reaches a craft on a predicted part of its
+  path. The orrery's hover: it has no i panel, so the shape does not fit
+  it as it stands. Io at three figures by its drift and under B at once:
+  which sentence its box carries, or both.
+- OWED, THE SKILL. provenance-discipline 2.38's section "A Computed
+  Position Prints What Its Errors Earn" still lists the three points as
+  open, gives statement 4 without its interim, and the style's (c) with
+  "billion" explained. A session that may change a skill brings it to
+  this note before the rule's build; the skill is at 1,511 of its cap of
+  1,512, so something moves out first. Until then this note wins over
+  the skill on those points.
+- A PLACEMENT CAUGHT BY ITS READ-BACK, for L-522 (document caps), whose
+  rule it is: the handoff was written to the session's outputs folder,
+  corrected there by one character ("144" to "145"), and sent a few
+  seconds later; Tony's folder received the earlier bytes, at the same
+  size, 7,118. The read-back's byte comparison caught it, and a copy
+  sent from a path not used before landed right. The third such case
+  (2026-11-10, 2026-11-25). A file is finished before it is written to
+  the folder it is sent from.
+**Gap:** THE THREE OPEN POINTS RULED (the note above). Next: the skill
+brought to those rulings; the design talk's second half, Jupiter's
+moons; then THE RULE'S BUILD, before Jupiter's fold. Each of the 15
+bodies printing under B is read to move it to A. The source of "about
+Earth's average distance from the Sun" is read, or the words come out.
+And,
 before a row for spacecraft is typed: Chapter 3's pages that
 have no text read as pictures; Chapter 4's three figures and Chapter 5
 read from JPL's copy; the 2008 paper
@@ -4562,14 +4749,59 @@ at the design talk for
 Jupiter's moons and after (L-558 (the folds after Mars)). First the 12
 rows, against what their source says. Then Io, Titan, Pluto and Charon,
 each for the distance its box prints; the 13 path bodies' first rung;
-Halley, Ikeya-Seki and Bennu; the spacecraft, one by one. The box's
-words, for Tony's approval, with the sentence that says the four figures
-are an editorial choice. Then a build that touches every box. Nothing
-built, no brief.
+Halley, Ikeya-Seki and Bennu; the spacecraft, one by one. The
+spacecraft's line in the i panel, and the orrery's hover, for Tony's
+approval. Then a build that touches every box. Nothing built, no brief.
 **Ref:** L-399 (the sentence when JPL's figure is missing); L-513 and
 L-514 (the Moon's and Mars's standards); L-398; L-484; L-401 (the
 spacecraft data sheets); L-515, L-557, L-558; L-554 (JPL's sentence
 when a path is a prediction); `gallery/solar_system_figures.js`.
+
+#### [L-561] A speed in the website's box: three ways, parked (gallery; Tony's question at L-560's talk)
+<!-- L:561 status:OPEN upd:2026-11-27 section:A flag: rice: -->
+- **Opened 2026-11-27** by a design talk (Claude Fable 5.2), on Tony's
+  question at the talk on L-560 (a digit is earned), 20:09: "Can we also
+  serve velocities to the website?" Parked on his word, 20:20: "Park it.
+  Thanks." Nothing is built.
+- WHAT IS THERE, read at gallery 78deb5d5. The website prints no speed:
+  `gallery/solar_system_figures.js` has no speed line. The served
+  positions carry t, x, y and z only. `tools/gallery_cache_builder.py`
+  keeps x, y and z from JPL's answer (`fetch_vectors_range`). NOT
+  CONFIRMED: that JPL's velocity columns are in the answer the night
+  already receives; the library it uses normally returns them.
+- Tony, 20:14: "Wait, i don't want to add more computation. I thought
+  that the orrery would serve its velocities to the website." Said back:
+  the orrery sends the website definitions only; the website's night
+  asks JPL itself; the page works out each place for the minute shown.
+- THREE WAYS. A: the night serves JPL's own speed with each body's "you
+  are here" point (`as_of_today`, served for bodies on orbits and on
+  paths alike); no new work on the page; the speed is for the night's
+  minute, up to two days old. B: the page works it out for the minute
+  shown: one line of arithmetic for a body on an orbit, from the orbit
+  it has; for a body on a path, JPL's velocity kept at each served
+  point, the positions growing from 1.0 MB to under 2 MB (an estimate).
+  This is the added computation he does not want. C: no speed on the
+  website, as today.
+- MEASURED FOR A, from tonight's served orbits, 71 bodies, the speed by
+  the two-body formula hour by hour over two days. For 28 it changes by
+  more than a fourth figure: mercury (49.66 km/s, by up to 1.46), titan,
+  phobos, encke, moon, itokawa, asteroid_2025_py1, io, tempel_2,
+  kamo_oalewa, asteroid_2023_jf, howell, asteroid_2025_pn7, schaumasse,
+  maps, bennu, asteroid_2024_dw, apophis, churyumov, lemmon, c2025_k1_c,
+  swan, neowise, mars, dinkinesh, steins, eros, ryugu. For the other 43
+  a two-day-old speed holds four figures. The session's working, not the
+  page's; the script is not saved.
+- The session's view, said to him: C over A if no added computation on
+  the page is the line, since A puts two times in one box; B is the only
+  one that gives a speed for the minute shown.
+- UNDER THE RULE, already ruled on L-560: a speed takes its distance's
+  count, four at most, from the same centre, and prints nothing where
+  the distance prints nothing.
+**Gap:** parked. A choice among the three, Tony's, when he takes it up.
+Nothing built, no brief.
+**Ref:** L-560 (a digit is earned); L-557 (the error away from today);
+`gallery/solar_system_figures.js`, `tools/gallery_cache_builder.py`;
+`position_accuracy.py`, the orrery's speed lines.
 
 #### [L-558] The folds after Mars: BepiColombo's arrival, Jupiter's moons, Saturn's moons, Uranus and Neptune (gallery + orrery; road stage 15; Tony's order of Nov 25)
 <!-- L:558 status:OPEN upd:2026-11-27 section:A flag: rice: -->

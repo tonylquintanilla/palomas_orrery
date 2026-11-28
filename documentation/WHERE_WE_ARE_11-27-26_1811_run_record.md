@@ -142,10 +142,43 @@ No. Pushing is yours alone under the project's rules, and reinstalling the skill
 - **The design talk can't usefully start before your push and reinstall.** Its first step is to compare the skills, and it would stop on the three you haven't reinstalled.
 
 So my recommendation is to leave it here. When you're back at your desk:
-1. GitHub Desktop, on the orrery: Commit, then Pull origin, then Push origin. -- 
-2. Reinstall provenance-discipline, orrery-coding-conventions and interactive-exhibit.
+1. GitHub Desktop, on the orrery: Commit, then Pull origin, then Push origin. -- 5de1ed8409a0c521994def96e50a21f36a993170
+2. Reinstall provenance-discipline, orrery-coding-conventions and interactive-exhibit. --done 
 3. Start the design talk from `documentation/HANDOFF_build_20261127_rule_into_skills.md`.
 
 **Where this leaves us**
 - The skills work is done and waiting in your folder, with nothing left for this session.
 - The order from here is your push, the reinstall, then the design talk.
+
+===========================
+
+The ledger and Where We Are did not reach your folder: the app's safety check refused to let me overwrite two existing files there. I did not try another way round it. Both files are attached here instead.
+
+**What is in your orrery folder now**
+- `documentation\WORDS_L560_box_words_20261127.md`, new, placed and confirmed.
+- `documentation\HANDOFF_talk_20261127_open_points_ruled.md`, new, placed and confirmed.
+
+**What is not**
+- `LEDGER_CONSOLIDATED.md`: three notes, the new item L-561 (a speed in the website's box), the index regenerated. 3,050,796 bytes.
+- `documentation\WHERE_WE_ARE.md`: 11 edits by section and the section marks reset. 25,717 bytes, 130 of 130 lines.
+- Your copies of both are untouched and still equal GitHub's.
+
+**Your run order, if you save them by hand**
+1. Save the attached `LEDGER_CONSOLIDATED.md` over the one in `palomas_orrery_for_github\`. -- done
+2. Save the attached `WHERE_WE_ARE.md` over the one in `palomas_orrery_for_github\documentation\`. -- done 
+3. In GitHub Desktop, the orrery should show four changed files: the ledger, Where We Are, the words file and the handoff, beside your run record copy.
+4. Commit, then Pull origin, then Push origin. -- 
+5. Nothing to reinstall: no skill changed tonight.
+
+**Where this leaves us**
+- The rule's three open points are ruled and the box's words are approved, all in your words on L-560 (a digit is earned).
+- "No source, no number" stays the principle; until a body's source is read its box prints four figures and says so. Fifteen bodies print that way today.
+- The provenance-discipline skill still lists the three points as open. It is owed an update before the rule's build, and the ledger wins over it until then.
+- Next is the talk's second half: the 12 rows against their source, then Io.
+
+**Size**
+- No token count prints here. Read: two handoffs, Where We Are, three ledger items, parts of two skills and four code files, and the served cache by script. Written: about 240 ledger lines, 11 edits to Where We Are, a words file of 145 lines and a handoff of 134.
+
+One final thought: the interim will be easy to leave in place. Fifteen boxes saying "we have not yet read a source" only become fourteen if someone does the reading, so I would give the 12 rows and Io a session of their own soon.
+
+Do you want to save the two attached files yourself, or would you rather allow the overwrite and have me place them?
