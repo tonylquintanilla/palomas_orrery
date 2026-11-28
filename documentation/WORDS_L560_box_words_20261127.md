@@ -17,7 +17,14 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
 
 Type: WORDS (zero code). Nothing is built. For the rule's build, after
 the design talk's second half. The rulings behind these words are on
-L-560 (a digit is earned), its note of 21:30. The ledger wins on status.
+L-560 (a digit is earned), its notes of 21:30 and 23:30. The ledger
+wins on status.
+
+Updated November 27, 2026, about 23:30, by the design talk's second
+half (Claude Opus 5.5), on orrery a71cc99ea8db0934b24a73a981c434115a038b09
+and gallery 78deb5d563984a84b3e45e0d6c76ce5113e62856, both read live:
+sentence 11 approved, Io out of the interim, and the notes for the
+build at the end.
 
 ## The shape (Tony, 20:36: "yes")
 
@@ -38,6 +45,9 @@ How four boxes would read, from the served figures of that night:
 - Voyager 1: 172.5 au from the Sun (25.80 billion km)
 - The Moon: 360,000 km from Earth (0.00241 au), with sentence 6.
 - Io: four figures, with sentence 5 (and see "Not settled" below).
+  Since 23:18: Io has its source (L-560's note of 23:30), so it is no
+  longer under the interim; its box prints three figures by the page's
+  drift most of the day, with sentence 6.
 
 ## On the page, once
 
@@ -86,11 +96,19 @@ How four boxes would read, from the served figures of that night:
    "This distance is rounded to JPL's uncertainty for [name]'s position
    on this date, at three standard deviations."
 
-11. HELD FOR THE 12 ROWS' CHECK. Reused from a moon's box:
-   "This distance is rounded to JPL's published accuracy for [Phobos's
-   orbit around Mars]."
-   It is true only if the row behind it is JPL's stated accuracy and
-   not the project's own rounding place (the rule's statement 5).
+11. APPROVED IN THE PLAINER WORDING (Tony, 22:58: "approved in the
+   plainer wording"). The wording, and the four questions put before
+   it, came from the coordinating session, not from Tony (his words,
+   22:58):
+   "This distance is rounded to match JPL's published accuracy for
+   [Phobos's orbit around Mars]."
+   The 12 rows were read first (L-560's note of 23:30): each row's
+   number is our rounding place, as its Status line says, and the
+   words behind it are JPL's, read at their sources. The sentence keeps
+   the two apart: the rounding is ours, the accuracy JPL's.
+   IT APPEARS ON NO WEBSITE BOX TODAY (Tony's correction, 22:58): a box
+   with four figures carries no sentence, so with Phobos's row kept at
+   10 km Deimos shows none and Phobos shows sentence 6.
 
 ## In a box, under the interim: "B until we have A" (Tony, 21:02)
 
@@ -101,7 +119,7 @@ those Tony said, 20:53: "we can't say that we don't know these
 distances. we do." and "again, we do know the distance."
 
 5. For a body whose source we have not read (Io, Titan, Pluto and
-   Charon that night):
+   Charon that night; Io left it at 23:18, its source read):
    "Worked out from JPL's orbit and shown to four figures. We have not
    yet read a source for how finely this position is known."
 
@@ -137,9 +155,34 @@ be coarse.
 - Whether the interim reaches a craft on a predicted part of its path.
 - The orrery's hover. It has no information panel, so the shape above
   does not fit it as it stands.
-- A body that is under the interim and also loses figures to drift
-  (Io, most hours of the day): sentence 5, sentence 6, or both.
+- A body that is under the interim and also loses figures to drift:
+  sentence 5, sentence 6, or both. Io was the case named here; it left
+  the interim at 23:18. Whether Titan, Pluto or Charon is such a case
+  was not measured.
 - The wording of the information panel's second source line, the
   uncertainty's.
 
-Written November 2026 with Anthropic's Claude Fable 5.2.
+## For the build (added November 27, 23:30)
+
+- THE BOX'S SENTENCES LIVE IN THREE WEBSITE FILES, NOT ONE (Tony,
+  22:58): `gallery/solar_system_figures.js` (a body's and a moon's
+  box), `gallery/earth_geometry.js` (the Moon's box in the Earth room)
+  and `gallery/encounter.js` (an encounter's box: "JPL states no
+  accuracy for this position."). Found by a search at gallery 78deb5d5.
+- The "published accuracy" words stand today in: the orrery's
+  `position_accuracy.py`, lines 571 and 576 (the hover, for the
+  planets, the Moon, Phobos and Deimos); its check
+  `test_position_digits.py`, lines 284 to 315, which expects "published
+  accuracy for" word for word and so changes in the same build;
+  `gallery/solar_system_figures.js`, lines 701 and 709; and
+  `gallery/earth_geometry.js`, lines 784, 787 and 789, and line 810,
+  the panel's heading "JPL's published accuracy" before the citation,
+  which labels JPL's own words and may stay. Lines at orrery a71cc99e
+  and gallery 78deb5d5.
+- The Galilean moons' evidence is class evidence, other authors'
+  description of the field, not JPL's statement about its own
+  ephemeris: no box or panel calls it JPL's accuracy for Io (Tony,
+  23:18; L-560's note of 23:30, with its three limits).
+
+Written November 2026 with Anthropic's Claude Fable 5.2; updated the
+same night with Anthropic's Claude Opus 5.5.

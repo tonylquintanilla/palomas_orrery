@@ -152,6 +152,8 @@ So my recommendation is to leave it here. When you're back at your desk:
 
 ===========================
 
+**Session: OPEN: 11-27-26 1823: Fable: Coordinator: L560  Build handoff documentation**
+
 The ledger and Where We Are did not reach your folder: the app's safety check refused to let me overwrite two existing files there. I did not try another way round it. Both files are attached here instead.
 
 **What is in your orrery folder now**
@@ -167,7 +169,7 @@ The ledger and Where We Are did not reach your folder: the app's safety check re
 1. Save the attached `LEDGER_CONSOLIDATED.md` over the one in `palomas_orrery_for_github\`. -- done
 2. Save the attached `WHERE_WE_ARE.md` over the one in `palomas_orrery_for_github\documentation\`. -- done 
 3. In GitHub Desktop, the orrery should show four changed files: the ledger, Where We Are, the words file and the handoff, beside your run record copy.
-4. Commit, then Pull origin, then Push origin. -- 
+4. Commit, then Pull origin, then Push origin. -- a71cc99ea8db0934b24a73a981c434115a038b09
 5. Nothing to reinstall: no skill changed tonight.
 
 **Where this leaves us**
@@ -182,3 +184,48 @@ The ledger and Where We Are did not reach your folder: the app's safety check re
 One final thought: the interim will be easy to leave in place. Fifteen boxes saying "we have not yet read a source" only become fourteen if someone does the reading, so I would give the 12 rows and Io a session of their own soon.
 
 Do you want to save the two attached files yourself, or would you rather allow the overwrite and have me place them?
+
+=====================
+
+**Session: OPEN: 11-27-26 2232: Opus: JPL accuracy rows: rounding or uncertainty**
+
+Before recording the 100 km point, I'm checking it against the served distances of all four moons.
+
+Only Io is served on the website; Europa, Ganymede and Callisto are not. Taking their distances from the orrery's own JPL cache rather than from memory.
+
+Confirmed across each orbit's nearest and farthest point: a 10 km or a 100 km place gives all four moons four figures from Jupiter. Now the records, under the session-records skill.
+
+The ledger in his folder is unchanged since I compared it, and the stray copy is gone. Checking his documentation folder for any newer file, and reading Where We Are.
+
+His newest run record copy changed at about 22:35, after this session started. Reading what he wrote there.
+
+Ledger has no cap; Where We Are is at its 130 lines, so every line I add there replaces one. Writing the L-560 note first.
+
+The ledger's index is unchanged apart from the note and Gap, and the file stays ASCII with LF. Now the words file.
+
+Now Where We Are, by section, keeping it at 130 lines.
+
+Caps pass. Now the handoff.
+
+I've recorded all your rulings, and the four files are attached. I haven't placed anything in your orrery folder yet, because your coordinating session may be writing there.
+
+**What the records say:**
+- **The 12 rows:** each row's number is our rounding place, and the words behind it are JPL's.
+- **Phobos's row stays at 10 km, for your reason.** The record says the split by direction is read from the paper's graphs by eye, and the paper prints no number for it.
+- **Sentence 11 is approved in your wording, and appears on no website box today.** The wording and the four questions before it are credited to the coordinating session.
+- **Io's source is class evidence for the four Galilean moons,** stored the way the spacecraft's tracking evidence is, never called JPL's accuracy, with its three limits. Its place is 10 km and nothing is multiplied. The recommendation is credited to the coordinating session.
+- **I checked the 100 km claim before writing it.** At each moon's nearest and farthest point from Jupiter, using the orbits in the orrery's JPL cache, 10 km and 100 km both give four figures for all four moons. Only Io is on the website today.
+- **Io leaves the interim, so 14 boxes now print four figures without a source:** Titan, Pluto, Charon, Bennu, Halley, Ikeya-Seki and the eight Lagrange points.
+- **For the build:** the three website files that hold the box's sentences, the five places the "published accuracy" words stand today, and Fayolle's 2025 thesis on the reading list.
+
+The ledger's index and the caps check both pass, and Where We Are stays at its 130 lines.
+
+**Your actions:**
+- (do) Save the four attached files: `LEDGER_CONSOLIDATED.md` in `palomas_orrery_for_github\`, and the other three in its `documentation\`. -- done
+- (do) Commit, Pull origin, Push origin. The commit includes the deletion of the two stray copies. -- 
+
+**Where this leaves us**
+- The talk's second half is past the 12 rows and Io. Titan, Pluto and Charon come next, and the outside returns already name sources for them, not yet checked.
+- provenance-discipline is still owed both talks' rulings before the rule's build.
+
+Is your coordinating session finished writing in the orrery folder? If it is, I'll place the four files myself and read each one back, or you can save the attachments.

@@ -4734,24 +4734,189 @@ at this note's end).
   sent from a path not used before landed right. The third such case
   (2026-11-10, 2026-11-25). A file is finished before it is written to
   the folder it is sent from.
-**Gap:** THE THREE OPEN POINTS RULED (the note above). Next: the skill
-brought to those rulings; the design talk's second half, Jupiter's
-moons; then THE RULE'S BUILD, before Jupiter's fold. Each of the 15
-bodies printing under B is read to move it to A. The source of "about
-Earth's average distance from the Sun" is read, or the words come out.
-And,
+**Note:** (2026-11-27, 23:30 Chicago, the design talk's second half,
+Claude Opus 5.5, linked to Tony's computer with a shell of its own and
+none on his, on orrery a71cc99e and gallery 78deb5d5, both read live;
+his orrery folder at a71cc99e, read from `.git/refs/heads/main`)
+THE 12 ROWS READ AGAINST THEIR SOURCES; SENTENCE 11 APPROVED; PHOBOS'S
+ROW KEPT AT 10 KM; IO GIVEN ITS SOURCE, AS CLASS EVIDENCE FOR THE FOUR
+GALILEAN MOONS. Nothing built.
+- BASE: Tony's push of the last talk, a71cc99e, is in his run record
+  copy `documentation/WHERE_WE_ARE_11-27-26_1811_run_record.md`. All 12
+  installed skills equal the repository's copies at a71cc99e, by this
+  session's comparison (the text below the header byte for byte, the
+  header with its line breaks ignored).
+- THE QUESTION (Tony, 22:32, a reviewer's): are the 12 rows rounding
+  places we chose, or uncertainties JPL states? BOTH, IN SEPARATE PARTS.
+  The 12 bodies share five rows in `constants_new.py`, section
+  "PLANETARY EPHEMERIS ACCURACY". Each row's NUMBER is the project's
+  rounding place, and its own Status line says so ("the reporting place
+  of the source's words, not a number the source prints"). The WORDS
+  are JPL's, and all four DE430 sentences the rows quote were read
+  tonight at JPL's own PDF of Folkner et al. (2014), IPN Progress Report
+  42-196, the abstract, p. 1: the Moon "submeter"; Mercury, Venus, Earth
+  and Mars "orbit uncertainties of a few hundred meters"; Jupiter and
+  Saturn "tens of kilometers"; Uranus, Neptune and Pluto "several
+  thousand kilometers". No sigma level anywhere in the report, by the
+  web tool's reading of the whole PDF in two parts (its summary, not a
+  search of the text; the PDF would not download to the shell). Phobos
+  and Deimos: Brozovic, Jacobson and Park (2025), AJ 170:42, read from
+  Tony's copy in `papers/` by a script, Section 6, p. 13: "the realistic
+  1 sigma value for the uncertainties is on the order of a few
+  kilometers for the next couple of decades" (the paper prints the
+  Greek sigma); it names no direction. So the reviewer is right of the
+  numbers, and JPL states an accuracy for all 12, in words.
+- SECTION 5.3, pp. 10-11, read for Tony's question of 22:48: the formal
+  1 sigma uncertainties are "at a subkilometer level"; along the orbit
+  they "are dominated by the uncertainties in the orbital mean motion";
+  MAR099 differs from NOE-4-2020 by about 3 km for Phobos and 2 km for
+  Deimos, so the formal figures are "overly optimistic", Phobos's to be
+  scaled by about 4 and Deimos's doubled, "more realistic 1 sigma
+  uncertainties". Section 6's few kilometers is those scaled figures.
+  THE SPLIT BY DIRECTION IS READ FROM THE PAPER'S GRAPHS BY EYE, Figure
+  5, p. 13, and Figure 3, p. 11; THE PAPER PRINTS NO NUMBER FOR IT.
+  Read so, around 2026: Phobos's distance from Mars about 0.4 km at 1
+  sigma after the scaling, Deimos's about 0.1 km; along the orbit about
+  1 km.
+- PHOBOS'S ROW STAYS AT 10 KM (Tony, 22:58): "The row stays at 10 km.
+  Reason: the paper's one-sigma figure is for the whole position, and
+  its own figures show the distance from Mars is known several times
+  more finely, so 10 km already covers three sigma of the distance we
+  print." Put to him first, and not taken: statement 2's three sigma
+  read against the position's few kilometers (6 to 30 km) would give a
+  100 km row.
+- WHAT THEY PRINT, worked out by this session from `distanceLine`'s
+  arithmetic redone in Python with the four-figure cap added, at the
+  night's minute of the cache generated 2026-11-27T21:27Z (gallery
+  78deb5d5); not read off the page; the script is not saved. The
+  night's orbits are dated 00:00 UTC and served from 21:27 UTC, so a
+  visitor sees them about 0.9 to 1.9 days old. Phobos, 9,495 km from
+  Mars, drift 13.2 km a day: with the 10 km row, 9,490 km (0.0000635
+  au), three figures, until its orbit is about 1.2 days old, then
+  9,500 km (0.000063 au), two, set by the drift; with a 100 km row,
+  9,500 km all day, set by the row. Deimos, 23,457 km, drift 1.8 km a
+  day: with the 10 km row 23,460 km (0.0001568 au), four figures, set
+  by the row; with a 100 km row 23,500 km, three.
+- SENTENCE 11 APPROVED IN THE PLAINER WORDING (Tony, 22:58): "This
+  distance is rounded to match JPL's published accuracy for Phobos's
+  orbit around Mars." THE WORDING AND THE FOUR QUESTIONS BEFORE IT
+  (what "a few kilometers" describes, the prints at 10 and 100 km, the
+  plainer wording, the places the words stand today) CAME FROM THE
+  COORDINATING SESSION, NOT FROM TONY (his words, 22:58).
+- SENTENCE 11 APPEARS ON NO WEBSITE BOX TODAY (Tony's correction,
+  22:58): under the approved shape a box with four figures carries no
+  sentence, so with the row at 10 km Deimos shows none and Phobos the
+  drift sentence (6).
+- FOR THE BUILD, the same "published accuracy" words stand today in:
+  the orrery's `position_accuracy.py`, line 576 ("These distances are
+  rounded to JPL's published accuracy for" an orbit: the planets, the
+  Moon, Phobos and Deimos) and line 571 ("JPL's published accuracy for
+  ... is finer."); its check `test_position_digits.py`, lines 284 to
+  315, which expects "published accuracy for" word for word, so it
+  changes in the same build; the website's
+  `gallery/solar_system_figures.js` (a moon's box, lines 701 and 709);
+  and `gallery/earth_geometry.js` (the Moon's box in the Earth room,
+  lines 784, 787 and 789; and line 810, the panel's heading "JPL's
+  published accuracy" before the citation, which labels JPL's own words
+  and is allowed). Line numbers at orrery a71cc99e and gallery 78deb5d5.
+- FOR THE BUILD'S BRIEF: THE BOX'S SENTENCES LIVE IN THREE WEBSITE
+  FILES, NOT ONE (Tony, 22:58): `gallery/solar_system_figures.js`,
+  `gallery/earth_geometry.js` and `gallery/encounter.js` (its sentence
+  "JPL states no accuracy for this position."). The three found by a
+  search of the website at 78deb5d5.
+- IO'S SOURCE, ACCEPTED AS CLASS EVIDENCE FOR THE FOUR GALILEAN MOONS
+  (Tony, 23:18): "Store it as class evidence for the four Galilean
+  moons, the way the tracking evidence is stored for spacecraft, not as
+  a row like the planets'. It is other authors' description of the
+  field, not JPL's statement about its own ephemeris, so nothing on the
+  page calls it JPL's accuracy for Io." THE SOURCE: Fayolle, M. S.,
+  Dirkx, D., Cimo, G., Gurvits, L. I., Lainey, V. and Visser, P. N. A.
+  M. (2024), "Contribution of PRIDE VLBI products to the joint
+  JUICE-Europa Clipper moons' ephemerides solution", Icarus;
+  https://arxiv.org/abs/2405.00562, read at its arXiv HTML (v1),
+  Section 4.1, "Baseline solution without VLBI": "This is again a
+  considerable improvement with respect to present solutions, which are
+  accurate to the 10-15 km level (see Table 4)." Read through the web
+  tool's quotation of the page. First named by Gemini's return
+  (`documentation/worksheets/Gemini_L560_printed_precision_review_RETURN_20261127.md`),
+  checked at its source tonight.
+  THE THREE LIMITS, which go with it wherever it is written:
+  (1) It covers the four Galilean moons together; it names no moon, no
+  ephemeris (not JUP365), no sigma level and no direction.
+  (2) Its "see Table 4" points to a setting in the authors' own
+  simulation, the a priori "Initial states global per arc 15 km
+  (position)", not a measurement; the sentence is the authors'
+  description of the field. (Gemini's return called the table "current
+  knowledge", which stretches it.)
+  (3) No published accuracy of JUP365 exists: JPL's page lists its
+  source as a personal communication (Jacobson 2021), and JUP365's own
+  comment file states none (the note of 09:22).
+  THE PLACE: 10 km, by the rule for an accuracy stated in words (10 to
+  15 km report to tens); no sigma is stated, so nothing is multiplied.
+  A 100 KM PLACE WOULD PRINT THE SAME FOUR FIGURES FOR ALL FOUR MOONS,
+  measured by this session at each moon's nearest and farthest distance
+  from Jupiter, from the osculating elements in the orrery's
+  `data/osculating_cache.json` at a71cc99e (Io 420,048 to 424,033 km,
+  Europa 665,154 to 677,489, Ganymede 1,069,108 to 1,072,012, Callisto
+  1,870,164 to 1,896,569; four figures at hundreds for the first two,
+  at thousands for the other two, under either place). Only Io is
+  served on the website; Europa, Ganymede and Callisto are not.
+  WHAT IO'S BOX DOES: four figures by the evidence; three by the page's
+  own drift most of the day (168 to 354 km at 0.9 to 1.9 days old), so
+  it keeps the drift sentence. It leaves the interim: sentence 5 ("We
+  have not yet read a source ...") no longer applies to it. FOURTEEN
+  PRINT UNDER THE INTERIM NOW: Titan, Pluto, Charon, Bennu, Halley,
+  Ikeya-Seki and the eight Lagrange points.
+  THE RECOMMENDATION TO STORE IT AS CLASS EVIDENCE CAME FROM THE
+  COORDINATING SESSION (Tony, 23:18).
+- READ FOR IO AND NOT A STATEMENT OF THE EPHEMERIS'S ACCURACY, each
+  through the web tool: Catani et al. (2023), MNRAS,
+  https://arxiv.org/abs/2310.00807, the abstract: "The average
+  uncertainty of the relative positions of the Galilean satellites was
+  5 mas (15 km)", their own observations of 2021; Fayolle et al.
+  (2023), A&A 677, A42, Section 2.1, the accuracy of each kind of
+  observation (occultations "a few kilometres", old astrometry "several
+  hundreds of kilometres"); Zenk, Dirkx and Fayolle (2025), Planetary
+  and Space Science 261, 106112, the a priori only as a graph (Fig. 1);
+  Fayolle et al., https://arxiv.org/abs/2308.06779, the abstract: none.
+- ON THE READING LIST FOR THE RULE'S BUILD, A BETTER-FITTING SOURCE FOR
+  IO (Tony, 23:18: "Do not hold Io for the thesis."): S. Fayolle (2025),
+  "Natural satellites ephemerides: The Galilean moons' dynamics in the
+  JUICE-Europa Clipper era", doctoral thesis, TU Delft,
+  https://doi.org/10.4233/uuid:667192b7-5555-49df-b2c6-2479942fc5f2,
+  its discussion of Fig. 3.4: it names Io and compares a JPL solution
+  (JUP380) with an independent one (NOE-5-2023). GPT's return
+  (`documentation/worksheets/GPT_L560_printed_precision_review_RETURN_20261127.md`)
+  quotes "on average, constrained within 10-15 km" for Io, Europa and
+  Ganymede; NOT CHECKED.
+- OWED to provenance-discipline, with the evening's other rulings
+  (the note of 21:30): the class evidence for the Galilean moons beside
+  the spacecraft's, with its three limits.
+- THE STRAY COPIES in a71cc99e, `LEDGER_CONSOLIDATED-1.md` and
+  `documentation/WHERE_WE_ARE-1.md`, are each byte for byte equal to
+  their originals; Tony is deleting them (22:48).
+**Gap:** THE THREE OPEN POINTS RULED (the note of 21:30); THE 12 ROWS
+AND IO READ (the note of 23:30). Next: the skill brought to those
+rulings, with the Galilean moons' class evidence; the design talk's
+second half goes on with Titan, Pluto and Charon; then THE RULE'S
+BUILD, before Jupiter's fold. Each of the 14 bodies still printing
+under B is read to move it to A. The source of "about Earth's average
+distance from the Sun" is read, or the words come out. Fayolle's
+thesis read for Io, on the build's reading list. And,
 before a row for spacecraft is typed: Chapter 3's pages that
 have no text read as pictures; Chapter 4's three figures and Chapter 5
 read from JPL's copy; the 2008 paper
 read; the other claims in the four returns checked as each is used.
 Then the rule applied, body by body,
 at the design talk for
-Jupiter's moons and after (L-558 (the folds after Mars)). First the 12
-rows, against what their source says. Then Io, Titan, Pluto and Charon,
+Jupiter's moons and after (L-558 (the folds after Mars)). The 12 rows
+and Io done Nov 27. Then Titan, Pluto and Charon,
 each for the distance its box prints; the 13 path bodies' first rung;
 Halley, Ikeya-Seki and Bennu; the spacecraft, one by one. The
 spacecraft's line in the i panel, and the orrery's hover, for Tony's
-approval. Then a build that touches every box. Nothing built, no brief.
+approval. Then a build that touches every box, its brief naming the
+three website files that hold the box's sentences. Nothing built, no
+brief.
 **Ref:** L-399 (the sentence when JPL's figure is missing); L-513 and
 L-514 (the Moon's and Mars's standards); L-398; L-484; L-401 (the
 spacecraft data sheets); L-515, L-557, L-558; L-554 (JPL's sentence
