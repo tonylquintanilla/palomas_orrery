@@ -6,9 +6,13 @@ fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and ch
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-254, 255-527, 528-738.
+Read this file in 3 parts: lines 1-249, 250-524, 525-735.
 
-Skill version: 1.46 | 2026-11-26, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.47 | 2026-11-27, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 714f1699. v1.47 (L-560, a digit is earned): Hover
+text gives km and au, written by provenance-discipline's display style
+from the rule's build. The 1.44 entry moved out.
+Earlier: 1.46 | 2026-11-26, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 55dbdb5a and gallery @ 972b4a93. v1.46 (L-545): the
 walks are rows of the gallery run, at night too, as built, and the
 drawer walk gates. The 1.43 entry and the 1.45 install moved out.
@@ -18,16 +22,6 @@ L-550) adds A VISITOR READS UTC; JPL'S DATES ARE ON JPL'S CLOCK and,
 under Phone first, A SESSION THAT CHANGES THE PAGE RUNS THE WALKS, with
 who adds a new row's dashboard button; written from the ledger and the
 gallery at e6af10ea. The 1.42 entry and two passages moved out.
-Earlier: 1.44 | 2026-11-21, with Anthropic's Claude Fable 5.2, at
-palomas_orrery @ bd70f584 and gallery @ 828362fd. v1.44 (L-529, guided
-encounters; L-540, a reel on a Featured card) adds two rules. AN
-ENCOUNTER IS A PACKAGE PLAYED IN A ROOM OF ITS OWN: a completed pass,
-its package fetched by hand, its player, its dates read and never
-typed. And A CARD BESIDE A BODY SITS IN A FOLD OF ITS KIND: Scenes,
-Encounters, Links, Saved pictures. Written by the coordinating session
-from the two builds' ledger notes and the gallery at 828362fd, not by
-their Code sessions. To stay at the cap, the 1.41 entry and four field
-notes of September (L-291, L-318) moved out.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
@@ -37,7 +31,8 @@ twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
 (L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515)
 and 2026-11-11 (L-522) and 2026-11-12 (L-527) and 2026-11-19 (L-297),
-2026-11-21 (L-529), 2026-11-22 (L-541) and 2026-11-26 (L-545).
+2026-11-21 (L-529), 2026-11-22 (L-541), 2026-11-26 (L-545) and
+2026-11-27 (L-560).
 
 ## Contents
 
@@ -64,7 +59,7 @@ if this list and the headings disagree (L-418).
   - Scene text is scenery [QUALITY]
   - The frame zoom and the grid agree [QUALITY]
   - Aspect is read, not assumed [QUALITY]
-  - Hover text gives km AND AU [QUALITY]
+  - Hover text gives km and au [QUALITY]
   - Phone first, and the conditions are stated [QUALITY]
   - A guide asks for one action and waits for it [QUALITY]
   - An encounter is a package played in a room of its own [QUALITY]
@@ -419,8 +414,10 @@ Chrome that projects from the camera reads `aspectratio` from the full
 layout. 1:1:1 is the Sun's choice, not a law (Tony: "sometimes the ticks
 are not isometric").
 
-### Hover text gives km AND AU [QUALITY]
-Standing convention inherited from the orrery (orrery-coding-conventions).
+### Hover text gives km and au [QUALITY]
+Standing convention inherited from the orrery (orrery-coding-conventions);
+how both are written is provenance-discipline's display style, from the
+rule's build (L-560).
 
 ### Phone first, and the conditions are stated [QUALITY]
 Mode 5 runs portrait on Tony's phone before desktop. Sequence: arrival

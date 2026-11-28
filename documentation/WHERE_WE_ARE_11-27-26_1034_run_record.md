@@ -190,7 +190,9 @@ No decision is waiting on you.
 
 The order is recorded, and all three files in your folder match what I built, byte for byte: the ledger (3,032,005 bytes), Where We Are (25,385) and the handoff (15,419).
 
-One action for you, in GitHub Desktop on the orrery: Commit, then Pull origin, then Push origin. The three files are `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/HANDOFF_coordinating_20261127_green_night.md`. -- 
+One action for you, in GitHub Desktop on the orrery: Commit, then Pull origin, then Push origin. The three files are `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/HANDOFF_coordinating_20261127_green_night.md`. -- 714f1699032edd2654e66390e3fdecbaf1d5a3f6
+
+-- website: nightly run: 78deb5d563984a84b3e45e0d6c76ce5113e62856 #66 and #67 green
 
 **Where this leaves us**
 

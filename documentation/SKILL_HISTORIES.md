@@ -583,6 +583,182 @@ which were cleared as those batches landed. (Two came out of
 shell_configs.py with the Mercury and Moon body headers in the geometry
 follow-up, from 16.) The rest clear in Batch 2.
 
+Earlier: 2.35 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 8d334e7. v2.35 (L-443) adds to What a Visitor Reads,
+principle 5: plain words keep the authority's word. Where JPL or the
+IAU has a term for a thing, the visitor reads it, with a plain
+explanation where it is not everyday English; it is never replaced by a
+paraphrase. Tony, 2026-10-26: "we should always keep the correct JPL
+words and explain them when needed."
+(Moved down 2026-11-27, when 2.38 made a fourth entry.)
+
+A Computed Position Prints What Its Errors Earn, as it stood at 2.37,
+moved here word for word on 2026-11-27 (L-560) when 2.38 wrote Tony's
+rule of that day into it:
+
+## A Computed Position Prints What Its Errors Earn [QUALITY]
+
+A position worked out at display time -- a planet's distance from the
+Sun, propagated in the browser from served elements to the minute the
+room was opened -- is not a store row and has no `# Figures:` line. Its
+count comes from its errors, and these bound it:
+
+- **Drift.** How far the worked-out position may have moved from what
+  JPL Horizons itself would give: the builder's measured rate, in
+  degrees per day, times the days since the elements' date, taken as a
+  distance at the body's distance.
+- **The source's own accuracy.** How well JPL knows where the body is
+  at all. For a planet, the Moon or Pluto, a store row per group,
+  served to the page on the object's entry; it is a place, and half a
+  unit of it is the error. For a small body, JPL's own 3-sigma for its
+  position on that date (Horizons' vector table 2xr), which is the
+  error itself and is used whole (v2.36, L-399).
+- **The working-out between served points** (v2.37, L-297). A body
+  placed by its served positions (a spacecraft, a comet on an open
+  path, a Lagrange point) sits on the parabola through the three
+  points nearest the minute (`render_spacecraft.position_at`). Its error
+  is the curve's, not the chord's (Tony, 2026-11-18): twice the larger
+  gap between that parabola and the cubic through one more point, each
+  side; never under the real miss in about 3,000 held-out points,
+  undoubled under it half the time. On only where that holds
+  (`CURVE_KINDS`, the "Curve error" row); orbiters wait for L-538.
+
+**The display prints to the Report test's place (The ceiling, Report)
+for the LARGEST of them**, each unit placed by its own error, never
+finer than a floor the display states (whole kilometres in the Solar
+System room), and never fewer than one figure. Tony's ruling,
+2026-10-01: "use whichever is larger". Drift alone measures how well
+the page reproduces Horizons, not how well Horizons knows the planet,
+and it printed Pluto's distance to ten figures where JPL knows it to
+several thousand kilometres. A body with no source-accuracy row yet
+prints by its drift and SAYS so in the display, in words the display's
+owner approved, and the words appear exactly when no source error is
+served, so the two cannot disagree. Since 2026-10-29 the asteroids and
+comets are served their own uncertainty (L-399; the website's builder,
+`position_uncertainty`, and the orrery's hover from its position
+query); the bodies JPL gives none for are the remaining case.
+
+**A sentence saying why a figure is missing says the TRUE reason**
+(v2.36, L-399, L-484). Two reasons look alike on the page and are not:
+the figure exists and was not fetched (a question that failed, or was
+never asked), and the authority states none (JPL answered, and its
+uncertainty column reads "n.a."). Each has its own words -- the
+orrery's "JPL's uncertainty for this position is not included here"
+against "JPL states no accuracy for this position" -- and a display
+prints the one that is true, decided from the answer itself, never by
+default. Calling JPL's "none" "not included" claims a figure exists
+that does not; calling a failed question "none" hides a figure that
+does. Bennu, Halley and Ikeya-Seki on 2026-10-29 were the case: the
+orrery said "not included" for all three until
+`position_accuracy._side` read the answer; the website's sentence, "not
+yet included", has the same slant for them and is the next gallery
+session's, a documented difference on L-484.
+
+This applies to every computed position a display prints, in the
+gallery and the orrery. The Solar System room is the first built
+(gallery/solar_system_figures.js, checked by
+documentation/smoke_solar_system_figures.js, gallery repo). The
+orrery's own position hovers are one ledger class, recorded and not
+chased (The Braid).
+
+The stories behind the rules, moved here word for word on 2026-11-27
+(L-560) on Tony's word (16:39) to make room for 2.38 under the cap,
+each under the heading it stood beneath:
+
+Under The Visibility Convention [CRITICAL]:
+(Tony's ruling, 2026-08-17, settling an L-196 question as a convention
+rather than a one-off, because the same distinction governs every
+future case of the same shape.)
+
+Under The Gate Binds at EXPORT [CRITICAL]:
+(Tony's rulings. 2026-08-27, the principle: the gate binds where a
+claim reaches a reader, not where it is drawn. 2026-08-28, the
+placement: "I think provenance should be settled before it leaves the
+orrery to the gallery cache. There is no provenance checker in the
+gallery." The second corrects the first without withdrawing it.)
+
+Under The Gate Binds at EXPORT [CRITICAL]:
+(Tony's ruling, 2026-08-27. Worked case: the Sun's served features carry
+111 numeric values -- 85 declared drawing parameters, 26 measured sites
+holding 19 distinct values. Each measured field carries both a `source`
+string and an `orrery_constant` pointer, and nine of nine served numbers
+checked matched the store constant they name. That is a closed slice.)
+
+Under The Access Standard [CRITICAL]:
+(Tony's ruling, 2026-10-21, that this is method. The case, 2026-10-20:
+the chromosphere's temperature, where NASA's Sun Fact Sheet,
+NASA/Marshall and Montana State gave different figures and none named
+a source; the figure came from Carlsson (2007), the model they
+summarise.)
+
+Under The Access Standard [CRITICAL]:
+(Tony's ruling, 2026-08-27: "If we can't access from an open paper, an
+abstract or a google scholar search with context then the citation
+fails. No paywalls. I don't have access to a research library.")
+
+Under A Drawing Approximation Does Not Promote [CRITICAL]:
+(Tony's ruling, 2026-09-08, on Earth's magnetosphere: "We are not
+promoting Mode 5 approximations," and "not promoting approximations or
+rounded numbers." Seven drawn numbers in that one renderer had no store
+name and every one of them was a candidate. The rebuild on a cited
+model is L-305; this rule is what stopped the shortcut. It is a SKILL
+rule and not a decision because it resolves the same way next month,
+for a different body, in a different file.)
+
+Under The Unit Field:
+(Tony's rulings, 2026-09-11 and 2026-09-14, recorded on L-322 and until
+this version living only there. In engineering he has always used
+units, not literals.)
+
+Under The Read Field:
+(Tony's rulings, 2026-09-11 and 2026-09-19, on L-322 ruling (b),
+confirmed point by point on 2026-09-19 before this section was written.
+The fourteen magnetosphere rows already carry a dated per-row record in
+`documentation/L305_gap1_read_record_20260911.md`, a model's read of
+Tony's PDFs; their lines name the model.)
+
+Under One Value, One Home [CRITICAL]:
+(Tony's ruling, 2026-08-26, stated as general and confirmed with the
+boundary above in the same exchange.)
+
+Under Observations Are Sourced Facts, and They Migrate [CRITICAL]:
+(Tony's ruling, 2026-08-27. Founding case: MAPS C/2026 A1's
+disintegration at 8.33 R_sun is cited to SOHO/CCOR-1 observations at
+`solar_visualization_shells.py` line 1226, and the figure itself lives
+only in display strings.)
+
+Under No Shadow Constants [CRITICAL]:
+Known precedent (FIXED in L-156 1f; kept as history): comet_visualization_shells.py lines 492-493 once hardcoded SUN_RADIUS_KM and KM_PER_AU despite KM_PER_AU already being imported, with line 602 deriving SUN_RADIUS_AU from the two local copies. Those lines now carry the fix comment recording the removal -- a reader sent to find shadow constants there will find the repair, not the defect. Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
+
+Under A Breadcrumb Must Not Cite [CRITICAL]:
+(Tony's ruling, 2026-08-26. Founding case L-253: `EARTH_D660_DEPTH_KM`
+carried a real, correctly transcribed reference to Ishii et al. 2019 --
+true of the 660 km depth, and not the source of either figure in the
+note beneath it. That paper is about the discontinuity's sharpness.)
+
+Under Uncited Goes to the Ledger, Not the Bin [QUALITY]:
+(Tony's ruling, 2026-08-27: "not eliminated -- documented for citation,
+just not today." Worked case: `solar_visualization_shells.py` carries 26
+Source blocks, 22 of which already name their store constant, while six
+display-string findings 250 lines below them read as uncited. Tree-wide
+the display-string class is 284 Tier-1 findings holding 553 claims,
+which is why it is recorded by class and worked in slices.)
+
+Under An Accuracy Stated in Words Is Stored as the Place It Reports To:
+The tempting reading is the place the words NAME -- thousands for
+"several thousand". It claims +/- 500 km where every value the words
+allow is nearer +/- 5,000, a factor of ten finer than the source. That
+was the session plan of 2026-10-01; this rule replaced it the same
+day, and Tony confirmed it.
+
+Under An Accuracy Stated in Words Is Stored as the Place It Reports To:
+(Tony's ruling of the larger error, 2026-10-01; this method confirmed
+by him "as recommended" the same day, L-398. Built by orrery patch
+patch_L398_1_accuracy_rows_and_skills_20261001.py.)
+
+Under Report to the Figures You Have [QUALITY]:
+(Tony's ruling, 2026-08-26, after exactly that appeared in a table.)
+
 ## interactive-exhibit
 
 Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
@@ -1348,6 +1524,18 @@ The 1.45 install, from Install and verify, moved 2026-11-26 (L-545):
 L-545 and L-550, from the repo's copy of 1.44; a session that loads the
 account's copy confirms it reads 1.45 before exhibit work.
 
+Earlier: 1.44 | 2026-11-21, with Anthropic's Claude Fable 5.2, at
+palomas_orrery @ bd70f584 and gallery @ 828362fd. v1.44 (L-529, guided
+encounters; L-540, a reel on a Featured card) adds two rules. AN
+ENCOUNTER IS A PACKAGE PLAYED IN A ROOM OF ITS OWN: a completed pass,
+its package fetched by hand, its player, its dates read and never
+typed. And A CARD BESIDE A BODY SITS IN A FOLD OF ITS KIND: Scenes,
+Encounters, Links, Saved pictures. Written by the coordinating session
+from the two builds' ledger notes and the gallery at 828362fd, not by
+their Code sessions. To stay at the cap, the 1.41 entry and four field
+notes of September (L-291, L-318) moved out.
+(Moved down 2026-11-27, when 1.47 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -1469,6 +1657,15 @@ From the Field Notes list of position consumers, its history line, moved
 2026-11-23 at 1.14 to stay at the cap, word for word:
 The old wording said "5 parallel pipelines in palomas_orrery.py",
   which put a cross-file count inside a single-file scope and hid them.
+
+Earlier: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 8f4173c4. v1.12 (L-494) corrects one sentence, under
+Hover Text Is Written for the Visitor: the website's hovers no longer
+end with a pointer to the i panel. Tony chose option C that evening,
+"remove the sentence everywhere and just add the banner"; a session
+following the old sentence would have put the pointer back. The
+orrery's own hovers keep theirs.
+(Moved down 2026-11-27, when 1.15 made a fourth entry.)
 
 ## ledger-and-session-records
 

@@ -10,7 +10,7 @@ looking up versions and triggers in one place.
 
 ```
 Skill                        Ver  Fires when
-orrery-coding-conventions    1.14 Markers, hover text, axes, the opening view
+orrery-coding-conventions    1.15 Markers, hover text, axes, the opening view
                                   (Auto scale), shells, legendgroups,
                                   docstrings, new visuals
 safe-file-editing            1.15 Editing existing files, patch scripts,
@@ -53,7 +53,7 @@ horizons-orbital-mechanics   1.21 Horizons queries, centers, frames, osculating
                                   website does not serve
                                   (horizons_unserved.py), JPL's dates on JPL's
                                   clock
-provenance-discipline        2.37 Scanner runs, audits, citations, constants,
+provenance-discipline        2.38 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
@@ -96,7 +96,7 @@ gallery-cache-builder        1.24 Nightly builder, atomic swap and its
                                   Lagrange point served as a point
                                   (serving_shape 'point'), the clock block and
                                   its witness, an encounter's package
-interactive-exhibit          1.46 a room or exhibit in interactive.html
+interactive-exhibit          1.47 a room or exhibit in interactive.html
                                   (?exhibit=); its drawer and chrome (nav
                                   cluster, frame zoom, i panel, HUD, text box,
                                   consent, back link); the served words and

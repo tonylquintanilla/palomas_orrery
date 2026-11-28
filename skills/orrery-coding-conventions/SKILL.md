@@ -8,7 +8,12 @@ fires_when: Markers, hover text, axes, the opening view (Auto scale), shells, le
 
 Read this file in 3 parts: lines 1-286, 287-586, 587-724.
 
-Skill version: 1.14 | 2026-11-23, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.15 | 2026-11-27, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 714f1699. v1.15 (L-560, a digit is earned): the
+Hover Text au Convention writes the unit "au" and points to
+provenance-discipline's display style, in force from the rule's build;
+it no longer claims copies in the earth-system and gallery skills.
+Earlier: 1.14 | 2026-11-23, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 09f633c5. v1.14 (L-522, step 3): the list of position
 consumers, under Field Notes, names six, the sixth the website's own
 chain, since the protocol's Check All Parallel Pipelines now points
@@ -22,16 +27,9 @@ render significance"). A session following 1.12 would have drawn ticks
 as crosses, which read as hover points. And it adds the ended mission's
 marker: the spacecraft's open diamond, on its path's last point; the
 symbol says what the thing is, the text box says when.
-Earlier: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 8f4173c4. v1.12 (L-494) corrects one sentence, under
-Hover Text Is Written for the Visitor: the website's hovers no longer
-end with a pointer to the i panel. Tony chose option C that evening,
-"remove the sentence everywhere and just add the banner"; a session
-following the old sentence would have put the pointer back. The
-orrery's own hovers keep theirs.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-19 (L-385), 2026-10-26 (L-494),
-2026-11-02 (L-507) and 2026-11-23 (L-522).
+2026-11-02 (L-507), 2026-11-23 (L-522) and 2026-11-27 (L-560).
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
@@ -46,7 +44,7 @@ if this list and the headings disagree (L-418).
 - Single Info Marker Pattern [QUALITY]
   - Marker Separation for Near-Equal Radii [QUALITY]
   - Two Standards for the Info Marker's Outline [QUALITY]
-- Hover Text AU Convention [QUALITY]
+- Hover Text au Convention [QUALITY]
 - 3D Axis Control Convention [QUALITY]
 - The Opening View [QUALITY]
 - Credit Line Convention [PRACTICE]
@@ -264,14 +262,16 @@ loaded this skill and could not have known. The code is not the store a
 fresh session reads. (L-317; the gallery now serves `info_border` per
 shell.)
 
-## Hover Text AU Convention [QUALITY]
+## Hover Text au Convention [QUALITY]
 
-All distance hover text must include AU alongside km.
-Conversion: km / 149597870.7.
-Reference points: GEO ~0.000285 AU; Moon ~0.00257 AU; Apophis perigee
-~0.000245 AU. AU enables cross-plot comparison. Apply to ALL new hover text
-in orrery modules. (This convention is duplicated in the earth-system and
-gallery skills for hover work that fires there; the master copy is here.)
+All distance hover text gives au alongside km. Conversion: km /
+149597870.7. Reference points: GEO ~0.000285 au; Moon ~0.00257 au;
+Apophis perigee ~0.000245 au. The au enables cross-plot comparison.
+Apply to ALL new hover text in orrery modules. How both are written --
+lowercase "au", kilometres with million or billion, at most four
+figures -- is provenance-discipline's display style (v2.38, L-560), in
+force from the rule's build; until then new hover text matches what the
+orrery prints today, "AU". (interactive-exhibit points here.)
 
 ## 3D Axis Control Convention [QUALITY]
 

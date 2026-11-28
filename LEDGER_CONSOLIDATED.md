@@ -4494,8 +4494,65 @@ BUILD; THEN JUPITER'S FOLD. The session's last note.
 - LEFT AS IT IS: the saved pictures (L-520 (old pictures carry old
   words)). The Earth System pages carry a copy of the AU convention;
   what distances they print was not looked at.
-**Gap:** FIRST, THE SKILLS SESSION; then the design talk; then THE
-RULE'S BUILD, before Jupiter's fold (the two notes above). And,
+**Note:** (2026-11-27, 16:42 Chicago, a build session for the skills,
+Claude Opus 5.5, linked to Tony's computer with a shell of its own and
+none on his, on orrery 714f1699 and gallery 78deb5d5, both read live
+and equal to his folders)
+THE RULE WRITTEN INTO THE SKILLS. Three skills bumped, one bump each,
+no code changed; the page and the orrery print as before.
+- provenance-discipline 2.38, cut from 714f1699: A Computed Position
+  Prints What Its Errors Earn now holds the rule's five statements and
+  the display style's six, word for word from the notes above; the
+  evidence for spacecraft with its three limits, as typical performance
+  and not a bound; the open points as open; and the old rule kept, under
+  "As built, until the rule's build". Its sentence that a body with no
+  source "prints by its drift and SAYS so" now says statement 4 replaces
+  it at the build. Why: the rule is approved and every session reads
+  this section.
+- IN FORCE FROM THE BUILD, on Tony's word. Put to him: until the rule's
+  build, new text matches what is printed today, so a box reads one way,
+  and the build changes every box at once. Tony, 16:28: "I agree."
+  Written into all three skills.
+- THE CAP. With the rule, provenance-discipline came to 1,582 lines
+  against its cap of 1,512. Put to Tony: raise the cap until the build,
+  or move old background notes out of about a dozen other sections.
+  Tony, 16:39, quoting the second: "yes and move these out too". Moved
+  to documentation/SKILL_HISTORIES.md, word for word, each under the
+  heading it stood beneath: 16 paragraphs of rulings' stories and
+  worked cases (the Visibility Convention, the Gate Binds at EXPORT
+  twice, the Access Standard twice, A Drawing Approximation Does Not
+  Promote, the Unit Field, the Read Field's L-322 lines, One Value One
+  Home, Observations Migrate, the shadow constants' known precedent, A
+  Breadcrumb Must Not Cite, Uncited Goes to the Ledger, the place-words
+  subsection twice, Report to the Figures You Have); the section as it
+  stood at 2.37, whole; and the 2.35 entry. Then, Tony, 16:52: "Yes the
+  pointers would be a good breadcrumb": each place carries a pointer
+  with the ruling's date, "(Tony, <date>: SKILL_HISTORIES.md.)", ten of
+  the sixteen on an existing line. Now 1,511 of 1,512.
+- orrery-coding-conventions 1.15: the Hover Text au Convention (renamed
+  from AU) gives au with km and points to the display style. Its
+  sentence that the convention is copied into the earth-system and
+  gallery skills was wrong and is gone: earth-system-pipeline does not
+  mention it, interactive-exhibit points to it, gallery-assembler names
+  it once. The 1.12 entry moved. 724 of 726.
+- interactive-exhibit 1.47: "Hover text gives km and au", by the display
+  style from the build. The 1.44 entry moved. 735 of 738.
+- CARRIED, not bumped: gallery-assembler 1.6 names the "AU-hover
+  convention" in passing; a session following it would do nothing
+  different, so it is corrected at that skill's next version.
+- FOUND WRITING 2.38, NOT RULED, for the design talk beside the two
+  open points: whether the page's own errors (drift, the curve) still
+  lower the count under the rule, as statement 2 does for a sourced
+  uncertainty. As built they do.
+- CHECKED: skills_index.py wrote the manifest (1.47, 1.15, 2.38) and
+  its --check passed (12 skills, read plans in 10 files); doc_index.py
+  --caps passed (17 documents within their caps); every changed file
+  ASCII with LF endings.
+- OWED: Tony commits and pushes, then reinstalls the three skills; the
+  next session's own comparison clears them, never his word.
+**Gap:** THE SKILLS SESSION DONE (the note above); next the design
+talk, for the open points there and Jupiter's moons; then THE RULE'S
+BUILD, before Jupiter's fold. And,
 before a row for spacecraft is typed: Chapter 3's pages that
 have no text read as pictures; Chapter 4's three figures and Chapter 5
 read from JPL's copy; the 2008 paper

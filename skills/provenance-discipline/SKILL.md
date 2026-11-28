@@ -6,9 +6,15 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 6 parts: lines 1-300, 301-621, 622-871, 872-1133, 1134-1403, 1404-1511.
+Read this file in 7 parts: lines 1-274, 275-579, 580-809, 810-1016, 1017-1204, 1205-1488, 1489-1511.
 
-Skill version: 2.37 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.38 | 2026-11-27, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 714f1699 and gallery @ 78deb5d5. v2.38 (L-560, a
+digit is earned) writes into A Computed Position Prints What Its
+Errors Earn Tony's rule of 2026-11-27, its display style and the
+evidence for spacecraft, in force from the rule's build; its two open
+points as open; the old rule as built until then. The 2.35 entry moved.
+Earlier: 2.37 | 2026-11-19, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a70d98c5 and gallery @ 56bc3fab. v2.37 (L-297) adds a
 third error to A Computed Position Prints What Its Errors Earn: the
 working-out between served points, for the curve the page draws (Tony,
@@ -21,18 +27,11 @@ served JPL's own 3-sigma, used whole. And it adds that a sentence
 saying why a figure is missing says the true reason -- not fetched, or
 stated by the authority as none -- never one for the other. Read from
 the code at 571b9bf4 and b55109f2 before it was written.
-Earlier: 2.35 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 8d334e7. v2.35 (L-443) adds to What a Visitor Reads,
-principle 5: plain words keep the authority's word. Where JPL or the
-IAU has a term for a thing, the visitor reads it, with a plain
-explanation where it is not everyday English; it is never replaced by a
-paraphrase. Tony, 2026-10-26: "we should always keep the correct JPL
-words and explain them when needed."
-Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
-2026-10-13 (L-437), 2026-10-17 (L-452 and L-411), 2026-10-20
-(L-410), 2026-10-21 (L-460), 2026-10-22 (L-434), 2026-10-27
-(L-443), 2026-10-29 (L-399) and 2026-11-19 (L-297).
+Older entries are in documentation/SKILL_HISTORIES.md, moved there on
+2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414), 2026-10-13 (L-437),
+2026-10-17 (L-452 and L-411), 2026-10-20 (L-410), 2026-10-21 (L-460),
+2026-10-22 (L-434), 2026-10-27 (L-443), 2026-10-29 (L-399), 2026-11-19
+(L-297) and 2026-11-27 (L-560); the rules' stories too.
 
 ## Contents
 
@@ -104,11 +103,7 @@ reporting a problem and refusing to proceed, ask where the report
 lands and who reads it. If the honest answer is that it lands in a log
 nobody opens, or in a file the next session will not load, then
 reporting is silence wearing the costume of diligence, and the correct
-behaviour is to refuse.
-
-(Tony's ruling, 2026-08-17, settling an L-196 question as a convention
-rather than a one-off, because the same distinction governs every
-future case of the same shape.)
+behaviour is to refuse. (Tony, 2026-08-17: SKILL_HISTORIES.md.)
 
 ## The Gate Binds at EXPORT [CRITICAL]
 
@@ -160,26 +155,14 @@ fingerprinted golden artifacts and is not withdrawn.
 
 The braid is intact: the audit stays bounded by the current artifact,
 stays countable, and stays off the critical path as a gate. What moved
-is where it binds.
-
-(Tony's rulings. 2026-08-27, the principle: the gate binds where a
-claim reaches a reader, not where it is drawn. 2026-08-28, the
-placement: "I think provenance should be settled before it leaves the
-orrery to the gallery cache. There is no provenance checker in the
-gallery." The second corrects the first without withdrawing it.)
+is where it binds. (Tony, 2026-08-27 and 08-28: SKILL_HISTORIES.md.)
 
 **What the provenance leg requires, and what it does not.** It requires
 Tier-1 = 0 on what is served -- cited, and TRUE. It does NOT require a
 cross-check. A cited claim that has not been cross-checked scores 15,
 which is Tier 2 REVIEW, and Tier 2 has never gated a push. Cross-checked
 is a higher rung earned deliberately, not a condition of clearing
-Tier 1.
-
-(Tony's ruling, 2026-08-27. Worked case: the Sun's served features carry
-111 numeric values -- 85 declared drawing parameters, 26 measured sites
-holding 19 distinct values. Each measured field carries both a `source`
-string and an `orrery_constant` pointer, and nine of nine served numbers
-checked matched the store constant they name. That is a closed slice.)
+Tier 1. (Tony, 2026-08-27; a case: SKILL_HISTORIES.md.)
 
 ## The Access Standard [CRITICAL]
 
@@ -236,13 +219,7 @@ where the agency itself made the measurement its page is the source.
 When summary pages disagree and none names a source, that is the
 signal to go down a layer, not to pick one. Where no work behind the
 figure can be found or opened, the figure is removed and the gap
-noted (Fetched vs Recalled).
-
-(Tony's ruling, 2026-10-21, that this is method. The case, 2026-10-20:
-the chromosphere's temperature, where NASA's Sun Fact Sheet,
-NASA/Marshall and Montana State gave different figures and none named
-a source; the figure came from Carlsson (2007), the model they
-summarise.)
+noted (Fetched vs Recalled). (Tony, 2026-10-21; a case: SKILL_HISTORIES.md.)
 
 **When a source fails access, re-home the citation to an accessible
 authority carrying the same result. Delete only when none exists.** Most
@@ -265,10 +242,7 @@ is the one worth keeping. A citation nobody in the loop can open is
 functionally the retired `# Verified:` stamp -- it stops the next reader
 from looking while recording nothing checkable. And every source string
 the served hover shows a visitor becomes one the visitor can open.
-
-(Tony's ruling, 2026-08-27: "If we can't access from an open paper, an
-abstract or a google scholar search with context then the citation
-fails. No paywalls. I don't have access to a research library.")
+(Tony, 2026-08-27, "No paywalls": SKILL_HISTORIES.md.)
 
 ## Measured Is the Goal, Declared Is the Fallback [CRITICAL]
 
@@ -423,14 +397,7 @@ physical value becomes drawable, which is the chromosphere precedent
 and the direction the section above sets. The line is whether there is
 a real value the number is standing in FOR. A stylization stands in for
 a measurement. An eyeballed shape parameter stands in for nothing.
-
-(Tony's ruling, 2026-09-08, on Earth's magnetosphere: "We are not
-promoting Mode 5 approximations," and "not promoting approximations or
-rounded numbers." Seven drawn numbers in that one renderer had no store
-name and every one of them was a candidate. The rebuild on a cited
-model is L-305; this rule is what stopped the shortcut. It is a SKILL
-rule and not a decision because it resolves the same way next month,
-for a different body, in a different file.)
+(Tony, 2026-09-08: SKILL_HISTORIES.md.)
 
 ## The Status Line [CRITICAL]
 
@@ -524,10 +491,7 @@ replaces two pieces of the gallery that did this job by inference,
 The migration is walked by body, Earth first, and each row is visited
 ONCE: `# Unit:`, `# Status:`, `# Figures:` (below) and, where the row is
 in scope, `# Read:` (below) are all written at that single visit.
-
-(Tony's rulings, 2026-09-11 and 2026-09-14, recorded on L-322 and until
-this version living only there. In engineering he has always used
-units, not literals.)
+(Tony, 2026-09-11 and 09-14: SKILL_HISTORIES.md.)
 
 **A temperature is stored in kelvin, and a visitor reads kelvin.** `k`
 is the store's one temperature token. A source that prints degrees
@@ -611,13 +575,7 @@ recalled data, one layer out.
 **No line at all means the row has not been read**, the way a missing
 `# Status:` means the pass has not reached the value. Inside a closed
 slice a missing line on an in-scope row FAILS; outside one it is named
-as not yet migrated.
-
-(Tony's rulings, 2026-09-11 and 2026-09-19, on L-322 ruling (b),
-confirmed point by point on 2026-09-19 before this section was written.
-The fourteen magnetosphere rows already carry a dated per-row record in
-`documentation/L305_gap1_read_record_20260911.md`, a model's read of
-Tony's PDFs; their lines name the model.)
+as not yet migrated. (Tony, 2026-09-11 and 09-19: SKILL_HISTORIES.md.)
 
 ### Geometry Constants Are First-Class Claims
 
@@ -718,9 +676,7 @@ carries the sweep -- L-181 is the parent, with L-243, L-244 and L-248 as
 open slices. This rule does NOT open a repo-wide sweep on the day it is
 adopted; that is the denominator that grows whenever someone thinks of
 something. (The Braid, resident protocol Part 3.)
-
-(Tony's ruling, 2026-08-26, stated as general and confirmed with the
-boundary above in the same exchange.)
+(Tony, 2026-08-26: SKILL_HISTORIES.md.)
 
 ## Observations Are Sourced Facts, and They Migrate [CRITICAL]
 
@@ -740,19 +696,13 @@ The practical consequence is an ordering one. A citation cannot move
 into the store ahead of the value it cites, because a citation with no
 value beside it has nowhere to sit. So the migration is: value first,
 then its source line, then the prose references the constant.
-
-(Tony's ruling, 2026-08-27. Founding case: MAPS C/2026 A1's
-disintegration at 8.33 R_sun is cited to SOHO/CCOR-1 observations at
-`solar_visualization_shells.py` line 1226, and the figure itself lives
-only in display strings.)
+(Tony, 2026-08-27; a case: SKILL_HISTORIES.md.)
 
 ## No Shadow Constants [CRITICAL]
 
 Modules must not carry local copies of values that exist in constants_new.py. Import through the established shim (planet_visualization_utilities) or directly from constants_new.py. A local literal that numerically matches a tracked constant is a frozen copy -- it won't follow if the source value updates, and it bypasses the scanner's citation chain even when the number is correct today.
 
-This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import -- do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
-
-Known precedent (FIXED in L-156 1f; kept as history): comet_visualization_shells.py lines 492-493 once hardcoded SUN_RADIUS_KM and KM_PER_AU despite KM_PER_AU already being imported, with line 602 deriving SUN_RADIUS_AU from the two local copies. Those lines now carry the fix comment recording the removal -- a reader sent to find shadow constants there will find the repair, not the defect. Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
+This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import -- do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it. (A precedent fixed in L-156: SKILL_HISTORIES.md.)
 
 ### A Breadcrumb Must Not Cite [CRITICAL]
 
@@ -781,12 +731,7 @@ The figures, the DOIs and where each actually came from live in the
 ledger row, which is searchable by handle, holds "pending sourcing" as a
 native state, is RICE-scorable against everything else, and sits outside
 the audit entirely. The trail is preserved at zero cost to the
-denominator.
-
-(Tony's ruling, 2026-08-26. Founding case L-253: `EARTH_D660_DEPTH_KM`
-carried a real, correctly transcribed reference to Ishii et al. 2019 --
-true of the 660 km depth, and not the source of either figure in the
-note beneath it. That paper is about the discontinuity's sharpness.)
+denominator. (Tony, 2026-08-26; a case: SKILL_HISTORIES.md.)
 
 ## Extend a Boundary Before Adding a Path [QUALITY]
 
@@ -860,21 +805,92 @@ ELSEWHERE in the same file.** The scanner reads a fixed lookback window,
 so a real citation two hundred lines away reads as absent. A run of bare
 string globals can sit far below the Source comments that cover them,
 and the remedy there is to ATTACH the existing citation, not to drop the
-sentence.
-
-(Tony's ruling, 2026-08-27: "not eliminated -- documented for citation,
-just not today." Worked case: `solar_visualization_shells.py` carries 26
-Source blocks, 22 of which already name their store constant, while six
-display-string findings 250 lines below them read as uncited. Tree-wide
-the display-string class is 284 Tier-1 findings holding 553 claims,
-which is why it is recorded by class and worked in slices.)
+sentence. (Tony, 2026-08-27: SKILL_HISTORIES.md.)
 
 ## A Computed Position Prints What Its Errors Earn [QUALITY]
 
 A position worked out at display time -- a planet's distance from the
 Sun, propagated in the browser from served elements to the minute the
-room was opened -- is not a store row and has no `# Figures:` line. Its
-count comes from its errors, and these bound it:
+room was opened -- is not a store row and has no `# Figures:` line.
+What its box may print is THE RULE below (v2.38, L-560, a digit is
+earned). NOT BUILT YET: until the rule's build, at the one place each
+repository formats a distance (`position_accuracy.py`; `distanceLine`
+in `gallery/solar_system_figures.js`), both print as under As built,
+and new text written before that build matches what is printed today,
+so a box reads one way; the build changes every box at once (Tony,
+2026-11-27, 16:28: "I agree"). The order: Where We Are's road.
+
+**The rule**, Tony's five statements (2026-11-27, 10:26: "Approved."):
+1. "At most four significant figures, in both units alike. This is an
+   editorial choice for the reader, said once on the page as such, and
+   not a claim about accuracy."
+2. "Fewer when the evidence is coarser. Where a sourced uncertainty is
+   larger than the fourth figure, the distance is rounded to the place
+   that uncertainty supports, at three sigma where the source gives a
+   sigma."
+3. "The evidence must fit the distance printed: this body, from this
+   centre, on this date. A moon's uncertainty around its planet does
+   not by itself support its distance from the Sun."
+4. "No source, no number. The marker and path stay, with the
+   position's source named, and the box says no distance is printed
+   because no source states how well it is known. No figure ever
+   stands beside a disclaimer."
+5. "Say what each thing is. The box names the position's source and
+   what the rounding rests on. A rounding place we chose is never
+   called JPL's uncertainty."
+The ceiling limits what is shown; it is not a rung and never stands in
+for a missing uncertainty. The evidence comes from a ladder: JPL's own
+figure for the body; else its class's standard source; else the
+literature; never a convention. A box names two sources, the
+position's and the uncertainty's. Four significant figures are not
+four decimals, so nothing prints as zero.
+
+**The display style**, six statements (put to Tony 2026-11-27, 14:08;
+approved 14:23):
+(a) Both units are worked from the one underlying distance and each is
+    rounded once; neither is converted from the other's rounded
+    figure; both carry the same number of figures, the number the more
+    demanding of the two supports.
+(b) The astronomical unit is written "au", as a plain decimal, and is
+    explained once on the page.
+(c) Kilometres are written with the word million or billion from one
+    million up, and as a whole number with commas below that;
+    "billion" is explained once as a thousand million.
+(d) Both units always; au leads for a distance from the Sun,
+    kilometres lead for a moon or a craft measured from the body it is
+    near.
+(e) No miles in the box and no scientific notation.
+(f) One standing sentence on the page says distances are from centre
+    to centre and rounded to at most four significant figures for the
+    reader, fewer where the evidence supports fewer.
+Checked at their own pages: the IAU's 2012 Resolution B2 (the symbol
+"au"; 149 597 870 700 m exactly); the NASA Glenn Content Guide,
+"Numbers and percentages" (a numeral and a word). No planetarium's
+standard was found.
+
+**The evidence for spacecraft as a class** (Tony, 14:34: "Yes,
+settled."): what deep-space tracking achieves, from Thornton and
+Border, "Radiometric Tracking Techniques for Deep-Space Navigation",
+JPL Publication 00-11 (2000), within three limits. It is never called
+JPL's uncertainty for a craft. It covers the part of a path fitted to
+tracking data, not a prediction. It does not reach a craft measured
+from a body it is near, which needs evidence of its own (as L-538, the
+orbiters' printed error). And it is TYPICAL PERFORMANCE, NOT A BOUND:
+the monograph states no worst case, only an illustrated failure (p.
+35: 5 m of range read as about 1000 km sideways at 10^8 km, about ten
+times finer than a fourth figure), so a box suggests no more. Before a
+spacecraft row is typed, the reading on L-560's Gap is done.
+
+**OPEN, not ruled; write neither as settled** (the design talk):
+- Whether the ceiling also caps speeds and an orbit's q, Q and a
+  lines, which `position_accuracy.py` formats beside distances. A
+  store value keeps its own `# Figures:` line either way.
+- The box's words, with the sentence calling four figures editorial.
+- Found writing v2.38, not ruled: whether the page's own errors below
+  (drift, the curve) lower the count, as statement 2 does for a
+  sourced uncertainty.
+
+**As built, until the rule's build.** Three errors bound the count:
 
 - **Drift.** How far the worked-out position may have moved from what
   JPL Horizons itself would give: the builder's measured rate, in
@@ -896,24 +912,21 @@ count comes from its errors, and these bound it:
   undoubled under it half the time. On only where that holds
   (`CURVE_KINDS`, the "Curve error" row); orbiters wait for L-538.
 
-**The display prints to the Report test's place (The ceiling, Report)
-for the LARGEST of them**, each unit placed by its own error, never
-finer than a floor the display states (whole kilometres in the Solar
-System room), and never fewer than one figure. Tony's ruling,
-2026-10-01: "use whichever is larger". Drift alone measures how well
-the page reproduces Horizons, not how well Horizons knows the planet,
-and it printed Pluto's distance to ten figures where JPL knows it to
-several thousand kilometres. A body with no source-accuracy row yet
-prints by its drift and SAYS so in the display, in words the display's
-owner approved, and the words appear exactly when no source error is
-served, so the two cannot disagree. Since 2026-10-29 the asteroids and
-comets are served their own uncertainty (L-399; the website's builder,
-`position_uncertainty`, and the orrery's hover from its position
-query); the bodies JPL gives none for are the remaining case.
+The display prints to the Report test's place (The ceiling, Report)
+for the LARGEST of them, each unit placed by its own error, never finer
+than a floor the display states (whole kilometres in the Solar System
+room), and never fewer than one figure (Tony, 2026-10-01: "use
+whichever is larger"). A body with no source-accuracy row yet prints
+by its drift and says so, in words the display's owner approved; at
+the build statement 4 replaces this. Since 2026-10-29 the asteroids
+and comets are served their own uncertainty (L-399; the website's
+builder, `position_uncertainty`, and the orrery's hover from its
+position query).
 
 **A sentence saying why a figure is missing says the TRUE reason**
-(v2.36, L-399, L-484). Two reasons look alike on the page and are not:
-the figure exists and was not fetched (a question that failed, or was
+(v2.36, L-399, L-484), and under statement 4 it is the box's reason
+for no number. Two reasons look alike on the page and are not: the
+figure exists and was not fetched (a question that failed, or was
 never asked), and the authority states none (JPL answered, and its
 uncertainty column reads "n.a."). Each has its own words -- the
 orrery's "JPL's uncertainty for this position is not included here"
@@ -921,11 +934,7 @@ against "JPL states no accuracy for this position" -- and a display
 prints the one that is true, decided from the answer itself, never by
 default. Calling JPL's "none" "not included" claims a figure exists
 that does not; calling a failed question "none" hides a figure that
-does. Bennu, Halley and Ikeya-Seki on 2026-10-29 were the case: the
-orrery said "not included" for all three until
-`position_accuracy._side` read the answer; the website's sentence, "not
-yet included", has the same slant for them and is the next gallery
-session's, a documented difference on L-484.
+does. (The case, Bennu, Halley and Ikeya-Seki: SKILL_HISTORIES.md.)
 
 This applies to every computed position a display prints, in the
 gallery and the orrery. The Solar System room is the first built
@@ -955,13 +964,7 @@ extended -- so the row never claims finer than the words allow.
 - "tens of kilometers": 10 to 15 km report to tens, 16 to 99 km to
   hundreds -> 100 km.
 - "several thousand kilometers": 2,000 to 9,999 km all report to
-  ten-thousands -> 10,000 km.
-
-The tempting reading is the place the words NAME -- thousands for
-"several thousand". It claims +/- 500 km where every value the words
-allow is nearer +/- 5,000, a factor of ten finer than the source. That
-was the session plan of 2026-10-01; this rule replaced it the same
-day, and Tony confirmed it.
+  ten-thousands -> 10,000 km. (Its history: SKILL_HISTORIES.md.)
 
 **The row.** Value: one unit of the place, in the unit the source
 names. `# Status: declared` -- the pick of the place is ours by this
@@ -975,10 +978,7 @@ the worked case.
 **The display uses half a unit of the place** as the source's error,
 which by the Report test gives back exactly that place; the larger of
 that and the drift then sets the print, as above.
-
-(Tony's ruling of the larger error, 2026-10-01; this method confirmed
-by him "as recommended" the same day, L-398. Built by orrery patch
-patch_L398_1_accuracy_rows_and_skills_20261001.py.)
+(Tony, 2026-10-01, L-398: SKILL_HISTORIES.md.)
 
 ## A Simple Error a Check Finds Is Fixed and Reported [QUALITY]
 
@@ -1390,7 +1390,7 @@ tens, so 5710 and not 5711.
 The failure this catches is quiet. Stating `0.8953994` when the inputs
 support `0.8954` is not a small error in the last digits -- it is six
 digits the value was never entitled to, and it reads as a measurement.
-(Tony's ruling, 2026-08-26, after exactly that appeared in a table.)
+(Tony, 2026-08-26: SKILL_HISTORIES.md.)
 
 **Before writing or checking a `# Figures:` line, deriving a value, or
 printing a number in a display, read `references/figures.md`.** It
